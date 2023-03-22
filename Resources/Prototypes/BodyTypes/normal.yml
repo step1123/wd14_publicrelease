@@ -1,0 +1,124 @@
+﻿- type: bodyType
+  id: HumanNormal
+  name: body-normal
+  sprites:
+    Head: MobHumanHead
+    Hair: MobHumanoidAnyMarking
+    FacialHair: MobHumanoidAnyMarking
+    Chest: MobHumanTorso
+    HeadTop: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    Eyes: MobHumanoidEyes
+    LArm: MobHumanLArm
+    RArm: MobHumanRArm
+    LHand: MobHumanLHand
+    RHand: MobHumanRHand
+    LLeg: MobHumanLLeg
+    RLeg: MobHumanRLeg
+    LFoot: MobHumanLFoot
+    RFoot: MobHumanRFoot
+
+- type: bodyType
+  id: ReptilianNormal
+  name: body-normal
+  sprites:
+    Head: MobReptilianHead
+    Snout: MobHumanoidAnyMarking
+    Chest: MobReptilianTorso
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    Eyes: MobHumanoidEyes
+    LArm: MobReptilianLArm
+    RArm: MobReptilianRArm
+    LHand: MobReptilianLHand
+    RHand: MobReptilianRHand
+    LLeg: MobReptilianLLeg
+    RLeg: MobReptilianRLeg
+    LFoot: MobReptilianLFoot
+    RFoot: MobReptilianRFoot
+
+- type: bodyType
+  id: SkeletonNormal
+  name: body-normal
+  sprites:
+    Head: MobSkeletonHead
+    Chest: MobSkeletonTorso
+    LArm: MobSkeletonLArm
+    RArm: MobSkeletonRArm
+    LHand: MobSkeletonLHand
+    RHand: MobSkeletonRHand
+    LLeg: MobSkeletonLLeg
+    RLeg: MobSkeletonRLeg
+    LFoot: MobSkeletonLFoot
+    RFoot: MobSkeletonRFoot
+
+- type: bodyType
+  id: SlimeNormal
+  name: body-normal
+  sprites:
+    Head: MobSlimeHead
+    Hair: MobSlimeMarkingFollowSkin
+    FacialHair: MobSlimeMarkingFollowSkin
+    Chest: MobSlimeTorso
+    Eyes: MobHumanoidEyes
+    LArm: MobSlimeLArm
+    RArm: MobSlimeRArm
+    LHand: MobSlimeLHand
+    RHand: MobSlimeRHand
+    LLeg: MobSlimeLLeg
+    RLeg: MobSlimeRLeg
+    LFoot: MobSlimeLFoot
+    RFoot: MobSlimeRFoot
+
+- type: bodyType
+  id: VoxNormal
+  name: body-normal
+  sprites:
+    Head: MobVoxHead
+    Hair: MobHumanoidAnyMarking
+    FacialHair: MobHumanoidAnyMarking
+    Chest: MobVoxTorso
+    Eyes: MobVoxEyes
+    LArm: MobVoxLArm
+    RArm: MobVoxRArm
+    LHand: MobVoxLHand
+    RHand: MobVoxRHand
+    LLeg: MobVoxLLeg
+    RLeg: MobVoxRLeg
+    LFoot: MobVoxLFoot
+    RFoot: MobVoxRFoot
+
+- type: bodyType
+  id: SkrellNormal
+  name: body-normal
+  sprites:
+    Head: MobSkrellHead
+    Hair: MobHumanoidAnyMarking
+    Chest: MobSkrellTorso
+    Eyes: MobSkrellEyes
+    LArm: MobSkrellLArm
+    RArm: MobSkrellRArm
+    LHand: MobSkrellLHand
+    RHand: MobSkrellRHand
+    LLeg: MobSkrellLLeg
+    RLeg: MobSkrellRLeg
+    LFoot: MobSkrellLFoot
+    RFoot: MobSkrellRFoot
+
+- type: bodyType
+  id: DionaNormal
+  name: body-normal
+  sprites:
+    Head: MobDionaHead
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Chest: MobDionaTorso
+    LArm: MobDionaLArm
+    RArm: MobDionaRArm
+    LHand: MobDionaLHand
+    RHand: MobDionaRHand
+    LLeg: MobDionaLLeg
+    RLeg: MobDionaRLeg
+    LFoot: MobDionaLFoot
+    RFoot: MobDionaRFoot

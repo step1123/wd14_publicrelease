@@ -3,6 +3,8 @@
   name: species-name-diona
   roundStart: true
   prototype: MobDiona
+  bodyTypes:
+    - DionaNormal
   sprites: MobDionaSprites
   markingLimits: MobDionaMarkingLimits
   dollPrototype: MobDionaDummy
@@ -13,21 +15,21 @@
   femaleLastNames: DionaLast
   naming: TheFirstofLast
 
-- type: speciesBaseSprites
-  id: MobDionaSprites
-  sprites:
-    Head: MobDionaHead
-    HeadTop: MobHumanoidAnyMarking
-    HeadSide: MobHumanoidAnyMarking
-    Chest: MobDionaTorso
-    LArm: MobDionaLArm
-    RArm: MobDionaRArm
-    LHand: MobDionaLHand
-    RHand: MobDionaRHand
-    LLeg: MobDionaLLeg
-    RLeg: MobDionaRLeg
-    LFoot: MobDionaLFoot
-    RFoot: MobDionaRFoot
+# - type: speciesBaseSprites
+#   id: MobDionaSprites
+#   sprites:
+#     Head: MobDionaHead
+#     HeadTop: MobHumanoidAnyMarking
+#     HeadSide: MobHumanoidAnyMarking
+#     Chest: MobDionaTorso
+#     LArm: MobDionaLArm
+#     RArm: MobDionaRArm
+#     LHand: MobDionaLHand
+#     RHand: MobDionaRHand
+#     LLeg: MobDionaLLeg
+#     RLeg: MobDionaRLeg
+#     LFoot: MobDionaLFoot
+#     RFoot: MobDionaRFoot
 
 - type: markingPoints
   id: MobDionaMarkingLimits

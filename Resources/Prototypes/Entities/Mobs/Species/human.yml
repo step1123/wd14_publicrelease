@@ -4,6 +4,9 @@
   parent: BaseMobOrganic
   id: BaseMobHuman
   abstract: true
+  bodyTypes:
+    - NormalHuman
+    - SlimHuman
   components:
   - type: Hunger
   - type: Thirst

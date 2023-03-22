@@ -2,8 +2,10 @@
   id: Human
   name: species-name-human
   roundStart: true
+  bodyTypes:
+    - HumanNormal
+    - HumanSlim
   prototype: MobHuman
-  sprites: MobHumanSprites
   markingLimits: MobHumanMarkingLimits
   dollPrototype: MobHumanDummy
   skinColoration: HumanToned
@@ -14,25 +16,6 @@
 # be defined as a 'custom base layer'
 # in either the mob's starting marking prototype,
 # or it has to be added in C#.
-- type: speciesBaseSprites
-  id: MobHumanSprites
-  sprites:
-    Head: MobHumanHead
-    Hair: MobHumanoidAnyMarking
-    FacialHair: MobHumanoidAnyMarking
-    Chest: MobHumanTorso
-    HeadTop: MobHumanoidAnyMarking
-    Tail: MobHumanoidAnyMarking
-    Eyes: MobHumanoidEyes
-    LArm: MobHumanLArm
-    RArm: MobHumanRArm
-    LHand: MobHumanLHand
-    RHand: MobHumanRHand
-    LLeg: MobHumanLLeg
-    RLeg: MobHumanRLeg
-    LFoot: MobHumanLFoot
-    RFoot: MobHumanRFoot
-
 - type: markingPoints
   id: MobHumanMarkingLimits
   points:
@@ -71,17 +54,13 @@
   id: MobHumanoidMarkingMatchSkin
   markingsMatchSkin: true
 
+# Normal body type sprites
+
 - type: humanoidBaseSprite
   id: MobHumanHead
   baseSprite:
     sprite: Mobs/Species/Human/parts.rsi
-    state: head_m
-
-- type: humanoidBaseSprite
-  id: MobHumanHeadMale
-  baseSprite:
-    sprite: Mobs/Species/Human/parts.rsi
-    state: head_m
+    state: head
 
 - type: humanoidBaseSprite
   id: MobHumanHeadFemale
@@ -93,13 +72,7 @@
   id: MobHumanTorso
   baseSprite:
     sprite: Mobs/Species/Human/parts.rsi
-    state: torso_m
-
-- type: humanoidBaseSprite
-  id: MobHumanTorsoMale
-  baseSprite:
-    sprite: Mobs/Species/Human/parts.rsi
-    state: torso_m
+    state: torso
 
 - type: humanoidBaseSprite
   id: MobHumanTorsoFemale
@@ -154,3 +127,77 @@
   baseSprite:
     sprite: Mobs/Species/Human/parts.rsi
     state: r_foot
+
+# Slim types
+
+- type: humanoidBaseSprite
+  id: MobHumanSlimHead
+  baseSprite:
+    sprite: Mobs/Species/Human/parts.rsi
+    state: head_slim
+
+- type: humanoidBaseSprite
+  id: MobHumanSlimHeadFemale
+  baseSprite:
+    sprite: Mobs/Species/Human/parts.rsi
+    state: head_slim_f
+
+- type: humanoidBaseSprite
+  id: MobHumanSlimTorso
+  baseSprite:
+    sprite: Mobs/Species/Human/parts.rsi
+    state: torso_slim
+
+- type: humanoidBaseSprite
+  id: MobHumanSlimTorsoFemale
+  baseSprite:
+    sprite: Mobs/Species/Human/parts.rsi
+    state: torso_slim_f
+
+- type: humanoidBaseSprite
+  id: MobHumanSlimLLeg
+  baseSprite:
+    sprite: Mobs/Species/Human/parts.rsi
+    state: l_leg_slim
+
+- type: humanoidBaseSprite
+  id: MobHumanSlimLArm
+  baseSprite:
+    sprite: Mobs/Species/Human/parts.rsi
+    state: l_arm_slim
+
+- type: humanoidBaseSprite
+  id: MobHumanSlimLHand
+  baseSprite:
+    sprite: Mobs/Species/Human/parts.rsi
+    state: l_hand_slim
+
+- type: humanoidBaseSprite
+  id: MobHumanSlimLFoot
+  baseSprite:
+    sprite: Mobs/Species/Human/parts.rsi
+    state: l_foot_slim
+
+- type: humanoidBaseSprite
+  id: MobHumanSlimRLeg
+  baseSprite:
+    sprite: Mobs/Species/Human/parts.rsi
+    state: r_leg_slim
+
+- type: humanoidBaseSprite
+  id: MobHumanSlimRArm
+  baseSprite:
+    sprite: Mobs/Species/Human/parts.rsi
+    state: r_arm_slim
+
+- type: humanoidBaseSprite
+  id: MobHumanSlimRHand
+  baseSprite:
+    sprite: Mobs/Species/Human/parts.rsi
+    state: r_hand_slim
+
+- type: humanoidBaseSprite
+  id: MobHumanSlimRFoot
+  baseSprite:
+    sprite: Mobs/Species/Human/parts.rsi
+    state: r_foot_slim

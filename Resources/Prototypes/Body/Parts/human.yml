@@ -27,12 +27,22 @@
   - type: Sprite
     netsync: false
     sprite: Mobs/Species/Human/parts.rsi
-    state: "torso_m"
+    state: "torso"
   - type: Icon
     sprite: Mobs/Species/Human/parts.rsi
-    state: "torso_m"
+    state: "torso"
   - type: BodyPart
     partType: Torso
+
+- type: entity
+  id: TorsoHumanSlim
+  name: "human torso"
+  parent: TorsoHuman
+  components:
+  - type: Sprite
+    state: "torso_slim"
+  - type: Icon
+    state: "torso_slim"
 
 - type: entity
   id: HeadHuman
@@ -42,10 +52,10 @@
   - type: Sprite
     netsync: false
     sprite: Mobs/Species/Human/parts.rsi
-    state: "head_m"
+    state: "head"
   - type: Icon
     sprite: Mobs/Species/Human/parts.rsi
-    state: "head_m"
+    state: "head"
   - type: BodyPart
     partType: Head
     vital: true
@@ -54,6 +64,15 @@
   - type: Tag
     tags:
       - Head
+
+- type: entity
+  id: HeadHumanSlim
+  parent: HeadHuman
+  components:
+    - type: Sprite
+      state: "head_slim"
+    - type: Icon
+      state: "head_slim"
 
 - type: entity
   id: LeftArmHuman
