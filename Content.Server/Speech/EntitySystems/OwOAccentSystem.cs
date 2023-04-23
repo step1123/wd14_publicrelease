@@ -8,12 +8,17 @@ namespace Content.Server.Speech.EntitySystems
         [Dependency] private readonly IRobustRandom _random = default!;
 
         private static readonly IReadOnlyList<string> Faces = new List<string>{
-            " (・`ω´・)", " ;;w;;", " owo", " UwU", " >w<", " ^w^"
+            //WD-EDIT
+            " (`ω´)", " ;;w;;", " owo", " UwU", " >w<", " ^w^"
+            //WD-EDIT
         }.AsReadOnly();
 
         private static readonly IReadOnlyDictionary<string, string> SpecialWords = new Dictionary<string, string>()
         {
             { "you", "wu" },
+            //WD-EDIT
+            { "ты", "ти" }
+            //WD-EDIT
         };
 
         public override void Initialize()
@@ -30,7 +35,12 @@ namespace Content.Server.Speech.EntitySystems
 
             return message.Replace("!", _random.Pick(Faces))
                 .Replace("r", "w").Replace("R", "W")
-                .Replace("l", "w").Replace("L", "W");
+                .Replace("l", "w").Replace("L", "W")
+
+                //WD-EDIT
+                .Replace("р", "в").Replace("Р", "В")
+                .Replace("л", "в").Replace("Л", "В");
+                //WD-EDIT
         }
 
         private void OnAccent(EntityUid uid, OwOAccentComponent component, AccentGetEvent args)

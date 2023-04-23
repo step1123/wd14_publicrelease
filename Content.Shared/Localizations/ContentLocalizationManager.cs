@@ -7,7 +7,11 @@ namespace Content.Shared.Localizations
         [Dependency] private readonly ILocalizationManager _loc = default!;
 
         // If you want to change your codebase's language, do it here.
+
+        // WD-EDIT
         private const string Culture = "ru-RU";
+
+        // WD-EDIT
         private const string FallbackCulture = "en-US";
 
         /// <summary>
@@ -24,12 +28,18 @@ namespace Content.Shared.Localizations
         public void Initialize()
         {
             var culture = new CultureInfo(Culture);
+
+            // WD-EDIT
             var fallbackCulture = new CultureInfo(FallbackCulture);
 
 
             _loc.LoadCulture(culture);
+
+            // WD-EDIT
             _loc.LoadCulture(fallbackCulture);
             _loc.SetFallbackCluture(fallbackCulture);
+            // WD-EDIT
+
             _loc.AddFunction(culture, "PRESSURE", FormatPressure);
             _loc.AddFunction(culture, "POWERWATTS", FormatPowerWatts);
             _loc.AddFunction(culture, "POWERJOULES", FormatPowerJoules);
