@@ -1,37 +1,37 @@
 <Document>
-# Power
+# Энергия
 
-SS14 has a fairly in-depth power system through which all devices on the station receive electricity. It's divided into three main powernets; HV, LV, and MV.
+SS14 имеет довольно глубокую систему электроснабжения, через которую все устройства на станции получают электроэнергию. Все разделено на три группы: Высоковольтные (ВВ), средневольтные (СВ) и низковольтные (НВ).
 <Box>
 <GuideEntityEmbed Entity="CableHVStack"/>
 <GuideEntityEmbed Entity="CableMVStack"/>
 <GuideEntityEmbed Entity="CableApcStack"/>
 </Box>
 
-## Cabling
-The three major cable types (HV, MV, and LV) can be used to form independent powernets. Examine them for a description of their uses.
+## Проводка
+Три типа кабелей (ВВ, СВ и НВ) могут использоваться для формирования независимых сетей электроснабжения. Осмотрите их для более подробного описания.
 <Box>
 <GuideEntityEmbed Entity="CableHV"/>
 <GuideEntityEmbed Entity="CableMV"/>
 <GuideEntityEmbed Entity="CableApcExtension"/>
 </Box>
 
-## Power storage
-Each power storage device presented functions as the transformer for its respective power level (HV, MV, and LV) and also provides a fairly sizable backup battery to help flatten out spikes and dips in power usage.
+## Энерго хранилища
+Каждое представленное ниже устройство накопления энергии функционирует как трансформатор для своего соответствующего уровня мощности (высокого, среднего и низкого напряжения), а также обеспечивает достаточно большую резервную батарею, помогающую сглаживать пики и провалы в энергопотреблении.
 <Box>
 <GuideEntityEmbed Entity="SMESBasic"/>
 <GuideEntityEmbed Entity="SubstationBasic"/>
 <GuideEntityEmbed Entity="APCBasic"/>
 </Box>
 
-## Ramping
-Contrary to what one might expect from a video game electrical simulation, power is not instantly provided upon request. Generators and batteries take time to ramp up to match the draw imposed on them, which leads to brownouts when there are large changes in current draw all at once, for example when batteries run out.
+## Разгон и падение
+Вопреки тому, что можно было бы ожидать от электрической симуляции в игре, питание не предоставляется мгновенно по запросу. Генераторам и батареям требуется время для набора мощности, чтобы соответствовать наложенному на них потреблению. Это приводит к отключениям электроэнергии при резких изменениях потребляемого тока, например, когда батареи разряжаются.
 
-## Installing power storage
-Substations are the most self-explanatory. Simply install the machine on top of an MV and HV cable, it will draw power from the HV cable to provide to MV.
+## Установка энерго хранилищ
+Подстанции говорят сами за себя. Просто установите машину поверх кабеля среднего и высокого напряжения и она преобразует ВВ ток в СВ запитав сеть СВ проводов под собой.
 
-Installing APCs is similarly simple, except APCs are exclusively wallmounted machinery and cannot be installed on the floor. Make sure it has both MV and LV connections.
+Установка APC также проста, за исключением того, что APC являются исключительно настенными приборами и не могут быть установлены на полу. АПЦ преобразует СВ в НВ позволяя большинству машин и компьютеров работать. Убедитесь, что он имеет подключения как СВ, так и НВ.
 
-Installing a SMES requires you construct a cable terminal to use as the input. The SMES will draw power from the terminal and send power out from underneath. The terminal will ensure that the HV input and HV output do not connect. Avoid connecting a SMES to itself, this will result in a short circuit which can result in power flickering or outages depending on severity.
+Установка СМЕСа. СМЕС будет получать питание от кабельного терминала и подавать питание ВВ проводу под собой. Терминал гарантирует, что вход высокого напряжения и выход высокого напряжения не соединятся. Избегайте подключения СМЕС к самому себе, это приведет к короткому замыканию, которое может привести к перебоям питания или полному отключению в зависимости от серьезности.
 
 </Document>
