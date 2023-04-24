@@ -1,13 +1,20 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Text.Json;
+using System.Text.RegularExpressions;
 using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
+using Robust.Shared.ContentPack;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Chat.Managers;
 
 public sealed class ChatSanitizationManager : IChatSanitizationManager
 {
     [Dependency] private readonly IConfigurationManager _configurationManager = default!;
+    [Dependency] private readonly IResourceManager _resources = default!;
+
+    private Dictionary<string, string> _slangToNormal = new();
 
     private static readonly Dictionary<string, string> SmileyToEmote = new()
     {
@@ -49,6 +56,16 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
         { ":p", "chatsan-stick-out-tongue" },
         { ":b", "chatsan-stick-out-tongue" },
         { "0-0", "chatsan-wide-eyed" },
+        //WD-EDIT
+        { "о-о", "chatsan-wide-eyed" }, // cyrillic о
+        { "о.о", "chatsan-wide-eyed" }, // cyrillic о
+        { "0_o", "chatsan-wide-eyed" },
+        { "0_о", "chatsan-wide-eyed" }, // cyrillic о
+        { "о/", "chatsan-waves" }, // cyrillic о
+        { "лол", "chatsan-laughs" },
+        { "о7", "chatsan-salutes" }, // cyrillic о
+        { "хд", "chatsan-laughs" },
+        //WD-EDIT
         { "o-o", "chatsan-wide-eyed" },
         { "o.o", "chatsan-wide-eyed" },
         { "._.", "chatsan-surprised" },
@@ -76,6 +93,18 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
     public void Initialize()
     {
         _configurationManager.OnValueChanged(CCVars.ChatSanitizerEnabled, x => _doSanitize = x, true);
+
+        //WD-EDIT
+        try
+        {
+            var filterData = _resources.ContentFileReadAllText(new ResPath("/White/ChatFilters/slang.json"));
+            _slangToNormal = JsonSerializer.Deserialize<Dictionary<string, string>>(filterData)!;
+        }
+        catch (Exception e)
+        {
+            Logger.ErrorS("chat", "Failed to load slang.json: {0}", e);
+        }
+        //WD-EDIT
     }
 
     public bool TrySanitizeOutSmilies(string input, EntityUid speaker, out string sanitized, [NotNullWhen(true)] out string? emote)
@@ -103,4 +132,16 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
         emote = null;
         return false;
     }
+
+    //WD-EDIT
+    public string SanitizeOutSlang(string input)
+    {
+        var pattern = @"\b(?<word>\w+)\b";
+
+        var newMessage = Regex.Replace(input, pattern ,
+            match => _slangToNormal.ContainsKey(match.Groups[1].Value.ToLower()) ? _slangToNormal[match.Groups[1].Value.ToLower()] : match.Value, RegexOptions.IgnoreCase);
+
+        return newMessage;
+    }
+    //WD-EDIT
 }

@@ -17,6 +17,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Radio;
+using Content.Shared.White;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
@@ -153,8 +154,10 @@ public sealed partial class ChatSystem : SharedChatSystem
         hideGlobalGhostChat |= hideChat;
         bool shouldCapitalize = (desiredType != InGameICChatType.Emote);
         bool shouldPunctuate = _configurationManager.GetCVar(CCVars.ChatPunctuation);
+        bool sanitizeSlang = _configurationManager.GetCVar(WhiteCVars.ChatSlangFilter);
 
-        message = SanitizeInGameICMessage(source, message, out var emoteStr, shouldCapitalize, shouldPunctuate);
+
+        message = SanitizeInGameICMessage(source, message, out var emoteStr, shouldCapitalize, shouldPunctuate, sanitizeSlang);
 
         // Was there an emote in the message? If so, send it.
         if (player != null && emoteStr != message && emoteStr != null)
@@ -515,9 +518,11 @@ public sealed partial class ChatSystem : SharedChatSystem
     }
 
     // ReSharper disable once InconsistentNaming
-    private string SanitizeInGameICMessage(EntityUid source, string message, out string? emoteStr, bool capitalize = true, bool punctuate = false)
+    private string SanitizeInGameICMessage(EntityUid source, string message, out string? emoteStr, bool capitalize = true, bool punctuate = false, bool sanitizeSlang = true)
     {
         var newMessage = message.Trim();
+        if(sanitizeSlang)
+            newMessage = _sanitizer.SanitizeOutSlang(newMessage);
         if (capitalize)
             newMessage = SanitizeMessageCapital(newMessage);
         if (punctuate)
