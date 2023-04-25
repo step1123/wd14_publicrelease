@@ -1,0 +1,15 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Gerxest#0019, resprite by HitPanda#1471 SS14 WHITE DREAM",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+                {
+            "name": "hair",
+            "directions": 4
+        }
+    ]
+}

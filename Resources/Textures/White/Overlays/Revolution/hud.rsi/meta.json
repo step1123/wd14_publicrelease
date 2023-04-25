@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+    "license": "CC-BY-SA-3.0",
+    "copyright": "xz mne poxyi",
+  "states": [
+    {
+      "name": "reva_podsos"
+    },
+    {
+      "name": "reva_head"
+    },
+    {
+      "name": "reva_head_animated",
+      "delays": [
+        [
+          60,
+          0.12,
+          0.12,
+          0.12,
+          0.12,
+          0.12
+        ]
+      ]
+    },
+    {
+      "name": "reva_podsos_animated",
+      "delays": [
+        [
+          60,
+          0.12,
+          0.12,
+          0.12,
+          0.12,
+          0.12
+        ]
+      ]
+    }
+  ]
+}
