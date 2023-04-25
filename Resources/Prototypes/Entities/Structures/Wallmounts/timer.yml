@@ -61,3 +61,5 @@
   components:
   - type: AccessReader
     access: [["Security"]]
+  - type: SignalTimer
+    timerCanAnnounce: true
