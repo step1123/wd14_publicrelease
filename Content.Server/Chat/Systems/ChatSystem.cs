@@ -306,6 +306,13 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
 
         name = FormattedMessage.EscapeText(name);
+
+        //WD-EDIT
+        var colorEv = new SetSpeakerColorEvent(source, name);
+        RaiseLocalEvent(source, colorEv);
+        name = colorEv.Name;
+        //WD-EDIT
+
         var wrappedMessage = Loc.GetString("chat-manager-entity-say-wrap-message",
             ("entityName", name), ("message", FormattedMessage.EscapeText(message)));
 
@@ -695,6 +702,20 @@ public sealed class EntitySpokeEvent : EntityEventArgs
         ObfuscatedMessage = obfuscatedMessage;
     }
 }
+
+//WD-EDIT
+public class SetSpeakerColorEvent
+{
+    public EntityUid Sender { get; set; }
+    public string Name { get; set; }
+
+    public SetSpeakerColorEvent(EntityUid sender, string name)
+    {
+        Sender = sender;
+        Name = name;
+    }
+}
+//WD-EDIT
 
 /// <summary>
 ///     InGame IC chat is for chat that is specifically ingame (not lobby) but is also in character, i.e. speaking.
