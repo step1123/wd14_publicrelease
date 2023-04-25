@@ -25,6 +25,7 @@ using Content.Shared.Throwing;
 using Content.Shared.Timing;
 using Content.Shared.Verbs;
 using Content.Shared.Wall;
+using Content.Shared.Weapons.Ranged.Components;
 using JetBrains.Annotations;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
@@ -288,11 +289,6 @@ namespace Content.Shared.Interaction
             if (target != null && Deleted(target.Value))
                 return;
 
-            if (!altInteract && TryComp(user, out CombatModeComponent? combatMode) && combatMode.IsInCombatMode)
-            {
-                // Eat the input
-                return;
-            }
 
             if (!ValidateInteractAndFace(user, coordinates))
                 return;
@@ -319,6 +315,31 @@ namespace Content.Shared.Interaction
             var inRangeUnobstructed = target == null
                 ? !checkAccess || InRangeUnobstructed(user, coordinates)
                 : !checkAccess || InRangeUnobstructed(user, target.Value); // permits interactions with wall mounted entities
+
+            //WD-EDIT
+            if (!altInteract && TryComp(user, out CombatModeComponent? combatMode) && combatMode.IsInCombatMode)
+            {
+                if(target == null)
+                    return;
+
+                if(!inRangeUnobstructed)
+                    return;
+
+                if(!TryComp<ItemComponent>(target.Value, out _))
+                    return;
+
+                // We need this because of funny SharedGunSystem realization
+                if (TryComp<GunComponent>(target.Value, out var gunComponent))
+                {
+                    gunComponent.NextFire = _gameTiming.CurTime + TimeSpan.FromMilliseconds(125);
+                    Dirty(gunComponent);
+                }
+
+                InteractHand(user, target.Value);
+                // Eat the input
+                return;
+            }
+            //WD-EDIT
 
             // Does the user have hands?
             if (!TryComp(user, out HandsComponent? hands) || hands.ActiveHand == null)
