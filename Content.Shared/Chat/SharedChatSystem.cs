@@ -50,7 +50,14 @@ public abstract class SharedChatSystem : EntitySystem
 
         foreach (var proto in _prototypeManager.EnumeratePrototypes<RadioChannelPrototype>())
         {
-            _keyCodes.Add(proto.KeyCode, proto);
+            //WD-EDIT
+            foreach (var keycode in proto.KeyCodes)
+            {
+                if (_keyCodes.ContainsKey(keycode))
+                    continue;
+                _keyCodes.Add(keycode, proto);
+            }
+            //WD-EDIT
         }
     }
 

@@ -62,7 +62,7 @@ public sealed class EncryptionKeySystem : EntitySystem
         // TODO add predicted pop-up overrides.
         if (_net.IsServer)
             _popup.PopupEntity(Loc.GetString("encryption-keys-all-extracted"), uid, args.User);
-        
+
         _audio.PlayPredicted(component.KeyExtractionSound, uid, args.User);
     }
 
@@ -222,8 +222,7 @@ public sealed class EncryptionKeySystem : EntitySystem
 
             var key = id == SharedChatSystem.CommonChannel
                 ? SharedChatSystem.RadioCommonPrefix.ToString()
-                : $"{SharedChatSystem.RadioChannelPrefix}{proto.KeyCode}";
-
+                : $":{string.Join(", :", proto.KeyCodes.ToArray())}"; //WD-EDIT
             examineEvent.PushMarkup(Loc.GetString(channelFTLPattern,
                 ("color", proto.Color),
                 ("key", key),

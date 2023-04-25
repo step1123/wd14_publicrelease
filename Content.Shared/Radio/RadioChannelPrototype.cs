@@ -17,8 +17,8 @@ public sealed class RadioChannelPrototype : IPrototype
     /// <summary>
     /// Single-character prefix to determine what channel a message should be sent to.
     /// </summary>
-    [DataField("keycode")]
-    public char KeyCode { get; private set; } = '\0';
+    [DataField("keycodes")]
+    public List<char> KeyCodes { get; private set; } = new() {'\0'}; //WD-EDIT
 
     [DataField("frequency")]
     public int Frequency { get; private set; } = 0;
@@ -30,7 +30,7 @@ public sealed class RadioChannelPrototype : IPrototype
     public string ID { get; } = default!;
 
     /// <summary>
-    /// If channel is long range it doesn't require telecommunication server 
+    /// If channel is long range it doesn't require telecommunication server
     /// and messages can be sent across different stations
     /// </summary>
     [DataField("longRange"), ViewVariables]
