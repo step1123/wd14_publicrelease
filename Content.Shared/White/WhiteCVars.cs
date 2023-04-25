@@ -18,4 +18,20 @@ public sealed class WhiteCVars
 
     public static readonly CVarDef<bool> ChatSlangFilter =
         CVarDef.Create("ic.slang_filter", true, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
+
+    /*
+ * Sponsors
+    */
+
+    public static readonly CVarDef<string> SponsorsApiUrl =
+        CVarDef.Create("sponsor.api_url", "", CVar.SERVERONLY);
+
+    /*
+ * Queue
+    */
+
+    public static readonly CVarDef<bool>
+        QueueEnabled = CVarDef.Create("queue.enabled", false, CVar.SERVERONLY);
+
+
 }

@@ -19,6 +19,8 @@ using Content.Client.Singularity;
 using Content.Client.Stylesheets;
 using Content.Client.Viewport;
 using Content.Client.Voting;
+using Content.Client.White.JoinQueue;
+using Content.Client.White.Sponsors;
 using Content.Shared.Administration;
 using Content.Shared.AME;
 using Content.Shared.Gravity;
@@ -65,6 +67,11 @@ namespace Content.Client.Entry
         [Dependency] private readonly ExtendedDisconnectInformationManager _extendedDisconnectInformation = default!;
         [Dependency] private readonly PlayTimeTrackingManager _playTimeTracking = default!;
         [Dependency] private readonly ContentLocalizationManager _contentLoc = default!;
+
+        //WD-EDIT
+        [Dependency] private readonly SponsorsManager _sponsorsManager = default!;
+        [Dependency] private readonly JoinQueueManager _queueManager = default!;
+        //WD-EDIT
 
         public override void Init()
         {
@@ -158,6 +165,11 @@ namespace Content.Client.Entry
             _networkResources.Initialize();
             _userInterfaceManager.SetDefaultTheme("SS14DefaultTheme");
             _documentParsingManager.Initialize();
+
+            //WD-EDIT
+            _sponsorsManager.Initialize();
+            _queueManager.Initialize();
+            //WD-EDIT
 
             _baseClient.RunLevelChanged += (_, args) =>
             {

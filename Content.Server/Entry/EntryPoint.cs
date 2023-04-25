@@ -31,6 +31,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Server.Station.Systems;
+using Content.Server.White.JoinQueue;
+using Content.Server.White.Sponsors;
 using Content.Shared.Localizations;
 
 namespace Content.Server.Entry
@@ -107,6 +109,11 @@ namespace Content.Server.Entry
                 IoCManager.Resolve<NetworkResourceManager>().Initialize();
                 IoCManager.Resolve<GhostKickManager>().Initialize();
                 IoCManager.Resolve<ServerInfoManager>().Initialize();
+
+                //WD-EDIT
+                IoCManager.Resolve<SponsorsManager>().Initialize();
+                IoCManager.Resolve<JoinQueueManager>().Initialize();
+                //WD-EDIT
 
                 _voteManager.Initialize();
                 _updateManager.Initialize();

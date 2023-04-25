@@ -19,6 +19,8 @@ using Content.Server.Preferences.Managers;
 using Content.Server.ServerInfo;
 using Content.Server.ServerUpdates;
 using Content.Server.Voting.Managers;
+using Content.Server.White.JoinQueue;
+using Content.Server.White.Sponsors;
 using Content.Shared.Administration;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Administration.Managers;
@@ -58,6 +60,11 @@ namespace Content.Server.IoC
             IoCManager.Register<PlayTimeTrackingManager>();
             IoCManager.Register<UserDbDataManager>();
             IoCManager.Register<ServerInfoManager>();
+
+            // WD-EDIT
+            IoCManager.Register<SponsorsManager>();
+            IoCManager.Register<JoinQueueManager>();
+            // WD-EDIT
         }
     }
 }

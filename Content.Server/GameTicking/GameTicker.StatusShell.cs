@@ -1,4 +1,5 @@
 using System.Text.Json.Nodes;
+using Content.Server.White.JoinQueue;
 using Content.Shared.CCVar;
 using Robust.Server.ServerStatus;
 using Robust.Shared.Configuration;
@@ -23,6 +24,10 @@ namespace Content.Server.GameTicking
         /// </summary>
         [Dependency] private readonly IConfigurationManager _cfg = default!;
 
+        // WD-EDIT
+        [Dependency] private readonly JoinQueueManager _queueManager = default!;
+        // WD-EDIT
+
         private void InitializeStatusShell()
         {
             IoCManager.Resolve<IStatusHost>().OnStatusRequest += GetStatusResponse;
@@ -34,7 +39,7 @@ namespace Content.Server.GameTicking
             lock (_statusShellLock)
             {
                 jObject["name"] = _baseServer.ServerName;
-                jObject["players"] = _playerManager.PlayerCount;
+                jObject["players"] = _queueManager.ActualPlayersCount; //WD-EDIT
                 jObject["soft_max_players"] = _cfg.GetCVar(CCVars.SoftMaxPlayers);
                 jObject["run_level"] = (int) _runLevel;
                 if (_runLevel >= GameRunLevel.InRound)

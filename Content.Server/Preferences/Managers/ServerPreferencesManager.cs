@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Database;
 using Content.Server.Humanoid;
+using Content.Server.White.Sponsors;
 using Content.Shared.CCVar;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
@@ -26,6 +27,10 @@ namespace Content.Server.Preferences.Managers
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly IServerDbManager _db = default!;
         [Dependency] private readonly IPrototypeManager _protos = default!;
+
+        // WD-EDIT
+        [Dependency] private readonly SponsorsManager _sponsors = default!;
+        // WD-EDIT
 
         // Cache player prefs on the server so we don't need as much async hell related to them.
         private readonly Dictionary<NetUserId, PlayerPrefData> _cachedPlayerPrefs =
@@ -99,7 +104,10 @@ namespace Content.Server.Preferences.Managers
 
             var curPrefs = prefsData.Prefs!;
 
-            profile.EnsureValid();
+            // WD-EDIT
+            var allowedMarkings = _sponsors.TryGetInfo(message.MsgChannel.UserId, out var sponsor) ? sponsor.AllowedMarkings : new string[]{};
+            profile.EnsureValid(allowedMarkings);
+            // WD-EDIT
 
             var profiles = new Dictionary<int, ICharacterProfile>(curPrefs.Characters)
             {
@@ -193,6 +201,15 @@ namespace Content.Server.Preferences.Managers
                 async Task LoadPrefs()
                 {
                     var prefs = await GetOrCreatePreferencesAsync(session.UserId);
+
+                    // WD-EDIT
+                    foreach (var (_, profile) in prefs.Characters)
+                    {
+                        var allowedMarkings = _sponsors.TryGetInfo(session.UserId, out var sponsor) ? sponsor.AllowedMarkings : new string[]{};
+                        profile.EnsureValid(allowedMarkings);
+                    }
+                    // WD-EDIT
+
                     prefsData.Prefs = prefs;
                     prefsData.PrefsLoaded = true;
 

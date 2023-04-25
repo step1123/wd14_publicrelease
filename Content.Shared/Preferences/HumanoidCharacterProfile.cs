@@ -350,7 +350,7 @@ namespace Content.Shared.Preferences
             return Appearance.MemberwiseEquals(other.Appearance);
         }
 
-        public void EnsureValid()
+        public void EnsureValid(string[] sponsorMarkings) //WD-EDIT
         {
             var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
 
@@ -433,7 +433,9 @@ namespace Content.Shared.Preferences
                 flavortext = FormattedMessage.RemoveMarkup(FlavorText);
             }
 
-            var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species);
+            // WD-EDIT
+            var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species, sponsorMarkings);
+            // WD-EDIT
 
             var prefsUnavailableMode = PreferenceUnavailable switch
             {
