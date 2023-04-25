@@ -19,6 +19,7 @@ using Content.Server.Construction;
 using Content.Server.Materials;
 using Content.Server.Stack;
 using Content.Server.Jobs;
+using Content.Shared.Bed.Sleep;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Zombies;
@@ -238,6 +239,10 @@ namespace Content.Server.Cloning
 
             AddComp<ActiveCloningPodComponent>(uid);
 
+            //WD-EDIT
+            AddComp<ForcedSleepingComponent>(mob);
+            //WD-EDIT
+
             // TODO: Ideally, components like this should be on a mind entity so this isn't neccesary.
             // Remove this when 'mind entities' are added.
             // Add on special job components to the mob.
@@ -294,6 +299,7 @@ namespace Content.Server.Cloning
             clonePod.UsedBiomass = 0;
             UpdateStatus(CloningPodStatus.Idle, clonePod);
             RemCompDeferred<ActiveCloningPodComponent>(uid);
+            RemComp<ForcedSleepingComponent>(entity); //WD-EDIT
         }
 
         private void EndFailedCloning(EntityUid uid, CloningPodComponent clonePod)
