@@ -4,6 +4,8 @@ using Content.Server.Atmos.Components;
 using Content.Server.Explosion.Components;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NPC.Pathfinding;
+using Content.Server.Station.Systems;
+using Content.Shared.Audio;
 using Content.Shared.Camera;
 using Content.Shared.Damage;
 using Content.Shared.Database;
@@ -16,6 +18,7 @@ using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -42,10 +45,20 @@ public sealed partial class ExplosionSystem : EntitySystem
     [Dependency] private readonly PVSOverrideSystem _pvsSys = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
 
+    //WD-EDIT
+    [Dependency] protected readonly IMapManager MapManager = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly StationSystem _stationSystem = default!;
+    //WD-EDIT
+
     /// <summary>
     ///     "Tile-size" for space when there are no nearby grids to use as a reference.
     /// </summary>
     public const ushort DefaultTileSize = 1;
+
+    //WD-EDIT
+    private readonly SoundCollectionSpecifier _meteorsHit = new("ShuttleImpactSound");
+    //WD-EDIT
 
     private AudioParams _audioParams = AudioParams.Default.WithVolume(-3f);
 
@@ -146,6 +159,7 @@ public sealed partial class ExplosionSystem : EntitySystem
             explosive.TileBreakScale,
             explosive.MaxTileBreak,
             explosive.CanCreateVacuum,
+            explosive.CanShakeGrid, //WD-EDIT
             user);
 
         if (delete)
@@ -215,13 +229,14 @@ public sealed partial class ExplosionSystem : EntitySystem
         float tileBreakScale = 1f,
         int maxTileBreak = int.MaxValue,
         bool canCreateVacuum = true,
+        bool canShakeGrid = false, //WD-EDIT
         EntityUid? user = null,
         bool addLog = true)
     {
         var pos = Transform(uid);
 
 
-        QueueExplosion(pos.MapPosition, typeId, totalIntensity, slope, maxTileIntensity, tileBreakScale, maxTileBreak, canCreateVacuum, addLog: false);
+        QueueExplosion(pos.MapPosition, typeId, totalIntensity, slope, maxTileIntensity, tileBreakScale, maxTileBreak, canCreateVacuum, canShakeGrid, addLog: false); //WD-EDIT
 
         if (!addLog)
             return;
@@ -245,6 +260,7 @@ public sealed partial class ExplosionSystem : EntitySystem
         float tileBreakScale = 1f,
         int maxTileBreak = int.MaxValue,
         bool canCreateVacuum = true,
+        bool canShakeGrid = false, //WD-EDIT
         bool addLog = true)
     {
         if (totalIntensity <= 0 || slope <= 0)
@@ -260,7 +276,7 @@ public sealed partial class ExplosionSystem : EntitySystem
             _adminLogger.Add(LogType.Explosion, LogImpact.High, $"Explosion ({typeId}) spawned at {epicenter:coordinates} with intensity {totalIntensity} slope {slope}");
 
         _explosionQueue.Enqueue(() => SpawnExplosion(epicenter, type, totalIntensity,
-            slope, maxTileIntensity, tileBreakScale, maxTileBreak, canCreateVacuum));
+            slope, maxTileIntensity, tileBreakScale, maxTileBreak, canCreateVacuum, canShakeGrid)); //WD-EDIT
     }
 
     /// <summary>
@@ -275,7 +291,8 @@ public sealed partial class ExplosionSystem : EntitySystem
         float maxTileIntensity,
         float tileBreakScale,
         int maxTileBreak,
-        bool canCreateVacuum)
+        bool canCreateVacuum,
+        bool canShakeGrid) //WD-EDIT
     {
         if (!_mapManager.MapExists(epicenter.MapId))
             return null;
@@ -289,6 +306,13 @@ public sealed partial class ExplosionSystem : EntitySystem
 
         var visualEnt = CreateExplosionVisualEntity(epicenter, type.ID, spaceMatrix, spaceData, gridData.Values, iterationIntensity);
 
+        //WD-EDIT
+        if (canShakeGrid)
+        {
+            ShakeGrid(epicenter, totalIntensity);
+        }
+        //WD-EDIT
+
         // camera shake
         CameraShake(iterationIntensity.Count * 2.5f, epicenter, totalIntensity);
 
@@ -299,6 +323,13 @@ public sealed partial class ExplosionSystem : EntitySystem
         var audioRange = iterationIntensity.Count * 5;
         var filter = Filter.Pvs(epicenter).AddInRange(epicenter, audioRange);
         SoundSystem.Play(type.Sound.GetSound(), filter, mapEntityCoords, _audioParams);
+
+        //WD-EDIT
+        if (canShakeGrid)
+        {
+            ShakeGrid(epicenter, totalIntensity);
+        }
+        //WD-EDIT
 
         return new Explosion(this,
             type,
@@ -338,4 +369,25 @@ public sealed partial class ExplosionSystem : EntitySystem
                 _recoilSystem.KickCamera(uid, -delta.Normalized * effect);
         }
     }
+
+    //WD-EDIT
+    private void ShakeGrid(MapCoordinates epicenter, float totalIntensity)
+    {
+        foreach (var grid in MapManager.GetAllMapGrids(epicenter.MapId))
+        {
+            if (HasComp<MapGridComponent>(grid.Owner))
+            {
+                CameraShake(1000, epicenter, totalIntensity);
+                PlayShakeSound(grid.Owner, epicenter);
+            }
+        }
+    }
+
+    private void PlayShakeSound(EntityUid uid, MapCoordinates epicenter)
+    {
+        var mapEntityCoords = EntityCoordinates.FromMap(EntityManager, _mapManager.GetMapEntityId(epicenter.MapId), epicenter);
+        var filter = Filter.Pvs(epicenter).AddPlayersByPvs(epicenter, 1000);
+        _audio.PlayGlobal(_meteorsHit, filter, false, AudioHelpers.WithVariation(1f).WithVolume(-10f));
+    }
+    //WD-EDIT
 }
