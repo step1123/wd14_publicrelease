@@ -34,6 +34,7 @@ using Content.Server.Station.Systems;
 using Content.Server.UtkaIntegration;
 using Content.Server.White.JoinQueue;
 using Content.Server.White.Sponsors;
+using Content.Server.White.TTS;
 using Content.Shared.Localizations;
 
 namespace Content.Server.Entry
@@ -114,6 +115,7 @@ namespace Content.Server.Entry
                 //WD-EDIT
                 IoCManager.Resolve<SponsorsManager>().Initialize();
                 IoCManager.Resolve<JoinQueueManager>().Initialize();
+                IoCManager.Resolve<TTSManager>().Initialize();
                 //WD-EDIT
 
                 _voteManager.Initialize();

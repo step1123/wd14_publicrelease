@@ -22,6 +22,7 @@ using Content.Server.Voting.Managers;
 using Content.Server.UtkaIntegration;
 using Content.Server.White.JoinQueue;
 using Content.Server.White.Sponsors;
+using Content.Server.White.TTS;
 using Content.Shared.Administration;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Administration.Managers;
@@ -66,6 +67,7 @@ namespace Content.Server.IoC
             IoCManager.Register<SponsorsManager>();
             IoCManager.Register<JoinQueueManager>();
             IoCManager.Register<UtkaTCPWrapper>();
+            IoCManager.Register<TTSManager>();
             // WD-EDIT
         }
     }

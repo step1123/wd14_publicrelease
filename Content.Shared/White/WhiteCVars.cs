@@ -62,4 +62,32 @@ public sealed class WhiteCVars
 
     public static readonly CVarDef<string> UtkaSocketKey = CVarDef.Create("utka.socket_key", "ass", CVar.SERVERONLY | CVar.CONFIDENTIAL);
 
+    /**
+     * TTS (Text-To-Speech)
+        */
+
+    /// <summary>
+    /// URL of the TTS server API.
+    /// </summary>
+    public static readonly CVarDef<bool> TTSEnabled =
+        CVarDef.Create("tts.enabled", true, CVar.SERVERONLY);
+
+    /// <summary>
+    /// URL of the TTS server API.
+    /// </summary>
+    public static readonly CVarDef<string> TTSApiUrl =
+        CVarDef.Create("tts.api_url", "http://127.0.0.1:2386", CVar.SERVERONLY);
+
+    /// <summary>
+    /// TTS Volume
+    /// </summary>
+    public static readonly CVarDef<float> TtsVolume =
+        CVarDef.Create("tts.volume", 0f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// TTS Cache
+    /// </summary>
+    public static readonly CVarDef<int> TTSMaxCacheSize =
+        CVarDef.Create("tts.max_cash_size", 200, CVar.SERVERONLY | CVar.ARCHIVE);
+
 }
