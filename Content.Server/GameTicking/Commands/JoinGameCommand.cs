@@ -1,8 +1,13 @@
+using Content.Server.Chat.Managers;
 using Content.Server.Station.Systems;
+using Content.Server.White.Stalin;
 using Content.Shared.Administration;
+using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Content.Shared.Roles;
+using Content.Shared.White;
 using Robust.Server.Player;
+using Robust.Shared.Configuration;
 using Robust.Shared.Console;
 using Robust.Shared.Prototypes;
 
@@ -12,6 +17,8 @@ namespace Content.Server.GameTicking.Commands
     sealed class JoinGameCommand : IConsoleCommand
     {
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+        [Dependency] private readonly StalinManager _stalinManager = default!;
+        [Dependency] private readonly IConfigurationManager _configurationManager = default!;
 
         public string Command => "joingame";
         public string Description => "";
@@ -21,7 +28,7 @@ namespace Content.Server.GameTicking.Commands
         {
             IoCManager.InjectDependencies(this);
         }
-        public void Execute(IConsoleShell shell, string argStr, string[] args)
+        public async void Execute(IConsoleShell shell, string argStr, string[] args)
         {
             if (args.Length != 2)
             {
@@ -45,6 +52,19 @@ namespace Content.Server.GameTicking.Commands
                 Logger.InfoS("security", $"{player.Name} ({player.UserId}) attempted to latejoin while in-game.");
                 shell.WriteError($"{player.Name} is not in the lobby.   This incident will be reported.");
                 return;
+            }
+
+            var chatManager = IoCManager.Resolve<IChatManager>();
+
+            if (_configurationManager.GetCVar(WhiteCVars.StalinEnabled))
+            {
+                var allowEnterRequest = await _stalinManager.AllowEnter(player);
+
+                if (!allowEnterRequest.allow)
+                {
+                    chatManager.DispatchServerMessage(player, allowEnterRequest.errorMessage);
+                    return;
+                }
             }
 
             if (ticker.RunLevel == GameRunLevel.PreRoundLobby)

@@ -76,7 +76,7 @@ public sealed class WhiteCVars
     /// URL of the TTS server API.
     /// </summary>
     public static readonly CVarDef<string> TTSApiUrl =
-        CVarDef.Create("tts.api_url", "http://127.0.0.1:2386", CVar.SERVERONLY);
+        CVarDef.Create("tts.api_url", "", CVar.SERVERONLY);
 
     /// <summary>
     /// TTS Volume
@@ -89,5 +89,22 @@ public sealed class WhiteCVars
     /// </summary>
     public static readonly CVarDef<int> TTSMaxCacheSize =
         CVarDef.Create("tts.max_cash_size", 200, CVar.SERVERONLY | CVar.ARCHIVE);
+
+
+
+    /*
+ * Stalin
+     */
+
+    public static readonly CVarDef<string> StalinSalt =
+        CVarDef.Create("stalin.salt", string.Empty, CVar.SERVERONLY | CVar.CONFIDENTIAL | CVar.ARCHIVE);
+    public static readonly CVarDef<string> StalinApiUrl =
+        CVarDef.Create("stalin.api_url", string.Empty, CVar.SERVERONLY | CVar.CONFIDENTIAL | CVar.ARCHIVE);
+    public static readonly CVarDef<string> StalinAuthUrl =
+        CVarDef.Create("stalin.auth_url", string.Empty, CVar.SERVERONLY | CVar.CONFIDENTIAL | CVar.ARCHIVE);
+    public static readonly CVarDef<bool> StalinEnabled =
+        CVarDef.Create("stalin.enabled", false, CVar.SERVERONLY | CVar.ARCHIVE);
+    public static readonly CVarDef<float> StalinDiscordMinimumAge =
+        CVarDef.Create("stalin.minimal_discord_age_minutes", 30.0f, CVar.SERVERONLY | CVar.ARCHIVE);
 
 }

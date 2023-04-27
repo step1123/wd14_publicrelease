@@ -20,7 +20,9 @@ using Robust.Shared.Utility;
 using System.Linq;
 using System.Threading.Tasks;
 using Content.Server.UtkaIntegration;
+using Content.Server.White.Stalin;
 using Content.Shared.Database;
+using Content.Shared.White;
 using Robust.Shared.Asynchronous;
 
 namespace Content.Server.GameTicking
@@ -31,6 +33,7 @@ namespace Content.Server.GameTicking
 
         //WD-EDIT
         [Dependency] private readonly UtkaTCPWrapper _utkaSocketWrapper = default!;
+        [Dependency] private readonly StalinManager _stalinManager = default!;
         //WD-EDIT
 
         private static readonly Counter RoundNumberMetric = Metrics.CreateCounter(
@@ -167,7 +170,7 @@ namespace Content.Server.GameTicking
             return gridUids;
         }
 
-        public void StartRound(bool force = false)
+        public async void StartRound(bool force = false)
         {
 #if EXCEPTION_TOLERANCE
             try
@@ -199,11 +202,25 @@ namespace Content.Server.GameTicking
             RaiseLocalEvent(startingEvent);
             var readyPlayers = new List<IPlayerSession>();
             var readyPlayerProfiles = new Dictionary<NetUserId, HumanoidCharacterProfile>();
+            var stalinBunkerEnabled = _configurationManager.GetCVar(WhiteCVars.StalinEnabled);
+
+            await _stalinManager.RefreshUsersData();
 
             foreach (var (userId, status) in _playerGameStatuses)
             {
                 if (LobbyEnabled && status != PlayerGameStatus.ReadyToPlay) continue;
                 if (!_playerManager.TryGetSessionById(userId, out var session)) continue;
+
+                if (stalinBunkerEnabled)
+                {
+                    var playerData = await _stalinManager.AllowEnter(session, false);
+
+                    if (!playerData.allow)
+                    {
+                        _chatManager.DispatchServerMessage(session, $"{playerData.errorMessage}");
+                        continue;
+                    }
+                }
 #if DEBUG
                 DebugTools.Assert(_userDb.IsLoadComplete(session), $"Player was readied up but didn't have user DB data loaded yet??");
 #endif

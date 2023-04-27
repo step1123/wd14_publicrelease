@@ -12,6 +12,7 @@ using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
+using Content.Shared.White;
 using JetBrains.Annotations;
 using Robust.Server.Player;
 using Robust.Shared.Map;
@@ -264,11 +265,21 @@ namespace Content.Server.GameTicking
             SpawnPlayer(player, station, jobId);
         }
 
-        public void MakeObserve(IPlayerSession player)
+        public async void MakeObserve(IPlayerSession player)
         {
             // Can't spawn players with a dummy ticker!
             if (DummyTicker)
                 return;
+
+            if (_configurationManager.GetCVar(WhiteCVars.StalinEnabled))
+            {
+                var allowEnterData = await _stalinManager.AllowEnter(player);
+                if (!allowEnterData.allow)
+                {
+                    _chatManager.DispatchServerMessage(player, $"Вход в игру запрещен: {allowEnterData.errorMessage}");
+                    return;
+                }
+            }
 
             PlayerJoinGame(player);
 
