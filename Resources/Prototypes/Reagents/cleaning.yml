@@ -31,6 +31,10 @@
   meltingPoint: -11.0
   tileReactions:
     - !type:CleanTileReaction {}
+    - !type:SpillTileReaction
+        paralyzeTime: 3
+        launchForwardsMultiplier: 4
+        requiredSlipSpeed: 1
 
 - type: reagent
   id: SpaceLube
