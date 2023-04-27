@@ -30,4 +30,6 @@ public enum GunVisualLayers : byte
     BaseUnshaded,
     Mag,
     MagUnshaded,
+    TwoModeFirst,
+    TwoModeSecond
 }

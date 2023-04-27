@@ -1,6 +1,7 @@
 using Content.Server.Power.Components;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Projectiles;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged;
@@ -12,6 +13,8 @@ namespace Content.Server.Weapons.Ranged.Systems;
 
 public sealed partial class GunSystem
 {
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+
     protected override void InitializeBattery()
     {
         base.InitializeBattery();
@@ -25,6 +28,41 @@ public sealed partial class GunSystem
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, ComponentStartup>(OnBatteryStartup);
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, ChargeChangedEvent>(OnBatteryChargeChange);
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, GetVerbsEvent<ExamineVerb>>(OnBatteryExaminableVerb);
+
+        //TwoModeEnergy
+        SubscribeLocalEvent<TwoModeEnergyAmmoProviderComponent, ComponentStartup>(OnBatteryStartup);
+        SubscribeLocalEvent<TwoModeEnergyAmmoProviderComponent, ChargeChangedEvent>(OnBatteryChargeChange);
+        SubscribeLocalEvent<TwoModeEnergyAmmoProviderComponent, GetVerbsEvent<ExamineVerb>>(OnBatteryExaminableVerb);
+        SubscribeLocalEvent<TwoModeEnergyAmmoProviderComponent, UseInHandEvent>(OnBatteryModeChange);
+    }
+
+    private void OnBatteryModeChange(EntityUid uid, TwoModeEnergyAmmoProviderComponent component, UseInHandEvent args)
+    {
+        if (!TryComp<GunComponent>(uid, out var gun))
+            return;
+
+        if (component.CurrentMode == EnergyModes.Stun)
+        {
+            component.InStun = false;
+            gun.SoundGunshot = component.HitscanSound;
+            component.CurrentMode = EnergyModes.Laser;
+            component.FireCost = component.HitscanFireCost;
+            _audio.PlayPvs(component.ToggleSound, args.User);
+        }
+        else if (component.CurrentMode == EnergyModes.Laser)
+        {
+            component.InStun = true;
+            gun.SoundGunshot = component.ProjSound;
+            component.CurrentMode = EnergyModes.Stun;
+            component.FireCost = component.ProjFireCost;
+            _audio.PlayPvs(component.ToggleSound, args.User);
+        }
+        UpdateShots(uid, component);
+        UpdateTwoModeAppearance(uid, component);
+        UpdateBatteryAppearance(uid, component);
+        UpdateAmmoCount(uid);
+        Dirty(gun);
+        Dirty(component);
     }
 
     private void OnBatteryStartup(EntityUid uid, BatteryAmmoProviderComponent component, ComponentStartup args)
@@ -80,6 +118,12 @@ public sealed partial class GunSystem
             case ProjectileBatteryAmmoProviderComponent:
                 damageType = Loc.GetString("damage-projectile");
                 break;
+            case TwoModeEnergyAmmoProviderComponent twoMode:
+                if (twoMode.CurrentMode == EnergyModes.Stun)
+                    damageType = Loc.GetString("damage-projectile");
+                else
+                    damageType = Loc.GetString("damage-hitscan");
+                break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
@@ -123,6 +167,25 @@ public sealed partial class GunSystem
             return ProtoManager.Index<HitscanPrototype>(hitscan.Prototype).Damage;
         }
 
+        if (component is TwoModeEnergyAmmoProviderComponent twoMode)
+        {
+            if (twoMode.CurrentMode == EnergyModes.Stun)
+            {
+                if (ProtoManager.Index<EntityPrototype>(twoMode.ProjectilePrototype).Components
+                    .TryGetValue(_factory.GetComponentName(typeof(ProjectileComponent)), out var projectile))
+                {
+                    var p = (ProjectileComponent) projectile.Component;
+
+                    if (p.Damage.Total > FixedPoint2.Zero)
+                    {
+                        return p.Damage;
+                    }
+                }
+
+                return null;
+            }
+            return ProtoManager.Index<HitscanPrototype>(twoMode.HitscanPrototype).Damage;
+        }
         return null;
     }
 

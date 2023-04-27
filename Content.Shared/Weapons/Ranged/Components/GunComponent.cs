@@ -13,7 +13,7 @@ public partial class GunComponent : Component
     #region Sound
 
     [ViewVariables(VVAccess.ReadWrite), DataField("soundGunshot")]
-    public SoundSpecifier? SoundGunshot = new SoundPathSpecifier("/Audio/Weapons/Guns/Gunshots/smg.ogg");
+    public SoundSpecifier? SoundGunshot { get; set; } = new SoundPathSpecifier("/Audio/Weapons/Guns/Gunshots/smg.ogg");
 
     [ViewVariables(VVAccess.ReadWrite), DataField("soundEmpty")]
     public SoundSpecifier? SoundEmpty = new SoundPathSpecifier("/Audio/Weapons/Guns/Empty/empty.ogg");

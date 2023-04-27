@@ -83,6 +83,7 @@
           - HitscanBatteryAmmoProvider
           - ProjectileBatteryAmmoProvider
           - Stunbaton
+          - TwoModeEnergyAmmoProvider
 
 - type: entity
   name: wall recharger
@@ -94,3 +95,14 @@
   - type: WallMount
   - type: Charger
     chargeRate: 25
+    slotId: charger_slot
+  - type: ItemSlots
+    slots:
+      charger_slot:
+        ejectOnInteract: true
+        whitelist:
+          components:
+            - HitscanBatteryAmmoProvider
+            - ProjectileBatteryAmmoProvider
+            - Stunbaton
+            - TwoModeEnergyAmmoProvider
