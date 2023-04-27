@@ -9,6 +9,7 @@ using Content.Server.Interaction;
 using Content.Server.Popups;
 using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
+using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
@@ -284,8 +285,20 @@ namespace Content.Server.Communications
 
         private void OnCallShuttleMessage(EntityUid uid, CommunicationsConsoleComponent comp, CommunicationsConsoleCallEmergencyShuttleMessage message)
         {
-            if (!CanCallOrRecall(comp)) return;
-            if (message.Session.AttachedEntity is not {Valid: true} mob) return;
+            if (!CanCallOrRecall(comp))
+                return;
+
+            if (message.Session.AttachedEntity is not {Valid: true} mob)
+                return;
+            
+            //WD-EDIT
+            if (!OnStationCallOrRecall(uid))
+            {
+                _popupSystem.PopupEntity(Loc.GetString("comms-console-no-connection"), uid, message.Session);
+                return;
+            }
+            //WD-EDIT
+
             if (!CanUse(mob, uid))
             {
                 _popupSystem.PopupEntity(Loc.GetString("comms-console-permission-denied"), uid, message.Session);
@@ -297,8 +310,20 @@ namespace Content.Server.Communications
 
         private void OnRecallShuttleMessage(EntityUid uid, CommunicationsConsoleComponent comp, CommunicationsConsoleRecallEmergencyShuttleMessage message)
         {
-            if (!CanCallOrRecall(comp)) return;
-            if (message.Session.AttachedEntity is not {Valid: true} mob) return;
+            if (!CanCallOrRecall(comp))
+                return;
+
+            if (message.Session.AttachedEntity is not {Valid: true} mob)
+                return;
+
+            //WD-EDIT
+            if (!OnStationCallOrRecall(uid))
+            {
+                _popupSystem.PopupEntity(Loc.GetString("comms-console-no-connection"), uid, message.Session);
+                return;
+            }
+            //WD-EDIT
+
             if (!CanUse(mob, uid))
             {
                 _popupSystem.PopupEntity(Loc.GetString("comms-console-permission-denied"), uid, message.Session);
@@ -307,6 +332,13 @@ namespace Content.Server.Communications
 
             _roundEndSystem.CancelRoundEndCountdown(uid);
             _adminLogger.Add(LogType.Action, LogImpact.Extreme, $"{ToPrettyString(mob):player} has recalled the shuttle.");
+        }
+
+        private bool OnStationCallOrRecall(EntityUid uid)
+        {
+            var parent = Transform(uid).ParentUid;
+            return (HasComp<BecomesStationComponent>(parent));
+
         }
     }
 }
