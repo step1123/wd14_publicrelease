@@ -22,6 +22,7 @@ namespace Content.Server.Chat.Managers
         void TrySendOOCMessage(IPlayerSession player, string message, OOCChatType type);
 
         void SendHookOOC(string sender, string message);
+        void SendHookAdminChat(string sender, string message); // WD-EDIT
         void SendAdminAnnouncement(string message);
         void SendAdminAlert(string message);
         void SendAdminAlert(EntityUid player, string message, MindComponent? mindComponent = null);

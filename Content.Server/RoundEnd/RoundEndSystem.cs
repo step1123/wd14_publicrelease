@@ -8,6 +8,7 @@ using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Systems;
+using Content.Server.UtkaIntegration;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Robust.Shared.Audio;
@@ -34,6 +35,11 @@ namespace Content.Server.RoundEnd
         [Dependency] private readonly GameTicker _gameTicker = default!;
         [Dependency] private readonly EmergencyShuttleSystem _shuttle = default!;
         [Dependency] private readonly StationSystem _stationSystem = default!;
+
+        //WD-EDIT
+        [Dependency] private readonly UtkaTCPWrapper _utkaSocketWrapper = default!;
+        //WD-EDIT
+
 
         public TimeSpan DefaultCooldownDuration { get; set; } = TimeSpan.FromSeconds(30);
 
@@ -171,6 +177,13 @@ namespace Content.Server.RoundEnd
 
             ActivateCooldown();
             RaiseLocalEvent(RoundEndSystemChangedEvent.Default);
+
+            //WD-EDIT
+            if (autoCall)
+                SendRoundStatus("shuttle_autocalled");
+            else
+                SendRoundStatus("shuttle_called");
+            //WD-EDIT
         }
 
         public void CancelRoundEndCountdown(EntityUid? requester = null, bool checkCooldown = true)
@@ -200,7 +213,23 @@ namespace Content.Server.RoundEnd
             ExpectedCountdownEnd = null;
             ActivateCooldown();
             RaiseLocalEvent(RoundEndSystemChangedEvent.Default);
+
+            //WD-EDIT
+            SendRoundStatus("shuttle_recalled");
+            //WD-EDIT
         }
+
+        //WD-EDIT
+        private void SendRoundStatus(string status)
+        {
+            var utkaRoundStatusEvent = new UtkaRoundStatusEvent()
+            {
+                Message = status
+            };
+
+            _utkaSocketWrapper.SendMessageToAll(utkaRoundStatusEvent);
+        }
+        //WD-EDIT
 
         public void EndRound()
         {
@@ -213,6 +242,8 @@ namespace Content.Server.RoundEnd
             _countdownTokenSource = new();
             _chatManager.DispatchServerAnnouncement(Loc.GetString("round-end-system-round-restart-eta-announcement", ("minutes", DefaultRestartRoundDuration.Minutes)));
             Timer.Spawn(DefaultRestartRoundDuration, AfterEndRoundRestart, _countdownTokenSource.Token);
+
+            SendRoundStatus("round_ended"); //WD-EDIT
         }
 
         private void AfterEndRoundRestart()

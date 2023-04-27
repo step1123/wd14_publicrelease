@@ -5,7 +5,7 @@ namespace Content.Shared.White;
 /*
  * PUT YOUR CUSTOM VARS HERE
  * DO IT OR I WILL KILL YOU
- * with love, by Hail-Rakes
+ * with love, by hailrakes
  */
 
 
@@ -55,5 +55,11 @@ public sealed class WhiteCVars
     /// </summary>
     public static readonly CVarDef<bool> DiscordRoundStartOnly =
         CVarDef.Create("discord.round_start_only", false, CVar.SERVERONLY);
+
+    /*
+  * Sockets
+     */
+
+    public static readonly CVarDef<string> UtkaSocketKey = CVarDef.Create("utka.socket_key", "ass", CVar.SERVERONLY | CVar.CONFIDENTIAL);
 
 }

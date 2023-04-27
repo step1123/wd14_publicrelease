@@ -220,6 +220,11 @@ public sealed partial class EmergencyShuttleSystem
             // Guarantees that emergency shuttle arrives first before anyone else can FTL.
             if (CentCom != null)
                 _shuttle.AddFTLDestination(CentCom.Value, true);
+
+            if (EarlyLaunchAuthorized)
+                SendRoundStatus("shuttle_escaped");
+            else
+                SendRoundStatus("shuttle_left");
         }
     }
 

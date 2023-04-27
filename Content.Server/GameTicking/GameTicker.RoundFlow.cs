@@ -19,6 +19,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Linq;
 using System.Threading.Tasks;
+using Content.Server.UtkaIntegration;
 using Content.Shared.Database;
 using Robust.Shared.Asynchronous;
 
@@ -27,6 +28,10 @@ namespace Content.Server.GameTicking
     public sealed partial class GameTicker
     {
         [Dependency] private readonly ITaskManager _taskManager = default!;
+
+        //WD-EDIT
+        [Dependency] private readonly UtkaTCPWrapper _utkaSocketWrapper = default!;
+        //WD-EDIT
 
         private static readonly Counter RoundNumberMetric = Metrics.CreateCounter(
             "ss14_round_number",
@@ -240,6 +245,7 @@ namespace Content.Server.GameTicking
             AnnounceRound();
             UpdateInfoText();
             RaiseLocalEvent(new RoundStartedEvent(RoundId)); // WD-EDIT
+            SendRoundStatus("game_started"); //WD-EDIT
 
 #if EXCEPTION_TOLERANCE
             }
@@ -405,6 +411,7 @@ namespace Content.Server.GameTicking
                 UpdateInfoText();
 
                 ReqWindowAttentionAll();
+                SendRoundStatus("lobby_loaded"); //WD-EDIT
             }
         }
 
@@ -490,6 +497,22 @@ namespace Content.Server.GameTicking
 
             return true;
         }
+
+        //WD-EDIT
+        private void SendRoundStatus(string status)
+        {
+            if (!_postInitialized)
+                return;
+
+            var utkaRoundStatusEvent = new UtkaRoundStatusEvent()
+            {
+                Message = status
+            };
+
+            _utkaSocketWrapper.SendMessageToAll(utkaRoundStatusEvent);
+
+        }
+        //WD-EDIT
 
         private void UpdateRoundFlow(float frameTime)
         {
