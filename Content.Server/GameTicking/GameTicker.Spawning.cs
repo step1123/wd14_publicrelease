@@ -184,38 +184,13 @@ namespace Content.Server.GameTicking
             var job = new Job(newMind, jobPrototype);
             newMind.AddRole(job);
 
-            _playTimeTrackings.PlayerRolesChanged(player);
-
-            var whitelistedSpecies = jobPrototype.WhitelistedSpecies;
-
-            if (whitelistedSpecies.Count > 0 && !whitelistedSpecies.Contains(character.Species))
+            if (_cfg.GetCVar(WhiteCVars.FanaticXenophobiaEnabled))
             {
-                var playerProfiles = _prefsManager.GetPreferences(player.UserId).Characters.Values.Cast<HumanoidCharacterProfile>().ToList();
-
-                var existedAllowedProfile = playerProfiles.FindAll(x => whitelistedSpecies.Contains(x.Species));
-
-                if (existedAllowedProfile.Count == 0)
-                {
-                    character = HumanoidCharacterProfile.RandomWithSpecies(_robustRandom.Pick(whitelistedSpecies));
-                    _chatManager.DispatchServerMessage(player, "Данному виду запрещено играть на этой профессии. Вам была выдана случайная внешность.");
-                }
-                else
-                {
-                    character = _robustRandom.Pick(existedAllowedProfile);
-                    _chatManager.DispatchServerMessage(player, "Данному виду запрещено играть на этой профессии. Вам была выдана случайная внешность с подходящим видом из вашего профиля.");
-                }
-
-                StringBuilder availableSpeciesLoc = new StringBuilder();
-                foreach (var specie in whitelistedSpecies)
-                {
-                    availableSpeciesLoc.AppendLine("-" + Loc.GetString($"species-name-{specie.ToLower()}"));
-                }
-
-                _chatManager.DispatchServerMessage(player, $"Доступные виды: \n {availableSpeciesLoc}");
+                character = ReplaceBlacklistedSpecies(player, character, jobPrototype);
+                newMind.CharacterName = character.Name;
             }
 
-
-
+            _playTimeTrackings.PlayerRolesChanged(player);
             var mobMaybe = _stationSpawning.SpawnPlayerCharacterOnStation(station, job, character);
             DebugTools.AssertNotNull(mobMaybe);
             var mob = mobMaybe!.Value;
@@ -272,6 +247,41 @@ namespace Content.Server.GameTicking
             var aev = new PlayerSpawnCompleteEvent(mob, player, jobId, lateJoin, PlayersJoinedRoundNormally, station, character);
             RaiseLocalEvent(mob, aev, true);
         }
+
+        private HumanoidCharacterProfile ReplaceBlacklistedSpecies(IPlayerSession player, HumanoidCharacterProfile character, JobPrototype jobPrototype)
+        {
+            var whitelistedSpecies = jobPrototype.WhitelistedSpecies;
+
+            if (whitelistedSpecies.Count > 0 && !whitelistedSpecies.Contains(character.Species))
+            {
+                var playerProfiles = _prefsManager.GetPreferences(player.UserId).Characters.Values
+                    .Cast<HumanoidCharacterProfile>().ToList();
+
+                var existedAllowedProfile = playerProfiles.FindAll(x => whitelistedSpecies.Contains(x.Species));
+
+                if (existedAllowedProfile.Count == 0)
+                {
+                    character = HumanoidCharacterProfile.RandomWithSpecies(_robustRandom.Pick(whitelistedSpecies));
+                    _chatManager.DispatchServerMessage(player, "Данному виду запрещено играть на этой профессии. Вам была выдана случайная внешность.");
+                }
+                else
+                {
+                    character = _robustRandom.Pick(existedAllowedProfile);
+                    _chatManager.DispatchServerMessage(player, "Данному виду запрещено играть на этой профессии. Вам была выдана случайная внешность с подходящим видом из вашего профиля.");
+                }
+
+                var availableSpeciesLoc = new StringBuilder();
+                foreach (var specie in whitelistedSpecies)
+                {
+                    availableSpeciesLoc.AppendLine("- " + Loc.GetString($"species-name-{specie.ToLower()}"));
+                }
+
+                _chatManager.DispatchServerMessage(player, $"Доступные виды: \n {availableSpeciesLoc}");
+            }
+
+            return character;
+        }
+
 
         public void Respawn(IPlayerSession player)
         {

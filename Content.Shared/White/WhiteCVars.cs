@@ -122,4 +122,12 @@ public sealed class WhiteCVars
 
     public static readonly CVarDef<bool> EmergencyShuttleCallEnabled =
         CVarDef.Create("shuttle.emergency_shuttle_call", true, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
+
+
+    /*
+   * Xenophobia
+     */
+
+    public static readonly CVarDef<bool> FanaticXenophobiaEnabled =
+        CVarDef.Create("white.fanatic_xenophobia", true, CVar.SERVERONLY | CVar.ARCHIVE);
 }
