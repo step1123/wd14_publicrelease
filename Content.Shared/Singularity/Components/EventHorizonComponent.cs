@@ -43,6 +43,13 @@ public sealed class EventHorizonComponent : Component
     [ViewVariables(VVAccess.ReadOnly)]
     public bool BeingConsumedByAnotherEventHorizon = false;
 
+    ///<summary>
+    /// Whether the event horizon was reported in admin about containment breach
+    /// </summary>
+    [DataField("wasDetectedInBreach")]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool WasDetectedInBreach;
+
     #region Update Timing
 
     /// <summary>

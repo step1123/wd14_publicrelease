@@ -1,3 +1,4 @@
+using Content.Server.Chat.Managers;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 using Robust.Shared.Map;
@@ -25,7 +26,8 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IMapManager _mapMan = default!;
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-#endregion Dependencies
+    [Dependency] private readonly IChatManager _chatManager = default!;
+    #endregion Dependencies
 
     /// <summary>
     /// The maximum number of nested containers an event horizon is allowed to eat through in an attempt to get to the map.
@@ -78,6 +80,12 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
             var curTime = _timing.CurTime;
             if (eventHorizon.NextConsumeWaveTime <= curTime)
                 Update(eventHorizon.Owner, eventHorizon, xform);
+            if (eventHorizon is { WasDetectedInBreach: false, CanBreachContainment: true })
+            {
+                _chatManager.SendAdminAnnouncement(Loc.GetString("admin-chatalert-singularity-can-breach-containment",
+                    ("singularity", ToPrettyString(eventHorizon.Owner))));
+                eventHorizon.WasDetectedInBreach = true;
+            }
         }
     }
 
