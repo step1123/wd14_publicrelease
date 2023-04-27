@@ -31,6 +31,8 @@ public partial class ChatSystem
         var emotes = _prototypeManager.EnumeratePrototypes<EmotePrototype>();
         foreach (var emote in emotes)
         {
+            if (emote.ChatTriggers == null)
+                continue;
             foreach (var word in emote.ChatTriggers)
             {
                 var lowerWord = word.ToLower();

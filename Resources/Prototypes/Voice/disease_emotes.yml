@@ -1,45 +1,23 @@
 - type: emote
   id: Sneeze
+  buttonText: Чихать
   category: Vocal
-  chatMessages: [sneezes]
-    
+  chatMessages: [чихает]
+
 - type: emote
   id: Cough
+  buttonText: Кашлять
   category: Vocal
-  chatMessages: [coughs]
+  chatMessages: [кашляет]
   chatTriggers:
     - cough
     - coughs
 
 - type: emote
-  id: CatMeow
-  category: Vocal
-  chatMessages: [meows]
-
-- type: emote
-  id: CatHisses
-  category: Vocal
-  chatMessages: [hisses]
-
-- type: emote
-  id: MonkeyScreeches
-  category: Vocal
-  chatMessages: [screeches]
-
-- type: emote
-  id: RobotBeep
-  category: Vocal
-  chatMessages: [beeps]
-
-- type: emote
   id: Yawn
+  buttonText: Зевать
   category: Vocal
-  chatMessages: [yawns]
+  chatMessages: [зевает]
   chatTriggers:
     - yawn
     - yawns
-
-- type: emote
-  id: Snore
-  category: Vocal
-  chatMessages: [snores]

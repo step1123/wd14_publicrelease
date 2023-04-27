@@ -10,6 +10,14 @@
     {
       "name": "monkey",
       "directions": 4
-    }
+    },
+      {
+          "name": "dead",
+          "delays": [
+              [
+                  1
+              ]
+          ]
+      }
   ]
 }

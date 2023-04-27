@@ -161,6 +161,9 @@ binds:
 - function: OpenCharacterMenu
   type: State
   key: C
+- function: OpenEmotionsMenu
+  type: State
+  key: Y
 - function: TextCursorSelect
   # TextCursorSelect HAS to be above ExamineEntity
   # So that LineEdit receives it correctly.

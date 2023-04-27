@@ -1,0 +1,108 @@
+- type: emote
+  id: Scream
+  category: Vocal
+  buttonText: Кричать
+  chatMessages: [кричит, орет, вопит, рявкает]
+  chatTriggers:
+    - кричит
+    - закричал
+    - закричала
+    - орет
+    - заорал
+    - заорала
+    - визжит
+    - завизжал
+    - завизжала
+    - взвизгнул
+    - взвизгнула
+    - рявкает
+    - рявкнул
+    - рявкнула
+    - вопит
+
+- type: emote
+  id: Laugh
+  category: Vocal
+  buttonText: Смеяться
+  chatMessages: [смеется, ржет, усмехается, хохочет, гогочет]
+  chatTriggers:
+    - смеется
+    - просмеялся
+    - засмеялся
+    - засмеялась
+    - хихикает
+    - хихикнул
+    - хихикнула
+    - хихикает
+    - ржет
+    - усмехается
+    - усмехнулась
+    - усмехнулся
+    - хохочет
+    - гогочет
+
+- type: emote
+  id: Clap
+  category: Gesture
+  buttonText: Хлопать
+  chatMessages: [хлопает]
+  chatTriggers:
+    - хлопает
+    - захлопала
+    - захлопал
+    - похлопал
+
+- type: emote
+  id: Snap
+  category: Gesture
+  buttonText: Щелкать пальцами
+  chatMessages: [щелкает пальцами]
+  chatTriggers:
+    - щелкает пальцами
+    - щелкает
+    - щелкнул
+    - щелкнула
+    - щелкунл пальцами
+    - щелкунла пальцами
+
+- type: emote
+  id: WaveHand
+  category: Gesture
+  buttonText: Махать рукой
+  chatMessages: [машет рукой]
+
+- type: emote
+  id: Nod
+  category: Gesture
+  buttonText: Кивать
+  chatMessages: [кивает]
+
+- type: emote
+  id: ShakeHead
+  category: Gesture
+  buttonText: Покачать головой
+  chatMessages: [качает головой]
+
+- type: emote
+  id: Frown
+  category: Gesture
+  buttonText: Хмуриться
+  chatMessages: [хмурится]
+
+- type: emote
+  id: Smile
+  category: Gesture
+  buttonText: Улыбаться
+  chatMessages: [улыбается]
+
+- type: emote
+  id: Sniff
+  category: Gesture
+  buttonText: Принюхиваться
+  chatMessages: [принюхивается]
+
+- type: emote
+  id: LickLips
+  category: Gesture
+  buttonText: Облизываться
+  chatMessages: [облизывается]
