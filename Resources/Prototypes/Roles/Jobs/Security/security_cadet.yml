@@ -13,6 +13,9 @@
   startingGear: SecurityCadetGear
   icon: "SecurityCadet"
   supervisors: job-supervisors-security
+  whitelistedSpecies:
+    - Human
+    - Dwarf
   canBeAntag: false
   access:
   - Security

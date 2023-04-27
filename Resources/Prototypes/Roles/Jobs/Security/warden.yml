@@ -10,6 +10,9 @@
   startingGear: WardenGear
   icon: "Warden"
   supervisors: job-supervisors-hos
+  whitelistedSpecies:
+    - Human
+    - Dwarf
   canBeAntag: false
   access:
   - Security

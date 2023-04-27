@@ -10,6 +10,9 @@
   startingGear: DetectiveGear
   icon: "Detective"
   supervisors: job-supervisors-hos
+  whitelistedSpecies:
+    - Human
+    - Dwarf
   canBeAntag: false
   access:
   - Security
