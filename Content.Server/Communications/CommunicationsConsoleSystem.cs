@@ -290,7 +290,7 @@ namespace Content.Server.Communications
 
             if (message.Session.AttachedEntity is not {Valid: true} mob)
                 return;
-            
+
             //WD-EDIT
             if (!OnStationCallOrRecall(uid))
             {

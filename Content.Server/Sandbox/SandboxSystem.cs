@@ -3,7 +3,9 @@ using Content.Server.GameTicking;
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Database;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
@@ -27,6 +29,10 @@ namespace Content.Server.Sandbox
         [Dependency] private readonly ItemSlotsSystem _slots = default!;
         [Dependency] private readonly GameTicker _ticker = default!;
         [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
+
+        //WD-EDIT
+        [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+        //WD-EDIT
 
         private bool _isSandboxEnabled;
 
@@ -55,6 +61,33 @@ namespace Content.Server.Sandbox
 
             _placementManager.AllowPlacementFunc = placement =>
             {
+                //WD-EDIT
+
+                //Logger.Info($"{placement.MsgChannel.UserName} spawned {placement.EntityTemplateName} on position {placement.EntityCoordinates}");
+                var data = _playerManager.GetSessionByUserId(placement.MsgChannel.UserId);
+                var playerUid = data.AttachedEntity.GetValueOrDefault();
+                var coordinates = placement.EntityCoordinates;
+                switch (placement.PlaceType)
+                {
+                    case PlacementManagerMessage.StartPlacement:
+                        break;
+                    case PlacementManagerMessage.CancelPlacement:
+                        break;
+                    case PlacementManagerMessage.RequestPlacement:
+                        _adminLogger.Add(LogType.EntitySpawn, LogImpact.High, $"{placement.EntityTemplateName} was spawned by" +
+                                                                              $" {ToPrettyString(playerUid):player} at " +
+                                                                              $"{ToPrettyString(coordinates.EntityId):entity} X={coordinates.X}, Y={coordinates.Y}");
+                        break;
+                    case PlacementManagerMessage.RequestEntRemove:
+                        _adminLogger.Add(LogType.EntitySpawn, LogImpact.High, $"{ToPrettyString(placement.EntityUid):entity} was deleted by {ToPrettyString(playerUid):player}");
+                        break;
+                    case PlacementManagerMessage.RequestRectRemove:
+                        break;
+                }
+                _adminLogger.Add(LogType.EntitySpawn, $"{ToPrettyString(placement.EntityUid):entity} spawned");
+
+                //WD-EDIT
+
                 if (IsSandboxEnabled)
                 {
                     return true;
