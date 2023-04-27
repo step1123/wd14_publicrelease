@@ -19,6 +19,7 @@ using Content.Shared.Database;
 using Content.Shared.Emag.Components;
 using Content.Shared.Examine;
 using Content.Shared.Popups;
+using Content.Shared.White;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
@@ -189,6 +190,10 @@ namespace Content.Server.Communications
         {
             // Defer to what the round end system thinks we should be able to do.
             if (_emergency.EmergencyShuttleArrived || !_roundEndSystem.CanCallOrRecall())
+                return false;
+
+            var shuttleCallEnabled = _cfg.GetCVar(WhiteCVars.EmergencyShuttleCallEnabled);
+            if (!shuttleCallEnabled)
                 return false;
 
             // Calling shuttle checks

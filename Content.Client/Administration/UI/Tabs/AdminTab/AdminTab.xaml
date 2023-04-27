@@ -17,6 +17,7 @@
             <cc:UICommandButton Command="callshuttle" Text="{Loc admin-player-actions-window-shuttle}" WindowType="{x:Type at:AdminShuttleWindow}"/>
             <cc:CommandButton Command="adminlogs" Text="{Loc admin-player-actions-window-admin-logs}"/>
             <cc:CommandButton Command="faxui" Text="{Loc admin-player-actions-window-admin-fax}"/>
+            <cc:UICommandButton Command="enableShuttleCall" Text="{Loc admin-player-actions-window-shuttle-call}" WindowType="{x:Type at:AdminShuttleCallEnableWindow}"/>
         </GridContainer>
     </BoxContainer>
 </Control>

@@ -115,4 +115,11 @@ public sealed class WhiteCVars
     public static readonly CVarDef<bool> NonPeacefulRoundEndEnabled =
         CVarDef.Create("white.non_peaceful_round_end_enabled", true, CVar.SERVERONLY | CVar.ARCHIVE);
 
+
+    /*
+  * Disabling calling shuttle by admin button
+     */
+
+    public static readonly CVarDef<bool> EmergencyShuttleCallEnabled =
+        CVarDef.Create("shuttle.emergency_shuttle_call", true, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
 }
