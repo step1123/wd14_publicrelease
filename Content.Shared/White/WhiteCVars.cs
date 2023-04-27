@@ -107,4 +107,12 @@ public sealed class WhiteCVars
     public static readonly CVarDef<float> StalinDiscordMinimumAge =
         CVarDef.Create("stalin.minimal_discord_age_minutes", 30.0f, CVar.SERVERONLY | CVar.ARCHIVE);
 
+
+    /*
+   * NonPeaceful Round End
+     */
+
+    public static readonly CVarDef<bool> NonPeacefulRoundEndEnabled =
+        CVarDef.Create("white.non_peaceful_round_end_enabled", true, CVar.SERVERONLY | CVar.ARCHIVE);
+
 }

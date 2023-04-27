@@ -1,0 +1,45 @@
+- type: nonPeacefulRoundEndItems
+  name: nonPeacefulRoundEndItems
+  id: nonPeacefulRoundEndRange
+  items:
+    - WeaponSubMachineGunVector
+    - WeaponSubMachineGunWt550
+    - WeaponSubMachineGunC20r
+    - WeaponSubMachineGunAtreides
+    - WeaponShotgunBulldog
+    - WeaponShotgunDoubleBarreled
+    - WeaponShotgunEnforcer
+    - WeaponShotgunKammerer
+    - WeaponShotgunSawn
+    - WeaponRifleAk
+    - WeaponRifleM90GrenadeLauncher
+    - WeaponRifleLecter
+    - WeaponRevolverDeckard
+    - WeaponRevolverInspector
+    - WeaponRevolverMateba
+    - WeaponRevolverPython
+    - WeaponRevolverPirate
+    - WeaponLightMachineGunL6
+    - WeaponFlareGun
+    - Stunbaton
+
+- type: nonPeacefulRoundEndItems
+  name: nonPeacefulRoundEndItems
+  id: nonPeacefulRoundEndMelee
+  items:
+    - FireAxeFlaming
+    - CaptainSabre
+    - Katana
+    - Machete
+    - Claymore
+    - Stunbaton
+    - ClothingBackpackDuffelSyndicateC4tBundle
+    - Spear
+    - ButchCleaver
+    - CombatKnife
+    - SurvivalKnife
+    - EnergyDagger
+    - EnergySword
+    - UnholyHalberd
+    - EldritchBlade
+    - BaseBallBat
