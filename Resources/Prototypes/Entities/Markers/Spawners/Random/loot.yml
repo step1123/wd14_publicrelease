@@ -1,0 +1,396 @@
+﻿- type: entity
+  name: Engineer loot spawner
+  id: EngiLootSpawner
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - sprite: Objects/Tools/crowbar.rsi
+          state: icon
+    - type: RandomSpawner
+      rarePrototypes:
+        - RCD
+        - ToolboxGoldFilled
+        - CowToolboxFilled
+        - JawsOfLife
+        - JetpackVoidFilled
+        - ClothingShoesBootsMagAdv
+      rareChance: 0.15
+      prototypes:
+        - Crowbar
+        - Wrench
+        - Welder
+        - Wirecutter
+        - Multitool
+        - Screwdriver
+        - ToolboxMechanicalFilled
+        - RCDAmmo
+        - GasAnalyzer
+        - CableHVStack
+        - CableApcStack
+        - CableMVStack
+        - ClothingEyesGlassesMeson
+        - ClothingHandsGlovesColorYellow
+        - ClothingShoesBootsMag
+        - ClothingMaskGas
+        - trayScanner
+        - HolofanProjector
+        - SheetRGlass
+        - PartRodMetal
+        - SheetPlasma
+        - SheetSteel
+        - SheetGlass
+        - SheetPlasteel
+        - SheetPlastic
+        - SheetRPGlass
+        - WelderIndustrial
+        - InflatableWallStack
+      chance: 0.65
+      offset: 0.2
+
+
+- type: entity
+  name: Common loot spawner
+  id: CommonLootSpawner
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - sprite: Objects/Specific/Janitorial/soap.rsi
+          state: omega
+    - type: RandomSpawner
+      rarePrototypes:
+        - FoamBlade
+        - SoapOmega
+        - PuddleVomit
+        - CaptainIDCard
+      rareChance: 0.15
+      prototypes:
+       - ToyAi
+       - ToyNuke
+       - ToyAssistant
+       - ToyGriffin
+       - ToyHonk
+       - ToyIan
+       - ToyMarauder
+       - ToyMauler
+       - ToyGygax
+       - ToyOdysseus
+       - ToyOwlman
+       - ToyDeathRipley
+       - ToyPhazon
+       - ToyFireRipley
+       - ToyReticence
+       - ToyRipley
+       - ToySeraph
+       - ToyDurand
+       - ToySkeleton
+       - PlushieBee
+       - PlushieNuke
+       - PlushieLizard
+       - PlushieNar
+       - PlushieCarp
+       - PlushieSlime
+       - PlushieSnake
+       - PlushieVox
+       - PlushieRatvar
+       - PlushieSpaceLizard
+       - PlushieRouny
+       - PlushieLamp
+       - PlushieSharkBlue
+       - PlushieSharkPink
+       - PlushieSharkGrey
+       - ToyAmongPequeno
+       - ToyMouse
+       - SalvageHumanCorpse
+       - TrashBag
+       - MopItem
+       - CigarGold
+       - SmokingPipeFilledTobacco
+       - RemoteSignaller
+      chance: 0.65
+      offset: 0.2
+
+- type: entity
+  name: Security loot spawner
+  id: SecLootSpawner
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - sprite: Objects/Weapons/Melee/stunbaton.rsi
+          state: stunbaton_off
+    - type: RandomSpawner
+      rarePrototypes:
+        - WeaponEgun
+        - WeaponRifleLector
+        - WeaponSubMachineGunWt550
+        - WeaponLaserCarbine
+        - WeaponPulseRifle
+      rareChance: 0.15
+      prototypes:
+        - ClothingBeltSecurityFilled
+        - ClothingEyesGlassesSecurity
+        - WeaponDisabler
+        - ClothingOuterArmorBulletproof
+        - FlashlightSeclite
+        - ClothingHandsGlovesColorBlack
+        - ClothingHeadHelmetHelmet
+        - Handcuffs
+        - Zipties
+        - ClothingBeltSecurityWebbing
+        - Flash
+        - RiotLaserShield
+        - RiotBulletShield
+        - RiotShield
+        - GrenadeFlashBang
+        - ClothingBackpackDuffelSecurity
+        - ClothingBackpackSecurity
+        - ClothingUniformJumpsuitPrisoner
+      chance: 0.65
+      offset: 0.2
+
+- type: entity
+  name: Medical loot spawner
+  id: MedLootSpawner
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - sprite: Objects/Specific/Medical/medical.rsi
+          state: brutepack
+    - type: RandomSpawner
+      rarePrototypes:
+        - Hypospray
+        - HandheldCrewMonitor
+      rareChance: 0.15
+      prototypes:
+        - ClothingEyesHudMedical
+        - HandheldHealthAnalyzer
+        - ClothingMaskSterile
+        - ClothingHandsGlovesLatex
+        - ClothingBackpackDuffelSurgeryFilled
+        - Hemostat
+        - Retractor
+        - Scalpel
+        - SawElectric
+        - Cautery
+        - Ointment
+        - Brutepack
+        - Syringe
+        - EmergencyRollerBad
+        - MaterialBiomass
+        - MedkitFilled
+        - MedkitRadiationFilled
+        - MedkitOxygenFilled
+        - MedkitBruteFilled
+        - MedkitCombatFilled
+        - MedkitToxinFilled
+        - MedkitBurnFilled
+        - MedkitAdvancedFilled
+        - NitrousOxideTankFilled
+      chance: 0.65
+      offset: 0.2
+
+- type: entity
+  name: Research loot spawner
+  id: RnDLootSpawner
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - sprite: Objects/Specific/Research/researchdisk.rsi
+          state: icon
+    - type: RandomSpawner
+      rarePrototypes:
+        - ResearchDisk
+        - SimpleXenoArtifact
+        - MechRipleyBattery
+        - APECircuitboard
+        - CommsComputerCircuitboard
+        - SyndicateCommsComputerCircuitboard
+      rareChance: 0.15
+      prototypes:
+        - CrateArtifactContainer
+        - CapacitorStockPart
+        - MicroLaserStockPart
+        - ScanningModuleStockPart
+        - ToolboxElectricalFilled
+      chance: 0.65
+      offset: 0.2
+
+- type: entity
+  name: Спавнер плоти
+  id: SpawnMobFlesh
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - state: lover
+          sprite: Mobs/Aliens/flesh.rsi
+    - type: ConditionalSpawner
+      prototypes:
+        - MobFleshLover
+        - MobFleshGolem
+        - MobFleshClamp
+        - MobFleshJared
+
+- type: entity
+  name: Спавнер гигантского паука
+  id: SpawnMobGiantSpider
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - state: tarantula
+          sprite: Mobs/Animals/spider.rsi
+    - type: ConditionalSpawner
+      prototypes:
+        - MobGiantSpiderAngry
+
+- type: entity
+  name: Спавнер ксено
+  id: SpawnMobXenos
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - state: running
+          sprite: Mobs/Aliens/Xenos/drone.rsi
+    - type: ConditionalSpawner
+      prototypes:
+        - MobXeno
+
+- type: entity
+  name: Спавнер ксено преторианца
+  id: SpawnMobXenoPraetorian
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - state: running
+          sprite: Mobs/Aliens/Xenos/praetorian.rsi
+    - type: ConditionalSpawner
+      prototypes:
+        - MobXenoPraetorian
+
+- type: entity
+  name: Спавнер ксено дрона
+  id: SpawnMobXenoDrone
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - state: running
+          sprite: Mobs/Aliens/Xenos/drone.rsi
+    - type: ConditionalSpawner
+      prototypes:
+        - MobXenoDrone
+
+- type: entity
+  name: Спавнер ксено королевы
+  id: SpawnMobXenoQueen
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - state: running
+          sprite: Mobs/Aliens/Xenos/queen.rsi
+    - type: ConditionalSpawner
+      prototypes:
+        - MobXenoQueen
+
+- type: entity
+  name: Спавнер ксено разрушителя
+  id: SpawnMobXenoRavager
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - state: running
+          sprite: Mobs/Aliens/Xenos/ravager.rsi
+    - type: ConditionalSpawner
+      prototypes:
+        - MobXenoRavager
+
+- type: entity
+  name: Спавнер ксено бегуна
+  id: SpawnMobXenoRunner
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - state: running
+          sprite: Mobs/Aliens/Xenos/runner.rsi
+    - type: ConditionalSpawner
+      prototypes:
+        - MobXenoRunner
+
+- type: entity
+  name: Спавнер ксено руни
+  id: SpawnMobXenoRouny
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - state: running
+          sprite: Mobs/Aliens/Xenos/rouny.rsi
+    - type: ConditionalSpawner
+      prototypes:
+        - MobXenoRouny
+
+- type: entity
+  name: Спавнер ксено плевальщика
+  id: SpawnMobXenoSpitter
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - state: running
+          sprite: Mobs/Aliens/Xenos/spitter.rsi
+    - type: ConditionalSpawner
+      prototypes:
+        - MobXenoSpitter
+
+- type: entity
+  name: Спавнер ксено турели
+  id: SpawnMobXenoTurret
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - state: acid_turret
+          sprite: Objects/Weapons/Guns/Turrets/xenoturret.rsi
+    - type: ConditionalSpawner
+      prototypes:
+        - WeaponTurretXeno
+
+- type: entity
+  name: Спавнер ксено башни
+  id: SpawnMobXenoTower
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+        - state: wardingtower
+          sprite: Structures/Specific/xeno_building.rsi
+    - type: ConditionalSpawner
+      prototypes:
+        - XenoWardingTower
