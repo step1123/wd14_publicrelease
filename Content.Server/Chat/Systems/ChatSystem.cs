@@ -11,6 +11,7 @@ using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Server.UtkaIntegration;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
@@ -469,7 +470,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     {
         var name = FormattedMessage.EscapeText(Identity.Name(source, EntityManager));
 
-        if (_adminManager.IsAdmin(player))
+        if (_adminManager.HasAdminFlag(player, AdminFlags.Admin))
         {
             if (!_adminLoocEnabled) return;
         }

@@ -258,13 +258,15 @@ namespace Content.Server.Chat.Managers
 
         private void SendAdminChat(IPlayerSession player, string message)
         {
-            if (!_adminManager.IsAdmin(player))
+            if (!_adminManager.HasAdminFlag(player, AdminFlags.Admin))
             {
                 _adminLogger.Add(LogType.Chat, LogImpact.Extreme, $"{player:Player} attempted to send admin message but was not admin");
                 return;
             }
 
-            var clients = _adminManager.ActiveAdmins.Select(p => p.ConnectedClient);
+            var clients = _adminManager.ActiveAdmins
+                .Where(p => _adminManager.HasAdminFlag(p, AdminFlags.Admin))
+                .Select(p => p.ConnectedClient);
             var wrappedMessage = Loc.GetString("chat-manager-send-admin-chat-wrap-message",
                                             ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")),
                                             ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
