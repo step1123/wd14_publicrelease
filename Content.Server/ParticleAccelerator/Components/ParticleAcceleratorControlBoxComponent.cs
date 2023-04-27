@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using Content.Server.Administration.Logs;
+using Content.Server.Chat.Managers;
 using Content.Server.Mind.Components;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
@@ -30,6 +31,7 @@ namespace Content.Server.ParticleAccelerator.Components
     {
         [Dependency] private readonly IEntityManager _entMan = default!;
         [Dependency] private readonly IMapManager _mapManager = default!;
+        [Dependency] private readonly IChatManager _chatManager = default!;
         [Dependency] private readonly IAdminLogManager _adminLogger = default!;
 
         [ViewVariables]
@@ -460,8 +462,13 @@ namespace Content.Server.ParticleAccelerator.Components
 
             // Logging
             _entMan.TryGetComponent(playerSession?.AttachedEntity, out MindComponent? mindComponent);
-            if(mindComponent != null)
-                _adminLogger.Add(LogType.Action, LogImpact.Low, $"{_entMan.ToPrettyString(mindComponent.Owner):player} has set {_entMan.ToPrettyString(Owner)} to on");
+            if (mindComponent != null)
+            {
+                _adminLogger.Add(LogType.Action, LogImpact.Low,
+                    $"{_entMan.ToPrettyString(mindComponent.Owner):player} has set {_entMan.ToPrettyString(Owner)} to on");
+                _chatManager.SendAdminAnnouncement(Loc.GetString("admin-chatalert-particle-accelerator-on",
+                    ("player", _entMan.ToPrettyString(mindComponent.Owner))));
+            }
 
             _isEnabled = true;
             UpdatePowerDraw();
@@ -484,8 +491,13 @@ namespace Content.Server.ParticleAccelerator.Components
         {
             // Logging
             _entMan.TryGetComponent(playerSession?.AttachedEntity, out MindComponent? mindComponent);
-            if(mindComponent != null)
-                _adminLogger.Add(LogType.Action, LogImpact.Low, $"{_entMan.ToPrettyString(mindComponent.Owner):player} has set {_entMan.ToPrettyString(Owner)} to off{(rescan ? " via rescan" : "")}");
+            if (mindComponent != null)
+            {
+                _adminLogger.Add(LogType.Action, LogImpact.Low,
+                    $"{_entMan.ToPrettyString(mindComponent.Owner):player} has set {_entMan.ToPrettyString(Owner)} to off{(rescan ? " via rescan" : "")}");
+                _chatManager.SendAdminAnnouncement(Loc.GetString("admin-chatalert-particle-accelerator-off",
+                    ("player", _entMan.ToPrettyString(mindComponent.Owner))));
+            }
 
             _isEnabled = false;
             PowerOff();
@@ -555,8 +567,14 @@ namespace Content.Server.ParticleAccelerator.Components
                     impact = LogImpact.Extreme;
                     break;
             }
-            if(mindComponent != null)
-                _adminLogger.Add(LogType.Action, impact, $"{_entMan.ToPrettyString(mindComponent.Owner):player} has set the strength of {_entMan.ToPrettyString(Owner)} to {state}");
+
+            if (mindComponent != null)
+            {
+                _adminLogger.Add(LogType.Action, impact,
+                    $"{_entMan.ToPrettyString(mindComponent.Owner):player} has set the strength of {_entMan.ToPrettyString(Owner)} to {state}");
+                _chatManager.SendAdminAnnouncement(Loc.GetString("admin-chatalert-particle-strength-change",
+                    ("player", _entMan.ToPrettyString(mindComponent.Owner)), ("state", state)));
+            }
 
             if (_isEnabled)
             {

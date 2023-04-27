@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.Components;
+using Content.Server.Chat.Managers;
 using Content.Server.Explosion.Components;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NPC.Pathfinding;
@@ -49,6 +50,7 @@ public sealed partial class ExplosionSystem : EntitySystem
     [Dependency] protected readonly IMapManager MapManager = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
+    [Dependency] private readonly IChatManager _chatManager = default!;
     //WD-EDIT
 
     /// <summary>
@@ -242,11 +244,19 @@ public sealed partial class ExplosionSystem : EntitySystem
             return;
 
         if (user == null)
+        {
             _adminLogger.Add(LogType.Explosion, LogImpact.High,
                 $"{ToPrettyString(uid):entity} exploded ({typeId}) at {pos.Coordinates:coordinates} with intensity {totalIntensity} slope {slope}");
+            _chatManager.SendAdminAnnouncement(Loc.GetString("admin-chatalert-explosion-no-player",
+                ("entity", ToPrettyString(uid)), ("coordinates", pos), ("intensity", totalIntensity), ("slope", slope)));
+        }
         else
+        {
             _adminLogger.Add(LogType.Explosion, LogImpact.High,
                 $"{ToPrettyString(user.Value):user} caused {ToPrettyString(uid):entity} to explode ({typeId}) at {pos.Coordinates:coordinates} with intensity {totalIntensity} slope {slope}");
+            _chatManager.SendAdminAnnouncement(Loc.GetString("admin-chatalert-explosion-player",
+                ("player",ToPrettyString(user.Value)), ("entity", ToPrettyString(uid)), ("coordinates", pos), ("intensity", totalIntensity), ("slope", slope)));
+        }
     }
 
     /// <summary>
