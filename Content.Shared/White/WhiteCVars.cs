@@ -130,4 +130,14 @@ public sealed class WhiteCVars
 
     public static readonly CVarDef<bool> FanaticXenophobiaEnabled =
         CVarDef.Create("white.fanatic_xenophobia", true, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /*
+   * MeatyOre
+     */
+
+    public static readonly CVarDef<bool> MeatyOrePanelEnabled =
+        CVarDef.Create("white.meatyore_panel_enabled", true, CVar.REPLICATED | CVar.SERVER | CVar.ARCHIVE);
+
+    public static readonly CVarDef<int> MeatyOreDefaultBalance =
+        CVarDef.Create("white.meatyore_default_balance", 15, CVar.SERVER | CVar.ARCHIVE);
 }

@@ -104,6 +104,16 @@
         AppendStyleClass="{x:Static style:StyleBase.ButtonSquare}"
         />
     <ui:MenuButton
+        Name="MeatyOreButton"
+        Access="Internal"
+        MinSize="42 64"
+        HorizontalExpand="True"
+        Icon="{xe:Tex '/Textures/Interface/meatyore-shop-icon.png'}"
+        AppendStyleClass="{x:Static style:StyleBase.ButtonSquare}"
+        ToolTip="Магазин метеора"
+        ToggleMode="False"
+    />
+    <ui:MenuButton
         Name="AHelpButton"
         Access="Internal"
         Icon="{xe:Tex '/Textures/Interface/info.svg.192dpi.png'}"

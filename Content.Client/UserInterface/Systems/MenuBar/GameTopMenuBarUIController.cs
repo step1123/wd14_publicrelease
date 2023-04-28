@@ -10,6 +10,7 @@ using Content.Client.UserInterface.Systems.Guidebook;
 using Content.Client.UserInterface.Systems.Inventory;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Content.Client.UserInterface.Systems.Sandbox;
+using Content.Client.White.MeatyOre;
 using Robust.Client.UserInterface.Controllers;
 
 namespace Content.Client.UserInterface.Systems.MenuBar;
@@ -26,6 +27,8 @@ public sealed class GameTopMenuBarUIController : UIController
     [Dependency] private readonly SandboxUIController _sandbox = default!;
     [Dependency] private readonly GuidebookUIController _guidebook = default!;
     [Dependency] private readonly EmotionsUIController _emotions = default!;
+    [Dependency] private readonly MeatyOreUIController _meatyOreUIController = default!;
+
 
     private GameTopMenuBar? GameTopMenuBar => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>();
 
@@ -50,6 +53,7 @@ public sealed class GameTopMenuBarUIController : UIController
         _action.UnloadButton();
         _sandbox.UnloadButton();
         _emotions.UnloadButton();
+        _meatyOreUIController.UnloadButton();
     }
 
     public void LoadButtons()
@@ -64,5 +68,6 @@ public sealed class GameTopMenuBarUIController : UIController
         _action.LoadButton();
         _sandbox.LoadButton();
         _emotions.LoadButton();
+        _meatyOreUIController.LoadButton();
     }
 }

@@ -25,7 +25,7 @@ public sealed partial class AdminVerbSystem
 
         var player = actor.PlayerSession;
 
-        if (!_adminManager.HasAdminFlag(player, AdminFlags.MeatyOre) && !_adminManager.HasAdminFlag(player, AdminFlags.Fun))
+        if (!_adminManager.HasAdminFlag(player, AdminFlags.Fun))
             return;
 
         var targetHasMind = TryComp(args.Target, out MindComponent? targetMindComp);

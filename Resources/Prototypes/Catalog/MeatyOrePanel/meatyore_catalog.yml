@@ -1,0 +1,1553 @@
+﻿#hats
+
+- type: listing
+  id: MeatyClothingHeadHatBeaverHat
+  productEntity: ClothingHeadHatBeaverHat
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadHatBeret
+  productEntity: ClothingHeadHatBeret
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadHatBowlerHat
+  productEntity: ClothingHeadHatBowlerHat
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadHatCardborg
+  productEntity: ClothingHeadHatCardborg
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadHatCentcom
+  productEntity: ClothingHeadHatCentcom
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadHatChef
+  productEntity: ClothingHeadHatChef
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadHatFedoraBrown
+  productEntity: ClothingHeadHatFedoraBrown
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadHatFedoraGrey
+  productEntity: ClothingHeadHatFedoraGrey
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadHatFez
+  productEntity: ClothingHeadHatFez
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadHatOutlawHat
+  productEntity: ClothingHeadHatOutlawHat
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadHatWitch1
+  productEntity: ClothingHeadHatWitch1
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadHatRedwizard
+  productEntity: ClothingHeadHatRedwizard
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadHatSantahat
+  productEntity: ClothingHeadHatSantahat
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadHatSombrero
+  productEntity: ClothingHeadHatSombrero
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadHatTophat
+  productEntity: ClothingHeadHatTophat
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadHatUshanka
+  productEntity: ClothingHeadHatUshanka
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadHatWitch
+  productEntity: ClothingHeadHatWitch
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadHatWizardFake
+  productEntity: ClothingHeadHatWizardFake
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadHatTrucker
+  productEntity: ClothingHeadHatTrucker
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadPaperSack
+  productEntity: ClothingHeadPaperSack
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadPaperSackSmile
+  productEntity: ClothingHeadPaperSackSmile
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadFishCap
+  productEntity: ClothingHeadFishCap
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadRastaHat
+  productEntity: ClothingHeadRastaHat
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadSafari
+  productEntity: ClothingHeadSafari
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+- type: listing
+  id: MeatyClothingHeadHatJester
+  productEntity: ClothingHeadHatJester
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreHats
+
+#masks
+
+- type: listing
+  id: MeatyClothingMaskClown
+  productEntity: ClothingMaskClown
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreMasks
+
+- type: listing
+  id: MeatyClothingMaskJoy
+  productEntity: ClothingMaskJoy
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreMasks
+
+- type: listing
+  id: MeatyClothingMaskMime
+  productEntity: ClothingMaskMime
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreMasks
+
+- type: listing
+  id: MeatyClothingMaskSterile
+  productEntity: ClothingMaskSterile
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreMasks
+
+- type: listing
+  id: MeatyClothingMaskPlague
+  productEntity: ClothingMaskPlague
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreMasks
+
+#boots
+- type: listing
+  id: MeatyClothingShoesBootsWork
+  productEntity: ClothingShoesBootsWork
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesBootsJack
+  productEntity: ClothingShoesBootsJack
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesBootsSalvage
+  productEntity: ClothingShoesBootsSalvage
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesBootsPerformer
+  productEntity: ClothingShoesBootsPerformer
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesBootsCombat
+  productEntity: ClothingShoesBootsCombat
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesBootsLaceup
+  productEntity: ClothingShoesBootsLaceup
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesColorBlack
+  productEntity: ClothingShoesColorBlack
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesColorBlue
+  productEntity: ClothingShoesColorBlue
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesColorBrown
+  productEntity: ClothingShoesColorBrown
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesColorGreen
+  productEntity: ClothingShoesColorGreen
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesColorOrange
+  productEntity: ClothingShoesColorOrange
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesColorPurple
+  productEntity: ClothingShoesColorPurple
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesColorRed
+  productEntity: ClothingShoesColorRed
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesColorWhite
+  productEntity: ClothingShoesColorWhite
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesColorYellow
+  productEntity: ClothingShoesColorYellow
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesFlippers
+  productEntity: ClothingShoesFlippers
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesSlippers
+  productEntity: ClothingShoesSlippers
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoeSlippersDuck
+  productEntity: ClothingShoeSlippersDuck
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesTourist
+  productEntity: ClothingShoesTourist
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesBling
+  productEntity: ClothingShoesBling
+  cost:
+    MeatyOreCoin: 5
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesCult
+  productEntity: ClothingShoesCult
+  cost:
+    MeatyOreCoin: 2
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesGaloshes
+  productEntity: ClothingShoesGaloshes
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesSwat
+  productEntity: ClothingShoesSwat
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesWizard
+  productEntity: ClothingShoesWizard
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+- type: listing
+  id: MeatyClothingShoesJester
+  productEntity: ClothingShoesJester
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreBoots
+
+
+#glasses
+
+- type: listing
+  id: MeatyClothingEyesGlassesBeer
+  productEntity: ClothingEyesGlassesBeer
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreGlasses
+
+- type: listing
+  id: MeatyClothingEyesGlasses
+  productEntity: ClothingEyesGlasses
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreGlasses
+
+- type: listing
+  id: MeatyClothingEyesEyepatch
+  productEntity: ClothingEyesEyepatch
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreGlasses
+
+- type: listing
+  id: MeatyClothingEyesBlindfold
+  productEntity: ClothingEyesBlindfold
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreGlasses
+
+#personal
+- type: listing
+  id: MeatyClothingNeckLGBTPin
+  productEntity: ClothingNeckLGBTPin
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOrePersonal
+
+- type: listing
+  id: MeatyClothingNeckAromanticPin
+  productEntity: ClothingNeckAromanticPin
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOrePersonal
+
+- type: listing
+  id: MeatyClothingNeckAsexualPin
+  productEntity: ClothingNeckAsexualPin
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOrePersonal
+
+- type: listing
+  id: MeatyClothingNeckBisexualPin
+  productEntity: ClothingNeckBisexualPin
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOrePersonal
+
+- type: listing
+  id: MeatyClothingNeckIntersexPin
+  productEntity: ClothingNeckIntersexPin
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOrePersonal
+
+- type: listing
+  id: MeatyClothingNeckLesbianPin
+  productEntity: ClothingNeckLesbianPin
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOrePersonal
+
+- type: listing
+  id: MeatyClothingNeckNonBinaryPin
+  productEntity: ClothingNeckNonBinaryPin
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOrePersonal
+
+- type: listing
+  id: MeatyClothingNeckPansexualPin
+  productEntity: ClothingNeckPansexualPin
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOrePersonal
+
+- type: listing
+  id: MeatyClothingNeckTransPin
+  productEntity: ClothingNeckTransPin
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOrePersonal
+
+- type: listing
+  id: MeatyClothingNeckCloakHerald
+  productEntity: ClothingNeckCloakHerald
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOrePersonal
+
+- type: listing
+  id: MeatyClothingNeckCloakNanotrasen
+  productEntity: ClothingNeckCloakNanotrasen
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOrePersonal
+
+- type: listing
+  id: MeatyClothingNeckCloakTrans
+  productEntity: ClothingNeckCloakTrans
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOrePersonal
+
+#suits
+
+#uniforms
+
+- type: listing
+  id: MeatyUniformShortsRed
+  productEntity: UniformShortsRed
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyOreClothingUniformJumpskirtJanimaid
+  productEntity: ClothingUniformJumpskirtJanimaid
+  cost:
+    MeatyOreCoin: 2
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyUniformShortsRedWithTop
+  productEntity: UniformShortsRedWithTop
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitAncient
+  productEntity: ClothingUniformJumpsuitAncient
+  cost:
+    MeatyOreCoin: 2
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitCentcomOfficial
+  productEntity: ClothingUniformJumpsuitCentcomOfficial
+  cost:
+    MeatyOreCoin: 5
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitClown
+  productEntity: ClothingUniformJumpsuitClown
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitJester
+  productEntity: ClothingUniformJumpsuitJester
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitDetective
+  productEntity: ClothingUniformJumpsuitDetective
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitDetectiveGrey
+  productEntity: ClothingUniformJumpsuitDetectiveGrey
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitMime
+  productEntity: ClothingUniformJumpsuitMime
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitPrisoner
+  productEntity: ClothingUniformJumpsuitPrisoner
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitColorGrey
+  productEntity: ClothingUniformJumpsuitColorGrey
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitColorBlack
+  productEntity: ClothingUniformJumpsuitColorBlack
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitColorBlue
+  productEntity: ClothingUniformJumpsuitColorBlue
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitColorGreen
+  productEntity: ClothingUniformJumpsuitColorGreen
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitColorOrange
+  productEntity: ClothingUniformJumpsuitColorOrange
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitColorPink
+  productEntity: ClothingUniformJumpsuitColorPink
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitColorRed
+  productEntity: ClothingUniformJumpsuitColorRed
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitColorWhite
+  productEntity: ClothingUniformJumpsuitColorWhite
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitColorYellow
+  productEntity: ClothingUniformJumpsuitColorYellow
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitColorDarkBlue
+  productEntity: ClothingUniformJumpsuitColorDarkBlue
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitColorTeal
+  productEntity: ClothingUniformJumpsuitColorTeal
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitColorPurple
+  productEntity: ClothingUniformJumpsuitColorPurple
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitColorDarkGreen
+  productEntity: ClothingUniformJumpsuitColorDarkGreen
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitColorLightBrown
+  productEntity: ClothingUniformJumpsuitColorLightBrown
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitColorBrown
+  productEntity: ClothingUniformJumpsuitColorBrown
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitColorMaroon
+  productEntity: ClothingUniformJumpsuitColorMaroon
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformColorRainbow
+  productEntity: ClothingUniformColorRainbow
+  cost:
+    MeatyOreCoin: 5
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformOveralls
+  productEntity: ClothingUniformOveralls
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitPyjamaSyndicateBlack
+  productEntity: ClothingUniformJumpsuitPyjamaSyndicateBlack
+  cost:
+    MeatyOreCoin: 5
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitPyjamaSyndicatePink
+  productEntity: ClothingUniformJumpsuitPyjamaSyndicatePink
+  cost:
+    MeatyOreCoin: 5
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitPyjamaSyndicateRed
+  productEntity: ClothingUniformJumpsuitPyjamaSyndicateRed
+  cost:
+    MeatyOreCoin: 5
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitNanotrasen
+  productEntity: ClothingUniformJumpsuitNanotrasen
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitCentcomFormal
+  productEntity: ClothingUniformJumpsuitCentcomFormal
+  cost:
+    MeatyOreCoin: 5
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitSafari
+  productEntity: ClothingUniformJumpsuitSafari
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitMonasticRobeDark
+  productEntity: ClothingUniformJumpsuitMonasticRobeDark
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+- type: listing
+  id: MeatyClothingUniformJumpsuitMonasticRobeLight
+  productEntity: ClothingUniformJumpsuitMonasticRobeLight
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreUniforms
+
+#gloves
+- type: listing
+  id: MeatyClothingHandsGlovesIhscombat
+  productEntity: ClothingHandsGlovesIhscombat
+  cost:
+    MeatyOreCoin: 2
+  categories:
+    - MeatyOreGloves
+
+- type: listing
+  id: MeatyClothingHandsGlovesLatex
+  productEntity: ClothingHandsGlovesLatex
+  cost:
+    MeatyOreCoin: 2
+  categories:
+    - MeatyOreGloves
+
+- type: listing
+  id: MeatyClothingHandsGlovesLeather
+  productEntity: ClothingHandsGlovesLeather
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreGloves
+
+- type: listing
+  id: MeatyClothingHandsGlovesPowerglove
+  productEntity: ClothingHandsGlovesPowerglove
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreGloves
+
+- type: listing
+  id: MeatyClothingHandsGlovesRobohands
+  productEntity: ClothingHandsGlovesRobohands
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreGloves
+
+- type: listing
+  id: MeatyClothingHandsGlovesFingerless
+  productEntity: ClothingHandsGlovesFingerless
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreGloves
+
+- type: listing
+  id: MeatyClothingHandsGlovesColorPurple
+  productEntity: ClothingHandsGlovesColorPurple
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreGloves
+
+- type: listing
+  id: MeatyClothingHandsGlovesColorRed
+  productEntity: ClothingHandsGlovesColorRed
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreGloves
+
+- type: listing
+  id: MeatyClothingHandsGlovesColorBlack
+  productEntity: ClothingHandsGlovesColorBlack
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreGloves
+
+- type: listing
+  id: MeatyClothingHandsGlovesColorBlue
+  productEntity: ClothingHandsGlovesColorBlue
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreGloves
+
+- type: listing
+  id: MeatyClothingHandsGlovesColorBrown
+  productEntity: ClothingHandsGlovesColorBrown
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreGloves
+
+- type: listing
+  id: MeatyClothingHandsGlovesColorGray
+  productEntity: ClothingHandsGlovesColorGray
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreGloves
+
+- type: listing
+  id: MeatyClothingHandsGlovesColorGreen
+  productEntity: ClothingHandsGlovesColorGreen
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreGloves
+
+- type: listing
+  id: MeatyClothingHandsGlovesColorLightBrown
+  productEntity: ClothingHandsGlovesColorLightBrown
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreGloves
+
+- type: listing
+  id: MeatyClothingHandsGlovesColorOrange
+  productEntity: ClothingHandsGlovesColorOrange
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreGloves
+
+- type: listing
+  id: MeatyClothingHandsGlovesColorWhite
+  productEntity: ClothingHandsGlovesColorWhite
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreGloves
+
+- type: listing
+  id: MeatyClothingHandsGlovesColorYellow
+  productEntity: ClothingHandsGlovesColorWhite
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreGloves
+
+#cloacks
+- type: listing
+  id: MeatyClothingOuterCoatBomber
+  productEntity: ClothingOuterCoatBomber
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreCloaks
+
+- type: listing
+  id: MeatyClothingOuterCoatGentle
+  productEntity: ClothingOuterCoatGentle
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreCloaks
+
+- type: listing
+  id: MeatyClothingOuterCoatInspector
+  productEntity: ClothingOuterCoatInspector
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreCloaks
+
+- type: listing
+  id: MeatyClothingOuterCoatJensen
+  productEntity: ClothingOuterCoatJensen
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreCloaks
+
+- type: listing
+  id: MeatyClothingOuterCoatLab
+  productEntity: ClothingOuterCoatLab
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreCloaks
+
+- type: listing
+  id: MeatyClothingOuterCoatPirate
+  productEntity: ClothingOuterCoatPirate
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreCloaks
+
+- type: listing
+  id: MeatyClothingOuterHoodieBlack
+  productEntity: ClothingOuterHoodieBlack
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreCloaks
+
+- type: listing
+  id: MeatyClothingOuterHoodieGrey
+  productEntity: ClothingOuterHoodieGrey
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreCloaks
+
+- type: listing
+  id: MeatyClothingOuterCardborg
+  productEntity: ClothingOuterCardborg
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreCloaks
+
+- type: listing
+  id: MeatyClothingOuterHoodieChaplain
+  productEntity: ClothingOuterHoodieChaplain
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreCloaks
+
+- type: listing
+  id: MeatyClothingOuterPonchoClassic
+  productEntity: ClothingOuterPonchoClassic
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreCloaks
+
+- type: listing
+  id: MeatyClothingOuterPoncho
+  productEntity: ClothingOuterPoncho
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreCloaks
+
+- type: listing
+  id: MeatyClothingOuterSanta
+  productEntity: ClothingOuterSanta
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreCloaks
+
+- type: listing
+  id: MeatyClothingOuterStraightjacket
+  productEntity: ClothingOuterStraightjacket
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreCloaks
+
+- type: listing
+  id: MeatyClothingOuterWizardViolet
+  productEntity: ClothingOuterWizardViolet
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreCloaks
+
+- type: listing
+  id: MeatyClothingOuterWizard
+  productEntity: ClothingOuterWizard
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreCloaks
+
+- type: listing
+  id: MeatyClothingOuterWizardRed
+  productEntity: ClothingOuterWizardRed
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreCloaks
+
+- type: listing
+  id: MeatyClothingOuterSkub
+  productEntity: ClothingOuterSkub
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreCloaks
+
+- type: listing
+  id: MeatyClothingOuterPlagueSuit
+  productEntity: ClothingOuterPlagueSuit
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreCloaks
+
+- type: listing
+  id: MeatyClothingOuterNunRobe
+  productEntity: ClothingOuterNunRobe
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreCloaks
+
+- type: listing
+  id: MeatyClothingOuterGhostSheet
+  productEntity: ClothingOuterGhostSheet
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreCloaks
+
+#toys
+- type: listing
+  id: MeatyPlushieBee
+  productEntity: PlushieBee
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyPlushieRGBee
+  productEntity: PlushieRGBee
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyPlushieNuke
+  productEntity: PlushieNuke
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyPlushieRouny
+  productEntity: PlushieRouny
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyPlushieLamp
+  productEntity: PlushieLamp
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyPlushieLizard
+  productEntity: PlushieLizard
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyPlushieSpaceLizard
+  productEntity: PlushieSpaceLizard
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyPlushieSharkPink
+  productEntity: PlushieSharkPink
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyPlushieSharkBlue
+  productEntity: PlushieSharkBlue
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyPlushieRatvar
+  productEntity: PlushieRatvar
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyPlushieNar
+  productEntity: PlushieNar
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyPlushieCarp
+  productEntity: PlushieCarp
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyPlushieSlime
+  productEntity: PlushieSlime
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyPlushieSnake
+  productEntity: PlushieSnake
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyToyMouse
+  productEntity: ToyMouse
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyToyRubberDuck
+  productEntity: ToyRubberDuck
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyPlushieVox
+  productEntity: PlushieVox
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyToyAi
+  productEntity: ToyAi
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyToyNuke
+  productEntity: ToyNuke
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyToyAssistant
+  productEntity: ToyAssistant
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyToyGriffin
+  productEntity: ToyGriffin
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyToyHonk
+  productEntity: ToyHonk
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyToyIan
+  productEntity: ToyIan
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyToyMarauder
+  productEntity: ToyMarauder
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyToyMauler
+  productEntity: ToyMauler
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyToyGygax
+  productEntity: ToyGygax
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyToyOwlman
+  productEntity: ToyOwlman
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyToyDeathRipley
+  productEntity: ToyDeathRipley
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyToyRipley
+  productEntity: ToyRipley
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyBasketball
+  productEntity: Basketball
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyFoamBlade
+  productEntity: FoamBlade
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyFootball
+  productEntity: Football
+  cost:
+    MeatyOreCoin: 1
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyBalloonSyn
+  productEntity: BalloonSyn
+  cost:
+    MeatyOreCoin: 2
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyBalloonCorgi
+  productEntity: BalloonCorgi
+  cost:
+    MeatyOreCoin: 2
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatySingularityToy
+  productEntity: SingularityToy
+  cost:
+    MeatyOreCoin: 20
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyPonderingOrb
+  productEntity: PonderingOrb
+  cost:
+    MeatyOreCoin: 2
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyToySword
+  productEntity: ToySword
+  cost:
+    MeatyOreCoin: 2
+  categories:
+    - MeatyOreToys
+
+- type: listing
+  id: MeatyToyAmongPequeno
+  productEntity: ToyAmongPequeno
+  cost:
+    MeatyOreCoin: 2
+  categories:
+    - MeatyOreToys
+
+# ANTAG
+
+- type: listing
+  id: MeatyBecomeTraitor
+  name: Антажка
+  description: Выдать себе антажку
+  productEvent: !type:MeatyTraitorRequestActionEvent
+  cost:
+    MeatyOreCoin: 10
+  categories:
+    - MeatyOreAntag
+  conditions:
+    - !type:BuyerBlockForAntagCondition
+    - !type:BuyerBlockForMindProtected
+
+
+# Special
+
+- type: listing
+  id: MeatyClothingHeadHatCatEars
+  productEntity: ClothingHeadHatCatEars
+  cost:
+    MeatyOreCoin: 5
+  categories:
+    - MeatyOreSpecial
+
+#Dj
+- type: listing
+  id: DjJukebox
+  productEntity: Jukebox
+  cost:
+    MeatyOreCoin: 0
+  categories:
+    - DjJukeboxCategory
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:DonationTierLockCondition
+    tier: 5
+
+- type: listing
+  id: DjTapeRecorder
+  productEntity: TapeRecorder
+  cost:
+    MeatyOreCoin: 0
+  categories:
+    - DjJukeboxCategory
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:DonationTierLockCondition
+    tier: 5
+
+- type: listing
+  id: DjTape
+  productEntity: TapeEmpty
+  cost:
+    MeatyOreCoin: 0
+  categories:
+    - DjJukeboxCategory
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 3
+  - !type:DonationTierLockCondition
+    tier: 5
