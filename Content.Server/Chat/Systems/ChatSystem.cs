@@ -571,6 +571,9 @@ public sealed partial class ChatSystem : SharedChatSystem
     private string SanitizeInGameICMessage(EntityUid source, string message, out string? emoteStr, bool capitalize = true, bool punctuate = false, bool sanitizeSlang = true)
     {
         var newMessage = message.Trim();
+
+        newMessage = _sanitizer.SanitizeTags(newMessage);
+
         if(sanitizeSlang)
             newMessage = _sanitizer.SanitizeOutSlang(newMessage);
         if (capitalize)

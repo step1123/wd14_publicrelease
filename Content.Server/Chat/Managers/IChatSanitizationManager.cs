@@ -10,5 +10,7 @@ public interface IChatSanitizationManager
 
     //WD-EDIT
     public string SanitizeOutSlang(string input);
+
+    public string SanitizeTags(string input);
     //WD-EDIT
 }
