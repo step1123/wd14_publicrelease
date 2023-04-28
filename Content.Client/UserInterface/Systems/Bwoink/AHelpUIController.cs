@@ -6,7 +6,9 @@ using Content.Client.Administration.UI.Bwoink;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Administration;
+using Content.Shared.CCVar;
 using Content.Shared.Input;
+using Content.Shared.White;
 using JetBrains.Annotations;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
@@ -15,6 +17,7 @@ using Robust.Client.UserInterface.Controllers;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Audio;
+using Robust.Shared.Configuration;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -29,17 +32,24 @@ public sealed class AHelpUIController: UIController, IOnStateChanged<GameplaySta
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IClyde _clyde = default!;
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+    [Dependency] private readonly IClientAdminManager _clientAdminManager = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
 
     private BwoinkSystem? _bwoinkSystem;
     private MenuButton? AhelpButton => UIManager.GetActiveUIWidgetOrNull<MenuBar.Widgets.GameTopMenuBar>()?.AHelpButton;
     public IAHelpUIHandler? UIHelper;
     private bool _discordRelayActive;
 
+    private float defaultBwoinkVolume;
+    private float adminBwoinkVolume;
+
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeNetworkEvent<BwoinkDiscordRelayUpdated>(DiscordRelayUpdated);
+        defaultBwoinkVolume = WhiteCVars.BwoinkVolume.DefaultValue;
+        _cfg.OnValueChanged(WhiteCVars.BwoinkVolume, volume => adminBwoinkVolume = volume);
     }
 
     public void OnStateEntered(GameplayState state)
@@ -123,9 +133,19 @@ public sealed class AHelpUIController: UIController, IOnStateChanged<GameplaySta
         {
             return;
         }
+
+
+        float bwoinkVolume = _clientAdminManager.IsActive() ? adminBwoinkVolume : defaultBwoinkVolume;
+
+        var audioParams = new AudioParams()
+        {
+            Volume = bwoinkVolume
+        };
+
+
         if (localPlayer.UserId != message.TrueSender)
         {
-            SoundSystem.Play("/Audio/Effects/adminhelp.ogg", Filter.Local());
+            SoundSystem.Play("/Audio/Effects/adminhelp.ogg", Filter.Local(), audioParams);
             _clyde.RequestWindowAttention();
         }
 

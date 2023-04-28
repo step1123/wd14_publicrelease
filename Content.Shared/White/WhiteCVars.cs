@@ -150,4 +150,11 @@ public sealed class WhiteCVars
 
     public static readonly CVarDef<int> GhostRespawnMaxPlayers =
         CVarDef.Create("ghost.respawn_max_players", 40, CVar.SERVERONLY);
+
+    /*
+    * Bwoink
+     */
+
+    public static readonly CVarDef<float> BwoinkVolume =
+        CVarDef.Create("white.admin.bwoinkVolume", 0f, CVar.CLIENTONLY | CVar.ARCHIVE);
 }
