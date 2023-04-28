@@ -212,5 +212,11 @@ namespace Content.Client.Ghost
         {
             _console.RemoteExecuteCommand(null, "toggleghosts");
         }
+
+        public void ReturnToRound()
+        {
+            var msg = new GhostReturnToRoundRequest();
+            RaiseNetworkEvent(msg);
+        }
     }
 }

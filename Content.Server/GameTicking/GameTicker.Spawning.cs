@@ -340,6 +340,10 @@ namespace Content.Server.GameTicking
             EntitySystem.Get<SharedGhostSystem>().SetCanReturnToBody(ghost, false);
             newMind.TransferTo(mob);
 
+            var userId = player.UserId;
+            if (!_ghostSystem._deathTime.TryGetValue(userId, out _))
+                _ghostSystem._deathTime[userId] = _gameTiming.CurTime;
+
             _playerGameStatuses[player.UserId] = PlayerGameStatus.JoinedGame;
             RaiseNetworkEvent(GetStatusSingle(player, PlayerGameStatus.JoinedGame));
         }

@@ -140,4 +140,14 @@ public sealed class WhiteCVars
 
     public static readonly CVarDef<int> MeatyOreDefaultBalance =
         CVarDef.Create("white.meatyore_default_balance", 15, CVar.SERVER | CVar.ARCHIVE);
+
+    /*
+   * Ghost Respawn
+     */
+
+    public static readonly CVarDef<float> GhostRespawnTime =
+        CVarDef.Create("ghost.respawn_time", 15f, CVar.SERVERONLY);
+
+    public static readonly CVarDef<int> GhostRespawnMaxPlayers =
+        CVarDef.Create("ghost.respawn_max_players", 40, CVar.SERVERONLY);
 }
