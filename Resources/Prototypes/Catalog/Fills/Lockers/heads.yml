@@ -42,7 +42,7 @@
       - id: ClothingHandsGlovesCaptain
       - id: ClothingOuterHardsuitCap
       - id: ClothingMaskGasCaptain
-      - id: WeaponDisabler
+      - id: WeaponEgun
       - id: CommsComputerCircuitboard
       - id: ClothingHeadsetAltCommand
       - id: SpaceCash1000
@@ -75,7 +75,7 @@
       - id: BoxID
       - id: BoxHeadset
       - id: IDComputerCircuitboard
-      - id: WeaponDisabler
+      - id: WeaponEgun
       - id: ClothingShoesColorBlack
         prob: 0.7
       - id: PlushieLizard
@@ -125,7 +125,7 @@
     contents:
       - id: MedkitFilled
       - id: ClothingHandsGlovesNitrile
-      #- name: ClothingEyesHudMedical #Removed until working properly
+      - id: ClothingEyesHudMedical
       - id: ClothingHeadsetAltMedical
       - id: ClothingCloakCmo
       - id: ClothingBackpackDuffelSurgeryFilled
@@ -175,7 +175,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: WeaponDisabler
+      - id: WeaponEgun
       - id: ClothingHeadHatBeretHoS
       - id: ClothingHeadHatHoshat
       - id: ClothingNeckCloakHos

@@ -1,0 +1,42 @@
+- type: entity
+  save: false
+  name: Urist McSkrell
+  parent: BaseMobOrganic
+  id: BaseMobSkrell
+  abstract: true
+  components:
+  - type: HumanoidAppearance
+    species: Skrell
+  - type: Hunger
+  - type: Thirst
+  - type: Icon
+    sprite: Mobs/Species/Skrell/parts.rsi
+    state: full
+  - type: Body
+    prototype: Skrell
+    requiredLegs: 2
+  - type: Temperature
+    heatDamageThreshold: 400
+    coldDamageThreshold: 285
+    currentTemperature: 310.15
+    specificHeat: 46
+    coldDamage:
+      types:
+        Cold : 0.2 #per second, scales with temperature & other constants
+    heatDamage:
+      types:
+        Heat : 0.1 #per second, scales with temperature & other constants
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 2.7
+    baseSprintSpeed : 4.5
+
+- type: entity
+  save: false
+  name: Urist McHands
+  id: MobSkrellDummy
+  parent: BaseMobOrganicDummy
+  description: A dummy skrell meant to be used in character setup.
+  noSpawn: true
+  components:
+  - type: HumanoidAppearance
+    species: Skrell

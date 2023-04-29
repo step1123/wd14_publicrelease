@@ -14,6 +14,10 @@ public sealed partial class GunSystem
         // Projectile
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, AmmoCounterControlEvent>(OnControl);
         SubscribeLocalEvent<ProjectileBatteryAmmoProviderComponent, UpdateAmmoCounterEvent>(OnAmmoCountUpdate);
+
+        // TwoModeEnergy
+        SubscribeLocalEvent<TwoModeEnergyAmmoProviderComponent, AmmoCounterControlEvent>(OnControl);
+        SubscribeLocalEvent<TwoModeEnergyAmmoProviderComponent, UpdateAmmoCounterEvent>(OnAmmoCountUpdate);
     }
 
     private void OnAmmoCountUpdate(EntityUid uid, BatteryAmmoProviderComponent component, UpdateAmmoCounterEvent args)

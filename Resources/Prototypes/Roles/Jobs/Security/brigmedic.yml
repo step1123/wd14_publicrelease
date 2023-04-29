@@ -13,6 +13,9 @@
   startingGear: BrigmedicGear
   icon: "Brigmedic"
   supervisors: job-supervisors-hos
+  whitelistedSpecies:
+    - Human
+    - Dwarf
   canBeAntag: false
   access:
   - Medical

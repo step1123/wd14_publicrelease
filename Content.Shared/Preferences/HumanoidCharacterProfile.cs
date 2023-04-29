@@ -8,6 +8,7 @@ using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Roles;
 using Content.Shared.Traits;
+using Content.Shared.White.TTS;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
@@ -37,6 +38,7 @@ namespace Content.Shared.Preferences
             string species,
             int age,
             Sex sex,
+            string voice,
             Gender gender,
             HumanoidCharacterAppearance appearance,
             ClothingPreference clothing,
@@ -49,6 +51,7 @@ namespace Content.Shared.Preferences
             Name = name;
             FlavorText = flavortext;
             Species = species;
+            Voice = voice;
             Age = age;
             Sex = sex;
             Gender = gender;
@@ -67,7 +70,7 @@ namespace Content.Shared.Preferences
             Dictionary<string, JobPriority> jobPriorities,
             List<string> antagPreferences,
             List<string> traitPreferences)
-            : this(other.Name, other.FlavorText, other.Species, other.Age, other.Sex, other.Gender, other.Appearance, other.Clothing, other.Backpack,
+            : this(other.Name, other.FlavorText, other.Species, other.Voice, other.Age, other.Sex, other.Gender, other.Appearance, other.Clothing, other.Backpack,
                 jobPriorities, other.PreferenceUnavailable, antagPreferences, traitPreferences)
         {
         }
@@ -82,6 +85,7 @@ namespace Content.Shared.Preferences
             string name,
             string flavortext,
             string species,
+            string voice,
             int age,
             Sex sex,
             Gender gender,
@@ -92,7 +96,7 @@ namespace Content.Shared.Preferences
             PreferenceUnavailableMode preferenceUnavailable,
             IReadOnlyList<string> antagPreferences,
             IReadOnlyList<string> traitPreferences)
-            : this(name, flavortext, species, age, sex, gender, appearance, clothing, backpack, new Dictionary<string, JobPriority>(jobPriorities),
+            : this(name, flavortext, species,  age, sex, voice, gender, appearance, clothing, backpack, new Dictionary<string, JobPriority>(jobPriorities),
                 preferenceUnavailable, new List<string>(antagPreferences), new List<string>(traitPreferences))
         {
         }
@@ -106,6 +110,7 @@ namespace Content.Shared.Preferences
             "John Doe",
             "",
             SharedHumanoidAppearanceSystem.DefaultSpecies,
+            SharedHumanoidAppearanceSystem.DefaultVoice,
             18,
             Sex.Male,
             Gender.Male,
@@ -133,6 +138,7 @@ namespace Content.Shared.Preferences
                 "John Doe",
                 "",
                 species,
+                SharedHumanoidAppearanceSystem.DefaultVoice,
                 18,
                 Sex.Male,
                 Gender.Male,
@@ -176,11 +182,16 @@ namespace Content.Shared.Preferences
                 age = random.Next(speciesPrototype.MinAge, speciesPrototype.OldAge); // people don't look and keep making 119 year old characters with zero rp, cap it at middle aged
             }
 
+            var voiceId = random.Pick(prototypeManager
+                .EnumeratePrototypes<TTSVoicePrototype>()
+                .Where(o => CanHaveVoice(o, sex)).ToArray()
+            ).ID;
+
             var gender = sex == Sex.Male ? Gender.Male : Gender.Female;
 
             var name = GetName(species, gender);
 
-            return new HumanoidCharacterProfile(name, "", species, age, sex, gender, HumanoidCharacterAppearance.Random(species, sex), ClothingPreference.Jumpsuit, BackpackPreference.Backpack,
+            return new HumanoidCharacterProfile(name, "", species, voiceId, age, sex, gender, HumanoidCharacterAppearance.Random(species, sex), ClothingPreference.Jumpsuit, BackpackPreference.Backpack,
                 new Dictionary<string, JobPriority>
                 {
                     {SharedGameTicker.FallbackOverflowJob, JobPriority.High},
@@ -190,6 +201,8 @@ namespace Content.Shared.Preferences
         public string Name { get; private set; }
         public string FlavorText { get; private set; }
         public string Species { get; private set; }
+
+        public string Voice { get; private set; }
 
         [DataField("age")]
         public int Age { get; private set; }
@@ -210,6 +223,12 @@ namespace Content.Shared.Preferences
         public IReadOnlyList<string> AntagPreferences => _antagPreferences;
         public IReadOnlyList<string> TraitPreferences => _traitPreferences;
         public PreferenceUnavailableMode PreferenceUnavailable { get; private set; }
+
+
+        public HumanoidCharacterProfile WithVoice(string voice)
+        {
+            return new(this) { Voice = voice };
+        }
 
         public HumanoidCharacterProfile WithName(string name)
         {
@@ -350,7 +369,7 @@ namespace Content.Shared.Preferences
             return Appearance.MemberwiseEquals(other.Appearance);
         }
 
-        public void EnsureValid()
+        public void EnsureValid(string[] sponsorMarkings) //WD-EDIT
         {
             var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
 
@@ -407,7 +426,7 @@ namespace Content.Shared.Preferences
             var configManager = IoCManager.Resolve<IConfigurationManager>();
             if (configManager.GetCVar(CCVars.RestrictedNames))
             {
-                name = Regex.Replace(name, @"[^A-Z,a-z,0-9, -]", string.Empty);
+                name = Regex.Replace(name, @"[^А-Я,а-я,0-9, -]", string.Empty); //WD EDIT
             }
 
             if (configManager.GetCVar(CCVars.ICNameCase))
@@ -433,7 +452,9 @@ namespace Content.Shared.Preferences
                 flavortext = FormattedMessage.RemoveMarkup(FlavorText);
             }
 
-            var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species);
+            // WD-EDIT
+            var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species, sponsorMarkings);
+            // WD-EDIT
 
             var prefsUnavailableMode = PreferenceUnavailable switch
             {
@@ -498,6 +519,15 @@ namespace Content.Shared.Preferences
 
             _traitPreferences.Clear();
             _traitPreferences.AddRange(traits);
+
+            prototypeManager.TryIndex<TTSVoicePrototype>(Voice, out var voice);
+            if (voice is null || !CanHaveVoice(voice, Sex))
+                Voice = SharedHumanoidAppearanceSystem.DefaultSexVoice[sex];
+        }
+
+        public static bool CanHaveVoice(TTSVoicePrototype voice, Sex sex)
+        {
+            return voice.RoundStart && sex == Sex.Unsexed || (voice.Sex == sex || voice.Sex == Sex.Unsexed);
         }
 
         // sorry this is kind of weird and duplicated,

@@ -6,6 +6,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Players;
 using System.Text;
+using Content.Shared.White;
 
 namespace Content.Server.GameTicking
 {
@@ -176,6 +177,11 @@ namespace Content.Server.GameTicking
             if (RunLevel != GameRunLevel.PreRoundLobby)
             {
                 return;
+            }
+          
+            if (_configurationManager.GetCVar(WhiteCVars.StalinEnabled))
+            {
+                _chatManager.DispatchServerMessage(player, "Внимание, на сервере включен бункер. Если ваш аккаунт не был привязан к дискорду, то вы не сможете зайти в раунд. Для того чтобы привязать аккаунт - нажмите на кнопку ПРИВЯЗАТЬ АККАУНТ");
             }
 
             var status = ready ? PlayerGameStatus.ReadyToPlay : PlayerGameStatus.NotReadyToPlay;

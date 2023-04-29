@@ -382,7 +382,8 @@ public sealed class ChatUIController : UIController
         }
 
         // msg.Message should be the string that a user sent over text, without any added markup.
-        var messages = SplitMessage(msg.Message);
+        var clearMessage = FormattedMessage.RemoveMarkup(msg.Message);
+        var messages = SplitMessage(clearMessage);
 
         foreach (var message in messages)
         {

@@ -247,40 +247,50 @@ public sealed partial class GunSystem
             _ammoCount.Visible = true;
 
             _ammoCount.Text = $"x{count:00}";
-            max = Math.Min(max, 8);
-            FillBulletRow(_bulletsList, count, max);
+            float step = 1;
+            if (max > 8)
+            {
+                step = ((float)max / 8);
+            }
+            FillBulletRow(_bulletsList, count, max, step);
         }
 
-        private static void FillBulletRow(Control container, int count, int capacity)
+        private static void FillBulletRow(Control container, int count, int capacity, float step = 1)
         {
             var colorGone = Color.FromHex("#000000");
             var color = Color.FromHex("#E00000");
+            int emptyNumber = 0;
 
             // Draw the empty ones
-            for (var i = count; i < capacity; i++)
+            for (float i = count; i < capacity; i+=step)
             {
-                container.AddChild(new PanelContainer
+                if (capacity - i >= step)
                 {
-                    PanelOverride = new StyleBoxFlat()
+                    container.AddChild(new PanelContainer
                     {
-                        BackgroundColor = colorGone,
-                    },
-                    MinSize = (10, 15),
-                });
+                        PanelOverride = new StyleBoxFlat()
+                        {
+                            BackgroundColor = colorGone,
+                        },
+                        MinSize = (10, 15),
+                    });
+                    emptyNumber++;
+                }
             }
 
             // Draw the full ones, but limit the count to the capacity
-            count = Math.Min(count, capacity);
-            for (var i = 0; i < count; i++)
+            for (var i = 0; i < (8 - emptyNumber); i++)
             {
-                container.AddChild(new PanelContainer
                 {
-                    PanelOverride = new StyleBoxFlat()
+                    container.AddChild(new PanelContainer
                     {
-                        BackgroundColor = color,
-                    },
-                    MinSize = (10, 15),
-                });
+                        PanelOverride = new StyleBoxFlat()
+                        {
+                            BackgroundColor = color,
+                        },
+                        MinSize = (10, 15),
+                    });
+                }
             }
         }
     }

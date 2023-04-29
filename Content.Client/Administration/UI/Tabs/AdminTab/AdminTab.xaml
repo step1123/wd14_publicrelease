@@ -9,6 +9,7 @@
         <GridContainer Columns="3">
             <cc:UICommandButton Command="kick" Text="{Loc admin-player-actions-window-title}" WindowType="{x:Type at:PlayerActionsWindow}" />
             <cc:UICommandButton Command="ban" Text="{Loc admin-player-actions-window-ban}" WindowType="{x:Type at:BanWindow}" />
+            <cc:UICommandButton Command="ban" Text="{Loc admin-player-actions-window-roleban}" WindowType="{x:Type at:RoleBanWindow}" />
             <cc:CommandButton Command="aghost" Text="{Loc admin-player-actions-window-admin-ghost}" />
             <cc:UICommandButton Command="tpto" Text="{Loc admin-player-actions-window-teleport}" WindowType="{x:Type at:TeleportWindow}" />
             <cc:CommandButton Command="permissions" Text="{Loc admin-player-actions-window-permissions}" />
@@ -16,6 +17,7 @@
             <cc:UICommandButton Command="callshuttle" Text="{Loc admin-player-actions-window-shuttle}" WindowType="{x:Type at:AdminShuttleWindow}"/>
             <cc:CommandButton Command="adminlogs" Text="{Loc admin-player-actions-window-admin-logs}"/>
             <cc:CommandButton Command="faxui" Text="{Loc admin-player-actions-window-admin-fax}"/>
+            <cc:UICommandButton Command="enableShuttleCall" Text="{Loc admin-player-actions-window-shuttle-call}" WindowType="{x:Type at:AdminShuttleCallEnableWindow}"/>
         </GridContainer>
     </BoxContainer>
 </Control>

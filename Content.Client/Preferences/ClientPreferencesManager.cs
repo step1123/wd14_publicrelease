@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Content.Client.White.Sponsors;
 using Content.Shared.Preferences;
 using Robust.Shared.IoC;
 using Robust.Shared.Network;
@@ -16,6 +17,10 @@ namespace Content.Client.Preferences
     public sealed class ClientPreferencesManager : IClientPreferencesManager
     {
         [Dependency] private readonly IClientNetManager _netManager = default!;
+
+        //WD-EDIT
+        [Dependency] private readonly SponsorsManager _sponsorsManager = default!;
+        //WD-EDIT
 
         public event Action? OnServerDataLoaded;
 
@@ -47,7 +52,10 @@ namespace Content.Client.Preferences
 
         public void UpdateCharacter(ICharacterProfile profile, int slot)
         {
-            profile.EnsureValid();
+            //WD-EDIT
+            var allowedMarkings = _sponsorsManager.TryGetInfo(out var sponsor) ? sponsor.AllowedMarkings : new string[]{};
+            profile.EnsureValid(allowedMarkings);
+            //WD-EDIT
             var characters = new Dictionary<int, ICharacterProfile>(Preferences.Characters) {[slot] = profile};
             Preferences = new PlayerPreferences(characters, Preferences.SelectedCharacterIndex, Preferences.AdminOOCColor);
             var msg = new MsgUpdateCharacter

@@ -22,7 +22,7 @@ namespace Content.Client.Administration.Systems
             // Currently this is only the ViewVariables verb, but more admin-UI related verbs can be added here.
 
             // View variables verbs
-            if (_clientConGroupController.CanViewVar())
+            if (_clientConGroupController.CanAdminMenu())
             {
                 Verb verb = new();
                 verb.Category = VerbCategory.Debug;

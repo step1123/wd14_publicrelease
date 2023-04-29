@@ -1,0 +1,48 @@
+- type: marking
+  id: SkrellHairMale
+  bodyPart: Hair
+  markingCategory: Hair
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: Mobs/Customization/skrell_hair.rsi
+      state: Male
+- type: marking
+  id: SkrellHairFemale
+  bodyPart: Hair
+  markingCategory: Hair
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: Mobs/Customization/skrell_hair.rsi
+      state: Female
+- type: marking
+  id: SkrellHairLong
+  bodyPart: Hair
+  markingCategory: Hair
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: Mobs/Customization/skrell_hair.rsi
+      state: Long
+- type: marking
+  id: SkrellHairShort
+  bodyPart: Hair
+  markingCategory: Hair
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: Mobs/Customization/skrell_hair.rsi
+      state: Short
+- type: marking
+  id: SkrellHairVeryLong
+  bodyPart: Hair
+  markingCategory: Hair
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: Mobs/Customization/skrell_hair.rsi
+      state: Verylong
+- type: marking
+  id: SkrellHairVeryShort
+  bodyPart: Hair
+  markingCategory: Hair
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: Mobs/Customization/skrell_hair.rsi
+      state: Veryshort

@@ -2,7 +2,6 @@ using Content.Client.Administration.Managers;
 using Content.Client.Changelog;
 using Content.Client.Chat.Managers;
 using Content.Client.Clickable;
-using Content.Client.Options;
 using Content.Client.Eui;
 using Content.Client.GhostKick;
 using Content.Client.Info;
@@ -16,8 +15,10 @@ using Content.Client.Viewport;
 using Content.Client.Voting;
 using Content.Shared.Administration;
 using Content.Shared.Administration.Logs;
-using Content.Shared.Module;
 using Content.Client.Guidebook;
+using Content.Client.White.JoinQueue;
+using Content.Client.White.Sponsors;
+using Content.Client.White.Stalin;
 using Content.Shared.Administration.Managers;
 
 namespace Content.Client.IoC
@@ -46,6 +47,12 @@ namespace Content.Client.IoC
             IoCManager.Register<ExtendedDisconnectInformationManager>();
             IoCManager.Register<PlayTimeTrackingManager>();
             IoCManager.Register<DocumentParsingManager>();
+
+            //WD-EDIT
+            IoCManager.Register<JoinQueueManager>();
+            IoCManager.Register<SponsorsManager>();
+            IoCManager.Register<StalinManager>();
+            //WD-EDIT
         }
     }
 }

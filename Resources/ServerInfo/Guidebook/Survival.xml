@@ -1,32 +1,32 @@
 ﻿<Document>
-# Survival
+# Выживание
 
-It is generally wise to avoid situations that will cause you harm, because medical can only heal you so much when there's nuclear operatives on your doorstep.
+Хоть медицина и может вытащить вас буквально с того света, это не значит что вы можете свободно выходить в космос без скафандра или дышать плазмой.
 
-## Identifying your situation
-Your PDA contains both a vessel name and list of crew currently active in your vessel, a reminder for your name if needed, and your assigned job for the shift, allowing you to quickly assess the situation.
+## Базовая информация
+В своем КПК вы можете найти как название станции, так и список экипажа, работающего в данный момент. А также ваше имя, должность и другую дополнительную информацию.
 
-## Emergency Treatment
-In the event of a serious emergency, there's a few things you can do to help ensure your long-term survival, including:
+## Первая помощь
+В чрезвычайной ситуации есть несколько вещей, которые вы можете сделать для обеспечения своей жизни, в том числе:
 
-- If entering critical condition, use the emergency medipen from your emergency box, it'll make sure you don't end up unable to do anything. Emergency medipens can also be used to revive people currently in crit on the floor, and to prolong the amount of time you have to deal with poisons/etc.
+- Если вы при смерти и можете упасть бес сознания в любую секунду, воспользуйтесь экстренным или космическим медипеном из вашего аварийного набора. Изначально он находится в рюкзаке. Применение гарантирует, что в течении некоторого времени вы будете способны бороться за свою жизнь, и возможно, в итоге спастись. Экстренный медипен также может быть использовано для поднятия людей, находящихся в данный момент бес сознания.
 <Box>
 <GuideEntityEmbed Entity="EmergencyMedipen"/>
 <GuideEntityEmbed Entity="SpaceMedipen"/>
 </Box>
-- Your emergency box contains a breath mask and oxygen tank, which can help you survive longer in a spacing situation.
+- В вашем наборе есть дыхательная маска и малый кислородный баллон, которые помогут вам дольше продержаться в аварийной ситуации.
 <Box>
 <GuideEntityEmbed Entity="ClothingMaskBreath"/>
 <GuideEntityEmbed Entity="EmergencyOxygenTankFilled"/>
 </Box>
-- If actively bleeding out, or simply wishing to prepare, it's possible to slice up cloth items with a knife or other sharp object and use the resulting cloth to create gauze to stem bleeding with.
+- При кровотечении, взяв нож, можно получить ткань из одежды, а далее, из ткани бинт.
 <Box>
 <GuideEntityEmbed Entity="Gauze"/>
 <GuideEntityEmbed Entity="MaterialCloth"/>
 </Box>
-- In lieu of an actual health analyzer, simply examining yourself and using the detailed examine is a good way to figure out what wounds you have.
-- If going blind, carrots are another way to treat the issue (as they contain Oculine, the chemistry drug used to treat blindness) should they be available.
-- Well-made meals (cooked food not from a vending machine) is generally much better for your overall health and can help heal smaller wounds more quickly.
-- Simple bed rest cures the majority of diseases and also allows wounds to close up on their own. Medical beds are best for this, providing a sterile surface and support for all damaged body parts, but any bed works. Even sitting down helps, if only a little.
+- Чтобы узнать что с вами, вы можете использовать "Подробный осмотр" себя. Это, конечно, не анализатор здоровья, но тоже неплохой способ узнать что с вами.
+- В некоторых ситуациях вы можете ослепнуть. Если медикам на вас нет дела, они заняты или их нет, вы можете съесть морковь. Это может помочь вам так как она содержит реагент используемый для лечения слепоты.
+- Хорошая еда (не из автомата) иногда может помочь вам. Правда, все-таки лучше пойти в медблок, а не испытывать нервы повара поедая все на своем пути..
+- Простой постельный режим - также отличный вариант лечения. Да, простой сон может спасти вам жизнь, а также позволяет ранам заживать быстрее. Для "лечебного" сна лучше всего подойдет медицинская кровать (не стазисная), хотя можно использовать простую или даже сиденье.
 
 </Document>

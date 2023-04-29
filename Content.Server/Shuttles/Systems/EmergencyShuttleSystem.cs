@@ -9,6 +9,7 @@ using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Components;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Server.UtkaIntegration;
 using Content.Shared.Access.Systems;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
@@ -49,6 +50,10 @@ public sealed partial class EmergencyShuttleSystem : EntitySystem
    [Dependency] private readonly ShuttleSystem _shuttle = default!;
    [Dependency] private readonly StationSystem _station = default!;
    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
+
+   //WD-EDIT
+   [Dependency] private readonly UtkaTCPWrapper _utkaSocketWrapper = default!;
+   //WD-EDIT
 
    private ISawmill _sawmill = default!;
 
@@ -188,6 +193,7 @@ public sealed partial class EmergencyShuttleSystem : EntitySystem
            // TODO: Need filter extensions or something don't blame me.
            _audio.PlayGlobal("/Audio/Misc/notice1.ogg", Filter.Broadcast(), true);
        }
+       SendRoundStatus("shuttle_docked");
    }
 
    private void OnStationStartup(EntityUid uid, StationDataComponent component, ComponentStartup args)
@@ -314,5 +320,16 @@ public sealed partial class EmergencyShuttleSystem : EntitySystem
            return;
 
        component.LaunchTime = component.LaunchTime.Value + args.PausedTime;
+   }
+
+   private void SendRoundStatus(string status)
+   {
+       var utkaRoundStatusEvent = new UtkaRoundStatusEvent()
+       {
+           Message = status
+       };
+
+       _utkaSocketWrapper.SendMessageToAll(utkaRoundStatusEvent);
+
    }
 }

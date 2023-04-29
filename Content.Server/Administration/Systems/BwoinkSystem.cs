@@ -509,6 +509,49 @@ namespace Content.Server.Administration.Systems
             {
             }
         }
+
+        //WD-EDIT
+        public void SendUtkaBwoinkMessage(NetUserId receiver, string sender, string text)
+        {
+            var bwoinkText = $"[color=red](D) {sender}[/color]: {text}";
+            _playerManager.TryGetUserId(sender, out var senderId);
+            var msg = new BwoinkTextMessage(receiver, senderId, bwoinkText);
+
+            LogBwoink(msg);
+
+            var admins = GetTargetAdmins();
+
+            // Notify all admins
+            foreach (var channel in admins)
+            {
+                RaiseNetworkEvent(msg, channel);
+            }
+
+            // Notify player
+            if (_playerManager.TryGetSessionById(receiver, out var session))
+            {
+                if (!admins.Contains(session.ConnectedClient))
+                    RaiseNetworkEvent(msg, session.ConnectedClient);
+            }
+
+            var sendsWebhook = _webhookUrl != string.Empty;
+            if (sendsWebhook)
+            {
+                if (!_messageQueues.ContainsKey(msg.UserId))
+                    _messageQueues[msg.UserId] = new Queue<string>();
+
+                var str = text;
+                var unameLength = sender.Length;
+
+                if (unameLength + str.Length + _maxAdditionalChars > DescriptionMax)
+                {
+                    str = str[..(DescriptionMax - _maxAdditionalChars - unameLength)];
+                }
+                _messageQueues[msg.UserId].Enqueue(GenerateAHelpMessage(sender, str, true));
+            }
+        }
+        //WD-EDIT
+
     }
 }
 

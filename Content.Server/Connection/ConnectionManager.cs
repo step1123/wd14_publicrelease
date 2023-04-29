@@ -3,9 +3,11 @@ using System.Threading.Tasks;
 using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Server.Preferences.Managers;
+using Content.Server.White.Sponsors;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Content.Shared.Players.PlayTimeTracking;
+using Content.Shared.White;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
@@ -16,6 +18,7 @@ namespace Content.Server.Connection
     public interface IConnectionManager
     {
         void Initialize();
+        Task<bool> HavePrivilegedJoin(NetUserId userId); // WD-EDIT
     }
 
     /// <summary>
@@ -29,6 +32,10 @@ namespace Content.Server.Connection
         [Dependency] private readonly IServerDbManager _db = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly ILocalizationManager _loc = default!;
+
+        //WD-EDIT
+        [Dependency] private readonly SponsorsManager _sponsorsManager = default!;
+        //WD-EDIT
 
         public void Initialize()
         {
@@ -136,13 +143,14 @@ namespace Content.Server.Connection
                 }
             }
 
-            var wasInGame = EntitySystem.TryGet<GameTicker>(out var ticker) &&
-                            ticker.PlayerGameStatuses.TryGetValue(userId, out var status) &&
-                            status == PlayerGameStatus.JoinedGame;
-            if ((_plyMgr.PlayerCount >= _cfg.GetCVar(CCVars.SoftMaxPlayers) && adminData is null) && !wasInGame)
+            //WD-EDIT
+            var isQueueEnabled = _cfg.GetCVar(WhiteCVars.QueueEnabled);
+            var isPrivileged = await HavePrivilegedJoin(e.UserId);
+            if (_plyMgr.PlayerCount >= _cfg.GetCVar(CCVars.SoftMaxPlayers) && !isPrivileged && !isQueueEnabled)
             {
                 return (ConnectionDenyReason.Full, Loc.GetString("soft-player-cap-full"), null);
             }
+            //WD-EDIT
 
             var bans = await _db.GetServerBansAsync(addr, userId, hwId, includeUnbanned: false);
             if (bans.Count > 0)
@@ -189,5 +197,20 @@ namespace Content.Server.Connection
             await _db.AssignUserIdAsync(name, assigned);
             return assigned;
         }
+
+        //WD-EDIT
+        public async Task<bool> HavePrivilegedJoin(NetUserId userId)
+        {
+            var adminData = await _dbManager.GetAdminDataForAsync(userId);
+
+            var havePriorityJoin = _sponsorsManager.TryGetInfo(userId, out var sponsorData) && sponsorData.HavePriorityJoin;
+            var wasInGame = EntitySystem.TryGet<GameTicker>(out var ticker) &&
+                            ticker.PlayerGameStatuses.TryGetValue(userId, out var status) &&
+                            status == PlayerGameStatus.JoinedGame;
+            return adminData != null ||
+                   havePriorityJoin ||
+                   wasInGame;
+        }
+        //WD-EDIT
     }
 }

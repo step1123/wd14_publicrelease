@@ -61,7 +61,7 @@ public sealed partial class StoreMenu : DefaultWindow
                 disabled = false;
         }
 
-        WithdrawButton.Disabled = disabled;
+        WithdrawButton.Visible = !disabled;
     }
 
     public void UpdateListing(List<ListingData> listings)

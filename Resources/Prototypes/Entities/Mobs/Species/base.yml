@@ -281,6 +281,7 @@
     spawned:
       - id: FoodMeat
         amount: 5
+  - type: TTS
   - type: Speech
     speechSounds: Alto
   - type: Vocal

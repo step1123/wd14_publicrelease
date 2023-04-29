@@ -157,7 +157,7 @@ public sealed partial class StoreSystem
         //broadcast event
         if (listing.ProductEvent != null)
         {
-            RaiseLocalEvent(listing.ProductEvent);
+            RaiseLocalEvent(buyer, listing.ProductEvent);
         }
 
         //log dat shit.
@@ -209,5 +209,13 @@ public sealed partial class StoreSystem
 
         component.Balance[msg.Currency] -= msg.Amount;
         UpdateUserInterface(buyer, uid, component);
+    }
+
+    public void CloseUi(EntityUid user, StoreComponent component)
+    {
+        if (!TryComp<ActorComponent>(user, out var actor))
+            return;
+
+        _ui.TryClose(component.Owner, StoreUiKey.Key, actor.PlayerSession);
     }
 }

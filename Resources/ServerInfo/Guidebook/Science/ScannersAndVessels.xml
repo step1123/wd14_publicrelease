@@ -1,24 +1,24 @@
 <Document>
-## Anomaly Scanner
+## Сканер аномалий
 
-The Anomaly Scanner is used to gather various information on anomalies. They can be found inside of the lockers in the science department.
+Сканер аномалий используется для сбора различной информации об аномалиях. Их можно найти внутри шкафчиков в научном отделе.
 
 <Box>
 <GuideEntityEmbed Entity="AnomalyScanner"/>
 </Box>
 
-Scanning an anomaly shows the severity, general stability, approximate point output, reactions with particle types, and time until the next pulse. The reaction types, specifically, can be used in conjunction with the A.P.E. to manipulate anomalies.
+Сканирование аномалии показывает степень, общую стабильность, приблизительный точечный выход, реакции с типами частиц и время до следующего импульса. Типы реакций, в частности, могут использоваться в сочетании с И.А.Ч. для управления аномалиями.
 
-## Anomaly Vessel
+## Аномальный сосуд
 
-The anomaly vessel is a machine that generates points from anomalies. Use the anomaly scanner on an empty vessel, and the anomaly that was last scanned will be synced with the vessel.
+Аномальный сосуд - это машина, которая генерирует точки из аномалий. Используйте сканер аномалий на пустом сосуде, и аномалия, которая была отсканирована в последний раз, будет синхронизирована с сосудом.
 
 <Box>
 <GuideEntityEmbed Entity="MachineAnomalyVessel"/>
 </Box>
 
-The amount of points a vessel generates per second is based on the severity, stability, and health of an anomaly. The higher each of these values, the higher the point output will be.
+Количество очков, которые судно генерирует в секунду, зависит от степени, стабильности и здоровья аномалии. Чем выше каждое из этих значений, тем выше будет результат очков.
 
-Be careful: if an anomaly goes [color=#a4885c]supercritical[/color], the vessel it is linked to will explode. This may damage the station and nearby equipment.
+Будьте осторожны: если аномалия станет [color=#a4885c]сверхкритической[/color], сосуд, с которым он связан, взорвется. Это может привести к повреждению станции и близлежащего оборудования.
 
 </Document>

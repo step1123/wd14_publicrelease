@@ -78,17 +78,17 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
 
         if (listing.Count == 0)
         {
-            GeneralStationRecordConsoleState state = new(null, null, null, console.Filter);
+            GeneralStationRecordConsoleState state = new(null, null, null, console!.Filter);
             SetStateForInterface(uid, state);
             return;
         }
         else if (listing.Count == 1)
         {
-            console.ActiveKey = listing.Keys.First();
+            console!.ActiveKey = listing.Keys.First();
         }
 
         GeneralStationRecord? record = null;
-        if (console.ActiveKey != null)
+        if (console!.ActiveKey != null)
         {
             _stationRecordsSystem.TryGetRecord(owningStation.Value, console.ActiveKey.Value, out record,
                 stationRecordsComponent);

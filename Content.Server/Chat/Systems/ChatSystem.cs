@@ -9,7 +9,9 @@ using Content.Server.Players;
 using Content.Server.Popups;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Server.UtkaIntegration;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
@@ -17,6 +19,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Radio;
+using Content.Shared.White;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
@@ -53,6 +56,10 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly StationSystem _stationSystem = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+
+    //WD-EDIT
+    [Dependency] private readonly UtkaTCPWrapper _utkaSockets = default!;
+    //WD-EDIT
 
     public const int VoiceRange = 10; // how far voice goes in world units
     public const int WhisperRange = 2; // how far whisper goes in world units
@@ -129,6 +136,9 @@ public sealed partial class ChatSystem : SharedChatSystem
     {
         if (HasComp<GhostComponent>(source))
         {
+            if(desiredType == InGameICChatType.Emote)
+                return;
+
             // Ghosts can only send dead chat messages, so we'll forward it to InGame OOC.
             TrySendInGameOOCMessage(source, message, InGameOOCChatType.Dead, hideChat, shell, player);
             return;
@@ -153,8 +163,10 @@ public sealed partial class ChatSystem : SharedChatSystem
         hideGlobalGhostChat |= hideChat;
         bool shouldCapitalize = (desiredType != InGameICChatType.Emote);
         bool shouldPunctuate = _configurationManager.GetCVar(CCVars.ChatPunctuation);
+        bool sanitizeSlang = _configurationManager.GetCVar(WhiteCVars.ChatSlangFilter);
 
-        message = SanitizeInGameICMessage(source, message, out var emoteStr, shouldCapitalize, shouldPunctuate);
+
+        message = SanitizeInGameICMessage(source, message, out var emoteStr, shouldCapitalize, shouldPunctuate, sanitizeSlang);
 
         // Was there an emote in the message? If so, send it.
         if (player != null && emoteStr != message && emoteStr != null)
@@ -219,6 +231,14 @@ public sealed partial class ChatSystem : SharedChatSystem
                 SendLOOC(source, player, message, hideChat);
                 break;
         }
+    }
+
+
+    public string AfterSpeechTransformed(EntityUid sender, string message)
+    {
+        var ev = new SpeechTransformedEvent(sender, message);
+        RaiseLocalEvent(ev);
+        return ev.Message;
     }
 
     #region Announcements
@@ -289,6 +309,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (message.Length == 0)
             return;
 
+        message = AfterSpeechTransformed(source, message);
+
         // get the entity's apparent name (if no override provided).
         string name;
         if (nameOverride != null)
@@ -303,12 +325,19 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
 
         name = FormattedMessage.EscapeText(name);
+
+        //WD-EDIT
+        var colorEv = new SetSpeakerColorEvent(source, name);
+        RaiseLocalEvent(source, colorEv);
+        name = colorEv.Name;
+        //WD-EDIT
+
         var wrappedMessage = Loc.GetString("chat-manager-entity-say-wrap-message",
-            ("entityName", name), ("message", FormattedMessage.EscapeText(message)));
+            ("entityName", name), ("message", message));
 
         SendInVoiceRange(ChatChannel.Local, message, wrappedMessage, source, hideChat, hideGlobalGhostChat);
 
-        var ev = new EntitySpokeEvent(source, message, null, null);
+        var ev = new EntitySpokeEvent(source, message, originalMessage, null, null);
         RaiseLocalEvent(source, ev, true);
 
         // To avoid logging any messages sent by entities that are not players, like vendors, cloning, etc.
@@ -342,6 +371,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (message.Length == 0)
             return;
 
+        message = AfterSpeechTransformed(source, message);
+
         var obfuscatedMessage = ObfuscateMessageReadability(message, 0.2f);
 
         // get the entity's apparent name (if no override provided).
@@ -360,11 +391,11 @@ public sealed partial class ChatSystem : SharedChatSystem
 
 
         var wrappedMessage = Loc.GetString("chat-manager-entity-whisper-wrap-message",
-            ("entityName", name), ("message", FormattedMessage.EscapeText(message)));
+            ("entityName", name), ("message", message));
 
 
         var wrappedobfuscatedMessage = Loc.GetString("chat-manager-entity-whisper-wrap-message",
-            ("entityName", name), ("message", FormattedMessage.EscapeText(obfuscatedMessage)));
+            ("entityName", name), ("message", obfuscatedMessage));
 
 
         foreach (var (session, data) in GetRecipients(source, VoiceRange))
@@ -383,7 +414,7 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         _replay.QueueReplayMessage(new ChatMessage(ChatChannel.Whisper, message, wrappedMessage, source, hideChat));
 
-        var ev = new EntitySpokeEvent(source, message, channel, obfuscatedMessage);
+        var ev = new EntitySpokeEvent(source, message, originalMessage, channel, obfuscatedMessage);
         RaiseLocalEvent(source, ev, true);
 
         if (originalMessage == message)
@@ -425,6 +456,28 @@ public sealed partial class ChatSystem : SharedChatSystem
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {ToPrettyString(source):user} as {name}: {action}");
         else
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {ToPrettyString(source):user}: {action}");
+
+        //WD-EDIT
+
+        string ckey = string.Empty;
+
+        if (TryComp<ActorComponent>(source, out var actorComponent))
+        {
+            ckey = actorComponent.PlayerSession.Name;
+        }
+
+        if(string.IsNullOrEmpty(ckey)) return;
+
+        var utkaEmoteEvent = new UtkaChatMeEvent()
+        {
+            Ckey = ckey,
+            Message = action,
+            CharacterName = MetaData(source).EntityName
+        };
+
+        _utkaSockets.SendMessageToAll(utkaEmoteEvent);
+
+        //WD-EDIT
     }
 
     // ReSharper disable once InconsistentNaming
@@ -432,7 +485,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     {
         var name = FormattedMessage.EscapeText(Identity.Name(source, EntityManager));
 
-        if (_adminManager.IsAdmin(player))
+        if (_adminManager.HasAdminFlag(player, AdminFlags.Admin))
         {
             if (!_adminLoocEnabled) return;
         }
@@ -515,9 +568,14 @@ public sealed partial class ChatSystem : SharedChatSystem
     }
 
     // ReSharper disable once InconsistentNaming
-    private string SanitizeInGameICMessage(EntityUid source, string message, out string? emoteStr, bool capitalize = true, bool punctuate = false)
+    private string SanitizeInGameICMessage(EntityUid source, string message, out string? emoteStr, bool capitalize = true, bool punctuate = false, bool sanitizeSlang = true)
     {
         var newMessage = message.Trim();
+
+        newMessage = _sanitizer.SanitizeTags(newMessage);
+
+        if(sanitizeSlang)
+            newMessage = _sanitizer.SanitizeOutSlang(newMessage);
         if (capitalize)
             newMessage = SanitizeMessageCapital(newMessage);
         if (punctuate)
@@ -674,6 +732,7 @@ public sealed class EntitySpokeEvent : EntityEventArgs
 {
     public readonly EntityUid Source;
     public readonly string Message;
+    public readonly string OriginalMessage;
     public readonly string? ObfuscatedMessage; // not null if this was a whisper
 
     /// <summary>
@@ -682,14 +741,42 @@ public sealed class EntitySpokeEvent : EntityEventArgs
     /// </summary>
     public RadioChannelPrototype? Channel;
 
-    public EntitySpokeEvent(EntityUid source, string message, RadioChannelPrototype? channel, string? obfuscatedMessage)
+    public EntitySpokeEvent(EntityUid source, string message, string originalMessage, RadioChannelPrototype? channel, string? obfuscatedMessage)
     {
         Source = source;
         Message = message;
+        OriginalMessage = originalMessage;
         Channel = channel;
         ObfuscatedMessage = obfuscatedMessage;
     }
 }
+
+//WD-EDIT
+public class SetSpeakerColorEvent
+{
+    public EntityUid Sender { get; set; }
+    public string Name { get; set; }
+
+    public SetSpeakerColorEvent(EntityUid sender, string name)
+    {
+        Sender = sender;
+        Name = name;
+    }
+}
+
+public sealed class SpeechTransformedEvent : EntityEventArgs
+{
+    public EntityUid Sender;
+    public string Message;
+
+    public SpeechTransformedEvent(EntityUid sender, string message)
+    {
+        Sender = sender;
+        Message = message;
+    }
+}
+
+//WD-EDIT
 
 /// <summary>
 ///     InGame IC chat is for chat that is specifically ingame (not lobby) but is also in character, i.e. speaking.

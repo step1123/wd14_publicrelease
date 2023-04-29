@@ -6,6 +6,8 @@ using Content.Server.Mind.Components;
 using Content.Server.MoMMI;
 using Content.Server.Preferences.Managers;
 using Content.Server.Station.Systems;
+using Content.Server.UtkaIntegration;
+using Content.Server.White.Sponsors;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
@@ -42,6 +44,11 @@ namespace Content.Server.Chat.Managers
         [Dependency] private readonly IConfigurationManager _configurationManager = default!;
         [Dependency] private readonly INetConfigurationManager _netConfigManager = default!;
         [Dependency] private readonly IEntityManager _entityManager = default!;
+
+        /// WD-EDIT
+        [Dependency] private readonly SponsorsManager _sponsorsManager = default!;
+        [Dependency] private readonly UtkaTCPWrapper _utkaSocketWrapper = default!;
+        /// WD-EDIT
 
         /// <summary>
         /// The maximum length a player-sent message can be sent
@@ -134,7 +141,7 @@ namespace Content.Server.Chat.Managers
 
         public void SendHookOOC(string sender, string message)
         {
-            if (!_oocEnabled && _configurationManager.GetCVar(CCVars.DisablingOOCDisablesRelay))
+            if (_configurationManager.GetCVar(CCVars.DisableHookedOOC))
             {
                 return;
             }
@@ -142,6 +149,28 @@ namespace Content.Server.Chat.Managers
             ChatMessageToAll(ChatChannel.OOC, message, wrappedMessage, source: EntityUid.Invalid, hideChat: false, recordReplay: true);
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Hook OOC from {sender}: {message}");
         }
+
+        //WD-EDIT
+        public void SendHookAdminChat(string sender, string message)
+        {
+            var admins = _adminManager.ActiveAdmins;
+
+            var wrappedMessage = Loc.GetString("chat-manager-send-admin-chat-wrap-message",
+                ("adminChannelName", Loc.GetString("chat-manager-admin-discord-channel-name")),
+                ("playerName", sender), ("message", FormattedMessage.EscapeText(message)));
+
+            ChatMessageToMany(ChatChannel.Admin, message, wrappedMessage, EntityUid.Invalid, false, true, admins.Select(p => p.ConnectedClient));
+
+            var asayEventMessage = new UtkaChatEventMessage()
+            {
+                Command = "asay",
+                Ckey = sender,
+                Message = message
+            };
+
+            _utkaSocketWrapper.SendMessageToAll(asayEventMessage);
+        }
+        //WD-EDIT
 
         #endregion
 
@@ -204,21 +233,41 @@ namespace Content.Server.Chat.Managers
                 wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", patronColor),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
             }
 
+            //WD-EDIT
+            if (_sponsorsManager.TryGetInfo(player.UserId, out var sponsorData) && sponsorData.OOCColor != null)
+            {
+                wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", sponsorData.OOCColor),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
+            }
+            //WD-EDIT
+
             //TODO: player.Name color, this will need to change the structure of the MsgChatMessage
             ChatMessageToAll(ChatChannel.OOC, message, wrappedMessage, EntityUid.Invalid, hideChat: false, recordReplay: true, colorOverride);
             _mommiLink.SendOOCMessage(player.Name, message);
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"OOC from {player:Player}: {message}");
+
+            //WD-EDIT
+            var toUtkaMessage = new UtkaChatEventMessage()
+            {
+                Command = "ooc",
+                Ckey = player.Name,
+                Message = message,
+            };
+
+            _utkaSocketWrapper.SendMessageToAll(toUtkaMessage);
+            //WD-EDIT
         }
 
         private void SendAdminChat(IPlayerSession player, string message)
         {
-            if (!_adminManager.IsAdmin(player))
+            if (!_adminManager.HasAdminFlag(player, AdminFlags.Admin))
             {
                 _adminLogger.Add(LogType.Chat, LogImpact.Extreme, $"{player:Player} attempted to send admin message but was not admin");
                 return;
             }
 
-            var clients = _adminManager.ActiveAdmins.Select(p => p.ConnectedClient);
+            var clients = _adminManager.ActiveAdmins
+                .Where(p => _adminManager.HasAdminFlag(p, AdminFlags.Admin))
+                .Select(p => p.ConnectedClient);
             var wrappedMessage = Loc.GetString("chat-manager-send-admin-chat-wrap-message",
                                             ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")),
                                             ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
@@ -236,6 +285,17 @@ namespace Content.Server.Chat.Managers
             }
 
             _adminLogger.Add(LogType.Chat, $"Admin chat from {player:Player}: {message}");
+
+            //WD-EDIT
+            var asayEventMessage = new UtkaChatEventMessage()
+            {
+                Command = "asay",
+                Ckey = player.Name,
+                Message = message
+            };
+
+            _utkaSocketWrapper.SendMessageToAll(asayEventMessage);
+            //WD-EDIT
         }
 
         #endregion

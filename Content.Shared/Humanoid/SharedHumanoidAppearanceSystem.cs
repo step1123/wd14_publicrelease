@@ -22,6 +22,13 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
     [Dependency] private readonly MarkingManager _markingManager = default!;
 
     public const string DefaultSpecies = "Human";
+    public const string DefaultVoice = "Eugene";
+    public static readonly Dictionary<Sex, string> DefaultSexVoice = new()
+    {
+        {Sex.Male, "Eugene"},
+        {Sex.Female, "Kseniya"},
+        {Sex.Unsexed, "Xenia"},
+    };
 
     public override void Initialize()
     {

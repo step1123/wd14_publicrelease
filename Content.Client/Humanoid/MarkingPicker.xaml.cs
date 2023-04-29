@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Client.White.Sponsors;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
@@ -18,6 +19,10 @@ public sealed partial class MarkingPicker : Control
 {
     [Dependency] private readonly MarkingManager _markingManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+
+    //WD-EDIT
+    [Dependency] private readonly SponsorsManager _sponsorsManager = default!;
+    //WD-EDIT
 
     public Action<MarkingSet>? OnMarkingAdded;
     public Action<MarkingSet>? OnMarkingRemoved;
@@ -199,6 +204,18 @@ public sealed partial class MarkingPicker : Control
 
             var item = CMarkingsUnused.AddItem($"{GetMarkingName(marking)}", marking.Sprites[0].Frame0());
             item.Metadata = marking;
+
+            //WD-EDIT
+            if (marking.SponsorOnly)
+            {
+                item.Disabled = true;
+                if (_sponsorsManager.TryGetInfo(out var sponsor))
+                {
+                    item.Disabled = !sponsor.AllowedMarkings.Contains(marking.ID);
+                }
+            }
+            //WD-EDIT
+
         }
 
         CMarkingPoints.Visible = _currentMarkings.PointsLeft(_selectedMarkingCategory) != -1;

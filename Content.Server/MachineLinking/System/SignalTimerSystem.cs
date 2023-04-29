@@ -6,6 +6,9 @@ using Content.Shared.MachineLinking;
 using Content.Server.UserInterface;
 using Content.Shared.Access.Systems;
 using Content.Server.Interaction;
+using Content.Server.Radio.EntitySystems;
+using Content.Shared.Radio;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.MachineLinking.System;
 
@@ -17,7 +20,8 @@ public sealed class SignalTimerSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
-    [Dependency] private readonly InteractionSystem _interaction = default!;
+    [Dependency] private readonly RadioSystem _radioSystem = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     public override void Initialize()
     {
@@ -57,6 +61,14 @@ public sealed class SignalTimerSystem : EntitySystem
         RemComp<ActiveSignalTimerComponent>(uid);
 
         _signalSystem.InvokePort(uid, signalTimer.TriggerPort);
+
+        var announceMessage = signalTimer.Label;
+        if (string.IsNullOrWhiteSpace(announceMessage)) { announceMessage = Loc.GetString("label-none");}
+
+        if (signalTimer.TimerCanAnnounce)
+        {
+            Report(uid, SignalTimerComponent.SecChannel, "timer-end-announcement", ("Label", announceMessage));
+        }
 
         _appearanceSystem.SetData(uid, TextScreenVisuals.Mode, TextScreenMode.Text);
 
@@ -147,6 +159,20 @@ public sealed class SignalTimerSystem : EntitySystem
             }
 
             _signalSystem.InvokePort(uid, component.StartPort);
+
+            var announceMessage = component.Label;
+            if (string.IsNullOrWhiteSpace(announceMessage)) { announceMessage = Loc.GetString("label-none");}
+
+            //sorry, skill issue
+            var time = TimeSpan.FromSeconds(component.Delay);
+            var timeFormatted = string.Format("{0}{1}{2}",
+                time.Duration().Hours > 0 ? $"{time.Hours:0} час;{(time.Hours == 1 ? string.Empty : "ов")} " : string.Empty,
+                time.Duration().Minutes > 0 ? $"{time.Minutes:0} минут;{(time.Minutes != 1 ? string.Empty : "а")} " : string.Empty,
+                time.Duration().Seconds > 0 ? $"{time.Seconds:0} секунд{(time.Seconds != 1 ? string.Empty : "а")} " : string.Empty);
+            if (component.TimerCanAnnounce)
+            {
+                Report(uid, SignalTimerComponent.SecChannel, "timer-start-announcement", ("Label", announceMessage), ("Time", timeFormatted));
+            }
         }
         else
         {
@@ -157,6 +183,22 @@ public sealed class SignalTimerSystem : EntitySystem
                 _appearanceSystem.SetData(uid, TextScreenVisuals.Mode, TextScreenMode.Text, appearance);
                 _appearanceSystem.SetData(uid, TextScreenVisuals.ScreenText, component.Label, appearance);
             }
+
+            var announceMessage = component.Label;
+            if (string.IsNullOrWhiteSpace(announceMessage)) { announceMessage = Loc.GetString("label-none");}
+
+            if (component.TimerCanAnnounce)
+            {
+                Report(uid, SignalTimerComponent.SecChannel, "timer-suffer-end", ("Label", announceMessage));
+            }
         }
     }
+
+    private void Report(EntityUid source, string channelName, string messageKey, params (string, object)[] args)
+    {
+        var message = args.Length == 0 ? Loc.GetString(messageKey) : Loc.GetString(messageKey, args);
+        var channel = _prototypeManager.Index<RadioChannelPrototype>(channelName);
+        _radioSystem.SendRadioMessage(source, message, channel, source);
+    }
+
 }

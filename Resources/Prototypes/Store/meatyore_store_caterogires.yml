@@ -1,0 +1,51 @@
+﻿- type: storeCategory
+  id: MeatyOreHats
+  name: meatyore-store-category-hats
+
+- type: storeCategory
+  id: MeatyOreMasks
+  name: meatyore-store-category-masks
+
+- type: storeCategory
+  id: MeatyOreBoots
+  name: meatyore-store-category-boots
+
+- type: storeCategory
+  id: MeatyOreGlasses
+  name: meatyore-store-category-glasses
+
+- type: storeCategory
+  id: MeatyOrePersonal
+  name: meatyore-store-category-personal
+
+- type: storeCategory
+  id: MeatyOreSuits
+  name: meatyore-store-category-suits
+
+- type: storeCategory
+  id: MeatyOreUniforms
+  name: meatyore-store-category-uniforms
+
+- type: storeCategory
+  id: MeatyOreGloves
+  name: meatyore-store-category-gloves
+
+- type: storeCategory
+  id: MeatyOreCloaks
+  name: meatyore-store-category-cloaks
+
+- type: storeCategory
+  id: MeatyOreToys
+  name: meatyore-store-category-toys
+
+- type: storeCategory
+  id: MeatyOreSpecial
+  name: meatyore-store-category-special
+
+- type: storeCategory
+  id: MeatyOreAntag
+  name: meatyore-store-category-antag
+
+- type: storeCategory
+  id: DjJukeboxCategory
+  name: dj-jukebox-store-category

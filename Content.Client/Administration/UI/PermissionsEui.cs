@@ -277,7 +277,7 @@ namespace Content.Client.Administration.UI
                 editButton.OnPressed += _ => OnEditRankPressed(kv);
                 _menu.AdminRanksList.AddChild(editButton);
 
-                if (!_adminManager.HasFlag(rank.Flags))
+                if (rank.Flags != AdminFlags.Host && !_adminManager.HasFlag(AdminFlags.Permissions) || rank.Flags == AdminFlags.Host && !_adminManager.HasFlag(AdminFlags.Host))
                 {
                     editButton.Disabled = true;
                     editButton.ToolTip = Loc.GetString("permissions-eui-do-not-have-required-flags-to-edit-rank-tooltip");
@@ -400,7 +400,15 @@ namespace Content.Client.Administration.UI
                 {
                     // Can only grant out perms you also have yourself.
                     // Primarily intended to prevent people giving themselves +HOST with +PERMISSIONS but generalized.
-                    var disable = !ui._adminManager.HasFlag(flag);
+                    bool disable;
+                    if (flag != AdminFlags.Host)
+                    {
+                        disable = !ui._adminManager.HasFlag(AdminFlags.Permissions);
+                    }
+                    else
+                    {
+                        disable = !ui._adminManager.HasFlag(AdminFlags.Host);
+                    }
                     var flagName = flag.ToString().ToUpper();
 
                     var group = new ButtonGroup();

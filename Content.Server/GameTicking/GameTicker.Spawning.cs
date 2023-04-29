@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using Content.Server.Ghost;
 using Content.Server.Ghost.Components;
 using Content.Server.Players;
@@ -12,6 +13,7 @@ using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
+using Content.Shared.White;
 using JetBrains.Annotations;
 using Robust.Server.Player;
 using Robust.Shared.Map;
@@ -182,9 +184,13 @@ namespace Content.Server.GameTicking
             var job = new Job(newMind, jobPrototype);
             newMind.AddRole(job);
 
+            if (_cfg.GetCVar(WhiteCVars.FanaticXenophobiaEnabled))
+            {
+                character = ReplaceBlacklistedSpecies(player, character, jobPrototype);
+                newMind.CharacterName = character.Name;
+            }
+
             _playTimeTrackings.PlayerRolesChanged(player);
-
-
             var mobMaybe = _stationSpawning.SpawnPlayerCharacterOnStation(station, job, character);
             DebugTools.AssertNotNull(mobMaybe);
             var mob = mobMaybe!.Value;
@@ -197,7 +203,8 @@ namespace Content.Server.GameTicking
                     Loc.GetString(
                         "latejoin-arrival-announcement",
                     ("character", MetaData(mob).EntityName),
-                    ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(job.Name))
+                        ("gender", character.Gender), // WD-EDIT
+                        ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(job.Name))
                     ), Loc.GetString("latejoin-arrival-sender"),
                     playDefaultSound: false);
             }
@@ -241,6 +248,41 @@ namespace Content.Server.GameTicking
             RaiseLocalEvent(mob, aev, true);
         }
 
+        private HumanoidCharacterProfile ReplaceBlacklistedSpecies(IPlayerSession player, HumanoidCharacterProfile character, JobPrototype jobPrototype)
+        {
+            var whitelistedSpecies = jobPrototype.WhitelistedSpecies;
+
+            if (whitelistedSpecies.Count > 0 && !whitelistedSpecies.Contains(character.Species))
+            {
+                var playerProfiles = _prefsManager.GetPreferences(player.UserId).Characters.Values
+                    .Cast<HumanoidCharacterProfile>().ToList();
+
+                var existedAllowedProfile = playerProfiles.FindAll(x => whitelistedSpecies.Contains(x.Species));
+
+                if (existedAllowedProfile.Count == 0)
+                {
+                    character = HumanoidCharacterProfile.RandomWithSpecies(_robustRandom.Pick(whitelistedSpecies));
+                    _chatManager.DispatchServerMessage(player, "Данному виду запрещено играть на этой профессии. Вам была выдана случайная внешность.");
+                }
+                else
+                {
+                    character = _robustRandom.Pick(existedAllowedProfile);
+                    _chatManager.DispatchServerMessage(player, "Данному виду запрещено играть на этой профессии. Вам была выдана случайная внешность с подходящим видом из вашего профиля.");
+                }
+
+                var availableSpeciesLoc = new StringBuilder();
+                foreach (var specie in whitelistedSpecies)
+                {
+                    availableSpeciesLoc.AppendLine("- " + Loc.GetString($"species-name-{specie.ToLower()}"));
+                }
+
+                _chatManager.DispatchServerMessage(player, $"Доступные виды: \n {availableSpeciesLoc}");
+            }
+
+            return character;
+        }
+
+
         public void Respawn(IPlayerSession player)
         {
             player.ContentData()?.WipeMind();
@@ -263,11 +305,21 @@ namespace Content.Server.GameTicking
             SpawnPlayer(player, station, jobId);
         }
 
-        public void MakeObserve(IPlayerSession player)
+        public async void MakeObserve(IPlayerSession player)
         {
             // Can't spawn players with a dummy ticker!
             if (DummyTicker)
                 return;
+
+            if (_configurationManager.GetCVar(WhiteCVars.StalinEnabled))
+            {
+                var allowEnterData = await _stalinManager.AllowEnter(player);
+                if (!allowEnterData.allow)
+                {
+                    _chatManager.DispatchServerMessage(player, $"Вход в игру запрещен: {allowEnterData.errorMessage}");
+                    return;
+                }
+            }
 
             PlayerJoinGame(player);
 
@@ -287,6 +339,10 @@ namespace Content.Server.GameTicking
             var ghost = EntityManager.GetComponent<GhostComponent>(mob);
             EntitySystem.Get<SharedGhostSystem>().SetCanReturnToBody(ghost, false);
             newMind.TransferTo(mob);
+
+            var userId = player.UserId;
+            if (!_ghostSystem._deathTime.TryGetValue(userId, out _))
+                _ghostSystem._deathTime[userId] = _gameTiming.CurTime;
 
             _playerGameStatuses[player.UserId] = PlayerGameStatus.JoinedGame;
             RaiseNetworkEvent(GetStatusSingle(player, PlayerGameStatus.JoinedGame));

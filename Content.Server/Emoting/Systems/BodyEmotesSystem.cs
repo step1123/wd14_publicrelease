@@ -31,7 +31,7 @@ public sealed class BodyEmotesSystem : EntitySystem
             return;
 
         var cat = args.Emote.Category;
-        if (cat.HasFlag(EmoteCategory.Hands))
+        if (cat.HasFlag(EmoteCategory.Gesture))
         {
             args.Handled = TryEmoteHands(uid, args.Emote, component);
         }

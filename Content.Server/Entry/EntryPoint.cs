@@ -31,6 +31,11 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Server.Station.Systems;
+using Content.Server.UtkaIntegration;
+using Content.Server.White.JoinQueue;
+using Content.Server.White.Sponsors;
+using Content.Server.White.Stalin;
+using Content.Server.White.TTS;
 using Content.Shared.Localizations;
 
 namespace Content.Server.Entry
@@ -108,6 +113,13 @@ namespace Content.Server.Entry
                 IoCManager.Resolve<GhostKickManager>().Initialize();
                 IoCManager.Resolve<ServerInfoManager>().Initialize();
 
+                //WD-EDIT
+                IoCManager.Resolve<SponsorsManager>().Initialize();
+                IoCManager.Resolve<JoinQueueManager>().Initialize();
+                IoCManager.Resolve<TTSManager>().Initialize();
+                IoCManager.Resolve<StalinManager>().Initialize();
+                //WD-EDIT
+
                 _voteManager.Initialize();
                 _updateManager.Initialize();
                 _playTimeTracking.Initialize();
@@ -146,6 +158,12 @@ namespace Content.Server.Entry
                 IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<GameTicker>().PostInitialize();
                 IoCManager.Resolve<IBqlQueryManager>().DoAutoRegistrations();
                 IoCManager.Resolve<RoleBanManager>().Initialize();
+
+                //WD-EDIT
+                IoCManager.Resolve<UtkaTCPWrapper>().Initialize();
+                UtkaTCPServer.RegisterCommands();
+                //WD-EDIT
+
             }
         }
 

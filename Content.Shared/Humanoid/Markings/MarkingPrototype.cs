@@ -16,9 +16,13 @@ namespace Content.Shared.Humanoid.Markings
 
         [DataField("markingCategory", required: true)]
         public MarkingCategories MarkingCategory { get; } = default!;
-        
+
         [DataField("speciesRestriction")]
         public List<string>? SpeciesRestrictions { get; }
+
+        // WD-EDIT
+        [DataField("sponsorOnly")] public bool SponsorOnly;
+        // WD-EDIT
 
         [DataField("followSkinColor")]
         public bool FollowSkinColor { get; } = false;

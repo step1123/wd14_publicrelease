@@ -1,0 +1,97 @@
+<DefaultWindow
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    Title="{Loc admin-job-ban-window-title}" MinSize="425 325">
+    <BoxContainer Orientation="Vertical">
+        <!-- Name -->
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc admin-job-ban-window-player}" MinWidth="100" />
+            <Control MinWidth="50" />
+            <LineEdit Name="PlayerNameLine" MinWidth="100" HorizontalExpand="True" />
+        </BoxContainer>
+        <!-- Reason -->
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc admin-job-ban-window-reason}" MinSize="100 0" />
+            <Control MinSize="50 0" />
+            <LineEdit Name="ReasonLine" Text="..." MinSize="100 0" HorizontalExpand="True" />
+        </BoxContainer>
+        <!-- Time -->
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc admin-job-ban-window-minutes}" MinWidth="100" />
+            <Control MinWidth="50" />
+            <LineEdit Name="MinutesLine" Text="0" MinWidth="100" HorizontalExpand="True" PlaceHolder="{Loc admin-job-ban-window-minutes-amount}" />
+            <Button Name="HourButton" Text="+1ч (0)"/>
+            <Button Name="DayButton" Text="+1д (0)"/>
+            <Button Name="WeekButton" Text="+1н (0)"/>
+            <Button Name="MonthButton" Text="+1М (0)"/>
+        </BoxContainer>
+        <!-- Role -->
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc admin-job-ban-window-role}" MinWidth="100" />
+            <Control MinWidth="50" />
+            <LineEdit Name="RoleNameLine" MinWidth="100" HorizontalExpand="True" />
+            <Button Name="SubmitByNameButton" Text="{Loc admin-job-ban-window-button-ban-by-name}" />
+        </BoxContainer>
+        <CheckBox Name="GlobalBan" Text="{Loc admin-job-ban-window-global-ban}"/>
+        <BoxContainer Orientation="Horizontal">
+            <cc:PlayerListControl Name="PlayerList" VerticalExpand="True" HorizontalExpand="True"/>
+            <BoxContainer Orientation="Vertical">
+                <BoxContainer Orientation="Horizontal">
+                    <BoxContainer Orientation="Vertical">
+                        <Label Text="{Loc department-Command}" FontColorOverride="Yellow"/>
+                        <CheckBox Name="Captain" Text="{Loc job-name-captain}"/>
+                        <CheckBox Name="HeadOfPersonnel" Text="{Loc job-name-hop}"/>
+                        <CheckBox Name="HeadOfSecurity" Text="{Loc job-name-hos}"/>
+                        <CheckBox Name="ChiefMedicalOfficer" Text="{Loc job-name-cmo}"/>
+                        <CheckBox Name="ChiefEngineer" Text="{Loc job-name-ce}"/>
+                        <CheckBox Name="Quartermaster" Text="{Loc job-name-qm}"/>
+                        <CheckBox Name="ResearchDirector" Text="{Loc job-name-rd}"/>
+                        <Label Text="{Loc department-Security}" FontColorOverride="Red"/>
+                        <CheckBox Name="Warden" Text="{Loc job-name-warden}"/>
+                        <CheckBox Name="SecurityOfficer" Text="{Loc job-name-security}"/>
+                        <CheckBox Name="Detective" Text="{Loc job-name-detective}"/>
+                        <CheckBox Name="SecurityCadet" Text="{Loc job-name-cadet}"/>
+                        <CheckBox Name="Brigmedic" Text="{Loc job-name-brigmedic}"/>
+                        <Label Text="{Loc department-Medical}" FontColorOverride="DeepSkyBlue"/>
+                        <CheckBox Name="Chemist" Text="{Loc job-name-chemist}"/>
+                        <CheckBox Name="MedicalDoctor" Text="{Loc job-name-doctor}"/>
+                        <CheckBox Name="Psychologist" Text="{Loc job-name-psychologist}"/>
+                        <CheckBox Name="MedicalIntern" Text="{Loc job-name-intern}"/>
+                        <Label Text="{Loc department-Engineering}" FontColorOverride="Orange"/>
+                        <CheckBox Name="AtmosphericTechnician" Text="{Loc job-name-atmostech}"/>
+                        <CheckBox Name="StationEngineer" Text="{Loc job-name-engineer}"/>
+                        <CheckBox Name="TechnicalAssistant" Text="{Loc job-name-technical-assistant}"/>
+                    </BoxContainer>
+                    <Control MinWidth="30" />
+                    <BoxContainer Orientation="Vertical">
+                        <Label Text="{Loc department-Cargo}" FontColorOverride="Chocolate"/>
+                        <CheckBox Name="CargoTechnician" Text="{Loc job-name-cargotech}"/>
+                        <CheckBox Name="SalvageSpecialist" Text="{Loc job-name-salvagespec}"/>
+                        <Label Text="{Loc department-Science}" FontColorOverride="MediumOrchid"/>
+                        <CheckBox Name="Scientist" Text="{Loc job-name-scientist}"/>
+                        <Label Text="{Loc department-Civilian}" FontColorOverride="Lime"/>
+                        <CheckBox Name="ServiceWorker" Text="{Loc job-name-serviceworker}"/>
+                        <CheckBox Name="Bartender" Text="{Loc job-name-bartender}"/>
+                        <CheckBox Name="Chef" Text="{Loc job-name-chef}"/>
+                        <CheckBox Name="Botanist" Text="{Loc job-name-botanist}"/>
+                        <CheckBox Name="Clown" Text="{Loc job-name-clown}"/>
+                        <CheckBox Name="Mime" Text="{Loc job-name-mime}"/>
+                        <CheckBox Name="Chaplain" Text="{Loc job-name-chaplain}"/>
+                        <CheckBox Name="Librarian" Text="{Loc job-name-librarian}"/>
+                        <CheckBox Name="Lawyer" Text="{Loc job-name-lawyer}"/>
+                        <CheckBox Name="Janitor" Text="{Loc job-name-janitor}"/>
+                        <CheckBox Name="Musician" Text="{Loc job-name-musician}"/>
+                        <CheckBox Name="Reporter" Text="{Loc job-name-reporter}"/>
+                        <CheckBox Name="Zookeeper" Text="{Loc job-name-zookeeper}"/>
+                        <!--<Label Text="{Loc department-Silicon}" FontColorOverride="LightGray"/>
+                        <CheckBox Name="Cyborg" Text="{Loc job-name-cyborg}"/>
+                        <CheckBox Name="MedicalCyborg" Text="{Loc job-name-medical-cyborg}"/>
+                        <CheckBox Name="EngCyborg" Text="Инженерный борг"/>
+                        <CheckBox Name="SecCyborg" Text="Охранный борг"/>-->
+                    </BoxContainer>
+                </BoxContainer>
+                <Button Name="SubmitListButton" Text="{Loc admin-job-ban-window-button-ban}"/>
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</DefaultWindow>

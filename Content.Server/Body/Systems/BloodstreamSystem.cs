@@ -5,6 +5,7 @@ using Content.Server.Fluids.EntitySystems;
 using Content.Server.Forensics;
 using Content.Server.HealthExaminable;
 using Content.Server.Popups;
+using Content.Shared.Alert;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Damage;
@@ -13,12 +14,9 @@ using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Content.Shared.Drunk;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Rejuvenate;
 using Robust.Server.GameObjects;
-using Robust.Shared.Audio;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -26,6 +24,7 @@ namespace Content.Server.Body.Systems;
 
 public sealed class BloodstreamSystem : EntitySystem
 {
+    [Dependency] private readonly AlertsSystem _alertsSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IRobustRandom _robustRandom = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
@@ -89,6 +88,13 @@ public sealed class BloodstreamSystem : EntitySystem
                 continue;
 
             bloodstream.AccumulatedFrametime -= bloodstream.UpdateInterval;
+
+            //WD-EDIT
+            if (bloodstream.IsBleeding)
+                _alertsSystem.ShowAlert(uid, AlertType.Bleeding);
+            else
+                _alertsSystem.ClearAlert(uid, AlertType.Bleeding);
+            //WD-EDIT
 
             // Adds blood to their blood level if it is below the maximum; Blood regeneration. Must be alive.
             if (bloodstream.BloodSolution.Volume < bloodstream.BloodSolution.MaxVolume && _mobStateSystem.IsAlive(uid))
@@ -260,7 +266,8 @@ public sealed class BloodstreamSystem : EntitySystem
         return _solutionContainerSystem.TryAddSolution(uid, component.ChemicalSolution, solution);
     }
 
-    public bool FlushChemicals(EntityUid uid, string excludedReagentID, FixedPoint2 quantity, BloodstreamComponent? component = null) {
+    public bool FlushChemicals(EntityUid uid, string excludedReagentID, FixedPoint2 quantity, BloodstreamComponent? component = null)
+    {
         if (!Resolve(uid, ref component, false))
             return false;
 

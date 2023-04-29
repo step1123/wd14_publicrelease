@@ -428,3 +428,41 @@
   - type: Appearance
   - type: StaticPrice
     price: 63
+
+- type: entity
+  name: egun
+  parent: BaseWeaponBattery
+  id: WeaponEgun
+  description: Egun
+  components:
+    - type: Sprite
+      sprite: Objects/Weapons/Guns/Battery/egun.rsi
+      layers:
+        - state: base
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-twomode1-4
+          map: ["enum.GunVisualLayers.TwoModeFirst"]
+          shader: unshaded
+        - state: mag-twomode2-4
+          map: ["enum.GunVisualLayers.TwoModeSecond"]
+          shader: unshaded
+    - type: Clothing
+      sprite: Objects/Weapons/Guns/Battery/egun.rsi
+    - type: Gun
+      soundGunshot:
+        path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+    - type: TwoModeEnergyAmmoProvider
+      projProto: BulletDisabler
+      fireCost: 50
+      projFireCost: 50
+      hitscanProto: RedLaser
+      hitscanFireCost: 100
+      projSound: "/Audio/Weapons/Guns/Gunshots/taser2.ogg"
+      hitscanSound: "/Audio/Weapons/Guns/Gunshots/laser_cannon.ogg"
+    - type: MagazineVisuals
+      magState: mag
+      steps: 5
+      zeroVisible: true
+    - type: Appearance
+    - type: StaticPrice
+      price: 800

@@ -12,10 +12,12 @@ public enum VoiceMaskUIKey : byte
 public sealed class VoiceMaskBuiState : BoundUserInterfaceState
 {
     public string Name { get; }
+    public string Voice { get; }
 
-    public VoiceMaskBuiState(string name)
+    public VoiceMaskBuiState(string name, string voice)
     {
         Name = name;
+        Voice = voice;
     }
 }
 

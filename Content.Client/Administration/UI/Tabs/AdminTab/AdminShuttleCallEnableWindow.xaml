@@ -1,0 +1,9 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+               xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+               Title="{Loc 'admin-player-actions-window-shuttle-call'}"
+               MinWidth="300">
+    <BoxContainer Orientation="Vertical">
+        <cc:CommandButton Command="enableShuttleCall True" Name="_enableCallShuttleButton" Text="{Loc 'emergency_shuttle-call-enable'}" HorizontalAlignment="Center"/>
+        <cc:CommandButton Command="enableShuttleCall False" Name="_disableCallShuttleButton" Text="{Loc 'emergency_shuttle-call-disable'}" HorizontalAlignment="Center"/>
+    </BoxContainer>
+</DefaultWindow>

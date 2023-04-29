@@ -7,5 +7,6 @@
         <tabs:KeyRebindTab />
         <tabs:AudioTab />
         <tabs:NetworkTab/>
+        <tabs:AdminSettingsTab/>
     </TabContainer>
 </DefaultWindow>

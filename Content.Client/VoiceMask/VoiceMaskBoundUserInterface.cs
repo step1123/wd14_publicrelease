@@ -19,6 +19,7 @@ public sealed class VoiceMaskBoundUserInterface : BoundUserInterface
 
         _window.OpenCentered();
         _window.OnNameChange += OnNameSelected;
+        _window.OnVoiceChange += (value) => SendMessage(new VoiceMaskChangeVoiceMessage(value));
         _window.OnClose += Close;
     }
 
@@ -34,7 +35,8 @@ public sealed class VoiceMaskBoundUserInterface : BoundUserInterface
             return;
         }
 
-        _window.UpdateState(cast.Name);
+        _window.UpdateState(cast.Name, cast.Voice);
+
     }
 
     protected override void Dispose(bool disposing)

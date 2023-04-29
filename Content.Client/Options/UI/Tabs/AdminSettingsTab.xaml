@@ -1,0 +1,44 @@
+<Control xmlns="https://spacestation14.io"
+         xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         x:Class="Content.Client.Options.UI.Tabs.AdminSettingsTab">
+    <BoxContainer Orientation="Vertical">
+        <BoxContainer Orientation="Vertical" Margin="5 0 0 0" VerticalExpand="True">
+            <BoxContainer Orientation="Horizontal" Margin="0 3 0 0">
+            <Label Text="Громкость звука ахелпа" HorizontalExpand="True"/>
+            <Control MinSize="8 0" />
+            <Slider Name="AhelpSoundVolume"
+                    MinValue="0"
+                    MaxValue="100"
+                    HorizontalExpand="True"
+                    MinSize="80 0"
+                    Rounded="True" />
+            <Control MinSize="8 0" />
+            <Label Name="AhelpSoundVolumeLabel" MinSize="48 0"></Label>
+            </BoxContainer>
+    </BoxContainer>
+        <BoxContainer Orientation="Vertical" >
+        <controls:StripeBack HasBottomEdge="False" HasMargins="False">
+            <BoxContainer Orientation="Horizontal"
+                          Align="End"
+                          HorizontalExpand="True"
+                          VerticalExpand="True">
+                <Button Name="ResetButton"
+                        Text="{Loc 'ui-options-reset-all'}"
+                        StyleClasses="Caution"
+                        HorizontalExpand="True"
+                        HorizontalAlignment="Right" />
+                <Button Name="DefaultButton"
+                        Text="{Loc 'ui-options-default'}"
+                        TextAlign="Center"
+                        HorizontalAlignment="Right" />
+                <Control MinSize="2 0" />
+                <Button Name="ApplyButton"
+                        Text="{Loc 'ui-options-apply'}"
+                        TextAlign="Center"
+                        HorizontalAlignment="Right" />
+            </BoxContainer>
+        </controls:StripeBack>
+    </BoxContainer>
+    </BoxContainer>
+</Control>

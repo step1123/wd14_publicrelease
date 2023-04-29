@@ -1,5 +1,6 @@
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.White.TTS;
 using Robust.Shared.Enums;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -70,6 +71,9 @@ public sealed class HumanoidAppearanceComponent : Component
 
     [DataField("eyeColor")]
     public Color EyeColor = Color.Brown;
+
+    [DataField("voice", customTypeSerializer: typeof(PrototypeIdSerializer<TTSVoicePrototype>))]
+    public string Voice { get; set; } = SharedHumanoidAppearanceSystem.DefaultVoice;
 
     /// <summary>
     ///     Hair color of this humanoid. Used to avoid looping through all markings
