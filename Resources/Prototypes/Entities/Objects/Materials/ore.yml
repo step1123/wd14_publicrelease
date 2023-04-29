@@ -185,7 +185,8 @@
   - type: Sprite
     state: bananium
   - type: Material
-    materials:
+  - type: PhysicalComposition
+    materialComposition:
       Bananium: 500
 
 - type: entity
