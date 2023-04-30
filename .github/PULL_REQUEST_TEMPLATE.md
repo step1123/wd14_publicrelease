@@ -1,39 +1,37 @@
-<!-- Please read these guidelines before opening your PR: https://docs.spacestation14.io/en/getting-started/pr-guideline -->
-<!-- The text between the arrows are comments - they will not be visible on your PR. -->
+<!-- Текст между стрелками - это комментарии - они не будут видны в вашем PR. -->
 
-## About the PR
-<!-- What does it change? What other things could this impact? -->
+# Описание PR <!-- Опишите здесь ваш Pull Request. Что он изменяет? На что еще это может повлиять? -->
 
+## Скриншоты
+<!-- Если приемлемо, добавьте скриншоты для демонстрации вашего PR. Если ваш PR представляет собой визуальное изменение, добавьте
+скриншоты, иначе он может быть закрыт. -->
 
-**Media**
-<!-- 
-PRs which make ingame changes (adding clothing, items, new features, etc) are required to have media attached that showcase the changes.
-Small fixes/refactors are exempt.
-Any media may be used in SS14 progress reports, with clear credit given.
+## Чек-лист:
 
-If you're unsure whether your PR will require media, ask a maintainer.
+- [ ] Rechecked all my code
 
-Check the box below to confirm that you have in fact seen this (put an X in the brackets, like [X]):
--->
+## typo:
 
-- [ ] I have added screenshots/videos to this PR showcasing its changes ingame, **or** this PR does not require an ingame showcase
+- [ ] Feature
+- [ ] Fix
+- [ ] Tweak
+- [ ] Balance
 
-**Changelog**
+**Изменения**
 <!--
-Here you can fill out a changelog that will automatically be added to the game when your PR is merged.
+Здесь вы можете написать список изменений, который будет автоматически добавлен в игру, когда ваш PR будет принят
+Для записей в списке изменений есть 4 значка: add, remove, tweak, fix. Думаю, вы сможете разобраться с остальным.
 
-Only put changes that are visible and important to the player on the changelog.
+Вы можете поставить свое имя после символа :cl:, чтобы изменить имя, которое будет отображаться в журнале изменений (в противном случае будет использоваться ваше имя пользователя GitHub)
+Например: :cl: PJB
 
-Don't consider the entry type suffix (e.g. add) to be "part" of the sentence:
-bad: - add: a new tool for engineers
-good: - add: added a new tool for engineers
+Как правило, в журналы изменений следует помещать только то, что действительно важно игрокам. Вещи вроде "Переработана система X, изменения не должны быть видны" не должны быть в журнале изменений.
 
-Putting a name after the :cl: symbol will change the name that shows in the changelog (otherwise it takes your GitHub username)
-Like so: :cl: PJB
+При написании списка изменений не считайте суффикс типа записи (например, add) "частью" предложения:
+плохо: - add: новый инструмент для инженеров
+хорошо: - add: добавлен новый инструмент для инженеров
 -->
 
 :cl:
-- add: Added fun!
-- remove: Removed fun!
-- tweak: Changed fun!
-- fix: Fixed fun!
+- add: Добавлено веселье!
+- remove: Убрано веселье!
