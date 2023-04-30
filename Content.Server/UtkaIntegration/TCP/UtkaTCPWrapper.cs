@@ -31,16 +31,16 @@ public sealed class UtkaTCPWrapper
         try
         {
              _server = new UtkaTCPServer(IPAddress.Any, port);
+             _server.Start();
+             _initialized = true;
 
         }
         catch (Exception e)
         {
+            _initialized = false;
             return;
         }
 
-        _server.Start();
-
-        _initialized = true;
     }
 
     public void SendMessageToAll(UtkaBaseMessage message)
