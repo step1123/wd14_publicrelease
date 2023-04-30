@@ -22,6 +22,7 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
     [Dependency] private readonly MarkingManager _markingManager = default!;
 
     public const string DefaultSpecies = "Human";
+    public const string DefaultBodyType = "HumanNormal";
     public const string DefaultVoice = "Eugene";
     public static readonly Dictionary<Sex, string> DefaultSexVoice = new()
     {
@@ -44,6 +45,7 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
             component.CustomBaseLayers,
             component.Sex,
             component.Gender,
+            component.BodyType,
             component.Age,
             component.Species,
             component.SkinColor,
@@ -136,7 +138,7 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         }
 
         humanoid.Species = species;
-        humanoid.MarkingSet.EnsureSpecies(species, humanoid.SkinColor, _markingManager);
+        humanoid.MarkingSet.EnsureSpecies(species, humanoid.BodyType, humanoid.SkinColor, _markingManager);
         var oldMarkings = humanoid.MarkingSet.GetForwardEnumerator().ToList();
         humanoid.MarkingSet = new(oldMarkings, prototype.MarkingPoints, _markingManager, _prototypeManager);
 
@@ -239,5 +241,16 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         {
             Dirty(humanoid);
         }
+    }
+
+    public List<BodyTypePrototype> GetValidBodyTypes(SpeciesPrototype species, Sex sex)
+    {
+        return species.BodyTypes.Select(protoId => _prototypeManager.Index<BodyTypePrototype>(protoId))
+            .Where(proto => !proto.SexRestrictions.Contains(sex.ToString())).ToList();
+    }
+
+    public static bool IsBodyTypeValid(BodyTypePrototype bodyType, SpeciesPrototype species, Sex sex)
+    {
+        return species.BodyTypes.Contains(bodyType.ID);
     }
 }

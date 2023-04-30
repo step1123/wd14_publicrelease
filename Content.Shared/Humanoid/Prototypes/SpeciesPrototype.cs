@@ -1,5 +1,6 @@
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 
 namespace Content.Shared.Humanoid.Prototypes;
 
@@ -17,6 +18,9 @@ public sealed class SpeciesPrototype : IPrototype
     /// </summary>
     [DataField("name", required: true)]
     public string Name { get; } = default!;
+
+    [DataField("bodyTypes", required: true, customTypeSerializer: typeof(PrototypeIdListSerializer<BodyTypePrototype>))]
+    public List<string> BodyTypes { get; } = default!;
 
     /// <summary>
     ///     Descriptor. Unused...? This is intended
@@ -41,8 +45,8 @@ public sealed class SpeciesPrototype : IPrototype
     // sprite layout, and leave this null. Keep in mind that this will disable
     // sprite accessories.
 
-    [DataField("sprites")]
-    public string SpriteSet { get; } = default!;
+    //[DataField("sprites")]
+    //public string SpriteSet { get; } = default!;
 
     /// <summary>
     ///     Default skin tone for this species. This applies for non-human skin tones.

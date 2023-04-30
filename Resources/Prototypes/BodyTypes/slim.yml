@@ -8,6 +8,8 @@
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
     Chest: MobHumanSlimTorso
+    HeadTop: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
     Eyes: MobHumanoidEyes
     LArm: MobHumanSlimLArm
     RArm: MobHumanSlimRArm
@@ -27,6 +29,8 @@
     Head: MobSkrellSlimHead
     Hair: MobHumanoidAnyMarking
     Chest: MobSkrellSlimTorso
+    HeadTop: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
     Eyes: MobSkrellEyes
     LArm: MobSkrellSlimLArm
     RArm: MobSkrellSlimRArm

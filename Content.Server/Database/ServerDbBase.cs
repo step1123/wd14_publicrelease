@@ -163,6 +163,8 @@ namespace Content.Server.Database
             if (Enum.TryParse<Sex>(profile.Sex, true, out var sexVal))
                 sex = sexVal;
 
+            var bodyType = profile.BodyType;
+
             var clothing = ClothingPreference.Jumpsuit;
             if (Enum.TryParse<ClothingPreference>(profile.Clothing, true, out var clothingVal))
                 clothing = clothingVal;
@@ -203,6 +205,7 @@ namespace Content.Server.Database
                 profile.Age,
                 sex,
                 gender,
+                bodyType,
                 new HumanoidCharacterAppearance
                 (
                     profile.HairName,
@@ -241,6 +244,7 @@ namespace Content.Server.Database
                 Age = humanoid.Age,
                 Sex = humanoid.Sex.ToString(),
                 Gender = humanoid.Gender.ToString(),
+                BodyType = humanoid.BodyType,
                 HairName = appearance.HairStyleId,
                 HairColor = appearance.HairColor.ToHex(),
                 FacialHairName = appearance.FacialHairStyleId,

@@ -17,7 +17,7 @@ namespace Content.Shared.Humanoid
 
         public static string GetSexMorph(HumanoidVisualLayers layer, Sex sex, string id)
         {
-            if (!HasSexMorph(layer) || sex == Sex.Unsexed)
+            if (!HasSexMorph(layer) || sex == Sex.Unsexed || sex == Sex.Male)
                 return id;
 
             return $"{id}{sex}";

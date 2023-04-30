@@ -36,7 +36,7 @@ public sealed partial class HumanoidAppearanceSystem
                 _uiSystem.TrySetUiState(
                     uid,
                     HumanoidMarkingModifierKey.Key,
-                    new HumanoidMarkingModifierState(component.MarkingSet, component.Species,
+                    new HumanoidMarkingModifierState(component.MarkingSet, component.Species, component.BodyType,
                         component.SkinColor,
                         component.CustomBaseLayers
                     ));
@@ -69,7 +69,7 @@ public sealed partial class HumanoidAppearanceSystem
             _uiSystem.TrySetUiState(
                 uid,
                 HumanoidMarkingModifierKey.Key,
-                new HumanoidMarkingModifierState(component.MarkingSet, component.Species,
+                new HumanoidMarkingModifierState(component.MarkingSet, component.Species, component.BodyType,
                         component.SkinColor,
                         component.CustomBaseLayers
                     ));
@@ -93,7 +93,7 @@ public sealed partial class HumanoidAppearanceSystem
             _uiSystem.TrySetUiState(
                 uid,
                 HumanoidMarkingModifierKey.Key,
-                new HumanoidMarkingModifierState(component.MarkingSet, component.Species,
+                new HumanoidMarkingModifierState(component.MarkingSet, component.Species, component.BodyType,
                         component.SkinColor,
                         component.CustomBaseLayers
                     ));
