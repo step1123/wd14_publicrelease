@@ -26,6 +26,10 @@
                    SizeFlagsStretchRatio="2"
                    HorizontalExpand="True"/>
             <cc:VSeparator/>
+            <Label Text="{Loc ban-list-header-server}"
+                   SizeFlagsStretchRatio="2"
+                   HorizontalExpand="True"/>
+            <cc:VSeparator/>
         </BoxContainer>
     </PanelContainer>
 </ContainerButton>

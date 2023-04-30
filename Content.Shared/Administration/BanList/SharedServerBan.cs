@@ -13,5 +13,6 @@ public sealed record SharedServerBan(
     DateTime? ExpirationTime,
     string Reason,
     string? BanningAdminName,
-    SharedServerUnban? Unban
+    SharedServerUnban? Unban,
+    string ServerName
 );

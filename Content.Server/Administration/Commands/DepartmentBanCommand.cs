@@ -19,6 +19,7 @@ public sealed class DepartmentBanCommand : IConsoleCommand
         string department;
         string reason;
         uint minutes;
+        bool isGlobalBan;
 
         switch (args.Length)
         {
@@ -27,11 +28,13 @@ public sealed class DepartmentBanCommand : IConsoleCommand
                 department = args[1];
                 reason = args[2];
                 minutes = 0;
+                isGlobalBan = false;
                 break;
             case 4:
                 target = args[0];
                 department = args[1];
                 reason = args[2];
+                isGlobalBan = false;
 
                 if (!uint.TryParse(args[3], out minutes))
                 {
@@ -39,6 +42,25 @@ public sealed class DepartmentBanCommand : IConsoleCommand
                     return;
                 }
 
+                break;
+            case 5:
+                target = args[0];
+                department = args[1];
+                reason = args[2];
+
+                var possibleMinutes = args[3] != "" ? args[3] : "0";
+
+                if (!uint.TryParse(possibleMinutes, out minutes))
+                {
+                    shell.WriteLine($"{args[3]} is not a valid amount of minutes.\n{Help}");
+                    return;
+                }
+
+                if (!bool.TryParse(args[4], out isGlobalBan))
+                {
+                    shell.WriteLine($"{args[4]} should be True or False.\n{Help}");
+                    return;
+                }
                 break;
             default:
                 shell.WriteError(Loc.GetString("cmd-roleban-arg-count"));
@@ -57,7 +79,7 @@ public sealed class DepartmentBanCommand : IConsoleCommand
 
         foreach (var job in departmentProto.Roles)
         {
-            banManager.CreateJobBan(shell, target, job, reason, minutes);
+            banManager.CreateJobBan(shell, target, job, reason, minutes, isGlobalBan);
         }
     }
 

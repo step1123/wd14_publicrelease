@@ -4,7 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Shared.CCVar;
 using Microsoft.EntityFrameworkCore;
+using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Utility;
 
@@ -50,7 +52,8 @@ namespace Content.Server.Database
         public override async Task<ServerBanDef?> GetServerBanAsync(
             IPAddress? address,
             NetUserId? userId,
-            ImmutableArray<byte>? hwId)
+            ImmutableArray<byte>? hwId,
+            bool ignoreServerName)
         {
             if (address == null && userId == null && hwId == null)
             {
@@ -60,7 +63,7 @@ namespace Content.Server.Database
             await using var db = await GetDbImpl();
 
             var exempt = await GetBanExemptionCore(db, userId);
-            var query = MakeBanLookupQuery(address, userId, hwId, db, includeUnbanned: false, exempt)
+            var query = MakeBanLookupQuery(address, userId, hwId, db, includeUnbanned: false, exempt, ignoreServerName: false)
                 .OrderByDescending(b => b.BanTime);
 
             var ban = await query.FirstOrDefaultAsync();
@@ -70,7 +73,7 @@ namespace Content.Server.Database
 
         public override async Task<List<ServerBanDef>> GetServerBansAsync(IPAddress? address,
             NetUserId? userId,
-            ImmutableArray<byte>? hwId, bool includeUnbanned)
+            ImmutableArray<byte>? hwId, bool includeUnbanned, bool ignoreServerName)
         {
             if (address == null && userId == null && hwId == null)
             {
@@ -80,7 +83,7 @@ namespace Content.Server.Database
             await using var db = await GetDbImpl();
 
             var exempt = await GetBanExemptionCore(db, userId);
-            var query = MakeBanLookupQuery(address, userId, hwId, db, includeUnbanned, exempt);
+            var query = MakeBanLookupQuery(address, userId, hwId, db, includeUnbanned, exempt, ignoreServerName);
 
             var queryBans = await query.ToArrayAsync();
             var bans = new List<ServerBanDef>(queryBans.Length);
@@ -104,7 +107,8 @@ namespace Content.Server.Database
             ImmutableArray<byte>? hwId,
             DbGuardImpl db,
             bool includeUnbanned,
-            ServerBanExemptFlags? exemptFlags)
+            ServerBanExemptFlags? exemptFlags,
+            bool ignoreServerName)
         {
             DebugTools.Assert(!(address == null && userId == null && hwId == null));
 
@@ -140,6 +144,14 @@ namespace Content.Server.Database
             DebugTools.Assert(
                 query != null,
                 "At least one filter item (IP/UserID/HWID) must have been given to make query not null.");
+
+            if (!ignoreServerName)
+            {
+                var cfg = IoCManager.Resolve<IConfigurationManager>();
+                var serverName = cfg.GetCVar(CCVars.AdminLogsServerName);
+                query = query.Where(p =>
+                    p.ServerName == serverName || p.ServerName == "unknown" || string.IsNullOrEmpty(p.ServerName));
+            }
 
             if (!includeUnbanned)
             {
@@ -185,7 +197,8 @@ namespace Content.Server.Database
                 ban.ExpirationTime,
                 ban.Reason,
                 aUid,
-                unbanDef);
+                unbanDef,
+                ban.ServerName ??= "unknown");
         }
 
         private static ServerUnbanDef? ConvertUnban(ServerUnban? unban)
@@ -219,7 +232,8 @@ namespace Content.Server.Database
                 BanningAdmin = serverBan.BanningAdmin?.UserId,
                 BanTime = serverBan.BanTime.UtcDateTime,
                 ExpirationTime = serverBan.ExpirationTime?.UtcDateTime,
-                UserId = serverBan.UserId?.UserId
+                UserId = serverBan.UserId?.UserId,
+                ServerName = serverBan.ServerName
             });
 
             await db.PgDbContext.SaveChangesAsync();
@@ -258,7 +272,8 @@ namespace Content.Server.Database
         public override async Task<List<ServerRoleBanDef>> GetServerRoleBansAsync(IPAddress? address,
             NetUserId? userId,
             ImmutableArray<byte>? hwId,
-            bool includeUnbanned)
+            bool includeUnbanned,
+            bool ignoreServerName)
         {
             if (address == null && userId == null && hwId == null)
             {
@@ -267,7 +282,7 @@ namespace Content.Server.Database
 
             await using var db = await GetDbImpl();
 
-            var query = MakeRoleBanLookupQuery(address, userId, hwId, db, includeUnbanned)
+            var query = MakeRoleBanLookupQuery(address, userId, hwId, db, includeUnbanned, ignoreServerName)
                 .OrderByDescending(b => b.BanTime);
 
             return await QueryRoleBans(query);
@@ -296,7 +311,9 @@ namespace Content.Server.Database
             NetUserId? userId,
             ImmutableArray<byte>? hwId,
             DbGuardImpl db,
-            bool includeUnbanned)
+            bool includeUnbanned,
+            bool ignoreServerName)
+
         {
             IQueryable<ServerRoleBan>? query = null;
 
@@ -325,6 +342,14 @@ namespace Content.Server.Database
                     .Where(b => b.HWId!.SequenceEqual(hwId.Value.ToArray()));
 
                 query = query == null ? newQ : query.Union(newQ);
+            }
+
+            if (!ignoreServerName)
+            {
+                var cfg = IoCManager.Resolve<IConfigurationManager>();
+
+                query = query?.Where(p =>
+                    p.ServerName == cfg.GetCVar(CCVars.AdminLogsServerName) || p.ServerName == "unknown" || string.IsNullOrEmpty(p.ServerName));
             }
 
             if (!includeUnbanned)
@@ -368,7 +393,8 @@ namespace Content.Server.Database
                 ban.Reason,
                 aUid,
                 unbanDef,
-                ban.RoleId);
+                ban.RoleId,
+                ban.ServerName ??= "unknown");
         }
 
         private static ServerRoleUnbanDef? ConvertRoleUnban(ServerRoleUnban? unban)
@@ -404,6 +430,8 @@ namespace Content.Server.Database
                 ExpirationTime = serverRoleBan.ExpirationTime?.UtcDateTime,
                 UserId = serverRoleBan.UserId?.UserId,
                 RoleId = serverRoleBan.Role,
+                ServerName = serverRoleBan.ServerName
+
             });
 
             await db.PgDbContext.SaveChangesAsync();

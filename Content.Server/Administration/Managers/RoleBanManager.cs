@@ -5,8 +5,10 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using Content.Server.Database;
+using Content.Shared.CCVar;
 using Content.Shared.Roles;
 using Robust.Server.Player;
+using Robust.Shared.Configuration;
 using Robust.Shared.Console;
 using Robust.Shared.Enums;
 using Robust.Shared.Network;
@@ -98,7 +100,7 @@ public sealed class RoleBanManager
     }
 
     #region Job Bans
-    public async void CreateJobBan(IConsoleShell shell, string target, string job, string reason, uint minutes)
+    public async void CreateJobBan(IConsoleShell shell, string target, string job, string reason, uint minutes, bool isGlobalBan)
     {
         if (!_prototypeManager.TryIndex(job, out JobPrototype? _))
         {
@@ -107,7 +109,7 @@ public sealed class RoleBanManager
         }
 
         job = string.Concat(JobPrefix, job);
-        CreateRoleBan(shell, target, job, reason, minutes);
+        CreateRoleBan(shell, target, job, reason, minutes, isGlobalBan);
     }
 
     public HashSet<string>? GetJobBans(NetUserId playerUserId)
@@ -122,7 +124,7 @@ public sealed class RoleBanManager
     #endregion
 
     #region Commands
-    private async void CreateRoleBan(IConsoleShell shell, string target, string role, string reason, uint minutes)
+    private async void CreateRoleBan(IConsoleShell shell, string target, string role, string reason, uint minutes, bool isGlobalBan)
     {
         var located = await _playerLocator.LookupIdByNameOrIdAsync(target);
         if (located == null)
@@ -152,6 +154,14 @@ public sealed class RoleBanManager
             addressRange = (targetAddress, cidr);
         }
 
+        var cfg = IoCManager.Resolve<IConfigurationManager>();
+        var serverName = cfg.GetCVar(CCVars.AdminLogsServerName);
+
+        if (isGlobalBan)
+        {
+            serverName = "unknown";
+        }
+
         var player = shell.Player as IPlayerSession;
         var banDef = new ServerRoleBanDef(
             null,
@@ -163,7 +173,8 @@ public sealed class RoleBanManager
             reason,
             player?.UserId,
             null,
-            role);
+            role,
+            serverName);
 
         if (!await AddRoleBan(banDef))
         {
@@ -172,7 +183,7 @@ public sealed class RoleBanManager
         }
 
         var length = expires == null ? Loc.GetString("cmd-roleban-inf") : Loc.GetString("cmd-roleban-until", ("expires", expires));
-        shell.WriteLine(Loc.GetString("cmd-roleban-success", ("target", target), ("role", role), ("reason", reason), ("length", length)));
+        shell.WriteLine(Loc.GetString("cmd-roleban-success", ("target", target), ("role", role), ("reason", reason), ("length", length), ("server", serverName)));
     }
     #endregion
 }

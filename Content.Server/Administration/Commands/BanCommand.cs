@@ -4,6 +4,7 @@ using System.Net.Sockets;
 using System.Text;
 using Content.Server.Database;
 using Content.Shared.Administration;
+using Content.Shared.CCVar;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Console;
@@ -28,6 +29,7 @@ namespace Content.Server.Administration.Commands
             string target;
             string reason;
             uint minutes;
+            bool isGlobalBan;
 
             switch (args.Length)
             {
@@ -35,10 +37,12 @@ namespace Content.Server.Administration.Commands
                     target = args[0];
                     reason = args[1];
                     minutes = 0;
+                    isGlobalBan = false;
                     break;
                 case 3:
                     target = args[0];
                     reason = args[1];
+                    isGlobalBan = false;
 
                     if (!uint.TryParse(args[2], out minutes))
                     {
@@ -46,6 +50,23 @@ namespace Content.Server.Administration.Commands
                         return;
                     }
 
+                    break;
+                case 4:
+                    target = args[0];
+                    reason = args[1];
+                    var possibleMinutes = args[2] != "" ? args[2] : "0";
+
+                    if (!uint.TryParse(possibleMinutes, out minutes))
+                    {
+                        shell.WriteLine($"{args[2]} is not a valid amount of minutes.\n{Help}");
+                        return;
+                    }
+
+                    if (!bool.TryParse(args[3], out isGlobalBan))
+                    {
+                        shell.WriteLine($"{args[3]} should be True or False.\n{Help}");
+                        return;
+                    }
                     break;
                 default:
                     shell.WriteLine($"Invalid amount of arguments.{Help}");
@@ -86,6 +107,13 @@ namespace Content.Server.Administration.Commands
                 addrRange = (targetAddr, cidr);
             }
 
+            var serverName = _cfg.GetCVar(CCVars.AdminLogsServerName);
+
+            if (isGlobalBan)
+            {
+                serverName = "unknown";
+            }
+
             var banDef = new ServerBanDef(
                 null,
                 targetUid,
@@ -95,13 +123,16 @@ namespace Content.Server.Administration.Commands
                 expires,
                 reason,
                 player?.UserId,
-                null);
+                null,
+                serverName);
 
             await dbMan.AddServerBanAsync(banDef);
 
-            var response = new StringBuilder($"Banned {target} with reason \"{reason}\"");
+            var serverNameYaica = serverName == "unknown" ? "всех серверах" : $"сервере {serverName}";
 
-            response.Append(expires == null ? " permanently." : $" until {expires}");
+            var response = new StringBuilder($"Забанен {target} с причиной \"{reason}\", на {serverNameYaica},");
+
+            response.Append(expires == null ? " навсегда." : $" до {expires}");
 
             shell.WriteLine(response.ToString());
 

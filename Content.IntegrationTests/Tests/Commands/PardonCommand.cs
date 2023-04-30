@@ -30,7 +30,7 @@ namespace Content.IntegrationTests.Tests.Commands
                 var clientId = clientSession.UserId;
 
                 // No bans on record
-                Assert.That(await sDatabase.GetServerBanAsync(null, clientId, null), Is.Null);
+                Assert.That(await sDatabase.GetServerBanAsync(null, clientId, null, false), Is.Null);
                 Assert.That(await sDatabase.GetServerBanAsync(1), Is.Null);
                 Assert.That(await sDatabase.GetServerBansAsync(null, clientId, null), Is.Empty);
 
@@ -38,7 +38,7 @@ namespace Content.IntegrationTests.Tests.Commands
                 sConsole.ExecuteCommand("pardon 1");
 
                 // Still no bans on record
-                Assert.That(await sDatabase.GetServerBanAsync(null, clientId, null), Is.Null);
+                Assert.That(await sDatabase.GetServerBanAsync(null, clientId, null, false), Is.Null);
                 Assert.That(await sDatabase.GetServerBanAsync(1), Is.Null);
                 Assert.That(await sDatabase.GetServerBansAsync(null, clientId, null), Is.Empty);
 
@@ -48,7 +48,7 @@ namespace Content.IntegrationTests.Tests.Commands
                 sConsole.ExecuteCommand($"ban {clientSession.Name} {banReason} 1440");
 
                 // Should have one ban on record now
-                Assert.That(await sDatabase.GetServerBanAsync(null, clientId, null), Is.Not.Null);
+                Assert.That(await sDatabase.GetServerBanAsync(null, clientId, null, false), Is.Not.Null);
                 Assert.That(await sDatabase.GetServerBanAsync(1), Is.Not.Null);
                 Assert.That(await sDatabase.GetServerBansAsync(null, clientId, null), Has.Count.EqualTo(1));
 
@@ -56,7 +56,7 @@ namespace Content.IntegrationTests.Tests.Commands
                 sConsole.ExecuteCommand("pardon 2");
 
                 // The existing ban is unaffected
-                Assert.That(await sDatabase.GetServerBanAsync(null, clientId, null), Is.Not.Null);
+                Assert.That(await sDatabase.GetServerBanAsync(null, clientId, null, false), Is.Not.Null);
 
                 var ban = await sDatabase.GetServerBanAsync(1);
                 Assert.That(ban, Is.Not.Null);
@@ -80,7 +80,7 @@ namespace Content.IntegrationTests.Tests.Commands
                 sConsole.ExecuteCommand("pardon 1");
 
                 // No bans should be returned
-                Assert.That(await sDatabase.GetServerBanAsync(null, clientId, null), Is.Null);
+                Assert.That(await sDatabase.GetServerBanAsync(null, clientId, null, false), Is.Null);
 
                 // Direct id lookup returns a pardoned ban
                 var pardonedBan = await sDatabase.GetServerBanAsync(1);
@@ -113,7 +113,7 @@ namespace Content.IntegrationTests.Tests.Commands
 
                 // Nothing changes
                 // No bans should be returned
-                Assert.That(await sDatabase.GetServerBanAsync(null, clientId, null), Is.Null);
+                Assert.That(await sDatabase.GetServerBanAsync(null, clientId, null, false), Is.Null);
 
                 // Direct id lookup returns a pardoned ban
                 Assert.That(await sDatabase.GetServerBanAsync(1), Is.Not.Null);

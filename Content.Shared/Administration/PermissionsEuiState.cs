@@ -21,6 +21,7 @@ namespace Content.Shared.Administration
             public AdminFlags PosFlags;
             public AdminFlags NegFlags;
             public int? RankId;
+            public string? AdminServer;
         }
 
         [Serializable, NetSerializable]
@@ -41,6 +42,7 @@ namespace Content.Shared.Administration
             public AdminFlags PosFlags;
             public AdminFlags NegFlags;
             public int? RankId;
+            public string? AdminServer;
         }
 
         [Serializable, NetSerializable]
@@ -57,6 +59,7 @@ namespace Content.Shared.Administration
             public AdminFlags PosFlags;
             public AdminFlags NegFlags;
             public int? RankId;
+            public string? AdminServer;
         }
 
 

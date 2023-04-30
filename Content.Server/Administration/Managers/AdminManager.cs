@@ -337,6 +337,15 @@ namespace Content.Server.Administration.Managers
                     Flags = flags
                 };
 
+                var currentServerName = _cfg.GetCVar(CCVars.AdminLogsServerName);
+                // я ебался в зад, поймите
+                if (!data.HasFlag(AdminFlags.Permissions) && !data.HasFlag(AdminFlags.Host) &&
+                    dbData.AdminServer != null && dbData.AdminServer != "unknown" && currentServerName != "unknown"
+                    && currentServerName != dbData.AdminServer)
+                {
+                    return null;
+                }
+
                 if (dbData.Title != null)
                 {
                     data.Title = dbData.Title;

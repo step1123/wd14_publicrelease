@@ -37,6 +37,7 @@ public sealed partial class BanListLine : BoxContainer
         }
 
         BanningAdmin.Text = ban.BanningAdminName;
+        ServerName.Text = ban.ServerName == "unknown" ? "GLOBAL" : ban.ServerName;
     }
 
     private static string FormatDate(DateTimeOffset date)

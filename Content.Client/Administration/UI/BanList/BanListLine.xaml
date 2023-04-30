@@ -35,4 +35,9 @@
            HorizontalExpand="True"
            ClipText="True"/>
     <cc:VSeparator/>
+    <Label Name="ServerName"
+           SizeFlagsStretchRatio="2"
+           HorizontalExpand="True"
+           ClipText="True"/>
+    <cc:VSeparator/>
 </BoxContainer>

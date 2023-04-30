@@ -22,6 +22,7 @@ public sealed class RoleBanCommand : IConsoleCommand
         string job;
         string reason;
         uint minutes;
+        bool isGlobalBan;
 
         switch (args.Length)
         {
@@ -30,11 +31,13 @@ public sealed class RoleBanCommand : IConsoleCommand
                 job = args[1];
                 reason = args[2];
                 minutes = 0;
+                isGlobalBan = false;
                 break;
             case 4:
                 target = args[0];
                 job = args[1];
                 reason = args[2];
+                isGlobalBan = false;
 
                 if (!uint.TryParse(args[3], out minutes))
                 {
@@ -43,13 +46,32 @@ public sealed class RoleBanCommand : IConsoleCommand
                 }
 
                 break;
+            case 5:
+                target = args[0];
+                job = args[1];
+                reason = args[2];
+
+                var possibleMinutes = args[3] != "" ? args[3] : "0";
+
+                if (!uint.TryParse(possibleMinutes, out minutes))
+                {
+                    shell.WriteLine($"{args[3]} is not a valid amount of minutes.\n{Help}");
+                    return;
+                }
+
+                if (!bool.TryParse(args[4], out isGlobalBan))
+                {
+                    shell.WriteLine($"{args[4]} should be True or False.\n{Help}");
+                    return;
+                }
+                break;
             default:
                 shell.WriteError(Loc.GetString("cmd-roleban-arg-count"));
                 shell.WriteLine(Help);
                 return;
         }
 
-        IoCManager.Resolve<RoleBanManager>().CreateJobBan(shell, target, job, reason, minutes);
+        IoCManager.Resolve<RoleBanManager>().CreateJobBan(shell, target, job, reason, minutes, isGlobalBan);
     }
 
     public CompletionResult GetCompletion(IConsoleShell shell, string[] args)

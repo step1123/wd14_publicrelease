@@ -64,7 +64,8 @@ namespace Content.Server.Database
         public override async Task<ServerBanDef?> GetServerBanAsync(
             IPAddress? address,
             NetUserId? userId,
-            ImmutableArray<byte>? hwId)
+            ImmutableArray<byte>? hwId,
+            bool ignoreServerName)
         {
             await using var db = await GetDbImpl();
 
@@ -74,14 +75,14 @@ namespace Content.Server.Database
             // So just pull down the whole list into memory.
             var bans = await GetAllBans(db.SqliteDbContext, includeUnbanned: false, exempt);
 
-            return bans.FirstOrDefault(b => BanMatches(b, address, userId, hwId, exempt)) is { } foundBan
+            return bans.FirstOrDefault(b => BanMatches(b, address, userId, hwId, exempt, ignoreServerName)) is { } foundBan
                 ? ConvertBan(foundBan)
                 : null;
         }
 
         public override async Task<List<ServerBanDef>> GetServerBansAsync(IPAddress? address,
             NetUserId? userId,
-            ImmutableArray<byte>? hwId, bool includeUnbanned)
+            ImmutableArray<byte>? hwId, bool includeUnbanned, bool ignoreServerName)
         {
             await using var db = await GetDbImpl();
 
@@ -92,7 +93,7 @@ namespace Content.Server.Database
             var queryBans = await GetAllBans(db.SqliteDbContext, includeUnbanned, exempt);
 
             return queryBans
-                .Where(b => BanMatches(b, address, userId, hwId, exempt))
+                .Where(b => BanMatches(b, address, userId, hwId, exempt, ignoreServerName))
                 .Select(ConvertBan)
                 .ToList()!;
         }
@@ -121,8 +122,17 @@ namespace Content.Server.Database
             IPAddress? address,
             NetUserId? userId,
             ImmutableArray<byte>? hwId,
-            ServerBanExemptFlags? exemptFlags)
+            ServerBanExemptFlags? exemptFlags,
+            bool ignoreServerName)
         {
+            var cfg = IoCManager.Resolve<IConfigurationManager>();
+            var serverName = cfg.GetCVar(CCVars.AdminLogsServerName);
+
+            if (!ignoreServerName && !string.IsNullOrEmpty(ban.ServerName) && ban.ServerName != "unknown" && serverName != ban.ServerName)
+            {
+                return false;
+            }
+
             if (!exemptFlags.GetValueOrDefault(ServerBanExemptFlags.None).HasFlag(ServerBanExemptFlags.IP)
                 && address != null && ban.Address is not null && IPAddressExt.IsInSubnet(address, ban.Address.Value))
             {
@@ -154,7 +164,8 @@ namespace Content.Server.Database
                 HWId = serverBan.HWId?.ToArray(),
                 BanTime = serverBan.BanTime.UtcDateTime,
                 ExpirationTime = serverBan.ExpirationTime?.UtcDateTime,
-                UserId = serverBan.UserId?.UserId
+                UserId = serverBan.UserId?.UserId,
+                ServerName = serverBan.ServerName
             });
 
             await db.SqliteDbContext.SaveChangesAsync();
@@ -191,7 +202,8 @@ namespace Content.Server.Database
         public override async Task<List<ServerRoleBanDef>> GetServerRoleBansAsync(IPAddress? address,
             NetUserId? userId,
             ImmutableArray<byte>? hwId,
-            bool includeUnbanned)
+            bool includeUnbanned,
+            bool ignoreServerName)
         {
             await using var db = await GetDbImpl();
 
@@ -200,7 +212,7 @@ namespace Content.Server.Database
             var queryBans = await GetAllRoleBans(db.SqliteDbContext, includeUnbanned);
 
             return queryBans
-                .Where(b => RoleBanMatches(b, address, userId, hwId))
+                .Where(b => RoleBanMatches(b, address, userId, hwId, ignoreServerName))
                 .Select(ConvertRoleBan)
                 .ToList()!;
         }
@@ -223,8 +235,18 @@ namespace Content.Server.Database
             ServerRoleBan ban,
             IPAddress? address,
             NetUserId? userId,
-            ImmutableArray<byte>? hwId)
+            ImmutableArray<byte>? hwId,
+            bool ignoreServerName)
         {
+
+            var cfg = IoCManager.Resolve<IConfigurationManager>();
+            var serverName = cfg.GetCVar(CCVars.AdminLogsServerName);
+
+            if (!ignoreServerName &&!string.IsNullOrEmpty(ban.ServerName) && ban.ServerName != "unknown" && serverName != ban.ServerName)
+            {
+                return false;
+            }
+
             if (address != null && ban.Address is not null && IPAddressExt.IsInSubnet(address, ban.Address.Value))
             {
                 return true;
@@ -257,6 +279,7 @@ namespace Content.Server.Database
                 ExpirationTime = serverBan.ExpirationTime?.UtcDateTime,
                 UserId = serverBan.UserId?.UserId,
                 RoleId = serverBan.Role,
+                ServerName = serverBan.ServerName
             });
 
             await db.SqliteDbContext.SaveChangesAsync();
@@ -307,7 +330,8 @@ namespace Content.Server.Database
                 ban.Reason,
                 aUid,
                 unban,
-                ban.RoleId);
+                ban.RoleId,
+                ban.ServerName ??= "unknown");
         }
 
         private static ServerRoleUnbanDef? ConvertRoleUnban(ServerRoleUnban? unban)
@@ -371,7 +395,8 @@ namespace Content.Server.Database
                 ban.ExpirationTime,
                 ban.Reason,
                 aUid,
-                unban);
+                unban,
+                ban.ServerName ??= "unknown");
         }
 
         private static ServerUnbanDef? ConvertUnban(ServerUnban? unban)

@@ -65,7 +65,8 @@ namespace Content.Server.Database
         Task<ServerBanDef?> GetServerBanAsync(
             IPAddress? address,
             NetUserId? userId,
-            ImmutableArray<byte>? hwId);
+            ImmutableArray<byte>? hwId,
+            bool ignoreServerName);
 
         /// <summary>
         ///     Looks up an user's ban history.
@@ -80,7 +81,8 @@ namespace Content.Server.Database
             IPAddress? address,
             NetUserId? userId,
             ImmutableArray<byte>? hwId,
-            bool includeUnbanned=true);
+            bool includeUnbanned=true,
+            bool ignoreServerName=false);
 
         Task AddServerBanAsync(ServerBanDef serverBan);
         Task AddServerUnbanAsync(ServerUnbanDef serverBan);
@@ -126,7 +128,8 @@ namespace Content.Server.Database
             IPAddress? address,
             NetUserId? userId,
             ImmutableArray<byte>? hwId,
-            bool includeUnbanned = true);
+            bool includeUnbanned = true,
+            bool ignoreServerName = false);
 
         Task AddServerRoleBanAsync(ServerRoleBanDef serverBan);
         Task AddServerRoleUnbanAsync(ServerRoleUnbanDef serverBan);
@@ -342,20 +345,22 @@ namespace Content.Server.Database
         public Task<ServerBanDef?> GetServerBanAsync(
             IPAddress? address,
             NetUserId? userId,
-            ImmutableArray<byte>? hwId)
+            ImmutableArray<byte>? hwId,
+            bool ignoreServerName)
         {
             DbReadOpsMetric.Inc();
-            return _db.GetServerBanAsync(address, userId, hwId);
+            return _db.GetServerBanAsync(address, userId, hwId, ignoreServerName);
         }
 
         public Task<List<ServerBanDef>> GetServerBansAsync(
             IPAddress? address,
             NetUserId? userId,
             ImmutableArray<byte>? hwId,
-            bool includeUnbanned=true)
+            bool includeUnbanned=true,
+            bool ignoreServerName=false)
         {
             DbReadOpsMetric.Inc();
-            return _db.GetServerBansAsync(address, userId, hwId, includeUnbanned);
+            return _db.GetServerBansAsync(address, userId, hwId, includeUnbanned, ignoreServerName);
         }
 
         public Task AddServerBanAsync(ServerBanDef serverBan)
@@ -393,10 +398,11 @@ namespace Content.Server.Database
             IPAddress? address,
             NetUserId? userId,
             ImmutableArray<byte>? hwId,
-            bool includeUnbanned = true)
+            bool includeUnbanned=true,
+            bool ignoreServerName=false)
         {
             DbReadOpsMetric.Inc();
-            return _db.GetServerRoleBansAsync(address, userId, hwId, includeUnbanned);
+            return _db.GetServerRoleBansAsync(address, userId, hwId, includeUnbanned, ignoreServerName);
         }
 
         public Task AddServerRoleBanAsync(ServerRoleBanDef serverRoleBan)

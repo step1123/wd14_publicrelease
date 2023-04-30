@@ -73,7 +73,8 @@ namespace Content.Server.Administration.UI
                     Title = p.a.Title,
                     RankId = p.a.AdminRankId,
                     UserId = new NetUserId(p.a.UserId),
-                    UserName = p.lastUserName
+                    UserName = p.lastUserName,
+                    AdminServer = p.a.AdminServer
                 }).ToArray(),
 
                 AdminRanks = _adminRanks.ToDictionary(a => a.Id, a => new PermissionsEuiState.AdminRankData
@@ -251,6 +252,7 @@ namespace Content.Server.Administration.UI
 
             admin.Title = ua.Title;
             admin.AdminRankId = ua.RankId;
+            admin.AdminServer = ua.AdminServer;
             admin.Flags = GenAdminFlagList(ua.PosFlags, ua.NegFlags);
 
             await _db.UpdateAdminAsync(admin);
@@ -265,8 +267,9 @@ namespace Content.Server.Administration.UI
             var name = playerRecord?.LastSeenUserName ?? ua.UserId.ToString();
             var title = ua.Title ?? "<no title>";
             var flags = AdminFlagsHelper.PosNegFlagsText(ua.PosFlags, ua.NegFlags);
+            var server = ua.AdminServer ?? "<all servers>";
 
-            Logger.InfoS("admin.perms", $"{Player} updated admin {name} to {title}/{rankName}/{flags}");
+            Logger.InfoS("admin.perms", $"{Player} updated admin {name} to {title}/{rankName}/{flags}/{server}");
 
             if (_playerManager.TryGetSessionById(ua.UserId, out var player))
             {
@@ -333,15 +336,17 @@ namespace Content.Server.Administration.UI
                 Flags = GenAdminFlagList(ca.PosFlags, ca.NegFlags),
                 AdminRankId = ca.RankId,
                 UserId = userId.UserId,
-                Title = ca.Title
+                Title = ca.Title,
+                AdminServer = ca.AdminServer
             };
 
             await _db.AddAdminAsync(admin);
 
             var title = ca.Title ?? "<no title>";
             var flags = AdminFlagsHelper.PosNegFlagsText(ca.PosFlags, ca.NegFlags);
+            var server = ca.AdminServer ?? "<all servers>";
 
-            Logger.InfoS("admin.perms", $"{Player} added admin {name} as {title}/{rankName}/{flags}");
+            Logger.InfoS("admin.perms", $"{Player} added admin {name} as {title}/{rankName}/{flags}/{server}");
 
             if (_playerManager.TryGetSessionById(userId, out var player))
             {

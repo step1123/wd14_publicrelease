@@ -20,8 +20,9 @@ namespace Content.Server.Database
         public NetUserId? BanningAdmin { get; }
         public ServerUnbanDef? Unban { get; }
 
-        public ServerBanDef(
-            int? id,
+        public string ServerName { get; }
+
+        public ServerBanDef(int? id,
             NetUserId? userId,
             (IPAddress, int)? address,
             ImmutableArray<byte>? hwId,
@@ -29,7 +30,8 @@ namespace Content.Server.Database
             DateTimeOffset? expirationTime,
             string reason,
             NetUserId? banningAdmin,
-            ServerUnbanDef? unban)
+            ServerUnbanDef? unban,
+            string serverName)
         {
             if (userId == null && address == null && hwId ==  null)
             {
@@ -52,6 +54,7 @@ namespace Content.Server.Database
             Reason = reason;
             BanningAdmin = banningAdmin;
             Unban = unban;
+            ServerName = serverName;
         }
 
         public string FormatBanMessage(IConfigurationManager cfg, ILocalizationManager loc)
