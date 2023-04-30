@@ -76,6 +76,9 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         SetSex(uid, profile.Sex, false, humanoid);
         humanoid.EyeColor = profile.Appearance.EyeColor;
 
+        SetBodyType(uid, profile.BodyType, false, humanoid);
+
+
         SetSkinColor(uid, profile.Appearance.SkinColor, false);
 
         humanoid.MarkingSet.Clear();
@@ -99,9 +102,9 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
 
         // Hair/facial hair - this may eventually be deprecated.
         // We need to ensure hair before applying it or coloring can try depend on markings that can be invalid
-        var hairColor = _markingManager.MustMatchSkin(profile.Species, HumanoidVisualLayers.Hair, out var hairAlpha, _prototypeManager)
+        var hairColor = _markingManager.MustMatchSkin(profile.BodyType, HumanoidVisualLayers.Hair, out var hairAlpha, _prototypeManager)
             ? profile.Appearance.SkinColor.WithAlpha(hairAlpha) : profile.Appearance.HairColor;
-        var facialHairColor = _markingManager.MustMatchSkin(profile.Species, HumanoidVisualLayers.FacialHair, out var facialHairAlpha, _prototypeManager)
+        var facialHairColor = _markingManager.MustMatchSkin(profile.BodyType, HumanoidVisualLayers.FacialHair, out var facialHairAlpha, _prototypeManager)
             ? profile.Appearance.SkinColor.WithAlpha(facialHairAlpha) : profile.Appearance.FacialHairColor;
 
         if (_markingManager.Markings.TryGetValue(profile.Appearance.HairStyleId, out var hairPrototype) &&
@@ -116,7 +119,7 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
             AddMarking(uid, profile.Appearance.FacialHairStyleId, facialHairColor, false);
         }
 
-        humanoid.MarkingSet.EnsureSpecies(profile.Species, profile.Appearance.SkinColor, _markingManager, _prototypeManager);
+        humanoid.MarkingSet.EnsureSpecies(profile.Species, profile.BodyType, profile.Appearance.SkinColor, _markingManager, _prototypeManager);
 
         // Finally adding marking with forced colors
         foreach (var (marking, prototype) in markingFColored)
@@ -168,6 +171,8 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         SetSex(target, sourceHumanoid.Sex, false, targetHumanoid);
         targetHumanoid.CustomBaseLayers = new(sourceHumanoid.CustomBaseLayers);
         targetHumanoid.MarkingSet = new(sourceHumanoid.MarkingSet);
+        targetHumanoid.BodyType = sourceHumanoid.BodyType;
+        SetTTSVoice(target, sourceHumanoid.Voice, targetHumanoid);
 
         targetHumanoid.Gender = sourceHumanoid.Gender;
         if (TryComp<GrammarComponent>(target, out var grammar))
@@ -176,6 +181,29 @@ public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceS
         }
 
         Dirty(targetHumanoid);
+    }
+
+
+    /// <summary>
+    ///     Set a humanoid mob's body yupe. This will change their base sprites.
+    /// </summary>
+    /// <param name="uid">The humanoid mob's UID.</param>
+    /// <param name="bodyType">The body type to set the mob to. Will return if the body type prototype was invalid.</param>
+    /// <param name="sync">Whether to immediately synchronize this to the humanoid mob, or not.</param>
+    /// <param name="humanoid">Humanoid component of the entity</param>
+    public void SetBodyType(EntityUid uid, string bodyType, bool sync = true, HumanoidAppearanceComponent? humanoid = null)
+    {
+        if (!Resolve(uid, ref humanoid) || !_prototypeManager.TryIndex<BodyTypePrototype>(bodyType, out var prototype))
+        {
+            return;
+        }
+
+        humanoid.BodyType = bodyType;
+
+        if (sync)
+        {
+            Dirty(humanoid);
+        }
     }
 
     /// <summary>

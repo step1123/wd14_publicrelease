@@ -40,6 +40,7 @@ public sealed partial class MarkingPicker : Control
     private List<MarkingCategories> _markingCategories = Enum.GetValues<MarkingCategories>().ToList();
 
     private string _currentSpecies = SharedHumanoidAppearanceSystem.DefaultSpecies;
+    private string _currentBodyType = SharedHumanoidAppearanceSystem.DefaultBodyType;
     public Color CurrentSkinColor = Color.White;
     public Color CurrentEyeColor = Color.Black;
     public Marking? HairMarking;
@@ -82,7 +83,7 @@ public sealed partial class MarkingPicker : Control
         }
     }
 
-    public void SetData(List<Marking> newMarkings, string species, Color skinColor, Color eyeColor)
+    public void SetData(List<Marking> newMarkings, string species, string bodyType, Color skinColor, Color eyeColor)
     {
         var pointsProto = _prototypeManager
             .Index<SpeciesPrototype>(species).MarkingPoints;
@@ -90,9 +91,10 @@ public sealed partial class MarkingPicker : Control
 
         if (!IgnoreSpecies)
         {
-            _currentMarkings.EnsureSpecies(species, skinColor, _markingManager); // should be validated server-side but it can't hurt
+            _currentMarkings.EnsureSpecies(species, bodyType, skinColor, _markingManager); // should be validated server-side but it can't hurt
         }
 
+        _currentBodyType = bodyType;
         _currentSpecies = species;
         CurrentSkinColor = skinColor;
         CurrentEyeColor = eyeColor;
@@ -101,13 +103,13 @@ public sealed partial class MarkingPicker : Control
         PopulateUsed();
     }
 
-    public void SetData(MarkingSet set, string species, Color skinColor, Color eyeColor)
+    public void SetData(MarkingSet set, string species, string bodyType, Color skinColor, Color eyeColor)
     {
         _currentMarkings = set;
 
         if (!IgnoreSpecies)
         {
-            _currentMarkings.EnsureSpecies(species, skinColor, _markingManager); // should be validated server-side but it can't hurt
+            _currentMarkings.EnsureSpecies(species, bodyType, skinColor, _markingManager); // should be validated server-side but it can't hurt
         }
 
         _currentSpecies = species;
@@ -231,7 +233,7 @@ public sealed partial class MarkingPicker : Control
 
         if (!IgnoreSpecies)
         {
-            _currentMarkings.EnsureSpecies(_currentSpecies, null, _markingManager);
+            _currentMarkings.EnsureSpecies(_currentSpecies, _currentBodyType, null, _markingManager);
         }
 
         // walk backwards through the list for visual purposes
@@ -335,7 +337,7 @@ public sealed partial class MarkingPicker : Control
         var speciesPrototype = _prototypeManager.Index<SpeciesPrototype>(species);
 
         _currentMarkings = new(markingList, speciesPrototype.MarkingPoints, _markingManager, _prototypeManager);
-        _currentMarkings.EnsureSpecies(species, null, _markingManager);
+        _currentMarkings.EnsureSpecies(species, _currentBodyType, null, _markingManager);
 
         Populate(CMarkingSearch.Text);
         PopulateUsed();
@@ -455,7 +457,7 @@ public sealed partial class MarkingPicker : Control
             markingSet.AddBack(MarkingCategories.FacialHair, FacialHairMarking);
         }
 
-        if (!_markingManager.MustMatchSkin(_currentSpecies, marking.BodyPart, out var _, _prototypeManager))
+        if (!_markingManager.MustMatchSkin(_currentBodyType, marking.BodyPart, out var _, _prototypeManager))
         {
             // Do default coloring
             var colors = MarkingColoring.GetMarkingLayerColors(

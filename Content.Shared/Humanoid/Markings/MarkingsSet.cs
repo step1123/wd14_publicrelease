@@ -144,7 +144,7 @@ public sealed class MarkingSet
     /// <param name="skinColor">The skin color for recoloring (i.e. slimes). Use null if you want only filter markings</param>
     /// <param name="markingManager">Marking manager.</param>
     /// <param name="prototypeManager">Prototype manager.</param>
-    public void EnsureSpecies(string species, Color? skinColor, MarkingManager? markingManager = null, IPrototypeManager? prototypeManager = null)
+    public void EnsureSpecies(string species, string bodyType, Color? skinColor, MarkingManager? markingManager = null, IPrototypeManager? prototypeManager = null)
     {
         IoCManager.Resolve(ref markingManager);
         IoCManager.Resolve(ref prototypeManager);
@@ -189,7 +189,7 @@ public sealed class MarkingSet
                 foreach (var marking in list)
                 {
                     if (markingManager.TryGetMarking(marking, out var prototype) &&
-                        markingManager.MustMatchSkin(species, prototype.BodyPart, out var alpha, prototypeManager))
+                        markingManager.MustMatchSkin(bodyType, prototype.BodyPart, out var alpha, prototypeManager))
                     {
                         marking.SetColor(skinColor.Value.WithAlpha(alpha));
                     }

@@ -86,6 +86,7 @@ namespace Content.Client.Preferences.UI
         private readonly List<SpeciesPrototype> _speciesList;
         private readonly List<AntagPreferenceSelector> _antagPreferences;
         private readonly List<TraitPreferenceSelector> _traitPreferences;
+        private List<BodyTypePrototype> _bodyTypesList = new();
 
         private Control _previewSpriteControl => CSpriteViewFront;
         private Control _previewSpriteSideControl => CSpriteViewSide;
@@ -149,6 +150,15 @@ namespace Content.Client.Preferences.UI
             };
 
             #endregion Sex
+
+
+            #region Body Type
+
+            CBodyTypesButton.OnItemSelected += OnBodyTypeSelected;
+
+            UpdateBodyTypes();
+
+            #endregion Body Type
 
             #region Age
 
@@ -816,6 +826,7 @@ namespace Content.Client.Preferences.UI
             CMarkings.SetSpecies(newSpecies); // Repopulate the markings tab as well.
             UpdateSexControls(); // update sex for new species
             RebuildSpriteView(); // they might have different inv so we need a new dummy
+            UpdateBodyTypes();
             IsDirty = true;
             _needUpdatePreview = true;
         }
@@ -848,6 +859,39 @@ namespace Content.Client.Preferences.UI
                 OnProfileChanged?.Invoke(Profile, CharacterSlot);
                 _needUpdatePreview = true;
             }
+        }
+
+
+
+        private void OnBodyTypeSelected(OptionButton.ItemSelectedEventArgs args)
+        {
+            args.Button.SelectId(args.Id);
+            SetBodyType(_bodyTypesList[args.Id].ID);
+        }
+
+        private void UpdateBodyTypes()
+        {
+            if (Profile is null)
+                return;
+
+            CBodyTypesButton.Clear();
+            var species = _prototypeManager.Index<SpeciesPrototype>(Profile.Species);
+            var sex = Profile.Sex;
+            _bodyTypesList = EntitySystem.Get<HumanoidAppearanceSystem>().GetValidBodyTypes(species, sex);
+
+            for (var i = 0; i < _bodyTypesList.Count; i++)
+            {
+                CBodyTypesButton.AddItem(Loc.GetString(_bodyTypesList[i].Name), i);
+            }
+
+            // If current body type is not valid.
+            if (!_bodyTypesList.Select(proto => proto.ID).Contains(Profile.BodyType))
+            {
+                // Then replace it with a first valid body type.
+                SetBodyType(_bodyTypesList.First().ID);
+            }
+
+            IsDirty = true;
         }
 
         private bool IsDirty
@@ -968,7 +1012,7 @@ namespace Content.Client.Preferences.UI
                 return;
             }
 
-            CMarkings.SetData(Profile.Appearance.Markings, Profile.Species,
+            CMarkings.SetData(Profile.Appearance.Markings, Profile.Species, Profile.BodyType,
                 Profile.Appearance.SkinColor, Profile.Appearance.EyeColor
             );
         }
@@ -1056,7 +1100,7 @@ namespace Content.Client.Preferences.UI
             {
                 if (_markingManager.CanBeApplied(Profile.Species, hairProto, _prototypeManager))
                 {
-                    if (_markingManager.MustMatchSkin(Profile.Species, HumanoidVisualLayers.Hair, out var _, _prototypeManager))
+                    if (_markingManager.MustMatchSkin(Profile.BodyType, HumanoidVisualLayers.Hair, out var _, _prototypeManager))
                     {
                         hairColor = Profile.Appearance.SkinColor;
                     }
@@ -1091,7 +1135,7 @@ namespace Content.Client.Preferences.UI
             {
                 if (_markingManager.CanBeApplied(Profile.Species, facialHairProto, _prototypeManager))
                 {
-                    if (_markingManager.MustMatchSkin(Profile.Species, HumanoidVisualLayers.Hair, out var _, _prototypeManager))
+                    if (_markingManager.MustMatchSkin(Profile.BodyType, HumanoidVisualLayers.Hair, out var _, _prototypeManager))
                     {
                         facialHairColor = Profile.Appearance.SkinColor;
                     }
@@ -1161,6 +1205,7 @@ namespace Content.Client.Preferences.UI
 
             //WD-EDIT
             UpdateTTSVoicesControls();
+            UpdateBodyTypes();
             //WD-EDIT
 
             _preferenceUnavailableButton.SelectId((int) Profile.PreferenceUnavailable);
@@ -1176,6 +1221,13 @@ namespace Content.Client.Preferences.UI
 
                 _needUpdatePreview = false;
             }
+        }
+
+        private void SetBodyType(string newBodyType)
+        {
+            Profile = Profile?.WithBodyType(newBodyType);
+            IsDirty = true;
+            _needUpdatePreview = true;
         }
 
         private void UpdateJobPriorities()

@@ -3,27 +3,29 @@
   name: Vox
   roundStart: false # sad...
   prototype: MobVox
+  bodyTypes:
+    - VoxNormal
   sprites: MobVoxSprites
   markingLimits: MobVoxMarkingLimits
   dollPrototype: MobVoxDummy
   skinColoration: Hues
 
-- type: speciesBaseSprites
-  id: MobVoxSprites
-  sprites:
-    Head: MobVoxHead
-    Hair: MobHumanoidAnyMarking
-    FacialHair: MobHumanoidAnyMarking
-    Chest: MobVoxTorso
-    Eyes: MobVoxEyes
-    LArm: MobVoxLArm
-    RArm: MobVoxRArm
-    LHand: MobVoxLHand
-    RHand: MobVoxRHand
-    LLeg: MobVoxLLeg
-    RLeg: MobVoxRLeg
-    LFoot: MobVoxLFoot
-    RFoot: MobVoxRFoot
+# - type: speciesBaseSprites
+#   id: MobVoxSprites
+#   sprites:
+#     Head: MobVoxHead
+#     Hair: MobHumanoidAnyMarking
+#     FacialHair: MobHumanoidAnyMarking
+#     Chest: MobVoxTorso
+#     Eyes: MobVoxEyes
+#     LArm: MobVoxLArm
+#     RArm: MobVoxRArm
+#     LHand: MobVoxLHand
+#     RHand: MobVoxRHand
+#     LLeg: MobVoxLLeg
+#     RLeg: MobVoxRLeg
+#     LFoot: MobVoxLFoot
+#     RFoot: MobVoxRFoot
 
 - type: markingPoints
   id: MobVoxMarkingLimits

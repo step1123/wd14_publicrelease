@@ -96,6 +96,13 @@ namespace Content.Shared.Humanoid
         {
         }
 
+        public static string DefaultWithBodyType(string species)
+        {
+            var speciesPrototype = IoCManager.Resolve<IPrototypeManager>().Index<SpeciesPrototype>(species);
+
+            return speciesPrototype.BodyTypes.First();
+        }
+
         public static HumanoidCharacterAppearance DefaultWithSpecies(string species)
         {
             var speciesPrototype = IoCManager.Resolve<IPrototypeManager>().Index<SpeciesPrototype>(species);
@@ -188,7 +195,7 @@ namespace Content.Shared.Humanoid
             return new(color.RByte, color.GByte, color.BByte);
         }
 
-        public static HumanoidCharacterAppearance EnsureValid(HumanoidCharacterAppearance appearance, string species, string[] sponsorMarkings) //WD-EDIT
+        public static HumanoidCharacterAppearance EnsureValid(HumanoidCharacterAppearance appearance, string species, string bodyType, string[] sponsorMarkings) //WD-EDIT
         {
             var hairStyleId = appearance.HairStyleId;
             var facialHairStyleId = appearance.FacialHairStyleId;
@@ -240,7 +247,7 @@ namespace Content.Shared.Humanoid
                     skinColor = Humanoid.SkinColor.ValidSkinTone(speciesProto.SkinColoration, skinColor);
                 }
 
-                markingSet.EnsureSpecies(species, skinColor, markingManager);
+                markingSet.EnsureSpecies(species, bodyType, skinColor, markingManager);
 
                 // WD-EDIT
                 markingSet.FilterSponsor(sponsorMarkings, markingManager);

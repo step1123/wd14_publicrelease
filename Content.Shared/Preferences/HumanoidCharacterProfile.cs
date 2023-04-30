@@ -40,6 +40,7 @@ namespace Content.Shared.Preferences
             Sex sex,
             string voice,
             Gender gender,
+            string bodyType,
             HumanoidCharacterAppearance appearance,
             ClothingPreference clothing,
             BackpackPreference backpack,
@@ -55,6 +56,7 @@ namespace Content.Shared.Preferences
             Age = age;
             Sex = sex;
             Gender = gender;
+            BodyType = bodyType;
             Appearance = appearance;
             Clothing = clothing;
             Backpack = backpack;
@@ -70,7 +72,7 @@ namespace Content.Shared.Preferences
             Dictionary<string, JobPriority> jobPriorities,
             List<string> antagPreferences,
             List<string> traitPreferences)
-            : this(other.Name, other.FlavorText, other.Species, other.Voice, other.Age, other.Sex, other.Gender, other.Appearance, other.Clothing, other.Backpack,
+            : this(other.Name, other.FlavorText, other.Species, other.Voice, other.Age, other.Sex, other.Gender, other.BodyType, other.Appearance, other.Clothing, other.Backpack,
                 jobPriorities, other.PreferenceUnavailable, antagPreferences, traitPreferences)
         {
         }
@@ -89,6 +91,7 @@ namespace Content.Shared.Preferences
             int age,
             Sex sex,
             Gender gender,
+            string bodyType,
             HumanoidCharacterAppearance appearance,
             ClothingPreference clothing,
             BackpackPreference backpack,
@@ -96,7 +99,7 @@ namespace Content.Shared.Preferences
             PreferenceUnavailableMode preferenceUnavailable,
             IReadOnlyList<string> antagPreferences,
             IReadOnlyList<string> traitPreferences)
-            : this(name, flavortext, species,  age, sex, voice, gender, appearance, clothing, backpack, new Dictionary<string, JobPriority>(jobPriorities),
+            : this(name, flavortext, species,  age, sex, voice, gender, bodyType, appearance, clothing, backpack, new Dictionary<string, JobPriority>(jobPriorities),
                 preferenceUnavailable, new List<string>(antagPreferences), new List<string>(traitPreferences))
         {
         }
@@ -114,6 +117,7 @@ namespace Content.Shared.Preferences
             18,
             Sex.Male,
             Gender.Male,
+            SharedHumanoidAppearanceSystem.DefaultBodyType,
             new HumanoidCharacterAppearance(),
             ClothingPreference.Jumpsuit,
             BackpackPreference.Backpack,
@@ -142,6 +146,7 @@ namespace Content.Shared.Preferences
                 18,
                 Sex.Male,
                 Gender.Male,
+                HumanoidCharacterAppearance.DefaultWithBodyType(species),
                 HumanoidCharacterAppearance.DefaultWithSpecies(species),
                 ClothingPreference.Jumpsuit,
                 BackpackPreference.Backpack,
@@ -176,10 +181,12 @@ namespace Content.Shared.Preferences
 
             var sex = Sex.Unsexed;
             var age = 18;
+            var bodyType = SharedHumanoidAppearanceSystem.DefaultBodyType;
             if (prototypeManager.TryIndex<SpeciesPrototype>(species, out var speciesPrototype))
             {
                 sex = random.Pick(speciesPrototype.Sexes);
                 age = random.Next(speciesPrototype.MinAge, speciesPrototype.OldAge); // people don't look and keep making 119 year old characters with zero rp, cap it at middle aged
+                bodyType = random.Pick(speciesPrototype.BodyTypes);
             }
 
             var voiceId = random.Pick(prototypeManager
@@ -191,7 +198,7 @@ namespace Content.Shared.Preferences
 
             var name = GetName(species, gender);
 
-            return new HumanoidCharacterProfile(name, "", species, voiceId, age, sex, gender, HumanoidCharacterAppearance.Random(species, sex), ClothingPreference.Jumpsuit, BackpackPreference.Backpack,
+            return new HumanoidCharacterProfile(name, "", species, voiceId, age, sex, gender, bodyType, HumanoidCharacterAppearance.Random(species, sex), ClothingPreference.Jumpsuit, BackpackPreference.Backpack,
                 new Dictionary<string, JobPriority>
                 {
                     {SharedGameTicker.FallbackOverflowJob, JobPriority.High},
@@ -209,6 +216,7 @@ namespace Content.Shared.Preferences
 
         [DataField("sex")]
         public Sex Sex { get; private set; }
+        public string BodyType { get; private set; }
 
         [DataField("gender")]
         public Gender Gender { get; private set; }
@@ -228,6 +236,11 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile WithVoice(string voice)
         {
             return new(this) { Voice = voice };
+        }
+
+        public HumanoidCharacterProfile WithBodyType(string bodyType)
+        {
+            return new(this) { BodyType = bodyType };
         }
 
         public HumanoidCharacterProfile WithName(string name)
@@ -360,6 +373,7 @@ namespace Content.Shared.Preferences
             if (Age != other.Age) return false;
             if (Sex != other.Sex) return false;
             if (Gender != other.Gender) return false;
+            if (BodyType != other.BodyType) return false;
             if (PreferenceUnavailable != other.PreferenceUnavailable) return false;
             if (Clothing != other.Clothing) return false;
             if (Backpack != other.Backpack) return false;
@@ -396,6 +410,12 @@ namespace Content.Shared.Preferences
                     sex = speciesPrototype.Sexes[0];
                 }
                 age = Math.Clamp(Age, speciesPrototype.MinAge, speciesPrototype.MaxAge);
+
+                if (!prototypeManager.TryIndex<BodyTypePrototype>(BodyType, out var bodyType) ||
+                    !SharedHumanoidAppearanceSystem.IsBodyTypeValid(bodyType, speciesPrototype, Sex))
+                {
+                    BodyType = prototypeManager.Index<BodyTypePrototype>(SharedHumanoidAppearanceSystem.DefaultBodyType).ID;
+                }
             }
 
             var gender = Gender switch
@@ -453,7 +473,7 @@ namespace Content.Shared.Preferences
             }
 
             // WD-EDIT
-            var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species, sponsorMarkings);
+            var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species, BodyType, sponsorMarkings);
             // WD-EDIT
 
             var prefsUnavailableMode = PreferenceUnavailable switch

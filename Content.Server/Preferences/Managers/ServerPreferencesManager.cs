@@ -6,6 +6,7 @@ using Content.Server.Database;
 using Content.Server.Humanoid;
 using Content.Server.White.Sponsors;
 using Content.Shared.CCVar;
+using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
@@ -298,24 +299,31 @@ namespace Content.Server.Preferences.Managers
                 {
                     case HumanoidCharacterProfile hp:
                     {
-                        var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
-                        var selectedSpecies = HumanoidAppearanceSystem.DefaultSpecies;
+                            var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
 
-                        if (prototypeManager.TryIndex<SpeciesPrototype>(hp.Species, out var species) && species.RoundStart)
-                        {
-                            selectedSpecies = hp.Species;
+                            //var selectedSpecies = HumanoidAppearanceSystem.DefaultSpecies;
+
+                            if (!prototypeManager.TryIndex<SpeciesPrototype>(hp.Species, out var selectedSpecies) || selectedSpecies.RoundStart)
+                            {
+                                selectedSpecies = prototypeManager.Index<SpeciesPrototype>(hp.Species);
+                            }
+
+                            if (!prototypeManager.TryIndex<BodyTypePrototype>(hp.BodyType, out var selectedBodyType) || !SharedHumanoidAppearanceSystem.IsBodyTypeValid(selectedBodyType, selectedSpecies, hp.Sex))
+                            {
+                                selectedBodyType = prototypeManager.Index<BodyTypePrototype>(SharedHumanoidAppearanceSystem.DefaultBodyType);
+                            }
+
+                            newProf = hp
+                                .WithJobPriorities(
+                                    hp.JobPriorities.Where(job =>
+                                        _protos.HasIndex<JobPrototype>(job.Key)))
+                                .WithAntagPreferences(
+                                    hp.AntagPreferences.Where(antag =>
+                                        _protos.HasIndex<AntagPrototype>(antag)))
+                                .WithSpecies(selectedSpecies.ID)
+                                .WithBodyType(selectedBodyType.ID);
+                            break;
                         }
-
-                        newProf = hp
-                            .WithJobPriorities(
-                                hp.JobPriorities.Where(job =>
-                                    _protos.HasIndex<JobPrototype>(job.Key)))
-                            .WithAntagPreferences(
-                                hp.AntagPreferences.Where(antag =>
-                                    _protos.HasIndex<AntagPrototype>(antag)))
-                            .WithSpecies(selectedSpecies);
-                        break;
-                    }
                     default:
                         throw new NotSupportedException();
                 }

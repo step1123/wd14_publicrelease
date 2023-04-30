@@ -37,6 +37,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         component.Sex = state.Sex;
         component.Species = state.Species;
         component.Age = state.Age;
+        component.BodyType = state.BodyType;
         component.SkinColor = state.SkinColor;
         component.EyeColor = state.EyeColor;
         component.HiddenLayers = new(state.HiddenLayers);
@@ -59,10 +60,13 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         var oldLayers = new HashSet<HumanoidVisualLayers>(component.BaseLayers.Keys);
         component.BaseLayers.Clear();
 
-        // add default species layers
-        var speciesProto = _prototypeManager.Index<SpeciesPrototype>(component.Species);
-        var baseSprites = _prototypeManager.Index<HumanoidSpeciesBaseSpritesPrototype>(speciesProto.SpriteSet);
-        foreach (var (key, id) in baseSprites.Sprites)
+        //var speciesProto = _prototypeManager.Index<SpeciesPrototype>(component.Species);
+
+        var bodyTypeProto = _prototypeManager.Index<BodyTypePrototype>(component.BodyType!);
+
+        //var baseSprites = _prototypeManager.Index<HumanoidSpeciesBaseSpritesPrototype>(speciesProto.SpriteSet);
+
+        foreach (var (key, id) in bodyTypeProto.Sprites)//baseSprites.Sprites)
         {
             oldLayers.Remove(key);
             if (!component.CustomBaseLayers.ContainsKey(key))
@@ -133,6 +137,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
             return;
         }
 
+        humanoid.BodyType = profile.BodyType;
         var customBaseLayers = new Dictionary<HumanoidVisualLayers, CustomBaseLayerInfo>();
 
         var speciesPrototype = _prototypeManager.Index<SpeciesPrototype>(profile.Species);
@@ -160,12 +165,12 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         //markings.RemoveCategory(MarkingCategories.FacialHair);
 
         // We need to ensure hair before applying it or coloring can try depend on markings that can be invalid
-        var hairColor = _markingManager.MustMatchSkin(profile.Species, HumanoidVisualLayers.Hair, out var hairAlpha, _prototypeManager)
+        var hairColor = _markingManager.MustMatchSkin(profile.BodyType, HumanoidVisualLayers.Hair, out var hairAlpha, _prototypeManager)
             ? profile.Appearance.SkinColor.WithAlpha(hairAlpha) : profile.Appearance.HairColor;
         var hair = new Marking(profile.Appearance.HairStyleId,
             new[] { hairColor });
 
-        var facialHairColor = _markingManager.MustMatchSkin(profile.Species, HumanoidVisualLayers.FacialHair, out var facialHairAlpha, _prototypeManager)
+        var facialHairColor = _markingManager.MustMatchSkin(profile.BodyType, HumanoidVisualLayers.FacialHair, out var facialHairAlpha, _prototypeManager)
             ? profile.Appearance.SkinColor.WithAlpha(facialHairAlpha) : profile.Appearance.FacialHairColor;
         var facialHair = new Marking(profile.Appearance.FacialHairStyleId,
             new[] { facialHairColor });
@@ -191,7 +196,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
             markings.AddBack(prototype.MarkingCategory, new Marking(marking.MarkingId, markingColors));
         }
 
-        markings.EnsureSpecies(profile.Species, profile.Appearance.SkinColor, _markingManager, _prototypeManager);
+        markings.EnsureSpecies(profile.Species, profile.BodyType, profile.Appearance.SkinColor, _markingManager, _prototypeManager);
         markings.EnsureDefault(
             profile.Appearance.SkinColor,
             profile.Appearance.EyeColor,
@@ -205,6 +210,7 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
             customBaseLayers,
             profile.Sex,
             profile.Gender,
+            profile.BodyType,
             profile.Age,
             profile.Species,
             profile.Appearance.SkinColor,

@@ -3,28 +3,30 @@
   name: species-name-slime
   roundStart: true
   prototype: MobSlimePerson
+  bodyTypes:
+    - SlimeNormal
   sprites: MobSlimeSprites
   defaultSkinTone: "#b8b8b8"
   markingLimits: MobSlimeMarkingLimits
   dollPrototype: MobSlimePersonDummy
   skinColoration: Hues
 
-- type: speciesBaseSprites
-  id: MobSlimeSprites
-  sprites:
-    Head: MobSlimeHead
-    Hair: MobSlimeMarkingFollowSkin
-    FacialHair: MobSlimeMarkingFollowSkin
-    Chest: MobSlimeTorso
-    Eyes: MobHumanoidEyes
-    LArm: MobSlimeLArm
-    RArm: MobSlimeRArm
-    LHand: MobSlimeLHand
-    RHand: MobSlimeRHand
-    LLeg: MobSlimeLLeg
-    RLeg: MobSlimeRLeg
-    LFoot: MobSlimeLFoot
-    RFoot: MobSlimeRFoot
+# - type: speciesBaseSprites
+#   id: MobSlimeSprites
+#   sprites:
+#     Head: MobSlimeHead
+#     Hair: MobSlimeMarkingFollowSkin
+#     FacialHair: MobSlimeMarkingFollowSkin
+#     Chest: MobSlimeTorso
+#     Eyes: MobHumanoidEyes
+#     LArm: MobSlimeLArm
+#     RArm: MobSlimeRArm
+#     LHand: MobSlimeLHand
+#     RHand: MobSlimeRHand
+#     LLeg: MobSlimeLLeg
+#     RLeg: MobSlimeRLeg
+#     LFoot: MobSlimeLFoot
+#     RFoot: MobSlimeRFoot
 
 - type: markingPoints
   id: MobSlimeMarkingLimits

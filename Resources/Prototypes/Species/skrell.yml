@@ -17,21 +17,21 @@
   femaleLastNames: SkrellLast
   naming: TheFirstofLast
 
-- type: speciesBaseSprites
-  id: MobSkrellSprites
-  sprites:
-    Head: MobSkrellHead
-    Hair: MobHumanoidAnyMarking
-    Chest: MobSkrellTorso
-    Eyes: MobSkrellEyes
-    LArm: MobSkrellLArm
-    RArm: MobSkrellRArm
-    LHand: MobSkrellLHand
-    RHand: MobSkrellRHand
-    LLeg: MobSkrellLLeg
-    RLeg: MobSkrellRLeg
-    LFoot: MobSkrellLFoot
-    RFoot: MobSkrellRFoot
+# - type: speciesBaseSprites
+#   id: MobSkrellSprites
+#   sprites:
+#     Head: MobSkrellHead
+#     Hair: MobHumanoidAnyMarking
+#     Chest: MobSkrellTorso
+#     Eyes: MobSkrellEyes
+#     LArm: MobSkrellLArm
+#     RArm: MobSkrellRArm
+#     LHand: MobSkrellLHand
+#     RHand: MobSkrellRHand
+#     LLeg: MobSkrellLLeg
+#     RLeg: MobSkrellRLeg
+#     LFoot: MobSkrellLFoot
+#     RFoot: MobSkrellRFoot
 
 - type: markingPoints
   id: MobSkrellMarkingLimits

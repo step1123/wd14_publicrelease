@@ -1,0 +1,64 @@
+﻿- type: bodyType
+  id: HumanSlim
+  name: body-slim
+  sexRestrictions:
+    - Male
+  sprites:
+    Head: MobHumanSlimHead
+    Hair: MobHumanoidAnyMarking
+    FacialHair: MobHumanoidAnyMarking
+    Chest: MobHumanSlimTorso
+    HeadTop: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    Eyes: MobHumanoidEyes
+    LArm: MobHumanSlimLArm
+    RArm: MobHumanSlimRArm
+    LHand: MobHumanSlimLHand
+    RHand: MobHumanSlimRHand
+    LLeg: MobHumanSlimLLeg
+    RLeg: MobHumanSlimRLeg
+    LFoot: MobHumanSlimLFoot
+    RFoot: MobHumanSlimRFoot
+
+- type: bodyType
+  id: SkrellSlim
+  name: body-slim
+  sexRestrictions:
+    - Male
+  sprites:
+    Head: MobSkrellSlimHead
+    Hair: MobHumanoidAnyMarking
+    Chest: MobSkrellSlimTorso
+    HeadTop: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    Eyes: MobSkrellEyes
+    LArm: MobSkrellSlimLArm
+    RArm: MobSkrellSlimRArm
+    LHand: MobSkrellSlimLHand
+    RHand: MobSkrellSlimRHand
+    LLeg: MobSkrellSlimLLeg
+    RLeg: MobSkrellSlimRLeg
+    LFoot: MobSkrellSlimLFoot
+    RFoot: MobSkrellSlimRFoot
+
+# - type: bodyType
+#   id: ReptilianSlim
+#   name: body-slim
+#   sexRestrictions:
+#     - Male
+#   sprites:
+#     Head: MobReptilianSlimHead
+#     Snout: MobHumanoidAnyMarking
+#     Chest: MobReptilianSlimTorso
+#     HeadTop: MobHumanoidAnyMarking
+#     HeadSide: MobHumanoidAnyMarking
+#     Tail: MobHumanoidAnyMarking
+#     Eyes: MobHumanoidEyes
+#     LArm: MobReptilianSlimLArm
+#     RArm: MobReptilianSlimRArm
+#     LHand: MobReptilianSlimLHand
+#     RHand: MobReptilianSlimRHand
+#     LLeg: MobReptilianSlimLLeg
+#     RLeg: MobReptilianSlimRLeg
+#     LFoot: MobReptilianSlimLFoot
+#     RFoot: MobReptilianSlimRFoot

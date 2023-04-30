@@ -3,6 +3,8 @@
   name: species-name-dwarf
   roundStart: true
   prototype: MobDwarf
+  bodyTypes:
+    - HumanNormal
   sprites: MobHumanSprites
   markingLimits: MobHumanMarkingLimits
   dollPrototype: MobDwarfDummy

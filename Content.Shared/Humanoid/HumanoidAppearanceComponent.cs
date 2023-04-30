@@ -69,6 +69,12 @@ public sealed class HumanoidAppearanceComponent : Component
     [DataField("sex")]
     public Sex Sex = Sex.Male;
 
+    /// <summary>
+    ///     Current body type.
+    /// </summary>
+    [DataField("bodyType", customTypeSerializer: typeof(PrototypeIdSerializer<BodyTypePrototype>))]
+    public string BodyType = SharedHumanoidAppearanceSystem.DefaultBodyType;
+
     [DataField("eyeColor")]
     public Color EyeColor = Color.Brown;
 
@@ -97,6 +103,7 @@ public sealed class HumanoidAppearanceState : ComponentState
     public readonly Dictionary<HumanoidVisualLayers, CustomBaseLayerInfo> CustomBaseLayers;
     public readonly Sex Sex;
     public readonly Gender Gender;
+    public readonly string BodyType;
     public readonly int Age = 18;
     public readonly string Species;
     public readonly Color SkinColor;
@@ -109,6 +116,7 @@ public sealed class HumanoidAppearanceState : ComponentState
         Dictionary<HumanoidVisualLayers, CustomBaseLayerInfo> customBaseLayers,
         Sex sex,
         Gender gender,
+        string bodyType,
         int age,
         string species,
         Color skinColor,
@@ -120,6 +128,7 @@ public sealed class HumanoidAppearanceState : ComponentState
         CustomBaseLayers = customBaseLayers;
         Sex = sex;
         Gender = gender;
+        BodyType = bodyType;
         Age = age;
         Species = species;
         SkinColor = skinColor;
