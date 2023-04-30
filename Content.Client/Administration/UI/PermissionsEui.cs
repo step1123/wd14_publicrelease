@@ -317,7 +317,7 @@ namespace Content.Client.Administration.UI
                     HorizontalAlignment = HAlignment.Right
                 };
 
-                AdminsList = new GridContainer { Columns = 5, VerticalExpand = true };
+                AdminsList = new GridContainer { Columns = 6, VerticalExpand = true };
                 var adminVBox = new BoxContainer
                 {
                     Orientation = LayoutOrientation.Vertical,
