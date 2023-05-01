@@ -1,0 +1,41 @@
+﻿# DOOMMAX
+- type: loadout
+  id: SuitGlamorousLoadout
+  entity: ClothingOuterSuitGlamorous
+  sponsorOnly: true
+  blacklistJobs: [Captain, HeadOfPersonnel, ChiefEngineer, ChiefMedicalOfficer, ResearchDirector, HeadOfSecurity, Quartermaster]
+
+- type: loadout
+  id: ClothingOuterHardsuitEVAGLAMOURsLoadout
+  entity: ClothingOuterHardsuitEVAGLAMOUR
+  sponsorOnly: true
+  whitelistJobs: [Captain, HeadOfPersonnel, ChiefEngineer, ChiefMedicalOfficer, ResearchDirector, HeadOfSecurity, Quartermaster]
+
+# Maury
+- type: loadout
+  id: ClothingUniformJumpsuitMaury #Should be ClothingUniformMauryLoadout but like i said i`m retard
+  entity: ClothingUniformJumpsuitMauryZ
+  sponsorOnly: true
+
+# YouWellLeer
+- type: loadout
+  id: SledgebarLoadout
+  entity: Sledgebar
+  sponsorOnly: true
+
+# мурка
+- type: loadout
+  id: BibleNyaLoadout
+  entity: BibleNya
+  sponsorOnly: true
+
+- type: loadout # WHITEGPT HUETA ДЛЯ КЛОУНОВ И ВЫШЕ
+  id: WhiteGPTLoadout
+  entity: PersonalNeuralAI
+  sponsorOnly: true
+
+# Warete
+- type: loadout
+  id: WareteJumpskirtLoadout
+  entity: WareteJumpskirt
+  sponsorOnly: true

@@ -1,0 +1,25 @@
+- type: marking
+  id: FoxEars
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Human]
+  sponsorOnly: true
+  sprites:
+    - sprite: White/Mobs/Customization/fox_parts.rsi
+      state: ears_fox_outer
+    - sprite: White/Mobs/Customization/fox_parts.rsi
+      state: ears_fox_inner
+
+- type: marking
+  id: FoxEarsMaury
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Human]
+  sponsorOnly: true
+  sprites:
+    - sprite: White/Mobs/Customization/fox_parts.rsi
+      state: ears_fox_outer
+    - sprite: White/Mobs/Customization/fox_parts.rsi
+      state: ears_fox_inner
+    - sprite: White/Mobs/Customization/fox_parts.rsi
+      state: ears_fox_tip

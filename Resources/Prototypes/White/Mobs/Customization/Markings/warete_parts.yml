@@ -1,0 +1,19 @@
+- type: marking
+  id: DemonHairWarete
+  bodyPart: Hair
+  markingCategory: HeadTop
+  speciesRestriction: [ Human ]
+  sponsorOnly: true
+  sprites:
+    - sprite: White/Mobs/Customization/warete_hair.rsi
+      state: hair
+
+- type: marking
+  id: DemonTailWarete
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Human]
+  sponsorOnly: true
+  sprites:
+    - sprite: White/Mobs/Customization/demon_tail.rsi
+      state: tail

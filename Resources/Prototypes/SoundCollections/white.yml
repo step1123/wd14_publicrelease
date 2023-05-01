@@ -1,0 +1,13 @@
+﻿- type: soundCollection
+  id: deathSounds
+  files:
+    - /White/Audio/Death/death.ogg
+    - /White/Audio/Death/death.wav
+
+- type: soundCollection
+  id: heartSounds
+  files:
+    - /White/Audio/Heart/heart.ogg
+    - /White/Audio/Heart/heart2.wav
+    - /White/Audio/Heart/heart3.ogg
+    - /White/Audio/Heart/heart4.ogg

@@ -1,0 +1,22 @@
+#YouWellLeer
+- type: marking
+  id: WolfEarsLeer
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [ Human ]
+  sponsorOnly: true
+  sprites:
+    - sprite: White/Mobs/Customization/wolf_parts.rsi
+      state: wolf_ears_outer
+    - sprite: White/Mobs/Customization/wolf_parts.rsi
+      state: wolf_ears_inner
+
+- type: marking
+  id: WolfTailLeer
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Human]
+  sponsorOnly: true
+  sprites:
+    - sprite: White/Mobs/Customization/wolf_parts.rsi
+      state: wolf_tail

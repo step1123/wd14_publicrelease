@@ -132,7 +132,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// <param name="player">The player doing the speaking</param>
     /// <param name="nameOverride">The name to use for the speaking entity. Usually this should just be modified via <see cref="TransformSpeakerNameEvent"/>. If this is set, the event will not get raised.</param>
     public void TrySendInGameICMessage(EntityUid source, string message, InGameICChatType desiredType, bool hideChat, bool hideGlobalGhostChat = false,
-        IConsoleShell? shell = null, IPlayerSession? player = null, string? nameOverride = null, bool checkRadioPrefix = true)
+        IConsoleShell? shell = null, IPlayerSession? player = null, string? nameOverride = null, bool checkRadioPrefix = true, bool force = false)
     {
         if (HasComp<GhostComponent>(source))
         {
@@ -150,7 +150,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             return;
         }
 
-        if (!CanSendInGame(message, shell, player))
+        if (!force && !CanSendInGame(message, shell, player))
             return;
 
         if (desiredType == InGameICChatType.Speak && message.StartsWith(LocalPrefix))
@@ -169,9 +169,9 @@ public sealed partial class ChatSystem : SharedChatSystem
         message = SanitizeInGameICMessage(source, message, out var emoteStr, shouldCapitalize, shouldPunctuate, sanitizeSlang);
 
         // Was there an emote in the message? If so, send it.
-        if (player != null && emoteStr != message && emoteStr != null)
+        if (emoteStr != message && emoteStr != null)
         {
-            SendEntityEmote(source, emoteStr, hideChat, hideGlobalGhostChat, nameOverride);
+            SendEntityEmote(source, emoteStr, hideChat, hideGlobalGhostChat, nameOverride, force: force);
         }
 
         // This can happen if the entire string is sanitized out.
@@ -198,7 +198,7 @@ public sealed partial class ChatSystem : SharedChatSystem
                 SendEntityWhisper(source, message, hideChat, hideGlobalGhostChat, null, nameOverride);
                 break;
             case InGameICChatType.Emote:
-                SendEntityEmote(source, message, hideChat, hideGlobalGhostChat, nameOverride);
+                SendEntityEmote(source, message, hideChat, hideGlobalGhostChat, nameOverride, force: force);
                 break;
         }
     }
@@ -436,9 +436,10 @@ public sealed partial class ChatSystem : SharedChatSystem
     }
 
     private void SendEntityEmote(EntityUid source, string action, bool hideChat,
-        bool hideGlobalGhostChat, string? nameOverride, bool checkEmote = true)
+        bool hideGlobalGhostChat, string? nameOverride, bool checkEmote = true, bool force = false)
     {
-        if (!_actionBlocker.CanEmote(source)) return;
+        if (!force && !_actionBlocker.CanEmote(source))
+            return;
 
         // get the entity's apparent name (if no override provided).
         string name = FormattedMessage.EscapeText(nameOverride ?? Identity.Name(source, EntityManager));

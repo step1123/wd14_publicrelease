@@ -128,6 +128,10 @@ namespace Content.Client.Entry
             _prototypeManager.RegisterIgnore("nukeopsRole");
             _prototypeManager.RegisterIgnore("flavor");
 
+            //WD-EDIT
+            _prototypeManager.RegisterIgnore("loadout");
+            //WD-EDIT
+
             _componentFactory.GenerateNetIds();
             _adminManager.Initialize();
             _stylesheetManager.Initialize();

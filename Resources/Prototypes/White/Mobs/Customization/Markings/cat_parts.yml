@@ -1,0 +1,34 @@
+﻿- type: marking
+  id: CatTailStripes
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Human]
+  sponsorOnly: true
+  sprites:
+    - sprite: White/Mobs/Customization/cat_parts.rsi
+      state: tail_cat_wag_stripes_prime
+    - sprite: White/Mobs/Customization/cat_parts.rsi
+      state: tail_cat_wag_stripes_second
+
+- type: marking
+  id: CatTailMaury
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Human]
+  sponsorOnly: true
+  sprites:
+    - sprite: White/Mobs/Customization/cat_parts.rsi
+      state: tail_cat_wag_z
+    - sprite: White/Mobs/Customization/cat_parts.rsi
+      state: tail_cat_wag_tip
+
+- type: marking
+  id: CatTailDouble
+  bodyPart: Tail
+  markingCategory: Tail
+  sponsorOnly: true
+  sprites:
+    - sprite: White/Mobs/Customization/double_cat.rsi
+      state: double_tail_cat_back
+    - sprite: White/Mobs/Customization/double_cat.rsi
+      state: double_tail_cat_front

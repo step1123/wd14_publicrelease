@@ -1,0 +1,112 @@
+﻿# DOOMMAX
+- type: entity
+  parent: ClothingOuterEVASuitBase
+  id: ClothingOuterSuitGlamorous
+  name: glamorous suit
+  description: An emergency suit in cases of... emergencies. But glamorous.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/DOOMMAX/glamorous.rsi
+    - type: Clothing
+      sprite: White/Fluff/DOOMMAX/glamorous.rsi
+    - type: ClothingSpeedModifier
+      walkModifier: 0.7
+      sprintModifier: 0.7
+    - type: TemperatureProtection
+      coefficient: 0.7
+    - type: ToggleableClothing
+      clothingPrototype: ClothingHeadHelmetEVA
+    - type: ContainerContainer
+      containers:
+        toggleable-clothing: !type:ContainerSlot {}
+
+- type: entity
+  parent: ClothingOuterHardsuitEVA
+  id: ClothingOuterHardsuitEVAGLAMOUR
+  name: скафандр EVA GLAMOUR
+  description: Улучшеный Скафандр Гламура! Модный, стильный, совершенный! Способен защитить вас от космического вакуума. В этом скафандре все главы будут ваши. На скафандре подписан владелец - Алина Бэккен.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/DOOMMAX/evaglamour.rsi
+    - type: Clothing
+      sprite: White/Fluff/DOOMMAX/evaglamour.rsi
+    - type: ToggleableClothing
+      clothingPrototype: ClothingHeadHelmetEVAGLAMOUR
+    - type: ContainerContainer
+      containers:
+        toggleable-clothing: !type:ContainerSlot { }
+
+- type: entity
+  parent: ClothingHeadHelmetEVA
+  id: ClothingHeadHelmetEVAGLAMOUR
+  name: шлем EVA GLAMOUR
+  description: Гламурный вариант шлема EVA.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/DOOMMAX/helmetglamour.rsi
+    - type: Clothing
+      sprite: White/Fluff/DOOMMAX/helmetglamour.rsi
+
+# Maury
+- type: entity
+  parent: ClothingUniformJumpsuitChemistry
+  id: ClothingUniformJumpsuitMauryZ #Should be ClothingUniformJumpsuitMaury but i`m retard and lazy idiot
+  name: Rupi's chemist uniform
+  description: Обычно NanoTrasen не позволяет сотрудникам изменять выданную им униформу, но по отношению к Руперту они проявили снисходительность.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/Maury/chemshit.rsi
+    - type: Clothing
+      sprite: White/Fluff/Maury/chemshit.rsi
+
+# YouWellLeer
+- type: entity
+  parent: Crowbar
+  id: Sledgebar
+  name: Mjolnir
+  description: Отлично ломает кости ассистентам и клоуну.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/YouWellLeer/sledgebar.rsi
+      state: icon
+      netsync: false
+    - type: Item
+      sprite: White/Fluff/YouWellLeer/sledgebar.rsi
+      size: 30
+    - type: Wieldable
+    - type: IncreaseDamageOnWield
+      damage:
+        types:
+          Blunt: 10
+
+# merkkaa
+- type: entity
+  parent: Bible
+  name: няко библия
+  description: Книга является заметками кошко богини. Её потомки используют эту книгу как Библию.
+  id: BibleNya
+  components:
+    - type: EarsSpawn
+    - type: Sprite
+      netsync: false
+      sprite: White/Fluff/merkkaa/bible.rsi
+      state: icon
+    - type: Item
+      size: 10
+      sprite: White/Fluff/merkkaa/bible.rsi
+    - type: PointLight
+      radius: 2
+      energy: 2
+      color: pink
+
+# Warete
+- type: entity
+  parent: ClothingUniformBase
+  id: WareteJumpskirt
+  name: репонит
+  description: Жаростойкая куртка. С предупреждением о возможной взрывоопасности.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/Warete/warete_jumpsuit.rsi
+    - type: Clothing
+      sprite: White/Fluff/Warete/warete_jumpsuit.rsi

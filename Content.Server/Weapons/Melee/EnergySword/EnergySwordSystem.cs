@@ -34,6 +34,20 @@ public sealed class EnergySwordSystem : EntitySystem
         SubscribeLocalEvent<EnergySwordComponent, IsHotEvent>(OnIsHotEvent);
         SubscribeLocalEvent<EnergySwordComponent, EnergySwordDeactivatedEvent>(TurnOff);
         SubscribeLocalEvent<EnergySwordComponent, EnergySwordActivatedEvent>(TurnOn);
+        SubscribeLocalEvent<EnergySwordComponent, DroppedEvent>(OnDrop);
+    }
+
+    private void OnDrop(EntityUid target, EnergySwordComponent comp, DroppedEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!comp.Activated)
+            return;
+
+        var ev = new EnergySwordDeactivatedEvent();
+        RaiseLocalEvent(target, ref ev);
+        UpdateAppearance(target, comp);
     }
 
     private void OnMapInit(EntityUid uid, EnergySwordComponent comp, MapInitEvent args)
@@ -57,7 +71,7 @@ public sealed class EnergySwordSystem : EntitySystem
             return;
 
         args.Handled = true;
-        
+
         if (comp.Activated)
         {
             var ev = new EnergySwordDeactivatedEvent();
@@ -120,7 +134,7 @@ public sealed class EnergySwordSystem : EntitySystem
         {
             malus.Malus += comp.LitDisarmMalus;
         }
-        
+
         _audio.Play(comp.ActivateSound, Filter.Pvs(uid, entityManager: EntityManager), uid, true, comp.ActivateSound.Params);
 
         comp.Activated = true;

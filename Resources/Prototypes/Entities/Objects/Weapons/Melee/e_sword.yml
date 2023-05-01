@@ -55,6 +55,7 @@
     enabled: false
     reflectProb: 0.25
     spread: 45
+  - type: DoubleSwordCraft
 
 - type: entity
   name: pen
@@ -164,3 +165,31 @@
   - type: Item
     size: 5
     sprite: Objects/Weapons/Melee/e_cutlass.rsi
+
+- type: entity
+  name: double energy sword
+  parent: EnergySword
+  id: EnergyDoubleSword
+  description: A very dangerous doubled energy sword. Can be stored in pockets when turned off. Makes a lot of noise when used or turned on.
+  components:
+    - type: Sprite
+      sprite: Objects/Weapons/Melee/double_esword.rsi
+      layers:
+        - state: e_sword
+        - state: e_sword_blade
+          visible: false
+          shader: unshaded
+          map: [ "blade" ]
+    - type: Wieldable
+    - type: IncreaseDamageOnWield
+      damage:
+        types:
+          Slash: 15
+          Heat: 13
+    - type: MeleeWeapon
+      attackRate: 1
+    - type: Reflect
+      enabled: false
+      energeticChance: 0.7
+      kineticChance: 0.7
+      spread: 45
