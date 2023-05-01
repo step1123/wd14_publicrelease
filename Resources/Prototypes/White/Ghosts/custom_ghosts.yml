@@ -21,3 +21,11 @@
   alpha: 1
   ghostName: Maid
   ghostDescription: Not a fucking fumo
+
+- type: customGhost
+  id: animeshka-ghost
+  ckey: animeshka
+  sprite: White/Ghosts/animeshka-ghost.rsi
+  alpha: 0.7
+  ghostName: Грабля
+  ghostDescription: Ну привет уебан!
