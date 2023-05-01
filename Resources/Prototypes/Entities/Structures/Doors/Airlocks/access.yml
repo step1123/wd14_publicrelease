@@ -768,6 +768,16 @@
 
 - type: entity
   parent: AirlockGlassShuttle
+  id: AirlockExternalGlassShuttleCargo
+  suffix: Cargo
+  components:
+    - type: PriorityDock
+      tag: DockCargo
+    - type: AccessReader
+      access: [ [ "Cargo" ] ]
+
+- type: entity
+  parent: AirlockGlassShuttle
   id: AirlockExternalGlassShuttleEscape
   suffix: External, Escape 3x4, Glass, Docking
   components:

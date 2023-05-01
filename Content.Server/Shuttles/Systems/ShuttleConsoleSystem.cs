@@ -5,6 +5,7 @@ using Content.Server.Shuttles.Events;
 using Content.Server.UserInterface;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Alert;
+using Content.Shared.Cargo.Components;
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.Shuttles.Components;
@@ -112,7 +113,16 @@ public sealed class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         var tagEv = new FTLTagEvent();
         RaiseLocalEvent(xform.GridUid.Value, ref tagEv);
 
-        _shuttle.FTLTravel(xform.GridUid.Value, shuttle, args.Destination, dock: dock, priorityTag: tagEv.Tag);
+        //WD-EDIT
+        if (HasComp<CargoShuttleComponent>(shuttleUid))
+        {
+            _shuttle.FTLTravel(xform.GridUid.Value, shuttle, args.Destination, dock: true, priorityTag: "DockCargo");
+        }
+        else
+        {
+            _shuttle.FTLTravel(xform.GridUid.Value, shuttle, args.Destination, dock: dock, priorityTag: tagEv.Tag);
+        }
+        //WD-EDIT
     }
 
     private void OnDock(DockEvent ev)
