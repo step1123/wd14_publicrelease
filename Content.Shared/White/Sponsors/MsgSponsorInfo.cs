@@ -7,6 +7,14 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.White.Sponsors;
 
+public enum WhiteSponsorTier
+{
+    DJ = 5,
+    ROBUSTER = 4,
+    CLOWN = 3,
+    PRIKOLIST = 2,
+    MEATYORE = 1
+}
 
 [Serializable, NetSerializable]
 public sealed class SponsorInfo

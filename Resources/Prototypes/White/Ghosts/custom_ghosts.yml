@@ -1,0 +1,23 @@
+﻿- type: customGhost
+  id: ravmorgan-ghost
+  ckey: ravmorgan
+  sprite: White/Ghosts/ravmorgan-ghost.rsi
+  alpha: 0.9
+  ghostName: Яйцо
+  ghostDescription: Большое...
+
+- type: customGhost
+  id: merkkaa-ghost
+  ckey: merkkaa
+  sprite: White/Ghosts/merkkaa-ghost.rsi
+  alpha: 0.9
+  ghostName: Мурка
+  ghostDescription: Ня...
+
+- type: customGhost
+  id: nairsark-ghost
+  ckey: nairsark
+  sprite: White/Ghosts/nairsark-ghost.rsi
+  alpha: 1
+  ghostName: Maid
+  ghostDescription: Not a fucking fumo
