@@ -157,4 +157,15 @@ public sealed class WhiteCVars
 
     public static readonly CVarDef<float> BwoinkVolume =
         CVarDef.Create("white.admin.bwoinkVolume", 0f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+
+     /*
+    * Chat
+      */
+
+    public static readonly CVarDef<string> SeparatedChatSize =
+        CVarDef.Create("white.chat_size_separated", "0.6f;0", CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<string> DefaultChatSize =
+        CVarDef.Create("white.chat_size_default", "300;500", CVar.CLIENTONLY | CVar.ARCHIVE);
 }

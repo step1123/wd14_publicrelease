@@ -11,7 +11,7 @@
            Orientation="Horizontal"
            HorizontalAlignment="Stretch"
            VerticalAlignment="Top"
-           SeparationOverride="5"
+           SeparationOverride="0"
 >
     <ui:MenuButton
         Name="EscapeButton"

@@ -111,7 +111,7 @@ namespace Content.Client.UserInterface.Systems.Atmos.GasTank
 
             var middle = new PanelContainer
             {
-                PanelOverride = new StyleBoxFlat {BackgroundColor = Color.FromHex("#202025")},
+                PanelOverride = new StyleBoxFlat {BackgroundColor = Color.FromHex("#3C4841")},
                 Children =
                 {
                     (_contentContainer = new BoxContainer

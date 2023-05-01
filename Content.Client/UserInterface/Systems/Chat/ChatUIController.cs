@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Linq;
 using Content.Client.Administration.Managers;
 using Content.Client.Chat;
@@ -8,7 +7,6 @@ using Content.Client.Chat.UI;
 using Content.Client.Examine;
 using Content.Client.Gameplay;
 using Content.Client.Ghost;
-using Content.Client.Lobby.UI;
 using Content.Client.UserInterface.Screens;
 using Content.Client.UserInterface.Systems.Chat.Widgets;
 using Content.Client.UserInterface.Systems.Gameplay;
@@ -18,6 +16,8 @@ using Content.Shared.Chat;
 using Content.Shared.Examine;
 using Content.Shared.Input;
 using Content.Shared.Radio;
+using Content.Shared.White;
+using Content.Shared.White.Utils;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
@@ -217,19 +217,28 @@ public sealed class ChatUIController : UIController
         }
 
         ChatBox chatBox;
-        string? chatSizeRaw;
+        //White modification start
+        string chatSizeRaw;
+        Vector2 chatSize;
+        //End
 
         switch (UIManager.ActiveScreen)
         {
             case DefaultGameScreen defaultScreen:
                 chatBox = defaultScreen.ChatBox;
-                chatSizeRaw = _config.GetCVar(CCVars.DefaultScreenChatSize);
-                SetChatSizing(chatSizeRaw, defaultScreen, setting);
+                //White modification start
+                chatSizeRaw = _config.GetCVar(WhiteCVars.DefaultChatSize);
+                chatSize = Vector2Utils.ParseVector2FromString(chatSizeRaw, ';');
+                //End
+                SetChatSizing(chatSize, defaultScreen, setting);
                 break;
             case SeparatedChatGameScreen separatedScreen:
                 chatBox = separatedScreen.ChatBox;
-                chatSizeRaw = _config.GetCVar(CCVars.SeparatedScreenChatSize);
-                SetChatSizing(chatSizeRaw, separatedScreen, setting);
+                //White modification start
+                chatSizeRaw = _config.GetCVar(WhiteCVars.SeparatedChatSize);
+                chatSize = Vector2Utils.ParseVector2FromString(chatSizeRaw, ';');
+                //End
+                SetChatSizing(chatSize, separatedScreen, setting);
                 break;
             default:
                 // this could be better?
@@ -243,7 +252,7 @@ public sealed class ChatUIController : UIController
         chatBox.Main = setting;
     }
 
-    private void SetChatSizing(string sizing, InGameScreen screen, bool setting)
+    private void SetChatSizing(Vector2 sizing, InGameScreen screen, bool setting)
     {
         if (!setting)
         {
@@ -253,19 +262,9 @@ public sealed class ChatUIController : UIController
 
         screen.OnChatResized += StoreChatSize;
 
-        if (string.IsNullOrEmpty(sizing))
-        {
-            return;
-        }
-
-        var split = sizing.Split(",");
-
-        var chatSize = new Vector2(
-            float.Parse(split[0], CultureInfo.InvariantCulture),
-            float.Parse(split[1], CultureInfo.InvariantCulture));
-
-
-        screen.SetChatSize(chatSize);
+        //White modification start
+        screen.SetChatSize(sizing);
+        //End
     }
 
     private void StoreChatSize(Vector2 size)
@@ -275,14 +274,17 @@ public sealed class ChatUIController : UIController
             throw new Exception("Cannot get active screen!");
         }
 
-        var stringSize = $"{size.X},{size.Y}";
         switch (UIManager.ActiveScreen)
         {
             case DefaultGameScreen _:
-                _config.SetCVar(CCVars.DefaultScreenChatSize, stringSize);
+                //White modification start
+                _config.SetCVar(WhiteCVars.DefaultChatSize, size.ConvertToString(';'));
+                //End
                 break;
             case SeparatedChatGameScreen _:
-                _config.SetCVar(CCVars.SeparatedScreenChatSize, stringSize);
+                //White modification start
+                _config.SetCVar(WhiteCVars.SeparatedChatSize, size.ConvertToString(';'));
+                //End
                 break;
             default:
                 // do nothing

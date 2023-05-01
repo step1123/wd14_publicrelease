@@ -10,7 +10,7 @@
         <pda:PDANavigationButton Name="SettingsButton" MinWidth="100" LabelText="{Loc 'comp-pda-io-settings-button'}"/>
 
         <pda:PDANavigationButton Name="ProgramTitle" Access="Public" BorderThickness="0 0 0 2" CurrentTabBorderThickness="2 0 0 2"
-                                 ActiveBgColor="#202023" Visible="False"/>
+                                 ActiveBgColor="#203023" Visible="False"/>
 
         <pda:PDANavigationButton HorizontalExpand="True"/>
 
