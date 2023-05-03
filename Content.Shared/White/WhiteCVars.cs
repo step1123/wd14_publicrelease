@@ -164,7 +164,7 @@ public sealed class WhiteCVars
       */
 
     public static readonly CVarDef<string> SeparatedChatSize =
-        CVarDef.Create("white.chat_size_separated", "0.6f;0", CVar.CLIENTONLY | CVar.ARCHIVE);
+        CVarDef.Create("white.chat_size_separated", "0.6;0", CVar.CLIENTONLY | CVar.ARCHIVE);
 
     public static readonly CVarDef<string> DefaultChatSize =
         CVarDef.Create("white.chat_size_default", "300;500", CVar.CLIENTONLY | CVar.ARCHIVE);
