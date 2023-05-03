@@ -1,5 +1,10 @@
-﻿tts-voice-name-aidar = Aidar
-tts-voice-name-baya = Baya
-tts-voice-name-kseniya = Kseniya
-tts-voice-name-xenia = Xenia
-tts-voice-name-eugene = Eugene
+﻿tts-voice-name-aidar = Айдар
+tts-voice-name-baya = Байя
+tts-voice-name-kseniya = Ксения
+tts-voice-name-xenia = Сения
+tts-voice-name-eugene = Евгений
+tts-voice-name-charlotte = Шарлотта
+tts-voice-name-bebey = Бэбэй
+tts-voice-name-biden = Байден
+tts-voice-name-ddr2 = Ддр 2
+tts-voice-name-papa = Папич
