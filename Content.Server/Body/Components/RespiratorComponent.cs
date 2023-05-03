@@ -1,5 +1,6 @@
 using Content.Server.Body.Systems;
 using Content.Shared.Damage;
+using Robust.Shared.Audio; // WD
 
 namespace Content.Server.Body.Components
 {
@@ -60,6 +61,15 @@ namespace Content.Server.Body.Components
         public float CycleDelay = 2.0f;
 
         public float AccumulatedFrametime;
+
+        // WD start
+        [DataField("CPRSound")]
+        public SoundSpecifier CPRSound { get; set; } = new SoundPathSpecifier("/White/Audio/CPR.ogg");
+
+        public IPlayingAudioStream? CPRPlayingStream;
+
+        public EntityUid? CPRPerformedBy = null;
+        // WD end
     }
 }
 
