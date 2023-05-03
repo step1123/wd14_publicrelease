@@ -1,0 +1,243 @@
+- type: entity
+  abstract: true
+  parent: Clothing
+  id: ClothingUnderwearSocksBase
+  name: based socks
+  description: "You should not see this."
+  components:
+  - type: Sprite
+    state: icon
+  - type: Item
+    size: 5
+  - type: Clothing
+    slots: [socks]
+  - type: Tag
+    tags:
+      - socks
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearSocksBeeKnee
+  name: Socks
+  description: Standard Nanotrasen stockings for station employees. Dyed black-yellow.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Socks/bee_knee.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearSocksBeeNorm
+  name: Socks
+  description: Standard Nanotrasen stockings for station employees. Dyed black-yellow.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Socks/bee_norm.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearSocksBeeThigh
+  name: Socks
+  description: Standard Nanotrasen stockings for station employees. Dyed black-yellow.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Socks/bee_thigh.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearSocksFishnet
+  name: Socks
+  description: Standard Nanotrasen stockings for station employees. Fishnet.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Socks/fishnet.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearSocksGarter
+  name: Socks
+  description: Standard Nanotrasen stockings for station employees. Fishnet.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Socks/garter.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearSocksPantyhose
+  name: Socks
+  description: Standard Nanotrasen stockings for station employees. Pantyhose.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Socks/pantyhose.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearSocksPantyhoseRipped
+  name: Socks
+  description: Standard Nanotrasen stockings for station employees. Pantyhose ripped.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Socks/pantyhose_ripped.rsi
+
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearSocksRainbowKnee
+  name: Socks
+  description: Standard Nanotrasen stockings for station employees. Dyed rainbow.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Socks/rainbow_knee.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearSocksRainbowThigh
+  name: Socks
+  description: Standard Nanotrasen stockings for station employees. Dyed rainbow.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Socks/rainbow_thigh.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearSocksHigh
+  name: high socks
+  description: Nanotrasen high socks for station employees. Painted white.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Socks/socks_knee.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearSocksNormal
+  name: socks
+  description: Standard Nanotrasen socks for station employees. Dyed white.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Socks/socks_norm.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearSocksShort
+  name: short socks
+  description: Nanotrasen short socks for station employees. Dyed white.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Socks/socks_short.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearSocksThigh
+  name: stockings
+  description: Standard Nanotrasen stockings for station employees. Dyed white.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Socks/socks_thigh.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearStockingsBlue
+  name: stockings
+  description: Standard Nanotrasen stockings for station employees. Dyed blue.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Socks/stockings_blue.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearStockingsCyan
+  name: stockings
+  description: Standard Nanotrasen stockings for station employees. Dyed cyan.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Socks/stockings_cyan.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearStockingsPink
+  name: stockings
+  description: Standard Nanotrasen stockings for station employees. Dyed pink.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Socks/stockings_dpink.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearStockingsGreen
+  name: stockings
+  description: Standard Nanotrasen stockings for station employees. Dyed green.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Socks/stockings_green.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearStockingsLightPink
+  name: stockings
+  description: Standard Nanotrasen stockings for station employees. Dyed light pink.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Socks/stockings_lpink.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearStockingsLightOrange
+  name: stockings
+  description: Standard Nanotrasen stockings for station employees. Dyed orange.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Socks/stockings_orange.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearStockingsLightPurple
+  name: stockings
+  description: Standard Nanotrasen stockings for station employees. Dyed purple.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Socks/stockings_purple.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearStockingsLightYellow
+  name: stockings
+  description: Standard Nanotrasen stockings for station employees. Dyed yellow.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Socks/stockings_yellow.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearSocksStripedKnee
+  name: stockings
+  description: Standard Nanotrasen stockings for station employees. Dyed black-white.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Socks/striped_knee.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearSocksStripedThigh
+  name: stockings
+  description: Standard Nanotrasen stockings for station employees. Dyed black-white.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Socks/striped_thigh.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearSocksThinKnee
+  name: stockings
+  description: Standard Nanotrasen stockings for station employees. Transparent.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Socks/thin_knee.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearSocksThinThigh
+  name: stockings
+  description: Standard Nanotrasen stockings for station employees. Transparent.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Socks/thin_thigh.rsi
+

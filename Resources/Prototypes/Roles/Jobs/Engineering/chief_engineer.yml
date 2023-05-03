@@ -40,6 +40,9 @@
     eyes: ClothingEyesGlassesMeson
     ears: ClothingHeadsetCE
     belt: ClothingBeltChiefEngineerFilled
+    underwearb: ClothingUnderwearBottomBoxersCE # White-Underwear
+  underweart: ClothingUnderwearTopBraCE # White-Underwear
+  underwearb: ClothingUnderwearBottomPantiesCE # White-Underwear
   innerclothingskirt: ClothingUniformJumpskirtChiefEngineer
   satchel: ClothingBackpackSatchelChiefEngineerFilled
   duffelbag: ClothingBackpackDuffelChiefEngineerFilled

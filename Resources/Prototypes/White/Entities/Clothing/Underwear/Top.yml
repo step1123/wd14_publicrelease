@@ -1,0 +1,281 @@
+- type: entity
+  abstract: true
+  parent: Clothing
+  id: ClothingUnderwearTopBase
+  name: based underweart
+  description: "You should not see this."
+  components:
+  - type: Sprite
+    state: icon
+  - type: Item
+    size: 1
+  - type: Clothing
+    slots: [underweart]
+  - type: Tag
+    tags:
+      - underweart
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraWhite
+  name: bra
+  description: Standard Nanotrasen bra for station staff. Painted white.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/bra.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraSports
+  name: sports bra
+  description: Sports bra. Painted white.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/sportsbra.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraSportsAlternative
+  name: alternative sports bra
+  description: Sports bra. Alternate version. Painted white.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/sportsbraalt.rsi
+
+#Underwear-for-the-heads
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraCap
+  name: captain's bra
+  description: Standard station captain's underwear.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/heads/capitan/bra.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraCE
+  name: chief engineer's bra
+  description: Standard station chief engineer's underwear.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/heads/ce/bra.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraCMO
+  name: chief medical officer's bra
+  description: Standard underwear of the station chief medical officer. For some reason it smells like chloral hydrate...
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/heads/cmo/bra.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraHOP
+  name: head of personnel's bra
+  description: The standard underwear of the station's chief of staff.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/heads/hop/bra.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraHOS
+  name: head of security's bra
+  description: Standard underwear of the station's head of security.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/heads/hos/bra.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraQM
+  name: quartermaster's bra
+  description: Standard station quartermaster underwear.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/heads/qm/bra.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraRD
+  name: research director's bra
+  description: Standard research director's underwear.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/heads/rd/bra.rsi
+
+
+#SPLURT
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraBeeKini
+  name: Bee-Kini
+  description: Bee-Kini bra.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/bra_bee_kini.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraBinder
+  name: Binder bra
+  description: Binder bra.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/bra_binder.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraBinderStrapless
+  name: Binder bra strapless
+  description: Binder bra strapless.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/bra_binder_strapless.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraKinky
+  name: Kinky bra
+  description: Kinky bra.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/bra_kinky.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraNeko
+  name: Neko bra
+  description: Neko bra.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/bra_neko.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraStrapless
+  name: Strapless Bra
+  description: Strapless bra.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/bra_strapless.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraStraplessAlt
+  name: Strapless Bra
+  description: Strapless bra.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/bra_strapless_alt.rsi
+
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraSwimming
+  name: Swimming Bra
+  description: Swimming bra.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/bra_swimming.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraSwimmingAlt
+  name: Swimming Bra
+  description: Swimming bra.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/bra_swimming_alt.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraThin
+  name: Thin Bra
+  description: Thin bra.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/bra_thin.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopFishnetBody
+  name: Fishnet Bra
+  description: Fishnet bra.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/fishnet_body.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopFishnetBodyGloves
+  name: Fishnet Bra with gloves
+  description: Fishnet bra with gloves.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/fishnet_gloves.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopFishnetBodySleeves
+  name: Fishnet Bra with sleeves
+  description: Fishnet bra with sleeves.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/fishnet_sleeves.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraHalterneck
+  name: Halterneck Bra
+  description: Halterneck bra.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/halterneck_bra.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraShibari
+  name: Shibari Bra
+  description: Shibari bra.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/shibari.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraShibariSleeves
+  name: Shibari Bra with sleeves
+  description: Shibari bra with sleeves.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/shibari_sleeves.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraStriped
+  name: Striped Bra
+  description: Striped bra.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/striped_bra.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopBraTubetop
+  name: Tubetop Bra
+  description: Tubetop bra.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/tubetop.rsi
+
+- type: entity
+  parent: ClothingUnderwearTopBase
+  id: ClothingUnderwearTopCow
+  name: Cow Bra
+  description: Cow bra.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Top/cow.rsi

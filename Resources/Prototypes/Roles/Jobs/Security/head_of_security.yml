@@ -45,6 +45,9 @@
     gloves: ClothingHandsGlovesCombat
     ears: ClothingHeadsetAltSecurity
     belt: ClothingBeltSecurityFilled
+    underwearb: ClothingUnderwearBottomBoxersHOS # White-Underwear
+  underweart: ClothingUnderwearTopBraHOS # White-Underwear
+  underwearb: ClothingUnderwearBottomPantiesHOS # White-Underwear
   innerclothingskirt: ClothingUniformJumpskirtHoS
   satchel: ClothingBackpackSatchelHOSFilled
   duffelbag: ClothingBackpackDuffelHOSFilled

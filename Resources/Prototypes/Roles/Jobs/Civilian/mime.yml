@@ -28,6 +28,9 @@
     mask: ClothingMaskMime
     id: MimePDA
     ears: ClothingHeadsetService
+    underwearb: ClothingUnderwearBottomBoxersWhite # White-Underwear
+  underweart: ClothingUnderwearTopBraWhite # White-Underwear
+  underwearb: ClothingUnderwearBottomPantiesWhite # White-Underwear
   innerclothingskirt: ClothingUniformJumpskirtMime
   satchel: ClothingBackpackSatchelFilled
   duffelbag: ClothingBackpackDuffelMimeFilled

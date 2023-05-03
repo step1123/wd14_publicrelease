@@ -1,0 +1,302 @@
+- type: entity
+  abstract: true
+  parent: Clothing
+  id: ClothingUnderwearBottomBase
+  name: based underwearb
+  description: "You should not see this. If you see it, let Neko Dar#8948 know."
+  components:
+  - type: Sprite
+    state: icon
+  - type: Item
+    size: 1
+  - type: Clothing
+    slots: [underwearb]
+  - type: Tag
+    tags:
+      - underwearb
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomPantiesWhite
+  name: panties
+  description: Standard Nanotrasen underwear for station female employees. Painted white.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Bottom/panties.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomBoxersWhite
+  name: boxers
+  description: Standard Nanotrasen underwear for station employees. Dyed white.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Bottom/boxers.rsi
+
+#Underwear-for-the-heads
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomBoxersCap
+  name: captain's boxers
+  description: Standard station captain's underwear.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Bottom/heads/capitan/boxers.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomBoxersCE
+  name: chief engineer's boxers
+  description: Standard station chief engineer underwear.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Bottom/heads/ce/boxers.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomBoxersCMO
+  name: chief medical officer's boxers
+  description: Standard station chief physician's underwear. For some reason they smell like chloral hydrate...
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Bottom/heads/cmo/boxers.rsi
+    state: icon
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomBoxersHOP
+  name: head of personnel's boxers
+  description: The standard underwear of the station's chief of staff.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Bottom/heads/hop/boxers.rsi
+    state: icon
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomBoxersHOS
+  name: head of security's boxers
+  description: Standard station head of security underwear.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Bottom/heads/hos/boxers.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomBoxersQM
+  name: quartermaster's boxers
+  description: Standard station quartermaster underwear.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Bottom/heads/qm/boxers.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomBoxersRD
+  name: research director's boxers
+  description: Standard research director's underwear.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Bottom/heads/rd/boxers.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomPantiesCap
+  name: captain's panties
+  description: Standard station captain underwear.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Bottom/heads/capitan/panties.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomPantiesCE
+  name: chief engineer's panties
+  description: Standard station chief engineer underwear.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Bottom/heads/ce/panties.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomPantiesCMO
+  name: chief medical officer's panties
+  description: Standard station chief physician's underwear. For some reason they smell like chloral hydrate...
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Bottom/heads/cmo/panties.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomPantiesHOP
+  name: head of personnel's panties
+  description: The standard underwear of the station's chief of staff.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Bottom/heads/hop/panties.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomPantiesHOS
+  name: head of security's panties
+  description: Standard station head of security underwear.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Bottom/heads/hos/panties.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomPantiesQM
+  name: quartermaster's panties
+  description: Standard station quartermaster underwear.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Bottom/heads/qm/panties.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomPantiesRD
+  name: research director's panties
+  description: Standard research director's underwear.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Bottom/heads/rd/panties.rsi
+
+
+# ТРУСЫ БЛЯТЬ
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomBeeShorts
+  name: Shorts
+  description: Bees.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Bottom/bee_shorts.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomBoxersHeart
+  name: Boxers
+  description: With hearts.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Bottom/boxers_heart.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomBoxersStriped
+  name: Boxers
+  description: Striped.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Bottom/boxers_striped.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomBriefs
+  name: Panties
+  description: Briefs.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Bottom/briefs.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomFishnetLower
+  name: Panties
+  description: Fishnet.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Bottom/fishnet_lower.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomJockstrap
+  name: Jockstrap
+  description: Jockstrap.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Bottom/jockstrap.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomMankini
+  name: Mankini
+  description: Bikini but for man.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Bottom/mankini.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomPantiesBeeKini
+  name: Panties BeeKini
+  description: Bee.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Bottom/panties_bee_kini.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomPantiesKinky
+  name: Panties
+  description: Kinky.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Bottom/panties_kinky.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomPantiesNeko
+  name: Panties
+  description: Neko.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Bottom/panties_neko.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomPantiesSlim
+  name: Panties
+  description: Slim.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Bottom/panties_slim.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomPantiesSwimming
+  name: Panties
+  description: For swimming.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Bottom/panties_swimming.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomPantiesThin
+  name: Panties
+  description: Thin.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Bottom/panties_thin.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomPantiesStripped
+  name: Panties
+  description: Stripped.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Bottom/striped_panties.rsi
+
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomPantiesThong
+  name: Panties
+  description: Thong.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Bottom/thong.rsi
+

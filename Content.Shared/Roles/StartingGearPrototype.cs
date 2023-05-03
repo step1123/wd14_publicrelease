@@ -1,3 +1,4 @@
+using Content.Shared.Humanoid;
 using Content.Shared.Preferences;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
@@ -22,6 +23,14 @@ namespace Content.Shared.Roles
         [DataField("duffelbag", customTypeSerializer:typeof(PrototypeIdSerializer<EntityPrototype>))]
         private string _duffelbag = string.Empty;
 
+        // White underwear
+        [DataField("underweart")]
+        private string _underweart = string.Empty;
+
+        [DataField("underwearb")]
+        private string _underwearb = string.Empty;
+        // White underwear end
+
         public IReadOnlyDictionary<string, string> Inhand => _inHand;
         /// <summary>
         /// hand index, item prototype
@@ -43,6 +52,12 @@ namespace Content.Shared.Roles
                     return _satchel;
                 if (slot == "back" && profile.Backpack == BackpackPreference.Duffelbag && !string.IsNullOrEmpty(_duffelbag))
                     return _duffelbag;
+                // White underwear
+                if (slot == "underweart" && profile.Sex == Sex.Female && !string.IsNullOrEmpty(_underweart))
+                    return _underweart;
+                if (slot == "underwearb" && profile.Sex == Sex.Female && !string.IsNullOrEmpty(_underwearb))
+                    return _underwearb;
+                // White underwear end
             }
 
             return _equipment.TryGetValue(slot, out var equipment) ? equipment : string.Empty;
