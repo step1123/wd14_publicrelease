@@ -33,6 +33,7 @@ using Robust.Shared.Utility;
 using Content.Server.Station.Systems;
 using Content.Server.UtkaIntegration;
 using Content.Server.White.JoinQueue;
+using Content.Server.White.Jukebox;
 using Content.Server.White.Sponsors;
 using Content.Server.White.Stalin;
 using Content.Server.White.TTS;
@@ -118,6 +119,7 @@ namespace Content.Server.Entry
                 IoCManager.Resolve<JoinQueueManager>().Initialize();
                 IoCManager.Resolve<TTSManager>().Initialize();
                 IoCManager.Resolve<StalinManager>().Initialize();
+                IoCManager.Resolve<ServerJukeboxSongsSyncManager>().Initialize();
                 //WD-EDIT
 
                 _voteManager.Initialize();
