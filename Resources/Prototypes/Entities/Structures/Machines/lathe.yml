@@ -494,10 +494,10 @@
       - MedkitAdvanced
       - MedkitRadiation
       - MedkitCombat
-      - ClothingEyesHudMedical
     dynamicRecipes:
       - HandheldCrewMonitor
       - ClothingHandsGlovesNitrile
+      - ClothingEyesHudMedical
   - type: Machine
     board: MedicalTechFabCircuitboard
 

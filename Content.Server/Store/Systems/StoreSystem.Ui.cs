@@ -50,16 +50,16 @@ public sealed partial class StoreSystem
         UpdateUserInterface(user, storeEnt, component);
     }
 
-    /// <summary>
-    /// Closes the store UI for everyone, if it's open
-    /// </summary>
-    public void CloseUi(EntityUid uid, StoreComponent? component = null)
-    {
-        if (!Resolve(uid, ref component))
-            return;
-
-        _ui.TryCloseAll(uid, StoreUiKey.Key);
-    }
+    // /// <summary>
+    // /// Closes the store UI for everyone, if it's open
+    // /// </summary>
+    // public void CloseUi(EntityUid uid, StoreComponent? component = null)
+    // {
+    //     if (!Resolve(uid, ref component))
+    //         return;
+    //
+    //     _ui.TryCloseAll(uid, StoreUiKey.Key);
+    // }
 
     /// <summary>
     /// Updates the user interface for a store and refreshes the listings
