@@ -24,7 +24,31 @@ namespace Content.Client.Preferences.UI
             if (Profile == null) return;
             var name = HumanoidCharacterProfile.GetName(Profile.Species, Profile.Gender);
             SetName(name);
-            UpdateNameEdit();
+            UpdateNamesEdit();
+        }
+
+        private void RandomizeClownName()
+        {
+            if (Profile == null) return;
+            var name = HumanoidCharacterProfile.GetClownName();
+            SetClownName(name);
+            UpdateNamesEdit();
+        }
+
+        private void RandomizeMimeName()
+        {
+            if (Profile == null) return;
+            var name = HumanoidCharacterProfile.GetMimeName();
+            SetMimeName(name);
+            UpdateNamesEdit();
+        }
+
+        private void RandomizeBorgName()
+        {
+            if (Profile == null) return;
+            var name = HumanoidCharacterProfile.GetBorgName();
+            SetBorgName(name);
+            UpdateNamesEdit();
         }
     }
 }

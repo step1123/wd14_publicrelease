@@ -15,6 +15,15 @@ public sealed class GeneralStationRecord
     [ViewVariables]
     public string Name = string.Empty;
 
+    [ViewVariables]
+    public string ClownName = string.Empty;
+
+    [ViewVariables]
+    public string MimeName = string.Empty;
+
+    [ViewVariables]
+    public string BorgName = string.Empty;
+
     /// <summary>
     ///     Age of the person that this station record represents.
     /// </summary>

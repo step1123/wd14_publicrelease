@@ -199,6 +199,9 @@ namespace Content.Server.Database
 
             return new HumanoidCharacterProfile(
                 profile.CharacterName,
+                profile.ClownName,
+                profile.MimeName,
+                profile.BorgName,
                 profile.FlavorText,
                 profile.Species,
                 voice,
@@ -238,6 +241,9 @@ namespace Content.Server.Database
             var entity = new Profile
             {
                 CharacterName = humanoid.Name,
+                ClownName = humanoid.ClownName,
+                MimeName = humanoid.MimeName,
+                BorgName = humanoid.BorgName,
                 FlavorText = humanoid.FlavorText,
                 Species = humanoid.Species,
                 Voice = humanoid.Voice,

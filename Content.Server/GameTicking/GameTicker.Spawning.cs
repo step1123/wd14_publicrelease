@@ -176,7 +176,10 @@ namespace Content.Server.GameTicking
             data!.WipeMind();
             var newMind = new Mind.Mind(data.UserId)
             {
-                CharacterName = character.Name
+                CharacterName = character.Name,
+                ClownName = character.ClownName,
+                MimeName = character.MimeName,
+                BorgName = character.BorgName
             };
             newMind.ChangeOwningPlayer(data.UserId);
 
@@ -188,12 +191,23 @@ namespace Content.Server.GameTicking
             {
                 character = ReplaceBlacklistedSpecies(player, character, jobPrototype);
                 newMind.CharacterName = character.Name;
+                newMind.ClownName = character.ClownName;
+                newMind.MimeName = character.MimeName;
+                newMind.BorgName = character.BorgName;
             }
 
             _playTimeTrackings.PlayerRolesChanged(player);
             var mobMaybe = _stationSpawning.SpawnPlayerCharacterOnStation(station, job, character);
             DebugTools.AssertNotNull(mobMaybe);
             var mob = mobMaybe!.Value;
+            var metadata = MetaData(mob);
+
+            if (job.Prototype.ID.Contains("Clown"))
+                metadata.EntityName = newMind.ClownName;
+            if (job.Prototype.ID.Contains("Mime"))
+                metadata.EntityName = newMind.MimeName;
+            if (job.Prototype.ID.Contains("Cyborg"))
+                metadata.EntityName = newMind.BorgName;
 
             newMind.TransferTo(mob);
 
@@ -217,10 +231,9 @@ namespace Content.Server.GameTicking
             _stationJobs.TryAssignJob(station, jobPrototype);
 
             if (lateJoin)
-                _adminLogger.Add(LogType.LateJoin, LogImpact.Medium, $"Player {player.Name} late joined as {character.Name:characterName} on station {Name(station):stationName} with {ToPrettyString(mob):entity} as a {job.Name:jobName}.");
+                _adminLogger.Add(LogType.LateJoin, LogImpact.Medium, $"Player {player.Name} late joined as {MetaData(mob).EntityName:entityName} on station {Name(station):stationName} with {ToPrettyString(mob):entity} as a {job.Name:jobName}.");
             else
-                _adminLogger.Add(LogType.RoundStartJoin, LogImpact.Medium, $"Player {player.Name} joined as {character.Name:characterName} on station {Name(station):stationName} with {ToPrettyString(mob):entity} as a {job.Name:jobName}.");
-
+                _adminLogger.Add(LogType.RoundStartJoin, LogImpact.Medium, $"Player {player.Name} joined as {MetaData(mob).EntityName:entityName} on station {Name(station):stationName} with {ToPrettyString(mob):entity} as a {job.Name:jobName}.");
             // Make sure they're aware of extended access.
             if (Comp<StationJobsComponent>(station).ExtendedAccess
                 && (jobPrototype.ExtendedAccess.Count > 0

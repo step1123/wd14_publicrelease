@@ -47,6 +47,9 @@ namespace Content.Tests.Server.Preferences
         {
             return new(
                 "Charlie Charlieson",
+                "HONK",
+                "Quiet",
+                "Silicon",
                 "The biggest boy around.",
                 "Human",
                 "Eugene",
