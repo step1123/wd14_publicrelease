@@ -66,6 +66,7 @@ namespace Content.Client.Preferences.UI
 
         //WD-EDIT
         private OptionButton _voiceButton => CVoiceButton;
+        private Button _voicePlayButton => CVoicePlayButton;
         //WD-EDIT
 
         private Slider _skinColor => CSkin;

@@ -19,6 +19,7 @@ using Content.Client.Guidebook;
 using Content.Client.White.JoinQueue;
 using Content.Client.White.Sponsors;
 using Content.Client.White.Stalin;
+using Content.Client.White.TTS;
 using Content.Shared.Administration.Managers;
 
 namespace Content.Client.IoC
@@ -52,6 +53,7 @@ namespace Content.Client.IoC
             IoCManager.Register<JoinQueueManager>();
             IoCManager.Register<SponsorsManager>();
             IoCManager.Register<StalinManager>();
+            IoCManager.Register<TTSManager>();
             //WD-EDIT
         }
     }

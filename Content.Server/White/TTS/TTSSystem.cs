@@ -5,7 +5,9 @@ using Content.Shared.CCVar;
 using Content.Shared.White.TTS;
 using Content.Shared.GameTicking;
 using Content.Shared.White;
+using Robust.Server.Player;
 using Robust.Shared.Configuration;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -21,6 +23,8 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private readonly TTSManager _ttsManager = default!;
     [Dependency] private readonly SharedTransformSystem _xforms = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly IServerNetManager _netMgr = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!;
 
     private const int MaxMessageChars = 100 * 2; // same as SingleBubbleCharLimit * 2
     private bool _isEnabled = false;
@@ -34,12 +38,19 @@ public sealed partial class TTSSystem : EntitySystem
         SubscribeLocalEvent<TransformSpeechEvent>(OnTransformSpeech);
         SubscribeLocalEvent<TTSComponent, EntitySpokeEvent>(OnEntitySpoke);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
-        SubscribeNetworkEvent<RequestTTSEvent>(OnRequestTTS);
+
+        _netMgr.RegisterNetMessage<MsgRequestTTS>(OnRequestTTS);
     }
 
-    private void OnRequestTTS(RequestTTSEvent ev)
+    private async void OnRequestTTS(MsgRequestTTS ev)
     {
-        throw new NotImplementedException();
+        if (!_playerManager.TryGetSessionByChannel(ev.MsgChannel, out var session) ||
+            !_prototypeManager.TryIndex<TTSVoicePrototype>(ev.VoiceId, out var protoVoice))
+            return;
+
+        var soundData = await GenerateTTS(ev.Uid, ev.Text, protoVoice.Speaker);
+        if (soundData != null)
+            RaiseNetworkEvent(new PlayTTSEvent(ev.Uid, soundData), Filter.SinglePlayer(session));
     }
 
     private async void OnEntitySpoke(EntityUid uid, TTSComponent component, EntitySpokeEvent args)
