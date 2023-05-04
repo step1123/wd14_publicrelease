@@ -181,4 +181,11 @@ public sealed class WhiteCVars
 
     public static readonly CVarDef<string> DefaultChatSize =
         CVarDef.Create("white.chat_size_default", "300;500", CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /*
+    * Chat GPT
+     */
+
+    public static readonly CVarDef<string> ChatGptApi =
+        CVarDef.Create("white.gpt_api_link", "", CVar.SERVERONLY | CVar.ARCHIVE | CVar.CONFIDENTIAL);
 }
