@@ -82,6 +82,15 @@ namespace Content.Server.Mind
         [ViewVariables(VVAccess.ReadWrite)]
         public string? CharacterName { get; set; }
 
+        [ViewVariables(VVAccess.ReadWrite)]
+        public string? ClownName { get; set; }
+
+        [ViewVariables(VVAccess.ReadWrite)]
+        public string? MimeName { get; set; }
+
+        [ViewVariables(VVAccess.ReadWrite)]
+        public string? BorgName { get; set; }
+
         /// <summary>
         ///     The time of death for this Mind.
         ///     Can be null - will be null if the Mind is not considered "dead".

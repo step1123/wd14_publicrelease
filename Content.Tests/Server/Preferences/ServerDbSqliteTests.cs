@@ -47,6 +47,9 @@ namespace Content.Tests.Server.Preferences
         {
             return new(
                 "Charlie Charlieson",
+                "HONK",
+                "Quiet",
+                "Silicon",
                 "The biggest boy around.",
                 "Human",
                 "Eugene",
@@ -81,7 +84,7 @@ namespace Content.Tests.Server.Preferences
             var conn = new SqliteConnection("Data Source=:memory:");
             conn.Open();
             builder.UseSqlite(conn);
-            return new ServerDbSqlite(builder.Options);
+            return new ServerDbSqlite(() => builder.Options, true);
         }
 
         [Test]

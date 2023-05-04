@@ -20,6 +20,7 @@ using Content.Client.Stylesheets;
 using Content.Client.Viewport;
 using Content.Client.Voting;
 using Content.Client.White.JoinQueue;
+using Content.Client.White.Jukebox;
 using Content.Client.White.Sponsors;
 using Content.Client.White.Stalin;
 using Content.Client.White.TTS;
@@ -75,6 +76,7 @@ namespace Content.Client.Entry
         [Dependency] private readonly JoinQueueManager _queueManager = default!;
         [Dependency] private readonly StalinManager _stalinManager = default!;
         [Dependency] private readonly TTSManager _ttsManager = default!;
+        [Dependency] private readonly ClientJukeboxSongsSyncManager _jukeboxSyncManager = default!;
         //WD-EDIT
 
         public override void Init()
@@ -99,6 +101,8 @@ namespace Content.Client.Entry
             _componentFactory.RegisterClass<SharedAMEControllerComponent>();
             // Do not add to the above, they are legacy
 
+            _prototypeManager.RegisterIgnore("utilityQuery");
+            _prototypeManager.RegisterIgnore("utilityCurvePreset");
             _prototypeManager.RegisterIgnore("accent");
             _prototypeManager.RegisterIgnore("material");
             _prototypeManager.RegisterIgnore("reaction"); //Chemical reactions only needed by server. Reactions checks are server-side.
@@ -182,6 +186,7 @@ namespace Content.Client.Entry
             _sponsorsManager.Initialize();
             _queueManager.Initialize();
             _ttsManager.Initialize();
+            _jukeboxSyncManager.Initialize();
             //WD-EDIT
 
             _baseClient.RunLevelChanged += (_, args) =>

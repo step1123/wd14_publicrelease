@@ -59,3 +59,41 @@
           enum.PAIStatus.Searching: pai-searching-overlay
           enum.PAIStatus.On: pai-on-overlay
 
+
+- type: entity
+  parent: BaseItem
+  id: PersonalNeuralAI
+  name: Personal neural ai
+  description: Your electronic pai on neural networks!
+  components:
+    - type: Sprite
+      netsync: false
+      sprite: Objects/Fun/pai.rsi
+      layers:
+        - state: pai-base
+        - state: pai-off-overlay
+          shader: unshaded
+    - type: Input
+      context: "human"
+    - type: Examiner
+    - type: ItemCooldown
+    - type: UseDelay
+      delay: 5
+    - type: ActiveListener
+      range: 5
+      channels:
+        - Common
+    - type: ChatGPT
+    - type: TypingIndicator
+      proto: robot
+    - type: Speech
+      speechSounds: Pai
+    - type: Appearance
+      visuals:
+        - type: GenericEnumVisualizer
+          key: enum.PAIVisuals.Status
+          layer: 1
+          states:
+            enum.PAIStatus.Off: pai-off-overlay
+            enum.PAIStatus.Searching: pai-searching-overlay
+            enum.PAIStatus.On: pai-on-overlay

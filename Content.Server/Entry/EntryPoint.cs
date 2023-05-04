@@ -33,6 +33,7 @@ using Robust.Shared.Utility;
 using Content.Server.Station.Systems;
 using Content.Server.UtkaIntegration;
 using Content.Server.White.JoinQueue;
+using Content.Server.White.Jukebox;
 using Content.Server.White.Sponsors;
 using Content.Server.White.Stalin;
 using Content.Server.White.TTS;
@@ -50,6 +51,7 @@ namespace Content.Server.Entry
         private ServerUpdateManager _updateManager = default!;
         private PlayTimeTrackingManager? _playTimeTracking;
         private IEntitySystemManager? _sysMan;
+        private IServerDbManager? _dbManager;
 
         /// <inheritdoc />
         public override void Init()
@@ -99,13 +101,14 @@ namespace Content.Server.Entry
                 _updateManager = IoCManager.Resolve<ServerUpdateManager>();
                 _playTimeTracking = IoCManager.Resolve<PlayTimeTrackingManager>();
                 _sysMan = IoCManager.Resolve<IEntitySystemManager>();
+                _dbManager = IoCManager.Resolve<IServerDbManager>();
 
                 logManager.GetSawmill("Storage").Level = LogLevel.Info;
                 logManager.GetSawmill("db.ef").Level = LogLevel.Info;
 
                 IoCManager.Resolve<IAdminLogManager>().Initialize();
                 IoCManager.Resolve<IConnectionManager>().Initialize();
-                IoCManager.Resolve<IServerDbManager>().Init();
+                _dbManager.Init();
                 IoCManager.Resolve<IServerPreferencesManager>().Init();
                 IoCManager.Resolve<INodeGroupFactory>().Initialize();
                 IoCManager.Resolve<IGamePrototypeLoadManager>().Initialize();
@@ -118,6 +121,7 @@ namespace Content.Server.Entry
                 IoCManager.Resolve<JoinQueueManager>().Initialize();
                 IoCManager.Resolve<TTSManager>().Initialize();
                 IoCManager.Resolve<StalinManager>().Initialize();
+                IoCManager.Resolve<ServerJukeboxSongsSyncManager>().Initialize();
                 //WD-EDIT
 
                 _voteManager.Initialize();
@@ -191,6 +195,7 @@ namespace Content.Server.Entry
         {
             _playTimeTracking?.Shutdown();
             _sysMan?.GetEntitySystemOrNull<StationSystem>()?.OnServerDispose();
+            _dbManager?.Shutdown();
         }
 
         private static void LoadConfigPresets(IConfigurationManager cfg, IResourceManager res, ISawmill sawmill)

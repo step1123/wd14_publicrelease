@@ -28,6 +28,10 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("INTEGER")
                         .HasColumnName("admin_rank_id");
 
+                    b.Property<string>("AdminServer")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("admin_server");
+
                     b.Property<string>("Title")
                         .HasColumnType("TEXT")
                         .HasColumnName("title");
@@ -540,6 +544,16 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("backpack");
 
+                    b.Property<string>("BodyType")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("body_type");
+
+                    b.Property<string>("BorgName")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("borg_name");
+
                     b.Property<string>("CharacterName")
                         .IsRequired()
                         .HasColumnType("TEXT")
@@ -549,6 +563,11 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("clothing");
+
+                    b.Property<string>("ClownName")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("clown_name");
 
                     b.Property<string>("EyeColor")
                         .IsRequired()
@@ -588,6 +607,11 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Property<byte[]>("Markings")
                         .HasColumnType("jsonb")
                         .HasColumnName("markings");
+
+                    b.Property<string>("MimeName")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("mime_name");
 
                     b.Property<int>("PreferenceId")
                         .HasColumnType("INTEGER")
@@ -711,6 +735,10 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("reason");
 
+                    b.Property<string>("ServerName")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("server_name");
+
                     b.Property<Guid?>("UserId")
                         .HasColumnType("TEXT")
                         .HasColumnName("user_id");
@@ -811,6 +839,10 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("role_id");
+
+                    b.Property<string>("ServerName")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("server_name");
 
                     b.Property<Guid?>("UserId")
                         .HasColumnType("TEXT")

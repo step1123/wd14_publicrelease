@@ -158,6 +158,19 @@ public sealed class WhiteCVars
     public static readonly CVarDef<float> BwoinkVolume =
         CVarDef.Create("white.admin.bwoinkVolume", 0f, CVar.CLIENTONLY | CVar.ARCHIVE);
 
+    /*
+    * Jukebox
+     */
+
+    public static readonly CVarDef<float> MaxJukeboxSongSizeInMB = CVarDef.Create("white.max_jukebox_song_size",
+        3.5f, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
+
+    public static readonly CVarDef<float> MaxJukeboxSoundRange = CVarDef.Create("white.max_jukebox_sound_range", 20f,
+        CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
+
+    public static readonly CVarDef<float> JukeboxVolume =
+        CVarDef.Create("white.jukebox_volume", 0f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
 
      /*
     * Chat
@@ -168,4 +181,11 @@ public sealed class WhiteCVars
 
     public static readonly CVarDef<string> DefaultChatSize =
         CVarDef.Create("white.chat_size_default", "300;500", CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /*
+    * Chat GPT
+     */
+
+    public static readonly CVarDef<string> ChatGptApi =
+        CVarDef.Create("white.gpt_api_link", "", CVar.SERVERONLY | CVar.ARCHIVE | CVar.CONFIDENTIAL);
 }

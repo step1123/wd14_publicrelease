@@ -56,8 +56,14 @@ namespace Content.Client.Preferences.UI
 
         private LineEdit _ageEdit => CAgeEdit;
         private LineEdit _nameEdit => CNameEdit;
+        private LineEdit _nameClownEdit => CClownNameEdit;
+        private LineEdit _nameMimeEdit => CMimeNameEdit;
+        private LineEdit _nameBorgEdit => CBorgNameEdit;
         private LineEdit _flavorTextEdit = null!;
         private Button _nameRandomButton => CNameRandomize;
+        private Button _nameClownRandomButton => CClownNameRandomize;
+        private Button _nameMimeRandomButton => CMimeNameRandomize;
+       private Button _nameBorgRandomButton => CBorgNameRandomize;
         private Button _randomizeEverythingButton => CRandomizeEverything;
         private RichTextLabel _warningLabel => CWarningLabel;
         private Button _saveButton => CSaveButton;
@@ -132,7 +138,13 @@ namespace Content.Client.Preferences.UI
             #region Name
 
             _nameEdit.OnTextChanged += args => { SetName(args.Text); };
+            _nameClownEdit.OnTextChanged += args => { SetClownName(args.Text); };
+            _nameMimeEdit.OnTextChanged += args => { SetMimeName(args.Text); };
+            _nameBorgEdit.OnTextChanged += args => { SetBorgName(args.Text); };
             _nameRandomButton.OnPressed += args => RandomizeName();
+            _nameClownRandomButton.OnPressed += args => RandomizeClownName();
+            _nameMimeRandomButton.OnPressed += args => RandomizeMimeName();
+            _nameBorgRandomButton.OnPressed += args => RandomizeBorgName();
             _randomizeEverythingButton.OnPressed += args => { RandomizeEverything(); };
             _warningLabel.SetMarkup($"[color=red]{Loc.GetString("humanoid-profile-editor-naming-rules-warning")}[/color]");
 
@@ -838,6 +850,24 @@ namespace Content.Client.Preferences.UI
             IsDirty = true;
         }
 
+        private void SetClownName(string newName)
+        {
+            Profile = Profile?.WithClownName(newName);
+            IsDirty = true;
+        }
+
+        private void SetMimeName(string newName)
+        {
+            Profile = Profile?.WithMimeName(newName);
+            IsDirty = true;
+        }
+
+        private void SetBorgName(string newName)
+        {
+            Profile = Profile?.WithBorgName(newName);
+            IsDirty = true;
+        }
+
         private void SetClothing(ClothingPreference newClothing)
         {
             Profile = Profile?.WithClothingPreference(newClothing);
@@ -906,9 +936,12 @@ namespace Content.Client.Preferences.UI
             }
         }
 
-        private void UpdateNameEdit()
+        private void UpdateNamesEdit()
         {
             _nameEdit.Text = Profile?.Name ?? "";
+            _nameClownEdit.Text = Profile?.ClownName ?? "";
+            _nameMimeEdit.Text = Profile?.MimeName ?? "";
+            _nameBorgEdit.Text = Profile?.BorgName ?? "";
         }
 
         private void UpdateFlavorTextEdit()
@@ -1183,8 +1216,10 @@ namespace Content.Client.Preferences.UI
 
         public void UpdateControls()
         {
-            if (Profile is null) return;
-            UpdateNameEdit();
+            if (Profile is null)
+                return;
+
+            UpdateNamesEdit();
             UpdateFlavorTextEdit();
             UpdateSexControls();
             UpdateGenderControls();
