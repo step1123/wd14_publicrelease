@@ -1,0 +1,21 @@
+﻿# basic dictionary that maps old entity ids to new entity ids.
+# an empty or "null" string results in the entity getting deleted.
+
+# e.g., you can swap all walls with windows and delete all tables by adding lines like:
+#
+# Window: WallSolid
+# WallSolid: Window
+# Table: null
+
+chem_dispenser: ChemDispenser
+
+# 2023-05-04
+BoxMagazineMagnumSubMachineGun: BoxMagazinePistolSubMachineGun
+BoxMagazineMagnumSubMachineGunPractice: BoxMagazinePistolSubMachineGunPractice
+BoxMagazineMagnumSubMachineGunRubber: BoxMagazinePistolSubMachineGunRubber
+
+MagazineMagnumSubMachineGun: MagazinePistolSubMachineGun
+MagazineMagnumSubMachineGunHighVelocity: MagazinePistolSubMachineGunHighVelocity
+MagazineMagnumSubMachineGunPractice: MagazinePistolSubMachineGunPractice
+MagazineMagnumSubMachineGunRubber: MagazinePistolSubMachineGunRubber
+WeaponSubMachineGunVector: WeaponSubMachineGunDrozd
