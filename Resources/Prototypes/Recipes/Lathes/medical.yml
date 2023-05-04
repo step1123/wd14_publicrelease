@@ -58,6 +58,16 @@
     Plastic: 1400
 
 - type: latheRecipe
+  id: ClothingEyesHudMedical
+  icon: { sprite: Clothing/Eyes/Hud/med.rsi, state: icon }
+  result: ClothingEyesHudMedical
+  completetime: 4
+  materials:
+    Steel: 100
+    Glass: 300
+    Plasma: 200
+
+- type: latheRecipe
   id: HandheldHealthAnalyzer
   result: HandheldHealthAnalyzerEmpty
   completetime: 4
@@ -102,6 +112,13 @@
   materials:
     Glass: 500
     Steel: 500
+
+- type: latheRecipe
+  id: Defibrillator
+  result: DefibrillatorEmpty
+  completetime: 2
+  materials:
+    Steel: 300
 
 - type: latheRecipe
   id: Medkit

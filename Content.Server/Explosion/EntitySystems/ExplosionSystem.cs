@@ -94,6 +94,8 @@ public sealed partial class ExplosionSystem : EntitySystem
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnReset);
 
+        SubscribeLocalEvent<ExplosionResistanceComponent, ArmorExamineEvent>(OnArmorExamine);
+
         // Handled by ExplosionSystem.Processing.cs
         SubscribeLocalEvent<MapChangedEvent>(OnMapChanged);
 
@@ -107,7 +109,7 @@ public sealed partial class ExplosionSystem : EntitySystem
     private void OnReset(RoundRestartCleanupEvent ev)
     {
         _explosionQueue.Clear();
-        if (_activeExplosion !=null)
+        if (_activeExplosion != null)
             QueueDel(_activeExplosion.VisualEnt);
         _activeExplosion = null;
         _nodeGroupSystem.PauseUpdating = false;
@@ -125,8 +127,8 @@ public sealed partial class ExplosionSystem : EntitySystem
     private void OnGetResistance(EntityUid uid, ExplosionResistanceComponent component, GetExplosionResistanceEvent args)
     {
         args.DamageCoefficient *= component.DamageCoefficient;
-        if (component.Resistances.TryGetValue(args.ExplotionPrototype, out var resistance))
-            args.DamageCoefficient *= resistance;
+        if (component.Modifiers.TryGetValue(args.ExplotionPrototype, out var modifier))
+            args.DamageCoefficient *= modifier;
     }
 
     /// <summary>
@@ -219,7 +221,7 @@ public sealed partial class ExplosionSystem : EntitySystem
             return MathF.Cbrt(3 * totalIntensity / (slope * MathF.PI));
         }
 
-        return r0 * (MathF.Sqrt(12 * totalIntensity/ v0 - 3) / 6 + 0.5f);
+        return r0 * (MathF.Sqrt(12 * totalIntensity / v0 - 3) / 6 + 0.5f);
     }
 
     /// <summary>
@@ -379,6 +381,14 @@ public sealed partial class ExplosionSystem : EntitySystem
             if (effect > 0.01f)
                 _recoilSystem.KickCamera(uid, -delta.Normalized * effect);
         }
+    }
+
+    private void OnArmorExamine(EntityUid uid, ExplosionResistanceComponent component, ref ArmorExamineEvent args)
+    {
+        args.Msg.PushNewline();
+        args.Msg.AddMarkup(Loc.GetString("explosion-resistance-coefficient-value",
+            ("value", MathF.Round((1f - component.DamageCoefficient) * 100, 1))
+            ));
     }
 
     //WD-EDIT
