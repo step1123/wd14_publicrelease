@@ -8,6 +8,7 @@ using Robust.Client.Graphics;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Robust.Shared.Timing;
 
 namespace Content.Client.EntityHealthBar;
 
@@ -25,6 +26,9 @@ public sealed class EntityHealthBarOverlay : Overlay
     private readonly ShaderInstance _shader;
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
     public string? DamageContainer;
+    // for icon frame change timer
+    int iconFrame = 1;
+    double delayTime = 0.25;
 
     public EntityHealthBarOverlay(IEntityManager entManager, IPrototypeManager protoManager)
     {
@@ -33,10 +37,16 @@ public sealed class EntityHealthBarOverlay : Overlay
         _mobStateSystem = _entManager.EntitySysManager.GetEntitySystem<MobStateSystem>();
         _mobThresholdSystem = _entManager.EntitySysManager.GetEntitySystem<MobThresholdSystem>();
 
-        var sprite = new SpriteSpecifier.Rsi(new ResPath("/Textures/Interface/Misc/health_bar.rsi"), "icon");
+        var sprite = new SpriteSpecifier.Rsi(new ResPath("/Textures/Interface/Misc/health_status.rsi"), "background");
         _barTexture = _entManager.EntitySysManager.GetEntitySystem<SpriteSystem>().Frame0(sprite);
 
-        _shader = protoManager.Index<ShaderPrototype>("shaded").Instance();
+        _shader = protoManager.Index<ShaderPrototype>("unshaded").Instance();
+        Timer.SpawnRepeating(TimeSpan.FromSeconds(delayTime), () => {
+            if (iconFrame < 8)
+                iconFrame++;
+            else
+                iconFrame = 1;
+        }, new System.Threading.CancellationToken());
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -45,6 +55,8 @@ public sealed class EntityHealthBarOverlay : Overlay
         var rotation = args.Viewport.Eye?.Rotation ?? Angle.Zero;
         var spriteQuery = _entManager.GetEntityQuery<SpriteComponent>();
         var xformQuery = _entManager.GetEntityQuery<TransformComponent>();
+
+        var _spriteSys = _entManager.EntitySysManager.GetEntitySystem<SpriteSystem>();
 
         const float scale = 1f;
         var scaleMatrix = Matrix3.CreateScale(new Vector2(scale, scale));
@@ -73,13 +85,19 @@ public sealed class EntityHealthBarOverlay : Overlay
             // Use the sprite itself if we know its bounds. This means short or tall sprites don't get overlapped
             // by the bar.
             float yOffset;
+            float xIconOffset;
+            float yIconOffset;
             if (spriteQuery.TryGetComponent(mob.Owner, out var sprite))
             {
-                yOffset = sprite.Bounds.Height + 15f;
+                yOffset = sprite.Bounds.Height + 12f;
+                yIconOffset = sprite.Bounds.Height + 7f;
+                xIconOffset = sprite.Bounds.Width + 7f;
             }
             else
             {
                 yOffset = 1f;
+                yIconOffset = 1f;
+                xIconOffset = 1f;
             }
 
             // Position above the entity (we've already applied the matrix transform to the entity itself)
@@ -88,7 +106,32 @@ public sealed class EntityHealthBarOverlay : Overlay
                 yOffset / EyeManager.PixelsPerMeter);
 
             // Draw the underlying bar texture
-            handle.DrawTexture(_barTexture, position);
+            if (sprite != null && !sprite.ContainerOccluded)
+                handle.DrawTexture(_barTexture, position);
+            else
+                continue;
+
+            // Draw state icon
+            string current_state;
+            if (_mobStateSystem.IsAlive(mob.Owner, mob))
+            {
+                current_state = "life_state";
+            }
+            else
+            {
+                if (_mobStateSystem.IsCritical(mob.Owner, mob) && _mobThresholdSystem.TryGetThresholdForState(mob.Owner, MobState.Critical, out var critThreshold))
+                    current_state = "defib_state";
+                else
+                    current_state = "dead_state";
+            }
+
+            var icon_sprite = new SpriteSpecifier.Rsi(new ResPath("/Textures/Interface/Misc/health_state.rsi"), current_state);
+            Texture _stateIcon = _spriteSys.RsiStateLike(icon_sprite).GetFrame(0, GetIconFrame(_spriteSys.RsiStateLike(icon_sprite)));
+
+            var icon_position = new Vector2(xIconOffset / EyeManager.PixelsPerMeter,
+                yIconOffset / EyeManager.PixelsPerMeter);
+
+            handle.DrawTexture(_stateIcon, icon_position);
 
             // we are all progressing towards death every day
             (float ratio, bool inCrit) deathProgress = CalcProgress(mob.Owner, mob, dmg);
@@ -96,18 +139,42 @@ public sealed class EntityHealthBarOverlay : Overlay
             var color = GetProgressColor(deathProgress.ratio, deathProgress.inCrit);
 
             // Hardcoded width of the progress bar because it doesn't match the texture.
-            const float startX = 2f;
-            const float endX = 22f;
+            const float startX = 1f;
+            const float endX = 15f;
 
             var xProgress = (endX - startX) * deathProgress.ratio + startX;
 
-            var box = new Box2(new Vector2(startX, 3f) / EyeManager.PixelsPerMeter, new Vector2(xProgress, 4f) / EyeManager.PixelsPerMeter);
+            var box = new Box2(new Vector2(startX, 0f) / EyeManager.PixelsPerMeter, new Vector2(xProgress, 2f) / EyeManager.PixelsPerMeter);
             box = box.Translated(position);
             handle.DrawRect(box, color);
         }
 
         handle.UseShader(null);
         handle.SetTransform(Matrix3.Identity);
+    }
+
+    private int GetIconFrame(IRsiStateLike sprite)
+    {
+        var _spriteSys = _entManager.EntitySysManager.GetEntitySystem<SpriteSystem>();
+
+        if (sprite.AnimationFrameCount <= 1)
+            return 0;
+
+        var currentFrame = iconFrame;
+        var result = 0;
+        while (true)
+        {
+            if (currentFrame > 0 && currentFrame > sprite.AnimationFrameCount)
+            {
+                currentFrame -= sprite.AnimationFrameCount;
+            }
+            else
+            {
+                result = currentFrame - 1;
+                break;
+            }
+        }
+        return result;
     }
 
     /// <summary>
@@ -120,7 +187,7 @@ public sealed class EntityHealthBarOverlay : Overlay
             if (!_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Critical, out var threshold))
                 return (1, false);
 
-            var ratio = 1 - ((FixedPoint2)(dmg.TotalDamage / threshold)).Float();
+            var ratio = 1 - ((FixedPoint2) (dmg.TotalDamage / threshold)).Float();
             return (ratio, false);
         }
 

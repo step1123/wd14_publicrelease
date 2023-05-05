@@ -8,6 +8,10 @@
     sprite: Clothing/Eyes/Hud/diag.rsi
   - type: Clothing
     sprite: Clothing/Eyes/Hud/diag.rsi
+  - type: ClothingGrantComponent
+    component:
+    - type: ShowHealthBars
+      damageContainer: Metallic
 
 - type: entity
   parent: ClothingEyesBase
@@ -34,3 +38,22 @@
     sprite: Clothing/Eyes/Hud/sec.rsi
   - type: Clothing
     sprite: Clothing/Eyes/Hud/sec.rsi
+  - type: ClothingGrantComponent
+    component:
+    - type: ShowJobInfo
+
+- type: entity
+  parent: ClothingEyesBase
+  id: ClothingEyesHudAdvanced
+  name: advanced hud
+  description: Advanced device. You can see humanoid's job and health level.
+  components:
+  - type: Sprite
+    sprite: Clothing/Eyes/Hud/diag.rsi
+  - type: Clothing
+    sprite: Clothing/Eyes/Hud/diag.rsi
+  - type: ClothingGrantComponent
+    component:
+    - type: ShowJobInfo
+    - type: ShowHealthBars
+      damageContainer: Biological
