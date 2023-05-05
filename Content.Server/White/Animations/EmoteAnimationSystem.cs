@@ -14,7 +14,6 @@ public class EmoteAnimationSystem : SharedEmoteAnimationSystem
     public override void Initialize()
     {
         SubscribeLocalEvent<EmoteAnimationComponent, ComponentGetState>(OnGetState);
-
         SubscribeLocalEvent<EmoteAnimationComponent, MapInitEvent>(OnMapInint);
         SubscribeLocalEvent<EmoteAnimationComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<EmoteAnimationComponent, EmoteEvent>(OnEmote);
@@ -30,7 +29,7 @@ public class EmoteAnimationSystem : SharedEmoteAnimationSystem
 
     private void OnMapInint(EntityUid uid, EmoteAnimationComponent component, MapInitEvent args)
     {
-        /*
+
         var actionFlip = new InstantAction(_proto.Index<InstantActionPrototype>(EmoteFlipActionPrototype));
         var actionJump = new InstantAction(_proto.Index<InstantActionPrototype>(EmoteJumpActionPrototype));
         var actionTurn = new InstantAction(_proto.Index<InstantActionPrototype>(EmoteTurnActionPrototype));
@@ -40,8 +39,6 @@ public class EmoteAnimationSystem : SharedEmoteAnimationSystem
         _action.AddAction(uid, actionFlip, null);
         _action.AddAction(uid, actionJump, null);
         _action.AddAction(uid, actionTurn, null);
-        */
-        // shity-dirty-fucking code. There is need to refactor in future, if you wanna add more animations - Doc
     }
 
     private void OnShutdown(EntityUid uid, EmoteAnimationComponent component, ComponentShutdown args)
@@ -52,7 +49,6 @@ public class EmoteAnimationSystem : SharedEmoteAnimationSystem
             _action.RemoveAction(uid, component.JumpAction);
         if (component.TurnAction != null)
             _action.RemoveAction(uid, component.TurnAction);
-        // shity-dirty-fucking code. There is need to refactor in future, if you wanna add more animations - Doc
     }
 
     private void OnEmote(EntityUid uid, EmoteAnimationComponent component, ref EmoteEvent args)
