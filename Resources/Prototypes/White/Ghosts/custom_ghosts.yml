@@ -29,3 +29,11 @@
   alpha: 0.7
   ghostName: Грабля
   ghostDescription: Ну привет уебан!
+
+- type: customGhost
+  id: shelupon-ghost
+  ckey: shelupon
+  sprite: White/Ghosts/shelupon-ghost.rsi
+  alpha: 1
+  ghostName: Величайший
+  ghostDescription: Восстал из небытия.
