@@ -38,6 +38,7 @@
     - ебанул сальтуху
     - ебанула сальтуху
     - ебашит сальтуху
+  allowMenu: true
 
 - type: emote
   id: EmoteJump
@@ -51,6 +52,7 @@
     - подпрыгнул
     - подпрыгнула
     - подскакивает
+  allowMenu: true
 
 - type: emote
   id: EmoteTurn
@@ -64,3 +66,4 @@
     - танцует
     - покружилась
     - покружился
+  allowMenu: true
