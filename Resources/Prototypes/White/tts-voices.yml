@@ -27,3 +27,33 @@
   name: tts-voice-name-xenia
   sex: Female
   speaker: xenia
+
+- type: ttsVoice
+  id: Charlotte
+  name: tts-voice-name-charlotte
+  sex: Female
+  speaker: charlotte
+
+- type: ttsVoice
+  id: Bebey
+  name: tts-voice-name-bebey
+  sex: Male
+  speaker: bebey
+
+- type: ttsVoice
+  id: Biden
+  name: tts-voice-name-biden
+  sex: Male
+  speaker: biden
+
+- type: ttsVoice
+  id: Ddr2
+  name: tts-voice-name-ddr2
+  sex: Male
+  speaker: ddr2
+
+- type: ttsVoice
+  id: Papa
+  name: tts-voice-name-papa
+  sex: Male
+  speaker: papa
