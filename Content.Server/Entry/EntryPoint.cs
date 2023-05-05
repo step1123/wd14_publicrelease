@@ -109,6 +109,7 @@ namespace Content.Server.Entry
 
                 IoCManager.Resolve<IAdminLogManager>().Initialize();
                 IoCManager.Resolve<IConnectionManager>().Initialize();
+                UnsafePseudoIoC.Initialize(); //WD
                 _dbManager.Init();
                 IoCManager.Resolve<IServerPreferencesManager>().Init();
                 IoCManager.Resolve<INodeGroupFactory>().Initialize();
@@ -123,7 +124,6 @@ namespace Content.Server.Entry
                 IoCManager.Resolve<TTSManager>().Initialize();
                 IoCManager.Resolve<StalinManager>().Initialize();
                 IoCManager.Resolve<ServerJukeboxSongsSyncManager>().Initialize();
-                UnsafePseudoIoC.Initialize();
                 //WD-EDIT
 
                 _voteManager.Initialize();
