@@ -35,12 +35,16 @@ public sealed class EmotePrototype : IPrototype
     [DataField("chatTriggers")]
     public HashSet<string>? ChatTriggers = new();
 
-    /// <summary>
+    /// <summary> White Dream EDIT Start
     ///     Текст для кнопки в эмоут меню.
     ///     Бля ну или как это описать, вы поняли короче. ¯\_(ツ)_/¯
     /// </summary>
     [DataField("buttonText")]
     public string ButtonText { get; } = "Unknown";
+
+    [DataField("allowMenu")]
+    public bool AllowToEmotionsMenu { get; } = false;
+    // White Dream EDIT end
 }
 
 /// <summary>
@@ -53,7 +57,6 @@ public enum EmoteCategory : byte
 {
     Invalid = 0,
     Vocal = 1 << 0,
-    Gesture = 1 << 1,
-    General = byte.MaxValue,
-    White = byte.MaxValue
+    Gesture = 1 << 1, // White Dream EDIT
+    General = byte.MaxValue
 }

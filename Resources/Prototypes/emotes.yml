@@ -1,6 +1,6 @@
 - type: emote
   id: Scream
-  category: White
+  category: Vocal
   buttonText: Кричать
   chatMessages: [кричит, орет, вопит, рявкает]
   chatTriggers:
@@ -19,10 +19,11 @@
     - рявкнул
     - рявкнула
     - вопит
+  allowMenu: true
 
 - type: emote
   id: Laugh
-  category: White
+  category: Vocal
   buttonText: Смеяться
   chatMessages: [смеется, ржет, усмехается, хохочет, гогочет]
   chatTriggers:
@@ -40,10 +41,11 @@
     - усмехнулся
     - хохочет
     - гогочет
+  allowMenu: true
 
 - type: emote
   id: Clap
-  category: White
+  category: Gesture
   buttonText: Хлопать
   chatMessages: [хлопает]
   chatTriggers:
@@ -51,10 +53,11 @@
     - захлопала
     - захлопал
     - похлопал
+  allowMenu: true
 
 - type: emote
   id: Snap
-  category: White
+  category: Gesture
   buttonText: Щелкать пальцами
   chatMessages: [щелкает пальцами]
   chatTriggers:
@@ -64,45 +67,53 @@
     - щелкнула
     - щелкунл пальцами
     - щелкунла пальцами
+  allowMenu: true
 
 - type: emote
   id: WaveHand
-  category: White
+  category: Gesture
   buttonText: Махать рукой
   chatMessages: [машет рукой]
+  allowMenu: true
 
 - type: emote
   id: Nod
-  category: White
+  category: Gesture
   buttonText: Кивать
   chatMessages: [кивает]
+  allowMenu: true
 
 - type: emote
   id: ShakeHead
-  category: White
+  category: Gesture
   buttonText: Покачать головой
   chatMessages: [качает головой]
+  allowMenu: true
 
 - type: emote
   id: Frown
-  category: White
+  category: Gesture
   buttonText: Хмуриться
   chatMessages: [хмурится]
+  allowMenu: true
 
 - type: emote
   id: Smile
-  category: White
+  category: Gesture
   buttonText: Улыбаться
   chatMessages: [улыбается]
+  allowMenu: true
 
 - type: emote
   id: Sniff
-  category: White
+  category: Gesture
   buttonText: Принюхиваться
   chatMessages: [принюхивается]
+  allowMenu: true
 
 - type: emote
   id: LickLips
-  category: White
+  category: Gesture
   buttonText: Облизываться
   chatMessages: [облизывается]
+  allowMenu: true

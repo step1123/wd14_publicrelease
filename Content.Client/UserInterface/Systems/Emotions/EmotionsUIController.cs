@@ -35,11 +35,12 @@ public sealed class EmotionsUIController : UIController, IOnStateChanged<Gamepla
         _window.OnClose += OnWindowClosed;
 
         var emotions = _prototypeManager.EnumeratePrototypes<EmotePrototype>().ToList();
-        emotions = emotions.Where(emote => emote.Category == EmoteCategory.White).ToList();
         emotions.Sort((a,b) => string.Compare(a.ButtonText, b.ButtonText.ToString(), StringComparison.Ordinal));
 
         foreach (var emote in emotions)
         {
+            if (!emote.AllowToEmotionsMenu)
+                continue;
             var control = new Button();
             control.OnPressed += _ => UseEmote(_random.Pick(emote.ChatMessages));
             control.Text = emote.ButtonText;
