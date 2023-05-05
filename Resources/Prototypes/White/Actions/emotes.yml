@@ -1,0 +1,66 @@
+# flip animation
+- type: instantAction
+  id: EmoteFlip
+  name: emote-flip-action-name
+  description: emote-flip-action-description
+  icon: Interface/Actions/blight.png
+  event: !type:EmoteFlipActionEvent
+
+# jump animation
+- type: instantAction
+  id: EmoteJump
+  name: emote-jump-action-name
+  description: emote-jump-action-description
+  icon: Interface/Actions/blight.png
+  event: !type:EmoteJumpActionEvent
+
+  # turn around in 4 directions animation
+- type: instantAction
+  id: EmoteTurn
+  name: emote-turn-action-name
+  description: emote-turn-action-description
+  icon: Interface/Actions/blight.png
+  event: !type:EmoteTurnActionEvent
+
+
+# Using EmoteAnimation from IC action chat
+- type: emote
+  id: EmoteFlip
+  category: Gesture
+  buttonText: Сальто
+  chatMessages: [делает сальто]
+  chatTriggers:
+    - сделал сальто
+    - сделала сальто
+    - делает сальто
+    - устроила сальто
+    - устроил сальто
+    - ебанул сальтуху
+    - ебанула сальтуху
+    - ебашит сальтуху
+
+- type: emote
+  id: EmoteJump
+  category: Gesture
+  buttonText: Прыгнуть
+  chatMessages: [прыгает]
+  chatTriggers:
+    - прыгает
+    - прыгнула
+    - прыгнул
+    - подпрыгнул
+    - подпрыгнула
+    - подскакивает
+
+- type: emote
+  id: EmoteTurn
+  category: Gesture
+  buttonText: Танцевать
+  chatMessages: [танцует]
+  chatTriggers:
+    - танцует
+    - кружится
+    - оборачивается
+    - танцует
+    - покружилась
+    - покружился
