@@ -1,6 +1,6 @@
 - type: emote
   id: Scream
-  category: Vocal
+  category: White
   buttonText: Кричать
   chatMessages: [кричит, орет, вопит, рявкает]
   chatTriggers:
@@ -22,7 +22,7 @@
 
 - type: emote
   id: Laugh
-  category: Vocal
+  category: White
   buttonText: Смеяться
   chatMessages: [смеется, ржет, усмехается, хохочет, гогочет]
   chatTriggers:
@@ -43,7 +43,7 @@
 
 - type: emote
   id: Clap
-  category: Gesture
+  category: White
   buttonText: Хлопать
   chatMessages: [хлопает]
   chatTriggers:
@@ -54,7 +54,7 @@
 
 - type: emote
   id: Snap
-  category: Gesture
+  category: White
   buttonText: Щелкать пальцами
   chatMessages: [щелкает пальцами]
   chatTriggers:
@@ -67,42 +67,42 @@
 
 - type: emote
   id: WaveHand
-  category: Gesture
+  category: White
   buttonText: Махать рукой
   chatMessages: [машет рукой]
 
 - type: emote
   id: Nod
-  category: Gesture
+  category: White
   buttonText: Кивать
   chatMessages: [кивает]
 
 - type: emote
   id: ShakeHead
-  category: Gesture
+  category: White
   buttonText: Покачать головой
   chatMessages: [качает головой]
 
 - type: emote
   id: Frown
-  category: Gesture
+  category: White
   buttonText: Хмуриться
   chatMessages: [хмурится]
 
 - type: emote
   id: Smile
-  category: Gesture
+  category: White
   buttonText: Улыбаться
   chatMessages: [улыбается]
 
 - type: emote
   id: Sniff
-  category: Gesture
+  category: White
   buttonText: Принюхиваться
   chatMessages: [принюхивается]
 
 - type: emote
   id: LickLips
-  category: Gesture
+  category: White
   buttonText: Облизываться
   chatMessages: [облизывается]

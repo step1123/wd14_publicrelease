@@ -6,13 +6,11 @@ using Content.Client.UserInterface.Systems.Emotions.Windows;
 using Content.Shared.Chat;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Input;
-using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 
 namespace Content.Client.UserInterface.Systems.Emotions;
 
@@ -27,18 +25,17 @@ public sealed class EmotionsUIController : UIController, IOnStateChanged<Gamepla
     private MenuButton? EmotionsButton => UIManager.GetActiveUIWidgetOrNull<MenuBar.Widgets.GameTopMenuBar>()?.EmotionsButton;
 
     private DateTime _lastEmotionTimeUse = DateTime.Now;
-    private float _emoteCooldown = 1.5f;
+    private const float EmoteCooldown = 1.5f;
 
     public void OnStateEntered(GameplayState state)
     {
-        DebugTools.Assert(_window == null);
-
         _window = UIManager.CreateWindow<EmotionsWindow>();
 
         _window.OnOpen += OnWindowOpened;
         _window.OnClose += OnWindowClosed;
 
         var emotions = _prototypeManager.EnumeratePrototypes<EmotePrototype>().ToList();
+        emotions = emotions.Where(emote => emote.Category == EmoteCategory.White).ToList();
         emotions.Sort((a,b) => string.Compare(a.ButtonText, b.ButtonText.ToString(), StringComparison.Ordinal));
 
         foreach (var emote in emotions)
@@ -73,7 +70,7 @@ public sealed class EmotionsUIController : UIController, IOnStateChanged<Gamepla
     {
         var timeSpan = DateTime.Now - _lastEmotionTimeUse;
         var seconds = timeSpan.TotalSeconds;
-        if (seconds < _emoteCooldown)
+        if (seconds < EmoteCooldown)
         {
             return;
         }
