@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using Content.Server.Database;
+using Content.Server.White;
 using Content.Shared.CCVar;
 using Content.Shared.Roles;
 using Robust.Server.Player;
@@ -154,7 +155,7 @@ public sealed class RoleBanManager
             addressRange = (targetAddress, cidr);
         }
 
-        var cfg = IoCManager.Resolve<IConfigurationManager>();
+        var cfg = UnsafePseudoIoC.ConfigurationManager;
         var serverName = cfg.GetCVar(CCVars.AdminLogsServerName);
 
         if (isGlobalBan)

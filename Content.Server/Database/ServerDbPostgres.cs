@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Server.White;
 using Content.Shared.CCVar;
 using Microsoft.EntityFrameworkCore;
 using Robust.Shared.Configuration;
@@ -147,7 +148,7 @@ namespace Content.Server.Database
 
             if (!ignoreServerName)
             {
-                var cfg = IoCManager.Resolve<IConfigurationManager>();
+                var cfg = UnsafePseudoIoC.ConfigurationManager;
                 var serverName = cfg.GetCVar(CCVars.AdminLogsServerName);
                 query = query.Where(p =>
                     p.ServerName == serverName || p.ServerName == "unknown" || string.IsNullOrEmpty(p.ServerName));

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.IP;
 using Content.Server.Preferences.Managers;
+using Content.Server.White;
 using Content.Shared.CCVar;
 using Microsoft.EntityFrameworkCore;
 using Robust.Shared.Configuration;
@@ -137,7 +138,7 @@ namespace Content.Server.Database
             ServerBanExemptFlags? exemptFlags,
             bool ignoreServerName)
         {
-            var cfg = IoCManager.Resolve<IConfigurationManager>();
+            var cfg = UnsafePseudoIoC.ConfigurationManager;
             var serverName = cfg.GetCVar(CCVars.AdminLogsServerName);
 
             if (!ignoreServerName && !string.IsNullOrEmpty(ban.ServerName) && ban.ServerName != "unknown" && serverName != ban.ServerName)
@@ -251,7 +252,7 @@ namespace Content.Server.Database
             bool ignoreServerName)
         {
 
-            var cfg = IoCManager.Resolve<IConfigurationManager>();
+            var cfg = UnsafePseudoIoC.ConfigurationManager;
             var serverName = cfg.GetCVar(CCVars.AdminLogsServerName);
 
             if (!ignoreServerName &&!string.IsNullOrEmpty(ban.ServerName) && ban.ServerName != "unknown" && serverName != ban.ServerName)
