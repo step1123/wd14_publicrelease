@@ -37,7 +37,7 @@ namespace Content.Server.Database
 
             var prefsCtx = new SqliteServerDbContext(options());
 
-            var cfg = IoCManager.Resolve<IConfigurationManager>();
+            var cfg = UnsafePseudoIoC.ConfigurationManager;
 
             // When inMemory we re-use the same connection, so we can't have any concurrency.
             var concurrency = inMemory ? 1 : cfg.GetCVar(CCVars.DatabaseSqliteConcurrency);

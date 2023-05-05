@@ -347,7 +347,7 @@ namespace Content.Server.Database
 
             if (!ignoreServerName)
             {
-                var cfg = IoCManager.Resolve<IConfigurationManager>();
+                var cfg = UnsafePseudoIoC.ConfigurationManager;
 
                 query = query?.Where(p =>
                     p.ServerName == cfg.GetCVar(CCVars.AdminLogsServerName) || p.ServerName == "unknown" || string.IsNullOrEmpty(p.ServerName));
