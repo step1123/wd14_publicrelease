@@ -65,7 +65,7 @@
                     <Label Text="{Loc 'ui-options-jukebox-volume'}" HorizontalExpand="True" />
                     <Control MinSize="8 0" />
                     <Slider Name="JukeboxVolumeSlider"
-                            MinValue="25"
+                            MinValue="0"
                             MaxValue="200"
                             HorizontalExpand="True"
                             MinSize="80 0"
