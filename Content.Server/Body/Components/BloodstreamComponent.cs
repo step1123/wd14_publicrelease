@@ -150,18 +150,13 @@ namespace Content.Server.Body.Components
         public Solution BloodTemporarySolution = default!;
 
         /// <summary>
-        /// Variable that stores the amount of drunk time added by having a low blood level.
+        /// Variable that stores the amount of status time added by having a low blood level.
         /// </summary>
         [ViewVariables(VVAccess.ReadWrite)]
-        public float DrunkTime;
+        public float StatusTime;
 
         //WD-EDIT
-
-        /// <summary>
-        ///     Bool for bleeding alert.
-        /// </summary>
         public bool IsBleeding => BleedAmount > 0;
-
         //WD-EDIT
     }
 }
