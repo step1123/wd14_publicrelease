@@ -183,8 +183,8 @@ namespace Content.Client.Stylesheets
                 Texture = windowBackgroundTex,
                 Mode = StyleBoxTexture.StretchMode.Tile
             };
-            windowBackground.SetPatchMargin(StyleBox.Margin.Horizontal | StyleBox.Margin.Bottom, 2);
-            windowBackground.SetExpandMargin(StyleBox.Margin.Horizontal | StyleBox.Margin.Bottom, 2);
+            windowBackground.SetPatchMargin(StyleBox.Margin.All, 2);
+            windowBackground.SetExpandMargin(StyleBox.Margin.All, -1);
 
             var borderedWindowBackgroundTex = resCache.GetTexture("/Textures/Interface/Nano/window_background_bordered.png");
             var borderedWindowBackground = new StyleBoxTexture
