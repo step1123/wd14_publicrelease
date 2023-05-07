@@ -55,9 +55,3 @@ jobs:
           key: ${{ secrets.BUILDS_SSH_KEY }}
           passphrase: ${{ secrets.BUILDS_SSH_KEY_PASS }}
           script: sh ~/ss14/anvil/cortice.sh ${{ github.sha }}
-
-      - name: Publish changelog
-        run: Tools/actions_changelogs_since_last_run.py
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DISCORD_WEBHOOK_URL: ${{ secrets.CHANGELOG_DISCORD_WEBHOOK }}
