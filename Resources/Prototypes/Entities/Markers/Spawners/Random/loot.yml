@@ -126,7 +126,6 @@
     - type: RandomSpawner
       rarePrototypes:
         - WeaponEgun
-        - WeaponRifleLector
         - WeaponSubMachineGunWt550
         - WeaponLaserCarbine
         - WeaponPulseRifle
