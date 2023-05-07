@@ -102,7 +102,7 @@ public sealed class ChatGPTSystem : EntitySystem
             return;
         }
 
-        _chatManager.TrySendInGameICMessage(uid, "Ожидайте ответа", InGameICChatType.Speak, false,  hideGlobalGhostChat: true);
+        _chatManager.TrySendInGameICMessage(uid, "Ожидайте ответа", InGameICChatType.Speak, false);
 
         var gptMessage = await RequestGPT(component, userData.EntityName, args.Message);
 

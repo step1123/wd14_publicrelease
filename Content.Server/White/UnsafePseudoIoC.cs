@@ -2,7 +2,7 @@
 
 namespace Content.Server.White;
 
-public static class UnsafePseudoIoC // Я НАНАВИЖУ IOCMAANGERRESOLVEPOSHEL NAHUI
+public static class UnsafePseudoIoC // Я НЕНАВИЖУ IOCMAANGERRESOLVEPOSHEL NAHUI
 {
     public static IConfigurationManager ConfigurationManager = default!;
 

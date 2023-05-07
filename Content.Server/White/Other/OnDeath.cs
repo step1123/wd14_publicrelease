@@ -85,7 +85,7 @@ public sealed class OnDeath : EntitySystem
         => Loc.GetString(message);
 
     private void SendDeathGaspMessage(EntityUid uid, string message)
-        => _chat.TrySendInGameICMessage(uid, message, InGameICChatType.Emote, false, force: true);
+        => _chat.TrySendInGameICMessage(uid, message, InGameICChatType.Emote, range: ChatTransmitRange.Normal, force:true);
 
     private void PlayDeathSound(EntityUid uid)
         => _audio.PlayEntity(DeathSounds, uid, uid, AudioParams.Default);
