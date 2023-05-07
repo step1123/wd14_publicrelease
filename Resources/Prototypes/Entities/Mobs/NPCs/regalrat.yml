@@ -117,6 +117,19 @@
     spawned:
     - id: ClothingHeadHatFancyCrown #how did that get there?
       amount: 1
+  - type: DiseaseCarrier
+    naturalImmunities:
+    - ActiveHonkVirus
+    carrierDiseases:
+    - VentCough
+    - AMIV
+    - SpaceCold
+    - SpaceFlu
+    - BirdFlew
+    - VanAusdallsRobovirus
+    - BleedersBite
+    - Plague
+    - TongueTwister
   - type: MobPrice
     price: 2500 # rat wealth
   - type: RandomMetadata
@@ -258,6 +271,19 @@
     spawned:
     - id: FoodMeatRat
       amount: 1
+  - type: DiseaseCarrier
+    naturalImmunities:
+      - ActiveHonkVirus
+    carrierDiseases:
+    - VentCough
+    - AMIV
+    - SpaceCold
+    - SpaceFlu
+    - BirdFlew
+    - VanAusdallsRobovirus
+    - BleedersBite
+    - Plague
+    - TongueTwister
   - type: Vocal
     sounds:
       Male: Mouse

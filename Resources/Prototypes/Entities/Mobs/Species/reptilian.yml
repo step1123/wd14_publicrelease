@@ -28,6 +28,8 @@
       Male: UnisexReptilian
       Female: UnisexReptilian
       Unsexed: UnisexReptilian
+  - type: DiseaseCarrier
+    diseaseResist: 0.1
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Scale
