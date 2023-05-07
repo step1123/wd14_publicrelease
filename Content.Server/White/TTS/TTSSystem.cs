@@ -127,8 +127,10 @@ public sealed partial class TTSSystem : EntitySystem
         var textSanitized = Sanitize(text);
         if (textSanitized == "")
             return null;
-        var metadata = Comp<MetaDataComponent>(uid);
-        return await _ttsManager.ConvertTextToSpeech(metadata.EntityName, speaker, textSanitized);
+        var entityName = "None";
+        if (TryComp<MetaDataComponent>(uid, out var metadata))
+            entityName = metadata.EntityName;
+        return await _ttsManager.ConvertTextToSpeech(entityName, speaker, textSanitized);
     }
 }
 
