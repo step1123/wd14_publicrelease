@@ -69,10 +69,10 @@
             VerticalExpand="True"
             SizeFlagsStretchRatio="1">
             <Label Margin="8 0 8 0" Text="{Loc 'lathe-menu-amount'}"/>
-            <LineEdit
+            <SliderIntInput
                 Name="AmountLineEdit"
-                PlaceHolder="0"
-                Text="1"
+                MinValue="1"
+                MaxValue="10"
                 HorizontalExpand="True" />
         </BoxContainer>
         <ItemList

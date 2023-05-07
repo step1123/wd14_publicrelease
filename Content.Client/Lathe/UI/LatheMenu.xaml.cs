@@ -40,7 +40,7 @@ public sealed partial class LatheMenu : DefaultWindow
         {
             PopulateRecipes(owner.Lathe);
         };
-        AmountLineEdit.OnTextChanged += _ =>
+        AmountLineEdit.OnValueChanged += _ =>
         {
             PopulateRecipes(owner.Lathe);
         };
@@ -113,8 +113,7 @@ public sealed partial class LatheMenu : DefaultWindow
             }
         }
 
-        if (!int.TryParse(AmountLineEdit.Text, out var quantity) || quantity <= 0)
-            quantity = 1;
+        var quantity = AmountLineEdit.Value;
 
         RecipeList.Children.Clear();
         foreach (var prototype in recipesToShow)
@@ -132,7 +131,7 @@ public sealed partial class LatheMenu : DefaultWindow
                     sb.Append('\n');
 
                 var adjustedAmount = SharedLatheSystem.AdjustMaterial(amount, prototype.ApplyMaterialDiscount, component.MaterialUseMultiplier);
-                
+
                 sb.Append(adjustedAmount);
                 sb.Append(' ');
                 sb.Append(Loc.GetString(proto.Name));
@@ -146,8 +145,7 @@ public sealed partial class LatheMenu : DefaultWindow
             var control = new RecipeControl(prototype, sb.ToString(), canProduce, icon);
             control.OnButtonPressed += s =>
             {
-                if (!int.TryParse(AmountLineEdit.Text, out var amount) || amount <= 0)
-                    amount = 1;
+                var amount = AmountLineEdit.Value;
                 RecipeQueueAction?.Invoke(s, amount);
             };
             RecipeList.AddChild(control);
