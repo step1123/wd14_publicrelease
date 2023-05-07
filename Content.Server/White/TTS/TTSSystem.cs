@@ -25,6 +25,7 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IServerNetManager _netMgr = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly TTSPitchRateSystem _ttsPitchRateSystem = default!;
 
     private const int MaxMessageChars = 100 * 2; // same as SingleBubbleCharLimit * 2
     private bool _isEnabled = false;
@@ -122,15 +123,34 @@ public sealed partial class TTSSystem : EntitySystem
         _ttsManager.ResetCache();
     }
 
-    private async Task<byte[]?> GenerateTTS(EntityUid uid, string text, string speaker)
+    private async Task<byte[]?> GenerateTTS(EntityUid uid, string text, string speaker, string? speechPitch = null, string? speechRate = null)
     {
         var textSanitized = Sanitize(text);
         if (textSanitized == "")
             return null;
-        var entityName = "None";
-        if (TryComp<MetaDataComponent>(uid, out var metadata))
-            entityName = metadata.EntityName;
-        return await _ttsManager.ConvertTextToSpeech(entityName, speaker, textSanitized);
+
+        string pitch;
+        string rate;
+        if (speechPitch == null || speechRate == null)
+        {
+            if (!_ttsPitchRateSystem.TryGetPitchRate(uid, out var pitchRate))
+            {
+                pitch = "medium";
+                rate = "medium";
+            }
+            else
+            {
+                pitch = pitchRate[0];
+                rate = pitchRate[1];
+            }
+        }
+        else
+        {
+            pitch = speechPitch;
+            rate = speechRate;
+        }
+
+        return await _ttsManager.ConvertTextToSpeech(speaker, textSanitized, pitch, rate);
     }
 }
 

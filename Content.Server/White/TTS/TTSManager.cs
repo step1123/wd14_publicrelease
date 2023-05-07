@@ -55,7 +55,7 @@ public sealed class TTSManager
     /// <param name="text">SSML formatted text</param>
     /// <returns>OGG audio bytes</returns>
     /// <exception cref="Exception">Throws if url or token CCVar not set or http request failed</exception>
-    public async Task<byte[]> ConvertTextToSpeech(string entityName, string speaker, string text)
+    public async Task<byte[]> ConvertTextToSpeech(string speaker, string text, string pitch, string rate)
     {
         var url = _cfg.GetCVar(WhiteCVars.TTSApiUrl);
         var maxCacheSize = _cfg.GetCVar(WhiteCVars.TTSMaxCacheSize);
@@ -77,7 +77,8 @@ public sealed class TTSManager
         {
             Text = text,
             Speaker = speaker,
-            Ckey = entityName,
+            Pitch = pitch,
+            Rate = rate
         };
 
         var request = CreateRequestLink(url, body);
@@ -125,9 +126,10 @@ public sealed class TTSManager
     {
         var uriBuilder = new UriBuilder(url);
         var query = HttpUtility.ParseQueryString(uriBuilder.Query);
-        query["ckey"] = body.Ckey;
         query["speaker"] = body.Speaker;
         query["text"] = body.Text;
+        query["pitch"] = body.Pitch;
+        query["rate"] = body.Rate;
         query["file"] = "1";
         uriBuilder.Query = query.ToString();
         return uriBuilder.ToString();
@@ -156,8 +158,11 @@ public sealed class TTSManager
         [JsonPropertyName("speaker")]
         public string Speaker { get; set; } = default!;
 
-        [JsonPropertyName("ckey")]
-        public string Ckey { get; set; } = default!;
+        [JsonPropertyName("pitch")]
+        public string Pitch { get; set; } = default!;
+
+        [JsonPropertyName("rate")]
+        public string Rate { get; set; } = default!;
     }
 
     private struct GenerateVoiceResponse
