@@ -133,7 +133,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     public void TrySendInGameICMessage(EntityUid source, string message, InGameICChatType desiredType, bool hideChat,
         IConsoleShell? shell = null, IPlayerSession? player = null, string? nameOverride = null, bool checkRadioPrefix = true)
     {
-        TrySendInGameICMessage(source, message, desiredType, hideChat ? ChatTransmitRange.HideChat : ChatTransmitRange.Normal, shell, player, nameOverride, checkRadioPrefix);
+        TrySendInGameICMessage(source, message, desiredType, hideChat ? ChatTransmitRange.HideChat : ChatTransmitRange.Normal, shell, player, nameOverride, checkRadioPrefix, force: false);
     }
 
     /// <summary>
