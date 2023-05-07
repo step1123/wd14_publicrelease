@@ -150,7 +150,7 @@ public sealed class ClientClothingSystem : ClothingSystem
     ///     Useful for lazily adding clothing sprites without modifying yaml. And for backwards compatibility.
     /// </remarks>
     private bool TryGetDefaultVisuals(EntityUid uid, ClothingComponent clothing, string slot, string? speciesId,
-        HumanoidAppearanceComponent humanoid, [NotNullWhen(true)] out List<PrototypeLayerData>? layers)
+        HumanoidAppearanceComponent? humanoid, [NotNullWhen(true)] out List<PrototypeLayerData>? layers)
     {
         layers = null;
 
@@ -178,10 +178,13 @@ public sealed class ClientClothingSystem : ClothingSystem
             state = $"{clothing.EquippedState}";
 
         // body type specific
-        var bodyTypeProto = _prototypeManager.Index<BodyTypePrototype>(humanoid.BodyType!);
-        if (bodyTypeProto != null && rsi.TryGetState($"{state}-{bodyTypeProto.Name}", out _))
+        if (humanoid != null)
         {
-            state = $"{state}-{bodyTypeProto.Name}";
+            var bodyTypeProto = _prototypeManager.Index<BodyTypePrototype>(humanoid.BodyType);
+            if (bodyTypeProto != null && rsi.TryGetState($"{state}-{bodyTypeProto.Name}", out _))
+            {
+                state = $"{state}-{bodyTypeProto.Name}";
+            }
         }
 
         // species specific
