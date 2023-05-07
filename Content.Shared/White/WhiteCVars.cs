@@ -76,7 +76,7 @@ public sealed class WhiteCVars
     /// URL of the TTS server API.
     /// </summary>
     public static readonly CVarDef<string> TTSApiUrl =
-        CVarDef.Create("tts.api_url", "http://46.173.131.39:2386/", CVar.SERVERONLY);
+        CVarDef.Create("tts.api_url", "", CVar.SERVERONLY);
 
     /// <summary>
     /// TTS Volume
