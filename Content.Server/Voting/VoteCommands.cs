@@ -11,10 +11,11 @@ using Robust.Shared.Console;
 
 namespace Content.Server.Voting
 {
-    [AnyCommand]
+    [AdminCommand(AdminFlags.Admin)] // WD MODIFICATION
     public sealed class CreateVoteCommand : IConsoleCommand
     {
         [Dependency] private readonly IAdminLogManager _adminLogger = default!;
+
 
         public string Command => "createvote";
         public string Description => Loc.GetString("cmd-createvote-desc");
@@ -22,6 +23,7 @@ namespace Content.Server.Voting
 
         public void Execute(IConsoleShell shell, string argStr, string[] args)
         {
+
             if (args.Length != 1)
             {
                 shell.WriteError(Loc.GetString("shell-need-exactly-one-argument"));
