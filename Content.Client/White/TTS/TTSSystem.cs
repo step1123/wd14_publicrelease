@@ -117,7 +117,7 @@ public sealed class TTSSystem : EntitySystem
     private bool TryCreateAudioSource(byte[] data, [NotNullWhen(true)] out IClydeAudioSource? source)
     {
         var dataStream = new MemoryStream(data) { Position = 0 };
-        var audioStream = _clyde.LoadAudioWav(dataStream);
+        var audioStream = _clyde.LoadAudioOggVorbis(dataStream);
         source = _clyde.CreateAudioSource(audioStream);
         source?.SetVolume(_volume);
         return source != null;

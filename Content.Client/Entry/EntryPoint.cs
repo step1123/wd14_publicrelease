@@ -23,6 +23,7 @@ using Content.Client.White.JoinQueue;
 using Content.Client.White.Jukebox;
 using Content.Client.White.Sponsors;
 using Content.Client.White.Stalin;
+using Content.Client.White.TTS;
 using Content.Shared.Administration;
 using Content.Shared.AME;
 using Content.Shared.Gravity;
@@ -74,6 +75,7 @@ namespace Content.Client.Entry
         [Dependency] private readonly SponsorsManager _sponsorsManager = default!;
         [Dependency] private readonly JoinQueueManager _queueManager = default!;
         [Dependency] private readonly StalinManager _stalinManager = default!;
+        [Dependency] private readonly TTSManager _ttsManager = default!;
         [Dependency] private readonly ClientJukeboxSongsSyncManager _jukeboxSyncManager = default!;
         //WD-EDIT
 
@@ -183,6 +185,7 @@ namespace Content.Client.Entry
             //WD-EDIT
             _sponsorsManager.Initialize();
             _queueManager.Initialize();
+            _ttsManager.Initialize();
             _jukeboxSyncManager.Initialize();
             //WD-EDIT
 

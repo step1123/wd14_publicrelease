@@ -21,7 +21,7 @@ public sealed class TTSManager
         new HistogramConfiguration()
         {
             LabelNames = new[] {"type"},
-            Buckets = Histogram.ExponentialBuckets(.1, 1.5, 10),
+            Buckets = Histogram.ExponentialBuckets(.1, 1.5, 100),
         });
 
     private static readonly Counter WantedCount = Metrics.CreateCounter(
@@ -41,7 +41,7 @@ public sealed class TTSManager
     private readonly HttpClient _httpClient = new();
 
     private ISawmill _sawmill = default!;
-    private readonly Dictionary<string, byte[]> _cache = new();
+    private readonly Dictionary<string, byte[]?> _cache = new();
 
     public void Initialize()
     {
@@ -55,7 +55,7 @@ public sealed class TTSManager
     /// <param name="text">SSML formatted text</param>
     /// <returns>OGG audio bytes</returns>
     /// <exception cref="Exception">Throws if url or token CCVar not set or http request failed</exception>
-    public async Task<byte[]> ConvertTextToSpeech(string entityName, string speaker, string text)
+    public async Task<byte[]?> ConvertTextToSpeech(string speaker, string text, string pitch, string rate)
     {
         var url = _cfg.GetCVar(WhiteCVars.TTSApiUrl);
         var maxCacheSize = _cfg.GetCVar(WhiteCVars.TTSMaxCacheSize);
@@ -77,7 +77,8 @@ public sealed class TTSManager
         {
             Text = text,
             Speaker = speaker,
-            Ckey = entityName,
+            Pitch = pitch,
+            Rate = rate
         };
 
         var request = CreateRequestLink(url, body);
@@ -110,14 +111,14 @@ public sealed class TTSManager
         catch (TaskCanceledException)
         {
             RequestTimings.WithLabels("Timeout").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
-            _sawmill.Error($"Timeout of request generation new sound for '{text}' speech by '{speaker}' speaker");
-            throw new Exception("TTS request timeout");
+            _sawmill.Warning($"Timeout of request generation new sound for '{text}' speech by '{speaker}' speaker");
+            return null;
         }
         catch (Exception e)
         {
             RequestTimings.WithLabels("Error").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
-            _sawmill.Error($"Failed of request generation new sound for '{text}' speech by '{speaker}' speaker\n{e}");
-            throw new Exception("TTS request failed");
+            _sawmill.Warning($"Failed of request generation new sound for '{text}' speech by '{speaker}' speaker\n{e}");
+            return null;
         }
     }
 
@@ -125,9 +126,11 @@ public sealed class TTSManager
     {
         var uriBuilder = new UriBuilder(url);
         var query = HttpUtility.ParseQueryString(uriBuilder.Query);
-        query["ckey"] = body.Ckey;
         query["speaker"] = body.Speaker;
         query["text"] = body.Text;
+        query["pitch"] = body.Pitch;
+        query["rate"] = body.Rate;
+        query["ogg"] = "1";
         query["file"] = "1";
         uriBuilder.Query = query.ToString();
         return uriBuilder.ToString();
@@ -156,8 +159,11 @@ public sealed class TTSManager
         [JsonPropertyName("speaker")]
         public string Speaker { get; set; } = default!;
 
-        [JsonPropertyName("ckey")]
-        public string Ckey { get; set; } = default!;
+        [JsonPropertyName("pitch")]
+        public string Pitch { get; set; } = default!;
+
+        [JsonPropertyName("rate")]
+        public string Rate { get; set; } = default!;
     }
 
     private struct GenerateVoiceResponse

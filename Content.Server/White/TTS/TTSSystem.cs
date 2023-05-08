@@ -5,7 +5,9 @@ using Content.Shared.CCVar;
 using Content.Shared.White.TTS;
 using Content.Shared.GameTicking;
 using Content.Shared.White;
+using Robust.Server.Player;
 using Robust.Shared.Configuration;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -21,6 +23,9 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private readonly TTSManager _ttsManager = default!;
     [Dependency] private readonly SharedTransformSystem _xforms = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly IServerNetManager _netMgr = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly TTSPitchRateSystem _ttsPitchRateSystem = default!;
 
     private const int MaxMessageChars = 100 * 2; // same as SingleBubbleCharLimit * 2
     private bool _isEnabled = false;
@@ -34,12 +39,23 @@ public sealed partial class TTSSystem : EntitySystem
         SubscribeLocalEvent<TransformSpeechEvent>(OnTransformSpeech);
         SubscribeLocalEvent<TTSComponent, EntitySpokeEvent>(OnEntitySpoke);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
-        SubscribeNetworkEvent<RequestTTSEvent>(OnRequestTTS);
+
+        _netMgr.RegisterNetMessage<MsgRequestTTS>(OnRequestTTS);
     }
 
-    private void OnRequestTTS(RequestTTSEvent ev)
+    private async void OnRequestTTS(MsgRequestTTS ev)
     {
-        throw new NotImplementedException();
+        var url = _cfg.GetCVar(WhiteCVars.TTSApiUrl);
+        if (string.IsNullOrWhiteSpace(url))
+            return;
+
+        if (!_playerManager.TryGetSessionByChannel(ev.MsgChannel, out var session) ||
+            !_prototypeManager.TryIndex<TTSVoicePrototype>(ev.VoiceId, out var protoVoice))
+            return;
+
+        var soundData = await GenerateTTS(ev.Uid, ev.Text, protoVoice.Speaker);
+        if (soundData != null)
+            RaiseNetworkEvent(new PlayTTSEvent(ev.Uid, soundData), Filter.SinglePlayer(session));
     }
 
     private async void OnEntitySpoke(EntityUid uid, TTSComponent component, EntitySpokeEvent args)
@@ -111,13 +127,34 @@ public sealed partial class TTSSystem : EntitySystem
         _ttsManager.ResetCache();
     }
 
-    private async Task<byte[]?> GenerateTTS(EntityUid uid, string text, string speaker)
+    private async Task<byte[]?> GenerateTTS(EntityUid uid, string text, string speaker, string? speechPitch = null, string? speechRate = null)
     {
         var textSanitized = Sanitize(text);
         if (textSanitized == "")
             return null;
-        var metadata = Comp<MetaDataComponent>(uid);
-        return await _ttsManager.ConvertTextToSpeech(metadata.EntityName, speaker, textSanitized);
+
+        string pitch;
+        string rate;
+        if (speechPitch == null || speechRate == null)
+        {
+            if (!_ttsPitchRateSystem.TryGetPitchRate(uid, out var pitchRate))
+            {
+                pitch = "medium";
+                rate = "medium";
+            }
+            else
+            {
+                pitch = pitchRate[0];
+                rate = pitchRate[1];
+            }
+        }
+        else
+        {
+            pitch = speechPitch;
+            rate = speechRate;
+        }
+
+        return await _ttsManager.ConvertTextToSpeech(speaker, textSanitized, pitch, rate);
     }
 }
 
