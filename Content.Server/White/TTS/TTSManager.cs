@@ -21,7 +21,7 @@ public sealed class TTSManager
         new HistogramConfiguration()
         {
             LabelNames = new[] {"type"},
-            Buckets = Histogram.ExponentialBuckets(.1, 1.5, 10),
+            Buckets = Histogram.ExponentialBuckets(.1, 1.5, 100),
         });
 
     private static readonly Counter WantedCount = Metrics.CreateCounter(
@@ -130,6 +130,7 @@ public sealed class TTSManager
         query["text"] = body.Text;
         query["pitch"] = body.Pitch;
         query["rate"] = body.Rate;
+        query["ogg"] = "1";
         query["file"] = "1";
         uriBuilder.Query = query.ToString();
         return uriBuilder.ToString();
