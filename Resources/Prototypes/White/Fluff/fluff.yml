@@ -110,3 +110,30 @@
       sprite: White/Fluff/Warete/warete_jumpsuit.rsi
     - type: Clothing
       sprite: White/Fluff/Warete/warete_jumpsuit.rsi
+
+# HSKveez
+- type: entity
+  parent: ClothingNeckBase
+  id: HSKveezKulon
+  name: плазменное сердце
+  description: Не взрывай.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/HSKveez/hope.rsi
+    - type: Clothing
+      sprite: White/Fluff/HSKveez/hope.rsi
+    - type: PointLight
+      radius: 2
+      energy: 2
+      color: '#ff6bff'
+
+- type: entity
+  name: дубинка контрактника
+  parent: Stunbaton
+  id: HSKveezStunBaton
+  description: Телескопическая дубинка, наносящая легкий электрический шок.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/HSKveez/contactor_batton.rsi
+    - type: Clothing
+      sprite: White/Fluff/HSKveez/contactor_batton.rsi

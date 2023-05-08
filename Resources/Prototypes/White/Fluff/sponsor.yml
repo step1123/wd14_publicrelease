@@ -39,3 +39,15 @@
   id: WareteJumpskirtLoadout
   entity: WareteJumpskirt
   sponsorOnly: true
+
+# HSKveez
+- type: loadout
+  id: HSKveezKulonLoadout
+  entity: HSKveezKulon
+  sponsorOnly: true
+
+- type: loadout
+  id: HSKveezStunBatonLoadout
+  entity: HSKveezStunBaton
+  sponsorOnly: true
+  whitelistJobs: [ Detective, HeadOfSecurity, SecurityCadet, SecurityOfficer, Warden ]
