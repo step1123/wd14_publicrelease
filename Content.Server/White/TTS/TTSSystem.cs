@@ -45,6 +45,10 @@ public sealed partial class TTSSystem : EntitySystem
 
     private async void OnRequestTTS(MsgRequestTTS ev)
     {
+        var url = _cfg.GetCVar(WhiteCVars.TTSApiUrl);
+        if (string.IsNullOrWhiteSpace(url))
+            return;
+
         if (!_playerManager.TryGetSessionByChannel(ev.MsgChannel, out var session) ||
             !_prototypeManager.TryIndex<TTSVoicePrototype>(ev.VoiceId, out var protoVoice))
             return;

@@ -39,7 +39,7 @@ public sealed class TTSPitchRateSystem : EntitySystem
                     pitchRate[0] = "high";
                     pitchRate[1] = "slow";
                 }
-                else if (humanoid.SkinColor.R >= 0.6) // Niggers
+                else if (humanoid.SkinColor.R >= 0.6)
                 {
                     pitchRate[0] = "x-low";
                     pitchRate[1] = "medium";

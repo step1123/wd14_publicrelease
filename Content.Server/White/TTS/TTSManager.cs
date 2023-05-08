@@ -41,7 +41,7 @@ public sealed class TTSManager
     private readonly HttpClient _httpClient = new();
 
     private ISawmill _sawmill = default!;
-    private readonly Dictionary<string, byte[]> _cache = new();
+    private readonly Dictionary<string, byte[]?> _cache = new();
 
     public void Initialize()
     {
@@ -55,7 +55,7 @@ public sealed class TTSManager
     /// <param name="text">SSML formatted text</param>
     /// <returns>OGG audio bytes</returns>
     /// <exception cref="Exception">Throws if url or token CCVar not set or http request failed</exception>
-    public async Task<byte[]> ConvertTextToSpeech(string speaker, string text, string pitch, string rate)
+    public async Task<byte[]?> ConvertTextToSpeech(string speaker, string text, string pitch, string rate)
     {
         var url = _cfg.GetCVar(WhiteCVars.TTSApiUrl);
         var maxCacheSize = _cfg.GetCVar(WhiteCVars.TTSMaxCacheSize);
@@ -111,14 +111,14 @@ public sealed class TTSManager
         catch (TaskCanceledException)
         {
             RequestTimings.WithLabels("Timeout").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
-            _sawmill.Error($"Timeout of request generation new sound for '{text}' speech by '{speaker}' speaker");
-            throw new Exception("TTS request timeout");
+            _sawmill.Warning($"Timeout of request generation new sound for '{text}' speech by '{speaker}' speaker");
+            return null;
         }
         catch (Exception e)
         {
             RequestTimings.WithLabels("Error").Observe((DateTime.UtcNow - reqTime).TotalSeconds);
-            _sawmill.Error($"Failed of request generation new sound for '{text}' speech by '{speaker}' speaker\n{e}");
-            throw new Exception("TTS request failed");
+            _sawmill.Warning($"Failed of request generation new sound for '{text}' speech by '{speaker}' speaker\n{e}");
+            return null;
         }
     }
 
