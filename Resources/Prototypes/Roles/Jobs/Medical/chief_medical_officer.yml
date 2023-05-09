@@ -19,7 +19,7 @@
   whitelistedSpecies:
     - Human
     - Dwarf
-  canBeAntag: false
+  canBeAntag: true
   access:
   - Medical
   - Command

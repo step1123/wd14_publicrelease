@@ -17,7 +17,7 @@
   whitelistedSpecies:
     - Human
     - Dwarf
-  canBeAntag: false
+  canBeAntag: true
   access:
   - Research
   - Command

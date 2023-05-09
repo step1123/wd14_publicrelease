@@ -22,7 +22,7 @@
   supervisors: job-supervisors-captain
   whitelistedSpecies:
     - Human
-  canBeAntag: false
+  canBeAntag: true
   access:
   - Command
   - HeadOfPersonnel

@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading;
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.EntitySystems;
+using Content.Server.Carrying;
 using Content.Server.Disposal.Tube.Components;
 using Content.Server.Disposal.Unit.Components;
 using Content.Server.Popups;
@@ -473,6 +474,9 @@ namespace Content.Server.Disposal.Unit.EntitySystems
                 _popupSystem.PopupEntity(Loc.GetString("disposal-unit-no-hands"), userId.Value, userId.Value, PopupType.SmallCaution);
                 return false;
             }
+
+            if (HasComp<CarryingComponent>(toInsertId))
+                return false;
 
             if (!CanInsert(unit, toInsertId))
                 return false;

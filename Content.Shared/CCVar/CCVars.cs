@@ -1073,7 +1073,7 @@ namespace Content.Shared.CCVar
         /// - When traversing grids it will snap to the nearest cardinal which will generally be imperceptible.
         /// </summary>
         public static readonly CVarDef<bool> CameraRotationLocked =
-            CVarDef.Create("shuttle.camera_rotation_locked", false, CVar.REPLICATED);
+            CVarDef.Create("shuttle.camera_rotation_locked", true, CVar.REPLICATED);
 
         /// <summary>
         /// Whether the arrivals shuttle is enabled.
@@ -1162,7 +1162,7 @@ namespace Content.Shared.CCVar
         ///     Time in minutes after round start to auto-call the shuttle. Set to zero to disable.
         /// </summary>
         public static readonly CVarDef<int> EmergencyShuttleAutoCallTime =
-            CVarDef.Create("shuttle.auto_call_time", 90, CVar.SERVERONLY);
+            CVarDef.Create("shuttle.auto_call_time", 0, CVar.SERVERONLY);
 
         /// <summary>
         ///     Time in minutes after the round was extended (by recalling the shuttle) to call
