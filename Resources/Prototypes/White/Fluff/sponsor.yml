@@ -51,3 +51,9 @@
   entity: HSKveezStunBaton
   sponsorOnly: true
   whitelistJobs: [ Detective, HeadOfSecurity, SecurityCadet, SecurityOfficer, Warden ]
+
+#Omntns
+- type: loadout
+  id: OmntnsHammerLoadout
+  entity: OmntnsHammer
+  sponsorOnly: true
