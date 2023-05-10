@@ -2225,3 +2225,4 @@
     - type: GhostRole
       name: Кошка
       description: Мяу!
+    - type: GhostTakeoverAvailable
