@@ -226,7 +226,7 @@ namespace Content.Client.Preferences.UI
 
                 if (specie.SponsorOnly)
                 {
-                    if(_sponsorsManager.TryGetInfo(out var info) && info.AllowedMarkings.Contains(specie.Name))
+                    if(_sponsorsManager.TryGetInfo(out var info) && info.AllowedMarkings.Contains(specie.ID))
                     {
                         CSpeciesButton.AddItem(name, i);
                     }
