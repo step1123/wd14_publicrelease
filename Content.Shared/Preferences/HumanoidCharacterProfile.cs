@@ -430,6 +430,12 @@ namespace Content.Shared.Preferences
                 speciesPrototype = prototypeManager.Index<SpeciesPrototype>(Species);
             }
 
+            if (speciesPrototype.SponsorOnly && !sponsorMarkings.Contains(Species))
+            {
+                Species = SharedHumanoidAppearanceSystem.DefaultSpecies;
+                speciesPrototype = prototypeManager.Index<SpeciesPrototype>(Species);
+            }
+
             var sex = Sex switch
             {
                 Sex.Male => Sex.Male,

@@ -6,3 +6,4 @@ species-name-reptilian = Ящер
 species-name-slime = Слаймолюд
 species-name-diona = Диона
 species-name-skrell = Скрелл
+species-name-felinid = Фелинид

@@ -23,7 +23,7 @@
   supervisors: job-supervisors-centcom
   whitelistedSpecies:
     - Human
-    - Dwarf
+    - Felinid
   canBeAntag: false
   accessGroups:
   - AllAccess

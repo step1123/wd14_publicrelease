@@ -5,6 +5,7 @@ using Content.Client.Message;
 using Content.Client.Players.PlayTimeTracking;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
+using Content.Client.White.Sponsors;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
@@ -49,6 +50,11 @@ namespace Content.Client.Preferences.UI
     [GenerateTypedNameReferences]
     public sealed partial class HumanoidProfileEditor : Control
     {
+
+        //WD-EDIT
+        private readonly SponsorsManager _sponsorsManager;
+        //WD-EDIT
+
         private readonly IClientPreferencesManager _preferencesManager;
         private readonly IEntityManager _entMan;
         private readonly IConfigurationManager _configurationManager;
@@ -122,6 +128,7 @@ namespace Content.Client.Preferences.UI
             IEntityManager entityManager, IConfigurationManager configurationManager)
         {
             RobustXamlLoader.Load(this);
+            _sponsorsManager = IoCManager.Resolve<SponsorsManager>();
             _random = IoCManager.Resolve<IRobustRandom>();
             _prototypeManager = prototypeManager;
             _entMan = entityManager;
@@ -210,9 +217,23 @@ namespace Content.Client.Preferences.UI
             #region Species
 
             _speciesList = prototypeManager.EnumeratePrototypes<SpeciesPrototype>().Where(o => o.RoundStart).ToList();
+
             for (var i = 0; i < _speciesList.Count; i++)
             {
-                var name = Loc.GetString(_speciesList[i].Name);
+                //WD EDIT
+                var specie = _speciesList[i];
+                var name = Loc.GetString(specie.Name);
+
+                if (specie.SponsorOnly)
+                {
+                    if(_sponsorsManager.TryGetInfo(out var info) && info.AllowedMarkings.Contains(specie.Name))
+                    {
+                        CSpeciesButton.AddItem(name, i);
+                    }
+                    continue;
+                }
+
+                //WD EDIT
                 CSpeciesButton.AddItem(name, i);
             }
 

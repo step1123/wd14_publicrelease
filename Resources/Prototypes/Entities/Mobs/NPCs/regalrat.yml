@@ -187,6 +187,7 @@
   parent: SimpleMobBase
   description: He's da mini rat. He don't make da roolz.
   components:
+  - type: FelinidFood
   - type: CombatMode
   - type: MovementSpeedModifier
     baseWalkSpeed : 3.5

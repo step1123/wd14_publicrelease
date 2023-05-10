@@ -129,6 +129,9 @@ public sealed class SpeciesPrototype : IPrototype
     /// </summary>
     [DataField("maxAge")]
     public int MaxAge = 120;
+
+    [DataField("sponsorOnly")]
+    public bool SponsorOnly { get; } = false;
 }
 
 public enum SpeciesNaming : byte
