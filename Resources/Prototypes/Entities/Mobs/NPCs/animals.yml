@@ -2214,3 +2214,13 @@
   - type: Faction
     factions:
     - Passive
+
+- type: entity
+  name: мурка
+  parent: MobCat
+  id: MobCatMurka
+  description: Потомок кошко-богини.
+  components:
+    - type: GhostRole
+      name: Кошка
+      description: Мяу!
