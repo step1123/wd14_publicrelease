@@ -86,7 +86,7 @@ public sealed class TTSManager
         var reqTime = DateTime.UtcNow;
         try
         {
-            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(2));
+            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(4));
             var response = await _httpClient.GetAsync(request, cts.Token);
             if (!response.IsSuccessStatusCode)
             {
@@ -130,7 +130,6 @@ public sealed class TTSManager
         query["text"] = body.Text;
         query["pitch"] = body.Pitch;
         query["rate"] = body.Rate;
-        query["ogg"] = "1";
         query["file"] = "1";
         uriBuilder.Query = query.ToString();
         return uriBuilder.ToString();
