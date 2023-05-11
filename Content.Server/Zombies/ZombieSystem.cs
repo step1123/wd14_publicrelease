@@ -51,6 +51,45 @@ namespace Content.Server.Zombies
             SubscribeLocalEvent<ZombieComponent, CloningEvent>(OnZombieCloning);
             SubscribeLocalEvent<ZombieComponent, AttemptSneezeCoughEvent>(OnSneeze);
             SubscribeLocalEvent<ZombieComponent, TryingToSleepEvent>(OnSleepAttempt);
+
+            SubscribeLocalEvent<PendingZombieComponent, MapInitEvent>(OnPendingMapInit);
+        }
+
+        private void OnPendingMapInit(EntityUid uid, PendingZombieComponent component, MapInitEvent args)
+        {
+            component.NextTick = _timing.CurTime;
+        }
+
+        public override void Update(float frameTime)
+        {
+            base.Update(frameTime);
+            var query = EntityQueryEnumerator<PendingZombieComponent>();
+            var curTime = _timing.CurTime;
+
+            // Hurt the living infected
+            while (query.MoveNext(out var uid, out var comp))
+            {
+                if (comp.NextTick + TimeSpan.FromSeconds(1) > curTime)
+                    continue;
+
+                comp.InfectedSecs += 1;
+                // Pain of becoming a zombie grows over time
+                // 1x at 30s, 3x at 60s, 6x at 90s, 10x at 120s.
+                var pain_multiple = 0.1 + 0.02 * comp.InfectedSecs + 0.0005 * comp.InfectedSecs * comp.InfectedSecs;
+                comp.NextTick = curTime;
+                _damageable.TryChangeDamage(uid, comp.Damage * pain_multiple, true, false);
+            }
+
+            var zomb_query = EntityQueryEnumerator<ZombieComponent>();
+            // Heal the zombified
+            while (zomb_query.MoveNext(out var uid, out var comp))
+            {
+                if (comp.NextTick + TimeSpan.FromSeconds(1) > curTime)
+                    continue;
+
+                comp.NextTick = curTime;
+                _damageable.TryChangeDamage(uid, comp.Damage, true, false);
+            }
         }
 
         private void OnSleepAttempt(EntityUid uid, ZombieComponent component, ref TryingToSleepEvent args)
@@ -151,11 +190,18 @@ namespace Content.Server.Zombies
                 if (!TryComp<MobStateComponent>(entity, out var mobState) || HasComp<DroneComponent>(entity))
                     continue;
 
-                if (HasComp<DiseaseCarrierComponent>(entity) && _robustRandom.Prob(GetZombieInfectionChance(entity, component)))
-                    _disease.TryAddDisease(entity, "ActiveZombieVirus");
-
                 if (HasComp<ZombieComponent>(entity))
+                {
                     args.BonusDamage = -args.BaseDamage * zombieComp.OtherZombieDamageCoefficient;
+                }
+                else
+                {
+                    if (_random.Prob(GetZombieInfectionChance(entity, component)))
+                    {
+                        EnsureComp<PendingZombieComponent>(entity);
+                        EnsureComp<ZombifyOnDeathComponent>(entity);
+                    }
+                }
 
                 if ((mobState.CurrentState == MobState.Dead || mobState.CurrentState == MobState.Critical)
                     && !HasComp<ZombieComponent>(entity))
