@@ -12,6 +12,7 @@ using Content.Shared.Bed.Sleep;
 using Content.Shared.Chemistry.Components;
 using Content.Server.Emoting.Systems;
 using Content.Server.Speech.EntitySystems;
+using Content.Shared.Damage;
 using Content.Shared.Disease.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
@@ -37,6 +38,7 @@ namespace Content.Server.Zombies
         [Dependency] private readonly IPrototypeManager _protoManager = default!;
         [Dependency] private readonly IRobustRandom _robustRandom = default!;
         [Dependency] private readonly HumanoidAppearanceSystem _humanoidSystem = default!;
+        [Dependency] private readonly DamageableSystem _damageable = default!;
 
         public override void Initialize()
         {
@@ -57,14 +59,14 @@ namespace Content.Server.Zombies
 
         private void OnPendingMapInit(EntityUid uid, PendingZombieComponent component, MapInitEvent args)
         {
-            component.NextTick = _timing.CurTime;
+            component.NextTick = _gameTiming.CurTime;
         }
 
         public override void Update(float frameTime)
         {
             base.Update(frameTime);
             var query = EntityQueryEnumerator<PendingZombieComponent>();
-            var curTime = _timing.CurTime;
+            var curTime = _gameTiming.CurTime;
 
             // Hurt the living infected
             while (query.MoveNext(out var uid, out var comp))
@@ -196,7 +198,7 @@ namespace Content.Server.Zombies
                 }
                 else
                 {
-                    if (_random.Prob(GetZombieInfectionChance(entity, component)))
+                    if (_robustRandom.Prob(GetZombieInfectionChance(entity, component)))
                     {
                         EnsureComp<PendingZombieComponent>(entity);
                         EnsureComp<ZombifyOnDeathComponent>(entity);
