@@ -95,11 +95,15 @@ public sealed class MenuButton : ContainerButton
 
     private void OnKeyBindingChanged(IKeyBinding obj)
     {
+        if(string.IsNullOrEmpty(_function.FunctionName)) return; //WD EDIT
+
         _buttonLabel!.Text = BoundKeyHelper.ShortKeyName(_function);
     }
 
     private void OnKeyBindingChanged()
     {
+        if(string.IsNullOrEmpty(_function.FunctionName)) return; //WD EDIT
+
         _buttonLabel!.Text = BoundKeyHelper.ShortKeyName(_function);
     }
 
