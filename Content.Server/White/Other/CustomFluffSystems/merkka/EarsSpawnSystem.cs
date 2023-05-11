@@ -6,7 +6,7 @@ using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Server.GameObjects;
 
-namespace Content.Server.White.Other.Lazy;
+namespace Content.Server.White.Other.CustomFluffSystems.merkka;
 
 public sealed class EarsSpawnSystem : EntitySystem
 {

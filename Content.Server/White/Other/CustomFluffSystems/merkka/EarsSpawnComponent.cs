@@ -1,7 +1,7 @@
 using Content.Shared.Actions.ActionTypes;
 using Robust.Shared.Utility;
 
-namespace Content.Server.White.Other.Lazy;
+namespace Content.Server.White.Other.CustomFluffSystems.merkka;
 
 [RegisterComponent]
 public sealed class EarsSpawnComponent : Component

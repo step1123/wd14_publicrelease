@@ -2,7 +2,7 @@ using Content.Server.Bible.Components;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Ghost.Roles.Events;
 using Content.Server.Popups;
-using Content.Server.White.Other.Lazy;
+using Content.Server.White.Other.CustomFluffSystems.merkka;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
