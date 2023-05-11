@@ -57,3 +57,9 @@
   id: OmntnsHammerLoadout
   entity: OmntnsHammer
   sponsorOnly: true
+
+# Pets summon book
+- type: loadout
+  id: PetsSummonBookLoadout
+  entity: PetSummonBook
+  sponsorOnly: true

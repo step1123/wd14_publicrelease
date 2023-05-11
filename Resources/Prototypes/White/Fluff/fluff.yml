@@ -163,3 +163,21 @@
       damage:
         types:
           Blunt: 0
+
+# Pets book
+- type: entity
+  parent: BookBase
+  id: PetSummonBook
+  name: странная потрёпанная книга
+  description: Книга непонятного происхождения.
+  suffix: Флафф
+  components:
+    - type: Sprite
+      sprite: Objects/Misc/books.rsi
+      layers:
+      - state: summon_book
+    - type: Item
+      size: 5
+    - type: Paper
+      content: Ego voco electi pet
+    - type: PetSummon

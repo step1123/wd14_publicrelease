@@ -1,0 +1,73 @@
+﻿# Kommandant
+- type: entity
+  parent: SimpleMobBase
+  id: KommandantPetSpider
+  name: паук Валера
+  description: Любит мух и деньги.
+  components:
+  - type: Faction
+    factions:
+      - PetsNT
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+      - map: [ "enum.DamageStateVisualLayers.Base" ]
+        state: viper
+        sprite: White/Mobs/Pets/Kommandant/spider.rsi
+        scale: "0.5, 0.5"
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 130
+        mask:
+          - MobMask
+        layer:
+          - MobLayer
+  - type: Appearance
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: viper
+      Critical:
+        Base: viper_dead
+      Dead:
+        Base: viper_dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      90: Critical
+      150: Dead
+  - type: ReplacementAccent
+    accent: xeno
+  - type: InteractionPopup
+    successChance: 0.5
+    interactSuccessString: petting-success-tarantula
+    interactFailureString: petting-failure-generic
+  - type: IgnoreSpiderWeb
+  - type: NoSlip
+  - type: CanEscapeInventory
+  - type: Grammar
+    attributes:
+      proper: true
+      gender: female
+  - type: Bloodstream
+    bloodMaxVolume: 150
+    bloodReagent: SpiderBlood
+  - type: Pacifist
+  - type: Tag
+    tags:
+      - CannotSuicide
+  - type: Item
+    size: 10
+  - type: GhostRole
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: "Питомец"
+    description: "Следуйте за хозяином"
+    rules: "Всегда следуйте за хозяином и слушайте его приказы."
+
