@@ -45,3 +45,12 @@
   alpha: 0.9
   ghostName: Огонек
   ghostDescription: А где тут огнетушитель?
+
+#pointpng
+- type: customGhost
+  id: cheeseCheese-ghost
+  ckey: cheese_cheese
+  sprite: White/Ghosts/cheese_cheese-ghost.rsi
+  alpha: 0.8
+  ghostName: Фырчало
+  ghostDescription: Инженерный борг
