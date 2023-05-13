@@ -28,11 +28,15 @@ public sealed class CustomGhostPrototype : IPrototype
 
     [DataField("ghostDescription")]
     public string GhostDescription = string.Empty;
+
+    [DataField("size")]
+    public Vector2 SizeOverride = Vector2.One;
 }
 
 [Serializable, NetSerializable]
 public enum CustomGhostAppearance
 {
     Sprite,
-    AlphaOverride
+    AlphaOverride,
+    SizeOverride
 }

@@ -21,5 +21,10 @@ public sealed class CustomGhostVisualizer : VisualizerSystem<GhostComponent>
         {
             args.Sprite.Color = args.Sprite.Color.WithAlpha(alpha);
         }
+
+        if (AppearanceSystem.TryGetData<Vector2>(uid, CustomGhostAppearance.SizeOverride, out var size, args.Component))
+        {
+            args.Sprite.Scale = size;
+        }
     }
 }

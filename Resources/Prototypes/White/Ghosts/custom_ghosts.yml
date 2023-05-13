@@ -54,3 +54,13 @@
   alpha: 0.8
   ghostName: Фырчало
   ghostDescription: Инженерный борг
+
+#reider207
+- type: customGhost
+  id: reider207-ghost
+  ckey: reider207
+  sprite: White/Ghosts/reider207-ghost.rsi
+  alpha: 0.8
+  ghostName: Гань Юй
+  ghostDescription: Священная Крио Лань
+  size: 0.8, 0.8
