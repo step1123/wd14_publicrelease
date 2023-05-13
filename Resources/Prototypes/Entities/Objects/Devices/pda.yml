@@ -155,6 +155,9 @@
   - type: PDA
     id: SecurityCadetIDCard
     state: pda-interncadet
+  - type: PDABorderColor
+    borderColor: "#717059"
+    accentVColor: "#cc4242"
   - type: Icon
     state: pda-interncadet
 
@@ -192,7 +195,8 @@
     id: ChefIDCard
     state: pda-cook
   - type: PDABorderColor
-    borderColor: "#d7d7d0"
+    borderColor: "#44843c"
+    accentVColor: "#00cc35"
   - type: Icon
     state: pda-cook
 
@@ -294,6 +298,9 @@
   - type: PDA
     id: QuartermasterIDCard
     state: pda-qm
+  - type: PDABorderColor
+    borderColor: "#e39751"
+    accentVColor: "#a23e3e"
   - type: Icon
     state: pda-qm
 
@@ -330,6 +337,8 @@
   - type: PDA
     id: BartenderIDCard
     state: pda-bartender
+  - type: PDABorderColor
+    borderColor: "#333333"
   - type: Icon
     state: pda-bartender
 
@@ -354,6 +363,8 @@
   - type: PDA
     id: LawyerIDCard
     state: pda-lawyer
+  - type: PDABorderColor
+    borderColor: "#6f6192"
   - type: Icon
     state: pda-lawyer
 
@@ -406,6 +417,9 @@
       whitelist:
         tags:
         - Write
+  - type: PDABorderColor
+    borderColor: "#789876"
+    accentHColor: "#3c94c5"
   - type: Icon
     state: pda-hop
 
@@ -433,6 +447,9 @@
   - type: PDA
     id: EngineeringIDCard
     state: pda-engineer
+  - type: PDABorderColor
+    borderColor: "#949137"
+    accentVColor: "#A32D26"
   - type: Icon
     state: pda-engineer
 
@@ -474,7 +491,7 @@
     scanDelay: 1.2
     scanningEndSound:
       path: "/Audio/Items/Medical/healthscanner.ogg"
-      
+
 - type: entity
   parent: BasePDA
   id: ParamedicPDA
@@ -493,7 +510,7 @@
     scanDelay: 0.5
     scanningEndSound:
       path: "/Audio/Items/Medical/healthscanner.ogg"
-      
+
 - type: entity
   parent: BasePDA
   id: ChemistryPDA
@@ -557,6 +574,9 @@
   - type: PDA
     id: WardenIDCard
     state: pda-warden
+  - type: PDABorderColor
+    borderColor: "#A32D26"
+    accentVColor: "#cccc00"
   - type: Icon
     state: pda-warden
 
@@ -569,6 +589,8 @@
   - type: PDA
     id: SecurityIDCard
     state: pda-security
+  - type: PDABorderColor
+    borderColor: "#A32D26"
   - type: Icon
     state: pda-security
 
@@ -615,6 +637,9 @@
   - type: PDA
     id: AtmosIDCard
     state: pda-atmos
+  - type: PDABorderColor
+    borderColor: "#949137"
+    accentVColor: "#447987"
   - type: Icon
     state: pda-atmos
 
@@ -627,6 +652,8 @@
   - type: PDA
     id: PassengerIDCard
     state: pda-clear
+  - type: PDABorderColor
+    borderColor: "#288e4d"
   - type: Icon
     state: pda-clear
 
@@ -639,6 +666,8 @@
   - type: PDA
     id: SyndicateIDCard
     state: pda-syndi
+  - type: PDABorderColor
+    borderColor: "#891417"
   - type: Icon
     state: pda-syndi
 
@@ -694,6 +723,8 @@
   - type: PDA
     id: ReporterIDCard
     state: pda-reporter
+  - type: PDABorderColor
+    borderColor: "#3f3f74"
   - type: Icon
     state: pda-reporter
 
