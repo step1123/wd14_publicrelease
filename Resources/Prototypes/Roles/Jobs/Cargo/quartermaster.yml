@@ -19,6 +19,7 @@
   whitelistedSpecies:
     - Human
     - Dwarf
+    - Felinid
   canBeAntag: true
   access:
   - Cargo

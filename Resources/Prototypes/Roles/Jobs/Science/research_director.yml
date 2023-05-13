@@ -16,7 +16,7 @@
   supervisors: job-supervisors-captain
   whitelistedSpecies:
     - Human
-    - Dwarf
+    - Felinid
   canBeAntag: true
   access:
   - Research

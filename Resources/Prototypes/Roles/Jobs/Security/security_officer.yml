@@ -12,7 +12,6 @@
   supervisors: job-supervisors-hos
   whitelistedSpecies:
     - Human
-    - Dwarf
   canBeAntag: false
   access:
   - Security
