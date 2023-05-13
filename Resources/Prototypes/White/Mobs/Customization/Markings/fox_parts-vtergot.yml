@@ -1,0 +1,23 @@
+﻿- type: marking
+  id: FoxEarsVtergot
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Human, Felinid]
+  sponsorOnly: true
+  sprites:
+    - sprite: White/Mobs/Customization/vtergot_fox_parts.rsi
+      state: ears_outer
+    - sprite: White/Mobs/Customization/vtergot_fox_parts.rsi
+      state: ears_inner
+
+- type: marking
+  id: FoxTailVtergot
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Human, Felinid]
+  sponsorOnly: true
+  sprites:
+    - sprite: White/Mobs/Customization/vtergot_fox_parts.rsi
+      state: tail
+    - sprite: White/Mobs/Customization/vtergot_fox_parts.rsi
+      state: tail_tip
