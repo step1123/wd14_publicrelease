@@ -2,6 +2,9 @@ using System.Linq;
 using Content.Client.Humanoid;
 using Content.Client.Inventory;
 using Content.Client.Preferences;
+// WD-EDIT start
+using Content.Client.Stylesheets;
+// WD-EDIT end
 using Content.Client.UserInterface.Controls;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid.Prototypes;
@@ -33,10 +36,13 @@ namespace Content.Client.Lobby.UI
         public LobbyCharacterPreviewPanel()
         {
             IoCManager.InjectDependencies(this);
-            var header = new NanoHeading
+            // WD-EDIT start
+            var justLine = new HLine
             {
-                Text = Loc.GetString("lobby-character-preview-panel-header")
+                Color = StyleNano.NanoGold,
+                Thickness = 2
             };
+            // WD-EDIT end
 
             CharacterSetupButton = new Button
             {
@@ -57,18 +63,24 @@ namespace Content.Client.Lobby.UI
                 Orientation = LayoutOrientation.Vertical,
                 Visible = false
             };
+            // WD-EDIT start
             _viewBox = new BoxContainer
             {
-                Orientation = LayoutOrientation.Horizontal
+                Orientation = LayoutOrientation.Horizontal,
+                Margin = new(0, 10, 0, 10)
             };
+            // WD-EDIT end
             var _vSpacer = new VSpacer();
 
             _loaded.AddChild(_summaryLabel);
+            // WD-EDIT start
+            _loaded.AddChild(justLine);
             _loaded.AddChild(_viewBox);
             _loaded.AddChild(_vSpacer);
             _loaded.AddChild(CharacterSetupButton);
 
-            vBox.AddChild(header);
+            //vBox.AddChild(header);
+            // WD-EDIT end
             vBox.AddChild(_loaded);
             vBox.AddChild(_unloaded);
             AddChild(vBox);

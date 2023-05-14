@@ -38,26 +38,15 @@ namespace Content.Client.Lobby.UI
 
         public void SwitchState(LobbyGuiState state)
         {
-            DefaultState.Visible = false;
-            CharacterSetupState.Visible = false;
-
             switch (state)
             {
                 case LobbyGuiState.Default:
-                    DefaultState.Visible = true;
-                    RightSide.Visible = true;
+                    CharacterSetupState.Visible = false;
+                    GayShitFuckFuckFuck.Visible = true;
                     break;
                 case LobbyGuiState.CharacterSetup:
                     CharacterSetupState.Visible = true;
-
-                    var actualWidth = (float) _userInterfaceManager.RootControl.PixelWidth;
-                    var setupWidth = (float) LeftSide.PixelWidth;
-
-                    if (1 - (setupWidth / actualWidth) > 0.30)
-                    {
-                        RightSide.Visible = false;
-                    }
-
+                    GayShitFuckFuckFuck.Visible = false;
                     break;
             }
         }

@@ -38,7 +38,9 @@ namespace Content.Client.Preferences.UI
         {
             PanelOverride = new StyleBoxFlat()
             {
-                BackgroundColor = new Color(35, 48, 35),
+                // WD-EDIT start
+                // BackgroundColor = new Color(35, 48, 35),
+                // WD-EDIT end
                 ContentMarginTopOverride = 10,
                 ContentMarginBottomOverride = 10,
                 ContentMarginLeftOverride = 10,
@@ -466,7 +468,9 @@ namespace Content.Client.Preferences.UI
 
                     category.AddChild(new PanelContainer
                     {
-                        PanelOverride = new StyleBoxFlat {BackgroundColor = Color.FromHex("#464966")},
+                        // WD-EDIT start
+                        PanelOverride = new StyleBoxFlat {BackgroundColor = Color.FromHex("#466646")},
+                        // WD-EDIT end
                         Children =
                         {
                             new Label

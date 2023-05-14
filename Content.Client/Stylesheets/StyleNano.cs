@@ -71,6 +71,9 @@ namespace Content.Client.Stylesheets
         public const string StyleClassSliderWhite = "White";
 
         public const string StyleClassLabelHeadingBigger = "LabelHeadingBigger";
+        // WD-EDIT start
+        public const string StyleClassLabelHeadingFuckingBigger = "LabelHeadingFuckingBigger";
+        // WD-EDIT end
         public const string StyleClassLabelKeyText = "LabelKeyText";
         public const string StyleClassLabelSecondaryColor = "LabelSecondaryColor";
         public const string StyleClassLabelBig = "LabelBig";
@@ -161,6 +164,9 @@ namespace Content.Client.Stylesheets
             var notoSansBold16 = resCache.NotoStack(variation: "Bold", size: 16);
             var notoSansBold18 = resCache.NotoStack(variation: "Bold", size: 18);
             var notoSansBold20 = resCache.NotoStack(variation: "Bold", size: 20);
+            // WD-EDIT start
+            var awesomeBigFuckingFont = resCache.NotoStack(variation: "Regular", size: 24);
+            // WD-EDIT end
             var windowHeaderTex = resCache.GetTexture("/Textures/Interface/Nano/window_header.png");
             var windowHeader = new StyleBoxTexture
             {
@@ -377,8 +383,14 @@ namespace Content.Client.Stylesheets
             var tabContainerPanel = new StyleBoxTexture
             {
                 Texture = tabContainerPanelTex,
+                // WD-EDIT start
+                Mode = StyleBoxTexture.StretchMode.Tile
+                // WD-EDIT end
             };
             tabContainerPanel.SetPatchMargin(StyleBox.Margin.All, 2);
+            // WD-EDIT start
+            tabContainerPanel.SetExpandMargin(StyleBox.Margin.All, -2);
+            // WD-EDIT end
 
             var tabContainerBoxActive = new StyleBoxFlat {BackgroundColor = new Color(64, 80, 64)};
             tabContainerBoxActive.SetContentMarginOverride(StyleBox.Margin.Horizontal, 5);
@@ -1058,6 +1070,16 @@ namespace Content.Client.Stylesheets
                         new StyleProperty(Label.StylePropertyFont, notoSansBold20),
                         new StyleProperty(Label.StylePropertyFontColor, NanoGold),
                     }),
+
+                // WD-EDIT start
+                // Fucking big Label
+                new StyleRule(new SelectorElement(typeof(Label), new[] {StyleClassLabelHeadingFuckingBigger}, null, null),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, awesomeBigFuckingFont),
+                        new StyleProperty(Label.StylePropertyFontColor, NanoGold),
+                    }),
+                // WD-EDIT end
 
                 // Small Label
                 new StyleRule(new SelectorElement(typeof(Label), new[] {StyleClassLabelSubText}, null, null), new[]

@@ -73,6 +73,10 @@ namespace Content.Client.Preferences.UI
 
             _humanoidProfileEditor = new HumanoidProfileEditor(preferencesManager, prototypeManager, entityManager, configurationManager);
             _humanoidProfileEditor.OnProfileChanged += ProfileChanged;
+            // WD-EDIT start
+            _humanoidProfileEditor.HorizontalExpand = true;
+            _humanoidProfileEditor.HorizontalAlignment = HAlignment.Stretch;
+            // WD-EDIT end
             CharEditor.AddChild(_humanoidProfileEditor);
 
             UpdateUI();
@@ -190,7 +194,9 @@ namespace Content.Client.Preferences.UI
                 var view = new SpriteView
                 {
                     Sprite = entityManager.GetComponent<SpriteComponent>(_previewDummy),
-                    Scale = (2, 2),
+                    // WD-EDIT start
+                    Scale = ((float) 1.45, (float) 1.45),
+                    // WD-EDIT end
                     OverrideDirection = Direction.South
                 };
 
@@ -207,6 +213,9 @@ namespace Content.Client.Preferences.UI
                 {
                     Text = description,
                     ClipText = true,
+                    // WD-EDIT start
+                    MinSize = (100, 0),
+                    // WD-EDIT end
                     HorizontalExpand = true
                 };
                 var deleteButton = new Button
@@ -238,6 +247,9 @@ namespace Content.Client.Preferences.UI
                 {
                     Orientation = LayoutOrientation.Horizontal,
                     HorizontalExpand = true,
+                    // WD-EDIT start
+                    MinSize = (125, 0),
+                    // WD-EDIT end
                     SeparationOverride = 0,
                     Children =
                     {
