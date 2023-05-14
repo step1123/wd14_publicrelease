@@ -412,14 +412,6 @@
     - MeatyOreBoots
 
 - type: listing
-  id: MeatyClothingShoesGaloshes
-  productEntity: ClothingShoesGaloshes
-  cost:
-    MeatyOreCoin: 1
-  categories:
-    - MeatyOreBoots
-
-- type: listing
   id: MeatyClothingShoesSwat
   productEntity: ClothingShoesSwat
   cost:
