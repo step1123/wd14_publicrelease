@@ -211,6 +211,12 @@ public sealed class UtkaBannedEvent : UtkaBaseMessage
 
     [JsonPropertyName("reason")]
     public string? Reason { get; set; }
+
+    [JsonPropertyName("rid")]
+    public int? Rid { get; set; }
+
+    [JsonPropertyName("ban_id")]
+    public int? BanId { get; set; }
 }
 
 public sealed class UtkaBanRequest : UtkaBaseMessage
