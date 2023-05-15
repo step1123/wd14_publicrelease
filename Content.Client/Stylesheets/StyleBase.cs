@@ -123,7 +123,7 @@ namespace Content.Client.Stylesheets
 
             var vScrollBarGrabberNormal = new StyleBoxFlat
             {
-                BackgroundColor = Color.DarkKhaki.WithAlpha(0.35f), ContentMarginLeftOverride = DefaultGrabberSize,
+                BackgroundColor = Color.CornflowerBlue.WithAlpha(0.35f), ContentMarginLeftOverride = DefaultGrabberSize,
                 ContentMarginTopOverride = DefaultGrabberSize
             };
             var vScrollBarGrabberHover = new StyleBoxFlat
@@ -139,7 +139,7 @@ namespace Content.Client.Stylesheets
 
             var hScrollBarGrabberNormal = new StyleBoxFlat
             {
-                BackgroundColor = Color.DarkKhaki.WithAlpha(0.35f), ContentMarginTopOverride = DefaultGrabberSize
+                BackgroundColor = Color.CornflowerBlue.WithAlpha(0.35f), ContentMarginTopOverride = DefaultGrabberSize
             };
             var hScrollBarGrabberHover = new StyleBoxFlat
             {

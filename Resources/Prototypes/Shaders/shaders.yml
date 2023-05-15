@@ -71,3 +71,13 @@
   id: Stealth
   kind: source
   path: "/Textures/Shaders/stealth.swsl"
+
+- type: shader
+  id: Glitch
+  kind: source
+  path: "/Textures/Shaders/glitch.swsl"
+
+- type: shader
+  id: Starfield
+  kind: source
+  path: "/Textures/Shaders/starfield.swsl"

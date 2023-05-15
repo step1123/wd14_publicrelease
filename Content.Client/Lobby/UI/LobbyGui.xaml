@@ -17,7 +17,7 @@
         <SplitContainer ResizeMode="NotResizable" Name="GayShitFuckFuckFuck" State="Auto" HorizontalExpand="True" Orientation="Vertical">
             <!-- LHS Controls -->
             <BoxContainer Name="TopSide" Orientation="Vertical" HorizontalAlignment="Stretch" HorizontalExpand="True" VerticalExpand="True" VerticalAlignment="Top">
-                <PanelContainer Name="TopPanel" MinWidth="722" StyleClasses="GayShitBackground" VerticalExpand="True" HorizontalExpand="True" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                <PanelContainer Name="TopPanel" MinWidth="722" StyleClasses="LobbyGayBackground" VerticalExpand="True" HorizontalExpand="True" HorizontalAlignment="Stretch" VerticalAlignment="Top">
                     <BoxContainer Orientation="Vertical" HorizontalExpand="True" HorizontalAlignment="Stretch" Margin="8 8 8 8">
                         <BoxContainer Orientation="Horizontal" MinSize="0 40" HorizontalAlignment="Center">
                             <info:LinkBanner Name="LinkBanner" VerticalExpand="True" HorizontalAlignment="Center"/>
@@ -32,13 +32,13 @@
             </BoxContainer>
             <!-- Bottom -->
             <BoxContainer Name="BottomSide" Orientation="Horizontal" HorizontalExpand="True" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
-                <PanelContainer Name="BottomLeft" MinHeight="100" MinWidth="150" StyleClasses="GayShitBackground" HorizontalExpand="True" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" >
+                <PanelContainer Name="BottomLeft" MinHeight="100" MinWidth="150" StyleClasses="LobbyGayBackground" HorizontalExpand="True" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" >
                     <BoxContainer Orientation="Vertical" MaxWidth="350" Margin="8 8 8 8" HorizontalAlignment="Stretch">
                         <lobbyUi:LobbyCharacterPreviewPanel Name="CharacterPreview" Access="Public" Margin="3 3 3 3" />
                         <controls:HSpacer Spacing="5"/>
                     </BoxContainer>
                 </PanelContainer>
-                <PanelContainer StyleClasses="GayShitBackground" MinHeight="400" MinWidth="450" HorizontalAlignment="Stretch" Name="BottomCenter" VerticalAlignment="Bottom"  HorizontalExpand="True" >
+                <PanelContainer StyleClasses="LobbyGayBackground" MinHeight="400" MinWidth="450" HorizontalAlignment="Stretch" Name="BottomCenter" VerticalAlignment="Bottom"  HorizontalExpand="True" >
                     <BoxContainer Orientation="Vertical" MinWidth="450" VerticalExpand="True" HorizontalAlignment="Stretch" Margin="8 8 8 8">
                         <BoxContainer Orientation="Horizontal" MinSize="0 40" Margin="0 0 0 8" Name="HeaderContainer" Access="Public"  SeparationOverride="4">
                             <Label Name="ServerName" Access="Public" StyleClasses="LabelHeadingFuckingBigger" VAlign="Center" HorizontalExpand="True" HorizontalAlignment="Center" />
@@ -59,7 +59,7 @@
                         <widgets:ChatBox Name="Chat" Access="Public" VerticalExpand="True" Margin="3 3 3 3" MinHeight="300" HorizontalExpand="True" HorizontalAlignment="Stretch" />
                     </BoxContainer>
                 </PanelContainer>
-                <PanelContainer Name="BottomRight" MinHeight="150" MinWidth="350" StyleClasses="GayShitBackground" HorizontalExpand="True" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+                <PanelContainer Name="BottomRight" MinHeight="150" MinWidth="350" StyleClasses="LobbyGayBackground" HorizontalExpand="True" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
                     <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="8 8 8 8">
                         <info:ServerInfo Name="ServerInfo" Access="Public" MinSize="0 30" VerticalExpand="True" HorizontalExpand="True" Margin="3 3 3 3" HorizontalAlignment="Stretch"/>
                     </BoxContainer>

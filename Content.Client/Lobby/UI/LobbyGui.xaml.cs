@@ -25,12 +25,15 @@ namespace Content.Client.Lobby.UI
     {
         [Dependency] private readonly IClientConsoleHost _consoleHost = default!;
         [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default!;
+        private readonly ShaderInstance _funnyShader;
 
         public LobbyGui()
         {
             RobustXamlLoader.Load(this);
             SetAnchorPreset(MainContainer, LayoutPreset.Wide);
             SetAnchorPreset(Background, LayoutPreset.Wide);
+            _funnyShader = IoCManager.Resolve<IPrototypeManager>().Index<ShaderPrototype>("Starfield").InstanceUnique();
+            Background.ShaderOverride = _funnyShader;
 
             LeaveButton.OnPressed += _ => _consoleHost.ExecuteCommand("disconnect");
             OptionsButton.OnPressed += _ => _userInterfaceManager.GetUIController<OptionsUIController>().ToggleWindow();

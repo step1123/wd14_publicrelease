@@ -18,7 +18,15 @@
     - /Audio/Lobby/every_light_is_blinking_at_once.ogg
 
 - type: soundCollection
-  id: LobbyMusic
+  id: LobbyMusicOld2
   files:
     - /Audio/Lobby/saveheaven.ogg
     - /Audio/Lobby/roomishere.ogg
+
+- type: soundCollection
+  id: LobbyMusic
+  files:
+    - /Audio/Lobby/1.ogg
+    - /Audio/Lobby/2.ogg
+    - /Audio/Lobby/mod.flip-flap.ogg
+    - /Audio/Lobby/comet_haley.ogg

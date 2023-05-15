@@ -64,6 +64,7 @@ namespace Content.Client.Stylesheets
         public const string StyleClassStorageButton = "storageButton";
         public const string StyleClassFuckyWuckyBackground = "FuckyWuckyBackground";
         public const string StyleClassGayShitBackground = "GayShitBackground";
+        public const string StyleClassLobbyGayBackground = "LobbyGayBackground";
 
         public const string StyleClassSliderRed = "Red";
         public const string StyleClassSliderGreen = "Green";
@@ -88,15 +89,15 @@ namespace Content.Client.Stylesheets
 
         public static readonly Color PanelDark = Color.FromHex("#1E1E22");
 
-        public static readonly Color NanoGold = Color.FromHex("#A2B1A8");
+        public static readonly Color NanoGold = Color.FromHex("#A2A8B1");
         public static readonly Color GoodGreenFore = Color.FromHex("#4D5B5C");
         public static readonly Color ConcerningOrangeFore = Color.FromHex("#5C5A4D");
         public static readonly Color DangerousRedFore = Color.FromHex("#5C4D5B");
-        public static readonly Color DisabledFore = Color.FromHex("#262E29");
+        public static readonly Color DisabledFore = Color.FromHex("#26292E");
 
-        public static readonly Color ButtonColorDefault = Color.FromHex("#4D5D53");
-        public static readonly Color ButtonColorDefaultRed = Color.FromHex("#992723");
-        public static readonly Color ButtonColorHovered = Color.FromHex("#58695E");
+        public static readonly Color ButtonColorDefault = Color.FromHex("#4D4D5A");
+        public static readonly Color ButtonColorDefaultRed = Color.FromHex("#992327");
+        public static readonly Color ButtonColorHovered = Color.FromHex("#59596E");
         public static readonly Color ButtonColorHoveredRed = Color.FromHex("#4D5D53");
         public static readonly Color ButtonColorPressed = Color.FromHex("#000000");
         public static readonly Color ButtonColorDisabled = Color.FromHex("#000000");
@@ -112,22 +113,22 @@ namespace Content.Client.Stylesheets
         // Context menu button colors
         public static readonly Color ButtonColorContext = Color.FromHex("#1119");
         public static readonly Color ButtonColorContextHover = Color.FromHex("#6E8476");
-        public static readonly Color ButtonColorContextPressed = Color.FromHex("#879B8F");
-        public static readonly Color ButtonColorContextDisabled = Color.FromHex("#262E29");
+        public static readonly Color ButtonColorContextPressed = Color.FromHex("#878F9B");
+        public static readonly Color ButtonColorContextDisabled = Color.FromHex("#26292E");
 
         // Examine button colors
         public static readonly Color ExamineButtonColorContext = Color.Transparent;
         public static readonly Color ExamineButtonColorContextHover = Color.FromHex("#6E8476");
-        public static readonly Color ExamineButtonColorContextPressed = Color.FromHex("#879B8F");
-        public static readonly Color ExamineButtonColorContextDisabled = Color.FromHex("#262E29");
+        public static readonly Color ExamineButtonColorContextPressed = Color.FromHex("#878F9B");
+        public static readonly Color ExamineButtonColorContextDisabled = Color.FromHex("#26292E");
 
         // UI Panel colors
-        public static readonly Color PanelColorDark = Color.FromHex("#1B211D");
+        public static readonly Color PanelColorDark = Color.FromHex("#1B1B21");
 
         // Fancy Tree elements
-        public static readonly Color FancyTreeEvenRowColor = Color.FromHex("#313B35");
-        public static readonly Color FancyTreeOddRowColor = FancyTreeEvenRowColor * new Color(0.8f, 0.9f, 0.8f);
-        public static readonly Color FancyTreeSelectedRowColor = new Color(55, 80, 68);
+        public static readonly Color FancyTreeEvenRowColor = Color.FromHex("#31313B");
+        public static readonly Color FancyTreeOddRowColor = FancyTreeEvenRowColor * new Color(0.8f, 0.8f, 0.9f);
+        public static readonly Color FancyTreeSelectedRowColor = new Color(55, 68, 80);
 
         //Used by the APC and SMES menus
         public const string StyleClassPowerStateNone = "PowerStateNone";
@@ -209,6 +210,17 @@ namespace Content.Client.Stylesheets
             fuckyWuckyBackground.SetPatchMargin(StyleBox.Margin.All, 24);
             fuckyWuckyBackground.SetExpandMargin(StyleBox.Margin.All, -4);
             fuckyWuckyBackground.SetContentMarginOverride(StyleBox.Margin.All, 8);
+
+            var lobbyGayBackgroundTex = resCache.GetTexture("/Textures/Interface/Nano/lobby_gay.png");
+            var lobbyGayBackground = new StyleBoxTexture
+            {
+                Texture = lobbyGayBackgroundTex,
+                Mode = StyleBoxTexture.StretchMode.Tile
+            };
+
+            lobbyGayBackground.SetPatchMargin(StyleBox.Margin.All, 24);
+            lobbyGayBackground.SetExpandMargin(StyleBox.Margin.All, -4);
+            lobbyGayBackground.SetContentMarginOverride(StyleBox.Margin.All, 8);
 
             var gayShitBackgroundTex = resCache.GetTexture("/Textures/Interface/Nano/gay_shit.png");
             var gayShitBackground = new StyleBoxTexture
@@ -392,20 +404,20 @@ namespace Content.Client.Stylesheets
             tabContainerPanel.SetExpandMargin(StyleBox.Margin.All, -2);
             // WD-EDIT end
 
-            var tabContainerBoxActive = new StyleBoxFlat {BackgroundColor = new Color(64, 80, 64)};
+            var tabContainerBoxActive = new StyleBoxFlat {BackgroundColor = new Color(64, 64, 80)};
             tabContainerBoxActive.SetContentMarginOverride(StyleBox.Margin.Horizontal, 5);
-            var tabContainerBoxInactive = new StyleBoxFlat {BackgroundColor = new Color(32, 40, 32)};
+            var tabContainerBoxInactive = new StyleBoxFlat {BackgroundColor = new Color(32, 32, 40)};
             tabContainerBoxInactive.SetContentMarginOverride(StyleBox.Margin.Horizontal, 5);
 
             var progressBarBackground = new StyleBoxFlat
             {
-                BackgroundColor = new Color(0.25f, 0.35f, 0.25f)
+                BackgroundColor = new Color(0.25f, 0.25f, 0.35f)
             };
             progressBarBackground.SetContentMarginOverride(StyleBox.Margin.Vertical, 5);
 
             var progressBarForeground = new StyleBoxFlat
             {
-                BackgroundColor = new Color(0.25f, 0.50f, 0.25f)
+                BackgroundColor = new Color(0.25f, 0.25f, 0.50f)
             };
             progressBarForeground.SetContentMarginOverride(StyleBox.Margin.Vertical, 5);
 
@@ -438,13 +450,13 @@ namespace Content.Client.Stylesheets
             placeholder.SetExpandMargin(StyleBox.Margin.All, -5);
             placeholder.Mode = StyleBoxTexture.StretchMode.Tile;
 
-            var itemListBackgroundSelected = new StyleBoxFlat {BackgroundColor = new Color(75, 90, 75)};
+            var itemListBackgroundSelected = new StyleBoxFlat {BackgroundColor = new Color(75, 75, 90)};
             itemListBackgroundSelected.SetContentMarginOverride(StyleBox.Margin.Vertical, 2);
             itemListBackgroundSelected.SetContentMarginOverride(StyleBox.Margin.Horizontal, 4);
-            var itemListItemBackgroundDisabled = new StyleBoxFlat {BackgroundColor = new Color(10, 20, 10)};
+            var itemListItemBackgroundDisabled = new StyleBoxFlat {BackgroundColor = new Color(10, 10, 20)};
             itemListItemBackgroundDisabled.SetContentMarginOverride(StyleBox.Margin.Vertical, 2);
             itemListItemBackgroundDisabled.SetContentMarginOverride(StyleBox.Margin.Horizontal, 4);
-            var itemListItemBackground = new StyleBoxFlat {BackgroundColor = new Color(55, 70, 55)};
+            var itemListItemBackground = new StyleBoxFlat {BackgroundColor = new Color(55, 55, 70)};
             itemListItemBackground.SetContentMarginOverride(StyleBox.Margin.Vertical, 2);
             itemListItemBackground.SetContentMarginOverride(StyleBox.Margin.Horizontal, 4);
             var itemListItemBackgroundTransparent = new StyleBoxFlat {BackgroundColor = Color.Transparent};
@@ -488,19 +500,19 @@ namespace Content.Client.Stylesheets
             var sliderFillBox = new StyleBoxTexture
             {
                 Texture = sliderFillTex,
-                Modulate = Color.FromHex("#313B35")
+                Modulate = Color.FromHex("#31313B")
             };
 
             var sliderBackBox = new StyleBoxTexture
             {
                 Texture = sliderFillTex,
-                Modulate = Color.FromHex("#1B211D")
+                Modulate = Color.FromHex("#1B1B21")
             };
 
             var sliderForeBox = new StyleBoxTexture
             {
                 Texture = sliderOutlineTex,
-                Modulate = Color.FromHex("#47554C")
+                Modulate = Color.FromHex("#474C55")
             };
 
             var sliderGrabBox = new StyleBoxTexture
@@ -574,6 +586,13 @@ namespace Content.Client.Stylesheets
                     new[]
                     {
                         new StyleProperty(PanelContainer.StylePropertyPanel, fuckyWuckyBackground),
+                    }),
+                // Lobby background.
+                new StyleRule(
+                    new SelectorElement(null, new[] {StyleClassLobbyGayBackground}, null, null),
+                    new[]
+                    {
+                        new StyleProperty(PanelContainer.StylePropertyPanel, lobbyGayBackground),
                     }),
                 // Panel background.
                 new StyleRule(
@@ -694,7 +713,7 @@ namespace Content.Client.Stylesheets
                     new SelectorElement(typeof(Label), null, null, null)),
                     new[]
                     {
-                        new StyleProperty("font-color", Color.FromHex("#3C484181")),
+                        new StyleProperty("font-color", Color.FromHex("#3C484881")),
                     }),
 
                 // Context Menu window
@@ -815,19 +834,19 @@ namespace Content.Client.Stylesheets
 
                 Element<ContainerButton>().Class(ListContainer.StyleClassListContainerButton)
                     .Pseudo(ContainerButton.StylePseudoClassNormal)
-                    .Prop(Control.StylePropertyModulateSelf, new Color(55, 80, 68)),
+                    .Prop(Control.StylePropertyModulateSelf, new Color(55, 68, 80)),
 
                 Element<ContainerButton>().Class(ListContainer.StyleClassListContainerButton)
                     .Pseudo(ContainerButton.StylePseudoClassHover)
-                    .Prop(Control.StylePropertyModulateSelf, new Color(75, 90, 86)),
+                    .Prop(Control.StylePropertyModulateSelf, new Color(75, 86, 90)),
 
                 Element<ContainerButton>().Class(ListContainer.StyleClassListContainerButton)
                     .Pseudo(ContainerButton.StylePseudoClassPressed)
-                    .Prop(Control.StylePropertyModulateSelf, new Color(75, 90, 86)),
+                    .Prop(Control.StylePropertyModulateSelf, new Color(75, 86, 90)),
 
                 Element<ContainerButton>().Class(ListContainer.StyleClassListContainerButton)
                     .Pseudo(ContainerButton.StylePseudoClassDisabled)
-                    .Prop(Control.StylePropertyModulateSelf, new Color(10, 20, 12)),
+                    .Prop(Control.StylePropertyModulateSelf, new Color(10, 12, 20)),
 
                 // Main menu: Make those buttons bigger.
                 new StyleRule(new SelectorChild(
@@ -856,14 +875,14 @@ namespace Content.Client.Stylesheets
                     new SelectorElement(typeof(LineEdit), new[] {LineEdit.StyleClassLineEditNotEditable}, null, null),
                     new[]
                     {
-                        new StyleProperty("font-color", new Color(192, 255, 192)),
+                        new StyleProperty("font-color", new Color(192, 192, 255)),
                     }),
 
                 new StyleRule(
                     new SelectorElement(typeof(LineEdit), null, null, new[] {LineEdit.StylePseudoClassPlaceholder}),
                     new[]
                     {
-                        new StyleProperty("font-color", Color.FromHex("#95A69B")),
+                        new StyleProperty("font-color", Color.FromHex("#959BA6")),
                     }),
 
                 Element<TextEdit>().Pseudo(TextEdit.StylePseudoClassPlaceholder)
@@ -1010,7 +1029,7 @@ namespace Content.Client.Stylesheets
                 new StyleRule(new SelectorElement(typeof(ItemList), null, null, null), new[]
                 {
                     new StyleProperty(ItemList.StylePropertyBackground,
-                        new StyleBoxFlat {BackgroundColor = new Color(32, 40, 32)}),
+                        new StyleBoxFlat {BackgroundColor = new Color(32, 32, 40)}),
                     new StyleProperty(ItemList.StylePropertyItemBackground,
                         itemListItemBackground),
                     new StyleProperty(ItemList.StylePropertyDisabledItemBackground,
@@ -1035,10 +1054,10 @@ namespace Content.Client.Stylesheets
                 new StyleRule(new SelectorElement(typeof(Tree), null, null, null), new[]
                 {
                     new StyleProperty(Tree.StylePropertyBackground,
-                        new StyleBoxFlat {BackgroundColor = new Color(32, 40, 32)}),
+                        new StyleBoxFlat {BackgroundColor = new Color(32, 32, 40)}),
                     new StyleProperty(Tree.StylePropertyItemBoxSelected, new StyleBoxFlat
                     {
-                        BackgroundColor = new Color(55, 75, 68),
+                        BackgroundColor = new Color(55, 69, 75),
                         ContentMarginLeftOverride = 4
                     })
                 }),
@@ -1053,7 +1072,7 @@ namespace Content.Client.Stylesheets
                     new SelectorElement(typeof(Label), new[] {Placeholder.StyleClassPlaceholderText}, null, null), new[]
                     {
                         new StyleProperty(Label.StylePropertyFont, notoSans16),
-                        new StyleProperty(Label.StylePropertyFontColor, new Color(103, 133, 103, 128)),
+                        new StyleProperty(Label.StylePropertyFontColor, new Color(103, 103, 133, 128)),
                     }),
 
                 // Big Label
@@ -1359,12 +1378,12 @@ namespace Content.Client.Stylesheets
 
                 Element<PanelContainer>().Class(ClassAngleRect)
                     .Prop(PanelContainer.StylePropertyPanel, BaseAngleRect)
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#253025")),
+                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#252530")),
 
                 Element<PanelContainer>().Class(ClassLowDivider)
                     .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
                     {
-                        BackgroundColor = Color.FromHex("#303530"),
+                        BackgroundColor = Color.FromHex("#303035"),
                         ContentMarginLeftOverride = 2,
                         ContentMarginBottomOverride = 2
                     }),
@@ -1389,11 +1408,11 @@ namespace Content.Client.Stylesheets
                 // Window Footer
                 Element<TextureRect>().Class("NTLogoDark")
                     .Prop(TextureRect.StylePropertyTexture, resCache.GetTexture("/Textures/Interface/Nano/ntlogo.svg.png"))
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#7A9082")),
+                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#7A7A90")),
 
                 Element<Label>().Class("WindowFooterText")
                     .Prop(Label.StylePropertyFont, notoSans8)
-                    .Prop(Label.StylePropertyFontColor, Color.FromHex("#7A9082")),
+                    .Prop(Label.StylePropertyFontColor, Color.FromHex("#7A7A90")),
 
                 Element<PanelContainer>().Class("PanelBackgroundAngledDark")
                     .Prop(PanelContainer.StylePropertyPanel, BaseAngleRect)
@@ -1461,7 +1480,7 @@ namespace Content.Client.Stylesheets
                 //PDA - Backgrounds
                 Element<PanelContainer>().Class("PDAContentBackground")
                     .Prop(PanelContainer.StylePropertyPanel, BaseButtonOpenBoth)
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#262E29")),
+                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#26292E")),
 
                 Element<PanelContainer>().Class("PDABackground")
                     .Prop(PanelContainer.StylePropertyPanel, BaseButtonOpenBoth)
@@ -1469,13 +1488,13 @@ namespace Content.Client.Stylesheets
 
                 Element<PanelContainer>().Class("PDABackgroundRect")
                     .Prop(PanelContainer.StylePropertyPanel, BaseAngleRect)
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#7A9082")),
+                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#7A7A90")),
 
                 Element<PanelContainer>().Class("PDABorderRect")
                     .Prop(PanelContainer.StylePropertyPanel, AngleBorderRect),
 
                 Element<PanelContainer>().Class("BackgroundDark")
-                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat(Color.FromHex("#262E29"))),
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat(Color.FromHex("#26292E"))),
 
                 //PDA - Buttons
                 Element<PDASettingsButton>().Pseudo(ContainerButton.StylePseudoClassNormal)
@@ -1506,11 +1525,11 @@ namespace Content.Client.Stylesheets
                 //PDA - Text
                 Element<Label>().Class("PDAContentFooterText")
                     .Prop(Label.StylePropertyFont, notoSans10)
-                    .Prop(Label.StylePropertyFontColor, Color.FromHex("#7A9082")),
+                    .Prop(Label.StylePropertyFontColor, Color.FromHex("#7A7A90")),
 
                 Element<Label>().Class("PDAWindowFooterText")
                     .Prop(Label.StylePropertyFont, notoSans10)
-                    .Prop(Label.StylePropertyFontColor, Color.FromHex("#4D5D53")),
+                    .Prop(Label.StylePropertyFontColor, Color.FromHex("#4D535D")),
 
                 // Fancy Tree
                 Element<ContainerButton>().Identifier(TreeItem.StyleIdentifierTreeButton)

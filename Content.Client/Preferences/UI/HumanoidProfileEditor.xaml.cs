@@ -469,7 +469,7 @@ namespace Content.Client.Preferences.UI
                     category.AddChild(new PanelContainer
                     {
                         // WD-EDIT start
-                        PanelOverride = new StyleBoxFlat {BackgroundColor = Color.FromHex("#466646")},
+                        PanelOverride = new StyleBoxFlat {BackgroundColor = Color.FromHex("#464666")},
                         // WD-EDIT end
                         Children =
                         {

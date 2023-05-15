@@ -17,11 +17,15 @@
 #- type: lobbyBackground
 #  id: SSXIV
 #  background: /Textures/LobbyScreens/ssxiv.png
+#
+#- type: lobbyBackground
+#  id: DeadlySpace
+#  background: /Textures/LobbyScreens/dead-in-space.png
+#
+#- type: lobbyBackground
+#  id: Planets
+#  background: /Textures/LobbyScreens/planets.png
 
 - type: lobbyBackground
-  id: DeadlySpace
-  background: /Textures/LobbyScreens/dead-in-space.png
-
-- type: lobbyBackground
-  id: Planets
-  background: /Textures/LobbyScreens/planets.png
+  id: Blank
+  background: /Textures/LobbyScreens/blank.png
