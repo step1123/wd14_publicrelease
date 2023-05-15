@@ -6,16 +6,14 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.Animations;
 
 /// <summary>
+/// Event for playing animations
 /// </summary>
-public class EmoteFlipActionEvent : InstantActionEvent { };
-
-/// <summary>
-/// </summary>
-public class EmoteJumpActionEvent : InstantActionEvent { };
-
-/// <summary>
-/// </summary>
-public class EmoteTurnActionEvent : InstantActionEvent { };
+public class EmoteActionEvent : InstantActionEvent
+{
+    [ViewVariables]
+    [DataField("emote", readOnly: true, required: true)]
+    public string Emote = default!;
+};
 
 [RegisterComponent]
 [NetworkedComponent]
@@ -24,9 +22,7 @@ public class EmoteAnimationComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public string AnimationId = "none";
 
-    public InstantAction? FlipAction;
-    public InstantAction? JumpAction;
-    public InstantAction? TurnAction;
+    public readonly List<InstantAction> Actions = new();
 
     [Serializable, NetSerializable]
     public class EmoteAnimationComponentState : ComponentState
