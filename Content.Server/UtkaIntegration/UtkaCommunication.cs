@@ -184,24 +184,9 @@ public sealed class UtkaAhelpPmEvent : UtkaBaseMessage
 
     [JsonPropertyName("sender")]
     public string? Sender { get; set; }
-}
 
-public sealed class UtkaPlayerJoinedEvent : UtkaBaseMessage
-{
-    [JsonPropertyName("command")]
-    public override string? Command => "player_joined";
-
-    [JsonPropertyName("ckey")]
-    public string? Ckey { get; set; }
-}
-
-public sealed class UtkaPlayerLeftEvent : UtkaBaseMessage
-{
-    [JsonPropertyName("command")]
-    public override string? Command => "player_left";
-
-    [JsonPropertyName("ckey")]
-    public string? Ckey { get; set; }
+    [JsonPropertyName("rid")]
+    public int? Rid { get; set; }
 }
 
 public sealed class UtkaBannedEvent : UtkaBaseMessage

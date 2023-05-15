@@ -568,7 +568,8 @@ namespace Content.Server.Administration.Systems
             {
                 Message = message,
                 Ckey = ckey,
-                Sender = sender
+                Sender = sender,
+                Rid = Get<GameTicker>().RoundId
             };
 
             _utkaSockets.SendMessageToAll(utkaAhelpEvent);
