@@ -3,7 +3,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using Content.Server.Database;
-using Content.Server.GameTicking;
 using Content.Server.UtkaIntegration;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
@@ -146,9 +145,6 @@ namespace Content.Server.Administration.Commands
             }
 
             //WD start
-            var banlist = await dbMan.GetServerBansAsync(null, targetUid, null);
-            var banId = banlist[^1].Id;
-
             var utkaBanned = new UtkaBannedEvent()
             {
                 Ckey = target,
@@ -156,9 +152,7 @@ namespace Content.Server.Administration.Commands
                 Bantype = "server",
                 Duration = minutes,
                 Global = isGlobalBan,
-                Reason = reason,
-                Rid = EntitySystem.Get<GameTicker>().RoundId,
-                BanId = banId
+                Reason = reason
             };
             _utkaSockets.SendMessageToAll(utkaBanned);
             //WD end

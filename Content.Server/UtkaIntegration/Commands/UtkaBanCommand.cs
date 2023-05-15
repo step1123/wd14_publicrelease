@@ -2,7 +2,6 @@
 using System.Net.Sockets;
 using Content.Server.Administration;
 using Content.Server.Database;
-using Content.Server.GameTicking;
 using Content.Shared.CCVar;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
@@ -14,7 +13,6 @@ public sealed class UtkaBanCommand : IUtkaCommand
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private UtkaTCPWrapper _utkaSocketWrapper = default!;
-    [Dependency] private readonly IServerDbManager _db = default!;
 
     private const ILocalizationManager LocalizationManager = default!;
 
@@ -107,9 +105,6 @@ public sealed class UtkaBanCommand : IUtkaCommand
 
         UtkaSendResponse(true);
 
-        var banlist = await _db.GetServerBansAsync(null, targetUid, null);
-        var banId = banlist[^1].Id;
-
         var utkaBanned = new UtkaBannedEvent()
         {
             Ckey = message.Ckey,
@@ -117,9 +112,7 @@ public sealed class UtkaBanCommand : IUtkaCommand
             Bantype = "server",
             Duration = message.Duration,
             Global = message.Global,
-            Reason = message.Reason,
-            Rid = EntitySystem.Get<GameTicker>().RoundId,
-            BanId = banId
+            Reason = message.Reason
         };
         _utkaSocketWrapper.SendMessageToAll(utkaBanned);
     }

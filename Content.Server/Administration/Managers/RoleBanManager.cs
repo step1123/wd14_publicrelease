@@ -5,7 +5,6 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using Content.Server.Database;
-using Content.Server.GameTicking;
 using Content.Server.UtkaIntegration;
 using Content.Server.White;
 using Content.Shared.CCVar;
@@ -272,25 +271,17 @@ public sealed class RoleBanManager
         _utkaSockets.SendMessageToAll(utkaBanned);
     }
 
-    private async void UtkaSendJobBanEvent(string ackey, string ckey, uint duration, string role, bool global,
+    private void UtkaSendJobBanEvent(string ackey, string ckey, uint duration, string role, bool global,
         string reason)
     {
-        var located = await _playerLocator.LookupIdByNameOrIdAsync(ckey);
-        var targetUid = located!.UserId;
-
-        var banlist = await _db.GetServerRoleBansAsync(null, targetUid, null);
-        var banId = banlist[^1].Id;
-
-            var utkaBanned = new UtkaBannedEvent()
+        var utkaBanned = new UtkaBannedEvent()
         {
             ACkey = ackey,
             Ckey = ckey,
             Duration = duration,
             Bantype = role,
             Global = global,
-            Reason = reason,
-            Rid = EntitySystem.Get<GameTicker>().RoundId,
-            BanId = banId
+            Reason = reason
         };
 
         _utkaSockets.SendMessageToAll(utkaBanned);
