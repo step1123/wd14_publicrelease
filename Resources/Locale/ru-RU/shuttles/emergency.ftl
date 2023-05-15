@@ -17,25 +17,27 @@ emergency-shuttle-command-launch-desc = Досрочно запускает эв
 # Emergency shuttle
 emergency-shuttle-left = Эвакуационный шаттл покинул станцию. Расчетное время прибытия шаттла на станцию ЦентКома - { $transitTime } секунд.
 emergency-shuttle-launch-time = Эвакуационный шаттл будет запущен через { $consoleAccumulator } секунд.
-emergency-shuttle-docked = Эвакуационный шаттл пристыковался к станции, сторона:{ $direction ->
-    [north]север
-    [northeast]северо-восток
-    [east]восток
-    [southeast]юго-восток
-    [south]юг
-    [southwest]юго-запад
-    [west]запад
-    [northwest]северо-запад
-    *[other]_
+emergency-shuttle-docked =
+    Эвакуационный шаттл пристыковался к станции, сторона:{ $direction ->
+        [north] север
+        [northeast] северо-восток
+        [east] восток
+        [southeast] юго-восток
+        [south] юг
+        [southwest] юго-запад
+        [west] запад
+        [northwest] северо-запад
+       *[other] _
     }. Он улетит через { $time } секунд.
 emergency-shuttle-good-luck = Эвакуационный шаттл не может найти станцию. Удачи.
 emergency-shuttle-nearby = Эвакуационный шаттл не может найти подходящий стыковочный шлюз. Он дрейфует около станции, сторона: { $direction }.
 emergency_shuttle_meteor_available = Установлена связь с эвакуационным шаттлом. Он может быть вызван.
-emergency_shuttle-announce-toggle = "Внимание! {$admin} {$value ->
-[True] включил
-[False] выключил
-*[other] _
-} вызов шаттла!"
+emergency_shuttle-announce-toggle =
+    "Внимание! { $admin } { $value ->
+        [True] включил
+        [False] выключил
+       *[other] _
+    } вызов шаттла!"
 emergency_shuttle-call-enable = Включить вызов шаттла
 emergency_shuttle-call-disable = Выключить вызов шаттла
 # Emergency shuttle console popup / announcement

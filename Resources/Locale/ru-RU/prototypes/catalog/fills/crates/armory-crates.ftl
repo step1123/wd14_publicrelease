@@ -6,5 +6,7 @@ ent-CrateTrackingImplants = ящик отслеживающих импланта
     .desc = Содержит несколько отслеживающих имплантатов. Хороши для заключенных, которых вы хотели бы освободить, но за которыми все еще следите.
 ent-CrateArmoryLaser = ящик лазеров
     .desc = Содержит три смертоносных высокоэнергетичных лазерных пистолета. Чтобы открыть необходим доступ уровня Оружейной.
+ent-CrateArmoryPistols = pistols crate
+    .desc = Contains two standard NT pistols with four mags. Requires Armory access to open.
 ent-CrateArmoryEgun = ящик с энергетическими винтовками
     .desc = Содержит комплект из трех энергетических винтовок. Чтобы открыть необходим уровень доступа Оружейная.

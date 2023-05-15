@@ -1,4 +1,4 @@
-﻿marking-SkrellHairMale = Обычные ки'рэи
+marking-SkrellHairMale = Обычные ки'рэи
 marking-SkrellHairFemale = Удлинённые ки'рэи
 marking-SkrellHairLong = Длинные ки'рэи
 marking-SkrellHairShort = Короткие ки'рэи

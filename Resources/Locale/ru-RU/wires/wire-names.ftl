@@ -1,4 +1,4 @@
-﻿wire-name-access = ДСТП
+wire-name-access = ДСТП
 wire-name-arcade-overflow = ЛИМТ
 wire-name-air-alarm-panic = ПНИК
 wire-name-device-net = СЕТЬ

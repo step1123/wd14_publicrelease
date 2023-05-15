@@ -1,4 +1,3 @@
-
 ## General stuff
 
 ui-options-title = Игровые настройки
@@ -27,6 +26,7 @@ ui-options-volume-label = Громкость
 ui-options-volume-percent = { TOSTRING($volume, "P0") }
 ui-options-volume-ui = UI Volume:
 ui-options-ambience-music = Ambience Music
+ui-options-show-combat-mode-indicators = Show combat mode indicators with cursor?
 ui-options-ambience-music-volume = Ambience music volume:
 
 ## Graphics menu
@@ -45,6 +45,9 @@ ui-options-scale-75 = 75%
 ui-options-scale-100 = 100%
 ui-options-scale-125 = 125%
 ui-options-scale-150 = 150%
+ui-options-hud-theme-default = Default
+ui-options-hud-theme-modernized = Modernized
+ui-options-hud-theme-classic = Classic
 ui-options-scale-175 = 175%
 ui-options-scale-200 = 200%
 ui-options-hud-theme = Тема HUD:
@@ -86,6 +89,9 @@ ui-options-header-general = Основное
 ui-options-hotkey-keymap = Использовать клавиши QWERTY (США)
 ui-options-function-move-up = Двигаться вверх
 ui-options-function-move-left = Двигаться налево
+ui-options-function-zoom-in = Zoom in
+ui-options-function-zoom-out = Zoom out
+ui-options-function-reset-zoom = Reset zoom
 ui-options-function-move-down = Двигаться вниз
 ui-options-function-move-right = Двигаться направо
 ui-options-function-walk = Идти
@@ -106,8 +112,10 @@ ui-options-function-swap-hands = Поменять руки
 ui-options-function-smart-equip-backpack = Умная экипировка в рюкзак
 ui-options-function-smart-equip-belt = Умная экипировка на пояс
 ui-options-function-throw-item-in-hand = Бросить предмет
+ui-options-function-focus-emote = Focus chat (Emote)
 ui-options-function-try-pull-object = Тянуть объект
 ui-options-function-move-pulled-object = Тянуть объект в сторону
+ui-options-function-focus-looc-window = Focus chat (LOOC)
 ui-options-function-release-pulled-object = Перестать тянуть объект
 ui-options-function-point = Указать на что-либо
 ui-options-function-focus-chat-input-window = Писать в чат
@@ -126,6 +134,10 @@ ui-options-function-open-context-menu = Открыть контекстное м
 ui-options-function-open-crafting-menu = Открыть меню строительства
 ui-options-function-open-inventory-menu = Открыть снаряжение
 ui-options-function-open-a-help = Открыть админ помощь
+ui-options-function-window-close-all = Close all windows
+ui-options-function-window-close-recent = Close recent window
+ui-options-function-show-escape-menu = Toggle game menu
+ui-options-function-escape-context = Close recent window or toggle game menu
 ui-options-function-open-abilities-menu = Открыть меню действий
 ui-options-function-open-entity-spawn-window = Открыть меню спавна сущностей
 ui-options-function-open-sandbox-window = Открыть меню песочницы

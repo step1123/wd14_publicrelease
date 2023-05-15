@@ -22,8 +22,7 @@ traitor-title = Предатель
 traitor-description = Среди нас есть предатели...
 traitor-not-enough-ready-players = Недостаточно игроков готовы к игре! Из { $minimumPlayers } необходимых игроков готовы { $readyPlayersCount }.
 traitor-no-one-ready = Нет готовых игроков! Не удалось начать режим Предателя.
-
-traitor-round-end-codewords = Кодовыми словами были: [color=White]{$codewords}[/color]
+traitor-round-end-codewords = Кодовыми словами были: [color=White]{ $codewords }[/color]
 
 ## TraitorDeathMatch
 
@@ -46,8 +45,10 @@ traitor-role-codewords =
     { $codewords }
     Кодовые слова можно использовать в обычном разговоре, чтобы незаметно идентифицировать себя для других агентов Синдиката.
     Прислушивайтесь к ним и храните их в тайне.
-
+traitor-role-uplink-code =
+    Установите мелодия рингтона на { $code } чтобы разблокировать аплинк.
+    Не забудьте заблокировать его после этого, иначе сотрудники станции тоже легко откроют его!
 traitor-role-codewords-short =
     Кодовые слова:
-        {$codewords}.
-traitor-role-uplink-code-short = Код от вашего аплинка - {$code}.
+        { $codewords }.
+traitor-role-uplink-code-short = Код от вашего аплинка - { $code }.

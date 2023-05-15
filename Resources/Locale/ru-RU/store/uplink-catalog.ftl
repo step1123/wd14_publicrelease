@@ -64,6 +64,8 @@ uplink-hypopen-name = Гипоручка
 uplink-hypopen-desc = Химический гипоспрей, замаскированный под ручку, способный мгновенно впрыскивать до 15 единиц реагентов. Изначально пустая.
 uplink-voice-mask-name = Голосовая маска
 uplink-voice-mask-desc = Противогаз, который позволяет вам подстраивать свой голос под любого, о ком вы только можете подумать.
+uplink-radio-jammer-name = Radio Jammer
+uplink-radio-jammer-desc = This device will disrupt any nearby outgoing radio communication when activated.
 # Implants
 uplink-storage-implanter-name = Имплант хранения
 uplink-storage-implanter-desc = Спрячьте вкусности внутри себя с помощью новой технологии блюспейс!
@@ -71,6 +73,8 @@ uplink-freedom-implanter-name = Имплант свободы
 uplink-freedom-implanter-desc = Убирайся подальше от этих мерзких офицеров с этим трехразовым имплантатом!
 uplink-macro-bomb-implanter-name = Имплант микро-бомбы
 uplink-macro-bomb-implanter-desc = Введи это, и после смерти ты создашь большой взрыв. Огромные потери для команды, используйте на свой страх и риск. Заменяет внутреннюю микро-бомбу.
+uplink-uplink-implanter-name = Uplink Implanter
+uplink-uplink-implanter-desc = Stealthily order equipment without the need for a PDA. Swallow telecrystals to top up the uplink.
 # Bundles
 uplink-c20r-bundle-name = Набор C-20r
 uplink-c20r-bundle-desc = Старый добрый: классический пистолет-пулемет C-20r в комплекте с тремя магазинами.
@@ -100,10 +104,20 @@ uplink-carp-dehydrated-desc = Выглядит как плюшевый игру�
 # Job Specific
 uplink-gatfruit-seeds-name = Пакетик семян Гейтфрута
 uplink-gatfruit-seeds-desc = И кто сказал, что оружие не растет на деревьях?
+uplink-rigged-boxing-gloves-name = Rigged Boxing Gloves
+uplink-rigged-boxing-gloves-desc = Float like a butterfly, sting like a bee.
 uplink-revolver-cap-gun-fake-name = Фальшивый пистон
 uplink-revolver-cap-gun-fake-desc = Обмани своего врага! Он может использовать как пистоны, так и магнум патроны. Заряжен пулями "магнум".
 uplink-necronomicon-name = Некрономикон
 uplink-necronomicon-desc = Нечестивая книга, способная вызвать демонического фамильяра.
+uplink-banana-peel-explosive-name = Explosive Banana Peel
+uplink-banana-peel-explosive-desc = They will burst into laughter when they slip on it!
+uplink-hot-potato-name = Hot Potato
+uplink-hot-potato-desc = Once activated, this time bomb can't be dropped - only passed to someone else!
+uplink-chimp-ammo-name = Box of 10 Omega Cartridges.
+uplink-chimp-ammo-desc = A box of 10 omega particle cartridges for the CHIMP. Omega particles inflict severe burns and cause anomalies to go supercritical.
+uplink-proximity-mine-name = Proximity Mine
+uplink-proximity-mine-desc = A mine disguised as a wet floor sign.
 # Armor
 uplink-chameleon-name = Набор хамелеона
 uplink-chameleon-desc = Рюкзак, полный предметов, содержащих технологию "хамелеон", позволяющую вам маскироваться практически под что угодно на станции, и многое другое!
@@ -151,6 +165,8 @@ uplink-cat-ears-name = Кошачьи уши
 uplink-cat-ears-desc = UwU
 uplink-outlaw-hat-name = Шляпа разбойника
 uplink-outlaw-hat-desc = Шляпа, в которой ты выглядишь так, будто носишь пистолет с зазубринами, под номером один и еще девятнадцать.
+uplink-outlaw-glasses-name = Outlaw Glasses
+uplink-outlaw-glasses-desc = A must for every self-respecting undercover agent.
 uplink-costume-pyjama-name = Сумка пижам Синдиката
 uplink-costume-pyjama-desc = Содержит 3 пары пижам синдиката и 3 случайные игрушки для идеальной ночевки.
 uplink-costume-clown-name = Сумка с костюмом клоуна

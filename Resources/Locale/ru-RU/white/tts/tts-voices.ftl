@@ -1,4 +1,4 @@
-﻿tts-voice-name-aidar = Айдар
+tts-voice-name-aidar = Айдар
 tts-voice-name-baya = Байя
 tts-voice-name-kseniya = Ксения
 tts-voice-name-xenia = Сения

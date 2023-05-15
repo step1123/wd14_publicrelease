@@ -7,6 +7,7 @@ device-frequency-prototype-name-mailing-units = Почтовый блок
 device-frequency-prototype-name-pdas = ПДА
 # prefixes for randomly generated device addresses
 device-address-prefix-vent = Вент-
+device-frequency-prototype-name-basic-device = Простые устройства
 device-address-prefix-scrubber = Скр-
 device-frequency-prototype-name-surveillance-camera-test = Тест подсети
 device-frequency-prototype-name-surveillance-camera-engineering = Камеры (Инж)

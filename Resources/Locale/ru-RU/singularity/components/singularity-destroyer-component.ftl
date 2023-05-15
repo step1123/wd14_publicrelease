@@ -1,1 +1,1 @@
-﻿singularity-destroyer-component-trigger = Сингулярность смешно уменьшается!
+singularity-destroyer-component-trigger = Сингулярность смешно уменьшается!

@@ -1,1 +1,1 @@
-﻿verb-debug-toggle-need-power = Переключить питание
+verb-debug-toggle-need-power = Переключить питание

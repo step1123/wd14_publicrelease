@@ -87,4 +87,5 @@ reagent-physical-desc-inky = чернильное
 reagent-physical-desc-exotic-smelling = экзотически пахнущее
 reagent-physical-desc-energizing = заряжающее
 reagent-physical-desc-exhilarating = волнующий
+reagent-physical-desc-vibrant = вибрирующий
 reagent-physical-desc-enigmatic = загадочное
