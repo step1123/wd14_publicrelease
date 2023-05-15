@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Content.Server.Administration.Managers;
 using Content.Server.GameTicking;
 using Content.Server.Players;
+using Content.Server.UtkaIntegration;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using JetBrains.Annotations;
@@ -29,6 +30,7 @@ namespace Content.Server.Administration.Systems
         [Dependency] private readonly IConfigurationManager _config = default!;
         [Dependency] private readonly IPlayerLocator _playerLocator = default!;
         [Dependency] private readonly GameTicker _gameTicker = default!;
+        [Dependency] private readonly UtkaTCPWrapper _utkaSockets = default!; // WD
 
         private ISawmill _sawmill = default!;
         private readonly HttpClient _httpClient = new();
@@ -407,6 +409,12 @@ namespace Content.Server.Administration.Systems
                 _messageQueues[msg.UserId].Enqueue(GenerateAHelpMessage(senderSession.Name, str, !personalChannel, admins.Count == 0));
             }
 
+            // WD start
+            var utkaCkey = _playerManager.GetSessionByUserId(message.UserId).ConnectedClient.UserName;
+            var utkaSender = _playerManager.GetSessionByUserId(senderSession.UserId).ConnectedClient.UserName;
+            UtkaSendAhelpPm(message.Text, utkaCkey, utkaSender);
+            // WD end
+
             if (admins.Count != 0 || sendsWebhook)
                 return;
 
@@ -549,6 +557,21 @@ namespace Content.Server.Administration.Systems
                 }
                 _messageQueues[msg.UserId].Enqueue(GenerateAHelpMessage(sender, str, true));
             }
+
+            var utkaCkey = _playerManager.GetSessionByUserId(receiver).ConnectedClient.UserName;
+            UtkaSendAhelpPm(text, utkaCkey, sender);
+        }
+
+        private void UtkaSendAhelpPm(string message, string ckey, string sender)
+        {
+            var utkaAhelpEvent = new UtkaAhelpPmEvent()
+            {
+                Message = message,
+                Ckey = ckey,
+                Sender = sender
+            };
+
+            _utkaSockets.SendMessageToAll(utkaAhelpEvent);
         }
         //WD-EDIT
 

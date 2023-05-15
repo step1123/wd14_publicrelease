@@ -170,3 +170,137 @@ public sealed class UtkaChatMeEvent : UtkaBaseMessage
     [JsonPropertyName("character_name")]
     public string? CharacterName { get; set; }
 }
+
+public sealed class UtkaAhelpPmEvent : UtkaBaseMessage
+{
+    [JsonPropertyName("command")]
+    public override string? Command => "pm";
+
+    [JsonPropertyName("message")]
+    public string? Message { get; set; }
+
+    [JsonPropertyName("ckey")]
+    public string? Ckey { get; set; }
+
+    [JsonPropertyName("sender")]
+    public string? Sender { get; set; }
+}
+
+public sealed class UtkaPlayerJoinedEvent : UtkaBaseMessage
+{
+    [JsonPropertyName("command")]
+    public override string? Command => "player_joined";
+
+    [JsonPropertyName("ckey")]
+    public string? Ckey { get; set; }
+}
+
+public sealed class UtkaPlayerLeftEvent : UtkaBaseMessage
+{
+    [JsonPropertyName("command")]
+    public override string? Command => "player_left";
+
+    [JsonPropertyName("ckey")]
+    public string? Ckey { get; set; }
+}
+
+public sealed class UtkaBannedEvent : UtkaBaseMessage
+{
+    [JsonPropertyName("command")]
+    public override string? Command => "banned";
+
+    [JsonPropertyName("ckey")]
+    public string? Ckey { get; set; }
+
+    [JsonPropertyName("a_ckey")]
+    public string? ACkey { get; set; }
+
+    [JsonPropertyName("bantype")]
+    public string? Bantype { get; set; }
+
+    [JsonPropertyName("duration")]
+    public uint? Duration { get; set; }
+
+    [JsonPropertyName("global")]
+    public bool? Global { get; set; }
+
+    [JsonPropertyName("reason")]
+    public string? Reason { get; set; }
+}
+
+public sealed class UtkaBanRequest : UtkaBaseMessage
+{
+    [JsonPropertyName("command")]
+    public override string? Command => "ban";
+
+    [JsonPropertyName("ckey")]
+    public string? Ckey { get; set; }
+
+    [JsonPropertyName("a_ckey")]
+    public string? ACkey { get; set; }
+
+    [JsonPropertyName("reason")]
+    public string? Reason { get; set; }
+
+    [JsonPropertyName("duration")]
+    public uint? Duration { get; set; }
+
+    [JsonPropertyName("global")]
+    public bool? Global { get; set; }
+}
+
+public sealed class UtkaBanResponse : UtkaBaseMessage
+{
+    [JsonPropertyName("command")]
+    public override string? Command => "ban";
+
+    [JsonPropertyName("banned")]
+    public bool? Banned { get; set; }
+}
+
+public sealed class UtkaJobBanRequest : UtkaBaseMessage
+{
+    public override string? Command => "jobban";
+
+    [JsonPropertyName("ckey")]
+    public string? Ckey { get; set; }
+
+    [JsonPropertyName("a_ckey")]
+    public string? ACkey { get; set; }
+
+    [JsonPropertyName("reason")]
+    public string? Reason { get; set; }
+
+    [JsonPropertyName("duration")]
+    public uint? Duration { get; set; }
+
+    [JsonPropertyName("global")]
+    public bool? Global { get; set; }
+
+    [JsonPropertyName("type")]
+    public string? Type { get; set; }
+}
+
+public sealed class UtkaJobBanResponse : UtkaBaseMessage
+{
+    [JsonPropertyName("command")]
+    public override string? Command => "jobban";
+
+    [JsonPropertyName("banned")]
+    public bool? Banned { get; set; }
+}
+
+public sealed class UtkaRestartRoundRequest : UtkaBaseMessage
+{
+    [JsonPropertyName("command")]
+    public override string? Command => "restart_round";
+}
+
+public sealed class UtkaRestartRoundResponse : UtkaBaseMessage
+{
+    [JsonPropertyName("command")]
+    public override string? Command => "restart_round";
+
+    [JsonPropertyName("restarted")]
+    public bool? Restarted { get; set; }
+}

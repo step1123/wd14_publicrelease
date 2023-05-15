@@ -14,7 +14,7 @@ public sealed class UtkaWhoCommand : IUtkaCommand
 {
     public string Name => "who";
     public Type RequestMessageType => typeof(UtkaWhoRequest);
-    
+
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private UtkaTCPWrapper _utkaSocketWrapper = default!;
 

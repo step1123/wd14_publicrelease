@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using Content.Server.Database;
+using Content.Server.UtkaIntegration;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Robust.Server.Player;
@@ -16,6 +17,7 @@ namespace Content.Server.Administration.Commands
     public sealed class BanCommand : LocalizedCommands
     {
         [Dependency] private readonly IConfigurationManager _cfg = default!;
+        [Dependency] private readonly UtkaTCPWrapper _utkaSockets = default!; // WD
 
         public override string Command => "ban";
 
@@ -141,6 +143,19 @@ namespace Content.Server.Administration.Commands
                 var message = banDef.FormatBanMessage(_cfg, LocalizationManager);
                 targetPlayer.ConnectedClient.Disconnect(message);
             }
+
+            //WD start
+            var utkaBanned = new UtkaBannedEvent()
+            {
+                Ckey = target,
+                ACkey = player?.Name,
+                Bantype = "server",
+                Duration = minutes,
+                Global = isGlobalBan,
+                Reason = reason
+            };
+            _utkaSockets.SendMessageToAll(utkaBanned);
+            //WD end
         }
 
         public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)
