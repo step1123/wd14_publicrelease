@@ -35,7 +35,7 @@ public sealed class UtkaUnbanCommand : IUtkaCommand
         }
 
         var adminData = await dbMan.GetAdminDataForAsync(player);
-        if (adminData?.AdminServer == null || ban.ServerName != "unknown" && adminData.AdminServer != ban.ServerName)
+        if (adminData?.AdminRank == null || ban.ServerName != "unknown" && adminData.AdminServer is not (null or "unknown") && adminData.AdminServer != ban.ServerName)
         {
             UtkaSendResponse(false);
             return;
