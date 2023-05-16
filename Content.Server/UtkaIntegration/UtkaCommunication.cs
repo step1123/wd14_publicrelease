@@ -187,6 +187,12 @@ public sealed class UtkaAhelpPmEvent : UtkaBaseMessage
 
     [JsonPropertyName("rid")]
     public int? Rid { get; set; }
+
+    [JsonPropertyName("no_admins")]
+    public bool? NoAdmins { get; set; }
+
+    [JsonPropertyName("entity")]
+    public string? Entity { get; set; }
 }
 
 public sealed class UtkaBannedEvent : UtkaBaseMessage
@@ -294,4 +300,25 @@ public sealed class UtkaRestartRoundResponse : UtkaBaseMessage
 
     [JsonPropertyName("restarted")]
     public bool? Restarted { get; set; }
+}
+
+public sealed class UtkaUnbanRequest : UtkaBaseMessage
+{
+    [JsonPropertyName("command")]
+    public override string? Command => "unban";
+
+    [JsonPropertyName("a_ckey")]
+    public string? ACkey { get; set; }
+
+    [JsonPropertyName("bid")]
+    public int? Bid { get; set; }
+}
+
+public sealed class UtkaUnbanResponse : UtkaBaseMessage
+{
+    [JsonPropertyName("command")]
+    public override string? Command => "unban";
+
+    [JsonPropertyName("unbanned")]
+    public bool? Unbanned { get; set; }
 }

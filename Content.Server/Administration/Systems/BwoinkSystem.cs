@@ -564,12 +564,25 @@ namespace Content.Server.Administration.Systems
 
         private void UtkaSendAhelpPm(string message, string ckey, string sender)
         {
+            var adminManager = IoCManager.Resolve<IAdminManager>();
+            var admins = adminManager.ActiveAdmins.Any();
+
+            var entity = ckey;
+            _playerManager.TryGetSessionByUsername(ckey, out var session);
+            if (session?.AttachedEntity != null)
+            {
+                var meta = MetaData((EntityUid) session.AttachedEntity);
+                entity = meta.EntityName;
+            }
+
             var utkaAhelpEvent = new UtkaAhelpPmEvent()
             {
                 Message = message,
                 Ckey = ckey,
                 Sender = sender,
-                Rid = Get<GameTicker>().RoundId
+                Rid = Get<GameTicker>().RoundId,
+                NoAdmins = !admins,
+                Entity = entity
             };
 
             _utkaSockets.SendMessageToAll(utkaAhelpEvent);

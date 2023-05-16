@@ -29,7 +29,6 @@ public sealed class UtkaBanCommand : IUtkaCommand
         var dbMan = IoCManager.Resolve<IServerDbManager>();
         IoCManager.InjectDependencies(this);
 
-        //_playerManager.TryGetSessionByUsername(message.ACkey!, out var player);
         var locatedPlayer = await locator.LookupIdByNameOrIdAsync(message.ACkey!);
         if (locatedPlayer == null)
         {
