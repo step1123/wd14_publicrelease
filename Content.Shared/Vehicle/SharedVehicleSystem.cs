@@ -121,7 +121,8 @@ public abstract partial class SharedVehicleSystem : EntitySystem
             Dirty(component);
             Appearance.SetData(uid, VehicleVisuals.HideRider, true);
 
-            _mover.SetRelay(args.BuckledEntity, uid);
+            var relay = EnsureComp<RelayInputMoverComponent>(args.BuckledEntity);
+            _mover.SetRelay(args.BuckledEntity, uid, relay);
             rider.Vehicle = uid;
 
             // Update appearance stuff, add actions

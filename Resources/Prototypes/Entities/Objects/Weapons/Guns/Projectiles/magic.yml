@@ -130,7 +130,6 @@
   parent: BaseBulletHighVelocity
   name: Icicle
   description: Brrrrr.
-  noSpawn: true
   components:
   - type: Sprite
     sprite: Structures/Specific/Anomalies/ice_anom.rsi

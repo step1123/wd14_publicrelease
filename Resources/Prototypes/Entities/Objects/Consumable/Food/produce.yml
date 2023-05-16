@@ -230,7 +230,7 @@
     heldPrefix: peel
   - type: Slippery
     paralyzeTime: 4
-    launchForwardsMultiplier: 2
+    launchForwardsMultiplier: 5
 
 - type: entity
   name: banana peel

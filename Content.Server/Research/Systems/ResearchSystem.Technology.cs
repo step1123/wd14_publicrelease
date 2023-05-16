@@ -1,6 +1,5 @@
 using Content.Shared.Research.Components;
 using Content.Shared.Research.Prototypes;
-using JetBrains.Annotations;
 
 namespace Content.Server.Research.Systems;
 
@@ -14,16 +13,13 @@ public sealed partial class ResearchSystem
         if (!Resolve(primaryUid, ref primaryDb) || !Resolve(otherUid, ref otherDb))
             return;
 
-        primaryDb.MainDiscipline = otherDb.MainDiscipline;
-        primaryDb.CurrentTechnologyCards = otherDb.CurrentTechnologyCards;
-        primaryDb.SupportedDisciplines = otherDb.SupportedDisciplines;
-        primaryDb.UnlockedTechnologies = otherDb.UnlockedTechnologies;
-        primaryDb.UnlockedRecipes = otherDb.UnlockedRecipes;
+        primaryDb.TechnologyIds = otherDb.TechnologyIds;
+        primaryDb.RecipeIds = otherDb.RecipeIds;
 
         Dirty(primaryDb);
 
         var ev = new TechnologyDatabaseModifiedEvent();
-        RaiseLocalEvent(primaryUid, ref ev);
+        RaiseLocalEvent(primaryDb.Owner, ref ev);
     }
 
     /// <summary>
@@ -32,15 +28,16 @@ public sealed partial class ResearchSystem
     ///     syncs against the research server, and the server against the local database.
     /// </summary>
     /// <returns>Whether it could sync or not</returns>
-    public void SyncClientWithServer(EntityUid uid, TechnologyDatabaseComponent? databaseComponent = null, ResearchClientComponent? clientComponent = null)
+    public bool SyncClientWithServer(EntityUid uid, TechnologyDatabaseComponent? databaseComponent = null, ResearchClientComponent? clientComponent = null)
     {
         if (!Resolve(uid, ref databaseComponent, ref clientComponent, false))
-            return;
+            return false;
 
         if (!TryComp<TechnologyDatabaseComponent>(clientComponent.Server, out var serverDatabase))
-            return;
+            return false;
 
         Sync(uid, clientComponent.Server.Value, databaseComponent, serverDatabase);
+        return true;
     }
 
     /// <summary>
@@ -48,49 +45,45 @@ public sealed partial class ResearchSystem
     /// </summary>
     /// <returns>If the technology was successfully added</returns>
     public bool UnlockTechnology(EntityUid client, string prototypeid, ResearchClientComponent? component = null,
-        TechnologyDatabaseComponent? clientDatabase = null)
+        TechnologyDatabaseComponent? databaseComponent = null)
     {
-        if (!PrototypeManager.TryIndex<TechnologyPrototype>(prototypeid, out var prototype))
+        if (!_prototypeManager.TryIndex<TechnologyPrototype>(prototypeid, out var prototype))
+        {
+            Logger.Error("invalid technology prototype");
             return false;
-
-        return UnlockTechnology(client, prototype, component, clientDatabase);
+        }
+        return UnlockTechnology(client, prototype, component, databaseComponent);
     }
 
     /// <summary>
     /// Tries to add a technology to a database, checking if it is able to
     /// </summary>
     /// <returns>If the technology was successfully added</returns>
-    public bool UnlockTechnology(EntityUid client,
-        TechnologyPrototype prototype,
-        ResearchClientComponent? component = null,
-        TechnologyDatabaseComponent? clientDatabase = null)
+    public bool UnlockTechnology(EntityUid client, TechnologyPrototype prototype, ResearchClientComponent? component = null,
+        TechnologyDatabaseComponent? databaseComponent = null)
     {
-        if (!Resolve(client, ref component, ref clientDatabase, false))
+        if (!Resolve(client, ref component, ref databaseComponent, false))
             return false;
 
-        if (!TryGetClientServer(client, out var serverEnt, out _, component))
+        if (!CanUnlockTechnology(client, prototype, databaseComponent))
             return false;
 
-        if (!CanServerUnlockTechnology(client, prototype, clientDatabase, component))
+        if (component.Server is not { } server)
             return false;
-
-        AddTechnology(serverEnt.Value, prototype);
-        TrySetMainDiscipline(prototype, serverEnt.Value);
-        ModifyServerPoints(serverEnt.Value, -prototype.Cost);
-        UpdateTechnologyCards(serverEnt.Value);
+        AddTechnology(server, prototype.ID);
+        AddPointsToServer(server, -prototype.RequiredPoints);
         return true;
     }
 
     /// <summary>
     ///     Adds a technology to the database without checking if it could be unlocked.
     /// </summary>
-    [PublicAPI]
     public void AddTechnology(EntityUid uid, string technology, TechnologyDatabaseComponent? component = null)
     {
         if (!Resolve(uid, ref component))
             return;
 
-        if (!PrototypeManager.TryIndex<TechnologyPrototype>(technology, out var prototype))
+        if (!_prototypeManager.TryIndex<TechnologyPrototype>(technology, out var prototype))
             return;
         AddTechnology(uid, prototype, component);
     }
@@ -103,19 +96,12 @@ public sealed partial class ResearchSystem
         if (!Resolve(uid, ref component))
             return;
 
-        //todo this needs to support some other stuff, too
-        foreach (var generic in technology.GenericUnlocks)
+        component.TechnologyIds.Add(technology.ID);
+        foreach (var unlock in technology.UnlockedRecipes)
         {
-            if (generic.PurchaseEvent != null)
-                RaiseLocalEvent(generic.PurchaseEvent);
-        }
-
-        component.UnlockedTechnologies.Add(technology.ID);
-        foreach (var unlock in technology.RecipeUnlocks)
-        {
-            if (component.UnlockedRecipes.Contains(unlock))
+            if (component.RecipeIds.Contains(unlock))
                 continue;
-            component.UnlockedRecipes.Add(unlock);
+            component.RecipeIds.Add(unlock);
         }
         Dirty(component);
 
@@ -127,16 +113,17 @@ public sealed partial class ResearchSystem
     /// Adds a lathe recipe to the specified technology database
     /// without checking if it can be unlocked.
     /// </summary>
-    public void AddLatheRecipe(EntityUid uid, string recipe, TechnologyDatabaseComponent? component = null)
+    public void AddLatheRecipe(EntityUid uid, string recipe, TechnologyDatabaseComponent? component = null, bool dirty = true)
     {
         if (!Resolve(uid, ref component))
             return;
 
-        if (component.UnlockedRecipes.Contains(recipe))
+        if (component.RecipeIds.Contains(recipe))
             return;
 
-        component.UnlockedRecipes.Add(recipe);
-        Dirty(component);
+        component.RecipeIds.Add(recipe);
+        if (dirty)
+            Dirty(component);
 
         var ev = new TechnologyDatabaseModifiedEvent();
         RaiseLocalEvent(uid, ref ev);
@@ -147,36 +134,34 @@ public sealed partial class ResearchSystem
     ///     taking parent technologies into account.
     /// </summary>
     /// <returns>Whether it could be unlocked or not</returns>
-    public bool CanServerUnlockTechnology(EntityUid uid,
-        TechnologyPrototype technology,
-        TechnologyDatabaseComponent? database = null,
-        ResearchClientComponent? client = null)
+    public bool CanUnlockTechnology(EntityUid uid, string technology, TechnologyDatabaseComponent? database = null, ResearchClientComponent? client = null)
     {
-
-        if (!Resolve(uid, ref client, ref database, false))
+        if (!_prototypeManager.TryIndex<TechnologyPrototype>(technology, out var prototype))
             return false;
-
-        if (!TryGetClientServer(uid, out _, out var serverComp, client))
-            return false;
-
-        if (!IsTechnologyAvailable(database, technology))
-            return false;
-
-        if (technology.Cost > serverComp.Points)
-            return false;
-
-        return true;
+        return CanUnlockTechnology(uid, prototype, database, client);
     }
 
-    private void OnDatabaseRegistrationChanged(EntityUid uid, TechnologyDatabaseComponent component, ref ResearchRegistrationChangedEvent args)
+    /// <summary>
+    ///     Returns whether a technology can be unlocked on this database,
+    ///     taking parent technologies into account.
+    /// </summary>
+    /// <returns>Whether it could be unlocked or not</returns>
+    public bool CanUnlockTechnology(EntityUid uid, TechnologyPrototype technology, TechnologyDatabaseComponent? database = null, ResearchClientComponent? client = null)
     {
-        if (args.Server != null)
-            return;
-        component.MainDiscipline = null;
-        component.CurrentTechnologyCards = new List<string>();
-        component.SupportedDisciplines = new List<string>();
-        component.UnlockedTechnologies = new List<string>();
-        component.UnlockedRecipes = new List<string>();
-        Dirty(component);
+        if (!Resolve(uid, ref database, ref client))
+            return false;
+
+        if (!TryGetClientServer(uid, out _, out var serverComponent, client))
+            return false;
+
+        if (serverComponent.Points < technology.RequiredPoints)
+            return false;
+
+        if (IsTechnologyUnlocked(uid, technology, database))
+            return false;
+
+        if (!ArePrerequesitesUnlocked(uid, technology, database))
+            return false;
+        return true;
     }
 }

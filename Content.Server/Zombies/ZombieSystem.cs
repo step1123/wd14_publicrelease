@@ -17,8 +17,6 @@ using Content.Shared.Disease.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs.Systems;
-using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Zombies;
 using Robust.Shared.Prototypes;
@@ -41,9 +39,6 @@ namespace Content.Server.Zombies
         [Dependency] private readonly IRobustRandom _robustRandom = default!;
         [Dependency] private readonly HumanoidAppearanceSystem _humanoidSystem = default!;
         [Dependency] private readonly DamageableSystem _damageable = default!;
-        [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-        [Dependency] private readonly MobStateSystem _mobState = default!;
-        [Dependency] private readonly SharedPopupSystem _popup = default!;
 
         public override void Initialize()
         {
@@ -70,15 +65,12 @@ namespace Content.Server.Zombies
         public override void Update(float frameTime)
         {
             base.Update(frameTime);
-            var query = EntityQueryEnumerator<PendingZombieComponent, DamageableComponent>();
+            var query = EntityQueryEnumerator<PendingZombieComponent>();
             var curTime = _gameTiming.CurTime;
 
-            var zombQuery = EntityQueryEnumerator<ZombieComponent, DamageableComponent, MobStateComponent>();
-
             // Hurt the living infected
-            while (query.MoveNext(out var uid, out var comp, out var damage))
+            while (query.MoveNext(out var uid, out var comp))
             {
-                // Process only once per second
                 if (comp.NextTick + TimeSpan.FromSeconds(1) > curTime)
                     continue;
 
@@ -87,34 +79,18 @@ namespace Content.Server.Zombies
                 // 1x at 30s, 3x at 60s, 6x at 90s, 10x at 120s.
                 var pain_multiple = 0.1 + 0.02 * comp.InfectedSecs + 0.0005 * comp.InfectedSecs * comp.InfectedSecs;
                 comp.NextTick = curTime;
-                _damageable.TryChangeDamage(uid, comp.Damage * pain_multiple, true, false, damage);
+                _damageable.TryChangeDamage(uid, comp.Damage * pain_multiple, true, false);
             }
 
+            var zomb_query = EntityQueryEnumerator<ZombieComponent>();
             // Heal the zombified
-            while (zombQuery.MoveNext(out var uid, out var comp, out var damage, out var mobState))
+            while (zomb_query.MoveNext(out var uid, out var comp))
             {
-                // Process only once per second
                 if (comp.NextTick + TimeSpan.FromSeconds(1) > curTime)
                     continue;
 
                 comp.NextTick = curTime;
-
-                if (comp.Permadeath)
-                {
-                    // No healing
-                    continue;
-                }
-
-                if (mobState.CurrentState == MobState.Alive)
-                {
-                    // Gradual healing for living zombies.
-                    _damageable.TryChangeDamage(uid, comp.Damage, true, false, damage);
-                }
-                else if (_robustRandom.Prob(comp.ZombieReviveChance))
-                {
-                    // There's a small chance to reverse all the zombie's damage (damage.Damage) in one go
-                    _damageable.TryChangeDamage(uid, -damage.Damage, true, false, damage);
-                }
+                _damageable.TryChangeDamage(uid, comp.Damage, true, false);
             }
         }
 
@@ -157,19 +133,6 @@ namespace Content.Server.Zombies
 
                 // Stop random groaning
                 _autoEmote.RemoveEmote(uid, "ZombieGroan");
-
-                if (args.NewMobState == MobState.Dead)
-                {
-                    // Roll to see if this zombie is not coming back.
-                    //   Note that due to damage reductions it takes a lot of hits to gib a zombie without this.
-                    if (_robustRandom.Prob(component.ZombiePermadeathChance))
-                    {
-                        // You're dead! No reviving for you.
-                        _mobThreshold.SetAllowRevives(uid, false);
-                        component.Permadeath = true;
-                        _popup.PopupEntity(Loc.GetString("zombie-permadeath"), uid, uid);
-                    }
-                }
             }
         }
 

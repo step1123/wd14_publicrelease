@@ -1,6 +1,5 @@
 using Content.Shared.Damage;
 using Content.Shared.Physics;
-using Content.Shared.Weapons.Reflect;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -31,11 +30,6 @@ public sealed class HitscanPrototype : IPrototype, IShootable
 
     [DataField("collisionMask")]
     public int CollisionMask = (int) CollisionGroup.Opaque;
-
-    /// <summary>
-    /// What we count as for reflection.
-    /// </summary>
-    [DataField("reflective")] public ReflectType Reflective = ReflectType.Energy;
 
     /// <summary>
     /// Sound that plays upon the thing being hit.

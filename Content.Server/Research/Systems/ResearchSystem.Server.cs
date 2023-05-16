@@ -49,7 +49,7 @@ public sealed partial class ResearchSystem
 
         if (!CanRun(uid))
             return;
-        ModifyServerPoints(uid, GetPointsPerSecond(uid, component) * time, component);
+        AddPointsToServer(uid, PointsPerSecond(uid, component) * time, component);
     }
 
     /// <summary>
@@ -60,14 +60,15 @@ public sealed partial class ResearchSystem
     /// <param name="clientComponent"></param>
     /// <param name="serverComponent"></param>
     /// <param name="dirtyServer">Whether or not to dirty the server component after registration</param>
-    public void RegisterClient(EntityUid client, EntityUid server, ResearchClientComponent? clientComponent = null,
+    /// <returns>Whether or not the client was successfully registered to the server</returns>
+    public bool RegisterClient(EntityUid client, EntityUid server, ResearchClientComponent? clientComponent = null,
         ResearchServerComponent? serverComponent = null,  bool dirtyServer = true)
     {
         if (!Resolve(client, ref clientComponent) || !Resolve(server, ref serverComponent))
-            return;
+            return false;
 
         if (serverComponent.Clients.Contains(client))
-            return;
+            return false;
 
         serverComponent.Clients.Add(client);
         clientComponent.Server = server;
@@ -77,6 +78,7 @@ public sealed partial class ResearchSystem
 
         var ev = new ResearchRegistrationChangedEvent(server);
         RaiseLocalEvent(client, ref ev);
+        return true;
     }
 
     /// <summary>
@@ -128,7 +130,7 @@ public sealed partial class ResearchSystem
     /// <param name="uid"></param>
     /// <param name="component"></param>
     /// <returns></returns>
-    public int GetPointsPerSecond(EntityUid uid, ResearchServerComponent? component = null)
+    public int PointsPerSecond(EntityUid uid, ResearchServerComponent? component = null)
     {
         var points = 0;
 
@@ -152,7 +154,7 @@ public sealed partial class ResearchSystem
     /// <param name="uid">The server</param>
     /// <param name="points">The amount of points being added</param>
     /// <param name="component"></param>
-    public void ModifyServerPoints(EntityUid uid, int points, ResearchServerComponent? component = null)
+    public void AddPointsToServer(EntityUid uid, int points, ResearchServerComponent? component = null)
     {
         if (points == 0)
             return;

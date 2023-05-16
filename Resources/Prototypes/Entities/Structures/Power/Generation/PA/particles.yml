@@ -3,7 +3,6 @@
   description: Accelerated particles.
   id: ParticlesProjectile
   parent: BaseBullet
-  noSpawn: true
   components:
     - type: Sprite
       layers:

@@ -38,8 +38,14 @@ namespace Content.Client.Medical.CrewMonitoring
             {
                 case CrewMonitoringState st:
                     _entManager.TryGetComponent<TransformComponent>(Owner.Owner, out var xform);
+                    Vector2 localPosition = Vector2.Zero;
 
-                    _menu?.ShowSensors(st.Sensors, xform?.Coordinates, st.Snap, st.Precision);
+                    if (_entManager.TryGetComponent<TransformComponent>(xform?.GridUid, out var gridXform))
+                    {
+                        localPosition = gridXform.InvWorldMatrix.Transform(xform.WorldPosition);
+                    }
+
+                    _menu?.ShowSensors(st.Sensors, localPosition, st.Snap, st.Precision);
                     break;
             }
         }

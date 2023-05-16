@@ -255,8 +255,7 @@ public sealed partial class GameTicker
 
     private CompletionResult EndGameRuleCompletions(IConsoleShell shell, string[] args)
     {
-        var opts = GetAddedGameRules().Select(ent => new CompletionOption(ent.ToString(), ToPrettyString(ent))).ToList();
-        return CompletionResult.FromHintOptions(opts, "<added rule>");
+        return CompletionResult.FromHintOptions(GetAddedGameRules().Select(u => u.ToString()), "<added rule>");
     }
 
     [AdminCommand(AdminFlags.Fun)]

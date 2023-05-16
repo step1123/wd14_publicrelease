@@ -22,9 +22,6 @@ public sealed class ActionsComponentState : ComponentState
 {
     public readonly List<ActionType> Actions;
 
-    [NonSerialized]
-    public SortedSet<ActionType>? SortedActions;
-
     public ActionsComponentState(List<ActionType> actions)
     {
         Actions = actions;

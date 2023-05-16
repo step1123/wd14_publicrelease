@@ -16,7 +16,7 @@
         - ReagentId: Nutriment
           Quantity: 5
   - type: Slippery
-    launchForwardsMultiplier: 5
+    launchForwardsMultiplier: 20
   - type: StepTrigger
     intersectRatio: 0.2
   - type: CollisionWake

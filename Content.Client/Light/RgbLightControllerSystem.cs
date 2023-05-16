@@ -99,7 +99,6 @@ namespace Content.Client.Light
                     rgb.HolderLayers.Add(key);
             }
         }
-
         private void OnHandleState(EntityUid uid, RgbLightControllerComponent rgb, ref ComponentHandleState args)
         {
             if (args.Current is not RgbLightControllerState state)
@@ -177,10 +176,9 @@ namespace Content.Client.Light
 
                 if (rgb.Layers != null)
                 {
-                    foreach (var index in rgb.Layers)
+                    foreach (var layer in rgb.Layers)
                     {
-                        if (sprite.TryGetLayer(index, out var layer))
-                            layer.Color = color;
+                        sprite.LayerSetColor(layer, color);
                     }
                 }
 
@@ -190,12 +188,11 @@ namespace Content.Client.Light
 
                 foreach (var layer in rgb.HolderLayers)
                 {
-                    if (holderSprite.LayerMapTryGet(layer, out var index))
-                        holderSprite.LayerSetColor(index, color);
+                    holderSprite.LayerSetColor(layer, color);
                 }
             }
 
-            foreach (var (map, rgb) in EntityQuery<MapLightComponent, RgbLightControllerComponent>())
+            foreach (var (rgb, map) in EntityQuery<RgbLightControllerComponent, MapLightComponent>())
             {
                 var color = GetCurrentRgbColor(_gameTiming.RealTime, rgb.CreationTick.Value * _gameTiming.TickPeriod, rgb);
                 map.AmbientLightColor = color;

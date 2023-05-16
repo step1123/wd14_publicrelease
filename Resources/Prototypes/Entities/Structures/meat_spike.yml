@@ -10,9 +10,6 @@
     # temp to make clickmask work
     sprite: Structures/meat_spike.rsi
     state: spike
-    layers:
-    - state: spike
-      map: ["base"]
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic
@@ -44,12 +41,13 @@
   - type: Anchorable
   - type: Pullable
   - type: Appearance
-  - type: GenericVisualizer
     visuals:
-      enum.KitchenSpikeVisuals.Status:
-        base:
-          Empty: { state: spike }
-          Bloody: { state: spikebloody }
+      - type: GenericEnumVisualizer
+        key: enum.KitchenSpikeVisuals.Status
+        layer: 0
+        states:
+          enum.KitchenSpikeStatus.Empty: spike
+          enum.KitchenSpikeStatus.Bloody: spikebloody
   - type: Construction
     graph: MeatSpike
     node: MeatSpike

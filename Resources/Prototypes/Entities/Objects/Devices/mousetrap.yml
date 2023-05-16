@@ -10,7 +10,6 @@
       drawdepth: SmallMobs # if mice can hide under tables, so can mousetraps
       layers:
         - state: mousetrap
-          map: ["base"]
     - type: StepTrigger
       intersectRatio: 0.2
       requiredTriggeredSpeed: 0
@@ -28,12 +27,13 @@
     - type: Item
       sprite: Objects/Devices/mousetrap.rsi
     - type: Appearance
-    - type: GenericVisualizer
       visuals:
-        enum.MousetrapVisuals.Visual:
-          base:
-            Armed: { state: mousetraparmed }
-            Unarmed: { state: mousetrap }
+        - type: GenericEnumVisualizer
+          key: enum.MousetrapVisuals.Visual
+          layer: 0
+          states:
+            enum.MousetrapVisuals.Armed: mousetraparmed
+            enum.MousetrapVisuals.Unarmed: mousetrap
     - type: Physics
       bodyType: Dynamic
     - type: CollisionWake

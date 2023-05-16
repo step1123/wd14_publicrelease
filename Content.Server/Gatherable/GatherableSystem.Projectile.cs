@@ -17,16 +17,12 @@ public sealed partial class GatherableSystem
     {
         if (!args.OtherFixture.Hard ||
             args.OurFixture.ID != SharedProjectileSystem.ProjectileFixture ||
-            component.Amount <= 0 ||
             !TryComp<GatherableComponent>(args.OtherEntity, out var gatherable))
         {
             return;
         }
 
         Gather(args.OtherEntity, uid, gatherable);
-        component.Amount--;
-
-        if (component.Amount <= 0)
-            QueueDel(uid);
+        QueueDel(uid);
     }
 }

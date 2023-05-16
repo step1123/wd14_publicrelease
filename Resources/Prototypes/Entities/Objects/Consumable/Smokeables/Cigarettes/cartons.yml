@@ -1,6 +1,6 @@
 - type: entity
   id: CigCartonGreen
-  parent: [ BoxCardboard, BaseBagOpenClose ]
+  parent: BoxCardboard
   name: Spessman's Smokes carton
   description: "A carton containing 6 packets of Spessman's Smokes."
   components:
@@ -8,8 +8,6 @@
     sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/green.rsi
     layers:
       - state: closed
-      - state: open
-        map: ["openLayer"]
   - type: Storage
     capacity: 36
   - type: Item
@@ -19,6 +17,10 @@
     contents:
       - id: CigPackGreen
         amount: 6
+  - type: Appearance
+    visuals:
+      - type: BagOpenCloseVisualizer
+        openIcon: open
   - type: Tag
     tags:
     - Trash

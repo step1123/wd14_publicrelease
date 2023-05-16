@@ -9,11 +9,6 @@
     state: server
   - type: ResearchServer
   - type: TechnologyDatabase
-    supportedDisciplines:
-    - Industrial
-    - Biochemical
-    - Experimental
-    - CivilianServices
   - type: ApcPowerReceiver
     powerLoad: 200
     priority: Low

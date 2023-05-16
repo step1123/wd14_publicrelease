@@ -30,7 +30,6 @@ namespace Content.Client.Lobby.UI
         public LobbyGui()
         {
             RobustXamlLoader.Load(this);
-            IoCManager.InjectDependencies(this);
             SetAnchorPreset(MainContainer, LayoutPreset.Wide);
             SetAnchorPreset(Background, LayoutPreset.Wide);
             _funnyShader = IoCManager.Resolve<IPrototypeManager>().Index<ShaderPrototype>("Starfield").InstanceUnique();
