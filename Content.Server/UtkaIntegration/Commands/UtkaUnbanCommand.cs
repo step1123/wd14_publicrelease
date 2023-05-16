@@ -34,6 +34,13 @@ public sealed class UtkaUnbanCommand : IUtkaCommand
             return;
         }
 
+        var adminData = await dbMan.GetAdminDataForAsync(player);
+        if (adminData?.AdminServer == null || ban.ServerName != "unknown" && adminData.AdminServer != ban.ServerName)
+        {
+            UtkaSendResponse(false);
+            return;
+        }
+
         await dbMan.AddServerUnbanAsync(new ServerUnbanDef(banId, player, DateTimeOffset.Now));
 
         UtkaSendResponse(true);
