@@ -71,7 +71,7 @@ namespace Content.Server.Zombies
         {
             base.Update(frameTime);
             var query = EntityQueryEnumerator<PendingZombieComponent, DamageableComponent>();
-            var curTime = _timing.CurTime;
+            var curTime = _gameTiming.CurTime;
 
             var zombQuery = EntityQueryEnumerator<ZombieComponent, DamageableComponent, MobStateComponent>();
 
@@ -110,7 +110,7 @@ namespace Content.Server.Zombies
                     // Gradual healing for living zombies.
                     _damageable.TryChangeDamage(uid, comp.Damage, true, false, damage);
                 }
-                else if (_random.Prob(comp.ZombieReviveChance))
+                else if (_robustRandom.Prob(comp.ZombieReviveChance))
                 {
                     // There's a small chance to reverse all the zombie's damage (damage.Damage) in one go
                     _damageable.TryChangeDamage(uid, -damage.Damage, true, false, damage);
@@ -162,7 +162,7 @@ namespace Content.Server.Zombies
                 {
                     // Roll to see if this zombie is not coming back.
                     //   Note that due to damage reductions it takes a lot of hits to gib a zombie without this.
-                    if (_random.Prob(component.ZombiePermadeathChance))
+                    if (_robustRandom.Prob(component.ZombiePermadeathChance))
                     {
                         // You're dead! No reviving for you.
                         _mobThreshold.SetAllowRevives(uid, false);

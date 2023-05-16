@@ -243,15 +243,15 @@ namespace Content.Server.Database
 
             profile.CharacterName = humanoid.Name;
             profile.ClownName = humanoid.ClownName;
-            profile.MimeName = humanoid.MimeName,
-            profile.BorgName = humanoid.BorgName,
+            profile.MimeName = humanoid.MimeName;
+            profile.BorgName = humanoid.BorgName;
             profile.FlavorText = humanoid.FlavorText;
             profile.Species = humanoid.Species;
-            profile.Voice = humanoid.Voice,
+            profile.Voice = humanoid.Voice;
             profile.Age = humanoid.Age;
             profile.Sex = humanoid.Sex.ToString();
             profile.Gender = humanoid.Gender.ToString();
-            profile.BodyType = humanoid.BodyType,
+            profile.BodyType = humanoid.BodyType;
             profile.HairName = appearance.HairStyleId;
             profile.HairColor = appearance.HairColor.ToHex();
             profile.FacialHairName = appearance.FacialHairStyleId;
