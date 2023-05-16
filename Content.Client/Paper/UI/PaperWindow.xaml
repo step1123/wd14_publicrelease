@@ -1,6 +1,6 @@
 <paper:PaperWindow xmlns="https://spacestation14.io"
     xmlns:paper="clr-namespace:Content.Client.Paper.UI"
-    MouseFilter="Stop" Resizable="True" MinSize="150 150"
+    MouseFilter="Stop" Resizable="True" MinSize="300 300"
     SetSize="510 660"> <!-- Provide some reasonable sizes by default. Can be changed by the component -->
 
     <BoxContainer Name="ContentsRoot" Orientation="Vertical">
