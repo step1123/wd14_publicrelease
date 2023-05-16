@@ -26,3 +26,4 @@ marking-CatTailDouble = Двойной хвост
 marking-CatTailDouble-double_tail_cat_back = Первый хвост
 marking-CatTailDouble-double_tail_cat_front = Второй хвост
 marking-DemonTailWarete = Демонический хвост
+marking-DemonTailWarete-tail = Хвост
