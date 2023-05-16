@@ -1,5 +1,7 @@
+using System.Linq;
 using Content.Shared.Dataset;
 using Content.Shared.Humanoid;
+using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Prototypes;
@@ -14,7 +16,12 @@ namespace Content.Client.Preferences.UI
 
         private void RandomizeEverything()
         {
-            Profile = HumanoidCharacterProfile.Random();
+            var species = _prototypeManager.EnumeratePrototypes<SpeciesPrototype>();
+
+            //Пиздец
+            var ignoredSpecies = species.Except(_speciesList).Select(x=> x.ID).ToHashSet();
+
+            Profile = HumanoidCharacterProfile.Random(ignoredSpecies);
             UpdateControls();
             IsDirty = true;
         }
