@@ -53,8 +53,6 @@
     malus: 0
   - type: Reflect
     enabled: false
-    reflectProb: 0.25
-    spread: 45
   - type: DoubleSwordCraft
 
 - type: entity
@@ -190,6 +188,4 @@
       attackRate: 1
     - type: Reflect
       enabled: false
-      energeticChance: 0.7
-      kineticChance: 0.7
-      spread: 45
+      reflectProb: 0.65

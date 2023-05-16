@@ -140,7 +140,6 @@ namespace Content.Client.Entry
 
             _componentFactory.GenerateNetIds();
             _adminManager.Initialize();
-            _stylesheetManager.Initialize();
             _screenshotHook.Initialize();
             _changelogManager.Initialize();
             _rulesManager.Initialize();
@@ -164,6 +163,9 @@ namespace Content.Client.Entry
         public override void PostInit()
         {
             base.PostInit();
+
+            _stylesheetManager.Initialize();
+
             // Setup key contexts
             ContentContexts.SetupContexts(_inputManager.Contexts);
 
