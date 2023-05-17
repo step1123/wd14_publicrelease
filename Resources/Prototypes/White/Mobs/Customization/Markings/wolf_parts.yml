@@ -3,7 +3,7 @@
   id: WolfEarsLeer
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [ Human ]
+  speciesRestriction: [ Human, Felinid ]
   sponsorOnly: true
   sprites:
     - sprite: White/Mobs/Customization/wolf_parts.rsi
@@ -15,7 +15,7 @@
   id: WolfTailLeer
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Human]
+  speciesRestriction: [Human, Felinid]
   sponsorOnly: true
   sprites:
     - sprite: White/Mobs/Customization/wolf_parts.rsi
