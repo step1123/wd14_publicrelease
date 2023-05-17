@@ -178,7 +178,15 @@ public sealed class RoleBanManager
             role,
             serverName);
 
-        UtkaSendJobBanEvent(admin, target, minutes, job, isGlobalBan, reason);
+        if (!await AddRoleBan(banDef))
+        {
+            UtkaSendResponse(false);
+            return;
+        }
+
+        var banId = await UtkaGetBanId(reason, role, targetUid);
+
+        UtkaSendJobBanEvent(admin, target, minutes, job, isGlobalBan, reason, banId);
         UtkaSendResponse(true);
     }
     //WD end
@@ -256,8 +264,12 @@ public sealed class RoleBanManager
         var length = expires == null ? Loc.GetString("cmd-roleban-inf") : Loc.GetString("cmd-roleban-until", ("expires", expires));
         shell.WriteLine(Loc.GetString("cmd-roleban-success", ("target", target), ("role", role), ("reason", reason), ("length", length), ("server", serverName)));
 
-        if (job != null) // WD
-            UtkaSendJobBanEvent(shell.Player!.Name, target, minutes, job, isGlobalBan, reason); //WD
+        // WD start
+        var banId = await UtkaGetBanId(reason, role, targetUid);
+
+        if (job != null)
+            UtkaSendJobBanEvent(shell.Player!.Name, target, minutes, job, isGlobalBan, reason, banId);
+        //WD end
     }
     #endregion
 
@@ -272,21 +284,15 @@ public sealed class RoleBanManager
         _utkaSockets.SendMessageToAll(utkaBanned);
     }
 
-    private async void UtkaSendJobBanEvent(string ackey, string ckey, uint duration, string role, bool global,
-        string reason)
+    private async void UtkaSendJobBanEvent(string ackey, string ckey, uint duration, string job, bool global,
+        string reason, int banId)
     {
-        var located = await _playerLocator.LookupIdByNameOrIdAsync(ckey);
-        var targetUid = located!.UserId;
-
-        var banlist = await _db.GetServerRoleBansAsync(null, targetUid, null);
-        var banId = banlist[^1].Id;
-
         var utkaBanned = new UtkaBannedEvent()
         {
             ACkey = ackey,
             Ckey = ckey,
             Duration = duration,
-            Bantype = role,
+            Bantype = job,
             Global = global,
             Reason = reason,
             Rid = EntitySystem.Get<GameTicker>().RoundId,
@@ -294,6 +300,25 @@ public sealed class RoleBanManager
         };
 
         _utkaSockets.SendMessageToAll(utkaBanned);
+    }
+
+    private async Task<int> UtkaGetBanId(string reason, string role, NetUserId targetUid)
+    {
+        var banId = 0;
+        var banList = await _db.GetServerRoleBansAsync(null, targetUid, null);
+
+        foreach (var ban in banList)
+        {
+            if (ban.Reason == reason)
+            {
+                if (ban.Role == role && ban.Id != null)
+                {
+                    banId = ban.Id.Value;
+                }
+            }
+        }
+
+        return banId;
     }
     //WD end
 }
