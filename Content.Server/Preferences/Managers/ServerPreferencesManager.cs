@@ -239,7 +239,8 @@ namespace Content.Server.Preferences.Managers
         {
             var maxSlots = _cfg.GetCVar(CCVars.GameMaxCharacterSlots);
             var extraSlots = _sponsors.TryGetInfo(userId, out var sponsor) ? sponsor.ExtraSlots : 0;
-            return maxSlots + extraSlots;
+            var maxSavedSlots = _cachedPlayerPrefs[userId].Prefs!.Characters.Count;
+            return Math.Max(maxSlots + extraSlots, maxSavedSlots - 1);
         }
 
         /// <summary>
