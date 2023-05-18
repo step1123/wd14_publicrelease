@@ -74,7 +74,7 @@ public class EmoteAnimationSystem : EntitySystem
                         KeyFrames =
                         {
                             new AnimationTrackProperty.KeyFrame(Vector2.Zero, 0f),
-                            new AnimationTrackProperty.KeyFrame(new Vector2(0, 1), 0.125f),
+                            new AnimationTrackProperty.KeyFrame(new Vector2(0, 0.7f), 0.125f),
                             new AnimationTrackProperty.KeyFrame(Vector2.Zero, 0.125f),
                         }
                     }
