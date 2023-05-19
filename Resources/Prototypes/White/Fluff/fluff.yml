@@ -181,3 +181,22 @@
     - type: Paper
       content: Ego voco electi pet
     - type: PetSummon
+
+# 2sh0nka
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearSocksBlack2sh0nka
+  name: чёрные чулки
+  description: Вау. Они.. чёрные?
+  components:
+    - type: Sprite
+      sprite: White/Fluff/deadman1740/black.rsi
+
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearSocksGray2sh0nka
+  name: серые чулки
+  description: Вау. Они.. серые?
+  components:
+    - type: Sprite
+      sprite: White/Fluff/deadman1740/gray.rsi

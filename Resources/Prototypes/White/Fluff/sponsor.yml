@@ -63,3 +63,15 @@
   id: PetsSummonBookLoadout
   entity: PetSummonBook
   sponsorOnly: true
+
+# 2sh0nka
+
+- type: loadout
+  id: 2sh0nkaBlackLoadout
+  entity: ClothingUnderwearSocksBlack2sh0nka
+  sponsorOnly: true
+
+- type: loadout
+  id: 2sh0nkaGrayLoadout
+  entity: ClothingUnderwearSocksGray2sh0nka
+  sponsorOnly: true

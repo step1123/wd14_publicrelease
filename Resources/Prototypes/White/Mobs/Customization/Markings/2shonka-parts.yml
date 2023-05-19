@@ -1,0 +1,41 @@
+- type: marking
+  id: SomeEarsHZ
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [ Human, Felinid ]
+  sponsorOnly: true
+  sprites:
+    - sprite: White/Mobs/Customization/mam_ears.rsi
+      state: m_ears_fox_FRONT
+
+- type: marking
+  id: SomeEarsHZZ
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [ Human, Felinid ]
+  sponsorOnly: true
+  sprites:
+    - sprite: White/Mobs/Customization/mam_ears.rsi
+      state: m_earsinner_fox_FRONT
+
+- type: marking
+  id: SomeTailHZ
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Human, Felinid ]
+  sponsorOnly: true
+  sprites:
+    - sprite: White/Mobs/Customization/oni.rsi
+      state: m_waggingtail_oni_BEHIND
+
+- type: marking
+  id: SomeTailHZZ
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Human, Felinid ]
+  sponsorOnly: false
+  sprites:
+    - sprite: White/Mobs/Customization/vtergot_fox_parts.rsi
+      state: tail
+    - sprite: White/Mobs/Customization/vtergot_fox_parts.rsi
+      state: tail_tip

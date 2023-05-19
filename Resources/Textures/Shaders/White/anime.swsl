@@ -1,4 +1,4 @@
-const highp float shake_power = 0.03;
+const highp float shake_power = 0.04;
 const highp float shake_block_size = 30.5;
 const highp float fade = 0.01;
 const highp vec2 direction_r = vec2( 1.0, 0.0 );

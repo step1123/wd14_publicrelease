@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "m_ears_fox_ADJ",
+      "directions": 4
+    },
+    {
+      "name": "m_earsinner_fox_FRONT",
+      "directions": 4
+    },
+    {
+      "name": "m_ears_fox_FRONT",
+      "directions": 4
+    }
+  ]
+}
