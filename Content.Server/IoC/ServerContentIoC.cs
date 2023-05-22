@@ -19,6 +19,7 @@ using Content.Server.Preferences.Managers;
 using Content.Server.ServerInfo;
 using Content.Server.ServerUpdates;
 using Content.Server.Voting.Managers;
+using Content.Server.Worldgen.Tools;
 using Content.Server.UtkaIntegration;
 using Content.Server.White.JoinQueue;
 using Content.Server.White.Jukebox;
@@ -53,10 +54,9 @@ namespace Content.Server.IoC
             IoCManager.Register<IPlayerLocator, PlayerLocator>();
             IoCManager.Register<IAfkManager, AfkManager>();
             IoCManager.Register<IGameMapManager, GameMapManager>();
-            IoCManager.Register<IGamePrototypeLoadManager, GamePrototypeLoadManager>();
             IoCManager.Register<RulesManager, RulesManager>();
             IoCManager.Register<RoleBanManager, RoleBanManager>();
-            IoCManager.Register<NetworkResourceManager>();
+            IoCManager.Register<ContentNetworkResourceManager>();
             IoCManager.Register<IAdminNotesManager, AdminNotesManager>();
             IoCManager.Register<GhostKickManager>();
             IoCManager.Register<ISharedAdminLogManager, AdminLogManager>();
@@ -64,6 +64,7 @@ namespace Content.Server.IoC
             IoCManager.Register<PlayTimeTrackingManager>();
             IoCManager.Register<UserDbDataManager>();
             IoCManager.Register<ServerInfoManager>();
+            IoCManager.Register<PoissonDiskSampler>();
 
             // WD-EDIT
             IoCManager.Register<SponsorsManager>();

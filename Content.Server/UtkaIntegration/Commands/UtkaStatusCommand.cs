@@ -33,7 +33,6 @@ public sealed class UtkaStatusCommand : IUtkaCommand
         var _station = EntitySystem.Get<StationSystem>();
         IoCManager.InjectDependencies(this);
 
-
         var players = Filter.GetAllPlayers().ToList().Count;
 
         var admins = _adminManager.ActiveAdmins.Select(x => x.Name).ToList().Count;
@@ -53,7 +52,7 @@ public sealed class UtkaStatusCommand : IUtkaCommand
 
         string? gameMap = null;
         string? stationCode = null;
-        foreach (var station in _station.Stations)
+        foreach (var station in _station.GetStations())
         {
             if (!_entMan.TryGetComponent(station, out AlertLevelComponent? alert) || stationCode != null)
             {
