@@ -56,7 +56,6 @@ namespace Content.Server.Zombies
             SubscribeLocalEvent<ZombieComponent, MeleeHitEvent>(OnMeleeHit);
             SubscribeLocalEvent<ZombieComponent, MobStateChangedEvent>(OnMobState);
             SubscribeLocalEvent<ZombieComponent, CloningEvent>(OnZombieCloning);
-            SubscribeLocalEvent<ZombieComponent, AttemptSneezeCoughEvent>(OnSneeze);
             SubscribeLocalEvent<ZombieComponent, TryingToSleepEvent>(OnSleepAttempt);
 
             SubscribeLocalEvent<PendingZombieComponent, MapInitEvent>(OnPendingMapInit);
@@ -72,7 +71,7 @@ namespace Content.Server.Zombies
         {
             base.Update(frameTime);
             var query = EntityQueryEnumerator<PendingZombieComponent, DamageableComponent, MobStateComponent>();
-            var curTime = _timing.CurTime;
+            var curTime = _gameTiming.CurTime;
 
             var zombQuery = EntityQueryEnumerator<ZombieComponent, DamageableComponent, MobStateComponent>();
 
@@ -266,7 +265,7 @@ namespace Content.Server.Zombies
                     if (_robustRandom.Prob(GetZombieInfectionChance(entity, component)))
                     {
                         var pending = EnsureComp<PendingZombieComponent>(entity);
-                        pending.MaxInfectionLength = _random.NextFloat(0.25f, 1.0f) * component.ZombieInfectionTurnTime;
+                        pending.MaxInfectionLength = _robustRandom.NextFloat(0.25f, 1.0f) * component.ZombieInfectionTurnTime;
                         EnsureComp<ZombifyOnDeathComponent>(entity);
                     }
                 }
