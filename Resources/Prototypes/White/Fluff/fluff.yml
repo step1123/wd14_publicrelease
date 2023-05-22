@@ -200,3 +200,21 @@
   components:
     - type: Sprite
       sprite: White/Fluff/deadman1740/gray.rsi
+
+# Dederiot
+- type: entity
+  parent: BaseHandheldInstrument
+  id: SuperSynthesizerInstrumentDederiot
+  name: супер синтезатор
+  description: Выглядит модно. Да.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/Dederiot/super_synthesizer.rsi
+      state: icon
+    - type: Item
+      size: 20
+      sprite: White/Fluff/Dederiot/super_synthesizer.rsi
+    - type: Instrument
+      allowPercussion: true
+      allowProgramChange: true
+      respectMidiLimits: false
