@@ -1,12 +1,22 @@
-﻿{"version": 1,
+﻿{
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
     "license": "CC-BY-SA-3.0",
-    "copyright": "Created by discord user 319426185702539266",
-
-    "size": {"x": 32, "y": 32},
+    "copyright": "Created by Discord User 319426185702539266",
     "states": [
-        {"name": "inhand-left",
-            "directions": 4},
-        {"name": "inhand-right",
-            "directions": 4},
-        {"name": "icon"}]
+        {
+            "name": "icon"
+        },
+        {
+            "name": "inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "inhand-right",
+            "directions": 4
+        }
+    ]
 }
