@@ -1,4 +1,4 @@
-﻿admin-chatalert-AME-exploded = ДАМ взорвался от перегрузки ядер! Последнее увеличение топлива было сделано игроком { $lastplayer }
+admin-chatalert-AME-exploded = ДАМ взорвался от перегрузки ядер! Последнее увеличение топлива было сделано игроком { $lastplayer }
 admin-chatalert-caution-stability = У ДАМ осталось менее 50% стабильности. Последнее увеличение топлива было сделано игроком { $lastplayer }
 admin-chatalert-danger-stability = У ДАМ осталось менее 10% стабильности! Взрыв неизбежен! Последнее увеличение топлива было сделано игроком { $lastplayer }
 admin-chatalert-singularity-no-fields = { $singularity } активировался без всех включенных полей!
@@ -11,5 +11,5 @@ admin-chatalert-gravity-generator-turned = { $player } переключил { $g
 admin-chatalert-particle-accelerator-on = { $player } включил ускоритель частиц.
 admin-chatalert-particle-accelerator-off = { $player } отключил ускоритель частиц.
 admin-chatalert-particle-strength-change = { $player } переключил мощность ускорителя частиц на { $state }.
-admin-chatalert-explosion-player = { $player } инициировал взрыв { $entity } на { $coordinates } с интенсивностью { $intensity} и уклоном { $slope }!
+admin-chatalert-explosion-player = { $player } инициировал взрыв { $entity } на { $coordinates } с интенсивностью { $intensity } и уклоном { $slope }!
 admin-chatalert-explosion-no-player = Подрыв { $entity } на { $coordinates } с интенсивностью { $intensity } и уклоном { $slope }!

@@ -1,4 +1,4 @@
-﻿meatyore-store-category-hats = Шапки
+meatyore-store-category-hats = Шапки
 meatyore-store-category-masks = Маски
 meatyore-store-category-boots = Обувь
 meatyore-store-category-glasses = Очки

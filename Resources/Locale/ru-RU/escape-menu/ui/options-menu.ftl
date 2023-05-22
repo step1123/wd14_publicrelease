@@ -145,6 +145,7 @@ ui-options-function-open-tile-spawn-window = Открыть меню спавн�
 ui-options-function-open-decal-spawn-window = Открыть меню спавна декалей
 ui-options-function-open-admin-menu = Открыть админ меню
 ui-options-function-open-guidebook = Открыть руководство
+ui-options-function-editor-flip-object = Перевернуть
 ui-options-function-take-screenshot = Сделать скриншот
 ui-options-function-take-screenshot-no-ui = Сделать скриншот (без интерфейса)
 ui-options-function-editor-place-object = Разместить объект

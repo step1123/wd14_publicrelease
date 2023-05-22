@@ -1,4 +1,4 @@
-﻿mech-verb-enter = Войти
+mech-verb-enter = Войти
 mech-verb-exit = Покинуть
 mech-equipment-begin-install = { CAPITALIZE($item) } устанавливается...
 mech-equipment-finish-install = Установка { $item } завершена

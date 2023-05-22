@@ -11,6 +11,8 @@ examine-headset-channels-prefix = На небольшом экране гарн�
 examine-headset-channel = [color={ $color }]{ $keys } для { $id } ({ $freq })[/color]
 examine-headset-no-keys = Похоже, это сломано. Нет ключей шифрования.
 examine-default-channel = Используй { $prefix } для стандартного ([color={ $color }]{ $channel }[/color]).
+# not headset but whatever
+chat-radio-handheld = Портативный
 examine-headset-chat-prefix = Используй { $prefix } для частоты своего отдела.
 examine-headset-default-channel =
     Это указывает на то, что канал по умолчанию этой гарнитуры - [color={ $color }]{ $channel ->

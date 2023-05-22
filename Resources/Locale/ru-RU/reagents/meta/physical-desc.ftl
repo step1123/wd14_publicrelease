@@ -61,6 +61,7 @@ reagent-physical-desc-burning = горящее
 reagent-physical-desc-powdery = порошкообразное
 reagent-physical-desc-creamy = кремообразное
 reagent-physical-desc-sticky = липкое
+reagent-physical-desc-rocky = каменистое
 reagent-physical-desc-bubbly = пузыристое
 reagent-physical-desc-lemony-fresh = лимонно-свежее
 reagent-physical-desc-crisp = хрустящее

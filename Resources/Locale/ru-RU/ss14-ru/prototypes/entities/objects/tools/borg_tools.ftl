@@ -1,4 +1,4 @@
-﻿ent-WelderIndustrialBorg = { ent-WelderIndustrialAdvanced }
+ent-WelderIndustrialBorg = { ent-WelderIndustrialAdvanced }
     .desc = { ent-WelderIndustrialAdvanced.desc }
     .suffix = Борг
 ent-HyposprayBorgStandard = гипоспрей с эпинефрином
@@ -25,7 +25,6 @@ ent-PartRodMetalInfinite = слот металлических стержней
 ent-FloorTileItemSteelFull = слот стального напольного покрытия
     .desc = Содержит стальное напольное покрытие внутри этого борга.
     .suffix = Борг
-
 ent-BorgFlash = { ent-Flash }
     .desc = { ent-Flash.desc }
     .suffix = Борг

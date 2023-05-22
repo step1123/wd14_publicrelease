@@ -157,6 +157,7 @@ flavor-complex-juice = как сок
 
 ## Basic drinks
 
+flavor-complex-rocksandstones = как камни
 flavor-complex-water = как вода
 flavor-complex-beer = как моча
 flavor-complex-ale = как хлеб
@@ -198,6 +199,7 @@ flavor-complex-screwdriver = как крепкий апельсиновый со
 
 flavor-complex-themartinez = как фиалки и лимонная водка
 flavor-complex-cogchamp = как медь
+flavor-complex-antifreeze = warm
 flavor-complex-pilk = как сладкое молоко
 
 # Medicine/chemical-specific flavors.
