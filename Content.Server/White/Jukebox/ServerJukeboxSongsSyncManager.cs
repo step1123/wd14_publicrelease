@@ -1,4 +1,7 @@
-﻿using Content.Shared.White.Jukebox;
+﻿using Content.Server.GameTicking;
+using Content.Shared.White.Jukebox;
+using Robust.Server.Player;
+using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Utility;
 
@@ -7,6 +10,7 @@ namespace Content.Server.White.Jukebox;
 public sealed class ServerJukeboxSongsSyncManager : JukeboxSongsSyncManager
 {
     [Dependency] private readonly INetManager _netManager = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -49,12 +53,21 @@ public sealed class ServerJukeboxSongsSyncManager : JukeboxSongsSyncManager
 
     public override void OnSongUploaded(JukeboxSongUploadNetMessage message)
     {
-
         ContentRoot.AddOrUpdateFile(message.RelativePath, message.Data);
 
         foreach (var channel in _netManager.Channels)
         {
             channel.SendMessage(message);
+        }
+    }
+
+    public void CleanUp()
+    {
+        var files = ContentRoot.GetAllFiles();
+
+        foreach (var file in files)
+        {
+            ContentRoot.RemoveFile(file.relPath);
         }
     }
 }
