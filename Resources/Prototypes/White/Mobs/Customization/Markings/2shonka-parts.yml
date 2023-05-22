@@ -33,7 +33,7 @@
   bodyPart: Tail
   markingCategory: Tail
   speciesRestriction: [ Human, Felinid ]
-  sponsorOnly: false
+  sponsorOnly: true
   sprites:
     - sprite: White/Mobs/Customization/vtergot_fox_parts.rsi
       state: tail
