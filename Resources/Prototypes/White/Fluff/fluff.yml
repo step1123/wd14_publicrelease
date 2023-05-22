@@ -213,8 +213,7 @@
       allowProgramChange: true
       respectMidiLimits: false
     - type: Sprite
-      sprite: /White/Fluff/Derderiot/super-synthesizer.rsi
-      state: icon
+      sprite: White/Fluff/Derderiot/super-synthesizer.rsi
     - type: Item
       size: 24
-      sprite: /White/Fluff/Derderiot/super-synthesizer.rsi
+      sprite: White/Fluff/Derderiot/super-synthesizer.rsi
