@@ -1,6 +1,6 @@
 ﻿- type: construction
   name: baseball bat
-  id: bat
+  id: BaseBallBat
   graph: WoodenBat
   startNode: start
   targetNode: bat
@@ -13,7 +13,7 @@
 
 - type: construction
   name: ghost sheet
-  id: ghost_sheet
+  id: ClothingOuterGhostSheet
   graph: GhostSheet
   startNode: start
   targetNode: ghost_sheet
@@ -26,7 +26,7 @@
 
 - type: construction
   name: makeshift handcuffs
-  id: makeshifthandcuffs
+  id: Cablecuffs
   graph: makeshifthandcuffs
   startNode: start
   targetNode: cuffscable
@@ -37,7 +37,7 @@
 
 - type: construction
   name: muzzle
-  id: muzzle
+  id: ClothingMaskMuzzle
   graph: Muzzle
   startNode: start
   targetNode: muzzle
@@ -50,7 +50,7 @@
 
 - type: construction
   name: improvised pneumatic cannon
-  id: pneumaticcannon
+  id: WeaponImprovisedPneumaticCannon
   graph: PneumaticCannon
   startNode: start
   targetNode: cannon
@@ -63,7 +63,7 @@
 
 - type: construction
   name: gauze
-  id: gauze
+  id: Gauze1
   graph: Gauze
   startNode: start
   targetNode: gauze
@@ -76,7 +76,7 @@
 
 - type: construction
   name: blindfold
-  id: blindfold
+  id: ClothingEyesBlindfold
   graph: Blindfold
   startNode: start
   targetNode: blindfold
@@ -89,7 +89,7 @@
 
 - type: construction
   name: flower crown
-  id: flowercrown
+  id: ClothingHeadHatFlowerCrown
   graph: flowercrown
   startNode: start
   targetNode: flowercrown
@@ -102,7 +102,7 @@
 
 - type: construction
   name: damp rag
-  id: rag
+  id: RagItem
   graph: Rag
   startNode: start
   targetNode: rag

@@ -38,7 +38,7 @@
             - tool: Screwing
               doAfter: 2
             - tag: SurveillanceCameraMonitorCircuitboard
-              name: surveillance camera monitor board
+              name: монитор камер наблюдения (машинная плата)
               icon:
                 sprite: Objects/Misc/module.rsi
                 state: cpuboard

@@ -1,8 +1,8 @@
 # Glass
 materials-glass = стекло
-materials-reinforced-glass = бронестекло
+materials-reinforced-glass = усиленное стекло
 materials-plasma-glass = плазменное стекло
-materials-reinforced-plasma-glass = плазменное бронестекло
+materials-reinforced-plasma-glass = усиленное плазменное стекло
 # Metals
 materials-steel = сталь
 materials-gold = золото

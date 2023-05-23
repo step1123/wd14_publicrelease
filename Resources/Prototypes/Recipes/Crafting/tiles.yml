@@ -2,7 +2,7 @@
 
 - type: construction
   name: steel tile
-  id: TileSteel
+  id: FloorTileItemSteel
   graph: TileSteel
   startNode: start
   targetNode: steeltile
@@ -13,7 +13,7 @@
 
 - type: construction
   name: wood floor
-  id: TileWood
+  id: FloorTileItemWood
   graph: TileWood
   startNode: start
   targetNode: woodtile
@@ -24,7 +24,7 @@
 
 - type: construction
   name: white tile
-  id: TileWhite
+  id: FloorTileItemWhite
   graph: TileWhite
   startNode: start
   targetNode: whitetile
@@ -35,7 +35,7 @@
 
 - type: construction
   name: dark tile
-  id: TileDark
+  id: FloorTileItemDark
   graph: TileDark
   startNode: start
   targetNode: darktile

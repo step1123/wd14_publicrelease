@@ -7,7 +7,7 @@
         - to: solarassembly
           steps:
             - tag: SolarAssemblyPart
-              name: Solar Assembly Parts
+              name: детали солнечной батареи
               icon:
                 sprite: Objects/Power/solar_parts.rsi
                 state: solar_assembly_parts

@@ -24,7 +24,7 @@ public abstract partial class InteractionTest
     protected const string RGlass = "ReinforcedGlass";
     protected const string Plastic = "Plastic";
     protected const string Cable = "Cable";
-    protected const string Rod = "MetalRod";
+    protected const string Rod = "PartRodMetal";
 
     // Parts
     protected const string Bin1 = "MatterBinStockPart";

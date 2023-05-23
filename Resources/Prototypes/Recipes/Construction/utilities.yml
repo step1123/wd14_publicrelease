@@ -1,7 +1,7 @@
 # SURVEILLANCE
 - type: construction
   name: camera
-  id: camera
+  id: SurveillanceCameraAssembly
   graph: SurveillanceCamera
   startNode: start
   targetNode: camera
@@ -31,7 +31,7 @@
 # POWER
 - type: construction
   name: APC
-  id: APC
+  id: APCBasic
   graph: APC
   startNode: start
   targetNode: apc
@@ -83,7 +83,7 @@
 
 - type: construction
   name: wallmount substation
-  id: WallmountSubstation
+  id: BaseSubstationWall
   graph: WallmountSubstation
   startNode: start
   targetNode: substation
@@ -98,7 +98,7 @@
 
 - type: construction
   name: wallmount generator
-  id: WallmountGenerator
+  id: GeneratorWallmountBasic
   graph: WallmountGenerator
   startNode: start
   targetNode: generator
@@ -113,7 +113,7 @@
 
 - type: construction
   name: wallmount APU
-  id: WallmountGeneratorAPU
+  id: GeneratorWallmountAPU
   graph: WallmountGenerator
   startNode: start
   targetNode: APU
@@ -290,7 +290,7 @@
 # ATMOS
 - type: construction
   name: air alarm
-  id: AirAlarmFixture
+  id: AirAlarm
   graph: AirAlarm
   startNode: start
   targetNode: air_alarm

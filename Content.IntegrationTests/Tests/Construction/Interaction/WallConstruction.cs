@@ -8,7 +8,7 @@ public sealed class WallConstruction : InteractionTest
 {
     public const string Girder = "Girder";
     public const string WallSolid = "WallSolid";
-    public const string Wall = "Wall";
+    public const string Wall = "WallSolid";
 
     [Test]
     public async Task ConstructWall()

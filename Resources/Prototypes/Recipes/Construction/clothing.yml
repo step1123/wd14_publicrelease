@@ -1,6 +1,6 @@
 - type: construction
   name: clown hardsuit
-  id: ClownHardsuit
+  id: ClothingOuterHardsuitClown
   graph: ClownHardsuit
   startNode: start
   targetNode: clownHardsuit

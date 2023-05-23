@@ -1,6 +1,6 @@
 - type: construction
   name: modular grenade
-  id: ModularGrenadeRecipe
+  id: ModularGrenade
   graph: ModularGrenadeGraph
   startNode: start
   targetNode: grenade
@@ -13,7 +13,7 @@
 
 - type: construction
   name: modular mine
-  id: ModularMineRecipe
+  id: LandMineModular
   graph: ModularMineGraph
   startNode: start
   targetNode: mine

@@ -7,7 +7,7 @@
         - to: flowercrown
           steps:
             - tag: Flower
-              name: flower
+              name: цветок
               icon:
                 sprite: Objects/Specific/Hydroponics/poppy.rsi
                 state: produce

@@ -1,6 +1,6 @@
 ﻿- type: construction
   name: metal rod
-  id: MetalRod
+  id: PartRodMetal
   graph: MetalRod
   startNode: start
   targetNode: MetalRod
@@ -32,7 +32,7 @@
   objectType: Item
 
 - type: construction
-  name: reinforced plasma glass
+  name: усиленное плазменное стекло
   description: A reinforced sheet of translucent plasma.
   id: SheetRPGlass
   graph: Glass

@@ -36,7 +36,7 @@
 
 - type: construction
   name: wall
-  id: Wall
+  id: WallSolid
   graph: Girder
   startNode: start
   targetNode: wall
@@ -54,7 +54,7 @@
 
 - type: construction
   name: reinforced wall
-  id: ReinforcedWall
+  id: WallReinforced
   graph: Girder
   startNode: start
   targetNode: reinforcedWall
@@ -72,7 +72,7 @@
 # here
 - type: construction
   name: wood wall
-  id: WoodWall
+  id: WallWood
   graph: Girder
   startNode: start
   targetNode: woodWall
@@ -90,7 +90,7 @@
 
 - type: construction
   name: uranium wall
-  id: UraniumWall
+  id: WallUranium
   graph: Girder
   startNode: start
   targetNode: uraniumWall
@@ -108,7 +108,7 @@
 
 - type: construction
   name: silver wall
-  id: SilverWall
+  id: WallSilver
   graph: Girder
   startNode: start
   targetNode: silverWall
@@ -126,7 +126,7 @@
 
 - type: construction
   name: plastic wall
-  id: PlasticWall
+  id: WallPlastic
   graph: Girder
   startNode: start
   targetNode: plasticWall
@@ -144,7 +144,7 @@
 
 - type: construction
   name: plasma wall
-  id: PlasmaWall
+  id: WallPlasma
   graph: Girder
   startNode: start
   targetNode: plasmaWall
@@ -162,7 +162,7 @@
 
 - type: construction
   name: gold wall
-  id: GoldWall
+  id: WallGold
   graph: Girder
   startNode: start
   targetNode: goldWall
@@ -180,7 +180,7 @@
 
 - type: construction
   name: bananium wall
-  id: ClownWall
+  id: WallClown
   graph: Girder
   startNode: start
   targetNode: bananiumWall
@@ -454,7 +454,7 @@
 
 - type: construction
   name: shutter
-  id: Shutters
+  id: ShuttersNormalOpen
   graph: Shutters
   startNode: start
   targetNode: Shutters
@@ -521,7 +521,7 @@
 
 - type: construction
   name: bananium floor
-  id: FloorBananium
+  id: FloorBananiumEntity
   graph: FloorBananium
   startNode: start
   targetNode: BananiumFloor
@@ -697,7 +697,7 @@
 
 - type: construction
   name: secure windoor
-  id: SecureWindoor
+  id: WindoorSecure
   graph: Windoor
   startNode: start
   targetNode: windoorSecure
@@ -716,7 +716,7 @@
 #lighting
 - type: construction
   name: wall light
-  id: LightTubeFixture
+  id: PoweredlightEmpty
   graph: LightFixture
   startNode: start
   targetNode: tubeLight
@@ -736,7 +736,7 @@
 
 - type: construction
   name: small wall light
-  id: LightSmallFixture
+  id: PoweredSmallLightEmpty
   graph: LightFixture
   startNode: start
   targetNode: bulbLight
@@ -755,7 +755,7 @@
 
 - type: construction
   name: ground light post
-  id: LightGroundFixture
+  id: PoweredLightPostSmallEmpty
   graph: LightFixture
   startNode: start
   targetNode: groundLight
@@ -908,7 +908,7 @@
 
 - type: construction
   name: bananium clown statue
-  id: BananiumClownStatue
+  id: StatueBananiumClown
   graph: BananiumStatueClown
   startNode: start
   targetNode: bananiumStatue
@@ -942,7 +942,7 @@
 
 - type: construction
   name: bananium altar
-  id: BananiumAltar
+  id: AltarBananium
   graph: BananiumAltarGraph
   startNode: start
   targetNode: bananiumAltar

@@ -1,6 +1,6 @@
 - type: construction
   name: cleanbot
-  id: cleanbot
+  id: MobCleanBot
   graph: CleanBot
   startNode: start
   targetNode: bot
@@ -13,7 +13,7 @@
 
 - type: construction
   name: honkbot
-  id: honkbot
+  id: MobHonkBot
   graph: HonkBot
   startNode: start
   targetNode: bot
@@ -26,7 +26,7 @@
 
 - type: construction
   name: jonkbot
-  id: jonkbot
+  id: MobJonkBot
   graph: JonkBot
   startNode: start
   targetNode: bot
@@ -39,7 +39,7 @@
 
 - type: construction
   name: medibot
-  id: medibot
+  id: MobMedibot
   graph: MediBot
   startNode: start
   targetNode: bot
@@ -52,7 +52,7 @@
 
 - type: construction
   name: mimebot
-  id: mimebot
+  id: MobMimeBot
   graph: MimeBot
   startNode: start
   targetNode: bot

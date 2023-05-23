@@ -1,6 +1,6 @@
 - type: construction
   name: joint
-  id: smokeableJoint
+  id: Joint
   graph: smokeableJoint
   startNode: start
   targetNode: joint
@@ -11,7 +11,7 @@
 
 - type: construction
   name: blunt
-  id: smokeableBlunt
+  id: Blunt
   graph: smokeableBlunt
   startNode: start
   targetNode: blunt
@@ -22,7 +22,7 @@
 
 - type: construction
   name: cigarette
-  id: smokeableCigarette
+  id: Cigarette
   graph: smokeableCigarette
   startNode: start
   targetNode: cigarette
@@ -35,7 +35,7 @@
 
 - type: construction
   name: ground cannabis
-  id: smokeableGroundCannabis
+  id: GroundCannabis
   graph: smokeableGroundCannabis
   startNode: start
   targetNode: ground
@@ -47,7 +47,7 @@
 
 - type: construction
   name: ground tobacco
-  id: smokeableGroundTobacco
+  id: GroundTobacco
   graph: smokeableGroundTobacco
   startNode: start
   targetNode: ground

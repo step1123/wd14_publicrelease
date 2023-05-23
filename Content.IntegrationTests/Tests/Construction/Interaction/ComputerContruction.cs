@@ -6,7 +6,7 @@ namespace Content.IntegrationTests.Tests.Construction.Interaction;
 
 public sealed class ComputerConstruction : InteractionTest
 {
-    private const string Computer = "Computer";
+    private const string Computer = "ComputerFrame";
     private const string ComputerId = "ComputerId";
     private const string ComputerFrame = "ComputerFrame";
     private const string IdBoard = "IDComputerCircuitboard";

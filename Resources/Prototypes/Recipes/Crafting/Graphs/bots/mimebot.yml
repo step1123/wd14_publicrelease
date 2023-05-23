@@ -10,35 +10,35 @@
         icon:
           sprite: Objects/Storage/Happyhonk/mime.rsi
           state: box
-        name: mime edition happy honk meal
+        name: Мим Хонк Мил
       - tag: MimeBelt
         icon:
             sprite: Clothing/Belt/suspenders.rsi
             state: icon
-        name: suspenders
+        name: подтяжки
         doAfter: 2
       - tag: ProximitySensor
         icon:
           sprite: Objects/Misc/proximity_sensor.rsi
           state: icon
-        name: proximity sensor
+        name: датчик движения
       - tag: BorgHead
         icon:
           sprite: Objects/Specific/Borg/head.rsi
           state: light_borg_head
-        name: borg head
+        name: голова борга
         doAfter: 2
       - tag: BorgArm
         icon:
           sprite: Mobs/Silicon/drone.rsi
           state: l_hand
-        name: borg arm
+        name: рука борга
         doAfter: 2
       - tag: BorgArm
         icon:
           sprite: Mobs/Silicon/drone.rsi
           state: l_hand
-        name: borg arm
+        name: рука борга
         doAfter: 2
   - node: bot
     entity: MobMimeBot

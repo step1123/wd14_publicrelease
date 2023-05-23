@@ -19,42 +19,42 @@
 
 - type: stack
   id: PaperRolling
-  name: rolling paper
+  name: самокрутка
   icon: { sprite: /Textures/Objects/Consumable/Smokeables/Cigarettes/paper.rsi, state: cigpaper }
   spawn: PaperRolling
   maxCount: 5
 
 - type: stack
   id: CigaretteFilter
-  name: cigarette filter
+  name: фильтр
   icon: { sprite: /Textures/Objects/Consumable/Smokeables/Cigarettes/paper.rsi, state: cigfilter }
   spawn: CigaretteFilter
   maxCount: 5
 
 - type: stack
   id: GroundTobacco
-  name: ground tobacco
+  name: измельчённый табак
   icon: { sprite: /Textures/Objects/Misc/reagent_fillings.rsi, state: powderpile }
   spawn: GroundTobacco
   maxCount: 5
 
 - type: stack
   id: GroundCannabis
-  name: ground cannabis
+  name: измельчённый каннабис
   icon: { sprite: /Textures/Objects/Misc/reagent_fillings.rsi, state: powderpile }
   spawn: GroundCannabis
   maxCount: 5
 
 - type: stack
   id: LeavesTobaccoDried
-  name: dried tobacco leaves
+  name: высушеные листья табака
   icon: { sprite: /Textures/Objects/Specific/Hydroponics/tobacco.rsi, state: dried }
   spawn: LeavesTobaccoDried
   maxCount: 5
 
 - type: stack
   id: LeavesCannabisDried
-  name: dried cannabis leaves
+  name: высушеные листья каннабиса
   icon: { sprite: /Textures/Objects/Specific/Hydroponics/tobacco.rsi, state: dried }
   spawn: LeavesCannabisDried
   maxCount: 5

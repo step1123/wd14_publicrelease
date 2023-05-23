@@ -19,7 +19,7 @@ public sealed class ModularGrenadeTests : InteractionTest
     public async Task AssembleAndDetonateGrenade()
     {
         await PlaceInHands(Steel, 5);
-        await CraftItem("ModularGrenadeRecipe");
+        await CraftItem("ModularGrenade");
         Target = await FindEntity("ModularGrenade");
 
         await Drop();
