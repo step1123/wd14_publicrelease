@@ -231,6 +231,9 @@ namespace Content.Server.Body.Systems
         // WD start
         private void OnHandInteract(EntityUid uid, RespiratorComponent component, InteractHandEvent args)
         {
+            if (args.Handled)
+                return;
+
             args.Handled = true;
 
             if (CanCPR(uid, component, args.User))
