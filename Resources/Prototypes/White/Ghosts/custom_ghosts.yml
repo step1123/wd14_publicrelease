@@ -64,3 +64,14 @@
   ghostName: Гань Юй
   ghostDescription: Священная Крио Лань
   size: 0.8, 0.8
+
+#mikvisan
+- type: customGhost
+  id: mikvisan-ghost
+  ckey: mikvisan
+  sprite: White/Ghosts/mikvisan-ghost.rsi
+  alpha: 0.8
+  ghostName: Мона
+  ghostDescription: Годротянка с хорошей задницей
+  size: 0.8, 0.8
+
