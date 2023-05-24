@@ -10,6 +10,7 @@ using Content.Server.Popups;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Server.UtkaIntegration;
+using Content.Server.White.Other.Speech;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
@@ -349,6 +350,17 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         var wrappedMessage = Loc.GetString("chat-manager-entity-say-wrap-message",
             ("entityName", name), ("message", message));
+
+        //WD-EDIT
+        if (TryComp<VoiceOfGodComponent>(source, out var comp))
+        {
+            wrappedMessage = Loc.GetString(comp.ChatLoc,
+                ("entityName", name),
+                ("message", FormattedMessage.EscapeText(message)),
+                ("color", comp.ChatColor)
+            );
+        }
+        //WD-EDIT
 
         SendInVoiceRange(ChatChannel.Local, message, wrappedMessage, source, range);
 
