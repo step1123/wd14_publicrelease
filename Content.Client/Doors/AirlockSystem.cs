@@ -26,7 +26,9 @@ public sealed class AirlockSystem : SharedAirlockSystem
         if (comp.OpenUnlitVisible) // Otherwise there are flashes of the fallback sprite between clicking on the door and the door closing animation starting.
         {
             door.OpenSpriteStates.Add((DoorVisualLayers.BaseUnlit, comp.OpenSpriteState));
+            door.OpenSpriteStates.Add((DoorVisualLayers.BaseBolted, "bolted_open_unlit"));
             door.ClosedSpriteStates.Add((DoorVisualLayers.BaseUnlit, comp.ClosedSpriteState));
+            door.ClosedSpriteStates.Add((DoorVisualLayers.BaseBolted, "bolted_unlit"));
         }
 
         ((Animation)door.OpeningAnimation).AnimationTracks.Add(new AnimationTrackSpriteFlick()
@@ -80,6 +82,7 @@ public sealed class AirlockSystem : SharedAirlockSystem
         var boltedVisible = false;
         var emergencyLightsVisible = false;
         var unlitVisible = false;
+        var baseVisible = true;
 
         if (!_appearanceSystem.TryGetData<DoorState>(uid, DoorVisuals.State, out var state, args.Component))
             state = DoorState.Closed;
@@ -93,11 +96,15 @@ public sealed class AirlockSystem : SharedAirlockSystem
                 ||  state == DoorState.Opening
                 ||  state == DoorState.Denying
                 || (state == DoorState.Open && comp.OpenUnlitVisible)
+                || (state == DoorState.Closed)
                 || (_appearanceSystem.TryGetData<bool>(uid, DoorVisuals.ClosedLights, out var closedLights, args.Component) && closedLights);
         }
 
-        args.Sprite.LayerSetVisible(DoorVisualLayers.BaseUnlit, unlitVisible);
-        args.Sprite.LayerSetVisible(DoorVisualLayers.BaseBolted, boltedVisible);
+        if ((state == DoorState.Open || state == DoorState.Closed) && (emergencyLightsVisible || boltedVisible))
+            baseVisible = false;
+
+        args.Sprite.LayerSetVisible(DoorVisualLayers.BaseUnlit, unlitVisible && baseVisible);
+        args.Sprite.LayerSetVisible(DoorVisualLayers.BaseBolted, unlitVisible && boltedVisible);
         if (comp.EmergencyAccessLayer)
         {
             args.Sprite.LayerSetVisible(
