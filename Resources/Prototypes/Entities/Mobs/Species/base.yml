@@ -295,6 +295,7 @@
       Female: FemaleHuman
       Unsexed: MaleHuman
   - type: Emoting
+  - type: EmoteAnimation
   - type: BodyEmotes
     soundsId: GeneralBodyEmotes
   - type: Grammar
