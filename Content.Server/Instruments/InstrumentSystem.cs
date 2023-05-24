@@ -1,11 +1,13 @@
 using Content.Server.Stunnable;
 using Content.Server.UserInterface;
+using Content.Server.White.EndOfRoundStats.InstrumentPlayed;
 using Content.Shared.Instruments;
 using Content.Shared.Popups;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
+using Robust.Shared.Timing;
 
 namespace Content.Server.Instruments;
 
@@ -15,6 +17,7 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly StunSystem _stunSystem = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     public override void Initialize()
     {
@@ -42,6 +45,8 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
 
         instrument.Playing = true;
         instrument.Dirty();
+
+        instrument.TimeStartedPlaying = _gameTiming.CurTime;
     }
 
     private void OnMidiStop(InstrumentStopMidiEvent msg, EntitySessionEventArgs args)
@@ -97,6 +102,17 @@ public sealed partial class InstrumentSystem : SharedInstrumentSystem
         {
             RaiseNetworkEvent(new InstrumentStopMidiEvent(uid));
         }
+
+        if (instrument.TimeStartedPlaying != null && instrument.InstrumentPlayer != null)
+        {
+            var username = instrument.InstrumentPlayer.Name;
+            var entity = instrument.InstrumentPlayer.AttachedEntity;
+            var name = entity != null ? MetaData((EntityUid) entity).EntityName : "Unknown";
+
+            RaiseLocalEvent(new InstrumentPlayedStatEvent(name, (TimeSpan) (_gameTiming.CurTime - instrument.TimeStartedPlaying), username));
+        }
+
+        instrument.TimeStartedPlaying = null;
 
         instrument.Playing = false;
         instrument.LastSequencerTick = 0;

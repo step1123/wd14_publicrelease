@@ -5,6 +5,7 @@ using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared.Sound.Components;
 using Content.Shared.Throwing;
+using Content.Shared.White.EndOfRoundStats.EmitSoundStatSystem;
 using JetBrains.Annotations;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
@@ -116,6 +117,9 @@ public abstract class SharedEmitSoundSystem : EntitySystem
             // don't predict sounds that client couldn't have played already
             _audioSystem.PlayPvs(component.Sound, uid);
         }
+
+        if (_netMan.IsServer)
+            RaiseLocalEvent(new EmitSoundStatEvent(component.Owner, component.Sound));
     }
 
     private void OnEmitSoundUnpaused(EntityUid uid, EmitSoundOnCollideComponent component, ref EntityUnpausedEvent args)

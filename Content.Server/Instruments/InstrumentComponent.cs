@@ -31,6 +31,8 @@ public sealed class InstrumentComponent : SharedInstrumentComponent
         ?? _entMan.GetComponentOrNull<ActorComponent>(Owner)?.PlayerSession;
 
     [ViewVariables] public BoundUserInterface? UserInterface => Owner.GetUIOrNull(InstrumentUiKey.Key);
+
+    public TimeSpan? TimeStartedPlaying { get; set; }
 }
 
 [RegisterComponent]

@@ -34,6 +34,9 @@
       Cloth: 100
   - type: StaticPrice
     price: 5
+  - type: Tag
+    tags:
+    - Plushie
 
 - type: entity
   parent: BasePlushie

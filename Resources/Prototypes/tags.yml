@@ -766,3 +766,6 @@
 
 - type: Tag
   id: TapeRecorderCoin
+
+- type: Tag
+  id: Plushie

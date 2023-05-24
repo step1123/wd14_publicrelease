@@ -25,10 +25,12 @@ using Content.Shared.Rejuvenate;
 using Content.Shared.Stunnable;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.White.EndOfRoundStats.CuffedTime;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
 
 namespace Content.Shared.Cuffs
 {
@@ -49,6 +51,7 @@ namespace Content.Shared.Cuffs
         [Dependency] private readonly SharedInteractionSystem _interaction = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly SharedTransformSystem _transform = default!;
+        [Dependency] private readonly IGameTiming _gameTiming = default!; // Parkstation-EndOfRoundStats
 
         public override void Initialize()
         {
@@ -419,6 +422,10 @@ namespace Content.Shared.Cuffs
 
             component.Container.Insert(handcuff);
             UpdateHeldItems(target, handcuff, component);
+
+            if (_net.IsServer)
+                component.CuffedTime = _gameTiming.CurTime;
+
             return true;
         }
 
@@ -589,6 +596,12 @@ namespace Content.Shared.Cuffs
 
             cuffable.Container.Remove(cuffsToRemove);
 
+
+            if (_net.IsServer && cuffable.CuffedTime != null)
+            {
+                RaiseLocalEvent(target, new CuffedTimeStatEvent(_gameTiming.CurTime - cuffable.CuffedTime.Value));
+                cuffable.CuffedTime = null;
+            }
 
             if (_net.IsServer)
             {
