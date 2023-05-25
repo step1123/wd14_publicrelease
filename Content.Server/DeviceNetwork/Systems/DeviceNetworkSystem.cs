@@ -6,7 +6,9 @@ using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using System.Buffers;
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.Doors.Components;
 using Content.Shared.Examine;
+using Robust.Shared.Timing;
 using static Content.Server.DeviceNetwork.Components.DeviceNetworkComponent;
 
 namespace Content.Server.DeviceNetwork.Systems
@@ -21,9 +23,12 @@ namespace Content.Server.DeviceNetwork.Systems
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly IPrototypeManager _protoMan = default!;
         [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+        [Dependency] private readonly IGameTiming _gameTiming = default!; //WD
 
         private readonly Dictionary<int, DeviceNet> _networks = new(4);
         private readonly Queue<DeviceNetworkPacketEvent> _packets = new();
+        private readonly TimeSpan packetDelay = TimeSpan.FromMilliseconds(500); //WD
+        private TimeSpan lastPacket = TimeSpan.Zero; //WD
 
         public override void Initialize()
         {
@@ -36,6 +41,20 @@ namespace Content.Server.DeviceNetwork.Systems
         {
             while (_packets.TryDequeue(out var packet))
             {
+                //WD edit
+                if (TryComp<DoorComponent>(packet.Sender, out _))
+                {
+                    if (lastPacket == TimeSpan.Zero)
+                        lastPacket = _gameTiming.CurTime;
+                    else
+                    {
+                        if (_gameTiming.CurTime - lastPacket < packetDelay)
+                            return;
+                    }
+                }
+
+                lastPacket = _gameTiming.CurTime;
+                //WD edit
                 SendPacket(packet);
             }
         }
