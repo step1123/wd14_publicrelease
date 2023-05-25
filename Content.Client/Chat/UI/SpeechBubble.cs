@@ -3,6 +3,7 @@ using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Client.Chat.UI
 {
@@ -46,25 +47,25 @@ namespace Content.Client.Chat.UI
         // man down
         public event Action<EntityUid, SpeechBubble>? OnDied;
 
-        public static SpeechBubble CreateSpeechBubble(SpeechType type, string text, EntityUid senderEntity, IEyeManager eyeManager, IChatManager chatManager, IEntityManager entityManager)
+        public static SpeechBubble CreateSpeechBubble(SpeechType type, string text, Color? color, EntityUid senderEntity, IEyeManager eyeManager, IChatManager chatManager, IEntityManager entityManager)
         {
             switch (type)
             {
                 case SpeechType.Emote:
-                    return new TextSpeechBubble(text, senderEntity, eyeManager, chatManager, entityManager, "emoteBox");
+                    return new TextSpeechBubble(text, senderEntity, color, eyeManager, chatManager, entityManager, "emoteBox");
 
                 case SpeechType.Say:
-                    return new TextSpeechBubble(text, senderEntity, eyeManager, chatManager, entityManager, "sayBox");
+                    return new TextSpeechBubble(text, senderEntity, color, eyeManager, chatManager, entityManager, "sayBox");
 
                 case SpeechType.Whisper:
-                    return new TextSpeechBubble(text, senderEntity, eyeManager, chatManager, entityManager, "whisperBox");
+                    return new TextSpeechBubble(text, senderEntity, color, eyeManager, chatManager, entityManager, "whisperBox");
 
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
 
-        public SpeechBubble(string text, EntityUid senderEntity, IEyeManager eyeManager, IChatManager chatManager, IEntityManager entityManager, string speechStyleClass)
+        public SpeechBubble(string text, EntityUid senderEntity, Color? color, IEyeManager eyeManager, IChatManager chatManager, IEntityManager entityManager, string speechStyleClass)
         {
             _chatManager = chatManager;
             _senderEntity = senderEntity;
@@ -74,7 +75,7 @@ namespace Content.Client.Chat.UI
             // Use text clipping so new messages don't overlap old ones being pushed up.
             RectClipContent = true;
 
-            var bubble = BuildBubble(text, speechStyleClass);
+            var bubble = BuildBubble(text, speechStyleClass, color, senderEntity, entityManager);
 
             AddChild(bubble);
 
@@ -85,7 +86,7 @@ namespace Content.Client.Chat.UI
             _verticalOffsetAchieved = -ContentSize.Y;
         }
 
-        protected abstract Control BuildBubble(string text, string speechStyleClass);
+        protected abstract Control BuildBubble(string text, string speechStyleClass, Color? color, EntityUid senderEntity, IEntityManager entityManager);
 
         protected override void FrameUpdate(FrameEventArgs args)
         {
@@ -163,24 +164,37 @@ namespace Content.Client.Chat.UI
 
     public sealed class TextSpeechBubble : SpeechBubble
     {
-        public TextSpeechBubble(string text, EntityUid senderEntity, IEyeManager eyeManager, IChatManager chatManager, IEntityManager entityManager, string speechStyleClass)
-            : base(text, senderEntity, eyeManager, chatManager, entityManager, speechStyleClass)
+        public TextSpeechBubble(string text, EntityUid senderEntity, Color? color, IEyeManager eyeManager, IChatManager chatManager, IEntityManager entityManager, string speechStyleClass)
+            : base(text, senderEntity, color, eyeManager, chatManager, entityManager, speechStyleClass)
         {
+
         }
 
-        protected override Control BuildBubble(string text, string speechStyleClass)
+        protected override Control BuildBubble(string text, string speechStyleClass, Color? color, EntityUid senderEntity, IEntityManager entityManager)
         {
+            var message = new FormattedMessage();
+
+            if (color.HasValue)
+            {
+                message.PushColor(color.Value);
+
+            }
+
+            message.AddMarkup("[font=\"SmallFont\"]"+text+"[/font]");
+            message.Pop();
+
             var label = new RichTextLabel
             {
-                MaxWidth = 256,
+                MaxWidth = 256
             };
-            label.SetMessage(text);
+
+            label.SetMessage(message);
 
             var panel = new PanelContainer
             {
                 StyleClasses = { "speechBox", speechStyleClass },
                 Children = { label },
-                ModulateSelfOverride = Color.White.WithAlpha(0.75f)
+                ModulateSelfOverride = Color.White.WithAlpha(0.7f)
             };
 
             return panel;

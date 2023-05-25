@@ -396,16 +396,24 @@ public sealed class ChatUIController : UIController
         var clearMessage = FormattedMessage.RemoveMarkup(msg.Message);
         var messages = SplitMessage(clearMessage);
 
+        var colorNodes = FormattedMessage.FromMarkup(msg.WrappedMessage).Nodes.Where(x=> x.Name == "color").ToArray();
+        Color? color = null;
+
+        if (colorNodes.Length > 0)
+        {
+            color = colorNodes.First().Value.ColorValue;
+        }
+
         foreach (var message in messages)
         {
-            EnqueueSpeechBubble(msg.SenderEntity, message, speechType);
+            EnqueueSpeechBubble(msg.SenderEntity, message, color, speechType);
         }
     }
 
     private void CreateSpeechBubble(EntityUid entity, SpeechBubbleData speechData)
     {
         var bubble =
-            SpeechBubble.CreateSpeechBubble(speechData.Type, speechData.Message, entity, _eye, _manager, _entities);
+            SpeechBubble.CreateSpeechBubble(speechData.Type, speechData.Message, speechData.color, entity, _eye, _manager, _entities);
 
         bubble.OnDied += SpeechBubbleDied;
 
@@ -439,7 +447,7 @@ public sealed class ChatUIController : UIController
         RemoveSpeechBubble(entity, bubble);
     }
 
-    private void EnqueueSpeechBubble(EntityUid entity, string contents, SpeechBubble.SpeechType speechType)
+    private void EnqueueSpeechBubble(EntityUid entity, string contents, Color? color, SpeechBubble.SpeechType speechType)
     {
         // Don't enqueue speech bubbles for other maps. TODO: Support multiple viewports/maps?
         if (_entities.GetComponent<TransformComponent>(entity).MapID != _eye.CurrentMap)
@@ -451,7 +459,7 @@ public sealed class ChatUIController : UIController
             _queuedSpeechBubbles.Add(entity, queueData);
         }
 
-        queueData.MessageQueue.Enqueue(new SpeechBubbleData(contents, speechType));
+        queueData.MessageQueue.Enqueue(new SpeechBubbleData(contents, color, speechType));
     }
 
     public void RemoveSpeechBubble(EntityUid entityUid, SpeechBubble bubble)
@@ -847,7 +855,7 @@ public sealed class ChatUIController : UIController
         }
     }
 
-    private readonly record struct SpeechBubbleData(string Message, SpeechBubble.SpeechType Type);
+    private readonly record struct SpeechBubbleData(string Message, Color? color, SpeechBubble.SpeechType Type);
 
     private sealed class SpeechBubbleQueueData
     {

@@ -37,3 +37,7 @@
 - type: font
   id: ComicSansMS
   path: /Fonts/ComicSans/ComicSansMS.ttf
+
+- type: font
+  id: SmallFont
+  path: /Fonts/SmallFonts/SmallFont.ttf
