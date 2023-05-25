@@ -11,7 +11,8 @@ using Content.Shared.Atmos;
 using Content.Shared.Body.Components;
 using Content.Shared.Damage;
 using Content.Shared.Database;
-using Content.Shared.DoAfter; // WD
+using Content.Shared.DoAfter;
+using Content.Shared.Humanoid; // WD
 using Content.Shared.IdentityManagement; // WD
 using Content.Shared.Interaction; // WD
 using Content.Shared.Inventory; // WD
@@ -231,13 +232,10 @@ namespace Content.Server.Body.Systems
         // WD start
         private void OnHandInteract(EntityUid uid, RespiratorComponent component, InteractHandEvent args)
         {
-            if (args.Handled)
-                return;
-
-            args.Handled = true;
-
             if (CanCPR(uid, component, args.User))
                 DoCPR(uid, component, args.User);
+
+            args.Handled = true;
         }
 
         private bool CanCPR(EntityUid target, RespiratorComponent comp, EntityUid user)
@@ -251,10 +249,7 @@ namespace Content.Server.Body.Systems
             if (comp.CPRPerformedBy != null && comp.CPRPerformedBy != user)
                 return false;
 
-            if (!TryComp<BodyComponent>(target, out var body))
-                return false;
-
-            if (!(body.Prototype is "Human" or "Diona" or "Slime" or "Dwarf" or "Reptilian" or "Skrell"))
+            if (!TryComp<HumanoidAppearanceComponent>(target, out _))
                 return false;
 
             if (!TryComp(target, out MobStateComponent? targetState))
