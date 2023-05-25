@@ -5,7 +5,6 @@
   prototype: MobDiona
   bodyTypes:
     - DionaNormal
-  sprites: MobDionaSprites
   markingLimits: MobDionaMarkingLimits
   dollPrototype: MobDionaDummy
   skinColoration: TintedHues

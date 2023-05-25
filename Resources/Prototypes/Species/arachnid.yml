@@ -1,18 +1,18 @@
 - type: species
   id: Arachnid
   name: species-name-arachnid
-  roundStart: true
+  roundStart: false
   prototype: MobArachnid
   bodyTypes:
     - ArachnidNormal
-  sprites: MobArachnidSprites
   defaultSkinTone: "#385878"
   markingLimits: MobArachnidMarkingLimits
   dollPrototype: MobArachnidDummy
   skinColoration: Hues
   maleFirstNames: names_arachnid_first
   femaleFirstNames: names_arachnid_first
-  lastNames: names_arachnid_last
+  maleLastNames: names_arachnid_last
+  femaleLastNames: names_arachnid_last
   sexes:
   - Unsexed
 

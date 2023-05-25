@@ -5,7 +5,6 @@
   prototype: MobVox
   bodyTypes:
     - VoxNormal
-  sprites: MobVoxSprites
   markingLimits: MobVoxMarkingLimits
   dollPrototype: MobVoxDummy
   skinColoration: Hues

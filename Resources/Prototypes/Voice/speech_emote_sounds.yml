@@ -26,8 +26,6 @@
       collection: Snores
     Honk:
       collection: BikeHorn
-    Sigh:
-      collection: MaleSigh
 
 - type: emoteSounds
   id: FemaleHuman
@@ -56,8 +54,6 @@
       collection: Snores
     Honk:
       collection: CluwneHorn
-    Sigh:
-      collection: FemaleSigh
 
 - type: emoteSounds
   id: MaleFelinid

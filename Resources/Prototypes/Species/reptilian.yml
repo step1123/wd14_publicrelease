@@ -5,7 +5,6 @@
   prototype: MobReptilian
   bodyTypes:
     - ReptilianNormal
-  sprites: MobReptilianSprites
   defaultSkinTone: "#34a223"
   markingLimits: MobReptilianMarkingLimits
   dollPrototype: MobReptilianDummy
@@ -154,7 +153,7 @@
   id: MobReptilianSlimHeadMale
   baseSprite:
     sprite: Mobs/Species/Reptilian/parts.rsi
-    state: head_slim_m
+    state: head_m
 
 - type: humanoidBaseSprite
   id: MobReptilianSlimHeadFemale
@@ -166,13 +165,13 @@
   id: MobReptilianSlimTorso
   baseSprite:
     sprite: Mobs/Species/Reptilian/parts.rsi
-    state: torso_slim_m
+    state: torso_m
 
 - type: humanoidBaseSprite
   id: MobReptilianSlimTorsoMale
   baseSprite:
     sprite: Mobs/Species/Reptilian/parts.rsi
-    state: torso_slim_m
+    state: torso_m
 
 - type: humanoidBaseSprite
   id: MobReptilianSlimTorsoFemale

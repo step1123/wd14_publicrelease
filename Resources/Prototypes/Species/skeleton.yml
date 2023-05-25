@@ -5,7 +5,6 @@
   prototype: MobSkeletonPerson
   bodyTypes:
     - SkeletonNormal
-  sprites: MobSkeletonSprites
   markingLimits: MobHumanMarkingLimits
   maleFirstNames: skeletonNamesFirst
   femaleFirstNames: skeletonNamesFirst

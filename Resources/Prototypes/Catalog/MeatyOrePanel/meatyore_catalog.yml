@@ -1484,14 +1484,14 @@
   id: MeatyBecomeTraitor
   name: Антажка
   description: Выдать себе антажку
-  productEvent: !type:MeatyTraitorRequestActionEvent
-  cost:
-    MeatyOreCoin: 10
   categories:
     - MeatyOreAntag
+  cost:
+    MeatyOreCoin: 10
   conditions:
     - !type:BuyerBlockForAntagCondition
     - !type:BuyerBlockForMindProtected
+  productEvent: !type:MeatyTraitorRequestActionEvent
 
 
 # Special

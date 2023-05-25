@@ -11,7 +11,7 @@
   - type: ClothingGrantComponent
     component:
     - type: ShowHealthBars
-      damageContainer: Metallic
+      damageContainer: Biological
 
 - type: entity
   parent: ClothingEyesBase

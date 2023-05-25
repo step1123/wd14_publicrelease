@@ -1,5 +1,4 @@
 - type: nonPeacefulRoundEndItems
-  name: nonPeacefulRoundEndItems
   id: nonPeacefulRoundEndRange
   items:
     - WeaponSubMachineGunVector
@@ -24,7 +23,6 @@
     - Stunbaton
 
 - type: nonPeacefulRoundEndItems
-  name: nonPeacefulRoundEndItems
   id: nonPeacefulRoundEndMelee
   items:
     - FireAxeFlaming

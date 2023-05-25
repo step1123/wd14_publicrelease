@@ -6,7 +6,6 @@
   bodyTypes:
     - SkrellNormal
     - SkrellSlim
-  sprites: MobSkrellSprites
   defaultSkinTone: "#50ff6d"
   markingLimits: MobSkrellMarkingLimits
   dollPrototype: MobSkrellDummy

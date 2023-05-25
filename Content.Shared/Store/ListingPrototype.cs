@@ -83,7 +83,7 @@ public class ListingData : IEquatable<ListingData>, ICloneable
     /// <summary>
     /// used internally for tracking how many times an item was purchased.
     /// </summary>
-    public int PurchaseAmount = 0;
+    public int PurchaseAmount;
 
     public bool Equals(ListingData? listing)
     {
