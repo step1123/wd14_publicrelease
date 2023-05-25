@@ -178,6 +178,9 @@
           visible: false
           shader: unshaded
           map: [ "blade" ]
+    - type: Item
+      size: 10
+      sprite: Objects/Weapons/Melee/double_esword.rsi
     - type: Wieldable
     - type: IncreaseDamageOnWield
       damage:
@@ -187,5 +190,5 @@
     - type: MeleeWeapon
       attackRate: 1
     - type: Reflect
+      reflectProb: 0.70
       enabled: false
-      reflectProb: 0.65

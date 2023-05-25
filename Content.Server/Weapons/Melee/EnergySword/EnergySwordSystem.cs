@@ -1,5 +1,6 @@
 using Content.Server.CombatMode.Disarm;
 using Content.Server.Kitchen.Components;
+using Content.Shared.Animations;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
@@ -22,6 +23,7 @@ public sealed class EnergySwordSystem : EntitySystem
     [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!;
 
     public override void Initialize()
     {
@@ -63,6 +65,19 @@ public sealed class EnergySwordSystem : EntitySystem
 
         // Overrides basic blunt damage with burn+slash as set in yaml
         args.BonusDamage = comp.LitDamageBonus;
+
+        var usedEnt = _entityManager.GetComponent<MetaDataComponent>(args.Weapon).EntityPrototype!.ID;
+
+        if (usedEnt == "EnergyDoubleSword")
+        {
+            var ev = new EmoteActionEvent
+            {
+                Emote = "EmoteTurn",
+                Performer = args.User
+
+            };
+            RaiseLocalEvent(args.User, ev);
+        }
     }
 
     private void OnUseInHand(EntityUid uid, EnergySwordComponent comp, UseInHandEvent args)
