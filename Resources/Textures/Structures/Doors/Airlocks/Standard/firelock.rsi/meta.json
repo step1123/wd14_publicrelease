@@ -159,6 +159,9 @@
       "name": "welded_open"
     },
     {
+      "name": "bolted_open_unlit"
+    },
+      {
       "name": "emergency_unlit",
       "delays": [
         [
