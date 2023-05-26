@@ -41,3 +41,17 @@
 - type: font
   id: SmallFont
   path: /Fonts/SmallFonts/SmallFont.ttf
+
+- type: font
+  id: Bedstead
+  path: /Fonts/Bedstead/Bedstead.otf
+
+- type: font
+  id: NeuePixelSans
+  path: /Fonts/NeuePixelSans/NeuePixelSans.ttf
+
+- type: font
+  id: Fifaks
+  path: /Fonts/Fifaks/Fifaks.ttf
+
+

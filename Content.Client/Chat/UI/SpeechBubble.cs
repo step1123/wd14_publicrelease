@@ -177,10 +177,9 @@ namespace Content.Client.Chat.UI
             if (color.HasValue)
             {
                 message.PushColor(color.Value);
-
             }
 
-            message.AddMarkup("[font=\"SmallFont\"]"+text+"[/font]");
+            message.AddMarkup("[font=\"Bedstead\" size=12]"+text+"[/font]");
             message.Pop();
 
             var label = new RichTextLabel
@@ -194,7 +193,7 @@ namespace Content.Client.Chat.UI
             {
                 StyleClasses = { "speechBox", speechStyleClass },
                 Children = { label },
-                ModulateSelfOverride = Color.White.WithAlpha(0.7f)
+                ModulateSelfOverride = Color.White.WithAlpha(0.8f)
             };
 
             return panel;
