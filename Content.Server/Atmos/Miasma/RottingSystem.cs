@@ -11,6 +11,7 @@ using Content.Shared.Rejuvenate;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Server.Atmos.Miasma;
@@ -23,6 +24,7 @@ public sealed class RottingSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     /// Miasma Disease Pool
     /// Miasma outbreaks are not per-entity,
