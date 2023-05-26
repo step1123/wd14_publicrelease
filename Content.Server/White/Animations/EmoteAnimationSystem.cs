@@ -19,6 +19,8 @@ public class EmoteAnimationSystem : EntitySystem
     /// Example: EmoteActionJump, EmoteActionFlip and etc.
     /// </summary>
     private const string INSTANT_IDENTIFIER = "EmoteAction";
+
+    private static TimeSpan _emoteCooldown = TimeSpan.FromSeconds(3);
     public override void Initialize()
     {
         SubscribeLocalEvent<EmoteAnimationComponent, ComponentGetState>(OnGetState);
@@ -46,6 +48,7 @@ public class EmoteAnimationSystem : EntitySystem
 
             if (action != null)
             {
+                action.UseDelay = _emoteCooldown;
                 component.Actions.Add(action);
                 _action.AddAction(uid, action, null);
             }
@@ -71,6 +74,7 @@ public class EmoteAnimationSystem : EntitySystem
     private void OnEmoteAction(EntityUid uid, EmoteAnimationComponent component, EmoteActionEvent args)
     {
         PlayEmoteAnimation(uid, component, args.Emote);
+        args.Handled = true;
     }
 
     public void PlayEmoteAnimation(EntityUid uid, EmoteAnimationComponent component, string emoteId)
