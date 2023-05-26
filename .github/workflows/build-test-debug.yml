@@ -10,10 +10,10 @@ on:
 
 jobs:
   build:
-    if: github.actor != 'PJBot' && github.event.pull_request.draft == false
+    if: github.actor != 'RavmorganButOnCocaine' && github.event.pull_request.draft == false
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [self-hosted]
 
     runs-on: ${{ matrix.os }}
 

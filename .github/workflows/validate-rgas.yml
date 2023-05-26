@@ -9,7 +9,7 @@ on:
 jobs:
   yaml-schema-validation:
     name: YAML RGA schema validator
-    if: github.actor != 'PJBot' && github.event.pull_request.draft == false
+    if: github.actor != 'RavmorganButOnCocaine' && github.event.pull_request.draft == false
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v2
