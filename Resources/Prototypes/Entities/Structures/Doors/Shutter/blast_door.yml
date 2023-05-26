@@ -11,6 +11,7 @@
     - state: closed
       map: ["enum.DoorVisualLayers.Base"]
   - type: Door
+    performCollisionCheck: false
     closeTimeOne: 0.4
     closeTimeTwo: 0.4
     openTimeOne: 0.4
