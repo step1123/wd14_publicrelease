@@ -343,3 +343,12 @@ public sealed class UtkaUnJobBanResponse : UtkaBaseMessage
     [JsonPropertyName("unbanned")]
     public bool? Unbanned { get; set; }
 }
+
+public sealed class UtkaPermsUpdatedEvent : UtkaBaseMessage
+{
+    [JsonPropertyName("command")]
+    public override string? Command => "perms_updated";
+
+    [JsonPropertyName("ckey")]
+    public string? Ckey { get; set; }
+}

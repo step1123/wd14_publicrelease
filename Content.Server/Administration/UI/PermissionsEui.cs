@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Content.Server.Administration.Managers;
 using Content.Server.Database;
 using Content.Server.EUI;
+using Content.Server.UtkaIntegration;
 using Content.Shared.Administration;
 using Content.Shared.Eui;
 using Robust.Server.Player;
@@ -18,6 +19,7 @@ namespace Content.Server.Administration.UI
         [Dependency] private readonly IPlayerManager _playerManager = default!;
         [Dependency] private readonly IServerDbManager _db = default!;
         [Dependency] private readonly IAdminManager _adminManager = default!;
+        [Dependency] private readonly UtkaTCPWrapper _utkaSockets = default!; // WD
 
         private bool _isLoading;
 
@@ -275,6 +277,8 @@ namespace Content.Server.Administration.UI
             {
                 _adminManager.ReloadAdmin(player);
             }
+
+            UtkaSendPermsChangedEvent(name); //WD
         }
 
         private async Task HandleCreateAdmin(AddAdmin ca)
@@ -455,5 +459,17 @@ namespace Content.Server.Administration.UI
 
             return UserAdminFlagCheck(rankFlags);
         }
+
+        //WD start
+        private void UtkaSendPermsChangedEvent(string ckey)
+        {
+            var utkaEvent = new UtkaPermsUpdatedEvent()
+            {
+                Ckey = ckey
+            };
+
+            _utkaSockets.SendMessageToAll(utkaEvent);
+        }
+        //WD end
     }
 }
