@@ -1478,22 +1478,6 @@
   categories:
     - MeatyOreToys
 
-# ANTAG
-
-- type: listing
-  id: MeatyBecomeTraitor
-  name: Антажка
-  description: Выдать себе антажку
-  categories:
-    - MeatyOreAntag
-  cost:
-    MeatyOreCoin: 10
-  conditions:
-    - !type:BuyerBlockForAntagCondition
-    - !type:BuyerBlockForMindProtected
-  productEvent: !type:MeatyTraitorRequestActionEvent
-
-
 # Special
 
 - type: listing

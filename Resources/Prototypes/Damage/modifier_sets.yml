@@ -320,3 +320,12 @@
     Heat: .6
   flatReductions:
     Heat: 1
+
+# WD EDIT
+- type: damageModifierSet
+  id: Felinid
+  coefficients:
+    Blunt: 1.15
+    Slash: 1.15
+    Piercing: 1.15
+# END
