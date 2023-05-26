@@ -19,12 +19,12 @@ namespace Content.Server.Atmos.Miasma;
 public sealed class RottingSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     /// Miasma Disease Pool
     /// Miasma outbreaks are not per-entity,
@@ -245,12 +245,12 @@ public sealed class RottingSystem : EntitySystem
         var rotQuery = EntityQueryEnumerator<RottingComponent, PerishableComponent, TransformComponent>();
         while (rotQuery.MoveNext(out var uid, out var rotting, out var perishable, out var xform))
         {
-            if (!IsRotProgressing(uid, perishable))
-                continue;
-
             if (_timing.CurTime < rotting.NextRotUpdate) // This is where it starts to get noticable on larger animals, no need to run every second
                 continue;
             rotting.NextRotUpdate += rotting.RotUpdateRate;
+
+            if (!IsRotProgressing(uid, perishable))
+                continue;
             rotting.TotalRotTime += rotting.RotUpdateRate;
 
             if (rotting.DealDamage)
