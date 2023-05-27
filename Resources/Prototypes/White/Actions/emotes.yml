@@ -3,7 +3,7 @@
   id: EmoteActionFlip
   name: emote-flip-action-name
   description: emote-flip-action-description
-  icon: Interface/Actions/blight.png
+  icon: White/Actions/EmoteFlip.png
   event: !type:EmoteActionEvent
     emote: EmoteFlip
 
@@ -12,7 +12,7 @@
   id: EmoteActionJump
   name: emote-jump-action-name
   description: emote-jump-action-description
-  icon: Interface/Actions/blight.png
+  icon: White/Actions/EmoteJump.png
   event: !type:EmoteActionEvent
     emote: EmoteJump
 
@@ -21,7 +21,7 @@
   id: EmoteActionTurn
   name: emote-turn-action-name
   description: emote-turn-action-description
-  icon: Interface/Actions/blight.png
+  icon: White/Actions/EmoteTurn.png
   event: !type:EmoteActionEvent
     emote: EmoteTurn
 
