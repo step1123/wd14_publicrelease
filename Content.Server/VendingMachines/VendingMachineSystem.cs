@@ -3,6 +3,7 @@ using Content.Server.Cargo.Systems;
 using Content.Server.Emp;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
+using Content.Server.Storage.Components;
 using Content.Server.UserInterface;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
@@ -14,6 +15,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Emag.Components;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Emp;
+using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Throwing;
 using Content.Shared.VendingMachines;
@@ -35,6 +37,7 @@ namespace Content.Server.VendingMachines
         [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
         [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
         [Dependency] private readonly IGameTiming _timing = default!;
+        [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
 
         private ISawmill _sawmill = default!;
 
@@ -57,6 +60,11 @@ namespace Content.Server.VendingMachines
             SubscribeLocalEvent<VendingMachineComponent, VendingMachineSelfDispenseEvent>(OnSelfDispense);
 
             SubscribeLocalEvent<VendingMachineComponent, RestockDoAfterEvent>(OnDoAfter);
+            //WD EDIT
+
+            SubscribeLocalEvent<VendingMachineComponent, InteractUsingEvent>(OnInteractUsing);
+
+            //WD EDIT END
 
             SubscribeLocalEvent<VendingMachineRestockComponent, PriceCalculationEvent>(OnPriceCalculation);
         }
@@ -186,6 +194,80 @@ namespace Content.Server.VendingMachines
 
             args.Handled = true;
         }
+        //WD EDIT
+
+        private void OnInteractUsing(EntityUid uid, VendingMachineComponent component, InteractUsingEvent args)
+        {
+            if (args.Handled)
+            {
+                return;
+            }
+
+            if (component.Broken || !this.IsPowered(uid, EntityManager))
+            {
+                return;
+            }
+
+            if (TryComp<ServerStorageComponent>(args.Used, out var storageComponent))
+            {
+                TryInsertFromStorage(uid, storageComponent, component);
+                args.Handled = true;
+            }
+            else
+            {
+                if (TryInsertItem(args.Used, component))
+                {
+                    args.Handled = true;
+                }
+            }
+
+        }
+
+        private void TryInsertFromStorage(EntityUid uid, ServerStorageComponent storageComponent,
+            VendingMachineComponent vendingComponent)
+        {
+            if (storageComponent.StoredEntities == null)
+                return;
+
+            var storedEntities = storageComponent.StoredEntities.ToArray();
+            var addedCount = storedEntities.Select(entity => TryInsertItem(entity, vendingComponent))
+                .Count(insertSuccess => insertSuccess);
+
+            if (addedCount > 0)
+            {
+                Popup.PopupEntity(Loc.GetString("vending-machine-insert-fromStorage-success", ("this", uid), ("count", addedCount)), uid);
+            }
+        }
+
+        private bool TryInsertItem(EntityUid itemUid, VendingMachineComponent component)
+        {
+            if (component.Whitelist == null || !component.Whitelist.IsValid(itemUid))
+                return false;
+
+            if (!TryComp<MetaDataComponent>(itemUid, out var metaData))
+            {
+                return false;
+            }
+
+            if (metaData.EntityPrototype == null)
+                return false;
+
+            var entityId = metaData.EntityPrototype.ID;
+
+            if (!component.Inventory.TryGetValue(entityId, out var item))
+            {
+                item = new VendingMachineInventoryEntry(InventoryType.Regular, entityId, 1);
+                component.Inventory.Add(entityId, item);
+            }
+            else
+            {
+                item.Amount++;
+            }
+            Del(itemUid);
+
+            return true;
+        }
+        //WD EDIT END
 
         /// <summary>
         /// Sets the <see cref="VendingMachineComponent.CanShoot"/> property of the vending machine.
@@ -263,6 +345,9 @@ namespace Content.Server.VendingMachines
 
             if (entry.Amount <= 0)
             {
+                //WD EDIT
+                vendComponent.Inventory.Remove(entry.ID);
+                //WD EDIT END
                 Popup.PopupEntity(Loc.GetString("vending-machine-component-try-eject-out-of-stock"), uid);
                 Deny(uid, vendComponent);
                 return;

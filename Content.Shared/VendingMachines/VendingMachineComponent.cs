@@ -1,5 +1,6 @@
 using Content.Shared.Actions;
 using Content.Shared.Actions.ActionTypes;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
@@ -174,6 +175,15 @@ namespace Content.Shared.VendingMachines
         [DataField("loopDeny")]
         public bool LoopDenyAnimation = true;
         #endregion
+
+        //WD EDIT
+        /// <summary>
+        /// Used for check whether the can be item placed in the fridge or not.
+        /// </summary>
+
+        [DataField("whitelist")]
+        public EntityWhitelist? Whitelist;
+        //WD EDIT END
     }
 
     [Serializable, NetSerializable]

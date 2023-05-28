@@ -847,6 +847,14 @@
     denyState: deny-unshaded
     screenState: normal-unshaded
     loopDeny: false
+    whitelist:
+      components:
+        - Pill
+        - Seed
+        - Produce
+      tags:
+        - Bottle
+        - Bloodpack
   - type: Advertise
     pack: SmartFridgeAds
   - type: Speech
