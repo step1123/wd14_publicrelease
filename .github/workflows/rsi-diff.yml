@@ -10,6 +10,9 @@ jobs:
     name: Diff
     runs-on: self-hosted
     steps:
+      - name: Fix home dir permissions
+        run: sudo chown -R $(whoami) .
+
       - name: Checkout
         uses: actions/checkout@v2
 

@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Fix home dir permissions
+        run: sudo chown -R $(whoami) .
       - uses: actions/checkout@v2
         with:
           submodules: 'recursive'

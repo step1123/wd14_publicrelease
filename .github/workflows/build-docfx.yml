@@ -8,6 +8,8 @@ jobs:
   docfx:
    runs-on: self-hosted
    steps:
+    - name: Fix home dir permissions
+      run: sudo chown -R $(whoami) .
     - uses: actions/checkout@v2
     - name: Setup submodule
       run: |
