@@ -23,6 +23,7 @@
                             <info:LinkBanner Name="LinkBanner" VerticalExpand="True" HorizontalAlignment="Center"/>
                             <cc:CommandButton Name = "AHelpButton" Command="openahelp" Access="Public" Text = "{Loc 'ui-lobby-ahelp-button'}" />
                             <vote:VoteCallMenuButton Name="CallVoteButton" />
+                            <info:DevInfoBanner Name="DevInfoBanner"/>
                             <Button Name="OptionsButton" Access="Public" Text="{Loc 'ui-lobby-options-button'}" />
                             <Button Name="LeaveButton" Access="Public" Text="{Loc 'ui-lobby-leave-button'}" />
                         </BoxContainer>
