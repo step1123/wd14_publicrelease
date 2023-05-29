@@ -1,4 +1,5 @@
 using Content.Client.Chat.Managers;
+using Content.Client.White.UserInterface.Controls;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
@@ -182,7 +183,7 @@ namespace Content.Client.Chat.UI
             message.AddMarkup("[font=\"Bedstead\" size=12]"+text+"[/font]");
             message.Pop();
 
-            var label = new RichTextLabel
+            var label = new ChatRichTextLabel
             {
                 MaxWidth = 256
             };
