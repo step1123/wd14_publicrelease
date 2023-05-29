@@ -1097,7 +1097,7 @@ namespace Content.Shared.CCVar
         /// Are players allowed to return on the arrivals shuttle.
         /// </summary>
         public static readonly CVarDef<bool> ArrivalsReturns =
-            CVarDef.Create("shuttle.arrivals_returns", false, CVar.SERVERONLY);
+            CVarDef.Create("shuttle.arrivals_returns", true, CVar.SERVERONLY);
 
         /// <summary>
         /// Whether cargo shuttles are enabled.
