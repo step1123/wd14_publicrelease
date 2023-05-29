@@ -1,4 +1,5 @@
 using System.Text;
+using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.RichText;
@@ -209,8 +210,13 @@ internal struct ChatRichTextEntry
 
                 // Также именно в этом файле пишем приколы со шрифтами.
                 // на уровне отрисовки лол.
+
+                //var sprite_icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/Interface/Misc/job_icons.rsi"), "NoId");
+                //var _iconTexture = IoCManager.Resolve<IEntityManager>().EntitySysManager.GetEntitySystem<SpriteSystem>().Frame0(sprite_icon);
                 var advance = font.DrawChar(handle, rune, baseLine, uiScale, color, true);
                 baseLine += new Vector2(advance, 0);
+                //handle.DrawTextureRect(_iconTexture, new UIBox2(baseLine += new Vector2(0, 5), new Vector2(6, 6)));
+                //baseLine += new Vector2(10, 0);
 
                 globalBreakCounter += 1;
             }
