@@ -18,9 +18,49 @@
   sponsorOnly: true
 
 # YouWellLeer
+#- type: loadout
+#  id: SledgebarLoadout
+#  entity: Sledgebar
+#  sponsorOnly: true
+
 - type: loadout
-  id: SledgebarLoadout
-  entity: Sledgebar
+  id: LeerBootsLoadout
+  entity: LeerBoots
+  sponsorOnly: true
+
+- type: loadout
+  id: LeerCapLoadout
+  entity: LeerCap
+  sponsorOnly: true
+
+- type: loadout
+  id: LeerCloakLoadout
+  entity: LeerCloak
+  sponsorOnly: true
+
+- type: loadout
+  id: LeerGlovesLoadout
+  entity: LeerGloves
+  sponsorOnly: true
+
+- type: loadout
+  id: LeerHardsuitLoadout
+  entity: LeerHardsuit
+  sponsorOnly: true
+
+- type: loadout
+  id: LeerHelmetLoadout
+  entity: LeerHelmet
+  sponsorOnly: true
+
+- type: loadout
+  id: LeerJumpsuitLoadout
+  entity: LeerJumpsuit
+  sponsorOnly: true
+
+- type: loadout
+  id: LeerMaskLoadout
+  entity: LeerMask
   sponsorOnly: true
 
 # мурка

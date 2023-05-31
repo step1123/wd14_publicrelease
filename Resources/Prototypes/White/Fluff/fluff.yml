@@ -60,24 +60,114 @@
       sprite: White/Fluff/Maury/chemshit.rsi
 
 # YouWellLeer
+#- type: entity
+#  parent: Crowbar
+#  id: Sledgebar
+#  name: Mjolnir
+#  description: Отлично ломает кости ассистентам и клоуну.
+#  components:
+#    - type: Sprite
+#      sprite: White/Fluff/YouWellLeer/sledgebar.rsi
+#      state: icon
+#      netsync: false
+#    - type: Item
+#      sprite: White/Fluff/YouWellLeer/sledgebar.rsi
+#      size: 30
+#    - type: Wieldable
+#    - type: IncreaseDamageOnWield
+#      damage:
+#        types:
+#          Blunt: 10
+
 - type: entity
-  parent: Crowbar
-  id: Sledgebar
-  name: Mjolnir
-  description: Отлично ломает кости ассистентам и клоуну.
+  parent: ClothingShoesBootsJack
+  id: LeerBoots
+  name: Дисциплина
+  description: Несогласные будут раздавлены.
   components:
     - type: Sprite
-      sprite: White/Fluff/YouWellLeer/sledgebar.rsi
-      state: icon
-      netsync: false
-    - type: Item
-      sprite: White/Fluff/YouWellLeer/sledgebar.rsi
-      size: 30
-    - type: Wieldable
-    - type: IncreaseDamageOnWield
-      damage:
-        types:
-          Blunt: 10
+      sprite: White/Fluff/YouWellLeer/hosboots.rsi
+    - type: Clothing
+      sprite: White/Fluff/YouWellLeer/hosboots.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: LeerCap
+  name: Правосудие
+  description: Там, где правит совесть, законы не нужны.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/YouWellLeer/hoscap.rsi
+    - type: Clothing
+      sprite: White/Fluff/YouWellLeer/hoscap.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: LeerCloak
+  name: плащ-палатка
+  description: Плащ, который при необходимости можно оборудовать в палатку, незаменимая вещь на войне.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/YouWellLeer/hoscloak.rsi
+
+- type: entity
+  parent: ClothingHandsGlovesCombat
+  id: LeerGloves
+  name: Наказание
+  description: Тактические перчатки из синтетических волокон с дополнительной защитой рук.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/YouWellLeer/hosgloves.rsi
+    - type: Clothing
+      sprite: White/Fluff/YouWellLeer/hosgloves.rsi
+
+- type: entity
+  parent: ClothingOuterHardsuitSecurityRed
+  id: LeerHardsuit
+  name: Завет
+  description: Созданный на заказ, этот скафандр сочетает в себе хорошие показатели защиты и мобильности.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/YouWellLeer/hoshardsuit.rsi
+    - type: Clothing
+      sprite: White/Fluff/YouWellLeer/hoshardsuit.rsi
+    - type: ToggleableClothing
+      clothingPrototype: LeerHelmet
+
+- type: entity
+  parent: ClothingHeadHelmetHardsuitSecurityRed
+  id: LeerHelmet
+  name: шлем
+  description: Просто шлем
+  components:
+    - type: Sprite
+      sprite: White/Fluff/YouWellLeer/hoshelmet.rsi
+    - type: Clothing
+      sprite: White/Fluff/YouWellLeer/hoshelmet.rsi
+    - type: PointLight
+      color: "#ff0000"
+
+- type: entity
+  parent: ClothingUniformJumpsuitHoS
+  id: LeerJumpsuit
+  name: комплект ФПУ
+  description: Форма Полевая Универсальная - отличный выбор для любителей боевых действий.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/YouWellLeer/hosjumpsuit.rsi
+    - type: Clothing
+      sprite: White/Fluff/YouWellLeer/hosjumpsuit.rsi
+
+- type: entity
+  parent: ClothingMaskGas
+  id: LeerMask
+  name: Заслон-1
+  description: Полумаска из прочных материалов с возможностью подключения ЗСД.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/YouWellLeer/hosmask.rsi
+    - type: Clothing
+      sprite: White/Fluff/YouWellLeer/hosmask.rsi
 
 # merkkaa
 - type: entity
