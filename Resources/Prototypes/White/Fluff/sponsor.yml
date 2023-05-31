@@ -27,41 +27,49 @@
   id: LeerBootsLoadout
   entity: LeerBoots
   sponsorOnly: true
+  whitelistedJobs: [HeadOfSecurity]
 
 - type: loadout
   id: LeerCapLoadout
   entity: LeerCap
   sponsorOnly: true
+  whitelistedJobs: [HeadOfSecurity]
 
 - type: loadout
   id: LeerCloakLoadout
   entity: LeerCloak
   sponsorOnly: true
+  whitelistedJobs: [HeadOfSecurity]
 
 - type: loadout
   id: LeerGlovesLoadout
   entity: LeerGloves
   sponsorOnly: true
+  whitelistedJobs: [HeadOfSecurity]
 
 - type: loadout
   id: LeerHardsuitLoadout
   entity: LeerHardsuit
   sponsorOnly: true
+  whitelistedJobs: [HeadOfSecurity]
 
 - type: loadout
   id: LeerHelmetLoadout
   entity: LeerHelmet
   sponsorOnly: true
+  whitelistedJobs: [HeadOfSecurity]
 
 - type: loadout
   id: LeerJumpsuitLoadout
   entity: LeerJumpsuit
   sponsorOnly: true
+  whitelistedJobs: [HeadOfSecurity]
 
 - type: loadout
   id: LeerMaskLoadout
   entity: LeerMask
   sponsorOnly: true
+  whitelistedJobs: [HeadOfSecurity]
 
 # мурка
 - type: loadout
