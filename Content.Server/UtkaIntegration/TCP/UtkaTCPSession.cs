@@ -75,24 +75,32 @@ public sealed class UtkaTCPSession : TcpSession
     }
     protected override void OnDisconnected()
     {
-        base.OnDisconnecting();
+        OnDisconnecting();
         Dispose();
         BufferCahce = string.Empty;
     }
 
     private void HandleCache()
     {
-        var regex = new Regex("{.+?}");
-        var matches = regex.Matches(BufferCahce);
+        var handles = BufferCahce.Split("&%^sep^%&");
 
-        foreach (Match match in matches)
+        for (var i = 0; i < handles.Length; i++)
         {
-            var pos = BufferCahce.IndexOf(match.Value);
-            BufferCahce = BufferCahce.Substring(0, pos) + BufferCahce.Substring(pos + match.Value.Length);
+            var handle = handles[i];
 
-            if (!ValidateMessage(match.Value, out var message))
+            if (i + 1 == handles.Length && !BufferCahce.EndsWith("&%^sep^%&"))
+                continue;
+
+            if (handle.Length == 0 || !handle.StartsWith("{\"") || !handle.EndsWith("\"}"))
+                continue;
+
+            var pos = BufferCahce.IndexOf(handle);
+
+            BufferCahce = BufferCahce.Substring(0, pos) + BufferCahce.Substring(pos + handle.Length + "&%^sep^%&".Length);
+
+            if (!ValidateMessage(handle, out var message))
             {
-                this.SendAsync("Validation fail");
+                SendAsync("Validation fail");
                 return;
             }
 
