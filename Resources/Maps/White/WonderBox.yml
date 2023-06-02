@@ -10731,18 +10731,6 @@ entities:
       pos: -77.5,14.5
       parent: 2
       type: Transform
-- proto: AirlockExternalGlassShuttleCargo
-  entities:
-  - uid: 11204
-    components:
-    - pos: -41.5,-9.5
-      parent: 2
-      type: Transform
-  - uid: 11207
-    components:
-    - pos: -41.5,-11.5
-      parent: 2
-      type: Transform
 - proto: AirlockExternalGlassShuttleEmergencyLocked
   entities:
   - uid: 19828
@@ -10811,6 +10799,20 @@ entities:
     components:
     - rot: 3.141592653589793 rad
       pos: -74.5,28.5
+      parent: 2
+      type: Transform
+- proto: AirlockExternalGlassShuttleLocked
+  entities:
+  - uid: 11204
+    components:
+    - rot: -1.5707963267948966 rad
+      pos: -41.5,-11.5
+      parent: 2
+      type: Transform
+  - uid: 11207
+    components:
+    - rot: -1.5707963267948966 rad
+      pos: -41.5,-9.5
       parent: 2
       type: Transform
 - proto: AirlockExternalLocked
