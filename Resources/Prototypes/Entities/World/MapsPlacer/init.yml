@@ -1,0 +1,599 @@
+- type: entity
+  id: D1
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/abductor.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D2
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/asteroid.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D4
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/derelict.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D5
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/derelict2.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D6
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/derelict3.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D7
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/derelict4.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D8
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/derelict5.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D10
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/derelict7.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D11
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/derelict8.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D14
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/dj_station.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D15
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/dobivalka.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D16
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/junk.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D17
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/mining_station.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D18
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/musorka.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D19
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/shuttle.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D20
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/shuttle2.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D21
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/shuttle3.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D22
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/space_hospital.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D23
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/stolovka.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D24
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/stolovka2.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D25
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /Maps/Salvage/small-ship-1.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D26
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /Maps/Salvage/small-ai-survey-drone.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D27
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /Maps/Salvage/small-1.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D28
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /Maps/Salvage/small-2.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D29
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /Maps/Salvage/small-3.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D30
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /Maps/Salvage/medium-pirate.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D31
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /Maps/Salvage/medium-ruined-emergency-shuttle.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D32
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /Maps/Salvage/medium-library.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D33
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/1.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D34
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/2.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D35
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/3.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D36
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/4.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D37
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/5.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D38
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/6.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D39
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/7.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D40
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/8.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D41
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/9.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D42
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/10.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D43
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/11.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D44
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/12.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D45
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/13.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D46
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/14.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D47
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/15.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D48
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/16.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D49
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/17.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D50
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/18.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D51
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/19.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D52
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/20.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D53
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/21.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D55
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/23.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D56
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/24.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D57
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/25.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D58
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/26.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D59
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/27.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D60
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/28.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D61
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/29.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D62
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/30.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D63
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/31.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D64
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/32.yml
+      components:
+        - type: IFF
+          flags: HideLabel
+
+- type: entity
+  id: D65
+  noSpawn: true
+  components:
+    - type: BlueprintPlacer
+      blueprint: /WhiteMaps/D/33.yml
+      components:
+        - type: IFF
+          flags: HideLabel

@@ -10,17 +10,116 @@
         - id: AsteroidDebrisSmall
         - id: AsteroidDebrisMedium
         - id: AsteroidDebrisLarge
-          prob: 0.7
         - id: AsteroidDebrisLarger
-          prob: 0.4
     - type: NoiseDrivenDebrisSelector
       noiseChannel: Wreck
       debrisTable:
         - id: ScrapDebrisSmall
         - id: ScrapDebrisMedium
         - id: ScrapDebrisLarge
-          prob: 0.5
     - type: NoiseRangeCarver
       ranges:
         - 0.4, 0.6
+      noiseChannel: Carver
+
+- type: spaceBiome
+  id: CombatRimAsteroidsStandard
+  priority: 0
+  noiseRanges: {}
+  chunkComponents:
+    - type: DebrisFeaturePlacerController
+      densityNoiseChannel: Density
+    - type: SimpleDebrisSelector
+      debrisTable:
+        - id: AfterlightAsteroidDebrisSmall
+        - id: AfterlightAsteroidDebrisMedium
+          prob: 0.7
+        - id: AfterlightAsteroidDebrisLarge
+          prob: 0.5
+        - id: AfterlightAsteroidDebrisLarger
+          prob: 0.3
+        - id: AsteroidDebrisSmall
+        - id: AsteroidDebrisMedium
+        - id: AsteroidDebrisLarge
+        - id: AsteroidDebrisLarger
+    - type: NoiseDrivenDebrisSelector
+      noiseChannel: Wreck
+      debrisTable:
+        - id: CombatRimScrapDebrisSmall
+        - id: CombatRimScrapDebrisMedium
+          prob: 0.7
+        - id: CombatRimScrapDebrisLarge
+          prob: 0.5
+        - id: ScrapDebrisSmall
+        - id: ScrapDebrisMedium
+        - id: ScrapDebrisLarge
+    - type: NoiseRangeCarver
+      ranges:
+        - 0.4, 0.6
+      noiseChannel: Carver
+
+- type: spaceBiome
+  id: CombatRimAsteroidsWastes
+  priority: 1
+  noiseRanges:
+    Temperature:
+      - 0.0, 0.3
+  chunkComponents:
+    - type: DebrisFeaturePlacerController
+      densityNoiseChannel: Density
+    - type: SimpleDebrisSelector
+      debrisTable:
+        - id: AfterlightAsteroidDebrisSmall
+        - id: AfterlightAsteroidDebrisMedium
+        - id: AfterlightAsteroidDebrisLarge
+          prob: 0.7
+        - id: AfterlightAsteroidDebrisLarger
+          prob: 0.4
+        - id: AsteroidDebrisSmall
+        - id: AsteroidDebrisMedium
+        - id: AsteroidDebrisLarge
+        - id: AsteroidDebrisLarger
+    - type: NoiseDrivenDebrisSelector
+      noiseChannel: Wreck
+      debrisTable:
+        - id: CombatRimScrapDebrisSmall
+        - id: CombatRimScrapDebrisMedium
+          prob: 0.1
+        - id: CombatRimScrapDebrisLarge
+          prob: 0.05
+        - id: ScrapDebrisSmall
+        - id: ScrapDebrisMedium
+        - id: ScrapDebrisLarge
+    - type: NoiseRangeCarver
+      ranges:
+        - 0.3, 0.7
+      noiseChannel: Carver
+
+- type: spaceBiome
+  id: CombatRimAsteroidsEmptiness
+  priority: 2
+  noiseRanges:
+    Temperature:
+      - 0.0, 0.1
+    Wreck:
+      - 0.5, 0.6
+  chunkComponents:
+    - type: DebrisFeaturePlacerController
+      densityNoiseChannel: Density
+    - type: SimpleDebrisSelector
+      debrisTable:
+        - id: AfterlightAsteroidDebrisSmall
+        - id: AfterlightAsteroidDebrisMedium
+          prob: 0.7
+        - id: AfterlightAsteroidDebrisLarge
+          prob: 0.5
+        - id: AfterlightAsteroidDebrisLarger
+          prob: 0.2
+        - id: AsteroidDebrisSmall
+        - id: AsteroidDebrisMedium
+        - id: AsteroidDebrisLarge
+        - id: AsteroidDebrisLarger
+    - type: NoiseRangeCarver
+      ranges:
+        - 0.3, 0.8
       noiseChannel: Carver

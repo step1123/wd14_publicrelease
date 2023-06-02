@@ -6,6 +6,7 @@ using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
 using Content.Shared.Radio.EntitySystems;
 using Robust.Server.GameObjects;
+using Robust.Shared.Audio;
 using Robust.Shared.Network;
 
 namespace Content.Server.Radio.EntitySystems;
@@ -14,6 +15,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
 {
     [Dependency] private readonly INetManager _netMan = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -101,6 +103,45 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
     {
         if (TryComp(Transform(uid).ParentUid, out ActorComponent? actor))
             _netMan.ServerSendMessage(args.ChatMsg, actor.PlayerSession.ConnectedClient);
+
+        //WD-EDIT
+        switch (args.Channel.ID)
+        {
+            case "Security":
+                _audio.PlayPvs("/Audio/White/Radio/security.ogg", uid, AudioParams.Default);
+                break;
+            case "Common":
+                _audio.PlayPvs("/Audio/White/Radio/common.ogg", uid, AudioParams.Default);
+                break;
+            case "Engineering":
+                _audio.PlayPvs("/Audio/White/Radio/eng.ogg", uid, AudioParams.Default);
+                break;
+            case "Medical":
+                _audio.PlayPvs("/Audio/White/Radio/med.ogg", uid, AudioParams.Default);
+                break;
+            case "Supply":
+                _audio.PlayPvs("/Audio/White/Radio/cargo.ogg", uid, AudioParams.Default);
+                break;
+            case "Science":
+                _audio.PlayPvs("/Audio/White/Radio/science.ogg", uid, AudioParams.Default);
+                break;
+            case "CentCom":
+                _audio.PlayPvs("/Audio/White/Radio/cc.ogg", uid, AudioParams.Default);
+                break;
+            case "Command":
+                _audio.PlayPvs("/Audio/White/Radio/command.ogg", uid, AudioParams.Default);
+                break;
+            case "Service":
+                _audio.PlayPvs("/Audio/White/Radio/common.ogg", uid, AudioParams.Default);
+                break;
+            case "Syndicate":
+                _audio.PlayPvs("/Audio/White/Radio/security.ogg", uid, AudioParams.Default);
+                break;
+            default:
+                _audio.PlayPvs("/Audio/White/Radio/common.ogg", uid, AudioParams.Default);
+                break;
+        }
+        //WD-EDIT
     }
 
     private void OnEmpPulse(EntityUid uid, HeadsetComponent component, ref EmpPulseEvent args)

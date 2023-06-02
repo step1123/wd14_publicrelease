@@ -1,0 +1,954 @@
+meta:
+  format: 5
+  postmapinit: false
+tilemap:
+  0: Space
+  82: FloorWhite
+  94: Lattice
+  95: Plating
+entities:
+- proto: ""
+  entities:
+  - uid: 1
+    components:
+    - type: MetaData
+    - pos: 32.86274,-3.6396961
+      parent: invalid
+      type: Transform
+    - chunks:
+        0,0:
+          ind: 0,0
+          tiles: UgAAAFIAAABSAAAAUgAAAFIAAABSAAAAUgAAAFIAAABSAAAAXwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFIAAABSAAAAUgAAAFIAAABSAAAAUgAAAFIAAABSAAAAUgAAAFIAAABeAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABSAAAAUgAAAFIAAABSAAAAUgAAAFIAAABSAAAAUgAAAF8AAABSAAAAUgAAAF4AAAAAAAAAAAAAAAAAAAAAAAAAUgAAAFIAAABSAAAAUgAAAFIAAABSAAAAXgAAAFIAAABSAAAAXwAAAF4AAABfAAAAAAAAAAAAAAAAAAAAAAAAAFIAAABSAAAAUgAAAFIAAABSAAAAXgAAAFIAAABeAAAAXwAAAF8AAABSAAAAXwAAAF4AAABeAAAAAAAAAAAAAABSAAAAUgAAAFIAAABSAAAAUgAAAFIAAABfAAAAXwAAAF4AAABSAAAAXgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUgAAAFIAAABSAAAAUgAAAFIAAABfAAAAXwAAAF8AAABeAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFIAAABSAAAAUgAAAFIAAABSAAAAUgAAAFIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+      type: MapGrid
+    - type: Broadphase
+    - angularDamping: 0.05
+      linearDamping: 0.05
+      fixedRotation: False
+      bodyType: Dynamic
+      type: Physics
+    - fixtures: {}
+      type: Fixtures
+    - type: OccluderTree
+    - type: SpreaderGrid
+    - type: Shuttle
+    - nextUpdate: 253.3409906
+      type: GridPathfinding
+    - gravityShakeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/alert.ogg
+      type: Gravity
+    - chunkCollection:
+        version: 2
+        nodes:
+        - node:
+            color: '#52B4E996'
+            id: HalfTileOverlayGreyscale
+          decals:
+            12: 1,2
+            13: 2,2
+            14: 3,2
+            15: 1,4
+            16: 2,4
+            17: 3,4
+            18: 1,6
+            19: 2,6
+            20: 3,6
+        - node:
+            color: '#52B4E996'
+            id: QuarterTileOverlayGreyscale
+          decals:
+            6: 4,1
+            7: 4,2
+            8: 4,3
+            9: 4,4
+            10: 4,5
+            11: 4,6
+        - node:
+            color: '#52B4E996'
+            id: QuarterTileOverlayGreyscale180
+          decals:
+            0: 9,1
+            1: 8,1
+            2: 7,1
+            3: 6,1
+            4: 5,1
+            5: 4,1
+      type: DecalGrid
+    - version: 2
+      data:
+        tiles:
+          0,0:
+            0: 239
+          1,0:
+            0: 17
+        uniqueMixes:
+        - volume: 2500
+          temperature: 293.15
+          moles:
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+        chunkSize: 4
+      type: GridAtmosphere
+    - type: GasTileOverlay
+    - type: RadiationGridResistance
+- proto: Bed
+  entities:
+  - uid: 35
+    components:
+    - pos: 1.5,6.5
+      parent: 1
+      type: Transform
+  - uid: 36
+    components:
+    - pos: 1.5,4.5
+      parent: 1
+      type: Transform
+  - uid: 37
+    components:
+    - pos: 1.5,2.5
+      parent: 1
+      type: Transform
+- proto: BedsheetMedical
+  entities:
+  - uid: 56
+    components:
+    - rot: 3.141592653589793 rad
+      pos: 1.5,2.5
+      parent: 1
+      type: Transform
+    - nextSound: 262.1576363
+      type: EmitSoundOnCollide
+  - uid: 57
+    components:
+    - rot: 3.141592653589793 rad
+      pos: 1.5,4.5
+      parent: 1
+      type: Transform
+    - nextSound: 262.7444582
+      type: EmitSoundOnCollide
+  - uid: 58
+    components:
+    - rot: 3.141592653589793 rad
+      pos: 1.5,6.5
+      parent: 1
+      type: Transform
+    - nextSound: 263.2730505
+      type: EmitSoundOnCollide
+- proto: CableApcExtension
+  entities:
+  - uid: 85
+    components:
+    - pos: 8.5,2.5
+      parent: 1
+      type: Transform
+    - enabled: True
+      type: AmbientSound
+    - fixtures: {}
+      type: Fixtures
+  - uid: 87
+    components:
+    - pos: 7.5,2.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 88
+    components:
+    - pos: 6.5,2.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 89
+    components:
+    - pos: 5.5,2.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 90
+    components:
+    - pos: 4.5,2.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 91
+    components:
+    - pos: 3.5,2.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 92
+    components:
+    - pos: 2.5,2.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 93
+    components:
+    - pos: 5.5,3.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 94
+    components:
+    - pos: 5.5,4.5
+      parent: 1
+      type: Transform
+    - enabled: True
+      type: AmbientSound
+    - fixtures: {}
+      type: Fixtures
+  - uid: 95
+    components:
+    - pos: 6.5,4.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 96
+    components:
+    - pos: 7.5,4.5
+      parent: 1
+      type: Transform
+    - enabled: True
+      type: AmbientSound
+    - fixtures: {}
+      type: Fixtures
+  - uid: 97
+    components:
+    - pos: 8.5,4.5
+      parent: 1
+      type: Transform
+    - enabled: True
+      type: AmbientSound
+    - fixtures: {}
+      type: Fixtures
+  - uid: 98
+    components:
+    - pos: 9.5,4.5
+      parent: 1
+      type: Transform
+    - enabled: True
+      type: AmbientSound
+    - fixtures: {}
+      type: Fixtures
+  - uid: 99
+    components:
+    - pos: 10.5,4.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 100
+    components:
+    - pos: 11.5,4.5
+      parent: 1
+      type: Transform
+    - enabled: True
+      type: AmbientSound
+    - fixtures: {}
+      type: Fixtures
+  - uid: 101
+    components:
+    - pos: 4.5,4.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 102
+    components:
+    - pos: 3.5,4.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 103
+    components:
+    - pos: 2.5,4.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 104
+    components:
+    - pos: 5.5,5.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 105
+    components:
+    - pos: 5.5,6.5
+      parent: 1
+      type: Transform
+    - enabled: True
+      type: AmbientSound
+    - fixtures: {}
+      type: Fixtures
+  - uid: 106
+    components:
+    - pos: 4.5,6.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 107
+    components:
+    - pos: 3.5,6.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 108
+    components:
+    - pos: 2.5,6.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 109
+    components:
+    - pos: 6.5,6.5
+      parent: 1
+      type: Transform
+    - enabled: True
+      type: AmbientSound
+    - fixtures: {}
+      type: Fixtures
+  - uid: 110
+    components:
+    - pos: 7.5,6.5
+      parent: 1
+      type: Transform
+    - enabled: True
+      type: AmbientSound
+    - fixtures: {}
+      type: Fixtures
+  - uid: 111
+    components:
+    - pos: 9.5,2.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 112
+    components:
+    - pos: 10.5,2.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 113
+    components:
+    - pos: 11.5,2.5
+      parent: 1
+      type: Transform
+    - enabled: True
+      type: AmbientSound
+    - fixtures: {}
+      type: Fixtures
+  - uid: 114
+    components:
+    - pos: 12.5,4.5
+      parent: 1
+      type: Transform
+    - enabled: True
+      type: AmbientSound
+    - fixtures: {}
+      type: Fixtures
+- proto: CableApcStack1
+  entities:
+  - uid: 84
+    components:
+    - pos: 6.5781937,3.1785927
+      parent: 1
+      type: Transform
+    - nextSound: 421.7984912
+      type: EmitSoundOnCollide
+  - uid: 86
+    components:
+    - pos: 8.546757,5.7210927
+      parent: 1
+      type: Transform
+    - nextSound: 425.9821328
+      type: EmitSoundOnCollide
+- proto: CableMV
+  entities:
+  - uid: 82
+    components:
+    - pos: 9.5,3.5
+      parent: 1
+      type: Transform
+    - enabled: True
+      type: AmbientSound
+    - fixtures: {}
+      type: Fixtures
+  - uid: 115
+    components:
+    - pos: 8.5,3.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 116
+    components:
+    - pos: 7.5,3.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 117
+    components:
+    - pos: 6.5,3.5
+      parent: 1
+      type: Transform
+    - enabled: True
+      type: AmbientSound
+    - fixtures: {}
+      type: Fixtures
+  - uid: 118
+    components:
+    - pos: 5.5,3.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 119
+    components:
+    - pos: 5.5,4.5
+      parent: 1
+      type: Transform
+    - enabled: True
+      type: AmbientSound
+    - fixtures: {}
+      type: Fixtures
+  - uid: 120
+    components:
+    - pos: 5.5,5.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 121
+    components:
+    - pos: 5.5,6.5
+      parent: 1
+      type: Transform
+    - enabled: True
+      type: AmbientSound
+    - fixtures: {}
+      type: Fixtures
+  - uid: 122
+    components:
+    - pos: 5.5,7.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 123
+    components:
+    - pos: 5.5,2.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 124
+    components:
+    - pos: 5.5,1.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 125
+    components:
+    - pos: 4.5,1.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 126
+    components:
+    - pos: 3.5,1.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+  - uid: 127
+    components:
+    - pos: 2.5,1.5
+      parent: 1
+      type: Transform
+    - fixtures: {}
+      type: Fixtures
+- proto: CableMVStack1
+  entities:
+  - uid: 83
+    components:
+    - pos: 6.9471703,5.4510927
+      parent: 1
+      type: Transform
+    - nextSound: 418.8820877
+      type: EmitSoundOnCollide
+- proto: Grille
+  entities:
+  - uid: 25
+    components:
+    - pos: 4.5,0.5
+      parent: 1
+      type: Transform
+  - uid: 26
+    components:
+    - pos: 3.5,0.5
+      parent: 1
+      type: Transform
+  - uid: 27
+    components:
+    - pos: 2.5,0.5
+      parent: 1
+      type: Transform
+  - uid: 28
+    components:
+    - pos: 0.5,2.5
+      parent: 1
+      type: Transform
+  - uid: 29
+    components:
+    - pos: 0.5,3.5
+      parent: 1
+      type: Transform
+  - uid: 30
+    components:
+    - pos: 0.5,4.5
+      parent: 1
+      type: Transform
+  - uid: 31
+    components:
+    - pos: 0.5,5.5
+      parent: 1
+      type: Transform
+  - uid: 32
+    components:
+    - pos: 2.5,7.5
+      parent: 1
+      type: Transform
+  - uid: 33
+    components:
+    - pos: 3.5,7.5
+      parent: 1
+      type: Transform
+  - uid: 34
+    components:
+    - pos: 4.5,7.5
+      parent: 1
+      type: Transform
+- proto: HospitalCurtainsOpen
+  entities:
+  - uid: 64
+    components:
+    - pos: 4.5,1.5
+      parent: 1
+      type: Transform
+  - uid: 65
+    components:
+    - pos: 4.5,2.5
+      parent: 1
+      type: Transform
+  - uid: 66
+    components:
+    - pos: 4.5,3.5
+      parent: 1
+      type: Transform
+  - uid: 67
+    components:
+    - pos: 4.5,4.5
+      parent: 1
+      type: Transform
+  - uid: 68
+    components:
+    - pos: 4.5,5.5
+      parent: 1
+      type: Transform
+  - uid: 69
+    components:
+    - pos: 4.5,6.5
+      parent: 1
+      type: Transform
+- proto: MaterialCloth1
+  entities:
+  - uid: 70
+    components:
+    - pos: 5.571457,2.4596114
+      parent: 1
+      type: Transform
+    - nextSound: 312.4631982
+      type: EmitSoundOnCollide
+  - uid: 71
+    components:
+    - pos: 5.2564545,3.1346114
+      parent: 1
+      type: Transform
+    - nextSound: 312.7661484
+      type: EmitSoundOnCollide
+  - uid: 72
+    components:
+    - pos: 6.4489555,1.9196113
+      parent: 1
+      type: Transform
+    - nextSound: 313.4189993
+      type: EmitSoundOnCollide
+  - uid: 73
+    components:
+    - pos: 2.4541473,3.4946113
+      parent: 1
+      type: Transform
+    - nextSound: 314.4152301
+      type: EmitSoundOnCollide
+  - uid: 74
+    components:
+    - pos: 5.498871,5.407111
+      parent: 1
+      type: Transform
+    - nextSound: 316.4493865
+      type: EmitSoundOnCollide
+  - uid: 75
+    components:
+    - pos: 3.0913696,5.2946115
+      parent: 1
+      type: Transform
+    - nextSound: 316.9159723
+      type: EmitSoundOnCollide
+- proto: PillCanister
+  entities:
+  - uid: 61
+    components:
+    - pos: 2.497879,2.5671825
+      parent: 1
+      type: Transform
+    - nextSound: 282.9745028
+      type: EmitSoundOnCollide
+  - uid: 62
+    components:
+    - pos: 3.3528824,4.5021825
+      parent: 1
+      type: Transform
+    - nextSound: 284.1752187
+      type: EmitSoundOnCollide
+  - uid: 63
+    components:
+    - pos: 3.03788,4.6371827
+      parent: 1
+      type: Transform
+    - nextSound: 284.4738275
+      type: EmitSoundOnCollide
+- proto: SheetSteel1
+  entities:
+  - uid: 2
+    components:
+    - pos: 10.573547,1.7782643
+      parent: 1
+      type: Transform
+    - nextSound: 328.098961
+      type: EmitSoundOnCollide
+  - uid: 76
+    components:
+    - pos: 11.541046,2.8132644
+      parent: 1
+      type: Transform
+    - nextSound: 328.7400407
+      type: EmitSoundOnCollide
+  - uid: 77
+    components:
+    - pos: 10.303547,3.2182643
+      parent: 1
+      type: Transform
+    - nextSound: 328.9823285
+      type: EmitSoundOnCollide
+  - uid: 78
+    components:
+    - pos: 12.9135475,4.7257643
+      parent: 1
+      type: Transform
+    - nextSound: 329.9657071
+      type: EmitSoundOnCollide
+  - uid: 79
+    components:
+    - pos: 6.6135483,6.5032644
+      parent: 1
+      type: Transform
+    - nextSound: 330.6985909
+      type: EmitSoundOnCollide
+  - uid: 80
+    components:
+    - pos: 9.111046,5.5582647
+      parent: 1
+      type: Transform
+    - nextSound: 331.1994675
+      type: EmitSoundOnCollide
+  - uid: 81
+    components:
+    - pos: 8.346046,6.300764
+      parent: 1
+      type: Transform
+    - nextSound: 331.6990735
+      type: EmitSoundOnCollide
+- proto: Syringe
+  entities:
+  - uid: 59
+    components:
+    - pos: 3.03788,2.5221825
+      parent: 1
+      type: Transform
+    - nextSound: 271.8813489
+      type: EmitSoundOnCollide
+  - uid: 60
+    components:
+    - pos: 2.3403816,4.5921826
+      parent: 1
+      type: Transform
+    - nextSound: 275.6375195
+      type: EmitSoundOnCollide
+- proto: TableFrame
+  entities:
+  - uid: 50
+    components:
+    - rot: 3.141592653589793 rad
+      pos: 3.5,6.5
+      parent: 1
+      type: Transform
+  - uid: 51
+    components:
+    - rot: 3.141592653589793 rad
+      pos: 2.5,6.5
+      parent: 1
+      type: Transform
+- proto: TableGlass
+  entities:
+  - uid: 52
+    components:
+    - rot: 3.141592653589793 rad
+      pos: 2.5,4.5
+      parent: 1
+      type: Transform
+  - uid: 53
+    components:
+    - rot: 3.141592653589793 rad
+      pos: 3.5,4.5
+      parent: 1
+      type: Transform
+  - uid: 54
+    components:
+    - rot: 3.141592653589793 rad
+      pos: 3.5,2.5
+      parent: 1
+      type: Transform
+  - uid: 55
+    components:
+    - rot: 3.141592653589793 rad
+      pos: 2.5,2.5
+      parent: 1
+      type: Transform
+- proto: WallSolid
+  entities:
+  - uid: 3
+    components:
+    - pos: 8.5,0.5
+      parent: 1
+      type: Transform
+  - uid: 4
+    components:
+    - pos: 6.5,0.5
+      parent: 1
+      type: Transform
+  - uid: 5
+    components:
+    - pos: 7.5,0.5
+      parent: 1
+      type: Transform
+  - uid: 7
+    components:
+    - pos: 5.5,0.5
+      parent: 1
+      type: Transform
+  - uid: 10
+    components:
+    - pos: 0.5,0.5
+      parent: 1
+      type: Transform
+  - uid: 11
+    components:
+    - pos: 1.5,0.5
+      parent: 1
+      type: Transform
+  - uid: 13
+    components:
+    - pos: 0.5,1.5
+      parent: 1
+      type: Transform
+  - uid: 16
+    components:
+    - pos: 0.5,6.5
+      parent: 1
+      type: Transform
+  - uid: 18
+    components:
+    - pos: 0.5,7.5
+      parent: 1
+      type: Transform
+  - uid: 19
+    components:
+    - pos: 1.5,7.5
+      parent: 1
+      type: Transform
+  - uid: 23
+    components:
+    - pos: 5.5,7.5
+      parent: 1
+      type: Transform
+  - uid: 24
+    components:
+    - pos: 6.5,7.5
+      parent: 1
+      type: Transform
+- proto: WindoorMedicalLocked
+  entities:
+  - uid: 38
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: 3.5,1.5
+      parent: 1
+      type: Transform
+  - uid: 39
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: 3.5,3.5
+      parent: 1
+      type: Transform
+  - uid: 40
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: 3.5,5.5
+      parent: 1
+      type: Transform
+- proto: Window
+  entities:
+  - uid: 6
+    components:
+    - pos: 3.5,0.5
+      parent: 1
+      type: Transform
+  - uid: 8
+    components:
+    - pos: 4.5,0.5
+      parent: 1
+      type: Transform
+  - uid: 9
+    components:
+    - pos: 0.5,2.5
+      parent: 1
+      type: Transform
+  - uid: 12
+    components:
+    - pos: 3.5,7.5
+      parent: 1
+      type: Transform
+  - uid: 14
+    components:
+    - pos: 0.5,5.5
+      parent: 1
+      type: Transform
+  - uid: 15
+    components:
+    - pos: 4.5,7.5
+      parent: 1
+      type: Transform
+  - uid: 17
+    components:
+    - pos: 2.5,7.5
+      parent: 1
+      type: Transform
+  - uid: 20
+    components:
+    - pos: 0.5,4.5
+      parent: 1
+      type: Transform
+  - uid: 21
+    components:
+    - pos: 0.5,3.5
+      parent: 1
+      type: Transform
+  - uid: 22
+    components:
+    - pos: 2.5,0.5
+      parent: 1
+      type: Transform
+- proto: WindowReinforcedDirectional
+  entities:
+  - uid: 41
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: 3.5,2.5
+      parent: 1
+      type: Transform
+  - uid: 42
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: 3.5,4.5
+      parent: 1
+      type: Transform
+  - uid: 43
+    components:
+    - rot: 1.5707963267948966 rad
+      pos: 3.5,6.5
+      parent: 1
+      type: Transform
+  - uid: 44
+    components:
+    - rot: 3.141592653589793 rad
+      pos: 3.5,2.5
+      parent: 1
+      type: Transform
+  - uid: 45
+    components:
+    - rot: 3.141592653589793 rad
+      pos: 2.5,2.5
+      parent: 1
+      type: Transform
+  - uid: 46
+    components:
+    - rot: 3.141592653589793 rad
+      pos: 1.5,2.5
+      parent: 1
+      type: Transform
+  - uid: 47
+    components:
+    - rot: 3.141592653589793 rad
+      pos: 3.5,4.5
+      parent: 1
+      type: Transform
+  - uid: 48
+    components:
+    - rot: 3.141592653589793 rad
+      pos: 2.5,4.5
+      parent: 1
+      type: Transform
+  - uid: 49
+    components:
+    - rot: 3.141592653589793 rad
+      pos: 1.5,4.5
+      parent: 1
+      type: Transform
+...

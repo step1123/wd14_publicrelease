@@ -80,3 +80,93 @@
     - type: MapGrid
     - type: BlobFloorPlanBuilder
       floorPlacements: 24
+
+
+- type: entity
+  id: CombatRimBaseScrapDebris
+  parent: BaseDebris
+  name: Scrap Debris
+  abstract: true
+  components:
+    - type: MapGrid
+    - type: BlobFloorPlanBuilder
+      floorTileset:
+        - Plating
+        - Plating
+        - Plating
+        - FloorSteel
+        - Lattice
+      blobDrawProb: 0.5
+      radius: 6
+      floorPlacements: 16
+    - type: SimpleFloorPlanPopulator
+      entries:
+        Plating:
+          - prob: 6 # Intentional blank.
+          - id: EngiLootSpawner
+            prob: 1
+          - id: CommonLootSpawner
+            prob: 0.03
+          - id: SecLootSpawner
+            prob: 0.03
+          - id: MedLootSpawner
+            prob: 0.01
+          - id: MedLootSpawner
+            prob: 0.7
+          - id: WallSolid
+            prob: 3
+          - id: Grille
+            prob: 1
+        Lattice:
+          - prob: 5
+          - id: Grille
+            prob: 1
+          - id: CommonLootSpawner
+            prob: 0.03
+          - id: EngiLootSpawner
+            prob: 0.03
+          - id: MedLootSpawner
+            prob: 0.03
+        FloorSteel:
+          - prob: 4 # Intentional blank.
+          - id: CommonLootSpawner
+            prob: 1
+          - id: SecLootSpawner
+            prob: 0.03
+          - id: SalvageMobSpawner
+            prob: 0.7
+    - type: GCAbleObject
+      queue: SpaceDebris
+    - type: IFF
+      flags: HideLabel
+      color: "#88b0d1"
+
+- type: entity
+  id: CombatRimScrapDebrisSmall
+  parent: CombatRimBaseScrapDebris
+  name: Scrap Debris Small
+  noSpawn: true
+  components:
+    - type: MapGrid
+    - type: BlobFloorPlanBuilder
+      floorPlacements: 8
+
+- type: entity
+  id: CombatRimScrapDebrisMedium
+  parent: CombatRimBaseScrapDebris
+  name: Scrap Debris Medium
+  noSpawn: true
+  components:
+    - type: MapGrid
+    - type: BlobFloorPlanBuilder
+      floorPlacements: 16
+
+- type: entity
+  id: CombatRimScrapDebrisLarge
+  parent: CombatRimBaseScrapDebris
+  name: Scrap Debris Large
+  noSpawn: true
+  components:
+    - type: MapGrid
+    - type: BlobFloorPlanBuilder
+      floorPlacements: 24

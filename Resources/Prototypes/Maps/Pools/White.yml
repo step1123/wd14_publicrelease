@@ -1,0 +1,8 @@
+- type: gameMapPool
+  id: WhiteMapPool
+  maps:
+    - WhiteBagel
+    - WhiteBox
+    - WhiteKettle
+    - WhiteMeta
+    - WonderBox
