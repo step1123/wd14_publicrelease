@@ -51,7 +51,7 @@ public sealed class UtkaTCPServer : TcpServer
 
     public void SendMessageToClient(UtkaTCPSession session, UtkaBaseMessage message)
     {
-        session.SendAsync(JsonSerializer.Serialize(message, message.GetType()));
+        session.SendAsync(JsonSerializer.Serialize(message, message.GetType()) + "&%^sep^%&");
     }
 
     protected override void OnConnected(TcpSession session)
