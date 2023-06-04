@@ -24,6 +24,10 @@
       "directions": 4
     },
     {
+        "name": "corner_out",
+        "directions": 4
+    },
+    {
       "name": "arm_left",
       "directions": 4
     },
