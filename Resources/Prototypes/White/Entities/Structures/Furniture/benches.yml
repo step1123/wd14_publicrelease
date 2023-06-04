@@ -163,6 +163,14 @@
   - type: Sprite
     state: right
 
+- type: entity
+  id: BenchSofaCorner
+  suffix: Corner
+  parent: BenchSofaMiddle
+  components:
+  - type: Sprite
+    state: corner
+
 # Corp sofa
 - type: entity
   name: grey sofa
@@ -187,3 +195,11 @@
   components:
   - type: Sprite
     state: right
+
+- type: entity
+  id: BenchSofaCorpCorner
+  suffix: Corner
+  parent: BenchSofaCorpMiddle
+  components:
+  - type: Sprite
+    state: corner
