@@ -103,7 +103,7 @@ public sealed class CuffedTimeStatSystem : EntitySystem
         else
             line += Loc.GetString
             (
-                "eorstats-cuffedtime-nousername",
+                "eorstats-cuffedtime-hasnousername",
                 ("name", data.Name),
                 ("timeCuffedMinutes", Math.Round(timeCuffed.TotalMinutes))
             );
