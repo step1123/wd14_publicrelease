@@ -125,7 +125,7 @@
   - type: Store
     preset: StorePresetUplink
     balance:
-      Telecrystal: 0
+      Telecrystal: 10
   - type: UserInterface
     interfaces:
     - key: enum.StoreUiKey.Key

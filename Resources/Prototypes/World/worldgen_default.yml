@@ -6,8 +6,8 @@
       biomes:
         - AsteroidsFallback
         - Failsafe
-        - CombatRimAsteroidsStandard
-        - CombatRimAsteroidsWastes
+        #- CombatRimAsteroidsStandard
+        #- CombatRimAsteroidsWastes
         - CombatRimAsteroidsEmptiness
     - type: StructurePlacement
       structures:

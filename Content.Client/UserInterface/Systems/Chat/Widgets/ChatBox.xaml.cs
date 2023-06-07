@@ -173,7 +173,15 @@ public partial class ChatBox : UIWidget
         _controller.UpdateSelectedChannel(this);
 
         // Warn typing indicator about change
-        _controller.NotifyChatTextChange();
+        if (IsValidChannel())
+        {
+            _controller.NotifyChatTextChange();
+        }
+    }
+
+    private bool IsValidChannel()
+    {
+        return SelectedChannel is not (ChatSelectChannel.Admin or ChatSelectChannel.Dead or ChatSelectChannel.OOC or ChatSelectChannel.LOOC);
     }
 
     protected override void Dispose(bool disposing)

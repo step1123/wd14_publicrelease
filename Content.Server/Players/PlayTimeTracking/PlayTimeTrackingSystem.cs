@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Server.Administration.Managers;
 using Content.Server.Afk;
 using Content.Server.Afk.Events;
 using Content.Server.GameTicking;
@@ -28,6 +29,7 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly PlayTimeTrackingManager _tracking = default!;
+    [Dependency] private readonly IAdminManager _adminManager = default!;
 
     public override void Initialize()
     {
@@ -155,8 +157,16 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
         _tracking.QueueSendTimers(ev.PlayerSession);
     }
 
+    private bool IsBypassingChecks(IPlayerSession player)
+    {
+        return _adminManager.IsAdmin(player, true);
+    }
+
     public bool IsAllowed(IPlayerSession player, string role)
     {
+        if (IsBypassingChecks(player))
+            return true;
+
         if (!_prototypes.TryIndex<JobPrototype>(role, out var job) ||
             job.Requirements == null ||
             !_cfg.GetCVar(CCVars.GameRoleTimers))
@@ -170,6 +180,10 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
     public HashSet<string> GetDisallowedJobs(IPlayerSession player)
     {
         var roles = new HashSet<string>();
+
+        if (IsBypassingChecks(player))
+            return roles;
+
         if (!_cfg.GetCVar(CCVars.GameRoleTimers))
             return roles;
 
@@ -201,6 +215,10 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
             return;
 
         var player = _playerManager.GetSessionByUserId(userId);
+
+        if (IsBypassingChecks(player))
+            return;
+
         if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
         {
             // Sorry mate but your playtimes haven't loaded.

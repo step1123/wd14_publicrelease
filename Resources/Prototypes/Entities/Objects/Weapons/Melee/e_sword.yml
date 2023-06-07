@@ -185,10 +185,10 @@
     - type: IncreaseDamageOnWield
       damage:
         types:
-          Slash: 15
-          Heat: 13
+          Slash: 7.5
+          Heat: 7.5
     - type: MeleeWeapon
       attackRate: 1
     - type: Reflect
-      reflectProb: 0.70
+      reflectProb: 0.60
       enabled: false
