@@ -5,12 +5,12 @@
   components:
   - type: GameRule
 
-- type: entity
-  id: DeathMatch
-  parent: BaseGameRule
-  noSpawn: true
-  components:
-  - type: DeathMatchRule
+#- type: entity
+#  id: DeathMatch
+ # parent: BaseGameRule
+ # noSpawn: true
+ # components:
+ # - type: DeathMatchRule
 
 - type: entity
   id: InactivityTimeRestart

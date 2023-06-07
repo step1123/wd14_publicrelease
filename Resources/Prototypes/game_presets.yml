@@ -52,15 +52,15 @@
     - Traitor
     - BasicStationEventScheduler
 
-- type: gamePreset
-  id: Deathmatch
-  alias:
-    - deathmatch
-    - dm
-  name: death-match-title
-  description: death-match-description
-  rules:
-    - DeathMatch
+#- type: gamePreset
+#  id: Deathmatch
+#  alias:
+ #   - deathmatch
+ #   - dm
+ # name: death-match-title
+ # description: death-match-description
+ # rules:
+ #   - DeathMatch
 
 - type: gamePreset
   id: Nukeops
