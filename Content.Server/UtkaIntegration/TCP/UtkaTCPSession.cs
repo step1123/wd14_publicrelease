@@ -91,7 +91,7 @@ public sealed class UtkaTCPSession : TcpSession
             if (i + 1 == handles.Length && !BufferCahce.EndsWith("&%^sep^%&"))
                 continue;
 
-            if (handle.Length == 0 || !handle.StartsWith("{\"") || !handle.EndsWith("\"}"))
+            if (handle.Length == 0 || !handle.StartsWith("{") || !handle.EndsWith("}"))
                 continue;
 
             var pos = BufferCahce.IndexOf(handle);
