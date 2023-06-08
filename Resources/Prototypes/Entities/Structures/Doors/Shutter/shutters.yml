@@ -35,6 +35,7 @@
       board: !type:Container
   - type: Door
     performCollisionCheck: false
+    canCrush: false
     bumpOpen: false
     clickOpen: false
     closeTimeOne: 0.2
