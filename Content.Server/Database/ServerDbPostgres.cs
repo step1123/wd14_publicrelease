@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Content.Server.White;
 using Content.Shared.CCVar;
 using Microsoft.EntityFrameworkCore;
 using Robust.Shared.Configuration;
@@ -16,11 +15,15 @@ namespace Content.Server.Database
     public sealed class ServerDbPostgres : ServerDbBase
     {
         private readonly DbContextOptions<PostgresServerDbContext> _options;
+        private readonly SemaphoreSlim _prefsSemaphore;
         private readonly Task _dbReadyTask;
 
-        public ServerDbPostgres(DbContextOptions<PostgresServerDbContext> options)
+        public ServerDbPostgres(DbContextOptions<PostgresServerDbContext> options, IConfigurationManager cfg)
         {
+            var concurrency = cfg.GetCVar(CCVars.DatabasePgConcurrency);
+
             _options = options;
+            _prefsSemaphore = new SemaphoreSlim(concurrency, concurrency);
 
             _dbReadyTask = Task.Run(async () =>
             {
@@ -514,8 +517,9 @@ namespace Content.Server.Database
         private async Task<DbGuardImpl> GetDbImpl()
         {
             await _dbReadyTask;
+            await _prefsSemaphore.WaitAsync();
 
-            return new DbGuardImpl(new PostgresServerDbContext(_options));
+            return new DbGuardImpl(this, new PostgresServerDbContext(_options));
         }
 
         protected override async Task<DbGuard> GetDb()
@@ -525,17 +529,21 @@ namespace Content.Server.Database
 
         private sealed class DbGuardImpl : DbGuard
         {
-            public DbGuardImpl(PostgresServerDbContext dbC)
+            private readonly ServerDbPostgres _db;
+
+            public DbGuardImpl(ServerDbPostgres db, PostgresServerDbContext dbC)
             {
+                _db = db;
                 PgDbContext = dbC;
             }
 
             public PostgresServerDbContext PgDbContext { get; }
             public override ServerDbContext DbContext => PgDbContext;
 
-            public override ValueTask DisposeAsync()
+            public override async ValueTask DisposeAsync()
             {
-                return DbContext.DisposeAsync();
+                await DbContext.DisposeAsync();
+                _db._prefsSemaphore.Release();
             }
         }
     }

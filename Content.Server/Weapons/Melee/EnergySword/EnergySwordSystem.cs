@@ -30,7 +30,7 @@ public sealed class EnergySwordSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<EnergySwordComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<EnergySwordComponent, MeleeHitEvent>(OnMeleeHit);
+        SubscribeLocalEvent<EnergySwordComponent, GetMeleeDamageEvent>(OnGetMeleeDamage);
         SubscribeLocalEvent<EnergySwordComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<EnergySwordComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<EnergySwordComponent, IsHotEvent>(OnIsHotEvent);
@@ -58,26 +58,13 @@ public sealed class EnergySwordSystem : EntitySystem
             comp.BladeColor = _random.Pick(comp.ColorOptions);
     }
 
-    private void OnMeleeHit(EntityUid uid, EnergySwordComponent comp, MeleeHitEvent args)
+    private void OnGetMeleeDamage(EntityUid uid, EnergySwordComponent comp, ref GetMeleeDamageEvent args)
     {
         if (!comp.Activated)
             return;
 
         // Overrides basic blunt damage with burn+slash as set in yaml
-        args.BonusDamage = comp.LitDamageBonus;
-
-        var usedEnt = _entityManager.GetComponent<MetaDataComponent>(args.Weapon).EntityPrototype!.ID;
-
-        if (usedEnt == "EnergyDoubleSword")
-        {
-            var ev = new EmoteActionEvent
-            {
-                Emote = "EmoteTurn",
-                Performer = args.User
-
-            };
-            RaiseLocalEvent(args.User, ev);
-        }
+        args.Damage = comp.LitDamageBonus;
     }
 
     private void OnUseInHand(EntityUid uid, EnergySwordComponent comp, UseInHandEvent args)

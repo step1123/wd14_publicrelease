@@ -3,13 +3,9 @@ using Content.Shared.DeviceNetwork;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 using System.Buffers;
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared.Doors.Components;
 using Content.Shared.Examine;
-using Robust.Shared.Timing;
-using static Content.Server.DeviceNetwork.Components.DeviceNetworkComponent;
 
 namespace Content.Server.DeviceNetwork.Systems
 {
@@ -23,40 +19,41 @@ namespace Content.Server.DeviceNetwork.Systems
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly IPrototypeManager _protoMan = default!;
         [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-        [Dependency] private readonly IGameTiming _gameTiming = default!; //WD
 
         private readonly Dictionary<int, DeviceNet> _networks = new(4);
-        private readonly Queue<DeviceNetworkPacketEvent> _packets = new();
-        private readonly TimeSpan packetDelay = TimeSpan.FromMilliseconds(500); //WD
-        private TimeSpan lastPacket = TimeSpan.Zero; //WD
+        private readonly Queue<DeviceNetworkPacketEvent> _queueA = new();
+        private readonly Queue<DeviceNetworkPacketEvent> _queueB = new();
+
+        /// <summary>
+        /// The queue being processed in the current tick
+        /// </summary>
+        private Queue<DeviceNetworkPacketEvent> _activeQueue = null!;
+
+        /// <summary>
+        /// The queue that will be processed in the next tick
+        /// </summary>
+        private Queue<DeviceNetworkPacketEvent> _nextQueue = null!;
+
 
         public override void Initialize()
         {
             SubscribeLocalEvent<DeviceNetworkComponent, MapInitEvent>(OnMapInit);
             SubscribeLocalEvent<DeviceNetworkComponent, ComponentShutdown>(OnNetworkShutdown);
             SubscribeLocalEvent<DeviceNetworkComponent, ExaminedEvent>(OnExamine);
+
+            _activeQueue = _queueA;
+            _nextQueue = _queueB;
         }
 
         public override void Update(float frameTime)
         {
-            while (_packets.TryDequeue(out var packet))
-            {
-                //WD edit
-                if (TryComp<DoorComponent>(packet.Sender, out _))
-                {
-                    if (lastPacket == TimeSpan.Zero)
-                        lastPacket = _gameTiming.CurTime;
-                    else
-                    {
-                        if (_gameTiming.CurTime - lastPacket < packetDelay)
-                            return;
-                    }
-                }
 
-                lastPacket = _gameTiming.CurTime;
-                //WD edit
+            while (_activeQueue.TryDequeue(out var packet))
+            {
                 SendPacket(packet);
             }
+
+            SwapQueues();
         }
 
         /// <summary>
@@ -81,8 +78,21 @@ namespace Content.Server.DeviceNetwork.Systems
             if (frequency == null)
                 return false;
 
-            _packets.Enqueue(new DeviceNetworkPacketEvent(device.DeviceNetId, address, frequency.Value, device.Address, uid, data));
+            _nextQueue.Enqueue(new DeviceNetworkPacketEvent(device.DeviceNetId, address, frequency.Value, device.Address, uid, data));
             return true;
+        }
+
+        /// <summary>
+        /// Swaps the active queue.
+        /// Queues are swapped so that packets being sent in the current tick get processed in the next tick.
+        /// </summary>
+        /// <remarks>
+        /// This prevents infinite loops while sending packets
+        /// </remarks>
+        private void SwapQueues()
+        {
+            _nextQueue = _activeQueue;
+            _activeQueue = _activeQueue == _queueA ? _queueB : _queueA;
         }
 
         private void OnExamine(EntityUid uid, DeviceNetworkComponent device, ExaminedEvent args)
