@@ -73,17 +73,17 @@ reagent-effect-guidebook-status-effect =
             { $chance ->
                 [1] Вызывает
                *[other] вызывает
-            } { LOC($key) } как минимум на { NATURALFIXED($time, 3) } { MANY("second", $time) } с накоплением
+            } { LOC($key) } как минимум на { NATURALFIXED($time, 3) } { $time } с накоплением
        *[set]
             { $chance ->
                 [1] Вызывает
                *[other] вызывает
-            } { LOC($key) } как минимум на { NATURALFIXED($time, 3) } { MANY("second", $time) } без накоплением
+            } { LOC($key) } как минимум на { NATURALFIXED($time, 3) } { $time } без накоплением
         [remove]
             { $chance ->
                 [1] Убирает
                *[other] убирает
-            } { NATURALFIXED($time, 3) } { MANY("second", $time) } { LOC($key) }
+            } { NATURALFIXED($time, 3) } { $time } { LOC($key) }
     }
 reagent-effect-guidebook-activate-artifact =
     { $chance ->
@@ -219,7 +219,7 @@ reagent-effect-guidebook-electrocute =
     { $chance ->
         [1] Electrocutes
        *[other] electrocute
-    } the metabolizer for { NATURALFIXED($time, 3) } { MANY("second", $time) }
+    } the metabolizer for { NATURALFIXED($time, 3) } { $time }
 reagent-effect-guidebook-extinguish-reaction =
     { $chance ->
         [1] Extinguishes
@@ -270,12 +270,12 @@ reagent-effect-guidebook-paralyze =
     { $chance ->
         [1] Paralyzes
        *[other] paralyze
-    } the metabolizer for at least { NATURALFIXED($time, 3) } { MANY("second", $time) }
+    } the metabolizer for at least { NATURALFIXED($time, 3) } { $time }
 reagent-effect-guidebook-movespeed-modifier =
     { $chance ->
         [1] Modifies
        *[other] modify
-    } movement speed by { NATURALFIXED($walkspeed, 3) }x for at least { NATURALFIXED($time, 3) } { MANY("second", $time) }
+    } movement speed by { NATURALFIXED($walkspeed, 3) }x for at least { NATURALFIXED($time, 3) } { $time }
 reagent-effect-guidebook-reset-narcolepsy =
     { $chance ->
         [1] Temporarily staves
