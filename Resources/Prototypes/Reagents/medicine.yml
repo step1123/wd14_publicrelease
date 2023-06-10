@@ -596,7 +596,6 @@
   metabolisms:
     Medicine:
       effects:
-      - !type:ChemCureDisease
       - !type:HealthChange
         damage:
           types:
@@ -852,7 +851,7 @@
         messages: ["ethyloxyephedrine-effect-feeling-awake", "ethyloxyephedrine-effect-clear-mind"]
         type: Local
         probability: 0.1
-        
+
 - type: reagent
   id: Sigynate
   name: reagent-name-sigynate
