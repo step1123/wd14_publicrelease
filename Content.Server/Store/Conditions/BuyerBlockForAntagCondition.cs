@@ -1,4 +1,5 @@
 ﻿using Content.Server.Mind.Components;
+using Content.Server.Roles;
 using Content.Server.Traitor;
 using Content.Shared.Store;
 
@@ -15,7 +16,7 @@ public sealed class BuyerBlockForAntagCondition : ListingCondition
 
         foreach (var role in mind.Mind.AllRoles)
         {
-            if (role is TraitorRole traitorRole)
+            if (role is TraitorRole)
                 return false;
         }
 

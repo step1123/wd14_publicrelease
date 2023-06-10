@@ -149,7 +149,7 @@ public sealed class RoleBanManager
         }
 
         job = string.Concat(JobPrefix, job);
-        CreateRoleBan(shell, located, job, reason, minutes);
+        CreateRoleBan(shell, located, job, reason, minutes, isGlobalBan);
     }
 
     //WD start
@@ -296,8 +296,7 @@ public sealed class RoleBanManager
         // WD start
         var banId = await UtkaGetBanId(reason, role, targetUid);
 
-        if (job != null)
-            UtkaSendJobBanEvent(shell.Player!.Name, target, minutes, job, isGlobalBan, reason, banId);
+        UtkaSendJobBanEvent(shell.Player!.Name, located.Username, minutes, role, isGlobalBan, reason, banId);
         //WD end
     }
     #endregion
