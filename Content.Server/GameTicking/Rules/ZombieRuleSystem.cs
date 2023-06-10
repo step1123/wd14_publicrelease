@@ -2,13 +2,12 @@ using System.Globalization;
 using System.Linq;
 using Content.Server.Actions;
 using Content.Server.Chat.Managers;
-using Content.Server.Disease;
-using Content.Server.Disease.Components;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Mind.Components;
 using Content.Server.Players;
 using Content.Server.Popups;
 using Content.Server.Preferences.Managers;
+using Content.Server.Roles;
 using Content.Server.RoundEnd;
 using Content.Server.Traitor;
 using Content.Server.Zombies;
@@ -38,7 +37,6 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IServerPreferencesManager _prefs = default!;
     [Dependency] private readonly RoundEndSystem _roundEndSystem = default!;
-    [Dependency] private readonly DiseaseSystem _diseaseSystem = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly ActionsSystem _action = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -167,7 +165,9 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
             var minPlayers = _cfg.GetCVar(CCVars.ZombieMinPlayers);
             if (!ev.Forced && ev.Players.Length < minPlayers)
             {
-                _chatManager.DispatchServerAnnouncement(Loc.GetString("zombie-not-enough-ready-players", ("readyPlayersCount", ev.Players.Length), ("minimumPlayers", minPlayers)));
+                _chatManager.SendAdminAnnouncement(Loc.GetString("zombie-not-enough-ready-players",
+                    ("readyPlayersCount", ev.Players.Length),
+                    ("minimumPlayers", minPlayers)));
                 ev.Cancel();
                 continue;
             }
@@ -233,7 +233,8 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
         var prefList = new List<IPlayerSession>();
         foreach (var player in allPlayers)
         {
-            if (player.AttachedEntity != null && HasComp<DiseaseCarrierComponent>(player.AttachedEntity))
+            // TODO: A
+            if (player.AttachedEntity != null && HasComp<HumanoidAppearanceComponent>(player.AttachedEntity))
             {
                 playerList.Add(player);
 
@@ -253,10 +254,6 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
             (int) Math.Min(
                 Math.Floor((double) playerList.Count / playersPerInfected), maxInfected));
 
-        // How long the zombies have as a group to decide to begin their attack.
-        //   Varies randomly from 20 to 30 minutes. After this the virus begins and they start
-        //   taking zombie virus damage.
-        var groupTimelimit = _random.NextFloat(component.MinZombieForceSecs, component.MaxZombieForceSecs);
         for (var i = 0; i < numInfected; i++)
         {
             IPlayerSession zombie;
@@ -286,16 +283,12 @@ public sealed class ZombieRuleSystem : GameRuleSystem<ZombieRuleComponent>
 
             DebugTools.AssertNotNull(mind.OwnedEntity);
 
-            mind.AddRole(new TraitorRole(mind, _prototypeManager.Index<AntagPrototype>(component.PatientZeroPrototypeID)));
+            mind.AddRole(new ZombieRole(mind, _prototypeManager.Index<AntagPrototype>(component.PatientZeroPrototypeID)));
 
             var inCharacterName = string.Empty;
-            // Create some variation between the times of each zombie, relative to the time of the group as a whole.
-            var personalDelay = _random.NextFloat(0.0f, component.PlayerZombieForceVariationSecs);
             if (mind.OwnedEntity != null)
             {
-                var pending = EnsureComp<PendingZombieComponent>(mind.OwnedEntity.Value);
-                // Only take damage after this many seconds
-                pending.InfectedSecs = -(int)(groupTimelimit + personalDelay);
+                EnsureComp<PendingZombieComponent>(mind.OwnedEntity.Value);
                 EnsureComp<ZombifyOnDeathComponent>(mind.OwnedEntity.Value);
                 inCharacterName = MetaData(mind.OwnedEntity.Value).EntityName;
 

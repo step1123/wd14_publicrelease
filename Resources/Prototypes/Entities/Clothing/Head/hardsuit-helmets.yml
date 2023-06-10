@@ -6,7 +6,6 @@
   description: A special hardsuit helmet designed for working in low-pressure, high thermal environments.
   components:
   - type: Sprite
-    netsync: false
     sprite: Clothing/Head/Hardsuits/atmospherics.rsi
     layers:
     - state: icon
@@ -111,21 +110,6 @@
     lowPressureMultiplier: 1000
 
 - type: entity
-  parent: HatBase
-  id: ClothingHeadHelmetIHSVoidHelm
-  noSpawn: true
-  name: IHS voidhelm
-  description: A robust, tactical IHS helmet.
-  components:
-  - type: Sprite
-    sprite: Clothing/Head/Hardsuits/ihsvoid.rsi
-  - type: Clothing
-    sprite: Clothing/Head/Hardsuits/ihsvoid.rsi
-  - type: PressureProtection
-    highPressureMultiplier: 0.3
-    lowPressureMultiplier: 10000
-
-- type: entity
   parent: ClothingHeadHardsuitWithLightBase
   id: ClothingHeadHelmetHardsuitMedical
   noSpawn: true
@@ -141,8 +125,6 @@
   - type: PressureProtection
     highPressureMultiplier: 0.6
     lowPressureMultiplier: 5500
-  - type: DiseaseProtection
-    protection: 0.15
 
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
@@ -256,8 +238,6 @@
   - type: PressureProtection
     highPressureMultiplier: 0.6
     lowPressureMultiplier: 5500
-  - type: DiseaseProtection
-    protection: 0.15
 
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
@@ -347,7 +327,6 @@
   description: A sturdy helmet designed for complex industrial operations in space.
   components:
   - type: Sprite
-    netsync: false
     sprite: Clothing/Head/Hardsuits/spatiohelm.rsi
     layers:
     - state: icon
@@ -440,8 +419,6 @@
         Piercing: 0.8
         Heat: 0.2
         Radiation: 0.5
-  - type: DiseaseProtection
-    protection: 0.15
 
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
@@ -451,7 +428,6 @@
   description: A pressure resistant and fireproof hood worn by special cleanup units.
   components:
   - type: Sprite
-    netsync: false
     sprite: Clothing/Head/Hardsuits/cburn.rsi
     layers:
     - state: icon
@@ -484,8 +460,6 @@
         Shock: 0.1
         Cold: 0.2
         Radiation: 0.2
-  - type: DiseaseProtection
-    protection: 0.25
 
 - type: entity
   parent: ClothingHeadHardsuitBase
@@ -559,8 +533,6 @@
     sprite: Clothing/Head/Hardsuits/ERThelmets/ertmedical.rsi
   - type: PointLight
     color: "#adffec"
-  - type: DiseaseProtection
-    protection: 0.20
 
 - type: entity
   parent: ClothingHeadHelmetHardsuitSyndie

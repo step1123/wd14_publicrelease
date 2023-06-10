@@ -92,3 +92,4 @@ tiles-low-desert-floor = низкий песок
 tiles-grass-planet-floor = травяное покрытие планеты
 tiles-basalt-floor = базальт
 tiles-snow-floor = снег
+tiles-wood3 = деревянный сломанный пол

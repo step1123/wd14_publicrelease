@@ -133,7 +133,8 @@ public abstract class SharedEmitSoundSystem : EntitySystem
             !args.OtherFixture.Hard ||
             !TryComp<PhysicsComponent>(uid, out var physics) ||
             physics.LinearVelocity.Length < component.MinimumVelocity ||
-            _timing.CurTime < component.NextSound)
+            _timing.CurTime < component.NextSound ||
+            MetaData(uid).EntityPaused)
         {
             return;
         }

@@ -8,7 +8,6 @@
   components:
   - type: Sprite
     sprite: Objects/Specific/Medical/healthanalyzer.rsi
-    netsync: false
     state: icon
     layers:
     - state: icon
@@ -40,6 +39,9 @@
         enum.PowerDeviceVisualLayers.Powered:
           True: { visible: true }
           False: { visible: false }
+  - type: GuideHelp
+    guides:
+    - Medical Doctor
 
 - type: entity
   id: HandheldHealthAnalyzerEmpty
@@ -50,42 +52,3 @@
     slots:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
-
-- type: entity
-  parent: HandheldHealthAnalyzer
-  id: HandheldHealthAnalyzerGigacancer
-  suffix: gigacancer
-  components:
-  - type: HealthAnalyzer
-    fake: true
-    disease: Ultragigacancer
-
-## I know admins will want this
-- type: entity
-  parent: HandheldHealthAnalyzer
-  id: HandheldHealthAnalyzerOwOnavirus
-  name: OwOnavirus analyzer
-  suffix: admin abuse
-  components:
-  - type: HealthAnalyzer
-    fake: true
-    disease: OwOnavirus
-
-- type: entity
-  parent: HandheldHealthAnalyzer
-  id: HandheldHealthAnalyzerZombie
-  name: Zombie Infector
-  suffix: Active
-  components:
-  - type: HealthAnalyzer
-    fake: true
-    disease: ActiveZombieVirus
-
-- type: entity
-  parent: HandheldHealthAnalyzer
-  id: HandheldHealthAnalyzerHonk
-  suffix: Honk Infector
-  components:
-  - type: HealthAnalyzer
-    fake: true
-    disease: ActiveHonkVirus

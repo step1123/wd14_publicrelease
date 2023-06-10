@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using Content.Server.Database;
+using Content.Shared.Players;
 using Content.Server.GameTicking;
 using Content.Server.UtkaIntegration;
 using Content.Server.White;
@@ -21,6 +22,7 @@ namespace Content.Server.Administration.Managers;
 
 public sealed class RoleBanManager
 {
+    [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -29,10 +31,14 @@ public sealed class RoleBanManager
 
     private const string JobPrefix = "Job:";
 
+    private ISawmill _sawmill = default!;
+
     private readonly Dictionary<NetUserId, HashSet<ServerRoleBanDef>> _cachedRoleBans = new();
 
     public void Initialize()
     {
+        _sawmill = Logger.GetSawmill("rolebans");
+        _netManager.RegisterNetMessage<MsgRoleBans>();
         _playerManager.PlayerStatusChanged += OnPlayerStatusChanged;
     }
 
@@ -40,10 +46,13 @@ public sealed class RoleBanManager
     {
         if (e.NewStatus != SessionStatus.Connected
             || _cachedRoleBans.ContainsKey(e.Session.UserId))
+        {
             return;
+        }
 
         var netChannel = e.Session.ConnectedClient;
         await CacheDbRoleBans(e.Session.UserId, netChannel.RemoteEndPoint.Address, netChannel.UserData.HWId.Length == 0 ? null : netChannel.UserData.HWId);
+        SendRoleBans(e.Session);
     }
 
     private async Task<bool> AddRoleBan(ServerRoleBanDef banDef)
@@ -55,12 +64,39 @@ public sealed class RoleBanManager
                 roleBans = new HashSet<ServerRoleBanDef>();
                 _cachedRoleBans.Add(banDef.UserId.Value, roleBans);
             }
-            if (!roleBans.Contains(banDef))
-                roleBans.Add(banDef);
+
+            roleBans.Add(banDef);
         }
 
         await _db.AddServerRoleBanAsync(banDef);
         return true;
+    }
+
+    public void SendRoleBans(LocatedPlayerData located)
+    {
+        if (!_playerManager.TryGetSessionById(located.UserId, out var player))
+        {
+            return;
+        }
+
+        SendRoleBans(player);
+    }
+
+    public void SendRoleBans(IPlayerSession pSession)
+    {
+        if (!_cachedRoleBans.TryGetValue(pSession.UserId, out var roleBans))
+        {
+            _sawmill.Error($"Tried to send rolebans for {pSession.Name} but none cached?");
+            return;
+        }
+
+        var bans = new MsgRoleBans()
+        {
+            Bans = roleBans.Select(o => o.Role).ToList()
+        };
+
+        _sawmill.Debug($"Sent rolebans to {pSession.Name}");
+        _netManager.ServerSendMessage(bans, pSession.ConnectedClient);
     }
 
     public HashSet<string>? GetRoleBans(NetUserId playerUserId)
@@ -104,7 +140,7 @@ public sealed class RoleBanManager
     }
 
     #region Job Bans
-    public async void CreateJobBan(IConsoleShell shell, string target, string job, string reason, uint minutes, bool isGlobalBan)
+    public async void CreateJobBan(IConsoleShell shell, LocatedPlayerData located, string job, string reason, uint minutes, bool isGlobalBan)
     {
         if (!_prototypeManager.TryIndex(job, out JobPrototype? _))
         {
@@ -112,8 +148,8 @@ public sealed class RoleBanManager
             return;
         }
 
-        var role = string.Concat(JobPrefix, job); // WD edit
-        CreateRoleBan(shell, target, role, reason, minutes, isGlobalBan, job); // WD edit
+        job = string.Concat(JobPrefix, job);
+        CreateRoleBan(shell, located, job, reason, minutes, isGlobalBan);
     }
 
     //WD start
@@ -203,15 +239,8 @@ public sealed class RoleBanManager
     #endregion
 
     #region Commands
-    private async void CreateRoleBan(IConsoleShell shell, string target, string role, string reason, uint minutes, bool isGlobalBan, string? job = null) // WD edit
+    private async void CreateRoleBan(IConsoleShell shell, LocatedPlayerData located, string role, string reason, uint minutes, bool isGlobalBan)
     {
-        var located = await _playerLocator.LookupIdByNameOrIdAsync(target);
-        if (located == null)
-        {
-            shell.WriteError(Loc.GetString("cmd-roleban-name-parse"));
-            return;
-        }
-
         var targetUid = located.UserId;
         var targetHWid = located.LastHWId;
         var targetAddress = located.LastAddress;
@@ -257,18 +286,17 @@ public sealed class RoleBanManager
 
         if (!await AddRoleBan(banDef))
         {
-            shell.WriteLine(Loc.GetString("cmd-roleban-existing", ("target", target), ("role", role)));
+            shell.WriteLine(Loc.GetString("cmd-roleban-existing", ("target", located.Username), ("role", role)));
             return;
         }
 
         var length = expires == null ? Loc.GetString("cmd-roleban-inf") : Loc.GetString("cmd-roleban-until", ("expires", expires));
-        shell.WriteLine(Loc.GetString("cmd-roleban-success", ("target", target), ("role", role), ("reason", reason), ("length", length), ("server", serverName)));
+        shell.WriteLine(Loc.GetString("cmd-roleban-success", ("target", located.Username), ("role", role), ("reason", reason), ("length", length), ("server", serverName)));
 
         // WD start
         var banId = await UtkaGetBanId(reason, role, targetUid);
 
-        if (job != null)
-            UtkaSendJobBanEvent(shell.Player!.Name, target, minutes, job, isGlobalBan, reason, banId);
+        UtkaSendJobBanEvent(shell.Player!.Name, located.Username, minutes, role, isGlobalBan, reason, banId);
         //WD end
     }
     #endregion

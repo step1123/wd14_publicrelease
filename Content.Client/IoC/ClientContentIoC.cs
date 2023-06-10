@@ -16,6 +16,7 @@ using Content.Client.Voting;
 using Content.Shared.Administration;
 using Content.Shared.Administration.Logs;
 using Content.Client.Guidebook;
+using Content.Client.Replay;
 using Content.Client.White.JoinQueue;
 using Content.Client.White.Jukebox;
 using Content.Client.White.Sponsors;
@@ -45,8 +46,9 @@ namespace Content.Client.IoC
             IoCManager.Register<ISharedAdminLogManager, SharedAdminLogManager>();
             IoCManager.Register<GhostKickManager>();
             IoCManager.Register<ExtendedDisconnectInformationManager>();
-            IoCManager.Register<PlayTimeTrackingManager>();
+            IoCManager.Register<JobRequirementsManager>();
             IoCManager.Register<DocumentParsingManager>();
+            IoCManager.Register<ContentReplayPlaybackManager, ContentReplayPlaybackManager>();
 
             //WD-EDIT
             IoCManager.Register<JoinQueueManager>();

@@ -148,6 +148,8 @@ flavor-complex-chaos = как хаос
 flavor-complex-squirming = как извивающийся
 flavor-complex-electrons = как электроны
 flavor-complex-parents = как чьи-то родители
+flavor-complex-plastic = как пластик
+flavor-complex-glue = как клей
 
 ## Generic alcohol/soda taste. This should be replaced with an actual flavor profile.
 
@@ -199,7 +201,7 @@ flavor-complex-screwdriver = как крепкий апельсиновый со
 
 flavor-complex-themartinez = как фиалки и лимонная водка
 flavor-complex-cogchamp = как медь
-flavor-complex-antifreeze = warm
+flavor-complex-antifreeze = как что-то тёплое
 flavor-complex-pilk = как сладкое молоко
 
 # Medicine/chemical-specific flavors.

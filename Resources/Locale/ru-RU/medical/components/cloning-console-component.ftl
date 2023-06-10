@@ -2,10 +2,10 @@
 
 cloning-console-window-title = Консоль клонирования
 cloning-console-window-clone-button-text = Клонировать
-cloning-console-window-scanner-id = ID: [color=white]{ $scannerOccupantName }[/color]
-cloning-console-window-pod-id = ID: [color=white]{ $podOccupantName }[/color]
+cloning-console-window-scanner-id = ИД: [color=white]{ $scannerOccupantName }[/color]
+cloning-console-window-pod-id = ИД: [color=white]{ $podOccupantName }[/color]
 cloning-console-window-no-patient-data-text = Нет данных о пациенте.
-cloning-console-window-id-blank = ID:
+cloning-console-window-id-blank = ИД:
 cloning-console-window-scanner-details-label = Статус генетического сканера
 cloning-console-window-pod-details-label = Статус капсулы клонирования
 cloning-console-window-no-scanner-detected-label = Соедините с генетическим сканером при помощи мультитула.
@@ -26,4 +26,5 @@ cloning-console-component-msg-incomplete = Не готово: Клонирова
 cloning-console-component-msg-no-cloner = Не готово: Клонер не обнаружен
 cloning-console-component-msg-no-mind = Не готово: Душа неактивна
 cloning-console-chat-error = ОШИБКА: НЕХВАТКА БИОМАССЫ. КЛОНИРОВАНИЕ ЭТОГО ТЕЛА ТРЕБУЕТ { $units } ЕДИНИЦ БИОМАССЫ.
+cloning-console-uncloneable-trait-error = ОШИБКА: ДУША ОТСУТСТВУЕТ, КЛОНИРОВАНИЕ НЕВОЗМОЖНО.
 cloning-console-cellular-warning = ВНИМАНИЕ: ОЦЕНКА ДОСТОВЕРНОСТИ ЦЕЛОСТНОСТИ ГЕНОВ СОСТАВЛЯЕТ { $percent }%. КЛОНИРОВАНИЕ МОЖЕТ ПРИВЕСТИ К НЕОЖИДАННЫМ РЕЗУЛЬТАТАМ.

@@ -10,5 +10,7 @@ trait-lightweight-name = Легко пьянеющий
 trait-lightweight-desc = Алкоголь сильнее воздействует на вас
 trait-muted-name = Немой
 trait-muted-desc = Вы не можете говорить
+trait-uncloneable-name = Неклонируемый
+trait-uncloneable-desc = Нельзя клонировать
 trait-paracusia-name = Паракузия
 trait-paracusia-desc = Вы слышите звуки, которых на самом деле нет

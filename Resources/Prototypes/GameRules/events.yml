@@ -56,22 +56,6 @@
   - type: BureaucraticErrorRule
 
 - type: entity
-  id: DiseaseOutbreak
-  parent: BaseGameRule
-  noSpawn: true
-  components:
-  - type: StationEvent
-    startAnnouncement: station-event-disease-outbreak-announcement
-    startAudio:
-      path: /Audio/Announcements/outbreak7.ogg
-      params:
-        volume: -4
-    weight: 5
-    duration: 1
-    earliestStart: 15
-  - type: DiseaseOutbreakRule
-
-- type: entity
   id: Dragon
   parent: BaseGameRule
   noSpawn: true
@@ -293,16 +277,16 @@
         amount: 4
         maxAmount: 8
 
-#- type: entity
-#  id: ZombieOutbreak
-#  parent: BaseGameRule
-#  noSpawn: true
-#  components:
-#  - type: StationEvent
-#    earliestStart: 50
-#    weight: 2.5
-#    duration: 1
-#  - type: ZombieRule
+- type: entity
+  id: ZombieOutbreak
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+  - type: StationEvent
+    earliestStart: 50
+    weight: 2.5
+    duration: 1
+  - type: ZombieRule
 
 - type: entity
   id: LoneOpsSpawn
