@@ -13,6 +13,8 @@ uplink-edagger-name = Энергетический кинжал
 uplink-edagger-desc = Маленькое энергетическое лезвие, удобно замаскированное в виде ручки.
 uplink-fire-axe-flaming-name = Пожарный топор
 uplink-fire-axe-flaming-desc = Оружие в классическом стиле, оснащенное передовой технологией атмос, позволяющей ему поджигать цели.
+uplink-gloves-north-star-name = Перчатки Полярной звезды
+uplink-gloves-north-star-desc = Пара перчаток, которые резко сокращают время восстановления ваших ударов, позволяя вам избивать людей до смерти шквалом ударов.
 # Explosives
 uplink-explosive-grenade-name = Разрывная граната
 uplink-explosive-grenade-desc = Граната, которая производит небольшой, но разрушительный взрыв.

@@ -4,6 +4,7 @@ salvage-expedition-structure-remaining =
         [one] { $count } структура осталась.
        *[other] { $count } структур осталось.
     }
+salvage-expedition-megafauna-remaining = { $count } мегафауны остаётся.
 salvage-expedition-window-title = Экспедиции
 salvage-expedition-window-difficulty = Сложность:
 salvage-expedition-window-details = Подробности:
@@ -24,8 +25,10 @@ salvage-expedition-desc-structure =
         [one] Уничтожить { $count } { $structure } в районе.
        *[other] Уничтожить { $count } { $structure } в районе.
     }
+salvage-expedition-desc-elimination = Убейте большое и опасное существо внутри области.
 salvage-expedition-type-Mining = Добыча полезных ископаемых
 salvage-expedition-type-Destruction = Уничтожение
+salvage-expedition-type-Elimination = Ликвидация
 salvage-expedition-difficulty-Minimal = Минимальная
 salvage-expedition-difficulty-Minor = Незначительная
 salvage-expedition-difficulty-Moderate = Умеренная
