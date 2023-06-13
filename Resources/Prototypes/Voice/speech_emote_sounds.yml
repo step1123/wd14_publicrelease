@@ -26,12 +26,6 @@
       collection: Snores
     Honk:
       collection: BikeHorn
-    Sigh:
-      collection: MaleSigh
-    Crying:
-      collection: MaleCry
-    Whistle:
-      collection: Whistles
 
 - type: emoteSounds
   id: FemaleHuman
@@ -60,12 +54,6 @@
       collection: Snores
     Honk:
       collection: CluwneHorn
-    Sigh:
-      collection: FemaleSigh
-    Crying:
-      collection: FemaleCry
-    Whistle:
-      collection: Whistles
 
 - type: emoteSounds
   id: MaleFelinid
@@ -118,10 +106,6 @@
       path: /Audio/Animals/lizard_happy.ogg
     Honk:
       collection: BikeHorn
-    Whistle:
-      collection: Whistles
-    Crying:
-      collection: MaleCry
 
 - type: emoteSounds
   id: UnisexSlime
@@ -170,10 +154,6 @@
       collection: MaleLaugh
     Honk:
       collection: BikeHorn
-    Crying:
-      collection: MaleCry
-    Whistle:
-      collection: Whistles
   params:
     variation: 0.125
     pitchscale: 0.75
@@ -188,8 +168,6 @@
       collection: Snaps
       params:
         volume: -6
-    Salute:
-      collection: Salutes
 
 - type: emoteSounds
   id: DionaBodyEmotes

@@ -68,7 +68,7 @@ namespace Content.Client.Preferences.UI
         private LineEdit _nameClownEdit => CClownNameEdit;
         private LineEdit _nameMimeEdit => CMimeNameEdit;
         private LineEdit _nameBorgEdit => CBorgNameEdit;
-        private LineEdit _flavorTextEdit = null!;
+        private TextEdit _flavorTextEdit = null!;
         private Button _nameRandomButton => CNameRandomize;
         private Button _nameClownRandomButton => CClownNameRandomize;
         private Button _nameMimeRandomButton => CMimeNameRandomize;
@@ -998,7 +998,7 @@ namespace Content.Client.Preferences.UI
         {
             if(_flavorTextEdit != null)
             {
-                _flavorTextEdit.Text = Profile?.FlavorText ?? "";
+                _flavorTextEdit.TextRope = new Rope.Leaf(Profile?.FlavorText ?? "");
             }
         }
 

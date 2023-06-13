@@ -361,7 +361,7 @@ namespace Content.Client.Examine
             _lastExaminedEntity = entity;
         }
 
-        private void CloseTooltip()
+        public void CloseTooltip()
         {
             if (_examineTooltipOpen != null)
             {

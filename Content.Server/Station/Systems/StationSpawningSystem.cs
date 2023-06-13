@@ -1,5 +1,4 @@
 using Content.Server.Access.Systems;
-using Content.Server.DetailExaminable;
 using Content.Server.Hands.Systems;
 using Content.Server.Humanoid;
 using Content.Server.IdentityManagement;
@@ -18,6 +17,7 @@ using Content.Shared.Preferences;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Roles;
+using Content.Shared.White.CharacterExamine;
 using JetBrains.Annotations;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
@@ -156,7 +156,9 @@ public sealed class StationSpawningSystem : EntitySystem
             MetaData(entity.Value).EntityName = profile.Name;
             if (profile.FlavorText != "" && _configurationManager.GetCVar(CCVars.FlavorText))
             {
-                AddComp<DetailExaminableComponent>(entity.Value).Content = profile.FlavorText;
+                var detail = AddComp<DetailExaminableComponent>(entity.Value);
+                detail.Content = profile.FlavorText;
+                Dirty(detail);
             }
         }
 

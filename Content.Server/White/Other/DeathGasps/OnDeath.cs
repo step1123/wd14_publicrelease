@@ -1,12 +1,10 @@
 ﻿using Content.Server.Chat.Systems;
-using Content.Server.Ghost.Components;
-using Content.Shared.Humanoid;
 using Content.Shared.Mobs;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Random;
 
-namespace Content.Server.White.Other;
+namespace Content.Server.White.Other.DeathGasps;
 
 public sealed class OnDeath : EntitySystem
 {
@@ -16,8 +14,8 @@ public sealed class OnDeath : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<HumanoidAppearanceComponent, MobStateChangedEvent>(HandleDeathEvent);
-        SubscribeLocalEvent<HumanoidAppearanceComponent, PlayerDetachedEvent>(OnDetach);
+        SubscribeLocalEvent<DeathGaspsComponent, MobStateChangedEvent>(HandleDeathEvent);
+        SubscribeLocalEvent<DeathGaspsComponent, PlayerDetachedEvent>(OnDetach);
     }
 
     private readonly Dictionary<EntityUid, IPlayingAudioStream> _playingStreams = new();
@@ -30,7 +28,7 @@ public sealed class OnDeath : EntitySystem
         "death-gasp-normal"
     };
 
-    private void HandleDeathEvent(EntityUid uid, HumanoidAppearanceComponent component, MobStateChangedEvent args)
+    private void HandleDeathEvent(EntityUid uid, DeathGaspsComponent component, MobStateChangedEvent args)
     {
         //^.^
         switch (args.NewMobState)
@@ -91,7 +89,7 @@ public sealed class OnDeath : EntitySystem
     private void PlayDeathSound(EntityUid uid)
         => _audio.PlayEntity(DeathSounds, uid, uid, AudioParams.Default);
 
-    private void OnDetach(EntityUid uid, HumanoidAppearanceComponent component, PlayerDetachedEvent args)
+    private void OnDetach(EntityUid uid, DeathGaspsComponent component, PlayerDetachedEvent args)
         => StopPlayingStream(args.Entity);
 
 

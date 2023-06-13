@@ -1,4 +1,4 @@
-﻿namespace Content.Server.DetailExaminable
+﻿/*namespace Content.Server.DetailExaminable
 {
     [RegisterComponent]
     public sealed class DetailExaminableComponent : Component
@@ -7,3 +7,4 @@
         public string Content = "";
     }
 }
+*/
