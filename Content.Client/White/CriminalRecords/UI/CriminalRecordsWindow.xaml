@@ -1,0 +1,99 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+               xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+               xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+               xmlns:controls="clr-namespace:Content.Client.White.CriminalRecords.UI.Controls"
+               xmlns:uicontrols="clr-namespace:Content.Client.UserInterface.Controls"
+               Title="{Loc 'criminal-console-name'}"
+               MinSize="625 500"
+               Resizable="False">
+    <BoxContainer Access="Public" Name="NonAccessContent" Orientation="Vertical" VerticalAlignment="Center" VerticalExpand="True" HorizontalExpand="True">
+        <BoxContainer Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <RichTextLabel Access="Public" HorizontalAlignment="Center" Name="LoginHint" HorizontalExpand="True" VerticalExpand="True"
+                           MaxWidth="400" Margin="10 0 0 0"/>
+            <controls:RecordIconButton
+                Name="LogInButton"
+                Access="Public"
+                HorizontalAlignment="Center"
+                Icon="/Textures/Interface/VerbIcons/close.svg.192dpi.png"
+                Label="{Loc 'criminal-login-in'}"
+                Margin="10 0 10 0">
+            </controls:RecordIconButton>
+        </BoxContainer>
+    </BoxContainer>
+    <BoxContainer Access="Public" Name="MainContent" Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
+        <uicontrols:StripeBack HasBottomEdge="True" HasMargins="False" HorizontalExpand="True">
+            <BoxContainer Orientation="Horizontal">
+                <RichTextLabel Access="Public"
+                               HorizontalExpand="True"
+                               Name="UserLabel"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Margin="10 0 10 0"/>
+                <controls:RecordIconButton
+                    Name="LogOutButton"
+                    Access="Public"
+                    HorizontalAlignment="Right"
+                    Icon="/Textures/Interface/VerbIcons/close.svg.192dpi.png"
+                    Label="{Loc 'criminal-login-out'}"
+                    Margin="10 0 10 0">
+                </controls:RecordIconButton>
+            </BoxContainer>
+        </uicontrols:StripeBack>
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True">
+            <!-- Persons list (chars) -->
+            <BoxContainer Orientation="Vertical"
+                          VerticalExpand="True"
+                          HorizontalExpand="True"
+                          HorizontalAlignment="Left"
+                          SizeFlagsStretchRatio="2"
+                          Margin="10 0 10 10"
+                          MinWidth="175"
+                          MaxWidth="175">
+                <Label Text="{Loc 'criminal-console-list'}" HorizontalAlignment="Center"/>
+                <customControls:HSeparator StyleClasses="LowDivider" Margin="0 0 0 10"/>
+                <PanelContainer VerticalExpand="True">
+                    <PanelContainer.PanelOverride>
+                        <gfx:StyleBoxFlat BackgroundColor="#1B1B1E" />
+                    </PanelContainer.PanelOverride>
+                    <ScrollContainer
+                        HScrollEnabled="False"
+                        HorizontalExpand="True"
+                        VerticalExpand="True">
+                        <BoxContainer
+                            Name="RecordsListContainer"
+                            Access="Public"
+                            Orientation="Vertical"
+                            VerticalExpand="True">
+                        </BoxContainer>
+                    </ScrollContainer>
+                </PanelContainer>
+            </BoxContainer>
+            <!-- Character info -->
+            <BoxContainer Orientation="Vertical"
+                          VerticalExpand="True"
+                          HorizontalExpand="True"
+                          SizeFlagsStretchRatio="3"
+                          Margin="0 0 10 10">
+                <PanelContainer VerticalExpand="True" MinSize="0 200">
+                    <PanelContainer.PanelOverride>
+                        <gfx:StyleBoxFlat BackgroundColor="#1B1B1E" />
+                    </PanelContainer.PanelOverride>
+                    <ScrollContainer
+                        HScrollEnabled="False"
+                        HorizontalExpand="True"
+                        SizeFlagsStretchRatio="2"
+                        VerticalExpand="True">
+                        <BoxContainer
+                            Name="RecordCardContainer"
+                            Access="Public"
+                            MinSize="100 256"
+                            Orientation="Vertical"
+                            SizeFlagsStretchRatio="2"
+                            VerticalExpand="True">
+                        </BoxContainer>
+                    </ScrollContainer>
+                </PanelContainer>
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</DefaultWindow>

@@ -1,0 +1,73 @@
+- type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  id: CriminalRecordsServer
+  name: criminal records server
+  description: When powered and filled with encryption keys it allows radio headset communication.
+  components:
+  - type: Sprite
+    sprite: White/Structures/Machines/criminal_record_server.rsi
+    snapCardinals: true
+    netsync: false
+    layers:
+    - state: icon
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Appearance
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Machine
+    board: CriminalRecordsServerCircuitboard
+  - type: WiresPanel
+  - type: Wires
+    BoardName: "CriminalRecordsServer"
+    LayoutId: CriminalRecordsServer
+  - type: Transform
+    anchored: true
+  - type: Pullable
+  - type: CriminalRecordsServer
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+
+- type: entity
+  id: CriminalRecordsServerCircuitboard
+  parent: BaseMachineCircuitboard
+  name: criminal records server machine board
+  description: A machine printed circuit board for an telecommunication server.
+  components:
+    - type: MachineBoard
+      prototype: CriminalRecordsServer
+      materialRequirements:
+        Steel: 1
+        Cable: 2

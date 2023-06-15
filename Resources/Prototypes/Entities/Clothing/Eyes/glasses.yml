@@ -130,6 +130,7 @@
   - type: ClothingGrantComponent
     component:
     - type: ShowJobInfo
+    - type: ShowCrimeRecords
 
 - type: entity
   parent: ClothingEyesBase

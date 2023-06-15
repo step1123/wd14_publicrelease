@@ -1,0 +1,31 @@
+<controls:RecordItem xmlns="https://spacestation14.io"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:controls="clr-namespace:Content.Client.White.CriminalRecords.UI.Controls"
+                     x:Class="Content.Client.White.CriminalRecords.UI.Controls.RecordItem">
+
+    <BoxContainer MaxHeight="25" Orientation="Horizontal">
+        <PanelContainer
+            Name="SideLineElement"
+            Access="Public"
+            StyleClasses="PDABackground"
+            MaxWidth="10"
+            VerticalExpand="False"
+            HorizontalExpand="False"
+            Margin="0 0 -5 0"/>
+        <Button
+            Name="ButtonElement"
+            Access="Public"
+            HorizontalExpand="True"
+            VerticalExpand="False"
+            ToolTip="foobar"
+            TooltipDelay="0.25">
+            <BoxContainer Orientation="Horizontal" Margin="0">
+                <RichTextLabel Access="Public"
+                               HorizontalExpand="True"
+                               Name="NameLabel"
+                               StyleClasses="LabelSubText"
+                               VerticalAlignment="Center"/>
+            </BoxContainer>
+        </Button>
+    </BoxContainer>
+</controls:RecordItem>

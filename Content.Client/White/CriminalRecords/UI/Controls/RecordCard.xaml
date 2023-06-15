@@ -1,0 +1,74 @@
+<controls:RecordCard xmlns="https://spacestation14.io"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                     xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+                     xmlns:controls="clr-namespace:Content.Client.White.CriminalRecords.UI.Controls"
+                     x:Class="Content.Client.White.CriminalRecords.UI.Controls.RecordCard">
+
+    <BoxContainer Name="MainContainer" Orientation="Vertical" Margin="10 10 10 10">
+        <!-- Header line -->
+        <PanelContainer
+            Name="SideLineElement"
+            Access="Public"
+            StyleClasses="PDABackground"
+            MinHeight="25"
+            VerticalExpand="False"
+            HorizontalExpand="True"
+            Margin="0 0 0 -5"/>
+        <!-- Header info -->
+        <PanelContainer VerticalExpand="True" HorizontalExpand="True" >
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BackgroundColor="#1e1c29" />
+            </PanelContainer.PanelOverride>
+            <BoxContainer Orientation="Vertical"
+                          VerticalExpand="True"
+                          Margin="5">
+                <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                    <SpriteView Name="ViewIcon"
+                                Access="Public"
+                                Scale="2 2"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalAlignment="Center" Margin="10 0 0 0">
+                        <BoxContainer Orientation="Horizontal">
+                            <Label Access="Public" Name="CharacterNameLabel" Text="empty-element" StyleClasses="LabelKeyText" HorizontalExpand="True"/>
+                            <TextureRect Access="Public" Name="JobIcon" TextureScale="3 3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        </BoxContainer>
+                        <customControls:HSeparator StyleClasses="LowDivider" Margin="0 5 0 5"/>
+                        <BoxContainer Orientation="Horizontal">
+                            <!-- <RichTextLabel Access="Public" Name="StatusLabel" HorizontalAlignment="Left" StyleClasses="LabelSubText" HorizontalExpand="True"/> -->
+                            <OptionButton Access="Public" Name="StatusOption" MinWidth="120"/>
+                        </BoxContainer>
+                    </BoxContainer>
+                </BoxContainer>
+
+                <!-- Main Info -->
+                <Control MinHeight="5"></Control>
+                <RichTextLabel Access="Public" Name="DetailLabel" HorizontalExpand="True" StyleClasses="LabelSubText" Margin="10 0 0 0"></RichTextLabel>
+                <Control MinHeight="5"></Control>
+                <BoxContainer Orientation="Vertical" Margin="10 0 0 0">
+                    <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                        <PanelContainer VerticalExpand="True" HorizontalExpand="True">
+                            <Label Text="{Loc 'criminal-detail-info'}" HorizontalAlignment="Left"/>
+                            <TextureButton Access="Public" Name="EditReason"
+                                           TexturePath="/Textures/Interface/pencil.png"
+                                           HorizontalAlignment="Right"></TextureButton>
+                        </PanelContainer>
+                    </BoxContainer>
+                    <customControls:HSeparator StyleClasses="LowDivider" Margin="0 0 0 10"/>
+                </BoxContainer>
+                <!-- Reason info -->
+                <RichTextLabel Visible="True" Access="Public" Name="ReasonWritten" HorizontalExpand="True" VerticalExpand="True"
+                               MinHeight="100" Margin="10 0 0 0"/>
+                <PanelContainer Visible="False" Access="Public" Name="InputContainer"
+                                StyleClasses="TransparentBorderedWindowPanel" MinHeight="100" Margin="10 0 0 0"
+                                VerticalAlignment="Stretch" VerticalExpand="True" HorizontalExpand="True">
+                    <TextEdit Name="Input" Access="Public" VerticalExpand="True" HorizontalExpand="True" />
+                </PanelContainer>
+                <BoxContainer Orientation="Vertical" Margin="10 0 0 0">
+                    <customControls:HSeparator StyleClasses="LowDivider" Margin="0 0 0 10"/>
+                </BoxContainer>
+            </BoxContainer>
+        </PanelContainer>
+    </BoxContainer>
+</controls:RecordCard>

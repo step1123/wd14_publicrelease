@@ -1,0 +1,28 @@
+<!-- close.svg.192dpi -->
+<controls:RecordIconButton xmlns="https://spacestation14.io"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:controls="clr-namespace:Content.Client.White.CriminalRecords.UI.Controls"
+                           x:Class="Content.Client.White.CriminalRecords.UI.Controls.RecordIconButton">
+
+    <BoxContainer Orientation="Horizontal">
+        <Button
+            Name="Controller"
+            Access="Public"
+            HorizontalExpand="True"
+            VerticalExpand="False"
+            ToolTip="foobar"
+            TooltipDelay="0.25">
+            <BoxContainer Orientation="Horizontal" >
+                <TextureRect Access="Public" Name="LIcon"
+                             MaxWidth="24"
+                             MaxHeight="24"
+                             VerticalAlignment="Center" HorizontalAlignment="Left" Stretch="KeepAspectCentered" />
+                <RichTextLabel Access="Public"
+                               HorizontalExpand="True"
+                               Name="LLabel"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"/>
+            </BoxContainer>
+        </Button>
+    </BoxContainer>
+</controls:RecordIconButton>
