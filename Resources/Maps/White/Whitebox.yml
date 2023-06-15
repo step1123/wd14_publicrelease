@@ -7530,7 +7530,7 @@ entities:
     - type: OccluderTree
     - type: Shuttle
     - type: RadiationGridResistance
-      type: GravityShake
+    - type: GravityShake
     - type: GasTileOverlay
   - uid: 11906
     components:
