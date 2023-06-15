@@ -7529,15 +7529,9 @@ entities:
       type: Joint
     - type: OccluderTree
     - type: Shuttle
-    - nextUpdate: 5417.8279988
-      type: GridPathfinding
     - type: RadiationGridResistance
-    - nextShake: 0
-      shakeTimes: 10
       type: GravityShake
     - type: GasTileOverlay
-    - nextUpdate: 0
-      type: SpreaderGrid
   - uid: 11906
     components:
     - type: MetaData
@@ -7583,11 +7577,7 @@ entities:
       type: Joint
     - type: OccluderTree
     - type: Shuttle
-    - nextUpdate: 47.0665638
-      type: GridPathfinding
     - type: RadiationGridResistance
-    - nextUpdate: 0
-      type: SpreaderGrid
 - proto: AcousticGuitarInstrument
   entities:
   - uid: 7161
@@ -14141,8 +14131,6 @@ entities:
     - pos: 31.489525,-32.317123
       parent: 8364
       type: Transform
-    - nextAttack: 750.9046614
-      type: MeleeWeapon
   - uid: 21180
     components:
     - pos: 74.27338,-18.287746
@@ -14548,8 +14536,6 @@ entities:
       type: MetaData
     - parent: 20886
       type: Transform
-    - nextAttack: 3063.5165265
-      type: MeleeWeapon
     - canCollide: False
       type: Physics
     - type: InsideEntityStorage
@@ -144994,8 +144980,6 @@ entities:
     - pos: -10.088213,9.755057
       parent: 8364
       type: Transform
-    - nextAttack: 1188.9447201
-      type: MeleeWeapon
   - uid: 26848
     components:
     - pos: -12.493954,3.065948
@@ -149080,8 +149064,6 @@ entities:
     - pos: 54.482033,-24.522997
       parent: 8364
       type: Transform
-    - nextAttack: 4442.2490056
-      type: MeleeWeapon
   - uid: 25977
     components:
     - pos: 24.446787,-32.484436
@@ -162839,8 +162821,6 @@ entities:
     - pos: 39.535873,-18.379318
       parent: 8364
       type: Transform
-    - nextAttack: 4724.4472423
-      type: MeleeWeapon
   - uid: 21416
     components:
     - pos: 79.5,-47.5
@@ -173859,8 +173839,6 @@ entities:
     - pos: 22.5,-21.5
       parent: 8364
       type: Transform
-    - nextEmpEject: 791.7830475
-      type: VendingMachine
 - proto: VendingMachineCigs
   entities:
   - uid: 940
@@ -174236,8 +174214,6 @@ entities:
     - pos: 56.5,-24.5
       parent: 8364
       type: Transform
-    - nextEmpEject: 699.7160408
-      type: VendingMachine
 - proto: VendingMachineSalvage
   entities:
   - uid: 21793
