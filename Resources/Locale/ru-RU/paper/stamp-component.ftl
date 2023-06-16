@@ -1,5 +1,6 @@
 stamp-component-stamped-name-default = Очень важная персона
 stamp-component-stamped-name-mime = Мим
+stamp-component-stamped-name-lawyer = Юрист
 stamp-component-stamped-name-captain = Капитан
 stamp-component-stamped-name-centcom = Центком
 stamp-component-stamped-name-chaplain = Священник

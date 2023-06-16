@@ -383,6 +383,21 @@
     size: 3
 
 - type: entity
+  name: lawyer's rubber stamp
+  parent: BaseItem
+  id: RubberStampLawyer
+  description: A rubber stamp for stamping important documents.
+  components:
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-lawyer
+    stampState: "paper_stamp-lawyer"
+  - type: Sprite
+    sprite: Objects/Misc/bureaucracy.rsi
+    state: stamp-lawyer
+  - type: Item
+    size: 3
+
+- type: entity
   name: captain's rubber stamp
   parent: RubberStampMime
   id: RubberStampCaptain

@@ -296,6 +296,12 @@
     {
       "name": "stamp-warden"
     },
+      {
+          "name": "stamp-lawyer"
+      },
+      {
+          "name": "paper_stamp-lawyer"
+      },
     {
       "name": "clipboard-equipped-BELT",
       "directions": 4
