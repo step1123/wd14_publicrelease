@@ -123,3 +123,6 @@
     stripTimeReduction: 9999
     stealthy: true
   - type: Stripping
+  - type: ShowCrimeRecords
+  - type: ShowHealthBars
+  - type: ShowJobInfo

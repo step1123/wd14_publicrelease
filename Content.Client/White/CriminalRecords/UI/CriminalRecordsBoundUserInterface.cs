@@ -26,6 +26,10 @@ public sealed class CriminalRecordsBoundUserInterface : BoundUserInterface
         {
             SendMessage(new ItemSlotButtonPressedEvent(CriminalRecordsConsoleComponent.IdSlotId));
         };
+        _window.NonLogOutButton.Controller.OnPressed += _ =>
+        {
+            SendMessage(new ItemSlotButtonPressedEvent(CriminalRecordsConsoleComponent.IdSlotId));
+        };
         _window.LogInButton.Controller.OnPressed += _ =>
         {
             SendMessage(new ItemSlotButtonPressedEvent(CriminalRecordsConsoleComponent.IdSlotId));

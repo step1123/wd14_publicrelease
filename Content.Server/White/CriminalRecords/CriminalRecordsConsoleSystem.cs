@@ -86,7 +86,10 @@ public sealed class CriminalRecordsConsoleSystem : EntitySystem
         RaiseLocalEvent(hasServer);
 
         if (!hasServer.Result)
+        {
+            UpdateUserInterface(uid, component);
             return;
+        }
 
         var ev = new EventChangeReason(msg.SelectedKey, msg.Text);
         RaiseLocalEvent(ev);
@@ -104,7 +107,10 @@ public sealed class CriminalRecordsConsoleSystem : EntitySystem
         RaiseLocalEvent(hasServer);
 
         if (!hasServer.Result)
+        {
+            UpdateUserInterface(uid, component);
             return;
+        }
 
         var messageId = "null";
         switch (msg.SelectedStatus.CriminalType)
@@ -166,7 +172,7 @@ public sealed class CriminalRecordsConsoleSystem : EntitySystem
 
         if (!TryComp<StationRecordsComponent>(owningStation, out var stationRecordsComponent))
         {
-            CriminalRecordsConsoleBuiState state = new(null, null, null, null, null, false); //null
+            CriminalRecordsConsoleBuiState state = new(null, null, null, null, null, false, false); //null
             SetStateForInterface(uid, state);
             return;
         }
@@ -183,7 +189,7 @@ public sealed class CriminalRecordsConsoleSystem : EntitySystem
 
         if (listing.Count == 0)
         {
-            CriminalRecordsConsoleBuiState state = new(null, null, null, null, null, false); //console!.Filter
+            CriminalRecordsConsoleBuiState state = new(null, null, null, null, null, false, false); //console!.Filter
             SetStateForInterface(uid, state);
             return;
         }
@@ -202,9 +208,12 @@ public sealed class CriminalRecordsConsoleSystem : EntitySystem
         var serverEv = new EventGetCache();
         RaiseLocalEvent(serverEv);
 
+        var hasServer = new EventCheckServer();
+        RaiseLocalEvent(hasServer);
+
         var idCardInfo = console.ContainedID != null ? new IdCardNetInfo(console.ContainedID.FullName, console.ContainedID.JobTitle) : null;
 
-        CriminalRecordsConsoleBuiState newState = new(console.ActiveKey, record, listing, serverEv.Cache, idCardInfo, AccessCheck(console.ContainedID)); //console.Filter
+        CriminalRecordsConsoleBuiState newState = new(console.ActiveKey, record, listing, serverEv.Cache, idCardInfo, AccessCheck(console.ContainedID), hasServer.Result); //console.Filter
         SetStateForInterface(uid, newState);
     }
 

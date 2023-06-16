@@ -16,9 +16,39 @@
                 HorizontalAlignment="Center"
                 Icon="/Textures/Interface/VerbIcons/close.svg.192dpi.png"
                 Label="{Loc 'criminal-login-in'}"
+                ToolTip="{Loc 'criminal-login-in-desc'}"
                 Margin="10 0 10 0">
             </controls:RecordIconButton>
         </BoxContainer>
+    </BoxContainer>
+    <BoxContainer Access="Public" Name="NonServerContent" Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
+        <uicontrols:StripeBack HasBottomEdge="True" HasMargins="False" HorizontalExpand="True">
+            <BoxContainer Orientation="Horizontal">
+                <RichTextLabel Access="Public"
+                               HorizontalExpand="True"
+                               Name="NonUserLabel"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Margin="10 0 10 0"/>
+                <controls:RecordIconButton
+                    Name="NonLogOutButton"
+                    Access="Public"
+                    HorizontalAlignment="Right"
+                    Icon="/Textures/Interface/VerbIcons/close.svg.192dpi.png"
+                    Label="{Loc 'criminal-login-out'}"
+                    ToolTip="{Loc 'criminal-login-out-desc'}"
+                    Margin="10 0 10 0">
+                </controls:RecordIconButton>
+            </BoxContainer>
+        </uicontrols:StripeBack>
+        <TextureRect Access="Public"
+                     VerticalExpand="True"
+                     HorizontalExpand="True"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                     MinSize="500 500"
+                     Visible="False"
+                     Name="NoiseBackground" />
     </BoxContainer>
     <BoxContainer Access="Public" Name="MainContent" Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
         <uicontrols:StripeBack HasBottomEdge="True" HasMargins="False" HorizontalExpand="True">
@@ -35,6 +65,7 @@
                     HorizontalAlignment="Right"
                     Icon="/Textures/Interface/VerbIcons/close.svg.192dpi.png"
                     Label="{Loc 'criminal-login-out'}"
+                    ToolTip="{Loc 'criminal-login-out-desc'}"
                     Margin="10 0 10 0">
                 </controls:RecordIconButton>
             </BoxContainer>

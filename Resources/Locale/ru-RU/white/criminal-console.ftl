@@ -2,8 +2,12 @@ criminal-console-list = Список экипажа
 criminal-console-name = консоль криминальных записей
 criminal-grant-status-button-name = Статус
 
+criminal-list-focus = Нажмите для редактирования
+
 criminal-login-out = Log Out
+criminal-login-out-desc = Выйти
 criminal-login-in = Log In
+criminal-login-in-desc = Войти
 criminal-login-info = ID: {$user}
 criminal-login-hint = Вставьте ID карту в консоль, нажав на "{$name}" (нужно держать ID карту в руке)
 criminal-login-warn = WARNING: Доступ к системе осуществляется уровнем доступа "службы безопасности"
@@ -36,4 +40,7 @@ criminal-fingerprint-desc = - [color={$color}]{$info}[/color]
 criminal-detail-info = Заметка:
 
 ent-CriminalRecordsServer = сервер криминальных записей
-    .desc = Содержит все преступные записи об экипажа на станции. Не дайте злоумышлиникам уничтожить его!
+    .desc = Содержит все преступные записи об экипаже на станции. Не дайте злоумышлиникам уничтожить его!
+
+ent-CriminalRecordsServerCircuitboard = схема платы сервера криминальных записей
+    .desc = Если сломали старый, постройте новый!
