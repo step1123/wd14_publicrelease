@@ -802,6 +802,9 @@
 - type: Tag
   id: Crystal
 
+- type: Tag
+  id: ZombifyableByMelee
+
 # WHITE END
 
 - type: Tag

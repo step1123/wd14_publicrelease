@@ -771,14 +771,6 @@
 
 #gloves
 - type: listing
-  id: MeatyClothingHandsGlovesIhscombat
-  productEntity: ClothingHandsGlovesIhscombat
-  cost:
-    MeatyOreCoin: 2
-  categories:
-    - MeatyOreGloves
-
-- type: listing
   id: MeatyClothingHandsGlovesLatex
   productEntity: ClothingHandsGlovesLatex
   cost:

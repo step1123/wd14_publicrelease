@@ -14,6 +14,7 @@ using Content.Shared.Damage;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Zombies;
 using Robust.Shared.Prototypes;
@@ -35,6 +36,9 @@ namespace Content.Server.Zombies
         [Dependency] private readonly AutoEmoteSystem _autoEmote = default!;
         [Dependency] private readonly EmoteOnDamageSystem _emoteOnDamage = default!;
         [Dependency] private readonly HumanoidAppearanceSystem _humanoidSystem = default!;
+        [Dependency] private readonly TagSystem _tag = default!;
+
+        private const string ZombifyableTag = "ZombifyableByMelee";
 
         public override void Initialize()
         {
@@ -164,6 +168,9 @@ namespace Content.Server.Zombies
                     continue;
 
                 if (!TryComp<MobStateComponent>(entity, out var mobState) || HasComp<DroneComponent>(entity))
+                    continue;
+
+                if(!_tag.HasTag(entity, ZombifyableTag))
                     continue;
 
                 if (_random.Prob(GetZombieInfectionChance(entity, component)))
