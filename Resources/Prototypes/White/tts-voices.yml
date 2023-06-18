@@ -46,14 +46,56 @@
   sex: Male
   speaker: biden
 
-- type: ttsVoice
-  id: Ddr2
-  name: tts-voice-name-ddr2
-  sex: Male
-  speaker: ddr2
+#- type: ttsVoice
+#  id: Ddr2
+#  name: tts-voice-name-ddr2
+#  sex: Male
+#  speaker: ddr2
 
 - type: ttsVoice
   id: Papa
   name: tts-voice-name-papa
   sex: Male
   speaker: papa
+
+- type: ttsVoice
+  id: Mykyta
+  name: tts-voice-name-mykyta
+  sex: Male
+  speaker: mykyta
+
+- type: ttsVoice
+  id: Glados
+  name: tts-voice-name-glados
+  sex: Female
+  speaker: glados
+
+- type: ttsVoice
+  id: Sentrybot
+  name: tts-voice-name-sentrybot
+  sex: Male
+  speaker: sentrybot
+
+- type: ttsVoice
+  id: Mana
+  name: tts-voice-name-mana
+  sex: Female
+  speaker: mana
+
+- type: ttsVoice
+  id: Soldier
+  name: tts-voice-name-soldier
+  sex: Male
+  speaker: soldier
+
+- type: ttsVoice
+  id: Planya
+  name: tts-voice-name-planya
+  sex: Female
+  speaker: planya
+
+- type: ttsVoice
+  id: Amina
+  name: tts-voice-name-amina
+  sex: Female
+  speaker: amina
