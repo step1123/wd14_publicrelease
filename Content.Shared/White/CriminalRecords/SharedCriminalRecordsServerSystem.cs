@@ -1,9 +1,11 @@
 using Content.Shared.StationRecords;
+using JetBrains.Annotations;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.White.CriminalRecords;
 
-public sealed class CriminalRecordsServerSystem: EntitySystem
+[PublicAPI]
+public class SharedCriminalRecordsServerSystem: EntitySystem
 {
     public override void Initialize()
     {

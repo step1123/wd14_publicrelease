@@ -70,28 +70,16 @@ public sealed class EntityCrimeRecordsOverlay : Overlay
 
             if (GetRecord(hum.Owner, args.MapId, out var criminalType))
             {
-                var icon = "released";
-                switch (criminalType)
+                var icon = criminalType switch
                 {
-                    case EnumCriminalRecordType.Released:
-                        icon = "released";
-                        break;
-                    case EnumCriminalRecordType.Discharged:
-                        icon = "discharged";
-                        break;
-                    case EnumCriminalRecordType.Parolled:
-                        icon = "parolled";
-                        break;
-                    case EnumCriminalRecordType.Suspected:
-                        icon = "suspected";
-                        break;
-                    case EnumCriminalRecordType.Wanted:
-                        icon = "wanted";
-                        break;
-                    case EnumCriminalRecordType.Incarcerated:
-                        icon = "incarcerated";
-                        break;
-                }
+                    EnumCriminalRecordType.Released => "released",
+                    EnumCriminalRecordType.Discharged => "discharged",
+                    EnumCriminalRecordType.Parolled => "parolled",
+                    EnumCriminalRecordType.Suspected => "suspected",
+                    EnumCriminalRecordType.Wanted => "wanted",
+                    EnumCriminalRecordType.Incarcerated => "incarcerated",
+                    _ => "released"
+                };
 
                 var sprite_icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/White/Interface/records.rsi"), icon);
                 var _iconTexture = _entManager.EntitySysManager.GetEntitySystem<SpriteSystem>().Frame0(sprite_icon);
