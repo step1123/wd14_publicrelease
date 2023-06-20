@@ -209,11 +209,14 @@ namespace Content.Server.GameTicking
             var metadata = MetaData(mob);
 
             if (job.Prototype.ID.Contains("Clown"))
-                metadata.EntityName = newMind.ClownName;
+                if (newMind.ClownName != null)
+                    metadata.EntityName = newMind.ClownName;
             if (job.Prototype.ID.Contains("Mime"))
-                metadata.EntityName = newMind.MimeName;
+                if (newMind.MimeName != null)
+                    metadata.EntityName = newMind.MimeName;
             if (job.Prototype.ID.Contains("Cyborg"))
-                metadata.EntityName = newMind.BorgName;
+                if (newMind.BorgName != null)
+                    metadata.EntityName = newMind.BorgName;
 
             _mindSystem.TransferTo(newMind, mob);
 

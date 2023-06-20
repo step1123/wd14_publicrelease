@@ -7644,6 +7644,8 @@ entities:
     - type: Shuttle
     - type: GasTileOverlay
     - type: RadiationGridResistance
+    - nextUpdate: 0
+      type: SpreaderGrid
 - proto: AcousticGuitarInstrument
   entities:
   - uid: 12657
@@ -13524,6 +13526,8 @@ entities:
     - pos: -15.644806,-26.365438
       parent: 5350
       type: Transform
+    - nextAttack: 1374.3738653
+      type: MeleeWeapon
   - uid: 16484
     components:
     - pos: -54.463097,-54.219025
@@ -74568,6 +74572,8 @@ entities:
       pos: -9.5,-33.5
       parent: 5350
       type: Transform
+    - nextAttack: 3609.3286078
+      type: MeleeWeapon
 - proto: ChairFoldingSpawnFolded
   entities:
   - uid: 24159
@@ -75460,21 +75466,29 @@ entities:
     - pos: -15.650829,-22.419653
       parent: 5350
       type: Transform
+    - nextAttack: 2104.5674098
+      type: MeleeWeapon
   - uid: 14385
     components:
     - pos: -15.525829,-22.169653
       parent: 5350
       type: Transform
+    - nextAttack: 2105.0638582
+      type: MeleeWeapon
   - uid: 14857
     components:
     - pos: -15.400829,-22.419653
       parent: 5350
       type: Transform
+    - nextAttack: 2107.2619066
+      type: MeleeWeapon
   - uid: 14858
     components:
     - pos: -15.291454,-22.138403
       parent: 5350
       type: Transform
+    - nextAttack: 2108.9662715
+      type: MeleeWeapon
 - proto: ChemistryHotplate
   entities:
   - uid: 16075
@@ -81948,11 +81962,15 @@ entities:
     - pos: -35.546013,-49.426834
       parent: 5350
       type: Transform
+    - nextUpdate: 27.5632284
+      type: PowerCellDraw
   - uid: 18423
     components:
     - pos: -25.546011,-49.44246
       parent: 5350
       type: Transform
+    - nextUpdate: 28.9164612
+      type: PowerCellDraw
 - proto: DefibrillatorCabinetFilled
   entities:
   - uid: 5343
@@ -82039,6 +82057,8 @@ entities:
     - pos: -8.590656,-27.399559
       parent: 5350
       type: Transform
+    - nextAttack: 3033.0467846
+      type: MeleeWeapon
 - proto: DiceBag
   entities:
   - uid: 2761
@@ -136130,7 +136150,7 @@ entities:
     - pos: 29.558147,-58.540123
       parent: 5350
       type: Transform
-- proto: HatBandGold
+- proto: ClothingHeadBandGold
   entities:
   - uid: 24777
     components:
@@ -136395,6 +136415,8 @@ entities:
     - pos: 42.042435,37.355846
       parent: 5350
       type: Transform
+    - nextAttack: 1342.3605519
+      type: MeleeWeapon
 - proto: hydroponicsTray
   entities:
   - uid: 3073
@@ -137401,6 +137423,8 @@ entities:
     - pos: -15.441681,-26.256063
       parent: 5350
       type: Transform
+    - nextAttack: 1376.471092
+      type: MeleeWeapon
   - uid: 16481
     components:
     - pos: -54.57247,-49.0741
@@ -140770,6 +140794,8 @@ entities:
     - pos: -6.50108,-35.54017
       parent: 5350
       type: Transform
+    - nextAttack: 3595.5228284
+      type: MeleeWeapon
 - proto: NuclearBomb
   entities:
   - uid: 1933
@@ -156594,11 +156620,15 @@ entities:
       pos: -43.5,27.5
       parent: 5350
       type: Transform
+    - nextChargeTime: 287.513468
+      type: SolutionRegeneration
   - uid: 6157
     components:
     - pos: -22.5,-22.5
       parent: 5350
       type: Transform
+    - nextChargeTime: 2466.2628163
+      type: SolutionRegeneration
   - uid: 12696
     components:
     - rot: -1.5707963267948966 rad
@@ -156726,6 +156756,8 @@ entities:
     - pos: 25.5,-15.5
       parent: 5350
       type: Transform
+    - nextChargeTime: 2452.9494029
+      type: SolutionRegeneration
   - uid: 16796
     components:
     - rot: 1.5707963267948966 rad
@@ -165497,6 +165529,8 @@ entities:
     - pos: -23.5,-22.5
       parent: 5350
       type: Transform
+    - nextEmpEject: 1783.2015653
+      type: VendingMachine
 - proto: VendingMachineChemicals
   entities:
   - uid: 14515
@@ -165506,6 +165540,8 @@ entities:
     - pos: -20.5,-22.5
       parent: 5350
       type: Transform
+    - nextEmpEject: 1138.1384564
+      type: VendingMachine
 - proto: VendingMachineCigs
   entities:
   - uid: 1082
@@ -165933,6 +165969,8 @@ entities:
     - pos: -5.5,-31.5
       parent: 5350
       type: Transform
+    - nextEmpEject: 3289.9117938
+      type: VendingMachine
 - proto: VendingMachineMediDrobe
   entities:
   - uid: 14497
@@ -165976,6 +166014,8 @@ entities:
     - pos: -39.5,28.5
       parent: 5350
       type: Transform
+    - nextEmpEject: 47.272158
+      type: VendingMachine
 - proto: VendingMachineSciDrobe
   entities:
   - uid: 22580
@@ -166042,6 +166082,8 @@ entities:
     - pos: -19.5,-28.5
       parent: 5350
       type: Transform
+    - nextEmpEject: 836.7551207
+      type: VendingMachine
   - uid: 15157
     components:
     - flags: SessionSpecific
@@ -166243,6 +166285,8 @@ entities:
     - pos: 25.5,19.5
       parent: 5350
       type: Transform
+    - nextEmpEject: 3965.0257929
+      type: VendingMachine
 - proto: VendingMachineYouTool
   entities:
   - uid: 3815
@@ -184241,6 +184285,8 @@ entities:
     - pos: 18.538572,39.67288
       parent: 5350
       type: Transform
+    - nextFire: 647.0521771
+      type: Gun
 - proto: WeaponLaserCarbine
   entities:
   - uid: 24712
@@ -184265,6 +184311,8 @@ entities:
     - pos: 18.527746,39.344753
       parent: 5350
       type: Transform
+    - nextFire: 641.384507
+      type: Gun
 - proto: WeaponRevolverDeckard
   entities:
   - uid: 1942

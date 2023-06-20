@@ -21,8 +21,8 @@ namespace Content.Server.GameTicking
         public const float PresetFailedCooldownIncrease = 30f;
 
         [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-        [Dependency] private readonly MindSystem _mindSystem = default!;
         [Dependency] private readonly GhostSystem _ghostSystem = default!;
+        [Dependency] private readonly MindSystem _mindSystem = default!;
 
         public GamePresetPrototype? Preset { get; private set; }
 
@@ -254,7 +254,7 @@ namespace Content.Server.GameTicking
             if (canReturn)
                 _mindSystem.Visit(mind, ghost);
             else
-                mind.TransferTo(mind, ghost);
+                _mindSystem.TransferTo(mind, ghost);
 
             var player = mind.Session;
 
@@ -262,7 +262,7 @@ namespace Content.Server.GameTicking
 
             if (!_ghostSystem._deathTime.TryGetValue(userId, out _))
                 _ghostSystem._deathTime[userId] = _gameTiming.CurTime;
-                
+
             return true;
         }
 

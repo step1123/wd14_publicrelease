@@ -157,7 +157,7 @@
   - type: Pda
     id: SecurityCadetIDCard
     state: pda-interncadet
-  - type: PDABorderColor
+  - type: PdaBorderColor
     borderColor: "#717059"
     accentVColor: "#cc4242"
   - type: Icon
@@ -299,7 +299,7 @@
   - type: Pda
     id: QuartermasterIDCard
     state: pda-qm
-  - type: PDABorderColor
+  - type: PdaBorderColor
     borderColor: "#e39751"
     accentVColor: "#a23e3e"
   - type: Icon
@@ -338,7 +338,7 @@
   - type: Pda
     id: BartenderIDCard
     state: pda-bartender
-  - type: PDABorderColor
+  - type: PdaBorderColor
     borderColor: "#333333"
   - type: Icon
     state: pda-bartender
@@ -364,7 +364,7 @@
   - type: Pda
     id: LawyerIDCard
     state: pda-lawyer
-  - type: PDABorderColor
+  - type: PdaBorderColor
     borderColor: "#6f6192"
   - type: Icon
     state: pda-lawyer
@@ -418,7 +418,7 @@
       whitelist:
         tags:
         - Write
-  - type: PDABorderColor
+  - type: PdaBorderColor
     borderColor: "#789876"
     accentHColor: "#3c94c5"
   - type: Icon
@@ -448,7 +448,7 @@
   - type: Pda
     id: EngineeringIDCard
     state: pda-engineer
-  - type: PDABorderColor
+  - type: PdaBorderColor
     borderColor: "#949137"
     accentVColor: "#A32D26"
   - type: Icon
@@ -578,7 +578,7 @@
   - type: Pda
     id: WardenIDCard
     state: pda-warden
-  - type: PDABorderColor
+  - type: PdaBorderColor
     borderColor: "#A32D26"
     accentVColor: "#cccc00"
   - type: Icon
@@ -593,7 +593,7 @@
   - type: Pda
     id: SecurityIDCard
     state: pda-security
-  - type: PDABorderColor
+  - type: PdaBorderColor
     borderColor: "#A32D26"
   - type: Icon
     state: pda-security
@@ -641,7 +641,7 @@
   - type: Pda
     id: AtmosIDCard
     state: pda-atmos
-  - type: PDABorderColor
+  - type: PdaBorderColor
     borderColor: "#949137"
     accentVColor: "#447987"
   - type: Icon
@@ -656,7 +656,7 @@
   - type: Pda
     id: PassengerIDCard
     state: pda-clear
-  - type: PDABorderColor
+  - type: PdaBorderColor
     borderColor: "#288e4d"
   - type: Icon
     state: pda-clear
@@ -670,7 +670,7 @@
   - type: Pda
     id: SyndicateIDCard
     state: pda-syndi
-  - type: PDABorderColor
+  - type: PdaBorderColor
     borderColor: "#891417"
   - type: Icon
     state: pda-syndi
@@ -727,7 +727,7 @@
   - type: Pda
     id: ReporterIDCard
     state: pda-reporter
-  - type: PDABorderColor
+  - type: PdaBorderColor
     borderColor: "#3f3f74"
   - type: Icon
     state: pda-reporter

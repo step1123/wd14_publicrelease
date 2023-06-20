@@ -240,10 +240,13 @@ public sealed class MindSystem : EntitySystem
         return null;
     }
 
-    public Mind CreateMind(NetUserId? userId, string? name = null)
+    public Mind CreateMind(NetUserId? userId, string? name = null, string? clownname = null, string? mimename = null, string? borgname = null)
     {
         var mind = new Mind();
         mind.CharacterName = name;
+        mind.ClownName = clownname;
+        mind.MimeName = mimename;
+        mind.BorgName = borgname;
         SetUserId(mind, userId);
 
         return mind;
