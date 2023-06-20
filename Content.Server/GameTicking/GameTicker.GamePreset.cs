@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Content.Server.GameTicking.Presets;
 using Content.Server.Ghost;
 using Content.Server.Ghost.Components;
+using Content.Server.Mind;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -20,6 +21,7 @@ namespace Content.Server.GameTicking
         public const float PresetFailedCooldownIncrease = 30f;
 
         [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
+        [Dependency] private readonly MindSystem _mindSystem = default!;
         [Dependency] private readonly GhostSystem _ghostSystem = default!;
 
         public GamePresetPrototype? Preset { get; private set; }
@@ -190,10 +192,10 @@ namespace Content.Server.GameTicking
 
             if (mind.VisitingEntity != default)
             {
-                mind.UnVisit();
+                _mindSystem.UnVisit(mind);
             }
 
-            var position = playerEntity is {Valid: true}
+            var position = Exists(playerEntity)
                 ? Transform(playerEntity.Value).Coordinates
                 : GetObserverSpawnPoint();
 
@@ -208,7 +210,7 @@ namespace Content.Server.GameTicking
             // + If we're in a mob that is critical, and we're supposed to be able to return if possible,
             //   we're succumbing - the mob is killed. Therefore, character is dead. Ghosting OK.
             //   (If the mob survives, that's a bug. Ghosting is kept regardless.)
-            var canReturn = canReturnGlobal && mind.CharacterDeadPhysically;
+            var canReturn = canReturnGlobal && _mindSystem.IsCharacterDeadPhysically(mind);
 
             if (canReturnGlobal && TryComp(playerEntity, out MobStateComponent? mobState))
             {
@@ -250,13 +252,17 @@ namespace Content.Server.GameTicking
             _ghosts.SetCanReturnToBody(ghostComponent, canReturn);
 
             if (canReturn)
-                mind.Visit(ghost);
+                _mindSystem.Visit(mind, ghost);
             else
-                mind.TransferTo(ghost);
+                mind.TransferTo(mind, ghost);
+
             var player = mind.Session;
+
             var userId = player!.UserId;
+
             if (!_ghostSystem._deathTime.TryGetValue(userId, out _))
                 _ghostSystem._deathTime[userId] = _gameTiming.CurTime;
+                
             return true;
         }
 

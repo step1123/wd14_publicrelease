@@ -177,19 +177,21 @@ namespace Content.Server.GameTicking
 
             DebugTools.AssertNotNull(data);
 
-            data!.WipeMind();
-            var newMind = new Mind.Mind(data.UserId)
-            {
-                CharacterName = character.Name,
-                ClownName = character.ClownName,
-                MimeName = character.MimeName,
-                BorgName = character.BorgName
-            };
-            newMind.ChangeOwningPlayer(data.UserId);
+            var newMind = _mindSystem.CreateMind(data!.UserId, character.Name, character.ClownName, character.MimeName, character.BorgName);
+            _mindSystem.SetUserId(newMind, data.UserId);
 
             var jobPrototype = _prototypeManager.Index<JobPrototype>(jobId);
             var job = new Job(newMind, jobPrototype);
-            newMind.AddRole(job);
+            _mindSystem.AddRole(newMind, job);
+
+            if (_cfg.GetCVar(WhiteCVars.FanaticXenophobiaEnabled))
+            {
+                character = ReplaceBlacklistedSpecies(player, character, jobPrototype);
+                newMind.CharacterName = character.Name;
+                newMind.ClownName = character.ClownName;
+                newMind.MimeName = character.MimeName;
+                newMind.BorgName = character.BorgName;
+            }
 
             if (_cfg.GetCVar(WhiteCVars.FanaticXenophobiaEnabled))
             {
@@ -213,7 +215,7 @@ namespace Content.Server.GameTicking
             if (job.Prototype.ID.Contains("Cyborg"))
                 metadata.EntityName = newMind.BorgName;
 
-            newMind.TransferTo(mob);
+            _mindSystem.TransferTo(newMind, mob);
 
             if (lateJoin)
             {
@@ -302,7 +304,7 @@ namespace Content.Server.GameTicking
 
         public void Respawn(IPlayerSession player)
         {
-            player.ContentData()?.WipeMind();
+            _mindSystem.WipeMind(player);
             _adminLogger.Add(LogType.Respawn, LogImpact.Medium, $"Player {player} was respawned.");
 
             if (LobbyEnabled)
@@ -346,16 +348,15 @@ namespace Content.Server.GameTicking
 
             DebugTools.AssertNotNull(data);
 
-            data!.WipeMind();
-            var newMind = new Mind.Mind(data.UserId);
-            newMind.ChangeOwningPlayer(data.UserId);
-            newMind.AddRole(new ObserverRole(newMind));
+            var newMind = _mindSystem.CreateMind(data!.UserId);
+            _mindSystem.SetUserId(newMind, data.UserId);
+            _mindSystem.AddRole(newMind, new ObserverRole(newMind));
 
             var mob = SpawnObserverMob();
             EntityManager.GetComponent<MetaDataComponent>(mob).EntityName = name;
             var ghost = EntityManager.GetComponent<GhostComponent>(mob);
             EntitySystem.Get<SharedGhostSystem>().SetCanReturnToBody(ghost, false);
-            newMind.TransferTo(mob);
+            _mindSystem.TransferTo(newMind, mob);
 
             var userId = player.UserId;
             if (!_ghostSystem._deathTime.TryGetValue(userId, out _))

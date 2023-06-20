@@ -51,7 +51,6 @@
     closeSound:
       path: /Audio/Machines/blastdoor.ogg
   - type: Weldable
-    fuel: 3
     time: 3
   - type: Appearance
   - type: UserInterface
