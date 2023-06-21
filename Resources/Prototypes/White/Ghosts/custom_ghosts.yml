@@ -75,3 +75,12 @@
   ghostDescription: Годротянка с хорошей задницей
   size: 0.8, 0.8
 
+#felix
+- type: customGhost
+  id: felix163-ghost
+  ckey: felix163
+  sprite: White/Ghosts/felix-ghost.rsi
+  alpha: 1
+  ghostName: Кошмар
+  ghostDescription: ползёт, ползёт...
+  size: 0.8, 0.8
