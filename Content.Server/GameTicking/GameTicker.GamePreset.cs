@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.GameTicking.Presets;
 using Content.Server.Ghost;
@@ -268,14 +269,32 @@ namespace Content.Server.GameTicking
             // TODO FIXME AAAAAAAAAAAAAAAAAAAH THIS IS BROKEN
             // Task.Run as a terrible dirty workaround to avoid synchronization context deadlock from .Result here.
             // This whole setup logic should be made asynchronous so we can properly wait on the DB AAAAAAAAAAAAAH
+            //WD start (HitPanda - Possibly fixed round start crashes here)
+            var mutex = new SemaphoreSlim(1, 1);
+            int result = default;
+
             var task = Task.Run(async () =>
             {
                 var server = await _db.AddOrGetServer(serverName);
-                return await _db.AddNewRound(server, playerIds);
+
+                await mutex.WaitAsync();
+
+                try
+                {
+                    var round = await _db.AddNewRound(server, playerIds);
+                    result = round;
+                }
+                finally
+                {
+                    mutex.Release();
+                }
             });
 
             _taskManager.BlockWaitOnTask(task);
-            RoundId = task.GetAwaiter().GetResult();
+            task.Wait();
+
+            RoundId = result;
+            //WD end
         }
     }
 
