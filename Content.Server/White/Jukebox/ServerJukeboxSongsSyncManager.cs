@@ -63,11 +63,6 @@ public sealed class ServerJukeboxSongsSyncManager : JukeboxSongsSyncManager
 
     public void CleanUp()
     {
-        var files = ContentRoot.GetAllFiles();
-
-        foreach (var file in files)
-        {
-            ContentRoot.RemoveFile(file.relPath);
-        }
+        ContentRoot.Clear();
     }
 }
