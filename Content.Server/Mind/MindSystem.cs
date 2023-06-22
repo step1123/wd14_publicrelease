@@ -393,14 +393,10 @@ public sealed class MindSystem : EntitySystem
 
         if (entity != null)
         {
-            if (!TryComp(entity.Value, out component))
-            {
-                component = AddComp<MindContainerComponent>(entity.Value);
-            }
-            else if (component.HasMind)
-            {
+            component = EnsureComp<MindContainerComponent>(entity.Value);
+
+            if (component.HasMind)
                 _gameTicker.OnGhostAttempt(component.Mind, false);
-            }
 
             if (TryComp<ActorComponent>(entity.Value, out var actor))
             {
@@ -632,6 +628,7 @@ public sealed class MindSystem : EntitySystem
 
         _userMinds[userId.Value] = mind;
         mind.UserId = userId;
+        mind.OriginalOwnerUserId ??= userId;
 
         _playerManager.TryGetSessionById(userId.Value, out var ret);
         mind.Session = ret;

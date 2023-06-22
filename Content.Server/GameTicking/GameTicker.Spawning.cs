@@ -2,15 +2,12 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using Content.Server.Ghost;
-using Content.Server.Ghost.Components;
 using Content.Server.Players;
-using Content.Server.Shuttles.Systems;
 using Content.Server.Spawners.Components;
 using Content.Server.Speech.Components;
 using Content.Server.Station.Components;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
-using Content.Shared.Ghost;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Content.Shared.White;
@@ -133,7 +130,7 @@ namespace Content.Server.GameTicking
 
             if (lateJoin && DisallowLateJoin)
             {
-                MakeObserve(player);
+                JoinAsObserver(player);
                 return;
             }
 
@@ -165,7 +162,7 @@ namespace Content.Server.GameTicking
             {
                 if (!LobbyEnabled)
                 {
-                    MakeObserve(player);
+                    JoinAsObserver(player);
                 }
                 _chatManager.DispatchServerMessage(player, Loc.GetString("game-ticker-player-no-jobs-available-when-joining"));
                 return;
@@ -177,12 +174,12 @@ namespace Content.Server.GameTicking
 
             DebugTools.AssertNotNull(data);
 
-            var newMind = _mindSystem.CreateMind(data!.UserId, character.Name, character.ClownName, character.MimeName, character.BorgName);
-            _mindSystem.SetUserId(newMind, data.UserId);
+            var newMind = _mind.CreateMind(data!.UserId, character.Name, character.ClownName, character.MimeName, character.BorgName);
+            _mind.SetUserId(newMind, data.UserId);
 
             var jobPrototype = _prototypeManager.Index<JobPrototype>(jobId);
             var job = new Job(newMind, jobPrototype);
-            _mindSystem.AddRole(newMind, job);
+            _mind.AddRole(newMind, job);
 
             if (_cfg.GetCVar(WhiteCVars.FanaticXenophobiaEnabled))
             {
@@ -218,7 +215,7 @@ namespace Content.Server.GameTicking
                 if (newMind.BorgName != null)
                     metadata.EntityName = newMind.BorgName;
 
-            _mindSystem.TransferTo(newMind, mob);
+            _mind.TransferTo(newMind, mob);
 
             if (lateJoin)
             {
@@ -307,7 +304,7 @@ namespace Content.Server.GameTicking
 
         public void Respawn(IPlayerSession player)
         {
-            _mindSystem.WipeMind(player);
+            _mind.WipeMind(player);
             _adminLogger.Add(LogType.Respawn, LogImpact.Medium, $"Player {player} was respawned.");
 
             if (LobbyEnabled)
@@ -327,7 +324,10 @@ namespace Content.Server.GameTicking
             SpawnPlayer(player, station, jobId);
         }
 
-        public async void MakeObserve(IPlayerSession player)
+        /// <summary>
+        /// Causes the given player to join the current game as observer ghost. See also <see cref="SpawnObserver"/>
+        /// </summary>
+        public async void JoinAsObserver(IPlayerSession player)
         {
             // Can't spawn players with a dummy ticker!
             if (DummyTicker)
@@ -345,28 +345,36 @@ namespace Content.Server.GameTicking
 
             PlayerJoinGame(player);
 
-            var name = GetPlayerProfile(player).Name;
-
-            var data = player.ContentData();
-
-            DebugTools.AssertNotNull(data);
-
-            var newMind = _mindSystem.CreateMind(data!.UserId);
-            _mindSystem.SetUserId(newMind, data.UserId);
-            _mindSystem.AddRole(newMind, new ObserverRole(newMind));
-
-            var mob = SpawnObserverMob();
-            EntityManager.GetComponent<MetaDataComponent>(mob).EntityName = name;
-            var ghost = EntityManager.GetComponent<GhostComponent>(mob);
-            EntitySystem.Get<SharedGhostSystem>().SetCanReturnToBody(ghost, false);
-            _mindSystem.TransferTo(newMind, mob);
-
             var userId = player.UserId;
             if (!_ghostSystem._deathTime.TryGetValue(userId, out _))
                 _ghostSystem._deathTime[userId] = _gameTiming.CurTime;
 
-            _playerGameStatuses[player.UserId] = PlayerGameStatus.JoinedGame;
+            SpawnObserver(player);
             RaiseNetworkEvent(GetStatusSingle(player, PlayerGameStatus.JoinedGame));
+        }
+
+        /// <summary>
+        /// Spawns an observer ghost and attaches the given player to it. If the player does not yet have a mind, the
+        /// player is given a new mind with the observer role. Otherwise, the current mind is transferred to the ghost.
+        /// </summary>
+        public void SpawnObserver(IPlayerSession player)
+        {
+            if (DummyTicker)
+                return;
+
+            var mind = player.GetMind();
+            if (mind == null)
+            {
+                mind = _mind.CreateMind(player.UserId);
+                _mind.SetUserId(mind, player.UserId);
+                _mind.AddRole(mind, new ObserverRole(mind));
+            }
+
+            var name = GetPlayerProfile(player).Name;
+            var ghost = SpawnObserverMob();
+            MetaData(ghost).EntityName = name;
+            _ghost.SetCanReturnToBody(ghost, false);
+            _mind.TransferTo(mind, ghost);
         }
 
         #region Mob Spawning Helpers

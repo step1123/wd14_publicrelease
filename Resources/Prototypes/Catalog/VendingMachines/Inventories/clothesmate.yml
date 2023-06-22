@@ -129,3 +129,78 @@
     ClothingUnderwearSocksThinKnee: 1
     ClothingUnderwearSocksThinThigh: 1
     # white end
+
+    #White bra start
+    ClothingUnderwearTopBraWhite: 5
+    ClothingUnderwearTopBraSports: 5
+    ClothingUnderwearTopBraSportsAlternative: 5
+    ClothingUnderwearTopBraBeeKini: 2
+    ClothingUnderwearTopBraBinder: 2
+    ClothingUnderwearTopBraBinderStrapless: 2
+    ClothingUnderwearTopBraKinky: 2
+    ClothingUnderwearTopBraNeko: 2
+    ClothingUnderwearTopBraStrapless: 2
+    ClothingUnderwearTopBraStraplessAlt: 2
+    ClothingUnderwearTopBraSwimming: 2
+    ClothingUnderwearTopBraSwimmingAlt: 2
+    ClothingUnderwearTopBraThin: 2
+    ClothingUnderwearTopFishnetBody: 1
+    ClothingUnderwearTopFishnetBodyGloves: 1
+    ClothingUnderwearTopFishnetBodySleeves: 1
+    ClothingUnderwearTopBraHalterneck: 3
+    ClothingUnderwearTopBraShibari: 1
+    ClothingUnderwearTopBraShibariSleeves: 1
+    ClothingUnderwearTopBraStriped: 1
+    ClothingUnderwearTopBraTubetop: 2
+    ClothingUnderwearTopCow: 1
+    #white end
+
+    #White panties start
+    ClothingUnderwearBottomBeeShorts: 2
+    ClothingUnderwearBottomBoxersHeart: 2
+    ClothingUnderwearBottomBoxersStriped: 2
+    ClothingUnderwearBottomBriefs: 2
+    ClothingUnderwearBottomFishnetLower: 1
+    ClothingUnderwearBottomJockstrap: 2
+    ClothingUnderwearBottomMankini: 2
+    ClothingUnderwearBottomPantiesBeeKini: 2
+    ClothingUnderwearBottomPantiesKinky: 1
+    ClothingUnderwearBottomPantiesNeko: 2
+    ClothingUnderwearBottomPantiesSlim: 2
+    ClothingUnderwearBottomPantiesSwimming: 2
+    ClothingUnderwearBottomPantiesThin: 1
+    ClothingUnderwearBottomPantiesStripped: 2
+    ClothingUnderwearBottomPantiesThong: 3
+    #white end
+
+    #white socks start
+    ClothingUnderwearSocksBeeKnee: 2
+    ClothingUnderwearSocksBeeNorm: 2
+    ClothingUnderwearSocksBeeThigh: 2
+    ClothingUnderwearSocksFishnet: 1
+    ClothingUnderwearSocksGarter: 1
+    ClothingUnderwearSocksPantyhose: 1
+    ClothingUnderwearSocksPantyhoseRipped: 1
+    ClothingUnderwearSocksRainbowKnee: 2
+    ClothingUnderwearSocksRainbowThigh: 2
+    ClothingUnderwearSocksHigh: 5
+    ClothingUnderwearSocksNormal: 5
+    ClothingUnderwearSocksShort: 5
+    ClothingUnderwearSocksThigh: 5
+    ClothingUnderwearStockingsBlue: 2
+    ClothingUnderwearStockingsCyan: 2
+    ClothingUnderwearStockingsPink: 2
+    ClothingUnderwearStockingsGreen: 2
+    ClothingUnderwearStockingsLightPink: 2
+    ClothingUnderwearStockingsLightOrange: 2
+    ClothingUnderwearStockingsLightPurple: 2
+    ClothingUnderwearStockingsLightYellow: 2
+    ClothingUnderwearSocksStripedKnee: 2
+    ClothingUnderwearSocksStripedThigh: 2
+    ClothingUnderwearSocksThinKnee: 1
+    ClothingUnderwearSocksThinThigh: 1
+    # white end
+    
+  contrabandInventory:
+    ClothingUniformJumpsuitTacticool: 1
+    ClothingUniformJumpskirtTacticool: 1
