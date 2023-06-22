@@ -9,14 +9,14 @@
             - material: Cloth
               amount: 5
               doAfter: 1
-            - tag: HardsuitEVA
-              name: скафандр EVA
+            - tag: SuitEVA
+              name: An EVA suit
               icon:
-                sprite: Clothing/OuterClothing/Hardsuits/eva.rsi
+                sprite: Clothing/OuterClothing/Suits/eva.rsi
                 state: icon
               doAfter: 1
             - tag: HelmetEVA
-              name: шлем EVA
+              name: An EVA helmet
               icon:
                 sprite: Clothing/Head/Helmets/eva.rsi
                 state: icon

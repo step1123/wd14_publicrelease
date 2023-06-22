@@ -4195,7 +4195,7 @@ entities:
       type: Transform
     - nextFire: 1416.0464935
       type: Thruster
-- proto: HatBandSkull
+- proto: ClothingHeadBandSkull
   entities:
   - uid: 905
     components:

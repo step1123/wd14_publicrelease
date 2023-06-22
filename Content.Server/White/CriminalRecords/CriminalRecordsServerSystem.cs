@@ -6,7 +6,7 @@ namespace Content.Server.White.CriminalRecords;
 
 public sealed class CriminalRecordsServerSystem : EntitySystem
 {
-    [Dependency] private readonly PVSOverrideSystem _pvsSys = default!;
+    [Dependency] private readonly PvsOverrideSystem _pvsSys = default!;
 
     public override void Initialize()
     {

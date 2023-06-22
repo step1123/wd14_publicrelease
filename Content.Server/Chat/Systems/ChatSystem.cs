@@ -440,7 +440,7 @@ public sealed partial class ChatSystem : SharedChatSystem
                 _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedMessage, wrappedobfuscatedMessage, source, false, session.ConnectedClient);
         }
 
-        _replay.QueueReplayMessage(new ChatMessage(ChatChannel.Whisper, message, wrappedMessage, source, MessageRangeHideChatForReplay(range)));
+        _replay.RecordServerMessage(new ChatMessage(ChatChannel.Whisper, message, wrappedMessage, source, MessageRangeHideChatForReplay(range)));
 
         var ev = new EntitySpokeEvent(source, message, originalMessage, channel, obfuscatedMessage);
         RaiseLocalEvent(source, ev, true);
@@ -614,7 +614,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             _chatManager.ChatMessageToOne(channel, message, wrappedMessage, source, entHideChat, session.ConnectedClient);
         }
 
-        _replay.QueueReplayMessage(new ChatMessage(channel, message, wrappedMessage, source, MessageRangeHideChatForReplay(range)));
+        _replay.RecordServerMessage(new ChatMessage(channel, message, wrappedMessage, source, MessageRangeHideChatForReplay(range)));
     }
 
     /// <summary>
@@ -626,9 +626,9 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (player == null)
             return true;
 
-        var mindComponent = player.ContentData()?.Mind;
+        var mindContainerComponent = player.ContentData()?.Mind;
 
-        if (mindComponent == null)
+        if (mindContainerComponent == null)
         {
             shell?.WriteError("You don't have a mind!");
             return false;

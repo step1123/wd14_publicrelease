@@ -119,8 +119,9 @@ public sealed class CharacterInformationSystem : EntitySystem
     private IdCardComponent? GetId(EntityUid? idUid)
     {
         // PDA
-        if (_entity.TryGetComponent(idUid, out PDAComponent? pda) && pda.ContainedID is not null)
-            return pda.ContainedID;
+        if (_entity.TryGetComponent(idUid, out PdaComponent? pda) && pda.ContainedId is not null)
+            return pda.ContainedId;
+
         // ID Card
         if (_entity.TryGetComponent(idUid, out IdCardComponent? id))
             return id;

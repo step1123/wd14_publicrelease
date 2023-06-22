@@ -44,7 +44,7 @@ public sealed class MeatyOreStoreSystem : EntitySystem
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly SponsorsManager _sponsorsManager = default!;
     [Dependency] private readonly IRobustRandom _robustRandom = default!;
-    [Dependency] private readonly PVSOverrideSystem _pvsOverrideSystem = default!;
+    [Dependency] private readonly PvsOverrideSystem _pvsOverrideSystem = default!;
 
 
     private static readonly string StorePresetPrototype = "StorePresetMeatyOre";
@@ -73,7 +73,7 @@ public sealed class MeatyOreStoreSystem : EntitySystem
         if(!TryComp<MobStateComponent>(ev.Target, out var state) || state?.CurrentState != MobState.Alive) return;
         if(!TryGetStore(actorComponent.PlayerSession, out var store)) return;
 
-        if(!TryComp<MindComponent>(ev.Target, out var targetMind) || !targetMind.HasMind) return;
+        if(!TryComp<MindContainerComponent>(ev.Target, out var targetMind) || !targetMind.HasMind) return;
         if (targetMind!.Mind!.AllRoles.Any(x => x.Antagonist)) return;
 
         if(targetMind.Mind.CurrentJob?.CanBeAntag != true) return;

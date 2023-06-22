@@ -130,9 +130,9 @@ public sealed class EntityCrimeRecordsOverlay : Overlay
                 if (_inventorySystem.TryGetSlotEntity(uid, "id", out var idUid))
                 {
                     // PDA
-                    if (_entManager.TryGetComponent(idUid, out PDAComponent? pda) && pda.ContainedID is not null)
+                    if (_entManager.TryGetComponent(idUid, out PdaComponent? pda) && pda.ContainedId is not null)
                     {
-                        var idCard = pda.ContainedID;
+                        var idCard = pda.ContainedId;
                         if (idCard.FullName == info.StationRecord.Name &&
                             idCard.JobTitle == info.StationRecord.JobTitle)
                         {

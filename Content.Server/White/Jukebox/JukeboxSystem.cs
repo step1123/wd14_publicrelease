@@ -21,7 +21,7 @@ public sealed class JukeboxSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly PVSOverrideSystem _pvsOverrideSystem = default!;
+    [Dependency] private readonly PvsOverrideSystem _pvsOverrideSystem = default!;
 
 
     private readonly List<JukeboxComponent> _playingJukeboxes = new();

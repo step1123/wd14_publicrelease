@@ -10,7 +10,7 @@ public sealed class BuyerBlockForMindProtected : ListingCondition
         var buyer = args.Buyer;
         var ent = args.EntityManager;
 
-        if (!ent.TryGetComponent<MindComponent>(buyer, out var mind) || mind.Mind == null)
+        if (!ent.TryGetComponent<MindContainerComponent>(buyer, out var mind) || mind.Mind == null)
             return false;
 
         if (mind.Mind.CurrentJob?.CanBeAntag != true)

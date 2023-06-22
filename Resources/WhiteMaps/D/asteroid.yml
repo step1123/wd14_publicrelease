@@ -668,15 +668,6 @@ entities:
       pos: 8.5,0.5
       parent: 1
       type: Transform
-- proto: ClothingHandsGlovesIhscombat
-  entities:
-  - uid: 24
-    components:
-    - pos: 4.0764055,-1.706533
-      parent: 1
-      type: Transform
-    - nextSound: 188.715936
-      type: EmitSoundOnCollide
 - proto: CombatKnife
   entities:
   - uid: 25
