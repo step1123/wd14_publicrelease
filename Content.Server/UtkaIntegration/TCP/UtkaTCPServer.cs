@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Concurrent;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
@@ -24,7 +25,7 @@ public sealed class UtkaTCPServer : TcpServer
     [Dependency] private readonly ITaskManager _taskManager = default!;
     [Dependency] private readonly ITimerManager _timerManager = default!;
 
-    public static readonly Dictionary<string, IUtkaCommand> Commands = new();
+    public static readonly ConcurrentDictionary<string, IUtkaCommand> Commands = new();
     private List<UtkaTCPSession> _authenticatedSessions = new();
 
     private string? _key;
