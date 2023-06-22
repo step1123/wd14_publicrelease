@@ -897,7 +897,7 @@ entities:
     - pos: 6.5,-0.5
       parent: 1
       type: Transform
-- proto: HatBandBotany
+- proto: ClothingHeadBandBotany
   entities:
   - uid: 57
     components:

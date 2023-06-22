@@ -34481,13 +34481,6 @@ entities:
     - pos: 33.449986,-18.355843
       parent: 1
       type: Transform
-- proto: ClothingHandsGlovesIhscombat
-  entities:
-  - uid: 12357
-    components:
-    - pos: -45.514385,-14.493437
-      parent: 1
-      type: Transform
 - proto: ClothingHandsGlovesLatex
   entities:
   - uid: 5348
