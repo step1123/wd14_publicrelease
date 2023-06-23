@@ -159,10 +159,6 @@
       collection: FemaleLaugh
     Honk:
       collection: BikeHorn
-    Crying:
-      collection: FemaleCry
-    Whistle:
-      collection: Whistles
   params:
     variation: 0.125
     pitchscale: 0.75
