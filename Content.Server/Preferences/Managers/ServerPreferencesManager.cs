@@ -37,8 +37,6 @@ namespace Content.Server.Preferences.Managers
         private readonly Dictionary<NetUserId, PlayerPrefData> _cachedPlayerPrefs =
             new();
 
-        //private int MaxCharacterSlots => _cfg.GetCVar(CCVars.GameMaxCharacterSlots);
-
         public void Init()
         {
             _netManager.RegisterNetMessage<MsgPreferencesAndSettings>();
@@ -134,7 +132,7 @@ namespace Content.Server.Preferences.Managers
                 return;
             }
 
-            if (slot < 0 || slot >= GetMaxUserCharacterSlots(userId))
+            if (slot < 0)
             {
                 return;
             }
@@ -239,12 +237,7 @@ namespace Content.Server.Preferences.Managers
         {
             var maxSlots = _cfg.GetCVar(CCVars.GameMaxCharacterSlots);
             var extraSlots = _sponsors.TryGetInfo(userId, out var sponsor) ? sponsor.ExtraSlots : 0;
-            var maxSavedSlots = 1;
-            if (_cachedPlayerPrefs.TryGetValue(userId, out var pref))
-            {
-                maxSavedSlots = pref.Prefs!.Characters.Count;
-            }
-            return Math.Max(maxSlots + extraSlots, maxSavedSlots - 1);
+            return maxSlots + extraSlots;
         }
 
         /// <summary>
