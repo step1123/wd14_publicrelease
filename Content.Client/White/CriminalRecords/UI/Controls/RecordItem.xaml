@@ -7,7 +7,7 @@
         <PanelContainer
             Name="SideLineElement"
             Access="Public"
-            StyleClasses="PDABackground"
+            StyleClasses="PdaBackground"
             MaxWidth="10"
             VerticalExpand="False"
             HorizontalExpand="False"
