@@ -10,7 +10,7 @@
         <PanelContainer
             Name="SideLineElement"
             Access="Public"
-            StyleClasses="PDABackground"
+            StyleClasses="PdaBackground"
             MinHeight="25"
             VerticalExpand="False"
             HorizontalExpand="True"
