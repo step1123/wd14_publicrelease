@@ -568,10 +568,13 @@ namespace Content.Server.Administration.Systems
             var admins = adminManager.ActiveAdmins.Any();
 
             var entity = ckey;
-            _playerManager.TryGetSessionByUsername(ckey, out var session);
-            if (session?.AttachedEntity != null)
+
+            if (!_playerManager.TryGetSessionByUsername(ckey, out var session))
+                return;
+
+            if (session.AttachedEntity != null)
             {
-                var meta = MetaData((EntityUid) session.AttachedEntity);
+                var meta = MetaData(session.AttachedEntity.Value);
                 entity = meta.EntityName;
             }
 
