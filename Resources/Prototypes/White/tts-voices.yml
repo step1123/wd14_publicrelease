@@ -99,3 +99,57 @@
   name: tts-voice-name-amina
   sex: Female
   speaker: amina
+
+- type: ttsVoice
+  id: AdventureCore
+  name: tts-voice-name-adventure-core
+  sex: Male
+  speaker: adventure_core
+
+- type: ttsVoice
+  id: SpaceCore
+  name: tts-voice-name-space-core
+  sex: Male
+  speaker: space_core
+
+- type: ttsVoice
+  id: FactCore
+  name: tts-voice-name-fact-core
+  sex: Male
+  speaker: fact_core
+
+- type: ttsVoice
+  id: Kleiner
+  name: tts-voice-name-kleiner
+  sex: Male
+  speaker: kleiner
+
+- type: ttsVoice
+  id: Dbkn
+  name: tts-voice-name-dbkn
+  sex: Male
+  speaker: dbkn
+
+- type: ttsVoice
+  id: Neco
+  name: tts-voice-name-neco
+  sex: Female
+  speaker: neco
+
+- type: ttsVoice
+  id: Gman
+  name: tts-voice-name-gman
+  sex: Male
+  speaker: gman
+
+- type: ttsVoice
+  id: Obama
+  name: tts-voice-name-obama
+  sex: Male
+  speaker: obama
+
+- type: ttsVoice
+  id: Trump
+  name: tts-voice-name-trump
+  sex: Male
+  speaker: trump
