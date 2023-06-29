@@ -9,7 +9,7 @@
             Access="Public"
             VerticalExpand="True"
             HorizontalExpand="True"
-            Content="Close"
+            Content="{Loc 'radial-ui-close'}"
             Texture="/Textures/Interface/Default/blocked.png"/>
         <LayoutContainer Access="Public" Name="Layout" HorizontalExpand="True" VerticalExpand="True"></LayoutContainer>
         <BoxContainer Access="Public" Name="ActionBox" HorizontalExpand="True" VerticalExpand="True">
