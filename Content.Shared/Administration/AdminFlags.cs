@@ -1,4 +1,4 @@
-﻿namespace Content.Shared.Administration
+namespace Content.Shared.Administration
 {
     /// <summary>
     ///     Permissions that admins can have.
@@ -93,6 +93,8 @@
         ///     Commands for Meaty Ores.
         /// </summary>
         MeatyOre = 1 << 15,
+
+        AdminSpecies = 1 << 16,
 
         /// <summary>
         ///     Dangerous host permissions like scsi.

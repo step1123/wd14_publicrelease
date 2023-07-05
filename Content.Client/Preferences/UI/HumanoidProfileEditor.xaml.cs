@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Client.Administration.Managers;
 using Content.Client.Humanoid;
 using Content.Client.Lobby.UI;
 using Content.Client.Message;
@@ -6,6 +7,7 @@ using Content.Client.Players.PlayTimeTracking;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
 using Content.Client.White.Sponsors;
+using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
@@ -23,11 +25,13 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Client.Utility;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
+using Robust.Shared.Log;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using TerraFX.Interop.Windows;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
 
 namespace Content.Client.Preferences.UI
@@ -55,6 +59,7 @@ namespace Content.Client.Preferences.UI
 
         //WD-EDIT
         private readonly SponsorsManager _sponsorsManager;
+        private readonly IClientAdminManager _adminManager;
         //WD-EDIT
 
         private readonly IClientPreferencesManager _preferencesManager;
@@ -132,6 +137,7 @@ namespace Content.Client.Preferences.UI
         {
             RobustXamlLoader.Load(this);
             _sponsorsManager = IoCManager.Resolve<SponsorsManager>();
+            _adminManager = IoCManager.Resolve<IClientAdminManager>();
             _random = IoCManager.Resolve<IRobustRandom>();
             _prototypeManager = prototypeManager;
             _entMan = entityManager;
@@ -220,37 +226,11 @@ namespace Content.Client.Preferences.UI
             #region Species
 
             //WD EDIT
-            _speciesList = prototypeManager.EnumeratePrototypes<SpeciesPrototype>().Where(o => o.RoundStart).ToList();
-
-            if (_sponsorsManager.TryGetInfo(out var sponsor))
-            {
-                for (int i = _speciesList.Count - 1; i >= 0; i--)
-                {
-                    var specie = _speciesList[i];
-
-                    if (specie.SponsorOnly && !sponsor.AllowedMarkings.Contains(specie.ID))
-                    {
-                        _speciesList.RemoveAt(i);
-                    }
-                }
-            }
-            else
-            {
-                for (int i = _speciesList.Count - 1; i >= 0; i--)
-                {
-                    var specie = _speciesList[i];
-
-                    if (specie.SponsorOnly)
-                    {
-                        _speciesList.RemoveAt(i);
-                    }
-                }
-            }
+            _speciesList = GetAllowedSpecies();
             //WD EDIT END
 
             for (var i = 0; i < _speciesList.Count; i++)
             {
-
                 var specie = _speciesList[i]; // WD EDIT
                 var name = Loc.GetString(specie.Name);
 
@@ -1310,6 +1290,54 @@ namespace Content.Client.Preferences.UI
                 _needUpdatePreview = false;
             }
         }
+
+        //WD EDIT
+        private List<SpeciesPrototype> GetAllowedSpecies()
+        {
+            var allowedSpecies = new List<SpeciesPrototype>();
+
+            var rawSpecieList = _prototypeManager.EnumeratePrototypes<SpeciesPrototype>()
+                .Where((specie) =>
+                {
+                    if (specie.RoundStart && (specie.SponsorOnly || specie.ForAdmins))
+                    {
+                        return true;
+                    }
+                    else if (specie.RoundStart)
+                    {
+                        allowedSpecies.Add(specie);
+                        return false;
+                    }
+                    return false;
+                }).ToList();
+
+            if (_sponsorsManager.TryGetInfo(out var sponsor))
+            {
+                foreach (var specie in rawSpecieList)
+                {
+                    if (specie.SponsorOnly
+                        && sponsor.AllowedMarkings.Contains(specie.ID)
+                        && !allowedSpecies.Contains(specie))
+                    {
+                        allowedSpecies.Add(specie);
+                    }
+                }
+            }
+
+            if (_adminManager.HasFlag(AdminFlags.AdminSpecies))
+            {
+                foreach (var specie in rawSpecieList)
+                {
+                    if (specie.ForAdmins && !allowedSpecies.Contains(specie))
+                    {
+                        allowedSpecies.Add(specie);
+                    }
+                }
+            }
+
+            return allowedSpecies;
+        }
+        //WD EDIT END
 
         private void SetBodyType(string newBodyType)
         {

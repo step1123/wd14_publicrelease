@@ -9,6 +9,7 @@
   bodyTypes:
     - HumanNormal
   sponsorOnly: true
+  forAmins: true
 
 - type: markingPoints
   id: MobFelinidMarkingLimits

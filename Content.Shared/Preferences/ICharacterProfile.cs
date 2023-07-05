@@ -13,6 +13,6 @@ namespace Content.Shared.Preferences
         /// <summary>
         ///     Makes this profile valid so there's no bad data like negative ages.
         /// </summary>
-        void EnsureValid(string[] sponsorMarkings); //WD-EDIT
+        void EnsureValid(string[] sponsorMarkings, bool isAdminSpecie); //WD-EDIT
     }
 }
