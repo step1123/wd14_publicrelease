@@ -1,4 +1,4 @@
-﻿- type: objective
+- type: objective
   id: CaptainIDStealObjective
   issuer: syndicate
   difficultyOverride: 2.75
@@ -47,6 +47,7 @@
       conditions:
         - StealCondition
         - EscapeShuttleCondition
+        - EscapeAloneShuttleCondition
   conditions:
     - !type:DieCondition {}
 
@@ -236,3 +237,157 @@
   conditions:
     - !type:RandomTraitorProgressCondition {}
   canBeDuplicate: true
+
+- type: objective
+  id: HijackShuttleByEscapeAloneObjective
+  issuer: syndicate
+  requirements:
+    - !type:TraitorRequirement {}
+    - !type:IncompatibleConditionsRequirement
+      conditions:
+        - DieCondition
+  conditions:
+    - !type:EscapeAloneShuttleCondition {}
+
+- type: objective
+  id: StayAliveObjective
+  issuer: syndicate
+  requirements:
+    - !type:TraitorRequirement {}
+    - !type:IncompatibleConditionsRequirement
+      conditions:
+        - DieCondition
+  conditions:
+    - !type:StayAliveCondition {}
+
+- type: objective
+  id: KillAllOtherAntagonistsObjective
+  issuer: syndicate
+  requirements:
+    - !type:TraitorRequirement {}
+    - !type:IncompatibleConditionsRequirement
+      conditions:
+        - DieCondition
+  conditions:
+    - !type:KillAllOtherAntagonistsCondition {}
+
+- type: objective
+  id: FewWeaponEgunObjective
+  issuer: syndicate
+  requirements:
+    - !type:TraitorRequirement {}
+    - !type:IncompatibleConditionsRequirement
+      conditions:
+        - DieCondition
+  conditions:
+    - !type:StealFewItemsCondition
+      prototype: WeaponEgun
+      quantityRange: [2, 5]
+
+- type: objective
+  id: FewIDCardObjective
+  issuer: syndicate
+  requirements:
+    - !type:TraitorRequirement {}
+    - !type:IncompatibleConditionsRequirement
+      conditions:
+        - DieCondition
+    - !type:NotRoleRequirement
+      roleId: HeadOfPersonnel
+    - !type:NotRoleRequirement
+      roleId: Captain
+  conditions:
+    - !type:StealFewItemsCondition
+      prototype: PassengerIDCard
+      prototypeParent: IDCardStandard
+      quantityRange: [5, 10]
+
+- type: objective
+  id: FewHandsGlovesColorYellowObjective
+  issuer: syndicate
+  requirements:
+    - !type:TraitorRequirement {}
+    - !type:IncompatibleConditionsRequirement
+      conditions:
+        - DieCondition
+    - !type:NotRoleRequirement
+      roleId: AtmosphericTechnician
+    - !type:NotRoleRequirement
+      roleId: ChiefEngineer
+    - !type:NotRoleRequirement
+      roleId: StationEngineer
+    - !type:NotRoleRequirement
+      roleId: TechnicalAssistant
+  conditions:
+    - !type:StealFewItemsCondition
+      prototype: ClothingHandsGlovesColorYellow
+      quantityRange: [2, 8]
+
+- type: objective
+  id: FewStunbatonObjective
+  issuer: syndicate
+  requirements:
+    - !type:TraitorRequirement {}
+    - !type:IncompatibleConditionsRequirement
+      conditions:
+        - DieCondition
+    - !type:NotRoleRequirement
+      roleId: HeadOfSecurity
+    - !type:NotRoleRequirement
+      roleId: SecurityCadet
+    - !type:NotRoleRequirement
+      roleId: SecurityOfficer
+    - !type:NotRoleRequirement
+      roleId: Detective
+    - !type:NotRoleRequirement
+      roleId: Warden
+  conditions:
+    - !type:StealFewItemsCondition
+      prototype: Stunbaton
+      quantityRange: [2, 5]
+
+- type: objective
+  id: FewHeadHelmetHelmetObjective
+  issuer: syndicate
+  requirements:
+    - !type:TraitorRequirement {}
+    - !type:IncompatibleConditionsRequirement
+      conditions:
+        - DieCondition
+    - !type:NotRoleRequirement
+      roleId: HeadOfSecurity
+    - !type:NotRoleRequirement
+      roleId: SecurityCadet
+    - !type:NotRoleRequirement
+      roleId: SecurityOfficer
+    - !type:NotRoleRequirement
+      roleId: Detective
+    - !type:NotRoleRequirement
+      roleId: Warden
+  conditions:
+    - !type:StealFewItemsCondition
+      prototype: ClothingHeadHelmetHelmet
+      quantityRange: [2, 5]
+
+- type: objective
+  id: FewWeaponDisablerObjective
+  issuer: syndicate
+  requirements:
+    - !type:TraitorRequirement {}
+    - !type:IncompatibleConditionsRequirement
+      conditions:
+        - DieCondition
+    - !type:NotRoleRequirement
+      roleId: HeadOfSecurity
+    - !type:NotRoleRequirement
+      roleId: SecurityCadet
+    - !type:NotRoleRequirement
+      roleId: SecurityOfficer
+    - !type:NotRoleRequirement
+      roleId: Detective
+    - !type:NotRoleRequirement
+      roleId: Warden
+  conditions:
+    - !type:StealFewItemsCondition
+      prototype: WeaponDisabler
+      quantityRange: [2, 5]

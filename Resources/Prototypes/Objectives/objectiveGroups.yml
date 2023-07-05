@@ -5,7 +5,8 @@
     TraitorObjectiveGroupSteal: 1
     TraitorObjectiveGroupKill: 1
     TraitorObjectiveGroupState: 1 #As in, something about your character. Alive, dead, arrested, gained an ability...
-    TraitorObjectiveGroupSocial: 1 #Involves helping/harming others without killing them or stealing their stuff
+    TraitorObjectiveGroupSocial: 0.7 #Involves helping/harming others without killing them or stealing their stuff
+    TraitorOBjectiveGroupStealFew: 0.7
 
 - type: weightedRandom
   id: TraitorObjectiveGroupSteal
@@ -23,15 +24,28 @@
     HandTeleporterStealObjective: 0.5
 
 - type: weightedRandom
+  id: TraitorOBjectiveGroupStealFew
+  weights:
+    FewWeaponEgunObjective: 1
+    FewIDCardObjective: 1
+    FewHandsGlovesColorYellowObjective: 1
+    FewStunbatonObjective: 1
+    FewHeadHelmetHelmetObjective: 1
+    FewWeaponDisablerObjective: 1
+
+- type: weightedRandom
   id: TraitorObjectiveGroupKill
   weights:
     KillRandomObjective: 1
+    KillAllOtherAntagonistsObjective: 0.4
 
 - type: weightedRandom
   id: TraitorObjectiveGroupState
   weights:
     EscapeShuttleObjective: 1
     DieObjective: 0.05
+    HijackShuttleByEscapeAloneObjective: 0.5
+    StayAliveObjective: 0.5
 
 - type: weightedRandom
   id: TraitorObjectiveGroupSocial
