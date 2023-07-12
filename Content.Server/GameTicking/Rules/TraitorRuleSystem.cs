@@ -20,6 +20,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Server.Objectives;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -269,13 +270,33 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
         // Give traitors their objectives
         var maxDifficulty = _cfg.GetCVar(CCVars.TraitorMaxDifficulty);
         var maxPicks = _cfg.GetCVar(CCVars.TraitorMaxPicks);
+        var minObjectives = _cfg.GetCVar(CCVars.TraitorMinObjectives);
+
         var difficulty = 0f;
-        for (var pick = 0; pick < maxPicks && maxDifficulty > difficulty; pick++)
+
+        // WD EDIT
+        for (var pick = 0; pick < maxPicks; pick++)
         {
-            var objective = _objectivesManager.GetRandomObjective(traitorRole.Mind, "TraitorObjectiveGroups");
+            if (traitorRole.Mind.Objectives.Count >= minObjectives)
+            {
+                if (difficulty > maxDifficulty)
+                    break;
+            }
+
+            ObjectivePrototype? objective;
+            if (traitorRole.Mind.Objectives.Count == 0)
+            {
+                objective = _objectivesManager.GetRandomObjective(traitorRole.Mind, "TraitorObjectiveGroupState");
+            }
+            else
+            {
+                objective = _objectivesManager.GetRandomObjective(traitorRole.Mind, "TraitorObjectiveGroups");
+            }
+            // WD EDIT END
 
             if (objective == null)
                 continue;
+
             if (_mindSystem.TryAddObjective(traitorRole.Mind, objective))
                 difficulty += objective.Difficulty;
         }

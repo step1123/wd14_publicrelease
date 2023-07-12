@@ -1,4 +1,4 @@
-﻿using Content.Server.Objectives.Interfaces;
+using Content.Server.Objectives.Interfaces;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Random;
 using Robust.Shared.Prototypes;
@@ -27,8 +27,15 @@ namespace Content.Server.Objectives
 
                 if (!_prototypeManager.TryIndex<WeightedRandomPrototype>(groupName, out var group))
                 {
-                    Logger.Error("Couldn't index objective group prototype" + groupName);
-                    return null;
+                    // WD EDIT
+                    if (_prototypeManager.TryIndex<ObjectivePrototype>(groupName, out var objectiveProto)
+                            && objectiveProto.CanBeAssigned(mind))
+                    {
+                        return objectiveProto;
+                    }
+                    tries++;
+                    continue;
+                    // WD EDIT END
                 }
 
                 if (_prototypeManager.TryIndex<ObjectivePrototype>(group.Pick(_random), out var objective)

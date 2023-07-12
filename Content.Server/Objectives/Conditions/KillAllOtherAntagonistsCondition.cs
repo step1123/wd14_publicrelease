@@ -9,6 +9,7 @@ using System.Linq;
 
 namespace Content.Server.Objectives.Conditions
 {
+    [DataDefinition]
     public sealed class KillAllOtherAntagonistsCondition : IObjectiveCondition
     {
         private IEntityManager EntityManager => IoCManager.Resolve<IEntityManager>();
@@ -25,8 +26,10 @@ namespace Content.Server.Objectives.Conditions
                     foreach (var target in _targets)
                     {
                         if (target?.OwnedEntity is { Valid: true } owned)
-                            title += ($"\n{target?.CurrentJob?.Name ?? "Unknown"}, " +
-                                $"{EntityManager.GetComponent<MetaDataComponent>(owned).EntityName}");
+                        {
+                            title += ($"\n  - {EntityManager.GetComponent<MetaDataComponent>(owned).EntityName}, " +
+                                $"{target?.CurrentJob?.Name ?? "Unknown"}");
+                        }
                     }
                 }
 
@@ -60,6 +63,12 @@ namespace Content.Server.Objectives.Conditions
                       MobStateSystem.IsAlive(entity.Value, mobState);
 
             }).Select(mc => mc.Mind).ToList();
+
+            if (!allMinds.Any())
+            {
+                var condition = new KillRandomPersonCondition();
+                return condition.GetAssigned(mind);
+            }
 
             return new KillAllOtherAntagonistsCondition
             {

@@ -21,6 +21,7 @@
     - !type:IncompatibleConditionsRequirement
         conditions:
           - RandomTraitorAliveCondition
+          - KillAllOtherAntagonistsCondition
   conditions:
     - !type:KillRandomPersonCondition {}
   canBeDuplicate: true
@@ -33,6 +34,7 @@
     - !type:IncompatibleConditionsRequirement
         conditions:
           - KillRandomPersonCondition
+          - KillAllOtherAntagonistsCondition
     - !type:MultipleTraitorsRequirement
   conditions:
     - !type:RandomTraitorAliveCondition {}
@@ -268,6 +270,9 @@
     - !type:IncompatibleConditionsRequirement
       conditions:
         - DieCondition
+        - KillRandomPersonCondition
+        - RandomTraitorAliveCondition
+        - RandomTraitorProgressCondition
   conditions:
     - !type:KillAllOtherAntagonistsCondition {}
 
@@ -391,3 +396,16 @@
     - !type:StealFewItemsCondition
       prototype: WeaponDisabler
       quantityRange: [2, 5]
+
+- type: objective
+  id: SaveRandomNoTraitorPersonObjective
+  issuer: syndicate
+  requirements:
+    - !type:TraitorRequirement {}
+    - !type:IncompatibleConditionsRequirement
+      conditions:
+        - DieCondition
+        - KillRandomPersonCondition
+        - KillAllOtherAntagonistsCondition
+  conditions:
+    - !type:SaveRandomNoTraitorPersonCondition {}
