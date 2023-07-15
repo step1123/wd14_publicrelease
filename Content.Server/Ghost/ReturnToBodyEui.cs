@@ -28,7 +28,7 @@ public sealed class ReturnToBodyEui : BaseEui
             return;
         }
 
-        if (_mindSystem.TryGetSession(_mind, out var session))
+        if (_mind != null && _mindSystem.TryGetSession(_mind, out var session))
             _mindSystem.UnVisit(session.ContentData()!.Mind);
         Close();
     }
