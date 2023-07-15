@@ -84,3 +84,13 @@
   ghostName: Кошмар
   ghostDescription: ползёт, ползёт...
   size: 0.8, 0.8
+
+#felix
+- type: customGhost
+  id: mapperian-ghost
+  ckey: mapperian
+  sprite: White/Ghosts/suzuran.rsi
+  alpha: 1
+  ghostName: Operator Suzuran
+  ghostDescription: Uoooooooh!!!
+  size: 0.8, 0.8
