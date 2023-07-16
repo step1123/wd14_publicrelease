@@ -38,12 +38,16 @@ namespace Content.Shared.Administration
             public NetUserId TrueSender { get; }
             public string Text { get; }
 
-            public BwoinkTextMessage(NetUserId userId, NetUserId trueSender, string text, DateTime? sentAt = default)
+            public bool IsAdmin { get; }
+
+            public BwoinkTextMessage(NetUserId userId, NetUserId trueSender, string text, bool isAdmin,
+                DateTime? sentAt = default)
             {
                 SentAt = sentAt ?? DateTime.Now;
                 UserId = userId;
                 TrueSender = trueSender;
                 Text = text;
+                IsAdmin = isAdmin;
             }
         }
     }

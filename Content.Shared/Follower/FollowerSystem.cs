@@ -6,6 +6,7 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Physics.Pull;
 using Content.Shared.Tag;
 using Content.Shared.Verbs;
+using Content.Shared.White.Administration;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Events;
@@ -118,6 +119,11 @@ public sealed class FollowerSystem : EntitySystem
     /// <param name="entity">The entity to be followed</param>
     public void StartFollowingEntity(EntityUid follower, EntityUid entity)
     {
+        // WD
+        if (!EntityManager.HasComponent<InvisibilityComponent>(follower) &&
+            EntityManager.TryGetComponent(entity, out InvisibilityComponent? component) && component.Invisible)
+            return;
+
         // No recursion for you
         var targetXform = Transform(entity);
         while (targetXform.ParentUid.IsValid())

@@ -21,6 +21,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Storage.Components;
 using Content.Shared.White;
+using Content.Shared.White.Administration;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
@@ -398,6 +399,10 @@ namespace Content.Server.Ghost
                 return;
 
             eyeComponent.VisibilityMask ^= (uint) VisibilityFlags.Ghost;
+            if (entityManager.HasComponent<InvisibilityComponent>(uid)) // WD
+            {
+                eyeComponent.VisibilityMask ^= (uint) VisibilityFlags.Invisible;
+            }
         }
     }
 }

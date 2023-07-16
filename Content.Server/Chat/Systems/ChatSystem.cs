@@ -57,6 +57,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly StationSystem _stationSystem = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly INetConfigurationManager _netConfigurationManager = default!; // WD
 
     //WD-EDIT
     [Dependency] private readonly UtkaTCPWrapper _utkaSockets = default!;
@@ -531,7 +532,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         var clients = GetDeadChatClients();
         var playerName = Name(source);
         string wrappedMessage;
-        if (_adminManager.IsAdmin(player))
+        if (_adminManager.IsAdmin(player) &&
+            _netConfigurationManager.GetClientCVar(player.ConnectedClient, WhiteCVars.DeadChatAdmin)) // WD
         {
             wrappedMessage = Loc.GetString("chat-manager-send-admin-dead-chat-wrap-message",
                 ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")),

@@ -32,7 +32,6 @@ public sealed class AHelpUIController: UIController, IOnStateChanged<GameplaySta
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IClyde _clyde = default!;
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
-    [Dependency] private readonly IClientAdminManager _clientAdminManager = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
 
     private BwoinkSystem? _bwoinkSystem;
@@ -134,8 +133,9 @@ public sealed class AHelpUIController: UIController, IOnStateChanged<GameplaySta
             return;
         }
 
-
-        float bwoinkVolume = _clientAdminManager.IsActive() ? adminBwoinkVolume : defaultBwoinkVolume;
+        var isAdmin = _adminManager.IsActive();
+        var notify = !isAdmin || !message.IsAdmin;
+        float bwoinkVolume = isAdmin ? adminBwoinkVolume : defaultBwoinkVolume;
 
         var audioParams = new AudioParams()
         {
@@ -143,14 +143,14 @@ public sealed class AHelpUIController: UIController, IOnStateChanged<GameplaySta
         };
 
 
-        if (localPlayer.UserId != message.TrueSender)
+        if (localPlayer.UserId != message.TrueSender && notify)
         {
             SoundSystem.Play("/Audio/Effects/adminhelp.ogg", Filter.Local(), audioParams);
             _clyde.RequestWindowAttention();
         }
 
         EnsureUIHelper();
-        if (!UIHelper!.IsOpen)
+        if (!UIHelper!.IsOpen && notify)
         {
             AhelpButton?.StyleClasses.Add(MenuButton.StyleClassRedTopButton);
         }
@@ -175,7 +175,7 @@ public sealed class AHelpUIController: UIController, IOnStateChanged<GameplaySta
         UIHelper = isAdmin ? new AdminAHelpUIHandler(ownerUserId) : new UserAHelpUIHandler(ownerUserId);
         UIHelper.DiscordRelayChanged(_discordRelayActive);
 
-        UIHelper.SendMessageAction = (userId, textMessage) => _bwoinkSystem?.Send(userId, textMessage);
+        UIHelper.SendMessageAction = (userId, textMessage) => _bwoinkSystem?.Send(userId, textMessage, isAdmin);
         UIHelper.OnClose += () => { SetAHelpPressed(false); };
         UIHelper.OnOpen +=  () => { SetAHelpPressed(true); };
         SetAHelpPressed(UIHelper.IsOpen);

@@ -189,6 +189,12 @@ public sealed class WhiteCVars
     public static readonly CVarDef<string> ChatGptApi =
         CVarDef.Create("white.gpt_api_link", "", CVar.SERVERONLY | CVar.ARCHIVE | CVar.CONFIDENTIAL);
 
+    /*
+     * Mark dead chat messages as admin
+     */
+    public static readonly CVarDef<bool> DeadChatAdmin =
+        CVarDef.Create("white.admin.deadChatAdmin", false, CVar.CLIENT | CVar.REPLICATED | CVar.ARCHIVE);
+
 
         /*
      * End of round stats

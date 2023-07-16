@@ -12,6 +12,8 @@ namespace Content.Shared.Administration
         /// </summary>
         public bool Active;
 
+        public bool Stealth; // WD
+
         /// <summary>
         ///     The admin's title.
         /// </summary>

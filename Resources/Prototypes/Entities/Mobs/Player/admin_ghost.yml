@@ -127,3 +127,4 @@
   - type: ShowCrimeRecords
   - type: ShowHealthBars
   - type: ShowJobInfo
+  - type: Invisibility

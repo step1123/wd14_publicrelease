@@ -374,7 +374,7 @@ namespace Content.Server.Administration.Systems
                 _ => $"{senderSession.Name}: {escapedText}",
             };
 
-            var msg = new BwoinkTextMessage(message.UserId, senderSession.UserId, bwoinkText);
+            var msg = new BwoinkTextMessage(message.UserId, senderSession.UserId, bwoinkText, senderAHelpAdmin);
 
             LogBwoink(msg);
 
@@ -420,7 +420,7 @@ namespace Content.Server.Administration.Systems
 
             // No admin online, let the player know
             var systemText = Loc.GetString("bwoink-system-starmute-message-no-other-users");
-            var starMuteMsg = new BwoinkTextMessage(message.UserId, SystemUserId, systemText);
+            var starMuteMsg = new BwoinkTextMessage(message.UserId, SystemUserId, systemText, senderAHelpAdmin);
             RaiseNetworkEvent(starMuteMsg, senderSession.ConnectedClient);
         }
 
@@ -523,7 +523,7 @@ namespace Content.Server.Administration.Systems
         {
             var bwoinkText = $"[color=red](D) {sender}[/color]: {text}";
             _playerManager.TryGetUserId(sender, out var senderId);
-            var msg = new BwoinkTextMessage(receiver, senderId, bwoinkText);
+            var msg = new BwoinkTextMessage(receiver, senderId, bwoinkText, true);
 
             LogBwoink(msg);
 

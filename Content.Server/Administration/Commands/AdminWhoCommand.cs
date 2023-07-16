@@ -22,24 +22,34 @@ public sealed class AdminWhoCommand : IConsoleCommand
 
         var sb = new StringBuilder();
         var first = true;
+
+        // WD start
+        var isAdmin = shell.Player is IPlayerSession player && adminMgr.HasAdminFlag(player, AdminFlags.Admin);
         foreach (var admin in adminMgr.ActiveAdmins)
         {
+            var adminData = adminMgr.GetAdminData(admin)!;
+            DebugTools.AssertNotNull(adminData);
+
+            if (!isAdmin && adminData.Stealth)
+                continue;
+
             if (!first)
                 sb.Append('\n');
             first = false;
-
-            var adminData = adminMgr.GetAdminData(admin)!;
-            DebugTools.AssertNotNull(adminData);
 
             sb.Append(admin.Name);
             if (adminData.Title is { } title)
                 sb.Append($": [{title}]");
 
-            if (shell.Player is IPlayerSession player && adminMgr.HasAdminFlag(player, AdminFlags.Admin))
-            {
-                if (afk.IsAfk(admin))
-                    sb.Append(" [AFK]");
-            }
+            if (!isAdmin)
+                continue;
+
+            if (afk.IsAfk(admin))
+                sb.Append(" [AFK]");
+
+            if (adminData.Stealth)
+                sb.Append(" [Stealth]");
+            // WD end
         }
 
         shell.WriteLine(sb.ToString());
