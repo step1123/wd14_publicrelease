@@ -113,6 +113,26 @@
   - UplinkExplosives
 
 - type: listing
+  id: UplinkBeeGrenade
+  name: Граната с пчелами!? Что?..
+  description: Это как..
+  productEntity: GrenadeBees
+  cost:
+    Telecrystal: 8
+  categories:
+    - UplinkExplosives
+
+- type: listing
+  id: UplinkExplosiveSmokeGrenade
+  name: дымовая граната
+  description: для постановки маскирующих завес
+  productEntity: SmokeGrenade
+  cost:
+    Telecrystal: 1
+  categories:
+    - UplinkExplosives
+
+- type: listing
   id: UplinkExplosiveGrenadeFlash
   name: uplink-flash-grenade-name
   description: uplink-flash-grenade-desc

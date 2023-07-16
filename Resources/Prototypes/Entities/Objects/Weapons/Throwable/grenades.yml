@@ -38,20 +38,17 @@
   parent: GrenadeBase
   id: ExGrenade
   components:
-  - type: ExplodeOnTrigger
-  - type: Explosive
-    explosionType: Default
-    maxIntensity: 10
-    intensitySlope: 3
-    totalIntensity: 120 # about a ~4 tile radius
-    canCreateVacuum: false
+  - type: SpawnEntitiesOnTrigger
+    prototype: BulletGrenadeShrapnel
+    count: 60
+    minCount: 35
+    velocity: 20
+    despawnTime: 0.4
+    shoot: true
+  - type: DeleteOnTrigger
   - type: OnUseTimerTrigger
-    beepSound:
-      path: "/Audio/Effects/beep1.ogg"
-      params:
-        volume: 5
     initialBeepDelay: 0
-    beepInterval: 2 # 2 beeps total (at 0 and 2)
+    beepInterval: 2
 
 - type: entity
   name: flashbang
@@ -199,3 +196,58 @@
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
+
+- type: entity
+  name: beenade
+  description: A grenade that explodes into a cloud of bees... Nightmarish.
+  parent: GrenadeBase
+  id: GrenadeBees
+  components:
+    - type: Sprite
+      sprite: White/Objects/Weapons/Grenades/beenade.rsi
+    - type: SpawnEntitiesOnTrigger
+      prototype: MobAngryBee
+      count: 14
+      minCount: 8
+      despawnTime: 120
+      offset: 1
+    - type: DeleteOnTrigger
+    - type: OnUseTimerTrigger
+      delay: 3
+    - type: TimerTriggerVisuals
+      primingSound:
+        path: /Audio/Effects/countdown.ogg
+
+
+- type: entity
+  name: smoke grenade
+  description:
+  parent: GrenadeBase
+  id: SmokeGrenade
+  components:
+    - type: Sprite
+      sprite: Objects/Weapons/Grenades/smokegrenade.rsi
+    - type: SmokeOnTrigger
+      spreadAmount: 50
+      time: 30
+      sound: /Audio/Effects/smoke.ogg
+    - type: DeleteOnTrigger
+    - type: Appearance
+
+- type: entity
+  name: tear smoke grenade
+  description:
+  parent: GrenadeBase
+  id: TearSmokeGrenade
+  components:
+    - type: Sprite
+      sprite: Objects/Weapons/Grenades/tearsmokegrenade.rsi
+    - type: SmokeOnTrigger
+      time: 10
+      spreadAmount: 30
+      smokeReagents:
+        - ReagentId: TearAcid
+          Quantity: 5
+      sound: /Audio/Effects/smoke.ogg
+    - type: DeleteOnTrigger
+    - type: Appearance

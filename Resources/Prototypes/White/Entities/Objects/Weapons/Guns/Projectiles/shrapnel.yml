@@ -1,0 +1,26 @@
+- type: entity
+  id: BulletGrenadeShrapnel
+  parent: BaseBulletHighVelocity
+  name: shrapnel
+  noSpawn: true
+  components:
+    - type: Sprite
+      sprite: White/Objects/Projectiles/projectiles.rsi
+      layers:
+        - state: shrapnel
+          shader: unshaded
+
+- type: entity
+  id: BulletGrenadeShrapnelRubber
+  parent: BaseBulletRubber
+  name: rubber ball
+  noSpawn: true
+  components:
+    - type: Projectile
+      damage:
+        types:
+          Blunt: 1.5
+      soundHit:
+        path: /Audio/Weapons/Guns/Hits/snap.ogg
+    - type: StaminaDamageOnCollide
+      damage: 15
