@@ -11,6 +11,9 @@ public sealed class CritComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public float CritMultiplier = 2.5f;
 
+    [DataField("isBloodDagger")]
+    public bool IsBloodDagger;
+
     [DataField("workingChance")]
     public int? WorkingChance;
 }

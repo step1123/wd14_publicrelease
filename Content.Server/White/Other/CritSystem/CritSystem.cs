@@ -2,6 +2,7 @@ using Content.Server.Body.Systems;
 using Content.Server.Popups;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Examine;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
@@ -16,11 +17,24 @@ public sealed class CritSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
+    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<CritComponent, MeleeHitEvent>(HandleHit);
+        SubscribeLocalEvent<CritComponent, ExaminedEvent>(OnExamine);
+    }
+
+    private void OnExamine(EntityUid uid, CritComponent component, ExaminedEvent args)
+    {
+        if (component.IsBloodDagger)
+        {
+            args.PushMarkup(
+                "[color=red]Критическая жажда: Кинжал Жажды обладает смертоносной точностью. Его владелец имеет 20% шанс нанести критический урон, поражая врага в его самые уязвимые места.\n" +
+                "Кровавый абсорб: При каждом успешном критическом ударе, кинжал извлекает кровь из цели, восстанавливая здоровье владельцу пропорционально количеству высосанной крови.[/color]"
+            );
+        }
     }
 
     private void HandleHit(EntityUid uid, CritComponent component, MeleeHitEvent args)
@@ -34,13 +48,21 @@ public sealed class CritSystem : EntitySystem
                 continue;
 
             var damage = args.BaseDamage.Total * component.CritMultiplier;
-            var ohio = _random.Next(1, 20);
 
-            args.BonusDamage = new DamageSpecifier(_prototypeManager.Index<DamageTypePrototype>("Blunt"), damage);
+            if (component.IsBloodDagger)
+            {
+                var ohio = _random.Next(1, 20);
+                var damageGroup = _prototypeManager.Index<DamageGroupPrototype>("Brute");
+
+                _bloodstream.TryModifyBloodLevel(target, -ohio);
+                _damageableSystem.TryChangeDamage(args.User, new DamageSpecifier(damageGroup, -ohio));
+
+                damage = args.BaseDamage.Total * component.CritMultiplier + ohio;
+            }
+
+            args.BonusDamage = new DamageSpecifier(_prototypeManager.Index<DamageTypePrototype>("Slash"), damage);
 
             _popup.PopupEntity($@"Crit! {damage}", args.User, PopupType.MediumCaution);
-
-            _bloodstream.TryModifyBloodLevel(target, -ohio);
         }
     }
 

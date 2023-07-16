@@ -85,6 +85,7 @@ shoes-they = На ногах у них
 # Character information
 
 character-information-verb-message = Информация о персонаже
+character-information-verb-text = Информация о персонаже
 character-information-ui-title = Информация о персонаже
 character-information-ui-flavor-text-placeholder =
     Нет заданного флавора.
