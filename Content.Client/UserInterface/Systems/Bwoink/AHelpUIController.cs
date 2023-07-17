@@ -49,7 +49,6 @@ public sealed class AHelpUIController: UIController, IOnStateChanged<GameplaySta
         SubscribeNetworkEvent<BwoinkDiscordRelayUpdated>(DiscordRelayUpdated);
         defaultBwoinkVolume = WhiteCVars.BwoinkVolume.DefaultValue;
         _cfg.OnValueChanged(WhiteCVars.BwoinkVolume, volume => adminBwoinkVolume = volume);
-        adminBwoinkVolume = _cfg.GetCVar(WhiteCVars.BwoinkVolume);
     }
 
     public void OnStateEntered(GameplayState state)

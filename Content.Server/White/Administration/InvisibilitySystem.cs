@@ -1,7 +1,6 @@
 using Content.Server.Ghost.Components;
 using Content.Server.Visible;
 using Content.Shared.Follower;
-using Content.Shared.Follower.Components;
 using Content.Shared.White.Administration;
 using Robust.Server.GameObjects;
 
@@ -46,8 +45,7 @@ public sealed class InvisibilitySystem : SharedInvisibilitySystem
         if (!EntityManager.TryGetComponent(uid, out VisibilityComponent? visibility))
             return;
 
-        if (TryComp(uid, out FollowedComponent? followed))
-            _followerSystem.StopAllFollowers(uid, followed);
+        _followerSystem.StopAllFollowers(uid);
 
         component.Invisible = !component.Invisible;
 

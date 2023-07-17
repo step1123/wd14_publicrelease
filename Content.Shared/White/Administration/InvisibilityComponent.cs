@@ -8,10 +8,7 @@ namespace Content.Shared.White.Administration;
 [Access(typeof(SharedInvisibilitySystem))]
 public sealed class InvisibilityComponent : Component
 {
-    [ViewVariables]
     public bool Invisible;
-
-    public float? DefaultAlpha;
 
     public readonly InstantAction ToggleInvisibilityAction = new()
     {
@@ -20,7 +17,6 @@ public sealed class InvisibilityComponent : Component
         Description = "Переключить невидимость вашего призрака.",
         ClientExclusive = true,
         CheckCanInteract = false,
-        Priority = -5,
         Event = new ToggleInvisibilityActionEvent()
     };
 }

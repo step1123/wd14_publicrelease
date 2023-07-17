@@ -13,7 +13,6 @@ using Content.Shared.Interaction.Helpers;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Pointing;
 using Content.Shared.Popups;
-using Content.Shared.White.Administration;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
@@ -112,11 +111,6 @@ namespace Content.Server.Pointing.EntitySystems
 
             if (_pointers.TryGetValue(session, out var lastTime) &&
                 _gameTiming.CurTime < lastTime + PointDelay)
-            {
-                return false;
-            }
-
-            if (TryComp(pointed, out InvisibilityComponent? invisibility) && invisibility.Invisible) // WD
             {
                 return false;
             }
