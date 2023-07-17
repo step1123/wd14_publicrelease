@@ -6,7 +6,6 @@
   startingGear: ServiceWorkerGear
   icon: "ServiceWorker"
   supervisors: job-supervisors-service
-  canBeAntag: false
   access:
   - Service
   - Maintenance
