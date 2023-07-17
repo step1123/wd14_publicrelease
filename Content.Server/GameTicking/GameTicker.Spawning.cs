@@ -8,6 +8,7 @@ using Content.Server.Speech.Components;
 using Content.Server.Station.Components;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
+using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Content.Shared.White;
@@ -190,15 +191,6 @@ namespace Content.Server.GameTicking
                 newMind.BorgName = character.BorgName;
             }
 
-            if (_cfg.GetCVar(WhiteCVars.FanaticXenophobiaEnabled))
-            {
-                character = ReplaceBlacklistedSpecies(player, character, jobPrototype);
-                newMind.CharacterName = character.Name;
-                newMind.ClownName = character.ClownName;
-                newMind.MimeName = character.MimeName;
-                newMind.BorgName = character.BorgName;
-            }
-
             _playTimeTrackings.PlayerRolesChanged(player);
             var mobMaybe = _stationSpawning.SpawnPlayerCharacterOnStation(station, job, character);
             DebugTools.AssertNotNull(mobMaybe);
@@ -280,7 +272,7 @@ namespace Content.Server.GameTicking
 
                 if (existedAllowedProfile.Count == 0)
                 {
-                    character = HumanoidCharacterProfile.RandomWithSpecies(_robustRandom.Pick(whitelistedSpecies));
+                    character = HumanoidCharacterProfile.DefaultWithSpecies();
                     _chatManager.DispatchServerMessage(player, "Данному виду запрещено играть на этой профессии. Вам была выдана случайная внешность.");
                 }
                 else
