@@ -25,5 +25,9 @@ public sealed class InvisibilityCommand : IConsoleCommand
             return;
 
         entityManager.System<InvisibilitySystem>().ToggleInvisibility(uid.Value, invisibilityComponent);
+
+        shell.WriteLine(invisibilityComponent.Invisible
+            ? "Теперь вы в режиме невидимости"
+            : "Теперь вы не в режиме невидимости");
     }
 }

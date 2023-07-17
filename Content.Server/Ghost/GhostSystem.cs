@@ -356,6 +356,10 @@ namespace Content.Server.Ghost
         {
             foreach (var (_, vis) in EntityQuery<GhostComponent, VisibilityComponent>())
             {
+                // WD
+                if (EntityManager.TryGetComponent(vis.Owner, out InvisibilityComponent? invis) && invis.Invisible)
+                    continue;
+
                 if (visible)
                 {
                     _visibilitySystem.AddLayer(vis, (int) VisibilityFlags.Normal, false);

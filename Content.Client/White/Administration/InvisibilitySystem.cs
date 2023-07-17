@@ -28,7 +28,11 @@ public sealed class InvisibilitySystem : SharedInvisibilitySystem
         if (!EntityManager.TryGetComponent(ev.Uid, out SpriteComponent? sprite))
             return;
 
-        var newAlpha = Math.Clamp(ev.Invisible ? sprite.Color.A / 3f : sprite.Color.A * 3f, 0f, 1f);
+        var component = EntityManager.EnsureComponent<InvisibilityComponent>(ev.Uid);
+        component.Invisible = ev.Invisible;
+        component.DefaultAlpha ??= sprite.Color.A;
+
+        var newAlpha = ev.Invisible ? component.DefaultAlpha.Value / 3f : component.DefaultAlpha.Value;
         sprite.Color = sprite.Color.WithAlpha(newAlpha);
     }
 
