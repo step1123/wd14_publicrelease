@@ -112,6 +112,14 @@ public sealed class FollowerSystem : EntitySystem
         StopAllFollowers(uid, component);
     }
 
+    private bool IsFollowingInvisibleEntity(EntityUid uid) // WD
+    {
+        if (TryComp(uid, out InvisibilityComponent? invisibility) && invisibility.Invisible)
+            return true;
+
+        return TryComp(uid, out FollowerComponent? follower) && IsFollowingInvisibleEntity(follower.Following);
+    }
+
     /// <summary>
     ///     Makes an entity follow another entity, by parenting to it.
     /// </summary>
@@ -119,10 +127,14 @@ public sealed class FollowerSystem : EntitySystem
     /// <param name="entity">The entity to be followed</param>
     public void StartFollowingEntity(EntityUid follower, EntityUid entity)
     {
-        // WD
-        if (!EntityManager.HasComponent<InvisibilityComponent>(follower) &&
-            EntityManager.TryGetComponent(entity, out InvisibilityComponent? component) && component.Invisible)
-            return;
+        if (IsFollowingInvisibleEntity(entity)) // WD
+        {
+            if (!HasComp<InvisibilityComponent>(follower))
+                return;
+
+            if (TryComp(follower, out FollowedComponent? followed))
+                StopAllFollowers(follower, followed);
+        }
 
         // No recursion for you
         var targetXform = Transform(entity);

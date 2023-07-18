@@ -6,7 +6,6 @@ using Content.Client.Administration.UI.Bwoink;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Administration;
-using Content.Shared.CCVar;
 using Content.Shared.Input;
 using Content.Shared.White;
 using JetBrains.Annotations;
@@ -39,16 +38,16 @@ public sealed class AHelpUIController: UIController, IOnStateChanged<GameplaySta
     public IAHelpUIHandler? UIHelper;
     private bool _discordRelayActive;
 
-    private float defaultBwoinkVolume;
-    private float adminBwoinkVolume;
+    private float _defaultBwoinkVolume;
+    private float _adminBwoinkVolume;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeNetworkEvent<BwoinkDiscordRelayUpdated>(DiscordRelayUpdated);
-        defaultBwoinkVolume = WhiteCVars.BwoinkVolume.DefaultValue;
-        _cfg.OnValueChanged(WhiteCVars.BwoinkVolume, volume => adminBwoinkVolume = volume);
+        _defaultBwoinkVolume = WhiteCVars.BwoinkVolume.DefaultValue;
+        _cfg.OnValueChanged(WhiteCVars.BwoinkVolume, volume => _adminBwoinkVolume = volume, true);
     }
 
     public void OnStateEntered(GameplayState state)
@@ -135,7 +134,7 @@ public sealed class AHelpUIController: UIController, IOnStateChanged<GameplaySta
 
         var isAdmin = _adminManager.IsActive();
         var notify = !isAdmin || !message.IsAdmin;
-        float bwoinkVolume = isAdmin ? adminBwoinkVolume : defaultBwoinkVolume;
+        var bwoinkVolume = isAdmin ? _adminBwoinkVolume : _defaultBwoinkVolume;
 
         var audioParams = new AudioParams()
         {
