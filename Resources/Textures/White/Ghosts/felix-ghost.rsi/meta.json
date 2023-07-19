@@ -1,5 +1,7 @@
 {
   "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "felix",
   "size": {
     "x": 64,
     "y": 64
