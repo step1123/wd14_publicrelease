@@ -7,6 +7,7 @@ using Content.Server.GameTicking;
 using Content.Server.UtkaIntegration;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
+using Content.Shared.GameTicking;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Console;
@@ -19,6 +20,7 @@ namespace Content.Server.Administration.Commands
     {
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly UtkaTCPWrapper _utkaSockets = default!; // WD
+        [Dependency] private readonly IEntityManager _entityManager = default!; //WD
 
         public override string Command => "ban";
 
@@ -28,6 +30,7 @@ namespace Content.Server.Administration.Commands
             var plyMgr = IoCManager.Resolve<IPlayerManager>();
             var locator = IoCManager.Resolve<IPlayerLocator>();
             var dbMan = IoCManager.Resolve<IServerDbManager>();
+            var gameTicker = _entityManager.System<GameTicker>();
 
             string target;
             string reason;
@@ -116,6 +119,8 @@ namespace Content.Server.Administration.Commands
             {
                 serverName = "unknown";
             }
+
+            reason = $"[RoundId: {gameTicker.RoundId}]" + reason; // WD
 
             var banDef = new ServerBanDef(
                 null,
