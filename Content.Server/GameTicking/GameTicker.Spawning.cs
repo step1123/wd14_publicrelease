@@ -272,7 +272,7 @@ namespace Content.Server.GameTicking
 
                 if (existedAllowedProfile.Count == 0)
                 {
-                    character = HumanoidCharacterProfile.DefaultWithSpecies();
+                    character = HumanoidCharacterProfile.RandomWithSpecies();
                     _chatManager.DispatchServerMessage(player, "Данному виду запрещено играть на этой профессии. Вам была выдана случайная внешность.");
                 }
                 else
