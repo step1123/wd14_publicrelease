@@ -737,14 +737,9 @@
   description: uplink-carp-dehydrated-desc
   productEntity: DehydratedSpaceCarp
   cost:
-    Telecrystal: 3
+    Telecrystal: 2
   categories:
   - UplinkTools
-  conditions:
-  - !type:StoreWhitelistCondition
-    blacklist:
-      tags:
-      - NukeOpsUplink
 
 # Job Specific
 
