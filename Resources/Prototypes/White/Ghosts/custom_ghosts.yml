@@ -94,3 +94,13 @@
   ghostName: Operator Suzuran
   ghostDescription: Uoooooooh!!!
   size: 0.8, 0.8
+
+#doommax
+- type: customGhost
+  id: doommax-ghost
+  ckey: doommax
+  sprite: White/Ghosts/doommax-ghost.rsi
+  alpha: 0.95
+  ghostName: Наблюдатель
+  ghostDescription: Явился из другого мира с целью наблюдать за другими разумными существами
+  size: 1, 1
