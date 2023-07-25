@@ -81,3 +81,8 @@
   id: Starfield
   kind: source
   path: "/Textures/Shaders/starfield.swsl"
+
+- type: shader
+  id: NightVision
+  kind: source
+  path: "/Textures/Shaders/White/nightvision.swsl"

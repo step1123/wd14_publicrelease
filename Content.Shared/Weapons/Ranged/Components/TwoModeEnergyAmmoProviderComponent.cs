@@ -13,7 +13,7 @@ public sealed class TwoModeEnergyAmmoProviderComponent : BatteryAmmoProviderComp
     public string ProjectilePrototype = default!;
 
     [ViewVariables(VVAccess.ReadOnly),
-     DataField("hitscanProto", required: true, customTypeSerializer: typeof(PrototypeIdSerializer<HitscanPrototype>))]
+     DataField("hitscanProto", required: true, customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
     public string HitscanPrototype = default!;
 
     [ViewVariables(VVAccess.ReadOnly), DataField("projFireCost")]

@@ -1,0 +1,44 @@
+- type: entity
+  parent: PartSilicon
+  id: CyborgChest
+  name: Cyborg Chest
+  components:
+    - type: Appearance
+    - type: ItemMapper
+      mapLayers:
+        borg_l_arm+o:
+          whitelist:
+            tags:
+              - BorgLeftArm
+        borg_r_arm+o:
+          whitelist:
+            tags:
+              - BorgRightArm
+        borg_l_leg+o:
+          whitelist:
+            tags:
+              - BorgLeftLeg
+        borg_r_leg+o:
+          whitelist:
+            tags:
+              - BorgRightLeg
+        borg_head+o:
+          whitelist:
+            tags:
+              - BorgHead
+      sprite: White/Objects/Specific/cyborg_parts.rsi
+    - type: ContainerContainer
+      containers:
+        mech-assembly-container: !type:Container
+    - type: MechAssembly
+      finishedPrototype: CyborgChassis
+      requiredParts:
+        BorgHead: false
+        BorgLeftArm: false
+        BorgRightArm: false
+        BorgLeftLeg: false
+        BorgRightLeg: false
+    - type: Sprite
+      sprite: White/Objects/Specific/cyborg_parts.rsi
+      state: borg_chest+o
+      noRot: true

@@ -1,16 +1,13 @@
-using Content.Shared.CCVar;
-using Content.Shared.Chemistry.Reaction;
-using Content.Shared.Chemistry.Reagent;
+using System.IO;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.IoC;
-using Content.Shared.Localizations;
 using Content.Shared.Maps;
 using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Map;
-using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.Entry
 {
@@ -40,6 +37,15 @@ namespace Content.Shared.Entry
 
             InitTileDefinitions();
             IoCManager.Resolve<MarkingManager>().Initialize();
+
+
+#if !DEBUG
+            var resourceManager = IoCManager.Resolve<IResourceManager>();
+            var logoText = resourceManager.ContentFileReadAllText(new ResPath("/White/AsciiHueta/Logo.txt"));
+            var iconaText = resourceManager.ContentFileReadAllText(new ResPath("/White/AsciiHueta/Icona.txt"));
+            var finalMessage = $"\n{logoText}\n{iconaText}\n{logoText}";
+            Logger.Info(finalMessage);
+#endif
 
 #if DEBUG
             var configMan = IoCManager.Resolve<IConfigurationManager>();

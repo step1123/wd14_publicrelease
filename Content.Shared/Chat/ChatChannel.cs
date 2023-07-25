@@ -74,15 +74,19 @@ namespace Content.Shared.Chat
         /// </summary>
         AdminChat = 1 << 12,
 
+        //WD EDIT
+        Cult = 1 << 13,
+        //WD EDIT END
+
         /// <summary>
         ///     Unspecified.
         /// </summary>
-        Unspecified = 1 << 13,
+        Unspecified = 1 << 14,
 
         /// <summary>
         ///     Channels considered to be IC.
         /// </summary>
-        IC = Local | Whisper | Radio | Dead | Emotes | Damage | Visual,
+        IC = Local | Whisper | Radio | Dead | Emotes | Damage | Visual | Cult, // WD EDIT
 
         AdminRelated = Admin | AdminAlert | AdminChat,
     }

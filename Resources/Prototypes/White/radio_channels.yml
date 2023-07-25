@@ -1,0 +1,7 @@
+﻿- type: radioChannel
+  id: Binary
+  name: chat-radio-binary
+  keycodes:
+    - "b"
+  frequency: 1453
+  color: "#a6d6e0"

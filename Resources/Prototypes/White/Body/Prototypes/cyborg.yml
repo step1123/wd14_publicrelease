@@ -1,0 +1,27 @@
+- type: body
+  id: Cyborg
+  name: "cyborg"
+  root: chest
+  slots:
+    head:
+      part: LightHeadBorg
+      connections:
+        - chest
+    chest:
+      part: CyborgChest
+      connections:
+        - hand 1
+        - hand 2
+        - hand 3
+        - left leg
+        - right leg
+    hand 1:
+      part: LeftArmBorg
+    hand 2:
+      part: LeftArmBorg
+    hand 3:
+      part: LeftArmBorg
+    left leg:
+      part: LeftLegBorg
+    right leg:
+      part: RightLegBorg

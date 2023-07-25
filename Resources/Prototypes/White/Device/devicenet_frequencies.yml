@@ -1,0 +1,14 @@
+﻿- type: deviceFrequency
+  id: CyborgMonitor
+  name: device-frequency-prototype-name-crew-monitor
+  frequency: 1260
+
+- type: deviceFrequency
+  id: CyborgSensor
+  name: device-frequency-prototype-name-suit-sensors
+  frequency: 1259
+
+- type: deviceFrequency
+  id: CyborgAction
+  name: device-frequency-prototype-name-suit-sensors
+  frequency: 1258

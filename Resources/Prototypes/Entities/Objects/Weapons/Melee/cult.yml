@@ -20,6 +20,20 @@
     slots:
     - back
   - type: DisarmMalus
+  - type: RuneDrawerProvider
+    runePrototypes: [OfferingRune,
+                     EmpoweringRune,
+                     BuffRune,
+                     TeleportRune,
+                     ReviveRune,
+                     BarrierRune,
+                     SummoningRune,
+                     BloodBoilRune,
+                     ApocalypseRune]
+  - type: UserInterface
+    interfaces:
+      - key: enum.ListViewSelectorUiKey.Key
+        type: ListViewSelectorBUI
 
 - type: entity
   name: eldritch blade

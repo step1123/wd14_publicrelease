@@ -1,0 +1,25 @@
+- type: entity
+  id: PositronicBrain
+  name: Positronic brain
+  parent: BaseItem
+  description: Braains
+  components:
+    - type: Sprite
+      sprite: White/Objects/Specific/posi.rsi
+      layers:
+        - state: posibrain
+          shader: unshaded
+          map: [ "brainState" ]
+    - type: Organ
+    - type: Muted
+    - type: DoAfter
+    - type: PositronicBrain
+    - type: CyborgBrain
+    - type: Appearance
+    - type: GenericVisualizer
+      visuals:
+        enum.PosiVisuals.Status:
+          brainState:
+            Standby: { state: posibrain }
+            Searching: { state: posibrain-searching }
+            Occupied: { state: posibrain-occupied }

@@ -1,0 +1,7 @@
+- type: entity
+  id: CartridgeLightRifleWeakened
+  name: cartridge (.30 rifle) Weakened
+  parent: BaseCartridgeLightRifle
+  components:
+    - type: CartridgeAmmo
+      proto: BulletLightRifleWeakened

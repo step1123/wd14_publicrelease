@@ -1,0 +1,23 @@
+﻿<PanelContainer
+    xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    Margin="12 12 12 0">
+
+    <Button Name="Select">
+        <BoxContainer Orientation="Vertical">
+            <BoxContainer Orientation="Horizontal" Margin="0">
+                <TextureRect Name="BorgRect"
+                             Margin="10 0 0 0"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Left"
+                             SetSize="64 64"
+                             MaxSize="64 64"
+                             Stretch="Scale"
+                />
+                <controls:NanoHeading Name="Title"/>
+            </BoxContainer>
+            <RichTextLabel Name="Description" Margin="12 6 6 6" />
+        </BoxContainer>
+    </Button>
+</PanelContainer>

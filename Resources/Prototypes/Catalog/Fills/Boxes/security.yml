@@ -72,3 +72,19 @@
     layers:
       - state: box_security
       - state: forensic
+
+#White
+
+- type: entity
+  name: mindshield box
+  parent: BoxCardboard
+  id: BoxMindShield
+  description: A box full of mindshields.
+  components:
+    - type: StorageFill
+      contents:
+        - id: MindshieldImplanter
+          amount: 5
+    - type: Sprite
+      layers:
+        - state: box_security

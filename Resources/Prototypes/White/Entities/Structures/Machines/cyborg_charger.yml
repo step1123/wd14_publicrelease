@@ -1,0 +1,97 @@
+- type: entity
+  id: BorgChargerEntity
+  parent: BaseMachinePowered
+  name: borg charger
+  description: That's used with borgs for charge our battery lol.
+  components:
+  - type: BorgCharger
+    chargeRate: 6
+  - type: Sprite
+    sprite: White/Structures/Machines/borg_charger.rsi
+    snapCardinals: true
+    layers:
+    - state: open
+      map: ["machineLayer"]
+    - state: open_powered
+      map: ["terminalLayer"]
+      shader: "unshaded"
+  - type: GenericVisualizer
+    visuals:
+      enum.BorgChargerVisuals.Base:
+        machineLayer:
+          Closed: {state: "closed"}
+          Opened: {state: "open"}
+      enum.BorgChargerVisuals.Light:
+        terminalLayer:
+          ClosePowered: {state: "closed_powered"}
+          OpenPowered: {state: "open_powered"}
+          CloseUnpowered: {state: "closed_unpowered"}
+          OpenUnpowered: {state: "open_unpowered"}
+          Occupied: {state: "occupied"}
+          OccupiedCharged: {state: "occupied_charged"}
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.5,0.25,0.5"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Construction
+    graph: Machine
+    node: machine
+    containers:
+    - machine_parts
+    - machine_board
+  - type: ContainerContainer
+    containers:
+      scanner-bodyContainer: !type:ContainerSlot
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: StrongMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Machine
+    board: BorgChargerMachineCircuitboard
+  - type: WiresPanel
+  - type: Wires
+    BoardName: "BorgCharger"
+    LayoutId: BorgCharger
+  - type: Appearance
+  - type: Climbable
+  - type: ApcPowerReceiver
+    powerLoad: 200
+  - type: EmptyOnMachineDeconstruct
+    containers:
+    - scanner-bodyContainer
+
+- type: entity
+  id: BorgChargerMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: borg charger machine board
+  description: yes lol
+  components:
+    - type: Sprite
+      state: science
+    - type: MachineBoard
+      prototype: BorgChargerEntity
+      requirements:
+        Capacitor: 1
+      materialRequirements:
+        Glass: 5
+        Cable: 1

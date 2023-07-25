@@ -1,0 +1,75 @@
+﻿- type: instantAction
+  id: ArtificerCreateSoulStone
+  name: artificer-create-soul-stone-action-name
+  description: artificer-create-soul-stone-action-description
+
+  icon:
+    sprite: White/Cult/actions_cult.rsi
+    state: phaseshift
+  sound: /Audio/White/Cult/curse.ogg
+  useDelay: 300
+  event: !type:ArtificerCreateSoulStoneActionEvent
+
+- type: instantAction
+  id: ArtificerCreateConstructShell
+  name: artificer-create-construct-shell-action-name
+  description: artificer-create-construct-shell-action-description
+  itemIconStyle: NoItem
+  icon:
+    sprite: White/Cult/actions_cult.rsi
+    state: artificer
+  sound: /Audio/White/Cult/curse.ogg
+  useDelay: 180
+  event: !type:ArtificerCreateConstructShellActionEvent
+
+
+- type: instantAction
+  id: ArtificerConvertCultistFloor
+  name: artificer-convert-cultist-floor-action-name
+  description: artificer-convert-cultist-floor-action-description
+  itemIconStyle: NoItem
+  icon:
+    sprite: White/Cult/actions_cult.rsi
+    state: floorconstruct
+  sound: /Audio/White/Cult/curse.ogg
+  useDelay: 2
+  event: !type:ArtificerConvertCultistFloorActionEvent
+
+
+- type: instantAction
+  id: ArtificerCreateCultistWall
+  name: artificer-create-cultist-wall-action-name
+  description: artificer-create-cultist-wall-action-description
+  itemIconStyle: NoItem
+  icon:
+    sprite: White/Cult/actions_cult.rsi
+    state: lesserconstruct
+  sound: /Audio/White/Cult/curse.ogg
+  useDelay: 20
+  event: !type:ArtificerCreateCultistWallActionEvent
+
+
+- type: instantAction
+  id: WraithPhase
+  name: wraith-phase-action-name
+  description: wraith-phase-action-description
+  itemIconStyle: NoItem
+  icon:
+    sprite: White/Cult/actions_cult.rsi
+    state: phaseshift
+  sound: /Audio/White/Cult/wraith_phase.ogg
+  useDelay: 20
+  event: !type:WraithPhaseActionEvent
+
+
+- type: instantAction
+  id: JuggernautCreateWall
+  name: juggernaut-create-wall-action-name
+  description: juggernaut-create-wall-action-description
+  itemIconStyle: NoItem
+  icon:
+    sprite: White/Cult/actions_cult.rsi
+    state: cultforcewall
+  useDelay: 35
+  event: !type:JuggernautCreateWallActionEvent
+

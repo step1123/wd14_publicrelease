@@ -89,6 +89,17 @@
   - BasicStationEventScheduler
 
 - type: gamePreset
+  id: Cult
+  alias:
+    - cult
+  name: CULT
+  description: CULT
+  showInVote: false
+  rules:
+    - Cult
+    - BasicStationEventScheduler
+
+- type: gamePreset
   id: Pirates
   alias:
     - pirates

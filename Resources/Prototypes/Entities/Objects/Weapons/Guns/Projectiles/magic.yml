@@ -153,3 +153,25 @@
     whitelist:
       components:
       - Body
+
+
+- type: entity
+  id: ProjectileCult
+  parent: BaseBulletHighVelocity
+  name: Blood
+  description: FUCK.
+  noSpawn: true
+  components:
+    - type: Sprite
+      sprite: White/Cult/suka.rsi
+    - type: Projectile
+      damage:
+        groups:
+          Burn: 10
+          Brute: 10
+    - type: PointLight
+      enabled: true
+      color: "#ff4300"
+      radius: 2.0
+      energy: 7.0
+

@@ -1,0 +1,32 @@
+﻿- type: entity
+  id: ComputerCyborgConsole
+  parent: BaseComputer
+  name: cyborg console computer
+  description: Used to control the cyborgs.
+  components:
+    - type: Sprite
+      layers:
+        - map: ["computerLayerBody"]
+          state: computer
+        - map: ["computerLayerKeyboard"]
+          state: generic_keyboard
+        - map: ["computerLayerScreen"]
+          state: dron_control_monitor
+        - map: ["computerLayerKeys"]
+          state: tech_key
+    - type: Computer
+      board: CyborgMonitoringComputerCircuitboard
+    - type: CyborgMonitoringConsole
+    - type: ActivatableUI
+      key: enum.CyborgMonitoringConsoleUiKey.Key
+    - type: UserInterface
+      interfaces:
+        - key: enum.CyborgMonitoringConsoleUiKey.Key
+          type: CyborgConsoleBoundUserInterface
+    - type: DeviceNetwork
+      deviceNetId: Wireless
+      transmitFrequencyId: CyborgAction
+      receiveFrequencyId: CyborgMonitor
+    - type: WirelessNetworkConnection
+      range: 1200
+    - type: StationLimitedNetwork

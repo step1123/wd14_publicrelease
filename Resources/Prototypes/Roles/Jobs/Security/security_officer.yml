@@ -10,6 +10,9 @@
   startingGear: SecurityOfficerGear
   icon: "SecurityOfficer"
   supervisors: job-supervisors-hos
+  special:
+    - !type:AddImplantSpecial
+      implants: [ MindShieldImplant ]
   whitelistedSpecies:
     - Human
   canBeAntag: false

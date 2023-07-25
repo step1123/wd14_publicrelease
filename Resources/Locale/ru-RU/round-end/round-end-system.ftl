@@ -12,3 +12,4 @@ round-end-system-shuttle-recalled-announcement = Эвакуационный ша
 round-end-system-round-restart-eta-announcement = Раунд перезапустится через { $minutes } минут...
 eta-units-minutes = минут
 eta-units-seconds = секунд
+round-end-system-shuttle-curse-delayed-announcement = По определённым причинам, шаттл был задержан на некоторое время.

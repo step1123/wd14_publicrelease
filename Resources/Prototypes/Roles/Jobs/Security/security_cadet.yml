@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   id: SecurityCadet
   name: job-name-cadet
   description: job-description-cadet
@@ -13,6 +13,9 @@
   startingGear: SecurityCadetGear
   icon: "SecurityCadet"
   supervisors: job-supervisors-security
+  special:
+    - !type:AddImplantSpecial
+      implants: [ MindShieldImplant ]
   whitelistedSpecies:
     - Human
   canBeAntag: false

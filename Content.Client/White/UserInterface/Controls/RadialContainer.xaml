@@ -12,8 +12,6 @@
             Content="{Loc 'radial-ui-close'}"
             Texture="/Textures/Interface/Default/blocked.png"/>
         <LayoutContainer Access="Public" Name="Layout" HorizontalExpand="True" VerticalExpand="True"></LayoutContainer>
-        <BoxContainer Access="Public" Name="ActionBox" HorizontalExpand="True" VerticalExpand="True">
-            <Label Access="Public" Name="ActionLabel" HorizontalExpand="True" Visible="False"/>
-        </BoxContainer>
+        <RichTextLabel Access="Public" Name="ActionLabel" HorizontalExpand="True" Visible="False"/>
     </BoxContainer>
 </controls:RadialContainer>

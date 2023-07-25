@@ -21,6 +21,9 @@
   requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: job-supervisors-centcom
+  special:
+    - !type:AddImplantSpecial
+      implants: [ MindShieldImplant ]
   whitelistedSpecies:
     - Human
     - Felinid

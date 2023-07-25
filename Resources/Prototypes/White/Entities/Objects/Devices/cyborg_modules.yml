@@ -1,0 +1,219 @@
+﻿- type: entity
+  id: CyborgModule
+  parent: BaseItem
+  abstract: true
+  name: cyborg module
+  components:
+    - type: CyborgModule
+    - type: Item
+      sprite: White/Objects/Devices/cyborgradiomodule.rsi
+    - type: Sprite
+      sprite: White/Objects/Devices/cyborgradiomodule.rsi
+      state: icon
+
+
+#radio modules
+- type: entity
+  id: CyborgRadioModule
+  parent: CyborgModule
+  name: cyborg radio module
+  components:
+    - type: CyborgModule
+      name: "Дополнение радиочастот"
+    - type: Sprite
+      layers:
+        - state: icon
+        - state: label_radio
+    - type: ContainerContainer
+      containers:
+        key_slots: !type:Container
+    - type: ContainerFill
+      containers:
+        key_slots:
+          - EncryptionKeyCommon
+          - EncryptionKeyEngineering
+          - EncryptionKeyMedical
+          - EncryptionKeyScience
+          - EncryptionKeyService
+          - EncryptionKeyBinary
+    - type: Headset
+      requiredSlot: NONE
+    - type: EncryptionKeyHolder
+      keySlots: 6
+
+- type: entity
+  id: CyborgRadioModuleSyndie
+  parent: CyborgRadioModule
+  suffix: syndie
+  components:
+    - type: ContainerFill
+      containers:
+        key_slots:
+          - EncryptionKeyCommon
+          - EncryptionKeyEngineering
+          - EncryptionKeyMedical
+          - EncryptionKeyScience
+          - EncryptionKeyService
+          - EncryptionKeySyndie
+          - EncryptionKeyBinary
+- type: entity
+  id: CyborgRadioModuleSec
+  parent: CyborgRadioModule
+  suffix: security
+  components:
+    - type: ContainerFill
+      containers:
+        key_slots:
+          - EncryptionKeyCommon
+          - EncryptionKeyEngineering
+          - EncryptionKeyMedical
+          - EncryptionKeyScience
+          - EncryptionKeyService
+          - EncryptionKeySecurity
+          - EncryptionKeyBinary
+
+# id cards
+- type: entity
+  id: CyborgIDCardModule
+  parent: [CyborgModule,IDCardStandard]
+  name: cyborg id card module
+  components:
+    - type: CyborgModule
+      name: "Дополнение доступа"
+    - type: Sprite
+      layers:
+        - state: icon
+        - state: label_access
+    - type: IdCard
+      jobTitle: Cyborg
+    - type: Access
+      groups:
+        - AllAccess
+
+
+- type: entity
+  id: CyborgLawsModule
+  parent: CyborgModule
+  name: cyborg laws module
+  components:
+    - type: CyborgModule
+      name: "Дополнение закона"
+    - type: Sprite
+      layers:
+        - state: icon
+        - state: label_laws
+
+# instruments
+- type: entity
+  id: CyborgInstrumentModule
+  parent: CyborgModule
+  name: cyborg instrument module
+  components:
+    - type: CyborgModule
+      name: "Дополнение инструментария"
+    - type: Sprite
+      layers:
+        - state: icon
+        - state: label_instrument
+    - type: CyborgInstrumentModule
+    - type: ContainerContainer
+      containers:
+        instrument_slots: !type:Container
+
+- type: entity
+  id: CyborgInstrumentModuleFilled
+  parent: CyborgInstrumentModule
+  suffix: filled
+  components:
+    - type: ContainerFill
+      containers:
+        instrument_slots:
+          - Screwdriver
+          - Crowbar
+          - Wirecutter
+          - trayScanner
+          - Wrench
+          - WelderIndustrialBorg
+          - HolofanProjector
+          - MopItem
+          - FireExtinguisherBorg
+          - StackHolderFloorTile
+
+
+
+- type: entity
+  id: CyborgInstrumentModuleFilledMedicine
+  parent: CyborgInstrumentModule
+  suffix: filled medicine
+  components:
+    - type: ContainerFill
+      containers:
+        instrument_slots:
+          - HyposprayBorg
+          - HandheldHealthAnalyzer
+          - Syringe
+          - FireExtinguisherBorg
+          - HandheldCrewMonitor
+          - StackHolderHealingItem
+
+- type: entity
+  id: CyborgInstrumentModuleFilledSecurity
+  parent: CyborgInstrumentModule
+  suffix: filled security
+  components:
+    - type: ContainerFill
+      containers:
+        instrument_slots:
+          - Stunbaton
+          - DisablerBorg
+          - Flash
+          - Crowbar
+          - StackHolderHandcuffs
+
+- type: entity
+  id: CyborgInstrumentModuleFilledEngineer
+  parent: CyborgInstrumentModule
+  suffix: filled engineer
+  components:
+    - type: ContainerFill
+      containers:
+        instrument_slots:
+          - RCD
+          - JawsOfLife
+          - PowerDrill
+          - HolofanProjector
+          - Multitool
+          - NetworkConfigurator
+          - WelderIndustrialBorg
+          - FireExtinguisherBorg
+          - StackHolderFloorTile
+          - StackHolderCable
+
+
+- type: entity
+  id: CyborgInstrumentModuleFilledSyndie
+  parent: CyborgInstrumentModule
+  suffix: filled syndie
+  components:
+    - type: ContainerFill
+      containers:
+        instrument_slots:
+          - EnergySword
+          - WeaponLightMachineGunL6Weakened
+          - WeaponLaserCarbine
+          - PinpointerNuclear
+          - Flash
+          - SyndicateJawsOfLife
+
+- type: entity
+  id: CyborgAmmoFillupModule
+  parent: CyborgModule
+  name: cyborg ammo fillup module
+  components:
+    - type: CyborgModule
+      name: "Дополнение наполнение магазина"
+    - type: Sprite
+      layers:
+        - state: icon
+        - state: label_ammo
+    - type: CyborgAmmoFillupModule

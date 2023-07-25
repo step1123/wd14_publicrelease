@@ -315,6 +315,14 @@
       - !type:SatiateThirst
         factor: 4
 
+#WD start
+- type: reagent
+  id: HolyWater
+  name: reagent-name-holy-water
+  parent: Water
+  desc: reagent-desc-holy-water
+#WD end
+
 - type: reagent
   id: Ice
   name: reagent-name-ice
@@ -432,7 +440,7 @@
       effects:
         - !type:SatiateThirst
           factor: 1
-          
+
 - type: reagent
   id: Kvass
   name: reagent-name-kvass

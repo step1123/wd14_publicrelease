@@ -54,3 +54,12 @@
   - Syndicate
   - Passive
   - PetsNT
+
+- type: faction
+  id: Cultist
+  hostile:
+    - NanoTrasen
+    - SimpleHostile
+    - Xeno
+    - PetsNT
+    - Syndicate

@@ -1,0 +1,35 @@
+- type: entity
+  id: ManMachineInterface
+  name: Man-Machine Interface
+  parent: BaseItem
+  description: Interface for your brains...
+  components:
+    - type: Sprite
+      sprite: White/Objects/Specific/mmi.rsi
+      layers:
+        - state: mmi_brain
+          visible: false
+          map: [ "mmiBrain"]
+        - state: mmi_off
+          shader: unshaded
+          map: [ "mmiState" ]
+    - type: Organ
+    - type: ContainerContainer
+      containers:
+        brain-slot: !type:ContainerSlot
+    - type: Muted
+    - type: DoAfter
+    - type: MMI
+    - type: CyborgBrain
+    - type: Appearance
+    - type: GenericVisualizer
+      visuals:
+        enum.MMIVisuals.Status:
+          mmiState:
+            Off: { state: mmi_off }
+            On: { state: mmi_alive }
+            Dead: { state: mmi_dead }
+        enum.MMIVisuals.HasBrain:
+          mmiBrain:
+            True: { visible: True }
+            False: { visible: False }

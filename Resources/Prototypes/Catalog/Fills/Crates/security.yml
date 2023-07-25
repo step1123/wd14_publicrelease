@@ -86,3 +86,14 @@
         amount: 2
 
 # Cosmetic Crates
+
+#White
+
+- type: entity
+  id: CreateSecurityMindShield
+  parent: CrateSecgear
+  components:
+    - type: StorageFill
+      contents:
+        - id: MindshieldImplanter
+          amount: 5

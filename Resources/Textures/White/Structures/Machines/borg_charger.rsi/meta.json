@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "https://github.com/tgstation/tgstation/blob/b3df75f00aa210af0a9f5aad989859e1ec6d92f5/icons/obj/objects.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "open"
+    },
+    {
+      "name": "open_powered"
+    },
+    {
+      "name": "open_unpowered"
+    },
+    {
+      "name": "closed"
+    },
+    {
+      "name": "closed_powered"
+    },
+    {
+      "name": "closed_unpowered"
+    },
+    {
+      "name": "occupied",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "occupied_charged",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "occupied_unpowered",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    }
+  ]
+}

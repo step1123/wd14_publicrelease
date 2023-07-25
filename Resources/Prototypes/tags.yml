@@ -811,6 +811,11 @@
 - type: Tag
   id: ZombifyableByMelee
 
+- type: Tag
+  id: SMImmune
+
+- type: Tag
+  id: MindshieldImplant
 # WHITE END
 
 - type: Tag

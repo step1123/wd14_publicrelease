@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared.Actions;
 using Content.Shared.Actions.ActionTypes;
 using Content.Shared.Implants.Components;
@@ -101,6 +101,7 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
 
         component.ImplantedEntity = target;
         implantContainer.Insert(implant);
+        RaiseLocalEvent(new SubdermalImplantInserted(target, component));
     }
 
     /// <summary>

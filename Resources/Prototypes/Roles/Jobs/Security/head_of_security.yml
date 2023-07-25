@@ -17,6 +17,9 @@
   icon: "HeadOfSecurity"
   requireAdminNotify: true
   supervisors: job-supervisors-captain
+  special:
+    - !type:AddImplantSpecial
+      implants: [ MindShieldImplant ]
   whitelistedSpecies:
     - Human
   canBeAntag: false

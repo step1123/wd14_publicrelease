@@ -226,6 +226,8 @@
       - ClothingBackpackDuffelHolding
       - WelderExperimental
       - JawsOfLife
+      - PositronicBrain #WD EDIT
+      - ManMachineInterface #WD EDIT
 
 - type: entity
   id: CircuitImprinter
@@ -315,6 +317,9 @@
       - SodaDispenserMachineCircuitboard
       - TelecomServerCircuitboard
       - CriminalRecordsServerCircuitboard # WD-EDIT
+      - CyborgMonitoringComputerCircuitboard
+      - BorgChargerMachineCircuitboard
+      - CyborgMonitoringServerMachineCircuitboard
   - type: MaterialStorage
     whitelist:
       tags:
@@ -367,6 +372,7 @@
     - HamtrRArm
     - HamtrLLeg
     - HamtrRLeg
+    - CyborgChest
   - type: MaterialStorage
     whitelist:
       tags:

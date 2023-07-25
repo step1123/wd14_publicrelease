@@ -1,0 +1,85 @@
+- type: entity
+  id: CyborgChassis
+  parent: BaseRipleyPart
+  name: Cyborg chassis
+  description: An in-progress construction of the cyborg.
+  components:
+    - type: Appearance
+    - type: ContainerContainer
+      containers:
+        battery-container: !type:Container
+        brain-container: !type:Container
+    - type: Sprite
+      noRot: true
+      sprite: White/Objects/Specific/cyborg_parts.rsi
+      layers:
+        - state: borg_r_arm+o
+        - state: borg_l_arm+o
+        - state: borg_r_leg+o
+        - state: borg_l_leg+o
+        - state: borg_head+o
+        - state: borg_chest+o
+          shader: unshaded
+    - type: Construction
+      graph: Borg
+      node: start
+      defaultTarget: borg
+
+- type: constructionGraph
+  id: Borg
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: borg
+          steps:
+            - tool: Anchoring
+              doAfter: 1
+
+            - component: PowerCell
+              name: power cell
+              store: battery-container
+              icon:
+                sprite: Objects/Power/power_cells.rsi
+                state: small
+            - tool: Screwing
+              doAfter: 1
+
+            - material: Cable
+
+            - tool: Cutting
+              doAfter: 1
+
+            - component: Flash
+              name: Flash
+
+            - tool: Screwing
+              doAfter: 1
+
+            - component: Flash
+              name: Flash
+
+            - tool: Screwing
+              doAfter: 1
+
+            - component: ActiveCyborgBrain
+              name: active MII or positronic brain
+              store: brain-container
+
+            - tool: Screwing
+              doAfter: 1
+
+            - material: Steel
+              amount: 5
+
+            - tool: Anchoring
+              doAfter: 1
+
+            - tool: Welding
+              doAfter: 1
+
+
+    - node: borg
+      actions:
+        - !type:BuildBorg
+          borgPrototype: PlayerCyborgStart

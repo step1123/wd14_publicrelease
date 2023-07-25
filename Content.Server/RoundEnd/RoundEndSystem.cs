@@ -219,6 +219,34 @@ namespace Content.Server.RoundEnd
             //WD-EDIT
         }
 
+        //WD start
+        public void DelayCursedShuttle(TimeSpan delay)
+        {
+            if (_gameTicker.RunLevel != GameRunLevel.InRound)
+                return;
+
+            if (_countdownTokenSource == null)
+                return;
+
+            var countdown =  ExpectedCountdownEnd - _gameTiming.CurTime + delay;
+            ExpectedCountdownEnd = _gameTiming.CurTime + countdown;
+
+            _countdownTokenSource.Cancel();
+            _countdownTokenSource = new ();
+
+            if (countdown != null)
+                Timer.Spawn(countdown.Value, _shuttle.CallEmergencyShuttle, _countdownTokenSource.Token);
+
+            _chatSystem.DispatchGlobalAnnouncement(Loc.GetString("round-end-system-shuttle-curse-delayed-announcement"),
+                Loc.GetString("Station"), colorOverride: Color.Gold);
+        }
+
+        public bool ShuttleCalled()
+        {
+            return ExpectedCountdownEnd != null;
+        }
+        //WD end
+
         //WD-EDIT
         private void SendRoundStatus(string status)
         {

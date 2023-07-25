@@ -192,4 +192,14 @@
     Blunt: 1.15
     Slash: 1.15
     Piercing: 1.15
+
+- type: damageModifierSet
+  id: CultRobe
+  coefficients:
+    Blunt: 1.45
+    Slash: 1.45
+    Piercing: 1.45
+    Shock: 1.45
+    Cold: 1.45
+    Heat: 1.45
 # END

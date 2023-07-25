@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using Content.Shared.Containers.ItemSlots;
@@ -11,6 +11,28 @@ using Robust.Shared.Player;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Implants;
+
+public class SubdermalImplantInserted
+{
+    public EntityUid Entity;
+    public SubdermalImplantComponent Component;
+    public SubdermalImplantInserted(EntityUid entity, SubdermalImplantComponent component)
+    {
+        Entity = entity;
+        Component = component;
+    }
+}
+
+public class SubdermalImplantRemoved
+{
+    public EntityUid Entity;
+    public SubdermalImplantComponent Component;
+    public SubdermalImplantRemoved(EntityUid entity, SubdermalImplantComponent component)
+    {
+        Entity = entity;
+        Component = component;
+    }
+}
 
 public abstract class SharedImplanterSystem : EntitySystem
 {
@@ -53,10 +75,14 @@ public abstract class SharedImplanterSystem : EntitySystem
         var implantedComp = EnsureComp<ImplantedComponent>(target);
         var implantContainer = implantedComp.ImplantContainer;
 
+        if (implantedComp.ImplantContainer.ContainedEntities.Any(x => MetaData(x).EntityName == MetaData(implant.Value).EntityName))
+            return;
+
         component.ImplanterSlot.ContainerSlot?.Remove(implant.Value);
         implantComp.ImplantedEntity = target;
         implantContainer.OccludesLight = false;
         implantContainer.Insert(implant.Value);
+        RaiseLocalEvent(new SubdermalImplantInserted(implantComp.ImplantedEntity!.Value, implantComp));
 
         if (component.CurrentMode == ImplanterToggleMode.Inject && !component.ImplantOnly)
             DrawMode(component);
@@ -116,6 +142,7 @@ public abstract class SharedImplanterSystem : EntitySystem
                 }
 
                 implantContainer.Remove(implant);
+                RaiseLocalEvent(new SubdermalImplantRemoved(implantComp.ImplantedEntity!.Value, implantComp));
                 implantComp.ImplantedEntity = null;
                 implanterContainer.Insert(implant);
                 permanentFound = implantComp.Permanent;

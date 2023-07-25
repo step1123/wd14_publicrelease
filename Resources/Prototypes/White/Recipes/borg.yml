@@ -1,0 +1,51 @@
+- type: latheRecipe
+  id: CyborgChest
+  result: CyborgChest
+  completetime: 10
+  materials:
+    Steel: 5000
+    Glass: 1000
+
+- type: latheRecipe
+  id: CyborgMonitoringComputerCircuitboard
+  result: CyborgMonitoringComputerCircuitboard
+  completetime: 4
+  materials:
+    Steel: 100
+    Glass: 900
+
+- type: latheRecipe
+  id: BorgChargerMachineCircuitboard
+  result: BorgChargerMachineCircuitboard
+  completetime: 4
+  materials:
+    Steel: 100
+    Glass: 900
+
+- type: latheRecipe
+  id: CyborgMonitoringServerMachineCircuitboard
+  result: CyborgMonitoringServerMachineCircuitboard
+  completetime: 4
+  materials:
+    Steel: 100
+    Glass: 900
+
+- type: latheRecipe
+  id: PositronicBrain
+  result: PositronicBrain
+  completetime: 4
+  materials:
+    Steel: 100
+    Plastic: 500
+
+- type: latheRecipe
+  id: ManMachineInterface
+  result: ManMachineInterface
+  icon:
+    sprite: White/Objects/Specific/mmi.rsi
+    state: mmi_off
+  completetime: 4
+  materials:
+    Steel: 300
+    Plastic: 500
+    Glass: 200

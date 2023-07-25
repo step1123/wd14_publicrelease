@@ -1,0 +1,46 @@
+﻿- type: alert
+  id: Charge
+  category: Charge
+  icons:
+    - sprite: /Textures/White/Interface/Alerts/charge.rsi
+      state: charge0
+    - sprite: /Textures/White/Interface/Alerts/charge.rsi
+      state: charge1
+    - sprite: /Textures/White/Interface/Alerts/charge.rsi
+      state: charge2
+    - sprite: /Textures/White/Interface/Alerts/charge.rsi
+      state: charge3
+    - sprite: /Textures/White/Interface/Alerts/charge.rsi
+      state: charge4
+    - sprite: /Textures/White/Interface/Alerts/charge.rsi
+      state: charge5
+    - sprite: /Textures/White/Interface/Alerts/charge.rsi
+      state: charge6
+  name: alerts-charge-name
+  description: alerts-charge-desc
+  minSeverity: 0
+  maxSeverity: 6
+
+
+- type: alert
+  id: Panel
+  category: Panel
+  icons:
+    - sprite: /Textures/White/Interface/Alerts/panel.rsi
+      state: panel0
+    - sprite: /Textures/White/Interface/Alerts/panel.rsi
+      state: panel1
+  name: alerts-panel-name
+  description: alerts-panel-desc
+  minSeverity: 0
+  maxSeverity: 1
+
+- type: alert
+  id: Law
+  category: Law
+  onClick: !type:ShowLaws  { }
+  icons:
+    - sprite: /Textures/White/Interface/Alerts/law.rsi
+      state: law
+  name: law-name
+  description: law-desc

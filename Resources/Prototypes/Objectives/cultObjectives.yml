@@ -1,0 +1,5 @@
+- type: objective
+  id: CultistKillObjective
+  issuer: Cult
+  conditions:
+    - !type:KillCultistTarget {}

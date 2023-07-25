@@ -38,7 +38,8 @@ namespace Content.Server.Body.Systems
             HandleMind(parent, args.Old);
         }
 
-        private void HandleMind(EntityUid newEntity, EntityUid oldEntity)
+        //WD FIX BLYAT!
+        private void HandleMind(EntityUid oldEntity, EntityUid newEntity)
         {
             EntityManager.EnsureComponent<MindContainerComponent>(newEntity);
             var oldMind = EntityManager.EnsureComponent<MindContainerComponent>(oldEntity);

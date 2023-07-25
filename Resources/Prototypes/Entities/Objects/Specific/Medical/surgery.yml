@@ -56,7 +56,7 @@
 - type: entity
   name: scalpel
   id: Scalpel
-  parent: BaseToolSurgery
+  parent: [BaseToolSurgery , BaseKnife] #WD EDIT
   description: A surgical tool used to make incisions into flesh.
   components:
   - type: Sharp

@@ -56,3 +56,5 @@ alerts-pulling-name = Вы тянете
 alerts-pulling-desc = Вы что-то тянете. Щелкните по иконке, чтобы перестать.
 alerts-bleeding-name = Кровотечение
 alerts-bleeding-desc = У вас [color=#C10000]кровотечение[/color], вколите [color=#3D9CBF]экстренный медипен[/color] или перебинтуйтесь.
+alerts-cult-buff-name = Усиление
+alerts-cult-buff-desc = Подготовка заклинаний крови занимает гораздо меньше времени, и вы не теряете столько крови при этом.

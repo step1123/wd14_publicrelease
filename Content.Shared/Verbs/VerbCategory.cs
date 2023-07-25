@@ -86,5 +86,9 @@ namespace Content.Shared.Verbs
         public static readonly VerbCategory Lever = new("verb-categories-lever", null);
 
         public static readonly VerbCategory SelectType = new("verb-categories-select-type", null);
+
+        //WD START
+        public static readonly VerbCategory Narsie = new VerbCategory("verb-categories-narsie", null);
+        //END
     }
 }

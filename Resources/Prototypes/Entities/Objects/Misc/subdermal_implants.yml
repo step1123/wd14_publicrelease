@@ -194,3 +194,17 @@
         - SubdermalImplant
         - HideContextMenu
         - MacroBomb
+
+# White
+
+- type: entity
+  parent: BaseSubdermalImplant
+  id: MindShieldImplant
+  name: mindshield
+  description: protects your mind
+  noSpawn: true
+  components:
+    - type: SubdermalImplant
+    - type: Tag
+      tags:
+        - MindshieldImplant

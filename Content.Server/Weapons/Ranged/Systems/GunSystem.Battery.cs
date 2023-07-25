@@ -184,7 +184,17 @@ public sealed partial class GunSystem
 
                 return null;
             }
-            return ProtoManager.Index<HitscanPrototype>(twoMode.HitscanPrototype).Damage;
+
+            if (ProtoManager.Index<EntityPrototype>(twoMode.HitscanPrototype).Components
+                .TryGetValue(_factory.GetComponentName(typeof(ProjectileComponent)), out var projectile2))
+            {
+                var p = (ProjectileComponent) projectile2.Component;
+
+                if (p.Damage.Total > FixedPoint2.Zero)
+                {
+                    return p.Damage;
+                }
+            }
         }
         return null;
     }

@@ -136,9 +136,9 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
     //WD-EDIT
     public string SanitizeOutSlang(string input)
     {
-        var pattern = @"\b(?<word>\w+)\b";
+        var pattern = @"[\p{L}\d'-]+";
 
-        var newMessage = Regex.Replace(input, pattern ,
+        var newMessage = Regex.Replace(input, pattern,
             match => _slangToNormal.ContainsKey(match.Groups[1].Value.ToLower()) ? _slangToNormal[match.Groups[1].Value.ToLower()] : match.Value, RegexOptions.IgnoreCase);
 
         return newMessage;

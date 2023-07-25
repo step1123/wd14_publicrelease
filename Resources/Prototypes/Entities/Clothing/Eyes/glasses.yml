@@ -131,6 +131,7 @@
     component:
     - type: ShowJobInfo
     - type: ShowCrimeRecords
+    - type: ShowMindShieldHud
 
 - type: entity
   parent: ClothingEyesBase

@@ -1,0 +1,10 @@
+- type: entity
+  id: BulletLightRifleWeakened
+  name: bullet (.20 rifle) Weakened
+  parent: BaseBullet
+  noSpawn: true
+  components:
+    - type: Projectile
+      damage:
+        types:
+          Piercing: 15

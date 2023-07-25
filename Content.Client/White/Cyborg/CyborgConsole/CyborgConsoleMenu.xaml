@@ -1,0 +1,24 @@
+﻿<ui:FancyWindow xmlns="https://spacestation14.io"
+                xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
+                xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+                Title="Консоль контроля киборгов"
+                MinSize="400 300"
+                SetSize="800 500"
+                Resizable="true">
+    <BoxContainer Orientation="Horizontal"
+                  HorizontalExpand="True"
+                  VerticalExpand="True">
+        <BoxContainer Orientation="Vertical"
+                      SizeFlagsStretchRatio="1"
+                      Name="CyborgList">
+
+        </BoxContainer>
+        <customControls:VSeparator StyleClasses="LowDivider"/>
+        <PanelContainer VerticalExpand="True"
+                        HorizontalExpand="True"
+                        SizeFlagsStretchRatio="3"
+                        Name="CyborgInformation">
+
+        </PanelContainer>
+    </BoxContainer>
+</ui:FancyWindow>

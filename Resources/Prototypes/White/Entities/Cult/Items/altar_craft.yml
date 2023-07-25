@@ -1,0 +1,13 @@
+﻿- type: cultistFactoryProduction
+  id: FactoryWhetstone
+  icon: "/Textures/White/Items/Misc/wetstone.rsi/sharpener.png"
+  name: Точильный камень
+  item:
+    - CultSharpener
+
+- type: cultistFactoryProduction
+  id: FactoryConstructShell
+  icon: "/Textures/White/Cult/soulstone.rsi/soulstone.png"
+  name: Оболочка Конструкта
+  item:
+    - ConstructShell

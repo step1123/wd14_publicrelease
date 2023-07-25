@@ -45,6 +45,7 @@
   - type: Tag
     tags:
     - Book
+  - type: BibleWaterConvert
 
 - type: entity
   parent: Bible

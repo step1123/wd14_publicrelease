@@ -51,6 +51,10 @@
         /// </summary>
         Admin = ChatChannel.AdminChat,
 
+        //WD EDIT
+        Cult = ChatChannel.Cult,
+        //WD EDIT END
+
         Console = ChatChannel.Unspecified
     }
 }

@@ -19,6 +19,9 @@ namespace Content.Shared.Input
         public static readonly BoundKeyFunction FocusLOOC = "FocusLOOCWindow";
         public static readonly BoundKeyFunction FocusOOC = "FocusOOCWindow";
         public static readonly BoundKeyFunction FocusAdminChat = "FocusAdminChatWindow";
+        // WD EDIT
+        public static readonly BoundKeyFunction FocusCultChat = "FocusCultChatWindow";
+        // WD EDIT END
         public static readonly BoundKeyFunction FocusDeadChat = "FocusDeadChatWindow";
         public static readonly BoundKeyFunction FocusConsoleChat = "FocusConsoleChatWindow";
         public static readonly BoundKeyFunction CycleChatChannelForward = "CycleChatChannelForward";

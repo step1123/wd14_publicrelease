@@ -23,6 +23,7 @@ namespace Content.Shared.Alert
         HumanDead,
         HumanHealth,
         Bleeding,
+        CultBuffed,
         PilotingShuttle,
         Peckish,
         Starving,
@@ -44,7 +45,12 @@ namespace Content.Shared.Alert
         Debug3,
         Debug4,
         Debug5,
-        Debug6
+        Debug6,
+        //WD start
+        Charge,
+        Panel,
+        Law
+        //WD end
     }
 
 }

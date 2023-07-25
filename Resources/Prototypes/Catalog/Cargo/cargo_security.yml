@@ -67,3 +67,16 @@
   cost: 800
   category: Security
   group: market
+
+
+#WHITE
+
+- type: cargoProduct
+  id: SecurityMindShield
+  icon:
+    sprite: Clothing/OuterClothing/Vests/oldarmor.rsi
+    state: icon
+  product: CreateSecurityMindShield
+  cost: 1000
+  category: Security
+  group: market

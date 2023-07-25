@@ -1,0 +1,14 @@
+- type: polymorph
+  id: CyborgMedical
+  entity: PlayerCyborgMedical
+  forced: true
+
+- type: polymorph
+  id: CyborgSecurity
+  entity: PlayerCyborgSecurity
+  forced: true
+
+- type: polymorph
+  id: CyborgEngineer
+  entity: PlayerCyborgEng
+  forced: true

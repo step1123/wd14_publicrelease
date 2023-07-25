@@ -28,3 +28,11 @@
   icon: { sprite: Objects/Materials/Sheets/metal.rsi, state: plasteel }
   color: "#696969" #Okay, this is epic
   price: 0.28 # 1-1 mix of plasma and steel.
+
+- type: material
+  id: CultRunicMetal
+  stackEntity: CultRunicMetal1
+  name: materials-runic-metal
+  icon: { sprite: /Textures/White/Cult/Entities/runic_metal.rsi, state: runic }
+  color: "#9d2b39"
+  price: 0.05

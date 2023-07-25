@@ -87,3 +87,14 @@
   noSpawn: true
   components:
   - type: RampingStationEventScheduler
+
+# WD EDIT
+- type: entity
+  id: Cult
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: CultRule
+      cultistStartingItems:
+        - RitualDagger
+        - CultRunicMetal20

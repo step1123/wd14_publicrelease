@@ -1,0 +1,21 @@
+- type: constructionGraph
+  id: BodySurgery
+  start: head
+  graph:
+    - node: head
+      edges:
+        - to: drop
+          steps:
+            - tool: Sawing
+              doAfter: 1
+
+            - tool: Slicing
+              doAfter: 1
+
+            - tool: Sawing
+              doAfter: 1
+
+
+    - node: drop
+      actions:
+        - !type:Surgery

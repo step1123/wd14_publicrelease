@@ -10,6 +10,9 @@
   startingGear: DetectiveGear
   icon: "Detective"
   supervisors: job-supervisors-hos
+  special:
+    - !type:AddImplantSpecial
+      implants: [ MindShieldImplant ]
   whitelistedSpecies:
     - Human
     - Dwarf

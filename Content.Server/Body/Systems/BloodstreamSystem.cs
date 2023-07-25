@@ -135,7 +135,7 @@ public sealed class BloodstreamSystem : EntitySystem
 
                 // storing the drunk and stutter time so we can remove it independently from other effects additions
                 bloodstream.StatusTime += bloodstream.UpdateInterval * 2;
-            }   
+            }
             else if (!_mobStateSystem.IsDead(uid))
             {
                 // If they're healthy, we'll try and heal some bloodloss instead.
@@ -311,7 +311,7 @@ public sealed class BloodstreamSystem : EntitySystem
     /// <summary>
     ///     Attempts to modify the blood level of this entity directly.
     /// </summary>
-    public bool TryModifyBloodLevel(EntityUid uid, FixedPoint2 amount, BloodstreamComponent? component = null)
+    public bool TryModifyBloodLevel(EntityUid uid, FixedPoint2 amount, BloodstreamComponent? component = null, bool createPuddle = true) //WD EDIT
     {
         if (!Resolve(uid, ref component, false))
             return false;
@@ -325,7 +325,7 @@ public sealed class BloodstreamSystem : EntitySystem
         var newSol = component.BloodSolution.SplitSolution(-amount);
         component.BloodTemporarySolution.AddSolution(newSol, _prototypeManager);
 
-        if (component.BloodTemporarySolution.Volume > component.BleedPuddleThreshold)
+        if (component.BloodTemporarySolution.Volume > component.BleedPuddleThreshold && createPuddle) //WD EDIT
         {
             // Pass some of the chemstream into the spilled blood.
             var temp = component.ChemicalSolution.SplitSolution(component.BloodTemporarySolution.Volume / 10);

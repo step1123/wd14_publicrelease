@@ -1,0 +1,34 @@
+﻿<ui:FancyWindow xmlns="https://spacestation14.io"
+                xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
+                xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+                Title="Выбор инструмента"
+                MinSize="400 300"
+                SetSize="500 500"
+                Resizable="true">
+    <BoxContainer Orientation="Vertical"
+                  HorizontalExpand="True"
+                  VerticalExpand="True">
+        <BoxContainer Orientation="Vertical"
+                      Margin="15 2 15 20">
+            <Label Name="EnergyLabel"></Label>
+            <ProgressBar
+                Name="EnergyBar"
+                MinValue="0"
+                MaxValue="1"
+                SetHeight="20">
+            </ProgressBar>
+        </BoxContainer>
+        <customControls:VSeparator StyleClasses="LowDivider"/>
+        <ScrollContainer
+            HScrollEnabled="False"
+            HorizontalExpand="True"
+            VerticalExpand="True">
+                <BoxContainer Name="InstrumentsList"
+                              Orientation="Vertical"
+                              HorizontalExpand="True"
+                              VerticalExpand="True"
+                              Margin="0 0 0 12">
+                </BoxContainer>
+        </ScrollContainer>
+    </BoxContainer>
+</ui:FancyWindow>

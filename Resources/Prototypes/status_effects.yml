@@ -56,3 +56,7 @@
 
 - type: statusEffect
   id: RatvarianLanguage #Praise him
+
+# WD
+- type: statusEffect
+  id: Incorporeal

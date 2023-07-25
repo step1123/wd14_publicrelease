@@ -7,3 +7,4 @@ round-end-system-round-restart-eta-announcement = Restarting the round in {$minu
 
 eta-units-minutes = minutes
 eta-units-seconds = seconds
+round-end-system-shuttle-curse-delayed-announcement = For certain reasons, the shuttle was delayed for some time.

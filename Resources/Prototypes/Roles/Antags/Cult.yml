@@ -1,0 +1,6 @@
+- type: antag
+  id: Cultist
+  name: Cultist
+  antagonist: true
+  setPreference: true
+  objective: Summon narsie

@@ -1,0 +1,28 @@
+﻿- type: entity
+  name: soul shard
+  description: Pohui
+  parent: BaseItem
+  id: SoulShard
+  components:
+    - type: Sprite
+      state: icon
+      layers:
+        - state: soulstone
+          map: ["hasSoul"]
+          sprite: White/Cult/soulstone.rsi
+    - type: MindContainer
+    - type: SoulShard
+    - type: PointLight
+      color: Red
+      radius: 2
+      softness: 1
+      enabled: false
+    - type: Appearance
+    - type: GenericVisualizer
+      visuals:
+        enum.SoulShardVisualState.State:
+          hasSoul:
+            True: { state: "soulstone2" }
+            False: { state: "soulstone" }
+    - type: Speech
+

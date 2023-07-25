@@ -166,7 +166,8 @@ public abstract partial class SharedGunSystem
                     var projEnt = Spawn(twoMode.ProjectilePrototype, coordinates);
                     return (projEnt, EnsureComp<AmmoComponent>(projEnt));
                 }
-                return (null, ProtoManager.Index<HitscanPrototype>(twoMode.HitscanPrototype));
+                var projEnt2 = Spawn(twoMode.HitscanPrototype, coordinates);
+                return (projEnt2, EnsureComp<AmmoComponent>(projEnt2));
             default:
                 throw new ArgumentOutOfRangeException();
         }

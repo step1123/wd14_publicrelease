@@ -31,3 +31,4 @@ verb-common-open = Открыть
 verb-common-close-ui = Закрыть UI
 verb-common-open-ui = Открыть UI
 verb-examine-group-other = Другое
+verb-categories-narsie = Нарси

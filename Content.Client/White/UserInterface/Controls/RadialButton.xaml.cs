@@ -19,6 +19,18 @@ public sealed partial class RadialButton : Control
         set => Controller.TexturePath = value;
     }
 
+    public string? Tooltip
+    {
+        set => Controller.ToolTip = value;
+        get => Controller.ToolTip;
+    }
+
+    public float? TooltipDelay
+    {
+        set => Controller.TooltipDelay = value;
+        get => Controller.TooltipDelay;
+    }
+
     [Animatable]
     public Vector2 ButtonSize
     {

@@ -15,5 +15,10 @@ public enum AlertCategory
     Piloting,
     Hunger,
     Thirst,
-    Toxins
+    Toxins,
+    //WD start
+    Charge,
+    Panel,
+    Law
+    //WD end
 }

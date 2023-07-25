@@ -1,0 +1,16 @@
+- type: technology
+  id: AdvancedRobotics
+  name: research-technology-advanced-robotics
+  icon:
+    sprite: White/Mobs/Player/Borgs/cyborg.rsi
+    state: icon
+  discipline: Experimental
+  tier: 3
+  cost: 10000
+  recipeUnlocks:
+    - CyborgChest
+    - CyborgMonitoringComputerCircuitboard
+    - BorgChargerMachineCircuitboard
+    - CyborgMonitoringServerMachineCircuitboard
+    - PositronicBrain
+    - ManMachineInterface

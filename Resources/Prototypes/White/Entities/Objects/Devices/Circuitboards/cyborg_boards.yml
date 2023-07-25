@@ -1,0 +1,20 @@
+- type: entity
+  id: CyborgMonitoringServerMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: cyborg monitoring server machine board
+  description: A machine printed circuit board for a cyborg monitoring server.
+  components:
+    - type: MachineBoard
+      prototype: CyborgMonitoringServer
+      materialRequirements:
+        Steel: 1
+        Cable: 2
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: CyborgMonitoringComputerCircuitboard
+  name: cyborg monitoring computer board
+  description: A computer printed circuit board for a cyborg monitoring console.
+  components:
+    - type: ComputerBoard
+      prototype: ComputerCyborgConsole

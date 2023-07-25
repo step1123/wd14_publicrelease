@@ -1,5 +1,7 @@
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind.Components;
+using Content.Server.White;
+using Content.Server.White.Cult.GameRule;
 using Content.Server.Zombies;
 using Content.Shared.Administration;
 using Content.Shared.Database;
@@ -16,6 +18,8 @@ public sealed partial class AdminVerbSystem
     [Dependency] private readonly TraitorRuleSystem _traitorRule = default!;
     [Dependency] private readonly NukeopsRuleSystem _nukeopsRule = default!;
     [Dependency] private readonly PiratesRuleSystem _piratesRule = default!;
+    [Dependency] private readonly CultRuleSystem _cultRuleSystem = default!;
+
 
     // All antag verbs have names so invokeverb works.
     private void AddAntagVerbs(GetVerbsEvent<Verb> args)
@@ -98,5 +102,21 @@ public sealed partial class AdminVerbSystem
         };
         args.Verbs.Add(pirate);
 
+        Verb cult = new()
+        {
+            Text = "Make Cultist",
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new("/Textures/White/Cult/actions_cult.rsi"), "armor"),
+            Act = () =>
+            {
+                if (targetMindComp.Mind == null || targetMindComp.Mind.Session == null)
+                    return;
+
+                _cultRuleSystem.MakeCultist(targetMindComp.Mind.Session);
+            },
+            Impact = LogImpact.High,
+            Message = Loc.GetString("admin-verb-make-cult"),
+        };
+        args.Verbs.Add(cult);
     }
 }

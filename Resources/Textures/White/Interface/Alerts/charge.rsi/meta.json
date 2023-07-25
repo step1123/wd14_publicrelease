@@ -1,0 +1,74 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "by Cinka",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+          "name": "charge6",
+          "delays": [
+            [
+              0.5,
+              0.5
+            ]
+          ]
+        },
+        {
+          "name": "charge5",
+          "delays": [
+            [
+              0.5,
+              0.5
+            ]
+          ]
+        },
+        {
+          "name": "charge4",
+          "delays": [
+            [
+              0.5,
+              0.5
+            ]
+          ]
+        },
+        {
+          "name": "charge3",
+          "delays": [
+            [
+              0.5,
+              0.5
+            ]
+          ]
+        },
+        {
+          "name": "charge2",
+          "delays": [
+            [
+              0.5,
+              0.5
+            ]
+          ]
+        },
+        {
+          "name": "charge1",
+          "delays": [
+            [
+              0.5,
+              0.5
+            ]
+          ]
+        },
+        {
+          "name": "charge0",
+          "delays": [
+            [
+              0.5,
+              0.5
+            ]
+          ]
+        }
+      ]
+}

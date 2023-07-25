@@ -38,6 +38,7 @@
     tags:
     - Trash
     - BorgArm
+    - BorgLeftArm
 
 - type: entity
   id: RightArmBorg
@@ -57,6 +58,7 @@
     tags:
     - Trash
     - BorgArm
+    - BorgRightArm
 
 - type: entity
   id: LeftLegBorg

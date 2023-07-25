@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Client.Popups;
 using Content.Shared.Construction;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Examine;
@@ -24,6 +25,8 @@ namespace Content.Client.Construction
         [Dependency] private readonly IPlayerManager _playerManager = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
+        [Dependency] private readonly EntityLookupSystem _lookup = default!;
+        [Dependency] private readonly PopupSystem _popup = default!;
 
         private readonly Dictionary<int, ConstructionGhostComponent> _ghosts = new();
         private readonly Dictionary<string, ConstructionGuide> _guideCache = new();
@@ -180,6 +183,14 @@ namespace Content.Client.Construction
                 return false;
             }
 
+            //WD start
+            if (prototype.ID == "CultPylon" && CheckForCultGhost(loc, prototype.ID))
+            {
+                _popup.PopupClient(Loc.GetString("cult-structure-craft-another-structure-nearby"), user, user);
+                return false;
+            }
+            //WD end
+
             if (GhostPresent(loc))
                 return false;
 
@@ -216,6 +227,23 @@ namespace Content.Client.Construction
 
             return true;
         }
+
+        //WD start
+        private bool CheckForCultGhost(EntityCoordinates pos, string id)
+        {
+            var entities = _lookup.GetEntitiesInRange(pos, 15f);
+            foreach (var ent in entities)
+            {
+                if (!TryComp<ConstructionGhostComponent>(ent, out var ghost))
+                    continue;
+
+                if (ghost.Prototype?.ID == id)
+                    return true;
+            }
+
+            return false;
+        }
+        //WD end
 
         /// <summary>
         /// Checks if any construction ghosts are present at the given position

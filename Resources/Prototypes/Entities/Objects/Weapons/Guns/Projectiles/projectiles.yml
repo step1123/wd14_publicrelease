@@ -720,3 +720,287 @@
             - Impassable
             - HighImpassable
     - type: GrapplingProjectile
+
+
+- type: entity
+  name: laser bolt
+  id: BulletTrailLaser
+  parent: BaseBullet
+  noSpawn: true
+  components:
+    - type: Sprite
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+      layers:
+        - shader: unshaded
+    - type: Ammo
+      muzzleFlash: null
+    - type: Physics
+    - type: Fixtures
+      fixtures:
+        projectile:
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.2,-0.2,0.2,0.2"
+          hard: false
+          mask:
+            - Opaque
+        fly-by: *flybyfixture
+    - type: Projectile
+      #   soundHit:  Waiting on serv3
+      damage:
+        types:
+          Heat: 14
+    - type: TimedDespawn
+      lifetime: 3
+    - type: Trail
+      splineIteratorType: Linear
+      splineRendererType: Continuous
+      creationMethod: OnMove
+      scale: 0.05, 0.0
+      lifetime: 0.1
+      randomWalk: 0.001, 0.001
+      gravity: 0, 0
+      gradient:
+        - 1, 0, 0, 1
+        - 1, 0, 0, 0
+    - type: PointLight
+      radius: 3.5
+      color: red
+      energy: 1
+
+
+- type: entity
+  name: practice laser bolt
+  id: BulletTrailLaserPractice
+  parent: BaseBullet
+  noSpawn: true
+  components:
+    - type: Sprite
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+      layers:
+        - shader: unshaded
+    - type: Ammo
+      muzzleFlash: null
+    - type: Physics
+    - type: Fixtures
+      fixtures:
+        projectile:
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.2,-0.2,0.2,0.2"
+          hard: false
+          mask:
+            - Opaque
+        fly-by: *flybyfixture
+    - type: Projectile
+      #   soundHit:  Waiting on serv3
+      damage:
+        types:
+          Heat: 0
+    - type: TimedDespawn
+      lifetime: 3
+    - type: Trail
+      splineIteratorType: Linear
+      splineRendererType: Continuous
+      creationMethod: OnMove
+      scale: 0.05, 0.0
+      lifetime: 0.1
+      randomWalk: 0.001, 0.001
+      gravity: 0, 0
+      gradient:
+        - 1, 0, 0, 1
+        - 1, 0, 0, 0
+    - type: PointLight
+      radius: 3.5
+      color: red
+      energy: 1
+
+
+
+- type: entity
+  name: pulse bolt
+  id: PulseBoltProjectile
+  parent: BaseBullet
+  noSpawn: true
+  components:
+    - type: Sprite
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+      layers:
+        - shader: unshaded
+    - type: Ammo
+      muzzleFlash: null
+    - type: Physics
+    - type: Fixtures
+      fixtures:
+        projectile:
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.2,-0.2,0.2,0.2"
+          hard: false
+          mask:
+            - Opaque
+        fly-by: *flybyfixture
+    - type: Projectile
+      #   soundHit:  Waiting on serv3
+      damage:
+        types:
+          Heat: 35
+    - type: TimedDespawn
+      lifetime: 3
+    - type: Trail
+      splineIteratorType: Linear
+      splineRendererType: Continuous
+      creationMethod: OnMove
+      scale: 0.10, 0.0
+      lifetime: 0.1
+      randomWalk: 0.001, 0.001
+      gravity: 0, 0
+      gradient:
+        - 0, 0, 1, 1
+        - 0, 0, 1, 0
+    - type: PointLight
+      radius: 3.5
+      color: blue
+      energy: 1
+
+
+- type: entity
+  name: heavy laser bolt
+  id: BulletTrailLaserHeavy
+  parent: BaseBullet
+  noSpawn: true
+  components:
+    - type: Sprite
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+      layers:
+        - shader: unshaded
+    - type: Ammo
+      muzzleFlash: null
+    - type: Physics
+    - type: Fixtures
+      fixtures:
+        projectile:
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.2,-0.2,0.2,0.2"
+          hard: false
+          mask:
+            - Opaque
+        fly-by: *flybyfixture
+    - type: Projectile
+      #   soundHit:  Waiting on serv3
+      damage:
+        types:
+          Heat: 28
+    - type: TimedDespawn
+      lifetime: 3
+    - type: Trail
+      splineIteratorType: Linear
+      splineRendererType: Continuous
+      creationMethod: OnMove
+      scale: 0.11, 0.0
+      lifetime: 0.1
+      randomWalk: 0.001, 0.001
+      gravity: 0, 0
+      gradient:
+        - 1, 0, 0, 1
+        - 1, 0, 0, 0
+    - type: PointLight
+      radius: 3.5
+      color: red
+      energy: 1
+
+
+
+- type: entity
+  name: xray laser bolt
+  id: BulletTrailLaserXray
+  parent: BaseBullet
+  noSpawn: true
+  components:
+    - type: Sprite
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+      layers:
+        - shader: unshaded
+    - type: Ammo
+      muzzleFlash: null
+    - type: Physics
+    - type: Fixtures
+      fixtures:
+        projectile:
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.2,-0.2,0.2,0.2"
+          hard: false
+          mask:
+            - Opaque
+        fly-by: *flybyfixture
+    - type: Projectile
+      #   soundHit:  Waiting on serv3
+      damage:
+        types:
+          Heat: 14
+    - type: TimedDespawn
+      lifetime: 3
+    - type: Trail
+      splineIteratorType: Linear
+      splineRendererType: Continuous
+      creationMethod: OnMove
+      scale: 0.11, 0.0
+      lifetime: 0.1
+      randomWalk: 0.001, 0.001
+      gravity: 0, 0
+      gradient:
+        - 0, 1, 0, 1
+        - 0, 1, 0, 0
+    - type: PointLight
+      radius: 3.5
+      color: green
+      energy: 1
+
+
+- type: entity
+  name: medium laser bolt
+  id: BulletTrailLaserMedium
+  parent: BaseBullet
+  noSpawn: true
+  components:
+    - type: Sprite
+      sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+      layers:
+        - shader: unshaded
+    - type: Ammo
+      muzzleFlash: null
+    - type: Physics
+    - type: Fixtures
+      fixtures:
+        projectile:
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.2,-0.2,0.2,0.2"
+          hard: false
+          mask:
+            - Opaque
+        fly-by: *flybyfixture
+    - type: Projectile
+      #   soundHit:  Waiting on serv3
+      damage:
+        types:
+          Heat: 17
+    - type: TimedDespawn
+      lifetime: 3
+    - type: Trail
+      splineIteratorType: Linear
+      splineRendererType: Continuous
+      creationMethod: OnMove
+      scale: 0.05, 0.0
+      lifetime: 0.1
+      randomWalk: 0.001, 0.001
+      gravity: 0, 0
+      gradient:
+        - 1, 0, 0, 1
+        - 1, 0, 0, 0
+    - type: PointLight
+      radius: 3.5
+      color: red
+      energy: 1

@@ -24,7 +24,7 @@ public class EmoteAnimationSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<EmoteAnimationComponent, ComponentGetState>(OnGetState);
-        SubscribeLocalEvent<EmoteAnimationComponent, MapInitEvent>(OnMapInint);
+        //SubscribeLocalEvent<EmoteAnimationComponent, MapInitEvent>(OnMapInint);
         SubscribeLocalEvent<EmoteAnimationComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<EmoteAnimationComponent, EmoteEvent>(OnEmote);
         SubscribeLocalEvent<EmoteAnimationComponent, EmoteActionEvent>(OnEmoteAction);
@@ -45,7 +45,6 @@ public class EmoteAnimationSystem : EntitySystem
                 action = new InstantAction(item);
             else
                 continue;
-
             if (action != null)
             {
                 action.UseDelay = _emoteCooldown;

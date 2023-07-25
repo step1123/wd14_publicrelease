@@ -1,6 +1,8 @@
 ﻿using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Content.Shared.White;
+using Robust.Shared.Configuration;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Localizations
@@ -8,14 +10,13 @@ namespace Content.Shared.Localizations
     public sealed class ContentLocalizationManager
     {
         [Dependency] private readonly ILocalizationManager _loc = default!;
+        [Dependency] private readonly IConfigurationManager _cfg = default!;
+
 
         // If you want to change your codebase's language, do it here.
 
         // WD-EDIT
-        private const string Culture = "ru-RU";
-
-        // WD-EDIT
-        private const string FallbackCulture = "en-US";
+        private string _culture = "ru-RU";
 
         /// <summary>
         /// Custom format strings used for parsing and displaying minutes:seconds timespans.
@@ -30,18 +31,24 @@ namespace Content.Shared.Localizations
 
         public void Initialize()
         {
-            var culture = new CultureInfo(Culture);
+            _cfg.OnValueChanged(WhiteCVars.ServerCulture, value => _culture = value, invokeImmediately: true);
 
-            // WD-EDIT
-            var fallbackCulture = new CultureInfo(FallbackCulture);
-
-
+            var culture = new CultureInfo(_culture);
             _loc.LoadCulture(culture);
 
             // WD-EDIT
-            _loc.LoadCulture(fallbackCulture);
-            _loc.SetFallbackCluture(fallbackCulture);
-            // WD-EDIT
+
+            if (_culture == "ru-RU")
+            {
+                var fallbackCulture = new CultureInfo("en-US");
+
+                // WD-EDIT
+                _loc.LoadCulture(fallbackCulture);
+                _loc.SetFallbackCluture(fallbackCulture);
+                // WD-EDIT
+            }
+
+            // WD-EDIT END
 
             _loc.AddFunction(culture, "PRESSURE", FormatPressure);
             _loc.AddFunction(culture, "POWERWATTS", FormatPowerWatts);
@@ -82,7 +89,7 @@ namespace Content.Shared.Localizations
         {
             var number = ((LocValueNumber) args.Args[0]).Value * 100;
             var maxDecimals = (int)Math.Floor(((LocValueNumber) args.Args[1]).Value);
-            var formatter = (NumberFormatInfo)NumberFormatInfo.GetInstance(CultureInfo.GetCultureInfo(Culture)).Clone();
+            var formatter = (NumberFormatInfo)NumberFormatInfo.GetInstance(CultureInfo.GetCultureInfo(_culture)).Clone();
             formatter.NumberDecimalDigits = maxDecimals;
             return new LocValueString(string.Format(formatter, "{0:N}", number).TrimEnd('0').TrimEnd('.') + "%");
         }
@@ -91,7 +98,7 @@ namespace Content.Shared.Localizations
         {
             var number = ((LocValueNumber) args.Args[0]).Value;
             var maxDecimals = (int)Math.Floor(((LocValueNumber) args.Args[1]).Value);
-            var formatter = (NumberFormatInfo)NumberFormatInfo.GetInstance(CultureInfo.GetCultureInfo(Culture)).Clone();
+            var formatter = (NumberFormatInfo)NumberFormatInfo.GetInstance(CultureInfo.GetCultureInfo(_culture)).Clone();
             formatter.NumberDecimalDigits = maxDecimals;
             return new LocValueString(string.Format(formatter, "{0:N}", number).TrimEnd('0').TrimEnd('.'));
         }
