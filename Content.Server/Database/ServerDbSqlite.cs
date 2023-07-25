@@ -132,17 +132,22 @@ namespace Content.Server.Database
             ServerBanExemptFlags? exemptFlags)
         {
             if (!exemptFlags.GetValueOrDefault(ServerBanExemptFlags.None).HasFlag(ServerBanExemptFlags.IP)
-                && address != null && ban.Address is not null && address.IsInSubnet(ban.Address.Value))
+                && address != null && ban.Address is not null && IPAddressExt.IsInSubnet(address, ban.Address.Value))
             {
                 return true;
             }
 
-            if (userId is { } id && ban.PlayerUserId == id.UserId)
+            if (userId is { } id && ban.UserId == id.UserId)
             {
                 return true;
             }
 
-            return hwId is { Length: > 0 } hwIdVar && hwIdVar.AsSpan().SequenceEqual(ban.HWId);
+            if (hwId is { } hwIdVar && hwIdVar.Length > 0 && hwIdVar.AsSpan().SequenceEqual(ban.HWId))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public override async Task AddServerBanAsync(ServerBanDef serverBan)
@@ -153,14 +158,11 @@ namespace Content.Server.Database
             {
                 Address = serverBan.Address,
                 Reason = serverBan.Reason,
-                Severity = serverBan.Severity,
                 BanningAdmin = serverBan.BanningAdmin?.UserId,
                 HWId = serverBan.HWId?.ToArray(),
                 BanTime = serverBan.BanTime.UtcDateTime,
                 ExpirationTime = serverBan.ExpirationTime?.UtcDateTime,
-                RoundId = serverBan.RoundId,
-                PlaytimeAtNote = serverBan.PlaytimeAtNote,
-                PlayerUserId = serverBan.UserId?.UserId
+                UserId = serverBan.UserId?.UserId
             });
 
             await db.SqliteDbContext.SaveChangesAsync();
@@ -194,8 +196,7 @@ namespace Content.Server.Database
             return ConvertRoleBan(ban);
         }
 
-        public override async Task<List<ServerRoleBanDef>> GetServerRoleBansAsync(
-            IPAddress? address,
+        public override async Task<List<ServerRoleBanDef>> GetServerRoleBansAsync(IPAddress? address,
             NetUserId? userId,
             ImmutableArray<byte>? hwId,
             bool includeUnbanned)
@@ -232,17 +233,22 @@ namespace Content.Server.Database
             NetUserId? userId,
             ImmutableArray<byte>? hwId)
         {
-            if (address != null && ban.Address is not null && address.IsInSubnet(ban.Address.Value))
+            if (address != null && ban.Address is not null && IPAddressExt.IsInSubnet(address, ban.Address.Value))
             {
                 return true;
             }
 
-            if (userId is { } id && ban.PlayerUserId == id.UserId)
+            if (userId is { } id && ban.UserId == id.UserId)
             {
                 return true;
             }
 
-            return hwId is { Length: > 0 } hwIdVar && hwIdVar.AsSpan().SequenceEqual(ban.HWId);
+            if (hwId is { } hwIdVar && hwIdVar.Length > 0 && hwIdVar.AsSpan().SequenceEqual(ban.HWId))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public override async Task AddServerRoleBanAsync(ServerRoleBanDef serverBan)
@@ -253,14 +259,11 @@ namespace Content.Server.Database
             {
                 Address = serverBan.Address,
                 Reason = serverBan.Reason,
-                Severity = serverBan.Severity,
                 BanningAdmin = serverBan.BanningAdmin?.UserId,
                 HWId = serverBan.HWId?.ToArray(),
                 BanTime = serverBan.BanTime.UtcDateTime,
                 ExpirationTime = serverBan.ExpirationTime?.UtcDateTime,
-                RoundId = serverBan.RoundId,
-                PlaytimeAtNote = serverBan.PlaytimeAtNote,
-                PlayerUserId = serverBan.UserId?.UserId,
+                UserId = serverBan.UserId?.UserId,
                 RoleId = serverBan.Role,
             });
 
@@ -289,7 +292,7 @@ namespace Content.Server.Database
             }
 
             NetUserId? uid = null;
-            if (ban.PlayerUserId is { } guid)
+            if (ban.UserId is { } guid)
             {
                 uid = new NetUserId(guid);
             }
@@ -310,10 +313,7 @@ namespace Content.Server.Database
                 // SQLite apparently always reads DateTime as unspecified, but we always write as UTC.
                 DateTime.SpecifyKind(ban.BanTime, DateTimeKind.Utc),
                 ban.ExpirationTime == null ? null : DateTime.SpecifyKind(ban.ExpirationTime.Value, DateTimeKind.Utc),
-                ban.RoundId,
-                ban.PlaytimeAtNote,
                 ban.Reason,
-                ban.Severity,
                 aUid,
                 unban,
                 ban.RoleId);
@@ -359,7 +359,7 @@ namespace Content.Server.Database
             }
 
             NetUserId? uid = null;
-            if (ban.PlayerUserId is { } guid)
+            if (ban.UserId is { } guid)
             {
                 uid = new NetUserId(guid);
             }
@@ -380,10 +380,7 @@ namespace Content.Server.Database
                 // SQLite apparently always reads DateTime as unspecified, but we always write as UTC.
                 DateTime.SpecifyKind(ban.BanTime, DateTimeKind.Utc),
                 ban.ExpirationTime == null ? null : DateTime.SpecifyKind(ban.ExpirationTime.Value, DateTimeKind.Utc),
-                ban.RoundId,
-                ban.PlaytimeAtNote,
                 ban.Reason,
-                ban.Severity,
                 aUid,
                 unban);
         }
@@ -485,44 +482,13 @@ namespace Content.Server.Database
                 var nextId = 1;
                 if (await db.DbContext.AdminNotes.AnyAsync())
                 {
-                    nextId = await db.DbContext.AdminNotes.MaxAsync(adminNote => adminNote.Id) + 1;
+                    nextId = await db.DbContext.AdminNotes.MaxAsync(dbVersion => dbVersion.Id) + 1;
                 }
 
                 note.Id = nextId;
             }
 
             return await base.AddAdminNote(note);
-        }
-        public override async Task<int> AddAdminWatchlist(AdminWatchlist watchlist)
-        {
-            await using (var db = await GetDb())
-            {
-                var nextId = 1;
-                if (await db.DbContext.AdminWatchlists.AnyAsync())
-                {
-                    nextId = await db.DbContext.AdminWatchlists.MaxAsync(adminWatchlist => adminWatchlist.Id) + 1;
-                }
-
-                watchlist.Id = nextId;
-            }
-
-            return await base.AddAdminWatchlist(watchlist);
-        }
-
-        public override async Task<int> AddAdminMessage(AdminMessage message)
-        {
-            await using (var db = await GetDb())
-            {
-                var nextId = 1;
-                if (await db.DbContext.AdminMessages.AnyAsync())
-                {
-                    nextId = await db.DbContext.AdminMessages.MaxAsync(adminMessage => adminMessage.Id) + 1;
-                }
-
-                message.Id = nextId;
-            }
-
-            return await base.AddAdminMessage(message);
         }
 
         private async Task<DbGuardImpl> GetDbImpl()

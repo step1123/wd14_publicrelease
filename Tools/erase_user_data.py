@@ -150,7 +150,7 @@ def clear_server_ban(cur: "psycopg2.cursor", user_id: str):
 DELETE FROM
     server_ban
 WHERE
-    player_user_id = %s
+    user_id = %s
 """, (user_id,))
 
 
@@ -172,7 +172,7 @@ def clear_server_role_ban(cur: "psycopg2.cursor", user_id: str):
 DELETE FROM
     server_role_ban
 WHERE
-    player_user_id = %s
+    user_id = %s
 """, (user_id,))
 
 
