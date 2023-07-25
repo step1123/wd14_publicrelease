@@ -30,6 +30,10 @@ namespace Content.Server.Database.Migrations.Postgres
 
             migrationBuilder.DropCheckConstraint(
                 name: "HaveEitherAddressOrUserIdOrHWId",
+                table: "server_role_ban");
+
+            migrationBuilder.DropCheckConstraint(
+                name: "HaveEitherAddressOrUserIdOrHWId",
                 table: "server_ban");
 
             migrationBuilder.RenameColumn(

@@ -99,6 +99,8 @@ public sealed class DepartmentBanCommand : IConsoleCommand
         {
             _banManager.CreateRoleBan(targetUid, located.Username, shell.Player?.UserId, null, targetHWid, job, minutes, severity, reason, now);
         }
+
+        _banManager.SendRoleBans(located.UserId);
     }
 
     public CompletionResult GetCompletion(IConsoleShell shell, string[] args)

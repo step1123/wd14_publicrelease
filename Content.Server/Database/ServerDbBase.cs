@@ -1304,67 +1304,70 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             // You can't group queries, as player will not always exist. When it doesn't, the
             // whole query returns nothing
             var player = await db.DbContext.Player.SingleOrDefaultAsync(p => p.UserId == user);
-            var bans = await db.DbContext.Ban
-                .Where(ban => ban.PlayerUserId == user && !ban.Hidden)
+            return await (from ban in db.DbContext.Ban
+                          where ban.PlayerUserId == user &&
+                                !ban.Hidden
+                          select ban)
                 .Include(ban => ban.Unban)
                 .Include(ban => ban.Round)
                 .ThenInclude(r => r!.Server)
                 .Include(ban => ban.CreatedBy)
                 .Include(ban => ban.LastEditedBy)
                 .Include(ban => ban.Unban)
-                .ToArrayAsync();
-
-            var banNotes = new List<ServerBanNote>();
-            foreach (var ban in bans)
-            {
-                var banNote = new ServerBanNote(ban.Id, ban.RoundId, ban.Round, ban.PlayerUserId, player,
-                    ban.PlaytimeAtNote, ban.Reason, ban.Severity, ban.CreatedBy, ban.BanTime,
-                    ban.LastEditedBy, ban.LastEditedAt, ban.ExpirationTime, ban.Hidden,
-                    ban.Unban?.UnbanningAdmin == null
-                        ? null
-                        : await db.DbContext.Player.SingleOrDefaultAsync(
-                            p => p.UserId == ban.Unban.UnbanningAdmin.Value),
-                    ban.Unban?.UnbanTime);
-
-                banNotes.Add(banNote);
-            }
-
-            return banNotes;
+                .ToAsyncEnumerable()
+                .SelectAwait(async ban =>
+                    new ServerBanNote(ban.Id, ban.RoundId, ban.Round, ban.PlayerUserId, player,
+                        ban.PlaytimeAtNote, ban.Reason, ban.Severity, ban.CreatedBy, ban.BanTime,
+                        ban.LastEditedBy, ban.LastEditedAt, ban.ExpirationTime, ban.Hidden,
+                        ban.Unban?.UnbanningAdmin == null
+                            ? null
+                            : await db.DbContext.Player.SingleOrDefaultAsync(p => p.UserId == ban.Unban.UnbanningAdmin.Value),
+                        ban.Unban?.UnbanTime)
+                ).ToListAsync();
         }
 
         protected async Task<List<ServerRoleBanNote>> GetGroupedServerRoleBansAsNotesForUser(DbGuard db, Guid user)
         {
             // Server side query
-            var bansQuery = await db.DbContext.RoleBan
-                .Where(ban => ban.PlayerUserId == user && !ban.Hidden)
+            var bansQuery =
+                (from ban in db.DbContext.RoleBan
+                 where ban.PlayerUserId == user &&
+                       !ban.Hidden
+                 select ban)
                 .Include(ban => ban.Unban)
                 .Include(ban => ban.Round)
                 .ThenInclude(r => r!.Server)
                 .Include(ban => ban.CreatedBy)
                 .Include(ban => ban.LastEditedBy)
                 .Include(ban => ban.Unban)
-                .ToArrayAsync();
+                .ToAsyncEnumerable();
 
             // Client side query, as EF can't do groups yet
-            var bansEnumerable = bansQuery
-                    .GroupBy(ban => new { ban.BanTime, ban.CreatedBy, ban.Reason, Unbanned = ban.Unban == null })
-                    .Select(banGroup => banGroup)
-                    .ToArray();
+            var bansEnumerable =
+                (from ban in bansQuery
+                 group ban by new
+                 {
+                     ban.BanTime,
+                     ban.CreatedBy,
+                     ban.Reason,
+                     Unbanned = ban.Unban == null
+                 }
+                    into banGroup
+                 select banGroup)
+                .AsAsyncEnumerable();
 
             List<ServerRoleBanNote> bans = new();
             var player = await db.DbContext.Player.SingleOrDefaultAsync(p => p.UserId == user);
-            foreach (var banGroup in bansEnumerable)
+            await foreach (var banGroup in bansEnumerable)
             {
-                var firstBan = banGroup.First();
+                var firstBan = await banGroup.FirstAsync();
                 Player? unbanningAdmin = null;
-
                 if (firstBan.Unban?.UnbanningAdmin is not null)
                     unbanningAdmin = await db.DbContext.Player.SingleOrDefaultAsync(p => p.UserId == firstBan.Unban.UnbanningAdmin.Value);
-
                 bans.Add(new ServerRoleBanNote(firstBan.Id, firstBan.RoundId, firstBan.Round, firstBan.PlayerUserId,
                     player, firstBan.PlaytimeAtNote, firstBan.Reason, firstBan.Severity, firstBan.CreatedBy,
                     firstBan.BanTime, firstBan.LastEditedBy, firstBan.LastEditedAt, firstBan.ExpirationTime,
-                    firstBan.Hidden, banGroup.Select(ban => ban.RoleId.Replace(BanManager.JobPrefix, null)).ToArray(),
+                    firstBan.Hidden, await banGroup.Select(ban => ban.RoleId.Replace(BanManager.JobPrefix, null)).ToArrayAsync(),
                     unbanningAdmin, firstBan.Unban?.UnbanTime));
             }
 
