@@ -4,6 +4,7 @@ using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Power.Components;
 using Content.Server.Station.Systems;
 using Content.Server.White.Cyborg.CyborgSensor;
+using Content.Shared.White.Cyborg.CyborgMonitoring;
 using Content.Shared.White.Cyborg.CyborgSensor;
 using Robust.Shared.Timing;
 
@@ -11,12 +12,11 @@ namespace Content.Server.White.Cyborg.CyborgMonitoring;
 
 public sealed class CyborgMonitoringServerSystem : EntitySystem
 {
-    [Dependency] private readonly CyborgSensorSystem _sensors = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly DeviceNetworkSystem _deviceNetworkSystem = default!;
-    [Dependency] private readonly StationSystem _stationSystem = default!;
-
     private const float UpdateRate = 3f;
+    [Dependency] private readonly DeviceNetworkSystem _deviceNetworkSystem = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly CyborgSensorSystem _sensors = default!;
+    [Dependency] private readonly StationSystem _stationSystem = default!;
     private float _updateDiff;
 
     public override void Initialize()
@@ -68,21 +68,21 @@ public sealed class CyborgMonitoringServerSystem : EntitySystem
 
     public bool TryGetActiveServerAddress(EntityUid stationId, out string? address)
     {
-        (EntityUid,CyborgMonitoringServerComponent, DeviceNetworkComponent)? last = default;
+        (EntityUid, CyborgMonitoringServerComponent, DeviceNetworkComponent)? last = default;
 
         var query = EntityQueryEnumerator<CyborgMonitoringServerComponent, DeviceNetworkComponent>();
-        while(query.MoveNext(out var uid,out var server, out var device))
+        while (query.MoveNext(out var uid, out var server, out var device))
         {
             if (!_stationSystem.GetOwningStation(uid)?.Equals(stationId) ?? false)
                 continue;
 
             if (!server.Available)
             {
-                DisconnectServer(uid,server, device);
+                DisconnectServer(uid, server, device);
                 continue;
             }
 
-            last = (uid,server, device);
+            last = (uid, server, device);
 
             if (server.Active)
             {
@@ -105,9 +105,10 @@ public sealed class CyborgMonitoringServerSystem : EntitySystem
     }
 
     /// <summary>
-    /// Adds or updates a sensor status entry if the received package is a sensor status update
+    ///     Adds or updates a sensor status entry if the received package is a sensor status update
     /// </summary>
-    private void OnPacketReceived(EntityUid uid, CyborgMonitoringServerComponent component, DeviceNetworkPacketEvent args)
+    private void OnPacketReceived(EntityUid uid, CyborgMonitoringServerComponent component,
+        DeviceNetworkPacketEvent args)
     {
         var sensorStatus = _sensors.PacketToCyborgSensor(args.Data);
         if (sensorStatus == null)
@@ -118,7 +119,7 @@ public sealed class CyborgMonitoringServerSystem : EntitySystem
     }
 
     /// <summary>
-    /// Clears the servers sensor status list
+    ///     Clears the servers sensor status list
     /// </summary>
     private void OnRemove(EntityUid uid, CyborgMonitoringServerComponent component, ComponentRemove args)
     {
@@ -126,7 +127,7 @@ public sealed class CyborgMonitoringServerSystem : EntitySystem
     }
 
     /// <summary>
-    /// Disconnects the server losing power
+    ///     Disconnects the server losing power
     /// </summary>
     private void OnPowerChanged(EntityUid uid, CyborgMonitoringServerComponent component, ref PowerChangedEvent args)
     {
@@ -137,7 +138,7 @@ public sealed class CyborgMonitoringServerSystem : EntitySystem
     }
 
     /// <summary>
-    /// Drop the sensor status if it hasn't been updated for to long
+    ///     Drop the sensor status if it hasn't been updated for to long
     /// </summary>
     private void UpdateTimeout(EntityUid uid, CyborgMonitoringServerComponent? component = null)
     {
@@ -153,13 +154,14 @@ public sealed class CyborgMonitoringServerSystem : EntitySystem
     }
 
     /// <summary>
-    /// Broadcasts the status of all connected sensors
+    ///     Broadcasts the status of all connected sensors
     /// </summary>
-    private void BroadcastSensorStatus(EntityUid uid, CyborgMonitoringServerComponent? serverComponent = null, DeviceNetworkComponent? device = null)
+    private void BroadcastSensorStatus(EntityUid uid, CyborgMonitoringServerComponent? serverComponent = null,
+        DeviceNetworkComponent? device = null)
     {
         if (!Resolve(uid, ref serverComponent, ref device))
             return;
-        var payload = new NetworkPayload()
+        var payload = new NetworkPayload
         {
             [DeviceNetworkConstants.Command] = DeviceNetworkConstants.CmdUpdatedState,
             [CyborgSensorConstants.NET_STATUS_COLLECTION] = serverComponent.SensorStatus
@@ -168,7 +170,8 @@ public sealed class CyborgMonitoringServerSystem : EntitySystem
         _deviceNetworkSystem.QueuePacket(uid, null, payload, device: device);
     }
 
-    private void ConnectServer(EntityUid uid, CyborgMonitoringServerComponent? server = null, DeviceNetworkComponent? device = null)
+    private void ConnectServer(EntityUid uid, CyborgMonitoringServerComponent? server = null,
+        DeviceNetworkComponent? device = null)
     {
         if (!Resolve(uid, ref server, ref device))
             return;
@@ -182,12 +185,13 @@ public sealed class CyborgMonitoringServerSystem : EntitySystem
     }
 
     /// <summary>
-    /// Disconnects a server from the device network and clears the currently active server
+    ///     Disconnects a server from the device network and clears the currently active server
     /// </summary>
-    private void DisconnectServer(EntityUid uid, CyborgMonitoringServerComponent? server = null, DeviceNetworkComponent? device = null)
+    private void DisconnectServer(EntityUid uid, CyborgMonitoringServerComponent? server = null,
+        DeviceNetworkComponent? device = null)
     {
         if (!Resolve(uid, ref server, ref device))
-         return;
+            return;
 
         server.SensorStatus.Clear();
         server.Active = false;

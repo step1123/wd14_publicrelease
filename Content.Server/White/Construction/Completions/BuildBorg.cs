@@ -1,9 +1,12 @@
 using Content.Server.Body.Components;
 using Content.Server.Construction;
 using Content.Server.Power.Components;
+using Content.Server.White.Cyborg.SiliconBrain;
 using Content.Server.White.Cyborg.Systems;
 using Content.Shared.Construction;
 using Content.Shared.White.Cyborg.Components;
+using Content.Shared.White.Cyborg.SiliconBrain;
+using Content.Shared.White.Cyborg.SiliconBrain.Components;
 using Content.Shared.White.Cyborg.Systems;
 using Robust.Server.Containers;
 using Robust.Shared.Containers;
@@ -28,7 +31,7 @@ public sealed class BuildBorg : IGraphAction
     {
         _sawmill = Logger.GetSawmill("BorgBuilder");
         var borgSystem = entityManager.EntitySysManager.GetEntitySystem<CyborgSystem>();
-        var borgBrainSystem = entityManager.EntitySysManager.GetEntitySystem<CyborgBrainSystem>();
+        var borgBrainSystem = entityManager.EntitySysManager.GetEntitySystem<SiliconBrainSystem>();
 
         if (!entityManager.TryGetComponent(uid, out ContainerManagerComponent? containerManager))
         {
@@ -46,7 +49,13 @@ public sealed class BuildBorg : IGraphAction
             return;
         }
 
-        if (!entityManager.TryGetComponent<CyborgBrainComponent>(brain, out var brainComp))
+        if (!entityManager.TryGetComponent<SiliconBrainComponent>(brain, out var brainComp))
+        {
+            _sawmill.Warning($"Borg construct entity {uid} had an invalid entity in container \"{BrainContainer}\"! Aborting build mech action.");
+            return;
+        }
+
+        if (!entityManager.TryGetComponent<SiliconBrainContainerComponent>(uid, out var siliconContainer))
         {
             _sawmill.Warning($"Borg construct entity {uid} had an invalid entity in container \"{BrainContainer}\"! Aborting build mech action.");
             return;
@@ -62,8 +71,8 @@ public sealed class BuildBorg : IGraphAction
             borgSystem.InsertBattery(borg, cell.Value, cyborgComp, batteryComponent);
 
 
-        if (cyborgComp.BrainSlot.ContainedEntity == null)
-            borgBrainSystem.InsertBrain(borg,brain.Value,cyborgComp);
+        if (siliconContainer.BrainSlot.ContainedEntity == null)
+            borgBrainSystem.InsertBrain(borg,brain.Value,siliconContainer);
 
         var entChangeEv = new ConstructionChangeEntityEvent(borg, uid);
         entityManager.EventBus.RaiseLocalEvent(uid, entChangeEv);

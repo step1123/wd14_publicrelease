@@ -1,23 +1,20 @@
-﻿using Content.Server.Polymorph.Systems;
-using Content.Server.White.Radials;
+﻿using Content.Server.White.Cyborg.SiliconBrain;
 using Content.Shared.White.Cyborg;
 using Content.Shared.White.Cyborg.Components;
-using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 
 namespace Content.Server.White.Cyborg.Systems;
 
-
 public sealed class CyborgSelectSystem : EntitySystem
 {
-    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
-    [Dependency] private readonly PolymorphSystem _polymorphSystem = default!;
-    [Dependency] private readonly CyborgBrainSystem _cyborgBrain = default!;
     [Dependency] private readonly CyborgSystem _cyborg = default!;
+    [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly SiliconBrainSystem _siliconBrain = default!;
+    [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<SelectCyborgComponent,CyborgSelectedMessage>(OnCyborgSelected);
+        SubscribeLocalEvent<SelectCyborgComponent, CyborgSelectedMessage>(OnCyborgSelected);
         SubscribeLocalEvent<SelectCyborgComponent, PlayerAttachedEvent>(OnPlayerAttached);
     }
 
@@ -31,31 +28,40 @@ public sealed class CyborgSelectSystem : EntitySystem
 
     private void OnCyborgSelected(EntityUid uid, SelectCyborgComponent component, CyborgSelectedMessage args)
     {
-        if(!TryComp<CyborgComponent>(uid,out var cyborgComponent))
-            return;
-
-        EntityUid? battery = null;
-        if (cyborgComponent.BatterySlot.ContainedEntity != null)
-        {
-            battery = cyborgComponent.BatterySlot.ContainedEntity.Value;
-            _cyborg.RemoveBattery(uid,cyborgComponent);
-        }
-
-        EntityUid? brain = null;
-        if (cyborgComponent.BrainSlot.ContainedEntity != null)
-        {
-            brain = cyborgComponent.BrainSlot.ContainedEntity.Value;
-            _cyborgBrain.RemoveBrain(uid,cyborgComponent);
-        }
-
-        var polyUid = _polymorphSystem.PolymorphEntity(uid, args.SelectedPolyMorph);
-        if(polyUid == null)
-            return;
-
-        if (battery.HasValue)
-            _cyborg.InsertBattery(polyUid.Value,battery.Value);
-        if (brain.HasValue)
-            _cyborgBrain.InsertBrain(polyUid.Value,brain.Value);
+        ChangeCyborgType(uid, args.SelectedPrototype);
     }
 
+    public EntityUid? ChangeCyborgType(EntityUid uid, string prototype, CyborgComponent? component = null)
+    {
+        if (!Resolve(uid, ref component))
+            return null;
+
+
+        EntityUid? battery = null;
+        if (component.BatterySlot.ContainedEntity != null)
+        {
+            battery = component.BatterySlot.ContainedEntity.Value;
+            _cyborg.RemoveBattery(uid, component);
+        }
+
+        EntityUid? brain;
+        if (_siliconBrain.TryGetBrain(uid, out brain))
+            _siliconBrain.RemoveBrain(uid);
+
+        var parentTransform = Transform(uid);
+        var polyUid = Spawn(prototype, parentTransform.Coordinates);
+        var polyTransform = Transform(polyUid);
+
+        _metaData.SetEntityName(polyUid, MetaData(uid).EntityName);
+        polyTransform.LocalRotation = parentTransform.LocalRotation;
+
+        QueueDel(uid);
+
+        if (battery.HasValue)
+            _cyborg.InsertBattery(polyUid, battery.Value);
+        if (brain.HasValue)
+            _siliconBrain.InsertBrain(polyUid, brain.Value);
+
+        return polyUid;
+    }
 }

@@ -6,7 +6,7 @@ public sealed class CyborgActionSelectedEvent : EntityEventArgs
     public EntityUid ActionSelector;
     public EntityUid? User;
 
-    public CyborgActionSelectedEvent(Enum action, EntityUid actionSelector,EntityUid? user)
+    public CyborgActionSelectedEvent(Enum action, EntityUid actionSelector, EntityUid? user)
     {
         Action = action;
         ActionSelector = actionSelector;

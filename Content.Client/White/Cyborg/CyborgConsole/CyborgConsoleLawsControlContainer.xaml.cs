@@ -30,11 +30,13 @@ public sealed partial class CyborgConsoleLawsControlContainer : PanelContainer
         UpLaw.Pressed = false;
         UpLaw.OnPressed += func;
     }
+
     public void OnLowClicked(Action<BaseButton.ButtonEventArgs> func)
     {
         DownLaw.Pressed = false;
         DownLaw.OnPressed += func;
     }
+
     public void OnRemoveClicked(Action<BaseButton.ButtonEventArgs> func)
     {
         RemoveLaw.OnPressed += func;

@@ -6,17 +6,17 @@ using Content.Shared.PowerCell.Components;
 using Content.Shared.Throwing;
 using Content.Shared.White.Cyborg.Components;
 using Content.Shared.White.Cyborg.Events;
-using Robust.Shared.Containers;
 
 namespace Content.Shared.White.Cyborg.Systems;
 
 public abstract class SharedCyborgHandSystem : EntitySystem
 {
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+
     public override void Initialize()
     {
-        SubscribeLocalEvent<CyborgComponent,PickupAttemptEvent>(OnChancel);
-        SubscribeLocalEvent<CyborgComponent,ThrowAttemptEvent>(OnChancel);
+        SubscribeLocalEvent<CyborgComponent, PickupAttemptEvent>(OnChancel);
+        SubscribeLocalEvent<CyborgComponent, ThrowAttemptEvent>(OnChancel);
     }
 
 
@@ -29,7 +29,7 @@ public abstract class SharedCyborgHandSystem : EntitySystem
     public bool TryPickupInstrument(EntityUid uid, EntityUid entity, CyborgComponent? component = null,
         HandsComponent? handsComponent = null)
     {
-        if(!Resolve(uid,ref component) || !Resolve(uid,ref handsComponent))
+        if (!Resolve(uid, ref component) || !Resolve(uid, ref handsComponent))
             return false;
 
         if (handsComponent.ActiveHand == null ||
@@ -47,13 +47,13 @@ public abstract class SharedCyborgHandSystem : EntitySystem
         component.Consumption += component.ModuleConsumption;
 
         var ev = new CyborgInstrumentGotPickupEvent(uid);
-        RaiseLocalEvent(entity,ev);
+        RaiseLocalEvent(entity, ev);
 
         return true;
     }
 
 
-    public bool TryInsertInstrument(EntityUid uid,EntityUid entity,CyborgComponent? component = null)
+    public bool TryInsertInstrument(EntityUid uid, EntityUid entity, CyborgComponent? component = null)
     {
         if (!Resolve(uid, ref component) || !RemComp<CyborgInstrumentComponent>(entity)
                                          || !component.InstrumentContainer.Insert(entity))
@@ -62,7 +62,7 @@ public abstract class SharedCyborgHandSystem : EntitySystem
         component.InstrumentUids.Add(entity);
 
         var ev = new CyborgInstrumentGotInsertedEvent(uid);
-        RaiseLocalEvent(entity,ev);
+        RaiseLocalEvent(entity, ev);
 
         return true;
     }

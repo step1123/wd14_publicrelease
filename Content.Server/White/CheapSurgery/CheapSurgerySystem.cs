@@ -6,6 +6,7 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Organ;
 using Content.Shared.Body.Part;
+using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.White.CheapSurgery;
@@ -45,6 +46,9 @@ public sealed class CheapSurgerySystem : SharedCheapSurgerySystem
         if(args.Handled || !TryComp<SharpComponent>(args.Used,out _) || _mobState.IsAlive(uid)
            || TryComp<ActiveSurgeryComponent>(uid,out _))
             return;
+        if(!TryComp<HumanoidAppearanceComponent>(uid,out _))
+            return;
+
         var organs = GenList(uid);
 
         var ev = new OnSurgeryStarted(uid,organs);

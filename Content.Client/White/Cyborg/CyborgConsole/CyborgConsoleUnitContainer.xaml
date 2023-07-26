@@ -13,9 +13,8 @@
                              HorizontalAlignment="Left"
                              SetSize="64 64"
                              MaxSize="64 64"
-                             Stretch="Scale"
-                />
-                <controls:NanoHeading Name="Title"/>
+                             Stretch="Scale" />
+                <controls:NanoHeading Name="Title" />
             </BoxContainer>
             <RichTextLabel Name="Description" Margin="12 6 6 6" />
         </BoxContainer>

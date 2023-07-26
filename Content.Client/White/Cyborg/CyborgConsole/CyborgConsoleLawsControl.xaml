@@ -9,12 +9,12 @@
                   HorizontalExpand="True"
                   VerticalExpand="True">
         <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="12">
-            <LineEdit PlaceHolder="Закон:" SizeFlagsStretchRatio="4" HorizontalExpand="True" Name="LawInput"/>
-            <LineEdit PlaceHolder="Индекс:" SizeFlagsStretchRatio="1" HorizontalExpand="True" Name="IndexInput"/>
-            <Button Text="Отправить" SizeFlagsStretchRatio="2" Name="AddLawButton"/>
+            <LineEdit PlaceHolder="Закон:" SizeFlagsStretchRatio="4" HorizontalExpand="True" Name="LawInput" />
+            <LineEdit PlaceHolder="Индекс:" SizeFlagsStretchRatio="1" HorizontalExpand="True" Name="IndexInput" />
+            <Button Text="Отправить" SizeFlagsStretchRatio="2" Name="AddLawButton" />
         </BoxContainer>
 
-        <customControls:HSeparator StyleClasses="LowDivider"/>
+        <customControls:HSeparator StyleClasses="LowDivider" />
 
         <BoxContainer Orientation="Horizontal"
                       HorizontalExpand="True"
@@ -29,8 +29,7 @@
                               Orientation="Vertical"
                               HorizontalExpand="True"
                               VerticalExpand="True"
-                              Margin="0 0 0 12">
-                </BoxContainer>
+                              Margin="0 0 0 12" />
             </ScrollContainer>
         </BoxContainer>
     </BoxContainer>

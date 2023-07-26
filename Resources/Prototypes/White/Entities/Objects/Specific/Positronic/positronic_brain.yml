@@ -14,7 +14,7 @@
     - type: Muted
     - type: DoAfter
     - type: PositronicBrain
-    - type: CyborgBrain
+    - type: SiliconBrain
     - type: Appearance
     - type: GenericVisualizer
       visuals:

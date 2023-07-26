@@ -10,6 +10,5 @@ public sealed class ActiveAmmoFillerComponent : Component
     [DataField("nextUpdate", customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan NextUpdateTime;
 
-    [ViewVariables(VVAccess.ReadWrite)]
-    public TimeSpan UpdateRate = TimeSpan.FromSeconds(1);
+    [ViewVariables(VVAccess.ReadWrite)] public TimeSpan UpdateRate = TimeSpan.FromSeconds(1);
 }

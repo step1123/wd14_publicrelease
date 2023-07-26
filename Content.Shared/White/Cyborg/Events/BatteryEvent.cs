@@ -1,6 +1,6 @@
 ﻿namespace Content.Shared.White.Cyborg.Events;
 
-public class BatteryEvent : EntityEventArgs
+public abstract class BatteryEvent : EntityEventArgs
 {
     public EntityUid Battery;
     public EntityUid Entity;
@@ -9,5 +9,19 @@ public class BatteryEvent : EntityEventArgs
     {
         Entity = entity;
         Battery = battery;
+    }
+}
+
+public sealed class BatteryLowEvent : BatteryEvent
+{
+    public BatteryLowEvent(EntityUid entity, EntityUid battery) : base(entity, battery)
+    {
+    }
+}
+
+public sealed class BatteryInsertedEvent : BatteryEvent
+{
+    public BatteryInsertedEvent(EntityUid entity, EntityUid battery) : base(entity, battery)
+    {
     }
 }

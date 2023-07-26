@@ -2,13 +2,11 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.White.Cyborg.Events;
 
-[Serializable,NetSerializable]
-public sealed class CyborgPartGetGibbedEvent : EntityEventArgs
+[Serializable]
+[NetSerializable]
+public sealed class CyborgPartGetGibbedEvent : BaseBorgEvent
 {
-    public EntityUid CyborgUid;
-
-    public CyborgPartGetGibbedEvent(EntityUid cyborgUid)
+    public CyborgPartGetGibbedEvent(EntityUid cyborgUid) : base(cyborgUid)
     {
-        CyborgUid = cyborgUid;
     }
 }

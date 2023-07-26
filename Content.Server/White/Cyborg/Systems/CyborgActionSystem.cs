@@ -6,9 +6,10 @@ using Content.Shared.White.Cyborg.Events;
 
 namespace Content.Server.White.Cyborg.Systems;
 
-public sealed class CyborgActionSystem: EntitySystem
+public sealed class CyborgActionSystem : EntitySystem
 {
     [Dependency] private readonly CyborgMonitoringConsoleSystem _cyborgMonitoring = default!;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<CyborgComponent, DeviceNetworkPacketEvent>(OnPacketReceived);
@@ -24,9 +25,10 @@ public sealed class CyborgActionSystem: EntitySystem
             return;
 
         var status = _cyborgMonitoring.PacketToCyborgAction(payload);
-        if(status == null) return;
+        if (status == null)
+            return;
 
-        var ev = new CyborgActionSelectedEvent(status.Action, args.Sender,status.Actioner);
-        RaiseLocalEvent(uid,ev);
+        var ev = new CyborgActionSelectedEvent(status.Action, args.Sender, status.Actioner);
+        RaiseLocalEvent(uid, ev);
     }
 }

@@ -13,6 +13,7 @@ public sealed class ListLawsCommand : IConsoleCommand
     public string Command => "lslaws";
     public string Description => Loc.GetString("command-lslaws-description");
     public string Help => Loc.GetString("command-lslaws-help");
+
     public async void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         var entityManager = IoCManager.Resolve<IEntityManager>();
@@ -20,17 +21,11 @@ public sealed class ListLawsCommand : IConsoleCommand
         EntityUid? entity = null;
 
         if (args.Length == 0 && player != null)
-        {
             entity = player.ContentData()?.Mind?.CurrentEntity;
-        }
         else if (IoCManager.Resolve<IPlayerManager>().TryGetPlayerDataByUsername(args[0], out var data))
-        {
             entity = data.ContentData()?.Mind?.CurrentEntity;
-        }
         else if (EntityUid.TryParse(args[0], out var foundEntity))
-        {
             entity = foundEntity;
-        }
 
         if (entity == null)
         {
@@ -58,6 +53,7 @@ public sealed class ClearLawsCommand : IConsoleCommand
     public string Command => "lawclear";
     public string Description => Loc.GetString("command-lawclear-description");
     public string Help => Loc.GetString("command-lawclear-help");
+
     public async void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         var entityManager = IoCManager.Resolve<IEntityManager>();
@@ -65,17 +61,11 @@ public sealed class ClearLawsCommand : IConsoleCommand
         EntityUid? entity = null;
 
         if (args.Length == 0 && player != null)
-        {
             entity = player.ContentData()?.Mind?.CurrentEntity;
-        }
         else if (IoCManager.Resolve<IPlayerManager>().TryGetPlayerDataByUsername(args[0], out var data))
-        {
             entity = data.ContentData()?.Mind?.CurrentEntity;
-        }
         else if (EntityUid.TryParse(args[0], out var foundEntity))
-        {
             entity = foundEntity;
-        }
 
         if (entity == null)
         {
@@ -99,6 +89,7 @@ public sealed class AddLawCommand : IConsoleCommand
     public string Command => "lawadd";
     public string Description => Loc.GetString("command-lawadd-description");
     public string Help => Loc.GetString("command-lawadd-help");
+
     public async void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         var entityManager = IoCManager.Resolve<IEntityManager>();
@@ -112,13 +103,9 @@ public sealed class AddLawCommand : IConsoleCommand
         }
 
         if (IoCManager.Resolve<IPlayerManager>().TryGetPlayerDataByUsername(args[0], out var data))
-        {
             entity = data.ContentData()?.Mind?.CurrentEntity;
-        }
         else if (EntityUid.TryParse(args[0], out var foundEntity))
-        {
             entity = foundEntity;
-        }
 
         if (entity == null)
         {
@@ -143,6 +130,7 @@ public sealed class RemoveLawCommand : IConsoleCommand
     public string Command => "lawrm";
     public string Description => Loc.GetString("command-lawrm-description");
     public string Help => Loc.GetString("command-lawrm-help");
+
     public async void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         var entityManager = IoCManager.Resolve<IEntityManager>();
@@ -156,13 +144,9 @@ public sealed class RemoveLawCommand : IConsoleCommand
         }
 
         if (IoCManager.Resolve<IPlayerManager>().TryGetPlayerDataByUsername(args[0], out var data))
-        {
             entity = data.ContentData()?.Mind?.CurrentEntity;
-        }
         else if (EntityUid.TryParse(args[0], out var foundEntity))
-        {
             entity = foundEntity;
-        }
 
         if (entity == null)
         {

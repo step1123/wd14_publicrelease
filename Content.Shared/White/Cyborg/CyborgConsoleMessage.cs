@@ -1,16 +1,17 @@
-﻿using Content.Shared.Medical.SuitSensor;
-using Content.Shared.White.Cyborg.CyborgSensor;
+﻿using Content.Shared.White.Cyborg.CyborgSensor;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.White.Cyborg;
 
-[NetSerializable, Serializable]
+[NetSerializable]
+[Serializable]
 public enum CyborgMonitoringConsoleUiKey : byte
 {
     Key
 }
 
-[NetSerializable, Serializable]
+[NetSerializable]
+[Serializable]
 public enum CyborgActionKey : byte
 {
     LawControl,
@@ -18,7 +19,8 @@ public enum CyborgActionKey : byte
     Freeze
 }
 
-[NetSerializable, Serializable]
+[NetSerializable]
+[Serializable]
 public sealed class CyborgMonitoringState : BoundUserInterfaceState
 {
     public List<CyborgSensorStatus> Sensors;
@@ -29,11 +31,12 @@ public sealed class CyborgMonitoringState : BoundUserInterfaceState
     }
 }
 
-[NetSerializable, Serializable]
+[NetSerializable]
+[Serializable]
 public sealed class CyborgActionMessage : BoundUserInterfaceMessage
 {
-    public string Address;
     public Enum Action;
+    public string Address;
 
     public CyborgActionMessage(Enum action, string address)
     {
@@ -41,6 +44,3 @@ public sealed class CyborgActionMessage : BoundUserInterfaceMessage
         Address = address;
     }
 }
-
-
-

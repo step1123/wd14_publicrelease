@@ -2,20 +2,20 @@
 
 namespace Content.Shared.White.Cyborg;
 
-[Serializable, NetSerializable]
+[Serializable]
+[NetSerializable]
 public sealed class CyborgActionStatus
 {
+    public Enum Action;
+    public EntityUid? Actioner;
+    public string Address;
+
     public CyborgActionStatus(Enum action, string address, EntityUid? actioner)
     {
         Action = action;
         Address = address;
         Actioner = actioner;
     }
-
-    public Enum Action;
-    public string Address;
-    public EntityUid? Actioner;
-
 }
 
 public static class CyborgActionConstants
@@ -24,4 +24,3 @@ public static class CyborgActionConstants
     public const string NET_ADDRESS = "address";
     public const string NET_ACTIONER = "actioner";
 }
-

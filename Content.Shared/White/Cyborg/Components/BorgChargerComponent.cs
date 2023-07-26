@@ -12,34 +12,23 @@ public struct BorgChargerVisualInfo
 }
 
 /// <summary>
-/// This is used for...
+///     This is used for...
 /// </summary>
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent]
+[NetworkedComponent]
 public sealed class BorgChargerComponent : Component
 {
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("chargeRate")]
-    public int ChargeRate = 5;
-
-    [ViewVariables(VVAccess.ReadOnly)]
-    public ContainerSlot BodyContainer = default!;
-
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("removeSound")]
-    public SoundSpecifier RemoveSound = new SoundPathSpecifier("/Audio/Items/pistol_magout.ogg");
-
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("insertSound")]
-    public SoundSpecifier InsertSound = new SoundPathSpecifier("/Audio/Items/pistol_magin.ogg");
-
-    [Serializable, NetSerializable]
+    [Serializable]
+    [NetSerializable]
     public enum BorgChargerVisuals : byte
     {
         Base,
         Light,
+
         // based
         Closed,
         Opened,
+
         // other
         ClosePowered,
         OpenPowered,
@@ -48,16 +37,27 @@ public sealed class BorgChargerComponent : Component
         Occupied,
         OccupiedCharged
     }
+
+    [ViewVariables(VVAccess.ReadOnly)] public ContainerSlot BodyContainer = default!;
+
+    [ViewVariables(VVAccess.ReadWrite)] [DataField("chargeRate")]
+    public int ChargeRate = 5;
+
+    [ViewVariables(VVAccess.ReadWrite)] [DataField("insertSound")]
+    public SoundSpecifier InsertSound = new SoundPathSpecifier("/Audio/Items/pistol_magin.ogg");
+
+    [ViewVariables(VVAccess.ReadWrite)] [DataField("removeSound")]
+    public SoundSpecifier RemoveSound = new SoundPathSpecifier("/Audio/Items/pistol_magout.ogg");
 }
 
 /// <summary>
-/// Contains network state for BorgChargerComponent.
+///     Contains network state for BorgChargerComponent.
 /// </summary>
-[Serializable, NetSerializable]
+[Serializable]
+[NetSerializable]
 public sealed class BorgChargerComponentState : ComponentState
 {
     public BorgChargerComponentState(BorgChargerComponent component)
     {
-
     }
 }

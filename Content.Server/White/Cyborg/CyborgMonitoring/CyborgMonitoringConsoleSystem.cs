@@ -5,6 +5,7 @@ using Content.Server.DeviceNetwork.Systems;
 using Content.Server.PowerCell;
 using Content.Shared.White.Cyborg;
 using Content.Shared.White.Cyborg.Components;
+using Content.Shared.White.Cyborg.CyborgMonitoring;
 using Content.Shared.White.Cyborg.CyborgSensor;
 using Robust.Server.GameObjects;
 
@@ -12,9 +13,10 @@ namespace Content.Server.White.Cyborg.CyborgMonitoring;
 
 public sealed class CyborgMonitoringConsoleSystem : EntitySystem
 {
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly PowerCellSystem _cell = default!;
     [Dependency] private readonly DeviceNetworkSystem _deviceNetworkSystem = default!;
+    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -26,8 +28,8 @@ public sealed class CyborgMonitoringConsoleSystem : EntitySystem
 
     private void OnAction(EntityUid uid, CyborgMonitoringConsoleComponent component, CyborgActionMessage args)
     {
-        var status = new CyborgActionStatus(args.Action, args.Address,args.Session.AttachedEntity);
-        BroadcastAction(uid,status);
+        var status = new CyborgActionStatus(args.Action, args.Address, args.Session.AttachedEntity);
+        BroadcastAction(uid, status);
     }
 
     private void OnRemove(EntityUid uid, CyborgMonitoringConsoleComponent component, ComponentRemove args)
@@ -35,7 +37,8 @@ public sealed class CyborgMonitoringConsoleSystem : EntitySystem
         component.ConnectedSensors.Clear();
     }
 
-    private void OnPacketReceived(EntityUid uid, CyborgMonitoringConsoleComponent component, DeviceNetworkPacketEvent args)
+    private void OnPacketReceived(EntityUid uid, CyborgMonitoringConsoleComponent component,
+        DeviceNetworkPacketEvent args)
     {
         var payload = args.Data;
         // check command
@@ -44,7 +47,8 @@ public sealed class CyborgMonitoringConsoleSystem : EntitySystem
         if (command != DeviceNetworkConstants.CmdUpdatedState)
             return;
 
-        if (!payload.TryGetValue(CyborgSensorConstants.NET_STATUS_COLLECTION, out Dictionary<string, CyborgSensorStatus>? sensorStatus))
+        if (!payload.TryGetValue(CyborgSensorConstants.NET_STATUS_COLLECTION,
+                out Dictionary<string, CyborgSensorStatus>? sensorStatus))
             return;
         component.ConnectedSensors = sensorStatus;
         UpdateUserInterface(uid, component);
@@ -63,20 +67,22 @@ public sealed class CyborgMonitoringConsoleSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return;
 
-        if(!_ui.HasUi(uid,CyborgMonitoringConsoleUiKey.Key))
+        if (!_ui.HasUi(uid, CyborgMonitoringConsoleUiKey.Key))
             return;
+
         var allSensors = component.ConnectedSensors.Values.ToList();
         var state = new CyborgMonitoringState(allSensors);
         var ui = _ui.GetUi(uid, CyborgMonitoringConsoleUiKey.Key);
         _ui.SetUiState(ui, state);
     }
 
-    private void UpdateAvailableActions(EntityUid uid, List<ActionData> availableAction, CyborgMonitoringConsoleComponent? component = null)
+    private void UpdateAvailableActions(EntityUid uid, List<ActionData> availableAction,
+        CyborgMonitoringConsoleComponent? component = null)
     {
-
     }
 
-    private void BroadcastAction(EntityUid consoleUid,CyborgActionStatus status, CyborgMonitoringConsoleComponent? consoleComponent = null, DeviceNetworkComponent? device = null)
+    private void BroadcastAction(EntityUid consoleUid, CyborgActionStatus status,
+        CyborgMonitoringConsoleComponent? consoleComponent = null, DeviceNetworkComponent? device = null)
     {
         if (!Resolve(consoleUid, ref consoleComponent, ref device))
             return;
@@ -86,11 +92,11 @@ public sealed class CyborgMonitoringConsoleSystem : EntitySystem
 
     public NetworkPayload CyborgActionToPacket(CyborgActionStatus status)
     {
-        var payload = new NetworkPayload()
+        var payload = new NetworkPayload
         {
             [DeviceNetworkConstants.Command] = DeviceNetworkConstants.CmdSetState,
             [CyborgActionConstants.NET_ADDRESS] = status.Address,
-            [CyborgActionConstants.NET_ACTION] = status.Action,
+            [CyborgActionConstants.NET_ACTION] = status.Action
         };
         if (status.Actioner != null)
             payload.Add(CyborgActionConstants.NET_ACTIONER, status.Actioner);
@@ -104,12 +110,14 @@ public sealed class CyborgMonitoringConsoleSystem : EntitySystem
         if (command != DeviceNetworkConstants.CmdSetState)
             return null;
 
-        if(!payload.TryGetValue(CyborgActionConstants.NET_ADDRESS,out string? address)) return null;
-        if(!payload.TryGetValue(CyborgActionConstants.NET_ACTION,out Enum? action)) return null;
+        if (!payload.TryGetValue(CyborgActionConstants.NET_ADDRESS, out string? address))
+            return null;
+        if (!payload.TryGetValue(CyborgActionConstants.NET_ACTION, out Enum? action))
+            return null;
 
         payload.TryGetValue(CyborgActionConstants.NET_ACTIONER, out EntityUid actioner);
 
-        var status = new CyborgActionStatus(action, address,actioner);
+        var status = new CyborgActionStatus(action, address, actioner);
         return status;
     }
 }

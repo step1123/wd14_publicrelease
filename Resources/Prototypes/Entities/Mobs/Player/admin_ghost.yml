@@ -43,11 +43,13 @@
         type: RadarConsoleBoundUserInterface
       - key: enum.CargoConsoleUiKey.Orders
         type: CargoOrderConsoleBoundUserInterface
-      - key: enum.CrewMonitoringUIKey.Key
-        type: CrewMonitoringBoundUserInterface
       - key: enum.GeneralStationRecordConsoleKey.Key
         # who the fuck named this bruh
         type: GeneralStationRecordConsoleBoundUserInterface
+        # WD EDIT
+      - key: enum.CyborgMonitoringConsoleUiKey.Key
+        type: CyborgConsoleBoundUserInterface
+
   - type: IntrinsicUI
     uis:
       - key: enum.SolarControlConsoleUiKey.Key
@@ -86,19 +88,20 @@
           keywords: [ "AI", "console", "interface" ]
           priority: -10
           event: !type:ToggleIntrinsicUIEvent
-      - key: enum.CrewMonitoringUIKey.Key
+      - key: enum.GeneralStationRecordConsoleKey.Key
         toggleAction:
-          name: action-name-show-crew-monitoring-console
-          description: action-description-crew-monitoring-console
+          name: action-name-show-station-records-console
+          description: action-description-station-records-console
           icon: { sprite: Structures/Machines/parts.rsi, state: box_0 }
           iconOn: Structures/Machines/parts.rsi/box_2.png
           keywords: [ "AI", "console", "interface" ]
           priority: -10
           event: !type:ToggleIntrinsicUIEvent
-      - key: enum.GeneralStationRecordConsoleKey.Key
+      # WD EDIT
+      - key: enum.CyborgMonitoringConsoleUiKey.Key
         toggleAction:
-          name: action-name-show-station-records-console
-          description: action-description-station-records-console
+          name: action-name-show-cyborg-console
+          description: action-description-cyborg-console
           icon: { sprite: Structures/Machines/parts.rsi, state: box_0 }
           iconOn: Structures/Machines/parts.rsi/box_2.png
           keywords: [ "AI", "console", "interface" ]
@@ -110,15 +113,15 @@
     color: "#228b22"
   - type: RadarConsole
   - type: CargoOrderConsole
-  - type: CrewMonitoringConsole
-    snap: false
-    precision: 3
   - type: GeneralStationRecordConsole
+  # WD EDIT
+  - type: CyborgMonitoringConsole
   - type: DeviceNetwork
     deviceNetId: Wireless
-    receiveFrequencyId: CrewMonitor
+    transmitFrequencyId: CyborgAction
+    receiveFrequencyId: CyborgMonitor
   - type: WirelessNetworkConnection
-    range: 500
+    range: 1200
   - type: StationLimitedNetwork
   - type: Thieving
     stripTimeReduction: 9999

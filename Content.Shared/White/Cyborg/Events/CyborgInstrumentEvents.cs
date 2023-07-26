@@ -2,24 +2,20 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.White.Cyborg.Events;
 
-[Serializable,NetSerializable]
-public sealed class CyborgInstrumentGotInsertedEvent : EntityEventArgs
+[Serializable]
+[NetSerializable]
+public sealed class CyborgInstrumentGotInsertedEvent : BaseBorgEvent
 {
-    public EntityUid CyborgUid;
-
-    public CyborgInstrumentGotInsertedEvent(EntityUid uid)
+    public CyborgInstrumentGotInsertedEvent(EntityUid cyborgUid) : base(cyborgUid)
     {
-        CyborgUid = uid;
     }
 }
 
-[Serializable,NetSerializable]
-public sealed class CyborgInstrumentGotPickupEvent : EntityEventArgs
+[Serializable]
+[NetSerializable]
+public sealed class CyborgInstrumentGotPickupEvent : BaseBorgEvent
 {
-    public EntityUid CyborgUid;
-
-    public CyborgInstrumentGotPickupEvent(EntityUid uid)
+    public CyborgInstrumentGotPickupEvent(EntityUid cyborgUid) : base(cyborgUid)
     {
-        CyborgUid = uid;
     }
 }

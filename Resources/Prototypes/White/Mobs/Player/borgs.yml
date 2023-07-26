@@ -21,8 +21,10 @@
       needsHands: false
     - type: Speech
       speechSounds: Bass
-    - type: MobState
     - type: Access
+      groups:
+        - AllAccess
+    - type: MobState
     - type: Appearance
     - type: Body
       prototype: Cyborg
@@ -65,6 +67,7 @@
         brain-slot: !type:ContainerSlot
         instrument-slots: !type:Container
     - type: ContainerFill
+    - type: SiliconBrainContainer
     - type: Cyborg
       unlockAccessTags:
         - Research
@@ -154,7 +157,6 @@
       containers:
         module-slots:
           - CyborgRadioModule
-          - CyborgIDCardModule
           - CyborgLawsModule
           - CyborgInstrumentModuleFilled
     - type: Faction
@@ -183,7 +185,6 @@
       containers:
         module-slots:
           - CyborgRadioModule
-          - CyborgIDCardModule
           - CyborgLawsModule
           - CyborgInstrumentModuleFilledMedicine
     - type: DeviceNetwork
@@ -213,7 +214,6 @@
       containers:
         module-slots:
           - CyborgRadioModuleSec
-          - CyborgIDCardModule
           - CyborgLawsModule
           - CyborgInstrumentModuleFilledSecurity
     - type: CombatMode
@@ -253,7 +253,6 @@
       containers:
         module-slots:
           - CyborgRadioModule
-          - CyborgIDCardModule
           - CyborgLawsModule
           - CyborgInstrumentModuleFilledEngineer
     - type: DeviceNetwork
@@ -275,6 +274,68 @@
           visible: false
           map: [ "enum.ToggleVisuals.Layer" ]
 
+#Kerfuś?
+- type: entity
+  parent: PlayerCyborgBase
+  id: PlayerCyborgNeko
+  name: neko cyborg
+  components:
+    - type: Faction
+      factions:
+        - NanoTrasen
+    - type: Cyborg
+      prototype: Neko
+    - type: ContainerFill
+      containers:
+        module-slots:
+          - CyborgRadioModule
+          - CyborgLawsModule
+          - CyborgInstrumentModuleFilledService
+    - type: DeviceNetwork
+      deviceNetId: Wireless
+      transmitFrequencyId: CyborgSensor
+      receiveFrequencyId: CyborgAction
+    - type: WirelessNetworkConnection
+      range: 1200
+    - type: StationLimitedNetwork
+    - type: CyborgSensor
+    - type: Sprite
+      drawdepth: Mobs
+      netsync: false
+      sprite: White/Mobs/Player/Borgs/cyborg_neko.rsi
+      layers:
+        - state: robot
+        - state: robot-flashlight
+          shader: unshaded
+          visible: false
+          map: [ "enum.ToggleVisuals.Layer" ]
+    - type: Absorbent
+      pickupAmount: 10
+    - type: UseDelay
+      delay: 2
+    - type: SolutionRegeneration
+      solution: absorbed
+      generated:
+        reagents:
+          - ReagentId: Water
+            Quantity: 10
+    - type: SolutionPurge
+      solution: absorbed
+      preserve:
+        - Water
+      quantity: 10
+    - type: SolutionContainerManager
+      solutions:
+        absorbed:
+          maxVol: 50
+    - type: MovementSpeedModifier
+      baseWalkSpeed: 2
+      baseSprintSpeed: 3
+    - type: NoSlip
+    - type: HTN
+      rootTask: CleanbotCompound
+    - type: DrainableSolution
+      solution: drainBuffer
 
 # Synd
 - type: entity
@@ -294,7 +355,6 @@
       containers:
         module-slots:
           - CyborgRadioModuleSyndie
-          - CyborgIDCardModule
           - CyborgLawsModule
           - CyborgInstrumentModuleFilledSyndie
           - CyborgAmmoFillupModule
@@ -335,6 +395,7 @@
       needsHands: false
     - type: InputMover
     - type: CyborgSensor
+    - type: SiliconBrainContainer
     - type: Speech
       speechSounds: Bass
     - type: MobState
@@ -426,7 +487,6 @@
       containers:
         module-slots:
           - CyborgRadioModule
-          - CyborgIDCardModule
           - CyborgLawsModule
           - CyborgInstrumentModuleFilled
         battery-slot:
@@ -443,7 +503,6 @@
       containers:
         module-slots:
           - CyborgRadioModule
-          - CyborgIDCardModule
           - CyborgLawsModule
           - CyborgInstrumentModuleFilledMedicine
         battery-slot:
@@ -460,7 +519,6 @@
       containers:
         module-slots:
           - CyborgRadioModuleSec
-          - CyborgIDCardModule
           - CyborgLawsModule
           - CyborgInstrumentModuleFilledSecurity
         battery-slot:
@@ -477,7 +535,6 @@
       containers:
         module-slots:
           - CyborgRadioModuleSyndie
-          - CyborgIDCardModule
           - CyborgLawsModule
           - CyborgInstrumentModuleFilledSyndie
           - CyborgAmmoFillupModule
@@ -495,9 +552,26 @@
       containers:
         module-slots:
           - CyborgRadioModule
-          - CyborgIDCardModule
+
           - CyborgLawsModule
           - CyborgInstrumentModuleFilledEngineer
+        battery-slot:
+          - PowerCellHigh
+        brain-slot:
+          - PositronicBrain
+
+- type: entity
+  parent: PlayerCyborgNeko
+  id: PlayerCyborgNekoBattery
+  suffix: Battery
+  components:
+    - type: ContainerFill
+      containers:
+        module-slots:
+          - CyborgRadioModule
+
+          - CyborgLawsModule
+          - CyborgInstrumentModuleFilledService
         battery-slot:
           - PowerCellHigh
         brain-slot:
@@ -571,6 +645,20 @@
   - type: ConditionalSpawner
     prototypes:
       - PlayerCyborgSyndBattery
+
+- type: entity
+  name: PlayerCyborgNeko Spawner
+  id: SpawnMobPlayerCyborgNeko
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: green
+        - sprite: White/Mobs/Player/Borgs/cyborg_neko.rsi
+          state: robot
+    - type: ConditionalSpawner
+      prototypes:
+        - PlayerCyborgNekoBattery
 
 - type: entity
   name: PlayerCyborgStart Spawner

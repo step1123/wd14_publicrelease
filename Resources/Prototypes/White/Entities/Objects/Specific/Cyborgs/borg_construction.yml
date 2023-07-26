@@ -51,13 +51,13 @@
               doAfter: 1
 
             - component: Flash
-              name: Flash
+              name: Вспышка
 
             - tool: Screwing
               doAfter: 1
 
             - component: Flash
-              name: Flash
+              name: Вспышка
 
             - tool: Screwing
               doAfter: 1

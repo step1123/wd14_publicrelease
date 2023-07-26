@@ -2,15 +2,33 @@ using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Movement.Events;
-using Content.Shared.White.Cyborg.Components;
+using Content.Shared.White.Cyborg.SiliconBrain.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.White.Cyborg.Systems;
+namespace Content.Shared.White.Cyborg.SiliconBrain.Systems;
 
 public abstract class SharedMMISystem : EntitySystem
 {
+    [Serializable]
+    [NetSerializable]
+    public enum MMIStatus : byte
+    {
+        Off,
+        On,
+        Dead
+    }
+
+    [Serializable]
+    [NetSerializable]
+    public enum MMIVisuals : byte
+    {
+        Status,
+        HasBrain
+    }
+
     [Dependency] private readonly SharedContainerSystem _container = default!;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<MMIComponent, UseAttemptEvent>(OnCancel);
@@ -20,7 +38,7 @@ public abstract class SharedMMISystem : EntitySystem
         SubscribeLocalEvent<MMIComponent, UpdateCanMoveEvent>(OnCancel);
         SubscribeLocalEvent<MMIComponent, ChangeDirectionAttemptEvent>(OnCancel);
 
-        SubscribeLocalEvent<MMIComponent,ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<MMIComponent, ComponentStartup>(OnStartup);
     }
 
     private void OnStartup(EntityUid uid, MMIComponent component, ComponentStartup args)
@@ -32,20 +50,4 @@ public abstract class SharedMMISystem : EntitySystem
     {
         args.Cancel();
     }
-
-    [Serializable, NetSerializable]
-    public enum MMIVisuals : byte
-    {
-        Status,
-        HasBrain
-    }
-
-    [Serializable, NetSerializable]
-    public enum MMIStatus : byte
-    {
-        Off,
-        On,
-        Dead
-    }
-
 }

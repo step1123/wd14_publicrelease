@@ -1,10 +1,7 @@
-﻿using Content.Client.White.Radials;
-using Content.Client.White.UserInterface.Controls;
+﻿using Content.Client.White.UserInterface.Controls;
 using Content.Shared.White.Cyborg;
-using Content.Shared.White.Radials;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
-using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client.White.Cyborg.CyborgSelect;
@@ -29,7 +26,7 @@ public sealed class CyborgSelectBoundUserInterface : BoundUserInterface
         foreach (var prototype in _prototypeManager.EnumeratePrototypes<CyborgPrototype>())
         {
             var radialButton = _radialContainer.AddButton(prototype.CyborgName, prototype.Icon);
-            radialButton.Controller.OnPressed += _ => Select(prototype.CyborgPolymorph);
+            radialButton.Controller.OnPressed += _ => Select(prototype.CyborgSpawnPrototype);
         }
 
         _radialContainer.OpenCentered();
@@ -38,9 +35,9 @@ public sealed class CyborgSelectBoundUserInterface : BoundUserInterface
         //_radialContainer.Open(usrMngr.MousePositionScaled.Position);
     }
 
-    public void Select(string polymorph)
+    public void Select(string prototype)
     {
-        SendMessage(new CyborgSelectedMessage(polymorph));
+        SendMessage(new CyborgSelectedMessage(prototype));
     }
 
     protected override void Dispose(bool disposing)

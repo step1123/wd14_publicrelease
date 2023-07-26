@@ -1,0 +1,47 @@
+- type: job
+  id: MedicalCyborg
+  name: MedicalCyborg
+  description: MedicalCyborg
+  playTimeTracker: JobPassenger
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 36000 #10 hrs
+  supervisors: job-supervisors-all
+  jobEntity: PlayerCyborgMedicalBattery
+  canBeAntag: false
+
+- type: job
+  id: SecurityCyborg
+  name: SecurityCyborg
+  description: SecurityCyborg
+  playTimeTracker: JobPassenger
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 36000 #10 hrs
+  supervisors: job-supervisors-all
+  jobEntity: PlayerCyborgSecurityBattery
+  canBeAntag: false
+
+- type: job
+  id: EngineerCyborg
+  name: EngineerCyborg
+  description: EngineerCyborg
+  playTimeTracker: JobPassenger
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 36000 #10 hrs
+  supervisors: job-supervisors-all
+  jobEntity: PlayerCyborgEngBattery
+  canBeAntag: false
+
+- type: job
+  id: NekoCyborg
+  name: NekoCyborg
+  description: NekoCyborg
+  playTimeTracker: JobPassenger
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 36000 #10 hrs
+  supervisors: job-supervisors-all
+  jobEntity: PlayerCyborgNekoBattery
+  canBeAntag: false

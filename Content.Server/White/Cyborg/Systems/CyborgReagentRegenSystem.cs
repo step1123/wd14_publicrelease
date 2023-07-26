@@ -3,13 +3,14 @@ using Content.Shared.White.Cyborg.Components;
 
 namespace Content.Server.White.Cyborg.Systems;
 
-public sealed class CyborgReagentRegenSystem: EntitySystem
+public sealed class CyborgReagentRegenSystem : EntitySystem
 {
     [Dependency] private readonly CyborgSystem _cyborg = default!;
+
     public override void Initialize()
     {
-        SubscribeLocalEvent<CyborgInstrumentComponent,ReagentWillAddedEvent>(OnReagentWillAdded);
-        SubscribeLocalEvent<CyborgInstrumentComponent,ReagentAddedEvent>(OnReagentAdded);
+        SubscribeLocalEvent<CyborgInstrumentComponent, ReagentWillAddedEvent>(OnReagentWillAdded);
+        SubscribeLocalEvent<CyborgInstrumentComponent, ReagentAddedEvent>(OnReagentAdded);
     }
 
     private void OnReagentWillAdded(EntityUid uid, CyborgInstrumentComponent component, ReagentWillAddedEvent args)
@@ -19,6 +20,6 @@ public sealed class CyborgReagentRegenSystem: EntitySystem
 
     private void OnReagentAdded(EntityUid uid, CyborgInstrumentComponent component, ReagentAddedEvent args)
     {
-        _cyborg.TryChangeEnergy(component.CyborgUid, -args.Accepted*10);
+        _cyborg.TryChangeEnergy(component.CyborgUid, -args.Accepted * 10);
     }
 }

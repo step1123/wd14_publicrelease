@@ -4,6 +4,4 @@ namespace Content.Client.White.Cyborg;
 
 public sealed class CyborgHandsSystem : SharedCyborgHandSystem
 {
-
-
 }

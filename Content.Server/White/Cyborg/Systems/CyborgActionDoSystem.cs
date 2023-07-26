@@ -1,4 +1,3 @@
-using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
 using Content.Server.Explosion.EntitySystems;
 using Content.Shared.ActionBlocker;
@@ -12,20 +11,20 @@ namespace Content.Server.White.Cyborg.Systems;
 
 public sealed class CyborgKaboomSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly BodySystem _body = default!;
     [Dependency] private readonly CyborgSystem _cyborg = default!;
+    [Dependency] private readonly ExplosionSystem _explosion = default!;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<CyborgComponent,CyborgActionSelectedEvent>(OnActionSelected);
+        SubscribeLocalEvent<CyborgComponent, CyborgActionSelectedEvent>(OnActionSelected);
     }
 
     private void OnActionSelected(EntityUid uid, CyborgComponent component, CyborgActionSelectedEvent args)
     {
-        if(args.User == null)
+        if (args.User == null)
             return;
 
         if (args.Action is CyborgActionKey.Blow && _cyborg.HasAccess(uid, args.User))
@@ -44,8 +43,11 @@ public sealed class CyborgKaboomSystem : EntitySystem
                 $"{ToPrettyString(uid):player} has {isFreeze} from console by {ToPrettyString(args.User.Value):player}");
 
             // BatteryLowEvent because at this event, the tools are put back into the borg
-            var ev = new BatteryLowEvent(uid, component.BatterySlot.ContainedEntity);
-            RaiseLocalEvent(uid,ev);
+            if (component.BatterySlot.ContainedEntity != null)
+            {
+                var ev = new BatteryLowEvent(uid, component.BatterySlot.ContainedEntity.Value);
+                RaiseLocalEvent(uid, ev);
+            }
 
             component.Freeze = !component.Freeze;
             _actionBlocker.UpdateCanMove(uid);

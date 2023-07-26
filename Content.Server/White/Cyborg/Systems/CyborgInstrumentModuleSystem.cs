@@ -9,15 +9,16 @@ namespace Content.Server.White.Cyborg.Systems;
 public sealed class CyborgSystemInstrumentModule : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly CyborgHandsSystem _cyborgHands = default!;
     [Dependency] private readonly CyborgSystem _cyborg = default!;
+    [Dependency] private readonly CyborgHandsSystem _cyborgHands = default!;
+
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CyborgInstrumentModuleComponent,ModuleInsertEvent>(OnModuleInsert);
-        SubscribeLocalEvent<CyborgInstrumentModuleComponent,ModuleRemoveEvent>(OnModuleRemoved);
-        SubscribeLocalEvent<CyborgInstrumentModuleComponent,MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<CyborgInstrumentModuleComponent, ModuleInsertEvent>(OnModuleInsert);
+        SubscribeLocalEvent<CyborgInstrumentModuleComponent, ModuleRemoveEvent>(OnModuleRemoved);
+        SubscribeLocalEvent<CyborgInstrumentModuleComponent, MapInitEvent>(OnMapInit);
     }
 
     private void OnMapInit(EntityUid uid, CyborgInstrumentModuleComponent component, MapInitEvent args)
@@ -29,13 +30,13 @@ public sealed class CyborgSystemInstrumentModule : EntitySystem
 
     private void OnModuleRemoved(EntityUid uid, CyborgInstrumentModuleComponent component, ModuleRemoveEvent args)
     {
-        InsertAllInstrumentIntoModule(args.CyborgUid,uid);
+        InsertAllInstrumentIntoModule(args.CyborgUid, uid);
     }
 
 
     private void OnModuleInsert(EntityUid uid, CyborgInstrumentModuleComponent component, ModuleInsertEvent args)
     {
-        if(!TryComp<CyborgComponent>(args.CyborgUid,out var cyborgComponent))
+        if (!TryComp<CyborgComponent>(args.CyborgUid, out var cyborgComponent))
             return;
 
         foreach (var entity in component.InstrumentContainer.ContainedEntities.ToList())
@@ -51,10 +52,11 @@ public sealed class CyborgSystemInstrumentModule : EntitySystem
         _cyborg.UpdateUserInterface(args.CyborgUid);
     }
 
-    public void InsertAllInstrumentIntoModule(EntityUid uid,EntityUid moduleUid,
-        CyborgComponent? component = null,CyborgInstrumentModuleComponent? instrument = null,HandsComponent? hands = null)
+    public void InsertAllInstrumentIntoModule(EntityUid uid, EntityUid moduleUid,
+        CyborgComponent? component = null, CyborgInstrumentModuleComponent? instrument = null,
+        HandsComponent? hands = null)
     {
-        if(!Resolve(uid,ref component) || !Resolve(moduleUid,ref instrument))
+        if (!Resolve(uid, ref component) || !Resolve(moduleUid, ref instrument))
             return;
 
         if (Resolve(uid, ref hands))
@@ -71,15 +73,16 @@ public sealed class CyborgSystemInstrumentModule : EntitySystem
         {
             InsertInstrumentIntoModule(uid, moduleUid, entity, component, instrument);
         }
+
         Dirty(component);
         _cyborg.UpdateUserInterface(uid);
     }
 
     //Суёт обратно инструменты в модуль
-    public void InsertInstrumentIntoModule(EntityUid uid,EntityUid moduleUid,EntityUid entity,
-        CyborgComponent? cyborgComponent = null,CyborgInstrumentModuleComponent? component = null)
+    public void InsertInstrumentIntoModule(EntityUid uid, EntityUid moduleUid, EntityUid entity,
+        CyborgComponent? cyborgComponent = null, CyborgInstrumentModuleComponent? component = null)
     {
-        if(!Resolve(uid,ref cyborgComponent) || !Resolve(moduleUid,ref component))
+        if (!Resolve(uid, ref cyborgComponent) || !Resolve(moduleUid, ref component))
             return;
 
         if (component.InstrumentContainer.Insert(entity))

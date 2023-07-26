@@ -12,7 +12,6 @@ public sealed class CyborgConsoleBoundUserInterface : BoundUserInterface
 
     public CyborgConsoleBoundUserInterface(ClientUserInterfaceComponent owner, Enum uiKey) : base(owner, uiKey)
     {
-
     }
 
     protected override void Open()
@@ -29,7 +28,7 @@ public sealed class CyborgConsoleBoundUserInterface : BoundUserInterface
         if (state is CyborgMonitoringState monitoringState)
             _menu?.UpdateCyborgsList(monitoringState.Sensors);
         if (state is LawsUpdateState lawsState)
-            _menu?.SetUnitInformation(new CyborgConsoleLawsControl(lawsState.Uid,lawsState.Laws,this));
+            _menu?.SetUnitInformation(new CyborgConsoleLawsControl(lawsState.Uid, lawsState.Laws, this));
     }
 
 
@@ -44,21 +43,21 @@ public sealed class CyborgConsoleBoundUserInterface : BoundUserInterface
 
     public void SendActionMessage(string address, Enum action)
     {
-        SendMessage(new CyborgActionMessage(action,address));
+        SendMessage(new CyborgActionMessage(action, address));
     }
 
     public void SendAddLawMessage(EntityUid uid, string law, int? index = null)
     {
-        SendMessage(new AddLawMessage(uid,law,index));
+        SendMessage(new AddLawMessage(uid, law, index));
     }
 
     public void SendReIndexLawMessage(EntityUid uid, int index, int newIndex)
     {
-        SendMessage(new ReIndexLawMessage(uid,index,newIndex));
+        SendMessage(new ReIndexLawMessage(uid, index, newIndex));
     }
 
     public void SendRemoveLawMessage(EntityUid uid, int index)
     {
-        SendMessage(new RemoveLawMessage(uid,index));
+        SendMessage(new RemoveLawMessage(uid, index));
     }
 }

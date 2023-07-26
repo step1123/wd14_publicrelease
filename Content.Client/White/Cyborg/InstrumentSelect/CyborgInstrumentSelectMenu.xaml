@@ -10,25 +10,23 @@
                   VerticalExpand="True">
         <BoxContainer Orientation="Vertical"
                       Margin="15 2 15 20">
-            <Label Name="EnergyLabel"></Label>
+            <Label Name="EnergyLabel" />
             <ProgressBar
                 Name="EnergyBar"
                 MinValue="0"
                 MaxValue="1"
-                SetHeight="20">
-            </ProgressBar>
+                SetHeight="20" />
         </BoxContainer>
-        <customControls:VSeparator StyleClasses="LowDivider"/>
+        <customControls:VSeparator StyleClasses="LowDivider" />
         <ScrollContainer
             HScrollEnabled="False"
             HorizontalExpand="True"
             VerticalExpand="True">
-                <BoxContainer Name="InstrumentsList"
-                              Orientation="Vertical"
-                              HorizontalExpand="True"
-                              VerticalExpand="True"
-                              Margin="0 0 0 12">
-                </BoxContainer>
+            <BoxContainer Name="InstrumentsList"
+                          Orientation="Vertical"
+                          HorizontalExpand="True"
+                          VerticalExpand="True"
+                          Margin="0 0 0 12" />
         </ScrollContainer>
     </BoxContainer>
 </ui:FancyWindow>

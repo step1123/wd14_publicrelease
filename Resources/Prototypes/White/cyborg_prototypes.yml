@@ -2,19 +2,26 @@
   id: Medical
   name: Медицинский киборг
   description: Подлотайте больных, помогите кожанным коллегам в лечении больных
-  cyborgPolymorph: CyborgMedical
+  cyborgPrototype: PlayerCyborgMedical
   icon: /Textures/White/Mobs/Player/Borgs/cyborg_medical.rsi/icon.png
 
 - type: cyborg
   id: Security
   name: Охранный киборг
   description: Ловите плохих парней! Калечьте их в поисках истинны!
-  cyborgPolymorph: CyborgSecurity
+  cyborgPrototype: PlayerCyborgSecurity
   icon: /Textures/White/Mobs/Player/Borgs/cyborg_sec.rsi/icon.png
 
 - type: cyborg
   id: Engineer
   name: Инженерный киборг
   description: Чините станцию, помогайте инженерам в их непростых задачах!
-  cyborgPolymorph: CyborgEngineer
+  cyborgPrototype: PlayerCyborgEng
   icon: /Textures/White/Mobs/Player/Borgs/cyborg_eng.rsi/icon.png
+
+- type: cyborg
+  id: Neko
+  name: Сервисный киборг
+  description: Мяу! обслуживайте персонал в заведениях, таких как бар!
+  cyborgPrototype: PlayerCyborgNeko
+  icon: /Textures/White/Mobs/Player/Borgs/cyborg_neko.rsi/icon.png

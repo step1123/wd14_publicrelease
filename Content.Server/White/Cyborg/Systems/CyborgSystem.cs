@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Content.Server.Administration.Managers;
 using Content.Server.Body.Components;
 using Content.Server.Chat.Managers;
 using Content.Server.Flash;
@@ -26,22 +27,24 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Timing;
 
 namespace Content.Server.White.Cyborg.Systems;
+
 public sealed class CyborgSystem : SharedCyborgSystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly BatterySystem _battery = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly LawsSystem _laws = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly FlashSystem _flash = default!;
-    [Dependency] private readonly AccessReaderSystem _reader = default!;
-
     private static readonly TimeSpan Delay = TimeSpan.FromSeconds(1);
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly IAdminManager _adminManager = default!;
+    [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private readonly BatterySystem _battery = default!;
+    [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private readonly ContainerSystem _container = default!;
+    [Dependency] private readonly FlashSystem _flash = default!;
+    [Dependency] private readonly LawsSystem _laws = default!;
+    [Dependency] private readonly AccessReaderSystem _reader = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly UserInterfaceSystem _ui = default!;
     private ISawmill _logger = default!;
+
     public override void Initialize()
     {
         _logger = Logger.GetSawmill("Borg");
@@ -68,19 +71,13 @@ public sealed class CyborgSystem : SharedCyborgSystem
 
     private void OnGetGibbed(EntityUid uid, CyborgComponent component, BeingGibbedEvent args)
     {
-        if (component.BrainUid.HasValue)
-        {
-            var ev = new CyborgPartGetGibbedEvent(uid);
-            RaiseLocalEvent(component.BrainUid.Value,ev);
-        }
-
         foreach (var part in component.ModuleUids)
         {
             var ev = new CyborgPartGetGibbedEvent(uid);
-            RaiseLocalEvent(part,ev);
+            RaiseLocalEvent(part, ev);
 
             var ee = new ModuleRemoveEvent(part, uid);
-            RaiseLocalEvent(part,ee);
+            RaiseLocalEvent(part, ee);
         }
 
         foreach (var part in component.InstrumentUids)
@@ -88,16 +85,17 @@ public sealed class CyborgSystem : SharedCyborgSystem
             _logger.Debug($"instrument {part} was gibbed, but was not picked up by the module! Remove then");
             QueueDel(part);
         }
+
         foreach (var part in args.GibbedParts)
         {
             var ev = new CyborgPartGetGibbedEvent(uid);
-            RaiseLocalEvent(part,ev);
+            RaiseLocalEvent(part, ev);
         }
     }
 
     private void OnBorgCanMove(EntityUid uid, CyborgComponent component, UpdateCanMoveEvent args)
     {
-        if(component.Energy <= FixedPoint2.Zero || component.Freeze)
+        if (component.Energy <= FixedPoint2.Zero || component.Freeze)
             args.Cancel();
     }
 
@@ -115,8 +113,9 @@ public sealed class CyborgSystem : SharedCyborgSystem
             RemComp<CyborgGotFlashedComponent>(uid);
             return;
         }
+
         EnsureComp<CyborgGotFlashedComponent>(uid);
-        _flash.Flash(uid,args.User,args.Used,8000,0.1f);
+        _flash.Flash(uid, args.User, args.Used, 8000, 0.1f);
         args.Cancel();
     }
 
@@ -125,25 +124,23 @@ public sealed class CyborgSystem : SharedCyborgSystem
         _adminLog.Add(LogType.Emag, LogImpact.Medium,
             $"{ToPrettyString(uid):player} has emmaged by {ToPrettyString(args.User):player}");
 
-        _laws.AddLaw(uid,Loc.GetString("borg-emagged-law",("person",Identity.Entity(args.User,EntityManager))),0);
-        if(TryComp<ActorComponent>(uid,out var actor))
-            _chatManager.DispatchServerMessage(actor.PlayerSession,Loc.GetString("borg-emagged-message",("person",Identity.Entity(args.User,EntityManager))));
-
-        //Clearing the actions so that it cannot be controlled via the Borg console
-        component.ActionsData.Clear();
+        _laws.AddLaw(uid, Loc.GetString("borg-emagged-law", ("person", Identity.Entity(args.User, EntityManager))), 0);
+        if (TryComp<ActorComponent>(uid, out var actor))
+            _chatManager.DispatchServerMessage(actor.PlayerSession,
+                Loc.GetString("borg-emagged-message", ("person", Identity.Entity(args.User, EntityManager))));
 
         //Raise ModuleGotEmmagedEvent for every module on cyborg
         foreach (var modules in component.InstrumentContainer.ContainedEntities)
         {
             var ev = new ModuleGotEmaggedEvent(args.User, uid);
-            RaiseLocalEvent(modules,ev);
+            RaiseLocalEvent(modules, ev);
         }
     }
 
 
     private void OnUpdateAlert(EntityUid uid, CyborgComponent component, EntityEventArgs args)
     {
-        UpdateAlert(uid,component);
+        UpdateAlert(uid, component);
         Dirty(component);
     }
 
@@ -155,25 +152,25 @@ public sealed class CyborgSystem : SharedCyborgSystem
 
     private void OnChargeChange(EntityUid uid, CyborgComponent component, ref ChargeChangedEvent args)
     {
-        UpdateAlert(uid,component);
-        if (args.Charge == 0)
+        UpdateAlert(uid, component);
+        if (args.Charge == 0 && component.BatterySlot.ContainedEntity != null)
         {
             _adminLog.Add(LogType.Emag, LogImpact.High,
                 $"{ToPrettyString(uid):player} borg have not enought energy!");
 
-            var ev = new BatteryLowEvent(uid, component.BatterySlot.ContainedEntity);
-            RaiseLocalEvent(uid,ev);
+            var ev = new BatteryLowEvent(uid, component.BatterySlot.ContainedEntity.Value);
+            RaiseLocalEvent(uid, ev);
         }
 
         _actionBlocker.UpdateCanMove(uid);
-        UpdateUserInterface(uid,component);
+        UpdateUserInterface(uid, component);
     }
 
     private void OnInsertBattery(EntityUid uid, CyborgComponent component, BatteryInsertedEvent args)
     {
         if (!TryComp<BatteryComponent>(args.Battery, out var battery))
             return;
-        InsertBattery(uid,args.Battery,component,battery);
+        InsertBattery(uid, args.Battery, component, battery);
     }
 
     private void OnRemoveBattery(EntityUid uid, CyborgComponent component, RemoveBatteryEvent args)
@@ -206,56 +203,65 @@ public sealed class CyborgSystem : SharedCyborgSystem
     }
 
 
-
     /// <summary>
-    /// Checks whether this entity has access to the borg
+    ///     Checks whether this entity has access to the borg
     /// </summary>
     /// <param name="cyborgUid"></param>
     /// <param name="uid">Entity`s Uid</param>
-    /// <seealso cref="SharedCyborgSystem.HasAccess"/>
+    /// <seealso cref="SharedCyborgSystem.HasAccess" />
     /// <returns>Is has access to the borg</returns>
-    public bool HasAccess(EntityUid cyborgUid,EntityUid? uid)
+    public bool HasAccess(EntityUid cyborgUid, EntityUid? uid)
     {
         if (!uid.HasValue)
             return false;
+
+        if (_adminManager.IsAdmin(uid.Value))
+            return true;
+
+        // Checks if another entity is a Borg. If yes then return false
+        if (HasComp<CyborgComponent>(uid))
+            return false;
+
+        if (TryComp<CyborgEmaggedComponent>(uid, out var emaggedComponent))
+            return uid == emaggedComponent.EmmagedBy;
+
         var accessTags = _reader.FindAccessTags(uid.Value).ToHashSet();
         return HasAccess(cyborgUid, accessTags);
     }
 
 
     /// <summary>
-    /// Responsible for displaying and updating Borg's Alerts
+    ///     Responsible for displaying and updating Borg's Alerts
     /// </summary>
     /// <param name="uid">Cyborg`s Uid</param>
     /// <param name="component"></param>
-    public void UpdateAlert(EntityUid uid,CyborgComponent? component = null)
+    public void UpdateAlert(EntityUid uid, CyborgComponent? component = null)
     {
-        if(!Resolve(uid,ref component))
+        if (!Resolve(uid, ref component))
             return;
 
         //Battery status alert
         var per = 0;
-        if(component.MaxEnergy > 0)
-            per = (int) ((component.Energy / component.MaxEnergy) * 6);
-        _alerts.ShowAlert(uid,AlertType.Charge,(short)per);
-        if(!TryComp<WiresPanelComponent>(uid,out var wiresPanelComponent))
+        if (component.MaxEnergy > 0)
+            per = (int) (component.Energy / component.MaxEnergy * 6);
+        _alerts.ShowAlert(uid, AlertType.Charge, (short) per);
+        if (!TryComp<WiresPanelComponent>(uid, out var wiresPanelComponent))
             return;
 
         //Panel is open alert
-        if(wiresPanelComponent.Open)
-            _alerts.ShowAlert(uid,AlertType.Panel,(short)(component.PanelLocked? 0 : 1));
-        else if(_alerts.IsShowingAlert(uid,AlertType.Panel))
-            _alerts.ClearAlert(uid,AlertType.Panel);
-
+        if (wiresPanelComponent.Open)
+            _alerts.ShowAlert(uid, AlertType.Panel, (short) (component.PanelLocked ? 0 : 1));
+        else if (_alerts.IsShowingAlert(uid, AlertType.Panel))
+            _alerts.ClearAlert(uid, AlertType.Panel);
     }
 
     public override void UpdateUserInterface(EntityUid uid, CyborgComponent? component = null)
     {
-        if(!Resolve(uid,ref component))
+        if (!Resolve(uid, ref component))
             return;
 
         base.UpdateUserInterface(uid, component);
-        if(!_ui.HasUi(uid,CyborgInstrumentSelectUiKey.Key))
+        if (!_ui.HasUi(uid, CyborgInstrumentSelectUiKey.Key))
             return;
 
         var state = new CyborgInstrumentSelectListState(component.InstrumentUids);
@@ -264,7 +270,8 @@ public sealed class CyborgSystem : SharedCyborgSystem
     }
 
 
-    public void InsertBattery(EntityUid uid, EntityUid toInsert, CyborgComponent? component = null, BatteryComponent? battery = null)
+    public void InsertBattery(EntityUid uid, EntityUid toInsert, CyborgComponent? component = null,
+        BatteryComponent? battery = null)
     {
         if (!Resolve(uid, ref component, false))
             return;
@@ -276,12 +283,12 @@ public sealed class CyborgSystem : SharedCyborgSystem
         component.Energy = battery.CurrentCharge;
         component.MaxEnergy = battery.MaxCharge;
 
-        var ev = new ChargeChangedEvent()
+        var ev = new ChargeChangedEvent
         {
             Charge = component.Energy.Float(),
             MaxCharge = component.MaxEnergy.Float()
         };
-        RaiseLocalEvent(uid,ref ev);
+        RaiseLocalEvent(uid, ref ev);
 
         Dirty(component);
     }
@@ -296,12 +303,12 @@ public sealed class CyborgSystem : SharedCyborgSystem
         component.Energy = 0;
         component.MaxEnergy = 0;
 
-        var ev = new ChargeChangedEvent()
+        var ev = new ChargeChangedEvent
         {
             Charge = component.Energy.Float(),
             MaxCharge = component.MaxEnergy.Float()
         };
-        RaiseLocalEvent(uid,ref ev);
+        RaiseLocalEvent(uid, ref ev);
 
         Dirty(component);
     }
@@ -322,36 +329,36 @@ public sealed class CyborgSystem : SharedCyborgSystem
         if (!TryComp<BatteryComponent>(battery, out var batteryComp))
             return false;
 
-        _battery.SetCharge(battery.Value,batteryComp.CurrentCharge + delta.Float(),batteryComp);
+        _battery.SetCharge(battery.Value, batteryComp.CurrentCharge + delta.Float(), batteryComp);
         if (batteryComp.CurrentCharge != component.Energy) //if there's a discrepency, we have to resync them
         {
             component.Energy = batteryComp.CurrentCharge;
             Dirty(component);
         }
 
-        var ev = new ChargeChangedEvent()
+        var ev = new ChargeChangedEvent
         {
             Charge = component.Energy.Float(),
             MaxCharge = component.MaxEnergy.Float()
         };
         Dirty(component);
-        RaiseLocalEvent(uid,ref ev);
+        RaiseLocalEvent(uid, ref ev);
         return true;
     }
 
-    public void TransferEnergy(EntityUid uid,EntityUid transferEntity,float value,
-        CyborgComponent? component = null,BatteryComponent? batteryComponent = null)
+    public void TransferEnergy(EntityUid uid, EntityUid transferEntity, float value,
+        CyborgComponent? component = null, BatteryComponent? batteryComponent = null)
     {
-        if(!Resolve(uid,ref component) || !Resolve(transferEntity,ref batteryComponent))
+        if (!Resolve(uid, ref component) || !Resolve(transferEntity, ref batteryComponent))
             return;
         if (batteryComponent.Charge >= batteryComponent.MaxCharge)
             return;
 
-        var changedCharge = float.Min(batteryComponent.Charge + value,batteryComponent.MaxCharge);
+        var changedCharge = float.Min(batteryComponent.Charge + value, batteryComponent.MaxCharge);
 
-        if(changedCharge < 0 || !TryChangeEnergy(uid,-(changedCharge - batteryComponent.Charge),component))
+        if (changedCharge < 0 || !TryChangeEnergy(uid, -(changedCharge - batteryComponent.Charge), component))
             return;
-        _battery.SetCharge(transferEntity,changedCharge,batteryComponent);
+        _battery.SetCharge(transferEntity, changedCharge, batteryComponent);
     }
 
     public override void Update(float frameTime)
@@ -362,17 +369,16 @@ public sealed class CyborgSystem : SharedCyborgSystem
 
         while (query.MoveNext(out var uid, out var component))
         {
-            if(_timing.CurTime < component.NextUpdateTime)
+            if (_timing.CurTime < component.NextUpdateTime)
                 continue;
             component.NextUpdateTime += Delay;
 
-            if(!component.Active || component.Consumption == 0 || component.Energy == 0)
+            if (!component.Active || component.Consumption == 0 || component.Energy == 0)
                 return;
 
             component.Energy = FixedPoint2.Max(FixedPoint2.Zero, component.Energy);
 
             TryChangeEnergy(uid, -component.Consumption, component);
         }
-
     }
 }

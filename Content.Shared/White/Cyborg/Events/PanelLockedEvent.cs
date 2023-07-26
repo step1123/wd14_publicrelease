@@ -2,7 +2,8 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.White.Cyborg.Events;
 
-[Serializable, NetSerializable]
+[Serializable]
+[NetSerializable]
 public sealed class PanelLockedEvent : EntityEventArgs
 {
     public bool Locked;

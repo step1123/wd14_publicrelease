@@ -15,12 +15,12 @@ namespace Content.Server.White.Cyborg.CyborgSensor;
 
 public sealed class CyborgSensorSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly CyborgMonitoringServerSystem _monitoringServerSystem = default!;
     [Dependency] private readonly DeviceNetworkSystem _deviceNetworkSystem = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly CyborgMonitoringServerSystem _monitoringServerSystem = default!;
     [Dependency] private readonly StationSystem _stationSystem = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -82,62 +82,58 @@ public sealed class CyborgSensorSystem : EntitySystem
     }
 
 
-
     private void OnMapInit(EntityUid uid, CyborgSensorComponent component, MapInitEvent args)
     {
         component.StationId ??= _stationSystem.GetOwningStation(uid);
     }
 
     public CyborgSensorStatus? GetSensorState(EntityUid uid, CyborgSensorComponent? sensor = null,
-        TransformComponent? transform = null, CyborgComponent? component = null, DeviceNetworkComponent? deviceNetworkComponent = null)
+        TransformComponent? transform = null, CyborgComponent? component = null,
+        DeviceNetworkComponent? deviceNetworkComponent = null)
+    {
+        if (!Resolve(uid, ref sensor, ref transform, ref component, ref deviceNetworkComponent))
+            return null;
+
+        // try to get mobs id from metaData
+        var userName = Loc.GetString("suit-sensor-component-unknown-name");
+        if (TryComp<MetaDataComponent>(uid, out var metaDataComponent))
+            userName = metaDataComponent.EntityName;
+
+        // get health mob state
+        var isAlive = false;
+        if (TryComp<MobStateComponent>(uid, out var mobState))
+            isAlive = !_mobStateSystem.IsDead(uid, mobState);
+
+
+        // finally, form suit sensor status
+        var status = new CyborgSensorStatus(userName, deviceNetworkComponent.Address);
+        status.IsAlive = isAlive;
+        status.Freeze = component.Freeze;
+        EntityCoordinates coordinates;
+        var xformQuery = GetEntityQuery<TransformComponent>();
+        if (transform.GridUid != null)
         {
-            if (!Resolve(uid, ref sensor, ref transform, ref component, ref deviceNetworkComponent))
-                return null;
-
-            // try to get mobs id from metaData
-            var userName = Loc.GetString("suit-sensor-component-unknown-name");
-            if (TryComp<MetaDataComponent>(uid, out var metaDataComponent))
-            {
-                userName = metaDataComponent.EntityName;
-            }
-
-            // get health mob state
-            var isAlive = false;
-            if (TryComp<MobStateComponent>(uid,out var mobState))
-                isAlive = !_mobStateSystem.IsDead(uid, mobState);
-
-
-            // finally, form suit sensor status
-            var status = new CyborgSensorStatus(userName,deviceNetworkComponent.Address);
-            status.IsAlive = isAlive;
-            status.Freeze = component.Freeze;
-            EntityCoordinates coordinates;
-            var xformQuery = GetEntityQuery<TransformComponent>();
-            if (transform.GridUid != null)
-            {
-                coordinates = new EntityCoordinates(transform.GridUid.Value,
-                    _transform.GetInvWorldMatrix(xformQuery.GetComponent(transform.GridUid.Value), xformQuery)
+            coordinates = new EntityCoordinates(transform.GridUid.Value,
+                _transform.GetInvWorldMatrix(xformQuery.GetComponent(transform.GridUid.Value), xformQuery)
                     .Transform(_transform.GetWorldPosition(transform, xformQuery)));
-            }
-            else if (transform.MapUid != null)
-            {
-                coordinates = new EntityCoordinates(transform.MapUid.Value,
-                    _transform.GetWorldPosition(transform, xformQuery));
-            }
-            else
-            {
-                coordinates = EntityCoordinates.Invalid;
-            }
-
-            status.Prototype = component.Prototype;
-            status.Coordinates = coordinates;
-            status.Energy = component.Energy;
-            status.MaxEnergy = component.MaxEnergy;
-            status.IsActive = component.Active;
-            status.IsPanelLocked = component.PanelLocked;
-            status.АvailableAction = component.ActionsData;
-            return status;
         }
+        else if (transform.MapUid != null)
+        {
+            coordinates = new EntityCoordinates(transform.MapUid.Value,
+                _transform.GetWorldPosition(transform, xformQuery));
+        }
+        else
+            coordinates = EntityCoordinates.Invalid;
+
+        status.Prototype = component.Prototype;
+        status.Coordinates = coordinates;
+        status.Energy = component.Energy;
+        status.MaxEnergy = component.MaxEnergy;
+        status.IsActive = component.Active;
+        status.IsPanelLocked = component.PanelLocked;
+        status.АvailableAction = component.ActionsData;
+        return status;
+    }
 
 
     /// <summary>
@@ -145,7 +141,7 @@ public sealed class CyborgSensorSystem : EntitySystem
     /// </summary>
     public NetworkPayload CyborgSensorToPacket(CyborgSensorStatus status)
     {
-        var payload = new NetworkPayload()
+        var payload = new NetworkPayload
         {
             [DeviceNetworkConstants.Command] = DeviceNetworkConstants.CmdUpdatedState,
             [CyborgSensorConstants.NET_NAME] = status.Name,
@@ -159,14 +155,10 @@ public sealed class CyborgSensorSystem : EntitySystem
             [CyborgSensorConstants.NET_FREEZE] = status.Freeze
         };
         if (status.Prototype != null)
-        {
-            payload.Add(CyborgSensorConstants.NET_PROTOTYPE,status.Prototype);
-        }
+            payload.Add(CyborgSensorConstants.NET_PROTOTYPE, status.Prototype);
 
         if (status.АvailableAction != null)
-        {
-            payload.Add(CyborgSensorConstants.NET_AVAILABLE_ACTION,status.АvailableAction);
-        }
+            payload.Add(CyborgSensorConstants.NET_AVAILABLE_ACTION, status.АvailableAction);
 
         return payload;
     }
@@ -183,15 +175,24 @@ public sealed class CyborgSensorSystem : EntitySystem
             return null;
 
         // check some shit
-        if (!payload.TryGetValue(CyborgSensorConstants.NET_NAME, out string? name)) return null;
-        if (!payload.TryGetValue(CyborgSensorConstants.NET_ADDRESS, out string? address)) return null;
-        if (!payload.TryGetValue(CyborgSensorConstants.NET_IS_ALIVE, out bool isAlive)) return null;
-        if (!payload.TryGetValue(CyborgSensorConstants.NET_IS_ACTIVE, out bool isActive)) return null;
-        if (!payload.TryGetValue(CyborgSensorConstants.NET_IS_PANEL_LOCKED, out bool isPanelLocked)) return null;
-        if (!payload.TryGetValue(CyborgSensorConstants.NET_COORDINATES, out EntityCoordinates cords)) return null;
-        if (!payload.TryGetValue(CyborgSensorConstants.NET_ENERGY, out FixedPoint2 energy)) return null;
-        if (!payload.TryGetValue(CyborgSensorConstants.NET_MAX_ENERGY, out FixedPoint2 maxEnergy)) return null;
-        if (!payload.TryGetValue(CyborgSensorConstants.NET_FREEZE, out bool freeze)) return null;
+        if (!payload.TryGetValue(CyborgSensorConstants.NET_NAME, out string? name))
+            return null;
+        if (!payload.TryGetValue(CyborgSensorConstants.NET_ADDRESS, out string? address))
+            return null;
+        if (!payload.TryGetValue(CyborgSensorConstants.NET_IS_ALIVE, out bool isAlive))
+            return null;
+        if (!payload.TryGetValue(CyborgSensorConstants.NET_IS_ACTIVE, out bool isActive))
+            return null;
+        if (!payload.TryGetValue(CyborgSensorConstants.NET_IS_PANEL_LOCKED, out bool isPanelLocked))
+            return null;
+        if (!payload.TryGetValue(CyborgSensorConstants.NET_COORDINATES, out EntityCoordinates cords))
+            return null;
+        if (!payload.TryGetValue(CyborgSensorConstants.NET_ENERGY, out FixedPoint2 energy))
+            return null;
+        if (!payload.TryGetValue(CyborgSensorConstants.NET_MAX_ENERGY, out FixedPoint2 maxEnergy))
+            return null;
+        if (!payload.TryGetValue(CyborgSensorConstants.NET_FREEZE, out bool freeze))
+            return null;
 
         payload.TryGetValue(CyborgSensorConstants.NET_AVAILABLE_ACTION,
             out List<ActionData>? availableAction);
@@ -212,5 +213,4 @@ public sealed class CyborgSensorSystem : EntitySystem
 
         return status;
     }
-
 }

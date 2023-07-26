@@ -11,9 +11,9 @@ namespace Content.Server.White.Cyborg.Systems;
 
 public sealed class CyborgHandsSystem : SharedCyborgHandSystem
 {
+    private static readonly TimeSpan Delay = TimeSpan.FromSeconds(1);
     [Dependency] private readonly CyborgSystem _cyborg = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    private static readonly TimeSpan Delay = TimeSpan.FromSeconds(1);
     private TimeSpan _nextUpdateTime;
 
 
@@ -21,13 +21,14 @@ public sealed class CyborgHandsSystem : SharedCyborgHandSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CyborgComponent,CyborgInstrumentSelectedMessage>(OnInstrumentSelect);
-        SubscribeLocalEvent<CyborgComponent,BatteryLowEvent>(OnBatteryLow);
+        SubscribeLocalEvent<CyborgComponent, CyborgInstrumentSelectedMessage>(OnInstrumentSelect);
+        SubscribeLocalEvent<CyborgComponent, BatteryLowEvent>(OnBatteryLow);
         SubscribeLocalEvent<CyborgInstrumentComponent, ContainerGettingRemovedAttemptEvent>(OnUnequipHand);
     }
 
 
-    private void OnUnequipHand(EntityUid uid, CyborgInstrumentComponent component, ContainerGettingRemovedAttemptEvent args)
+    private void OnUnequipHand(EntityUid uid, CyborgInstrumentComponent component,
+        ContainerGettingRemovedAttemptEvent args)
     {
         args.Cancel();
         TryInsertInstrument(component.CyborgUid, uid);
@@ -37,7 +38,7 @@ public sealed class CyborgHandsSystem : SharedCyborgHandSystem
 
     private void OnBatteryLow(EntityUid uid, CyborgComponent component, BatteryLowEvent args)
     {
-        if(!TryComp<HandsComponent>(uid,out var handsComponent))
+        if (!TryComp<HandsComponent>(uid, out var handsComponent))
             return;
         foreach (var hand in handsComponent.Hands)
         {
@@ -45,48 +46,46 @@ public sealed class CyborgHandsSystem : SharedCyborgHandSystem
                 TryInsertInstrument(uid, hand.Value.HeldEntity.Value, component);
         }
 
-        _cyborg.UpdateUserInterface(uid,component);
+        _cyborg.UpdateUserInterface(uid, component);
     }
-
 
 
     private void OnInstrumentSelect(EntityUid uid, CyborgComponent component, CyborgInstrumentSelectedMessage args)
     {
-        if(!TryComp<HandsComponent>(uid,out var handsComponent))
+        if (!TryComp<HandsComponent>(uid, out var handsComponent))
             return;
 
-        if(component.Freeze || handsComponent.ActiveHand == null || component.Energy <= 0)
+        if (component.Freeze || handsComponent.ActiveHand == null || component.Energy <= 0)
             return;
 
         if (handsComponent.ActiveHand.HeldEntity != null)
             TryInsertInstrument(uid, handsComponent.ActiveHand.HeldEntity.Value, component);
 
         if (args.SelectedInstrumentUid != EntityUid.Invalid)
-            TryPickupInstrument(uid,args.SelectedInstrumentUid,component,handsComponent);
+            TryPickupInstrument(uid, args.SelectedInstrumentUid, component, handsComponent);
 
-        _cyborg.UpdateUserInterface(uid,component);
+        _cyborg.UpdateUserInterface(uid, component);
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        if(_timing.CurTime < _nextUpdateTime)
+        if (_timing.CurTime < _nextUpdateTime)
             return;
         _nextUpdateTime += Delay;
 
         var query = EntityQueryEnumerator<CyborgInstrumentComponent>();
         while (query.MoveNext(out var uid, out var component))
         {
-
             var batteryUid = component.BatteryUid;
             if (TryComp<BatteryComponent>(uid, out _))
                 batteryUid = uid;
 
-            if(!batteryUid.HasValue)
+            if (!batteryUid.HasValue)
                 continue;
 
-            _cyborg.TransferEnergy(component.CyborgUid,batteryUid.Value,20);
+            _cyborg.TransferEnergy(component.CyborgUid, batteryUid.Value, 20);
         }
     }
 }

@@ -188,7 +188,21 @@
           - FireExtinguisherBorg
           - StackHolderFloorTile
           - StackHolderCable
+          - trayScanner
 
+- type: entity
+  id: CyborgInstrumentModuleFilledService
+  parent: CyborgInstrumentModule
+  suffix: filled Service
+  components:
+    - type: ContainerFill
+      containers:
+        instrument_slots:
+          - AdvMopItem
+          - TrashBag
+          - KitchenKnife
+          - DrinkShaker
+          - FireExtinguisherBorg
 
 - type: entity
   id: CyborgInstrumentModuleFilledSyndie

@@ -12,9 +12,8 @@ namespace Content.Client.White.Cyborg.CyborgConsole;
 public sealed partial class CyborgConsoleMenu : FancyWindow
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    public CyborgConsoleBoundUserInterface Owner { get; }
-    public Dictionary<string,CyborgSensorStatus> Sensors = new();
     public string? LastAddress;
+    public Dictionary<string, CyborgSensorStatus> Sensors = new();
 
     public CyborgConsoleMenu(CyborgConsoleBoundUserInterface owner)
     {
@@ -23,13 +22,15 @@ public sealed partial class CyborgConsoleMenu : FancyWindow
         Owner = owner;
     }
 
+    public CyborgConsoleBoundUserInterface Owner { get; }
+
     public void UpdateCyborgsList(List<CyborgSensorStatus> sensors)
     {
         CyborgList.DisposeAllChildren();
         Sensors.Clear();
         foreach (var sensor in sensors)
         {
-            Sensors.Add(sensor.Address,sensor);
+            Sensors.Add(sensor.Address, sensor);
             AddOnCyborgList(sensor.Address);
         }
 
@@ -38,7 +39,7 @@ public sealed partial class CyborgConsoleMenu : FancyWindow
 
     public void AddOnCyborgList(string address)
     {
-        if(!Sensors.TryGetValue(address,out var sensor))
+        if (!Sensors.TryGetValue(address, out var sensor))
             return;
 
         var cyborg = new CyborgConsoleUnitContainer();
@@ -49,7 +50,8 @@ public sealed partial class CyborgConsoleMenu : FancyWindow
             UpdateUnitInformation(address);
         });
 
-        if (sensor.Prototype != null && _prototypeManager.TryIndex<CyborgPrototype>(sensor.Prototype, out var prototype))
+        if (sensor.Prototype != null &&
+            _prototypeManager.TryIndex<CyborgPrototype>(sensor.Prototype, out var prototype))
             cyborg.SetView(prototype.Icon);
 
         CyborgList.AddChild(cyborg);
@@ -57,19 +59,21 @@ public sealed partial class CyborgConsoleMenu : FancyWindow
 
     public void UpdateUnitInformation(string? address)
     {
-        if(CyborgInformation.ChildCount > 0 && CyborgInformation.GetChild(0) is not CyborgConsoleUnitInformationContainer)
+        if (CyborgInformation.ChildCount > 0 &&
+            CyborgInformation.GetChild(0) is not CyborgConsoleUnitInformationContainer)
             return;
 
         CyborgInformation.DisposeAllChildren();
-        if(address == null || !Sensors.TryGetValue(address,out var sensor))
+        if (address == null || !Sensors.TryGetValue(address, out var sensor))
             return;
 
         LastAddress = address;
 
         var unitInformation = new CyborgConsoleUnitInformationContainer();
         unitInformation.SetName(sensor.Name);
-        unitInformation.SetEnergyInfo(Loc.GetString("examine-borg-energy-percent",("energy",(int)(sensor.Energy/sensor.MaxEnergy*100))));
-        unitInformation.SetEnergyBar(sensor.Energy.Float(),sensor.MaxEnergy.Float());
+        unitInformation.SetEnergyInfo(Loc.GetString("examine-borg-energy-percent",
+            ("energy", (int) (sensor.Energy / sensor.MaxEnergy * 100))));
+        unitInformation.SetEnergyBar(sensor.Energy.Float(), sensor.MaxEnergy.Float());
         unitInformation.SetCyborgActiveInfo(sensor.IsActive);
         unitInformation.SetCyborgPanelLockedInfo(sensor.IsPanelLocked);
         unitInformation.SetCyborgAlive(sensor.IsAlive);
@@ -80,12 +84,13 @@ public sealed partial class CyborgConsoleMenu : FancyWindow
             foreach (var action in sensor.АvailableAction)
             {
                 unitInformation.AddButton(action, args =>
-                        Owner.SendActionMessage(sensor.Address,action.ActionKey)
+                    Owner.SendActionMessage(sensor.Address, action.ActionKey)
                 );
             }
         }
 
-        if (sensor.Prototype != null && _prototypeManager.TryIndex<CyborgPrototype>(sensor.Prototype, out var prototype))
+        if (sensor.Prototype != null &&
+            _prototypeManager.TryIndex<CyborgPrototype>(sensor.Prototype, out var prototype))
             unitInformation.SetView(prototype.Icon);
 
         SetUnitInformation(unitInformation);
@@ -96,10 +101,4 @@ public sealed partial class CyborgConsoleMenu : FancyWindow
         CyborgInformation.DisposeAllChildren();
         CyborgInformation.AddChild(container);
     }
-
-
-
-
-
-
 }

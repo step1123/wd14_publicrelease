@@ -20,7 +20,7 @@
     - type: Muted
     - type: DoAfter
     - type: MMI
-    - type: CyborgBrain
+    - type: SiliconBrain
     - type: Appearance
     - type: GenericVisualizer
       visuals:
