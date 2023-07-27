@@ -377,11 +377,15 @@ public partial class CultSystem : EntitySystem
 
          bool result;
 
+         var target = _ruleSystem.GetTarget();
+
          if (state.CurrentState != MobState.Dead)
          {
              var canBeConverted = _entityManager.TryGetComponent<MindContainerComponent>(victim.Value, out var mind) && mind.HasMind;
+             var isTarget = mind != null && mind.Mind == target;
 
-             result = canBeConverted && !_entityManager.TryGetComponent<MindShieldComponent>(victim.Value, out _)
+
+             result = canBeConverted && !_entityManager.TryGetComponent<MindShieldComponent>(victim.Value, out _) && !isTarget
                  ? Convert(uid, victim.Value, args.User, args.Cultists)
                  : Sacrifice(uid, victim.Value, args.User, args.Cultists);
          }

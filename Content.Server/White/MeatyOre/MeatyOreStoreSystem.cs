@@ -2,6 +2,7 @@
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind.Components;
+using Content.Server.Popups;
 using Content.Server.Store.Components;
 using Content.Server.Store.Systems;
 using Content.Server.White.Sponsors;
@@ -10,6 +11,7 @@ using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.White;
 using Content.Shared.White.MeatyOre;
@@ -32,6 +34,8 @@ public sealed class MeatyOreStoreSystem : EntitySystem
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly SponsorsManager _sponsorsManager = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverrideSystem = default!;
+    [Dependency] private readonly PopupSystem _popupSystem = default!;
+
 
 
     private static readonly string StorePresetPrototype = "StorePresetMeatyOre";
@@ -77,8 +81,14 @@ public sealed class MeatyOreStoreSystem : EntitySystem
             Message = $"Цена - {MeatyOreCurrencyPrototype}:10",
             Act = () =>
             {
-                _storeSystem.TryAddCurrency(new Dictionary<string, FixedPoint2> {{MeatyOreCurrencyPrototype, -10}}, store.Owner, store);
-                _traitorRuleSystem.MakeTraitor(targetMind.Mind.Session);
+                if (_traitorRuleSystem.MakeTraitor(targetMind.Mind.Session))
+                {
+                    _storeSystem.TryAddCurrency(new Dictionary<string, FixedPoint2> {{MeatyOreCurrencyPrototype, -10}}, store.Owner, store);
+                }
+                else
+                {
+                    _popupSystem.PopupCursor("Что-то пошло не так!", store.Owner, PopupType.Medium);
+                }
             },
             Category = VerbCategory.MeatyOre
         };
@@ -166,8 +176,4 @@ public sealed class MeatyOreStoreSystem : EntitySystem
 
         return storeComponent;
     }
-
-
-
-
 }

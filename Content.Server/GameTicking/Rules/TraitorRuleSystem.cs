@@ -21,6 +21,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Server.Objectives;
+using Content.Shared.White.Cult;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -156,6 +157,12 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
 
         foreach (var player in candidates.Keys)
         {
+
+            if (player.Data.ContentData()?.Mind?.AllRoles.Count() > 1)
+            {
+                continue;
+            }
+
             // Role prevents antag.
             if (!(player.Data.ContentData()?.Mind?.AllRoles.All(role => role is not Job { CanBeAntag: false }) ?? false))
             {
@@ -225,6 +232,14 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
         if (mind.OwnedEntity is not { } entity)
         {
             Logger.ErrorS("preset", "Mind picked for traitor did not have an attached entity.");
+            return false;
+        }
+        if (HasComp<CultistComponent>(mind.OwnedEntity)) // Cause no CultistRole this why i supposed to do this.......
+        {
+            return false;
+        }
+        if (mind.AllRoles.Count() > 1)
+        {
             return false;
         }
 

@@ -172,8 +172,9 @@
     - type: Sprite
       sprite: Objects/Weapons/Melee/double_esword.rsi
       layers:
-        - state: e_sword
-        - state: e_sword_blade
+        - state: e_sword_double
+        - state: e_sword_double_blade
+          color: "#FFFFFF"
           visible: false
           shader: unshaded
           map: [ "blade" ]
@@ -181,6 +182,7 @@
       size: 10
       sprite: Objects/Weapons/Melee/double_esword.rsi
     - type: Wieldable
+      wieldTime: 0
     - type: IncreaseDamageOnWield
       damage:
         types:

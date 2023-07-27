@@ -11,6 +11,8 @@ using Content.Shared.Toggleable;
 using Content.Shared.Tools.Components;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Wieldable;
+using Content.Shared.Wieldable.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 
@@ -37,6 +39,8 @@ public sealed class EnergySwordSystem : EntitySystem
         SubscribeLocalEvent<EnergySwordComponent, EnergySwordDeactivatedEvent>(TurnOff);
         SubscribeLocalEvent<EnergySwordComponent, EnergySwordActivatedEvent>(TurnOn);
         SubscribeLocalEvent<EnergySwordComponent, DroppedEvent>(OnDrop);
+        SubscribeLocalEvent<EnergySwordComponent, ItemUnwieldedEvent>(TurnOffonUnwielded);
+        SubscribeLocalEvent<EnergySwordComponent, ItemWieldedEvent>(TurnOnonWielded);
     }
 
     private void OnDrop(EntityUid target, EnergySwordComponent comp, DroppedEvent args)
@@ -73,6 +77,9 @@ public sealed class EnergySwordSystem : EntitySystem
             return;
 
         args.Handled = true;
+
+        if (TryComp<WieldableComponent>(uid, out _))
+            return;
 
         if (comp.Activated)
         {
@@ -174,5 +181,19 @@ public sealed class EnergySwordSystem : EntitySystem
     private void OnIsHotEvent(EntityUid uid, EnergySwordComponent energySword, IsHotEvent args)
     {
         args.IsHot = energySword.Activated;
+    }
+
+    private void TurnOffonUnwielded(EntityUid uid, EnergySwordComponent comp, ItemUnwieldedEvent args)
+    {
+        var ev = new EnergySwordDeactivatedEvent();
+        RaiseLocalEvent(uid, ref ev);
+        UpdateAppearance(uid, comp);
+    }
+
+    private void TurnOnonWielded(EntityUid uid, EnergySwordComponent comp, ref ItemWieldedEvent args)
+    {
+        var ev = new EnergySwordActivatedEvent();
+        RaiseLocalEvent(uid, ref ev);
+        UpdateAppearance(uid, comp);
     }
 }
