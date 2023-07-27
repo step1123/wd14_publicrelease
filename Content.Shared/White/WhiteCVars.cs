@@ -189,6 +189,14 @@ public sealed class WhiteCVars
     public static readonly CVarDef<string> ChatGptApi =
         CVarDef.Create("white.gpt_api_link", "", CVar.SERVERONLY | CVar.ARCHIVE | CVar.CONFIDENTIAL);
 
+
+    /*
+    * OnlyInOhio
+     */
+
+    public static readonly CVarDef<string> OnlyInOhio =
+        CVarDef.Create("white.ohio_api_link", "", CVar.SERVERONLY | CVar.ARCHIVE | CVar.CONFIDENTIAL);
+
     /*
      * Mark dead chat messages as admin
      */

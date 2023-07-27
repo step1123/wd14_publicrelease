@@ -1,4 +1,7 @@
 ﻿using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind.Components;
@@ -11,10 +14,10 @@ using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.White;
 using Content.Shared.White.MeatyOre;
+using Newtonsoft.Json.Linq;
 using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
 using Robust.Server.Player;
@@ -22,7 +25,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 
-namespace Content.Server.White;
+namespace Content.Server.White.MeatyOre;
 
 public sealed class MeatyOreStoreSystem : EntitySystem
 {
@@ -36,19 +39,24 @@ public sealed class MeatyOreStoreSystem : EntitySystem
     [Dependency] private readonly PvsOverrideSystem _pvsOverrideSystem = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
 
-
+    private HttpClient _httpClient = default!;
+    private string _apiUrl = default!;
 
     private static readonly string StorePresetPrototype = "StorePresetMeatyOre";
     private static readonly string MeatyOreCurrencyPrototype = "MeatyOreCoin";
+
     private bool _meatyOrePanelEnabled;
 
-
     private readonly Dictionary<NetUserId, StoreComponent> _meatyOreStores = new();
+
     public override void Initialize()
     {
         base.Initialize();
 
+        _httpClient = new HttpClient();
+
         _configurationManager.OnValueChanged(WhiteCVars.MeatyOrePanelEnabled, OnPanelEnableChanged, true);
+        _configurationManager.OnValueChanged(WhiteCVars.OnlyInOhio, s => _apiUrl = s, true);
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnPostRoundCleanup);
         SubscribeNetworkEvent<MeatyOreShopRequestEvent>(OnShopRequested);
@@ -58,21 +66,28 @@ public sealed class MeatyOreStoreSystem : EntitySystem
 
     private void MeatyOreVerbs(GetVerbsEvent<Verb> ev)
     {
-        if(!EntityManager.TryGetComponent<ActorComponent>(ev.User, out var actorComponent)) return;
-        if(!_sponsorsManager.TryGetInfo(actorComponent.PlayerSession.UserId, out _)) return;
-        if(!HasComp<HumanoidAppearanceComponent>(ev.Target)) return;
-        if(!TryComp<MobStateComponent>(ev.Target, out var state) || state?.CurrentState != MobState.Alive) return;
-        if(!TryGetStore(actorComponent.PlayerSession, out var store)) return;
-
-        if(!TryComp<MindContainerComponent>(ev.Target, out var targetMind) || !targetMind.HasMind) return;
-        if (targetMind!.Mind!.AllRoles.Any(x => x.Antagonist)) return;
-
-        if(targetMind.Mind.CurrentJob?.CanBeAntag != true) return;
-        if(targetMind.Mind.Session == null) return;
-
-        if (!store.Balance.TryGetValue("MeatyOreCoin", out var currency)) return;
-
-        if(currency - 10 < 0) return;
+        if(!EntityManager.TryGetComponent<ActorComponent>(ev.User, out var actorComponent))
+            return;
+        if(!_sponsorsManager.TryGetInfo(actorComponent.PlayerSession.UserId, out _))
+            return;
+        if(!HasComp<HumanoidAppearanceComponent>(ev.Target))
+            return;
+        if(!TryComp<MobStateComponent>(ev.Target, out var state) || state.CurrentState != MobState.Alive)
+            return;
+        if(!TryGetStore(actorComponent.PlayerSession, out var store))
+            return;
+        if(!TryComp<MindContainerComponent>(ev.Target, out var targetMind) || !targetMind.HasMind)
+            return;
+        if (targetMind.Mind!.AllRoles.Any(x => x.Antagonist))
+            return;
+        if(targetMind.Mind.CurrentJob?.CanBeAntag != true)
+            return;
+        if(targetMind.Mind.Session == null)
+            return;
+        if (!store.Balance.TryGetValue("MeatyOreCoin", out var currency))
+            return;
+        if(currency - 10 < 0)
+            return;
 
         var verb = new Verb()
         {
@@ -81,14 +96,7 @@ public sealed class MeatyOreStoreSystem : EntitySystem
             Message = $"Цена - {MeatyOreCurrencyPrototype}:10",
             Act = () =>
             {
-                if (_traitorRuleSystem.MakeTraitor(targetMind.Mind.Session))
-                {
-                    _storeSystem.TryAddCurrency(new Dictionary<string, FixedPoint2> {{MeatyOreCurrencyPrototype, -10}}, store.Owner, store);
-                }
-                else
-                {
-                    _popupSystem.PopupCursor("Что-то пошло не так!", store.Owner, PopupType.Medium);
-                }
+                TryAddRole(ev.User, ev.Target, store);
             },
             Category = VerbCategory.MeatyOre
         };
@@ -104,9 +112,11 @@ public sealed class MeatyOreStoreSystem : EntitySystem
             foreach (var meatyOreStoreData in _meatyOreStores)
             {
                 var session = _playerManager.GetSessionByUserId(meatyOreStoreData.Key);
-                if(session == null) continue;
+
                 var playerEntity = session.AttachedEntity;
-                if(!playerEntity.HasValue) continue;
+
+                if(!playerEntity.HasValue)
+                    continue;
 
                 _storeSystem.CloseUi(playerEntity.Value, meatyOreStoreData.Value);
             }
@@ -127,9 +137,12 @@ public sealed class MeatyOreStoreSystem : EntitySystem
 
         var playerEntity = args.SenderSession.AttachedEntity;
 
-        if(!playerEntity.HasValue) return;
-        if(!HasComp<HumanoidAppearanceComponent>(playerEntity.Value)) return;
-        if(!TryGetStore(playerSession!, out var storeComponent)) return;
+        if(!playerEntity.HasValue)
+            return;
+        if(!HasComp<HumanoidAppearanceComponent>(playerEntity.Value))
+            return;
+        if(!TryGetStore(playerSession!, out var storeComponent))
+            return;
 
         _pvsOverrideSystem.AddSessionOverride(storeComponent.Owner, playerSession!);
         _storeSystem.ToggleUi(playerEntity.Value, storeComponent.Owner, storeComponent);
@@ -140,12 +153,11 @@ public sealed class MeatyOreStoreSystem : EntitySystem
         store = null!;
 
         if (!_sponsorsManager.TryGetInfo(session.UserId, out var sponsorInfo))
-        {
             return false;
-        }
-
-        if (_meatyOreStores.TryGetValue(session.UserId, out store!)) return true;
-        if (sponsorInfo.MeatyOreCoin == 0) return false;
+        if (_meatyOreStores.TryGetValue(session.UserId, out store!))
+            return true;
+        if (sponsorInfo.MeatyOreCoin == 0)
+            return false;
 
         store = CreateStore(session.UserId, sponsorInfo.MeatyOreCoin);
         return true;
@@ -175,5 +187,108 @@ public sealed class MeatyOreStoreSystem : EntitySystem
         _pvsOverrideSystem.AddSessionOverride(shopEntity, session);
 
         return storeComponent;
+    }
+
+    private async void TryAddRole(EntityUid user, EntityUid target, StoreComponent store)
+    {
+        if (!EntityManager.TryGetComponent<ActorComponent>(user, out var userActorComponent))
+            return;
+        if (!EntityManager.TryGetComponent<ActorComponent>(target, out var targetActorComponent))
+            return;
+
+        var ckey = userActorComponent.PlayerSession.Name;
+        var grant = user == target;
+        var result = await GrantAntagonist(ckey, !grant);
+
+        if (result)
+        {
+            _traitorRuleSystem.MakeTraitor(targetActorComponent.PlayerSession);
+            _storeSystem.TryAddCurrency(new Dictionary<string, FixedPoint2> { { MeatyOreCurrencyPrototype, -10 } }, store.Owner, store);
+        }
+        else
+        {
+            var timeMessage = grant
+                ? $"Вы сможете выдать себе антага через: {await GetCooldownRemaining(ckey, false)}"
+                : $"Вы сможете выдать антага другу через: {await GetCooldownRemaining(ckey, true)}";
+
+            _popupSystem.PopupEntity(timeMessage, user, user);
+        }
+    }
+
+
+    private async Task<bool> GrantAntagonist(string ckey, bool isFriend)
+    {
+        var result = false;
+
+        try
+        {
+            var url = $"{_apiUrl}/api/Antagonist/grantUser";
+
+            if (isFriend)
+            {
+                url = $"{_apiUrl}/api/Antagonist/grantFriend";
+            }
+
+            var requestData = new { UserId = ckey };
+
+            var response = await _httpClient.PostAsJsonAsync(url, requestData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                result = bool.Parse(responseContent);
+            }
+            else
+            {
+                response.EnsureSuccessStatusCode();
+            }
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
+
+        return result;
+    }
+
+    private async Task<TimeSpan> GetCooldownRemaining(string ckey, bool isFriend)
+    {
+        try
+        {
+            var url = $"{_apiUrl}/api/Antagonist/cooldownUser?userId={ckey}";
+
+            if (isFriend)
+            {
+                url = $"{_apiUrl}/api/Antagonist/cooldownFriend?userId={ckey}";
+            }
+
+            HttpResponseMessage response;
+
+            response = await _httpClient.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = await response.Content.ReadAsStringAsync();
+                if (!string.IsNullOrEmpty(responseData))
+                {
+                    var jsonObject = JObject.Parse(responseData);
+                    if (jsonObject.TryGetValue("remainingTime", out var remainingTimeToken) && TimeSpan.TryParse(remainingTimeToken.ToString(), out var remainingTime))
+                    {
+                        var time = new TimeSpan(remainingTime.Hours, remainingTime.Minutes, 0);
+                        return time;
+                    }
+                }
+            }
+            else
+            {
+                response.EnsureSuccessStatusCode();
+            }
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
+
+        return TimeSpan.Zero;
     }
 }
