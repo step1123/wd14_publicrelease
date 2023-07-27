@@ -104,3 +104,12 @@
   ghostName: Наблюдатель
   ghostDescription: Явился из другого мира с целью наблюдать за другими разумными существами
   size: 1, 1
+
+- type: customGhost
+  id: serbwo-ghost
+  ckey: serbwo
+  sprite: White/Ghosts/serbo-ghost.rsi
+  alpha: 0.8
+  ghostName: Karseba
+  ghostDescription: Дракон который делает Ням-Ням
+  size: 1, 1
