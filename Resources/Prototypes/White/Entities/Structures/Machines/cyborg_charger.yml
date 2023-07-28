@@ -2,83 +2,71 @@
   id: BorgChargerEntity
   parent: BaseMachinePowered
   name: borg charger
-  description: That's used with borgs for charge our battery lol.
+  description: That's used with borgs for charge our battery.
   components:
-  - type: BorgCharger
-    chargeRate: 6
-  - type: Sprite
-    sprite: White/Structures/Machines/borg_charger.rsi
-    snapCardinals: true
-    layers:
-    - state: open
-      map: ["machineLayer"]
-    - state: open_powered
-      map: ["terminalLayer"]
-      shader: "unshaded"
-  - type: GenericVisualizer
-    visuals:
-      enum.BorgChargerVisuals.Base:
-        machineLayer:
-          Closed: {state: "closed"}
-          Opened: {state: "open"}
-      enum.BorgChargerVisuals.Light:
-        terminalLayer:
-          ClosePowered: {state: "closed_powered"}
-          OpenPowered: {state: "open_powered"}
-          CloseUnpowered: {state: "closed_unpowered"}
-          OpenUnpowered: {state: "open_unpowered"}
-          Occupied: {state: "occupied"}
-          OccupiedCharged: {state: "occupied_charged"}
-  - type: Physics
-    bodyType: Static
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.25,-0.5,0.25,0.5"
-        density: 190
-        mask:
-        - MachineMask
-        layer:
-        - MachineLayer
-  - type: Construction
-    graph: Machine
-    node: machine
-    containers:
-    - machine_parts
-    - machine_board
-  - type: ContainerContainer
-    containers:
-      scanner-bodyContainer: !type:ContainerSlot
-      machine_board: !type:Container
-      machine_parts: !type:Container
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: StrongMetallic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:ChangeConstructionNodeBehavior
-        node: machineFrame
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-  - type: Machine
-    board: BorgChargerMachineCircuitboard
-  - type: WiresPanel
-  - type: Wires
-    BoardName: "BorgCharger"
-    LayoutId: BorgCharger
-  - type: Appearance
-  - type: Climbable
-  - type: ApcPowerReceiver
-    powerLoad: 200
-  - type: EmptyOnMachineDeconstruct
-    containers:
-    - scanner-bodyContainer
+    - type: Sprite
+      netsync: false
+      sprite: White/Structures/Machines/charging_pad.rsi
+      drawdepth: FloorObjects
+      layers:
+        - state: offline
+        - state: idle
+          shader: unshaded
+          map: [ "enum.SiliconChargerVisuals.Lights" ]
+    - type: GenericVisualizer
+      visuals:
+        enum.PowerDeviceVisuals.VisualState:
+          enum.SiliconChargerVisuals.Lights:
+            Normal: { state: "idle" }
+            Charging: { state: "beam" }
+        enum.PowerDeviceVisuals.Powered:
+          enum.SiliconChargerVisuals.Lights:
+            True: { visible: true }
+            False: { visible: false }
+    - type: ApcPowerReceiver
+      powerLoad: 150
+    - type: Physics
+      canCollide: true
+    - type: Appearance
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PhysShapeAabb
+            bounds: "-0.35,-0.35,0.35,0.35"
+          hard: false
+          layer:
+            - SlipLayer
+        fix2:
+          shape: !type:PhysShapeAabb
+            bounds: "-0.35,-0.35,0.35,0.35"
+          density: 10
+          mask:
+            - MachineMask
+    - type: StepTrigger
+    - type: SiliconCharger
+      chargeMulti: 150
+    - type: ContainerContainer
+      containers:
+        machine_board: !type:Container
+        machine_parts: !type:Container
+    - type: Construction
+      graph: Machine
+      node: machine
+      containers:
+        - machine_board
+        - machine_parts
+    - type: Machine
+      board: BorgChargerMachineCircuitboard
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 350
+          behaviors:
+            - !type:ChangeConstructionNodeBehavior
+              node: machineFrame
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
 
 - type: entity
   id: BorgChargerMachineCircuitboard

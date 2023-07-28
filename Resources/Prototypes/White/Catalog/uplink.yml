@@ -1,0 +1,18 @@
+- type: listing
+  id: UplinkSyndieBorg
+  name: uplink-syndieborg-name
+  description: uplink-syndieborg-desc
+  productEntity: PlayerCyborgSyndBattery
+  cost:
+    Telecrystal: 60
+  categories:
+    - UplinkUtility
+  conditions:
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - NukeOpsUplink
+    - !type:BuyerWhitelistCondition
+      blacklist:
+        components:
+          - SurplusBundle
