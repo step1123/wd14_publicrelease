@@ -55,16 +55,11 @@ public sealed class BuildBorg : IGraphAction
             return;
         }
 
-        if (!entityManager.TryGetComponent<SiliconBrainContainerComponent>(uid, out var siliconContainer))
-        {
-            _sawmill.Warning($"Borg construct entity {uid} had an invalid entity in container \"{BrainContainer}\"! Aborting build mech action.");
-            return;
-        }
-
         var transform = entityManager.GetComponent<TransformComponent>(uid);
         var borg = entityManager.SpawnEntity(BorgPrototype, transform.Coordinates);
 
-        if(!entityManager.TryGetComponent<CyborgComponent>(borg, out var cyborgComp))
+        if(!entityManager.TryGetComponent<CyborgComponent>(borg, out var cyborgComp)
+           || !entityManager.TryGetComponent<SiliconBrainContainerComponent>(borg,out var siliconContainer))
             return;
 
         if (cyborgComp.BatterySlot.ContainedEntity == null)

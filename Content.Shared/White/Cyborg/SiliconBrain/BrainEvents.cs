@@ -35,6 +35,6 @@ public sealed class BrainRemoveEvent : EntityEventArgs
 
 [Serializable]
 [NetSerializable]
-public sealed class BorgMindDoAfterEvent : SimpleDoAfterEvent
+public sealed class SiliconMindDoAfterEvent : SimpleDoAfterEvent
 {
 }

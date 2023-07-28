@@ -49,3 +49,41 @@
     Steel: 300
     Plastic: 500
     Glass: 200
+
+
+- type: latheRecipe
+  id: CyborgHUDModuleSec
+  result: CyborgHUDModuleSec
+  completetime: 4
+  materials:
+    Steel: 1300
+    Plastic: 1500
+    Glass: 1200
+
+- type: latheRecipe
+  id: CyborgHUDModuleMed
+  result: CyborgHUDModuleMed
+  completetime: 4
+  materials:
+    Steel: 1300
+    Plastic: 1500
+    Glass: 1200
+
+
+- type: latheRecipe
+  id: CyborgSpeedModule
+  result: CyborgSpeedModule
+  completetime: 4
+  materials:
+    Steel: 1300
+    Plastic: 1500
+    Glass: 1200
+
+- type: latheRecipe
+  id: CyborgInstrumentModuleFilled
+  result: CyborgInstrumentModuleFilled
+  completetime: 4
+  materials:
+    Steel: 13000
+    Plastic: 15000
+    Glass: 12000

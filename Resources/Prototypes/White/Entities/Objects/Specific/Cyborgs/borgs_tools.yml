@@ -57,14 +57,29 @@
     - type: ItemSlots
       slots:
         stack_slot:
-          name: healing item
+          name: Brutepack
           startingItem: Brutepack
           whitelist:
             tags:
               - Brutepack
+        ointment_slot:
+          name: Ointment
+          startingItem: Ointment
+          whitelist:
+            tags:
               - Ointment
+        gauze_slot:
+          name: Gauze
+          startingItem: Gauze
+          whitelist:
+            tags:
               - Gauze
     - type: StackHolder
+    - type: StackHolderList
+      stackSlots:
+        - stack_slot
+        - ointment_slot
+        - gauze_slot
     - type: Sprite
       netsync: false
       sprite: Objects/Specific/Medical/medical.rsi
@@ -72,6 +87,8 @@
     - type: ContainerContainer
       containers:
         stack_slot: !type:ContainerSlot
+        ointment_slot: !type:ContainerSlot
+        gauze_slot:  !type:ContainerSlot
 
 
 - type: entity
@@ -134,7 +151,24 @@
           whitelist:
             components:
               - CablePlacer
+        cableMV_slot:
+          name: cable stack
+          startingItem: CableMVStack
+          whitelist:
+            components:
+              - CablePlacer
+        cableHV_slot:
+          name: cable stack
+          startingItem: CableHVStack
+          whitelist:
+            components:
+              - CablePlacer
     - type: StackHolder
+    - type: StackHolderList
+      stackSlots:
+        - stack_slot
+        - cableMV_slot
+        - cableHV_slot
     - type: Sprite
       netsync: false
       sprite: Objects/Tools/cable-coils.rsi
@@ -142,6 +176,8 @@
     - type: ContainerContainer
       containers:
         stack_slot: !type:ContainerSlot
+        cableMV_slot: !type:ContainerSlot
+        cableHV_slot: !type:ContainerSlot
 
 - type: entity
   parent: PartRodMetal

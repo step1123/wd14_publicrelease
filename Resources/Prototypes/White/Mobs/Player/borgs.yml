@@ -14,9 +14,6 @@
           shader: unshaded
           visible: false
           map: [ "enum.ToggleVisuals.Layer" ]
-    - type: MovementSpeedModifier
-      baseWalkSpeed : 2.4
-      baseSprintSpeed : 3.6
     - type: Puller
       needsHands: false
     - type: Speech
@@ -187,6 +184,7 @@
           - CyborgRadioModule
           - CyborgLawsModule
           - CyborgInstrumentModuleFilledMedicine
+          - CyborgHUDModuleMed
     - type: DeviceNetwork
       deviceNetId: Wireless
       transmitFrequencyId: CyborgSensor
@@ -216,6 +214,7 @@
           - CyborgRadioModuleSec
           - CyborgLawsModule
           - CyborgInstrumentModuleFilledSecurity
+          - CyborgHUDModuleSec
     - type: CombatMode
       canDisarm: false
     - type: DeviceNetwork
@@ -505,6 +504,7 @@
           - CyborgRadioModule
           - CyborgLawsModule
           - CyborgInstrumentModuleFilledMedicine
+          - CyborgHUDModuleMed
         battery-slot:
           - PowerCellHigh
         brain-slot:
@@ -521,6 +521,7 @@
           - CyborgRadioModuleSec
           - CyborgLawsModule
           - CyborgInstrumentModuleFilledSecurity
+          - CyborgHUDModuleSec
         battery-slot:
           - PowerCellHigh
         brain-slot:

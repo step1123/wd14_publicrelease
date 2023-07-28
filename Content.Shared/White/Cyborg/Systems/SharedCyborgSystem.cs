@@ -61,10 +61,14 @@ public abstract class SharedCyborgSystem : EntitySystem
         component.BatterySlot = _container.EnsureContainer<ContainerSlot>(uid, CyborgComponent.BatterySlotId);
         component.InstrumentContainer =
             _container.EnsureContainer<Container>(uid, CyborgComponent.InstrumentContainerName);
+
+        // On server modules has not filled, but on client yes
+        if(_net.IsClient) InitModules(uid,component);
     }
 
     private void OnMapInit(EntityUid uid, CyborgComponent component, MapInitEvent args)
     {
+        Dirty(component);
         InitModules(uid, component);
 
         if (component.BatterySlot.ContainedEntity.HasValue)
@@ -169,13 +173,13 @@ public abstract class SharedCyborgSystem : EntitySystem
 
     public void InitModules(EntityUid uid, CyborgComponent component)
     {
-        if (!component.Initialized || _net.IsClient)
+        if (!component.Initialized)
             return;
 
         //What is already in the borg we initialize
         foreach (var entityUid in component.ModuleContainer.ContainedEntities)
         {
-            if (!TryComp<CyborgModuleComponent>(entityUid, out var cyborgModuleComponent))
+            if (!TryComp<CyborgModuleComponent>(entityUid, out _))
                 continue;
             component.ModuleUids.Add(entityUid);
             var ev = new ModuleInsertEvent(entityUid, uid);

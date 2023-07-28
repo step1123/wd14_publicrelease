@@ -20,6 +20,15 @@
       "name" : "label_laws"
     },
     {
+      "name" : "label_hud_sec"
+    },
+    {
+      "name" : "label_hud_med"
+    },
+    {
+        "name" : "label_speed"
+    },
+    {
       "name": "label_instrument"
     },
     {

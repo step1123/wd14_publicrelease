@@ -32,20 +32,20 @@ public sealed class PositronicBrainSystem : SharedPositronicBrainSystem
         SubscribeLocalEvent<PositronicBrainComponent, MindRemovedMessage>(OnMindRemoved);
         SubscribeLocalEvent<PositronicBrainComponent, GetVerbsEvent<ActivationVerb>>(AddWipeVerb);
         SubscribeLocalEvent<PositronicBrainComponent, BrainInsertEvent>(OnInserted);
-        SubscribeLocalEvent<CyborgComponent, BorgMindDoAfterEvent>(OnMindBAdded);
 
+        SubscribeLocalEvent<SiliconBrainContainerComponent, SiliconMindDoAfterEvent>(OnMindBAdded);
         SubscribeLocalEvent<SiliconBrainContainerComponent, MindAddedMessage>(OnMindAddedParent);
     }
 
     private void OnMindAddedParent(EntityUid uid, SiliconBrainContainerComponent component, MindAddedMessage args)
     {
-        if (!component.BrainUid.HasValue)
+        if (!component.BrainUid.HasValue || HasComp<PositronicBrainComponent>(component.BrainUid.Value))
             return;
 
         PositronicBrainTurningOff(component.BrainUid.Value);
     }
 
-    private void OnMindBAdded(EntityUid uid, CyborgComponent component, BorgMindDoAfterEvent args)
+    private void OnMindBAdded(EntityUid uid, SiliconBrainContainerComponent component, SiliconMindDoAfterEvent args)
     {
         if (_mind.TryGetMind(args.User, out var mind))
             _mind.TransferTo(mind, uid);
@@ -96,7 +96,7 @@ public sealed class PositronicBrainSystem : SharedPositronicBrainSystem
 
         if (TryComp<SiliconBrainComponent>(uid, out var brainComponent) && brainComponent.ParentUid.HasValue)
         {
-            var doAfterArgs = new DoAfterArgs(uid, TimeSpan.FromMilliseconds(300), new BorgMindDoAfterEvent(),
+            var doAfterArgs = new DoAfterArgs(uid, TimeSpan.FromMilliseconds(300), new SiliconMindDoAfterEvent(),
                 brainComponent.ParentUid.Value)
             {
                 BreakOnHandChange = false,

@@ -62,7 +62,7 @@
             - tool: Screwing
               doAfter: 1
 
-            - component: ActiveCyborgBrain
+            - component: ActiveSiliconBrain
               name: active MII or positronic brain
               store: brain-container
 

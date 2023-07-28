@@ -103,6 +103,56 @@
         - state: icon
         - state: label_laws
 
+- type: entity
+  id: CyborgHUDModuleSec
+  parent: CyborgModule
+  name: cyborg hud module security
+  components:
+    - type: CyborgModule
+      name: "Дополнение охранного визора"
+    - type: Sprite
+      layers:
+        - state: icon
+        - state: label_hud_sec
+    - type: ModuleComponentGranting
+      component:
+        - type: ShowJobInfo
+        - type: ShowCrimeRecords
+        - type: ShowMindShieldHud
+
+- type: entity
+  id: CyborgHUDModuleMed
+  parent: CyborgModule
+  name: cyborg hud module medicine
+  components:
+    - type: CyborgModule
+      name: "Дополнение медицинского визора"
+    - type: Sprite
+      layers:
+        - state: icon
+        - state: label_hud_med
+    - type: ModuleComponentGranting
+      component:
+        - type: ShowHealthBars
+          damageContainer: Biological
+
+- type: entity
+  id: CyborgSpeedModule
+  parent: CyborgModule
+  name: cyborg speed module
+  components:
+    - type: CyborgModule
+      name: "Дополнение скорости"
+    - type: Sprite
+      layers:
+        - state: icon
+        - state: label_speed
+    - type: ModuleComponentGranting
+      component:
+      - type: MovementSpeedModifier
+        baseWalkSpeed: 4
+        baseSprintSpeed: 5
+
 # instruments
 - type: entity
   id: CyborgInstrumentModule
