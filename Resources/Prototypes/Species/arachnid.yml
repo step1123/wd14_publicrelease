@@ -17,12 +17,6 @@
   - Unsexed
 
 
-- type: humanoidBaseSprite
-  id: MobArachnidEyes
-  baseSprite:
-    sprite: Mobs/Species/Arachnid/parts.rsi
-    state: eyes
-
 - type: markingPoints
   id: MobArachnidMarkingLimits
   onlyWhitelisted: true
@@ -37,6 +31,10 @@
       points: 1
       required: true
       defaultMarkings: [ ArachnidAppendagesDefault ]
+    Head:
+      points: 1
+      required: true
+      defaultMarkings: [ ArachnidEyesAngry ]
     HeadTop:
       points: 1
       required: false

@@ -1,4 +1,4 @@
-﻿- type: bodyType
+- type: bodyType
   id: HumanNormal
   name: body-normal
   sprites:
@@ -133,7 +133,7 @@
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
     Tail: MobHumanoidAnyMarking
-    Eyes: MobArachnidEyes
+    Eyes: MobHumanoidAnyMarking
     LArm: MobArachnidLArm
     RArm: MobArachnidRArm
     LHand: MobArachnidLHand

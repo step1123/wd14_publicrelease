@@ -20,3 +20,5 @@ marking-ArachnidTorsoCross = Крест
 marking-ArachnidTorsoCross-cross = Дизайн
 marking-ArachnidTorsoX = X
 marking-ArachnidTorsoX-x = Дизайн
+marking-ArachnidEyesAngry = Глаза (Злые)
+marking-ArachnidEyesNormal = Глаза (Обычные)
