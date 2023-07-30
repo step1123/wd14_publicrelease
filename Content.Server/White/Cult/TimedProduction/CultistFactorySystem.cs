@@ -47,26 +47,25 @@ public sealed class CultistFactorySystem : EntitySystem
 
     private void OnInit(EntityUid uid, CultistFactoryComponent component, ComponentInit args)
     {
-        if(component.UserInterface == null)
-            return;
-        _ui.SetUiState(component.UserInterface, new CultistFactoryBUIState(component.Products));
-
         UpdateAppearance(uid, component);
     }
 
     private void OnInteract(EntityUid uid, CultistFactoryComponent component, InteractHandEvent args)
     {
-        if(component.UserInterface == null)
-            return;
         if (!TryComp<ActorComponent>(args.User, out var actor))
             return;
+
         if (!HasComp<CultistComponent>(args.User))
             return;
+
         if (!CanCraft(uid, component, args.User))
             return;
 
-        _ui.CloseUi(component.UserInterface, actor.PlayerSession);
-        _ui.OpenUi(component.UserInterface, actor.PlayerSession);
+        if(_ui.TryGetUi(uid, CultistAltarUiKey.Key, out var bui))
+        {
+            UserInterfaceSystem.SetUiState(bui, new CultistFactoryBUIState(component.Products));
+            _ui.OpenUi(bui, actor.PlayerSession);
+        }
     }
 
     private void OnSelected(EntityUid uid, CultistFactoryComponent component, CultistFactoryItemSelectedMessage args)

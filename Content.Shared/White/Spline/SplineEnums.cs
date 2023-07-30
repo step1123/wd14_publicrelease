@@ -1,5 +1,7 @@
+using System.Numerics;
 using Content.Shared.White.Spline.CatmullRom;
 using Content.Shared.White.Spline.Linear;
+using Vector4 = Robust.Shared.Maths.Vector4;
 
 namespace Content.Shared.White.Spline;
 

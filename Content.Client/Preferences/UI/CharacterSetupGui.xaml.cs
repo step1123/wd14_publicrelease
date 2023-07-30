@@ -213,7 +213,7 @@ namespace Content.Client.Preferences.UI
                     Text = description,
                     ClipText = true,
                     // WD-EDIT start
-                    MinSize = (100, 0),
+                    MinSize = new Vector2(100, 0),
                     // WD-EDIT end
                     HorizontalExpand = true
                 };
@@ -247,7 +247,7 @@ namespace Content.Client.Preferences.UI
                     Orientation = LayoutOrientation.Horizontal,
                     HorizontalExpand = true,
                     // WD-EDIT start
-                    MinSize = (125, 0),
+                    MinSize = new Vector2(125, 0),
                     // WD-EDIT end
                     SeparationOverride = 0,
                     Children =

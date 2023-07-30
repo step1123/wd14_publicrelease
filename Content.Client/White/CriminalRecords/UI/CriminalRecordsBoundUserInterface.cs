@@ -11,7 +11,7 @@ public sealed class CriminalRecordsBoundUserInterface : BoundUserInterface
 {
     private CriminalRecordsWindow? _window = default!;
 
-    public CriminalRecordsBoundUserInterface(ClientUserInterfaceComponent owner, Enum uiKey) : base(owner, uiKey)
+    public CriminalRecordsBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {}
 
     protected override void Open()

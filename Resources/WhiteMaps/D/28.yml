@@ -1356,19 +1356,6 @@ entities:
     - canCollide: False
       type: Physics
     - type: InsideEntityStorage
-- proto: ClothingHeadHelmetHelmet
-  entities:
-  - uid: 315
-    components:
-    - flags: InContainer
-      type: MetaData
-    - parent: 309
-      type: Transform
-    - nextSound: 2631.7402558
-      type: EmitSoundOnCollide
-    - canCollide: False
-      type: Physics
-    - type: InsideEntityStorage
 - proto: ClothingHeadPyjamaSyndicatePink
   entities:
   - uid: 301
@@ -1592,7 +1579,6 @@ entities:
           - 313
           - 310
           - 314
-          - 315
           - 316
           - 317
         paper_label: !type:ContainerSlot

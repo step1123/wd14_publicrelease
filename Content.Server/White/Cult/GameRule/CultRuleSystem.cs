@@ -40,7 +40,7 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
     [Dependency] private readonly StorageSystem _storageSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly FactionSystem _factionSystem = default!;
+    [Dependency] private readonly NpcFactionSystem _factionSystem = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly RoundEndSystem _roundEndSystem = default!;

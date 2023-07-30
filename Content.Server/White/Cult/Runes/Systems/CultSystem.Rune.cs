@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Numerics;
 using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Components;
@@ -33,6 +34,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
+using TerraFX.Interop.Windows;
 
 namespace Content.Server.White.Cult.Runes.Systems;
 
@@ -79,7 +81,6 @@ public partial class CultSystem : EntitySystem
         SubscribeLocalEvent<RuneDrawerProviderComponent, ListViewItemSelectedMessage>(OnRuneSelected);
         SubscribeLocalEvent<CultTeleportRuneProviderComponent, TeleportRunesListWindowItemSelectedMessage>(OnTeleportRuneSelected);
         SubscribeLocalEvent<CultRuneSummoningProviderComponent, SummonCultistListWindowItemSelectedMessage>(OnCultistSelected);
-        SubscribeLocalEvent<RuneDrawerProviderComponent, ComponentInit>(OnInit);
 
         // Rune drawing/erasing
         SubscribeLocalEvent<CultistComponent, CultDrawEvent>(OnDraw);
@@ -107,7 +108,6 @@ public partial class CultSystem : EntitySystem
     private const string NarsiePrototypeId = "Narsie";
     private const string CultBarrierPrototypeId = "CultBarrier";
 
-    private bool _narsieSummoned;
     private bool _doAfterAlreadyStarted;
 
     private IPlayingAudioStream? _playingStream;
@@ -125,14 +125,6 @@ public partial class CultSystem : EntitySystem
     * Rune draw start ----
      */
 
-    private void OnInit(EntityUid uid, RuneDrawerProviderComponent component, ComponentInit args)
-    {
-        if(component.UserInterface == null)
-            return;
-
-        _ui.SetUiState(component.UserInterface, new ListViewBUIState(component.RunePrototypes, false));
-    }
-
     private void OnRuneDrawerUseInHand(EntityUid uid, RuneDrawerProviderComponent component, UseInHandEvent args)
     {
         if(component.UserInterface == null)
@@ -144,7 +136,11 @@ public partial class CultSystem : EntitySystem
         if (!HasComp<CultistComponent>(args.User))
             return;
 
-        _ui.ToggleUi(component.UserInterface, actorComponent.PlayerSession);
+        if (_ui.TryGetUi(uid, ListViewSelectorUiKey.Key, out var bui))
+        {
+            UserInterfaceSystem.SetUiState(bui, new ListViewBUIState(component.RunePrototypes, false));
+            _ui.OpenUi(bui, actorComponent.PlayerSession);
+        }
     }
 
     private void OnRuneSelected(EntityUid uid, RuneDrawerProviderComponent component, ListViewItemSelectedMessage args)
@@ -222,7 +218,11 @@ public partial class CultSystem : EntitySystem
             if (!TryComp<ActorComponent>(user, out var actorComponent))
                 return;
 
-            _ui.GetUiOrNull(user, NameSelectorUIKey.Key)?.Open(actorComponent.PlayerSession);
+            if (_ui.TryGetUi(user, NameSelectorUIKey.Key, out var bui))
+            {
+                _ui.OpenUi(bui, actorComponent.PlayerSession);
+            }
+
             return;
         }
 
@@ -234,7 +234,10 @@ public partial class CultSystem : EntitySystem
         if (!TryComp<ActorComponent>(uid, out var actorComponent))
             return;
 
-        _ui.GetUiOrNull(uid, NameSelectorUIKey.Key)?.Close(actorComponent.PlayerSession);
+        if (_ui.TryGetUi(uid, NameSelectorUIKey.Key, out var bui))
+        {
+            _ui.CloseUi(bui, actorComponent.PlayerSession);
+        }
 
         SpawnRune(uid, TeleportRunePrototypeId, true, args.Name);
     }
@@ -588,7 +591,7 @@ public partial class CultSystem : EntitySystem
         providerComponent.Targets = victims;
         providerComponent.BaseRune = rune;
 
-        _ui.SetUiState(ui, new TeleportRunesListWindowBUIState(list, labels));
+        UserInterfaceSystem.SetUiState(ui, new TeleportRunesListWindowBUIState(list, labels));
 
         if (_ui.IsUiOpen(user, ui.UiKey))
             return false;
@@ -672,12 +675,6 @@ public partial class CultSystem : EntitySystem
             return false;
         }
 
-        if (_narsieSummoned)
-        {
-            _popupSystem.PopupEntity("You arleady summoned me!", user, user);
-            return false;
-        }
-
         if (_doAfterAlreadyStarted)
         {
             _popupSystem.PopupEntity("Someone arleady summoning narsie!", user, user);
@@ -708,7 +705,7 @@ public partial class CultSystem : EntitySystem
         _doAfterAlreadyStarted = true;
 
         _chat.DispatchGlobalAnnouncement("Cultists, started ritual. You have 40 sec to prevent this!", "CULT", false, colorOverride: Color.DarkRed);
-        _playingStream = _audio.PlayGlobal(_narsie40Sec, Filter.Broadcast(), false, AudioParams.Default.WithLoop(true));
+        _playingStream = _audio.PlayGlobal(_narsie40Sec, Filter.Broadcast(), false, AudioParams.Default.WithLoop(true).WithVolume(0.15f));
 
         return true;
     }
@@ -731,7 +728,6 @@ public partial class CultSystem : EntitySystem
             return;
 
         _entityManager.SpawnEntity(NarsiePrototypeId, transform.Value);
-        _narsieSummoned = true;
 
         _chat.DispatchGlobalAnnouncement("NARSIE HAS RISEN", "CULT", true, _apocRuneEndDrawing, colorOverride: Color.DarkRed);
 
@@ -881,7 +877,7 @@ public partial class CultSystem : EntitySystem
         _entityManager.EnsureComponent<CultRuneSummoningProviderComponent>(user, out var providerComponent);
         providerComponent.BaseRune = rune;
 
-        _ui.SetUiState(ui, new SummonCultistListWindowBUIState(list, labels));
+        UserInterfaceSystem.SetUiState(ui, new SummonCultistListWindowBUIState(list, labels));
 
         if (_ui.IsUiOpen(user, ui.UiKey))
             return false;

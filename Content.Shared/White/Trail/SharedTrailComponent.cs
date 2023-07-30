@@ -1,6 +1,8 @@
+using System.Numerics;
 using Content.Shared.White.Spline;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
+using Vector4 = Robust.Shared.Maths.Vector4;
 
 namespace Content.Shared.White.Trail;
 

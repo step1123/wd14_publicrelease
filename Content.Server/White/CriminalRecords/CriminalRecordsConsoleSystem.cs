@@ -219,9 +219,8 @@ public sealed class CriminalRecordsConsoleSystem : EntitySystem
 
     private void SetStateForInterface(EntityUid uid, CriminalRecordsConsoleBuiState newState)
     {
-        _userInterface
-            .GetUiOrNull(uid, CriminalRecordsConsoleKey.Key)
-            ?.SetState(newState);
+        if (_userInterface.TryGetUi(uid, CriminalRecordsConsoleKey.Key, out var bui))
+            UserInterfaceSystem.SetUiState(bui, newState);
     }
 
     private bool AccessCheck(IdCardComponent? component)

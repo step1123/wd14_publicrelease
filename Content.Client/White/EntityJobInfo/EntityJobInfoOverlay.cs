@@ -9,6 +9,7 @@ using Robust.Shared.Utility;
 using Content.Shared.Access.Components;
 using Content.Shared.Roles;
 using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
 
 namespace Content.Client.EntityJobInfo;
 
@@ -100,15 +101,15 @@ public sealed class EntityJobInfoOverlay : Overlay
         if (_inventorySystem.TryGetSlotEntity(uid, "id", out var idUid))
         {
             // PDA
-            if (_entManager.TryGetComponent(idUid, out PdaComponent? pda) && pda.ContainedId is not null)
+            if (_entManager.TryGetComponent(idUid, out PdaComponent? pda) && _entManager.TryGetComponent<IdCardComponent>(pda.ContainedId, out var id))
             {
-                if (TryMatchJobTitleToIcon(pda.ContainedId.JobTitle, out string? icon))
+                if (TryMatchJobTitleToIcon(id.JobTitle, out var icon))
                     return icon;
             }
             // ID Card
-            if (_entManager.TryGetComponent(idUid, out IdCardComponent? id))
+            if (_entManager.TryGetComponent(idUid, out id))
             {
-                if (TryMatchJobTitleToIcon(id.JobTitle, out string? icon))
+                if (TryMatchJobTitleToIcon(id.JobTitle, out var icon))
                     return icon;
             }
         }

@@ -11,7 +11,7 @@ public sealed class ListViewSelectorBUI : BoundUserInterface
 
     private ListViewSelectorWindow? _window;
 
-    public ListViewSelectorBUI(ClientUserInterfaceComponent owner, Enum uiKey) : base(owner, uiKey)
+    public ListViewSelectorBUI(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         IoCManager.InjectDependencies(this);
     }

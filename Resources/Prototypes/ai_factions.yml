@@ -55,7 +55,7 @@
   - Passive
   - PetsNT
 
-- type: faction
+- type: npcFaction
   id: Cultist
   hostile:
     - NanoTrasen

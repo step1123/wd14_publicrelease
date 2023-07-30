@@ -40,7 +40,7 @@ namespace Content.IntegrationTests.Tests.Commands
                 // Still no bans on record
                 Assert.Multiple(async () =>
                 {
-                    Assert.That(await sDatabase.GetServerBanAsync(null, clientId, null), Is.Null, false);
+                    Assert.That(await sDatabase.GetServerBanAsync(null, clientId, null, false), Is.Null);
                     Assert.That(await sDatabase.GetServerBanAsync(1), Is.Null);
                     Assert.That(await sDatabase.GetServerBansAsync(null, clientId, null), Is.Empty);
                 });

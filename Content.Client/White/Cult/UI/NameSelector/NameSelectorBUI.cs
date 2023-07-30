@@ -5,7 +5,7 @@ namespace Content.Client.White.Cult.UI.NameSelector;
 
 public sealed class NameSelectorBUI : BoundUserInterface
 {
-    public NameSelectorBUI(ClientUserInterfaceComponent owner, Enum uiKey) : base(owner, uiKey)
+    public NameSelectorBUI(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
     }
 

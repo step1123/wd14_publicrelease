@@ -9,6 +9,7 @@ using Robust.Shared.Utility;
 using Content.Shared.Access.Components;
 using Content.Shared.Roles;
 using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
 using Content.Shared.White.CriminalRecords;
 using Robust.Shared.Map;
 
@@ -130,9 +131,9 @@ public sealed class EntityCrimeRecordsOverlay : Overlay
                 if (_inventorySystem.TryGetSlotEntity(uid, "id", out var idUid))
                 {
                     // PDA
-                    if (_entManager.TryGetComponent(idUid, out PdaComponent? pda) && pda.ContainedId is not null)
+                    if (_entManager.TryGetComponent(idUid, out PdaComponent? pda) && _entManager.TryGetComponent<IdCardComponent>(pda.ContainedId, out var id))
                     {
-                        var idCard = pda.ContainedId;
+                        var idCard = id;
                         if (idCard.FullName == info.StationRecord.Name &&
                             idCard.JobTitle == info.StationRecord.JobTitle)
                         {
@@ -141,7 +142,7 @@ public sealed class EntityCrimeRecordsOverlay : Overlay
                         }
                     }
                     // ID Card
-                    if (_entManager.TryGetComponent(idUid, out IdCardComponent? id))
+                    if (_entManager.TryGetComponent(idUid, out id))
                     {
                         var idCard = id;
                         if (idCard.FullName == info.StationRecord.Name &&

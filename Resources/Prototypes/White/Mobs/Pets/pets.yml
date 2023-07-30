@@ -5,7 +5,7 @@
   name: паук Валера
   description: Любит мух и деньги.
   components:
-  - type: Faction
+  - type: NpcFactionMember
     factions:
       - PetsNT
   - type: Sprite

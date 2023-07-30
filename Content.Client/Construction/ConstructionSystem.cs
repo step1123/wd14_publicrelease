@@ -186,7 +186,7 @@ namespace Content.Client.Construction
             //WD start
             if (prototype.ID == "CultPylon" && CheckForCultGhost(loc, prototype.ID))
             {
-                _popup.PopupClient(Loc.GetString("cult-structure-craft-another-structure-nearby"), user, user);
+                _popupSystem.PopupClient(Loc.GetString("cult-structure-craft-another-structure-nearby"), user, user);
                 return false;
             }
             //WD end

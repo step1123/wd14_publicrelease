@@ -1,5 +1,5 @@
 ﻿using System.Threading;
-using Content.Server.Coordinates.Helpers;
+using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Maps;
@@ -73,7 +73,7 @@ public sealed class VoidTeleportSystem : EntitySystem
             attempts--;
             //Get coords to where tp
             var random = new Random().Next(component.MinRange, component.MaxRange);
-            var offset = transform.LocalRotation.ToWorldVec().Normalized;
+            var offset = transform.LocalRotation.ToWorldVec().Normalized();
             var direction = transform.LocalRotation.GetDir().ToVec();
             var newOffset = offset + direction * random;
             coords = transform.Coordinates.Offset(newOffset).SnapToGrid(EntityManager);

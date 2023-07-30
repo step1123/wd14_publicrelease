@@ -179,16 +179,6 @@
           flags: HideLabel
 
 - type: entity
-  id: D23
-  noSpawn: true
-  components:
-    - type: BlueprintPlacer
-      blueprint: /WhiteMaps/D/stolovka.yml
-      components:
-        - type: IFF
-          flags: HideLabel
-
-- type: entity
   id: D24
   noSpawn: true
   components:

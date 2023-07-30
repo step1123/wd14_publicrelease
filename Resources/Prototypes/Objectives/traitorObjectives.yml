@@ -387,7 +387,7 @@
       roleId: Warden
   conditions:
     - !type:StealFewItemsCondition
-      prototype: ClothingHeadHelmetHelmet
+      prototype: ClothingHeadHelmetBasic
       quantityRange: [2, 5]
 
 - type: objective

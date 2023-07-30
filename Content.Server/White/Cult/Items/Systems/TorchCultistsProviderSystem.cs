@@ -83,7 +83,7 @@ public sealed class TorchCultistsProviderSystem : EntitySystem
             return;
         }
 
-        _ui.SetUiState(provider.UserInterface, new TorchWindowBUIState(list));
+        UserInterfaceSystem.SetUiState(provider.UserInterface, new TorchWindowBUIState(list));
 
         if(!TryComp<ActorComponent>(args.User, out var actorComponent))
             return;

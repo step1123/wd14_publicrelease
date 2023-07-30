@@ -12,8 +12,6 @@ public sealed class KillRandomHeadCondition : KillPersonCondition
 {
     public override IObjectiveCondition GetAssigned(Mind.Mind mind)
     {
-        RequireDead = true;
-
         var allHumans = EntityManager.EntityQuery<MindContainerComponent>(true).Where(mc =>
         {
             var entity = mc.Mind?.OwnedEntity;

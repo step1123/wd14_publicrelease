@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Client.IoC;
 using Content.Client.Items;
 using Content.Client.Resources;
@@ -232,7 +233,7 @@ public sealed partial class GunSystem
                             }),
                         }
                     },
-                    new Control() { MinSize = (5, 0) },
+                    new Control() { MinSize = new Vector2(5, 0) },
                     (_ammoCount = new Label
                     {
                         StyleClasses = { StyleNano.StyleClassItemStatus },
@@ -274,7 +275,7 @@ public sealed partial class GunSystem
                         {
                             BackgroundColor = colorGone,
                         },
-                        MinSize = (10, 15),
+                        MinSize = new Vector2(10, 15),
                     });
                     emptyNumber++;
                 }
@@ -290,7 +291,7 @@ public sealed partial class GunSystem
                         {
                             BackgroundColor = color,
                         },
-                        MinSize = (10, 15),
+                        MinSize = new Vector2(10, 15),
                     });
                 }
             }
@@ -322,7 +323,7 @@ public sealed partial class GunSystem
                         VerticalAlignment = VAlignment.Center,
                         HorizontalAlignment = HAlignment.Right,
                     }),
-                    new Control() { MinSize = (5,0) },
+                    new Control() { MinSize = new Vector2(5,0) },
                     new Control
                     {
                         HorizontalExpand = true,
@@ -341,7 +342,7 @@ public sealed partial class GunSystem
                             })
                         }
                     },
-                    new Control() { MinSize = (5,0) },
+                    new Control() { MinSize = new Vector2(5,0) },
                     (_ammoCount = new Label
                     {
                         StyleClasses = {StyleNano.StyleClassItemStatus},
@@ -488,7 +489,7 @@ public sealed partial class GunSystem
                     box.AddChild(new TextureRect
                     {
                         Texture = texture,
-                        TextureScale = (scale, scale),
+                        TextureScale = new Vector2(scale, scale),
                         ModulateSelfOverride = Color.LimeGreen,
                     });
                 }

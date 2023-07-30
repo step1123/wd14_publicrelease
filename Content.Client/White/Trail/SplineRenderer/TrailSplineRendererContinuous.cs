@@ -2,6 +2,8 @@ using Content.Shared.White.Spline;
 using Content.Shared.White.Trail;
 using Robust.Client.Graphics;
 using System.Linq;
+using System.Numerics;
+using Vector4 = Robust.Shared.Maths.Vector4;
 
 namespace Content.Client.White.Trail.SplineRenderer;
 
@@ -33,7 +35,7 @@ public sealed class TrailSplineRendererContinuous : ITrailSplineRenderer
         {
             var (position, velocity) = splineIterator.SamplePositionVelocity(paPositions, u);
 
-            var offset = velocity.Rotated90DegreesAnticlockwiseWorld.Normalized * settings.Scale.X;
+            var offset = new Vector2(-velocity.Y, velocity.X).Normalized() * settings.Scale.X; // 90-degree anticlockwise rotation
             var curPoints = (position - offset, position + offset);
 
             if (prevPoints.HasValue)

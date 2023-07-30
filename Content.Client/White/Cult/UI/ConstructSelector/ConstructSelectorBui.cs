@@ -16,14 +16,14 @@ public sealed class ConstructSelectorBui : BoundUserInterface
 
     private bool _selected;
 
-    public ConstructSelectorBui(ClientUserInterfaceComponent owner, Enum uiKey) : base(owner, uiKey) { }
+    public ConstructSelectorBui(EntityUid owner, Enum uiKey) : base(owner, uiKey) { }
 
     protected override void Open()
     {
         base.Open();
 
         _spriteSystem = _entityManager.EntitySysManager.GetEntitySystem<SpriteSystem>();
-        var shellComponent = _entityManager.GetComponent<ConstructShellComponent>(Owner.Owner);
+        var shellComponent = _entityManager.GetComponent<ConstructShellComponent>(Owner);
 
         var shellSelector = new RadialContainer();
 

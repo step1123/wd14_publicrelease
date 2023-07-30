@@ -7,7 +7,7 @@ public sealed class SummonCultistListWindowBUI : BoundUserInterface
 {
     private SummonCultistListWindow? _window;
 
-    public SummonCultistListWindowBUI(ClientUserInterfaceComponent owner, Enum uiKey) : base(owner, uiKey)
+    public SummonCultistListWindowBUI(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         IoCManager.InjectDependencies(this);
     }

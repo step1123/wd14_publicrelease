@@ -11,12 +11,12 @@ public sealed class TapeCreatorBUI : BoundUserInterface
 
     private TapeCreatorMenu? _window;
 
-    public TapeCreatorBUI(ClientUserInterfaceComponent owner, Enum uiKey) : base(owner, uiKey)
+    public TapeCreatorBUI(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         IoCManager.InjectDependencies(this);
         _sharedPopupSystem = _entityManager.System<SharedPopupSystem>();
 
-        var uid = owner.Owner;
+        var uid = owner;
 
         if (!_entityManager.TryGetComponent<TapeCreatorComponent>(uid, out var tapeCreatorComponent))
         {

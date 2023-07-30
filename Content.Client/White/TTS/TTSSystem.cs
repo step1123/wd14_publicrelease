@@ -78,11 +78,11 @@ public sealed class TTSSystem : EntitySystem
                 var collisionMask = (int) CollisionGroup.Impassable;
                 var sourceRelative = ourPos - mapPos.Position;
                 var occlusion = 0f;
-                if (sourceRelative.Length > 0)
+                if (sourceRelative.Length() > 0)
                 {
                     occlusion = _broadPhase.IntersectRayPenetration(mapPos.MapId,
-                        new CollisionRay(mapPos.Position, sourceRelative.Normalized, collisionMask),
-                        sourceRelative.Length, stream.Uid);
+                        new CollisionRay(mapPos.Position, sourceRelative.Normalized(), collisionMask),
+                        sourceRelative.Length(), stream.Uid);
                 }
                 stream.Source.SetOcclusion(occlusion);
             }

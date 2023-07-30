@@ -1,4 +1,5 @@
-﻿using Content.Shared.Humanoid;
+﻿using System.Numerics;
+using Content.Shared.Humanoid;
 using Content.Shared.White.Cult;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;

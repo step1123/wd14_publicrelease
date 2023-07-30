@@ -10,9 +10,9 @@ public sealed class CyborgInstrumentSelectBoundInterface : BoundUserInterface
     private CyborgInstrumentSelectMenu? _menu;
     public EntityUid Machine;
 
-    public CyborgInstrumentSelectBoundInterface(ClientUserInterfaceComponent owner, Enum uiKey) : base(owner, uiKey)
+    public CyborgInstrumentSelectBoundInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
-        Machine = owner.Owner;
+        Machine = owner;
     }
 
     protected override void Open()

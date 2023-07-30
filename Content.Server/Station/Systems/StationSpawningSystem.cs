@@ -169,7 +169,7 @@ public sealed class StationSpawningSystem : EntitySystem
         return entity.Value;
     }
 
-    private static void DoJobSpecials(Job? job, EntityUid entity, HumanoidCharacterProfile? profile)
+    private void DoJobSpecials(Job? job, EntityUid entity, HumanoidCharacterProfile? profile)
     {
         foreach (var jobSpecial in job?.Prototype.Special ?? Array.Empty<JobSpecial>())
         {

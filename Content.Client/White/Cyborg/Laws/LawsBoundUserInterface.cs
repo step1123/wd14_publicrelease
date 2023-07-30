@@ -11,9 +11,9 @@ public sealed class LawsBoundUserInterface : BoundUserInterface
 
     public EntityUid Machine;
 
-    public LawsBoundUserInterface(ClientUserInterfaceComponent owner, Enum uiKey) : base(owner, uiKey)
+    public LawsBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
-        Machine = owner.Owner;
+        Machine = owner;
     }
 
     protected override void Open()

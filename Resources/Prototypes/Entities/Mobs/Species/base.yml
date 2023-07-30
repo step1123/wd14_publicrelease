@@ -114,7 +114,7 @@
       - shader: StencilMask
         map: ["enum.HumanoidVisualLayers.StencilMask"]
         sprite: Mobs/Customization/masking_helpers.rsi
-        state: unisex_full
+        state: female_full
         visible: false
       - map: [ "underwearb" ] #White
       - map: [ "underweart" ] #White
@@ -147,11 +147,6 @@
       - map: [ "head" ]
       - map: [ "pocket1" ]
       - map: [ "pocket2" ]
-      - map: ["enum.HumanoidVisualLayers.Handcuffs"]
-        color: "#ffffff"
-        sprite: Objects/Misc/handcuffs.rsi
-        state: body-overlay-2
-        visible: false
       - map: [ "clownedon" ] # Dynamically generated
         sprite: "Effects/creampie.rsi"
         state: "creampie_human"
@@ -360,7 +355,7 @@
         - shader: StencilMask
           map: ["enum.HumanoidVisualLayers.StencilMask"]
           sprite: Mobs/Customization/masking_helpers.rsi
-          state: unisex_full
+          state: female_full
           visible: false
         - map: [ "underwearb" ] #White
         - map: [ "underweart" ] #White

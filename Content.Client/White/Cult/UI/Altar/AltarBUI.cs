@@ -11,7 +11,7 @@ public sealed class AltarBUI : BoundUserInterface
 {
     private AltarWindow? _window;
 
-    public AltarBUI(ClientUserInterfaceComponent owner, Enum uiKey) : base(owner, uiKey)
+    public AltarBUI(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         IoCManager.InjectDependencies(this);
     }

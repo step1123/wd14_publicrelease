@@ -13,7 +13,7 @@ public sealed class CyborgSelectBoundUserInterface : BoundUserInterface
     private RadialContainer? _radialContainer;
 
 
-    public CyborgSelectBoundUserInterface(ClientUserInterfaceComponent owner, Enum uiKey) : base(owner, uiKey)
+    public CyborgSelectBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         IoCManager.InjectDependencies(this);
     }

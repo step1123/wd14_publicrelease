@@ -75,12 +75,13 @@ namespace Content.Server.White.Other.ExamineSystem
             if (_inventorySystem.TryGetSlotEntity(uid, "id", out var idUid))
             {
                 // PDA
-                if (EntityManager.TryGetComponent(idUid, out PdaComponent? pda) && pda.ContainedId is not null)
+                if (EntityManager.TryGetComponent(idUid, out PdaComponent? pda) &&
+                    TryComp<IdCardComponent>(pda.ContainedId, out var id))
                 {
-                    return GetNameAndJob(pda.ContainedId);
+                    return GetNameAndJob(id);
                 }
                 // ID Card
-                if (EntityManager.TryGetComponent(idUid, out IdCardComponent? id))
+                if (EntityManager.TryGetComponent(idUid, out id))
                 {
                     return GetNameAndJob(id);
                 }

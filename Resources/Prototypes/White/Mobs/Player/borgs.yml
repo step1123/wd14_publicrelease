@@ -156,7 +156,7 @@
           - CyborgRadioModule
           - CyborgLawsModule
           - CyborgInstrumentModuleFilled
-    - type: Faction
+    - type: NpcFactionMember
       factions:
         - NanoTrasen
 
@@ -203,7 +203,7 @@
     - type: MovementSpeedModifier
       baseWalkSpeed: 2.3
       baseSprintSpeed: 3.2
-    - type: Faction
+    - type: NpcFactionMember
       factions:
         - NanoTrasen
     - type: Cyborg
@@ -243,7 +243,7 @@
   id: PlayerCyborgEng
   name: engineer cyborg
   components:
-    - type: Faction
+    - type: NpcFactionMember
       factions:
         - NanoTrasen
     - type: Cyborg
@@ -279,7 +279,7 @@
   id: PlayerCyborgNeko
   name: neko cyborg
   components:
-    - type: Faction
+    - type: NpcFactionMember
       factions:
         - NanoTrasen
     - type: Cyborg
@@ -466,7 +466,7 @@
             keywords: [ "AI", "console", "interface", "select", "borg" ]
             priority: -3
             event: !type:ToggleIntrinsicUIEvent
-    - type: Faction
+    - type: NpcFactionMember
       factions:
         - NanoTrasen
     - type: CombatMode

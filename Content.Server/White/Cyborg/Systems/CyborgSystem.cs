@@ -266,7 +266,8 @@ public sealed class CyborgSystem : SharedCyborgSystem
 
         var state = new CyborgInstrumentSelectListState(component.InstrumentUids);
         var ui = _ui.GetUi(uid, CyborgInstrumentSelectUiKey.Key);
-        _ui.SetUiState(ui, state);
+
+        UserInterfaceSystem.SetUiState(ui, state);
     }
 
 
