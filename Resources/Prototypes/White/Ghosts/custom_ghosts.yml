@@ -113,3 +113,12 @@
   ghostName: Karseba
   ghostDescription: Дракон который делает Ням-Ням
   size: 1, 1
+
+- type: customGhost
+  id: centurion-ghost
+  ckey: centurion
+  sprite: White/Ghosts/vkuser_ghost.rsi
+  alpha: 0.5
+  ghostName: Мяу
+  ghostDescription: Мур!
+  size: 0.8, 0.8
