@@ -882,6 +882,8 @@
     - !type:BuyerJobCondition
       whitelist:
         - Scientist
+        - ResearchAssistant
+        - ResearchDirector
 
 - type: listing
   id: uplinkProximityMine
@@ -917,6 +919,8 @@
     - Zookeeper
     - Scientist
     - Chef
+    - ResearchAssistant
+    - ResearchDirector
 
 - type: listing
   id: UplinkDisposableTurret
@@ -933,6 +937,10 @@
         - StationEngineer
         - AtmosphericTechnician
         - Scientist
+        - ResearchAssistant
+        - ResearchDirector
+        - ChiefEngineer
+        - TechnicalAssistant
 
 # Armor
 
