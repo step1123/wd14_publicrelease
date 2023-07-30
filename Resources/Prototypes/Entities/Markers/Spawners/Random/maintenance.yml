@@ -27,6 +27,7 @@
         - DrinkMugDog
         - CluwneHorn
         - ClothingMaskRat
+        - MysteryFigureBox
       rareChance: 0.01
       prototypes:
         - Lighter
@@ -85,6 +86,7 @@
         - SheetSteel
         - SheetPlastic
         - ResearchDisk
+        - Plunger
       chance: 0.6
       offset: 0.0
 

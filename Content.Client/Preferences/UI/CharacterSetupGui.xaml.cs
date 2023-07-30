@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Numerics;
 using Content.Client.Humanoid;
 using Content.Client.Info;
 using Content.Client.Lobby.UI;
@@ -194,9 +195,7 @@ namespace Content.Client.Preferences.UI
                 var view = new SpriteView
                 {
                     Sprite = entityManager.GetComponent<SpriteComponent>(_previewDummy),
-                    // WD-EDIT start
-                    Scale = ((float) 1.45, (float) 1.45),
-                    // WD-EDIT end
+                    Scale = new Vector2(2, 2),
                     OverrideDirection = Direction.South
                 };
 

@@ -71,6 +71,7 @@ SERVER_CONTENT_ASSEMBLIES = [
 SERVER_EXTRA_ASSEMBLIES = [
     "Npgsql.",
     "Microsoft",
+    "System.Linq.Async",
     "NetCoreServer"
 ]
 

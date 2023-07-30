@@ -68,6 +68,7 @@
         Bloodloss:
           -1
   - type: Stamina
+  - type: StatusIcon
   - type: StatusEffects
     allowed:
       - Stun
@@ -111,9 +112,9 @@
         # sprite refactor when
         state: l_leg
       - shader: StencilMask
-        map: [ "enum.HumanoidVisualLayers.StencilMask" ]
+        map: ["enum.HumanoidVisualLayers.StencilMask"]
         sprite: Mobs/Customization/masking_helpers.rsi
-        state: female_full
+        state: unisex_full
         visible: false
       - map: [ "underwearb" ] #White
       - map: [ "underweart" ] #White
@@ -146,6 +147,11 @@
       - map: [ "head" ]
       - map: [ "pocket1" ]
       - map: [ "pocket2" ]
+      - map: ["enum.HumanoidVisualLayers.Handcuffs"]
+        color: "#ffffff"
+        sprite: Objects/Misc/handcuffs.rsi
+        state: body-overlay-2
+        visible: false
       - map: [ "clownedon" ] # Dynamically generated
         sprite: "Effects/creampie.rsi"
         state: "creampie_human"
@@ -314,6 +320,7 @@
     price: 1500 # Kidnapping a living person and selling them for cred is a good move.
     deathPenalty: 0.01 # However they really ought to be living and intact, otherwise they're worth 100x less.
   - type: ContentEye
+  - type: SleepEmitSound
   - type: Carriable
   - type: TTS
   - type: DeathGasps
@@ -351,9 +358,9 @@
           sprite: Mobs/Species/Human/parts.rsi
           state: l_leg
         - shader: StencilMask
-          map: [ "enum.HumanoidVisualLayers.StencilMask" ]
+          map: ["enum.HumanoidVisualLayers.StencilMask"]
           sprite: Mobs/Customization/masking_helpers.rsi
-          state: female_full
+          state: unisex_full
           visible: false
         - map: [ "underwearb" ] #White
         - map: [ "underweart" ] #White

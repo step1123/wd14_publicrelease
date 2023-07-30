@@ -25,8 +25,8 @@ namespace Content.Client.Construction
         [Dependency] private readonly IPlayerManager _playerManager = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
+        [Dependency] private readonly PopupSystem _popupSystem = default!;
         [Dependency] private readonly EntityLookupSystem _lookup = default!;
-        [Dependency] private readonly PopupSystem _popup = default!;
 
         private readonly Dictionary<int, ConstructionGhostComponent> _ghosts = new();
         private readonly Dictionary<string, ConstructionGuide> _guideCache = new();
@@ -46,11 +46,11 @@ namespace Content.Client.Construction
 
             CommandBinds.Builder
                 .Bind(ContentKeyFunctions.OpenCraftingMenu,
-                    new PointerInputCmdHandler(HandleOpenCraftingMenu))
+                    new PointerInputCmdHandler(HandleOpenCraftingMenu, outsidePrediction:true))
                 .Bind(EngineKeyFunctions.Use,
                     new PointerInputCmdHandler(HandleUse, outsidePrediction: true))
                 .Bind(ContentKeyFunctions.EditorFlipObject,
-                    new PointerInputCmdHandler(HandleFlip))
+                    new PointerInputCmdHandler(HandleFlip, outsidePrediction:true))
                 .Register<ConstructionSystem>();
 
             SubscribeLocalEvent<ConstructionGhostComponent, ExaminedEvent>(HandleConstructionGhostExamined);
@@ -199,11 +199,8 @@ namespace Content.Client.Construction
             if (!_interactionSystem.InRangeUnobstructed(user, loc, 20f, predicate: predicate))
                 return false;
 
-            foreach (var condition in prototype.Conditions)
-            {
-                if (!condition.Condition(user, loc, dir))
-                    return false;
-            }
+            if (!CheckConstructionConditions(prototype, loc, dir, user, showPopup: true))
+                return false;
 
             ghost = EntityManager.SpawnEntity("constructionghost", loc);
             var comp = EntityManager.GetComponent<ConstructionGhostComponent>(ghost.Value);
@@ -224,6 +221,30 @@ namespace Content.Client.Construction
 
             if (prototype.CanBuildInImpassable)
                 EnsureComp<WallMountComponent>(ghost.Value).Arc = new(Math.Tau);
+
+            return true;
+        }
+
+        private bool CheckConstructionConditions(ConstructionPrototype prototype, EntityCoordinates loc, Direction dir,
+            EntityUid user, bool showPopup = false)
+        {
+            foreach (var condition in prototype.Conditions)
+            {
+                if (!condition.Condition(user, loc, dir))
+                {
+                    if (showPopup)
+                    {
+                        var message = condition.GenerateGuideEntry()?.Localization;
+                        if (message != null)
+                        {
+                            // Show the reason to the user:
+                            _popupSystem.PopupCoordinates(Loc.GetString(message), loc);
+                        }
+                    }
+
+                    return false;
+                }
+            }
 
             return true;
         }

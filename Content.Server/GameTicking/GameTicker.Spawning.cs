@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using Content.Server.Ghost;
 using Content.Server.Players;
@@ -342,7 +343,6 @@ namespace Content.Server.GameTicking
                 _ghostSystem._deathTime[userId] = _gameTiming.CurTime;
 
             SpawnObserver(player);
-            RaiseNetworkEvent(GetStatusSingle(player, PlayerGameStatus.JoinedGame));
         }
 
         /// <summary>

@@ -1,5 +1,4 @@
 using Content.Server.DeviceLinking.Components;
-using Content.Server.Interaction;
 using Content.Server.UserInterface;
 using Content.Shared.Access.Systems;
 using Content.Shared.MachineLinking;
@@ -20,6 +19,7 @@ public sealed class SignalTimerSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly AccessReaderSystem _accessReader = default!;
+    [Dependency] private readonly InteractionSystem _interaction = default!;
     [Dependency] private readonly RadioSystem _radioSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
@@ -46,7 +46,7 @@ public sealed class SignalTimerSystem : EntitySystem
 
         if (_ui.TryGetUi(uid, SignalTimerUiKey.Key, out var bui))
         {
-            _ui.SetUiState(bui, new SignalTimerBoundUserInterfaceState(component.Label,
+            UserInterfaceSystem.SetUiState(bui, new SignalTimerBoundUserInterfaceState(component.Label,
                 TimeSpan.FromSeconds(component.Delay).Minutes.ToString("D2"),
                 TimeSpan.FromSeconds(component.Delay).Seconds.ToString("D2"),
                 component.CanEditLabel,
@@ -74,7 +74,7 @@ public sealed class SignalTimerSystem : EntitySystem
 
         if (_ui.TryGetUi(uid, SignalTimerUiKey.Key, out var bui))
         {
-            _ui.SetUiState(bui, new SignalTimerBoundUserInterfaceState(signalTimer.Label,
+            UserInterfaceSystem.SetUiState(bui, new SignalTimerBoundUserInterfaceState(signalTimer.Label,
                 TimeSpan.FromSeconds(signalTimer.Delay).Minutes.ToString("D2"),
                 TimeSpan.FromSeconds(signalTimer.Delay).Seconds.ToString("D2"),
                 signalTimer.CanEditLabel,
@@ -127,7 +127,7 @@ public sealed class SignalTimerSystem : EntitySystem
         if (!IsMessageValid(uid, args))
             return;
 
-        component.Label = args.Text[..Math.Min(5,args.Text.Length)];
+        component.Label = args.Text[..Math.Min(5, args.Text.Length)];
         _appearanceSystem.SetData(uid, TextScreenVisuals.ScreenText, component.Label);
     }
 
