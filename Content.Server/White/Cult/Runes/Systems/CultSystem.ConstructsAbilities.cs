@@ -1,16 +1,15 @@
-﻿using Content.Server.Coordinates.Helpers;
-using Content.Server.Maps;
+﻿using Content.Server.Maps;
 using Content.Server.Popups;
 using Content.Server.White.IncorporealSystem;
 using Content.Shared.Actions;
 using Content.Shared.Actions.ActionTypes;
+using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Maps;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
 using Content.Shared.StatusEffect;
 using Content.Shared.White.Cult;
-using Robust.Server.GameObjects;
 
 namespace Content.Server.White.Cult.Runes.Systems;
 
@@ -136,7 +135,7 @@ public partial class CultSystem
     {
         var xform = Transform(performer);
 
-        var offsetValue = xform.LocalRotation.ToWorldVec().Normalized;
+        var offsetValue = xform.LocalRotation.ToWorldVec().Normalized();
         var coords = xform.Coordinates.Offset(offsetValue).SnapToGrid(EntityManager);
         var tile = coords.GetTileRef();
         if (tile == null)

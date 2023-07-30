@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared.White.Trail;
 using Robust.Client.Graphics;
 using Robust.Shared.Map;

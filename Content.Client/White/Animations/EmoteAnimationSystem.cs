@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared.Animations;
 using Robust.Client.Animations;
 using Robust.Shared.Animations;

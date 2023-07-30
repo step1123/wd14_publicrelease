@@ -12,7 +12,7 @@ public sealed class SpellSelectorBUI : BoundUserInterface
 
     private RadialContainer? _radialContainer;
 
-    public SpellSelectorBUI(ClientUserInterfaceComponent owner, Enum uiKey) : base(owner, uiKey)
+    public SpellSelectorBUI(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         IoCManager.InjectDependencies(this);
     }

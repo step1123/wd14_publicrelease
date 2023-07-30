@@ -1,5 +1,7 @@
+using System.Numerics;
 using Content.Shared.White.Spline;
 using Content.Shared.White.Trail;
+using Vector4 = Robust.Shared.Maths.Vector4;
 
 namespace Content.Server.White.Trail;
 

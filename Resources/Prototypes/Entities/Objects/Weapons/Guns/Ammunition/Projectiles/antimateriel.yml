@@ -8,6 +8,7 @@
     damage:
       types:
         Piercing: 49
+        Structural: 30
   - type: Trail
     splineIteratorType: CatmullRom
     splineRendererType: Continuous

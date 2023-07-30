@@ -14,7 +14,7 @@ public sealed class CultistFactoryComponent : Component
     public int Cooldown = 240;
 
     [ViewVariables(VVAccess.ReadOnly)]
-    public TimeSpan? NextTimeUse = TimeSpan.Zero;
+    public TimeSpan? NextTimeUse;
 
     [ViewVariables(VVAccess.ReadOnly)]
     [DataField("products", customTypeSerializer: typeof(PrototypeIdListSerializer<CultistFactoryProductionPrototype>))]

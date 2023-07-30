@@ -1,6 +1,8 @@
+using System.Numerics;
 using Content.Shared.White.Spline;
 using Content.Shared.White.Trail;
 using Robust.Client.Graphics;
+using Vector4 = Robust.Shared.Maths.Vector4;
 
 namespace Content.Client.White.Trail.SplineRenderer;
 

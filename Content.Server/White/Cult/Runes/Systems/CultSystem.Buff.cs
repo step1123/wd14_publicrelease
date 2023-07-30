@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Numerics;
 using Content.Server.White.Cult.GameRule;
 using Content.Server.White.Cult.Runes.Comps;
 using Content.Shared.Alert;
@@ -86,7 +87,7 @@ public partial class CultSystem
         if (!_mapManager.TryGetGrid(Transform(uid).GridUid, out var grid))
             return false;
 
-        var tilesRefs = grid.GetLocalTilesIntersecting(new Box2(localpos + (-radius, -radius), localpos + (radius, radius)));
+        var tilesRefs = grid.GetLocalTilesIntersecting(new Box2(localpos + new Vector2(-radius, -radius), localpos + new Vector2(radius, radius)));
         var cultTileDef = (ContentTileDefinition) _tileDefinition[$"{CultRuleComponent.CultFloor}"];
         var cultTile = new Tile(cultTileDef.TileId);
 

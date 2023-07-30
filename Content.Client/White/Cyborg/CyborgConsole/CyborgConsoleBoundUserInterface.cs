@@ -10,7 +10,7 @@ public sealed class CyborgConsoleBoundUserInterface : BoundUserInterface
 {
     private CyborgConsoleMenu? _menu;
 
-    public CyborgConsoleBoundUserInterface(ClientUserInterfaceComponent owner, Enum uiKey) : base(owner, uiKey)
+    public CyborgConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
     }
 

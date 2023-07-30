@@ -124,7 +124,7 @@ public sealed class JukeboxSystem : EntitySystem
         foreach (var (jukeboxComponent, jukeboxXform) in jukeboxes)
         {
 
-            if (jukeboxXform.MapID != playerXform.MapID || (jukeboxXform.MapPosition.Position - playerXform.MapPosition.Position).Length > _maxAudioRange)
+            if (jukeboxXform.MapID != playerXform.MapID || (jukeboxXform.MapPosition.Position - playerXform.MapPosition.Position).Length() > _maxAudioRange)
             {
                 if (_playingJukeboxes.TryGetValue(jukeboxComponent, out var stream))
                 {
@@ -186,11 +186,11 @@ public sealed class JukeboxSystem : EntitySystem
         var sourceRelative = playerXform.MapPosition.Position - jukeboxXform.MapPosition.Position;
         var occlusion = 0f;
 
-        if (sourceRelative.Length > 0)
+        if (sourceRelative.Length() > 0)
         {
             occlusion = _physicsSystem.IntersectRayPenetration(jukeboxXform.MapID,
-                new CollisionRay(jukeboxXform.MapPosition.Position, sourceRelative.Normalized, (int)collisionMask),
-                sourceRelative.Length, jukeboxXform.Owner) * 3f;
+                new CollisionRay(jukeboxXform.MapPosition.Position, sourceRelative.Normalized(), (int)collisionMask),
+                sourceRelative.Length(), jukeboxXform.Owner) * 3f;
         }
 
         jukeboxAudio.PlayingStream.SetOcclusion(occlusion);

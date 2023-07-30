@@ -11,11 +11,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install dependencies
+        run: sudo apt-get install -y python3-paramiko
+
       - name: Fix home dir permissions
         run: sudo chown -R $(whoami) .
       - uses: actions/checkout@v2
         with:
           submodules: 'recursive'
+
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
         with:

@@ -7,7 +7,7 @@ public sealed class TeleportRunesListWindowBUI : BoundUserInterface
 {
     private TeleportRunesListWindow? _window;
 
-    public TeleportRunesListWindowBUI(ClientUserInterfaceComponent owner, Enum uiKey) : base(owner, uiKey)
+    public TeleportRunesListWindowBUI(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         IoCManager.InjectDependencies(this);
     }

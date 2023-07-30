@@ -11,7 +11,7 @@ public sealed class TorchWindowBUI : BoundUserInterface
 
     private TorchWindow? _window;
 
-    public TorchWindowBUI(ClientUserInterfaceComponent owner, Enum uiKey) : base(owner, uiKey)
+    public TorchWindowBUI(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         IoCManager.InjectDependencies(this);
     }

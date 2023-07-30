@@ -16,7 +16,7 @@ public sealed class CultistFactoryBUI : BoundUserInterface
 
     private bool _updated = false;
 
-    public CultistFactoryBUI(ClientUserInterfaceComponent owner, Enum uiKey) : base(owner, uiKey)
+    public CultistFactoryBUI(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         IoCManager.InjectDependencies(this);
     }

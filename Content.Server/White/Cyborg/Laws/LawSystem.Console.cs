@@ -64,6 +64,7 @@ public sealed class LawSystemConsole : EntitySystem
         if (!_ui.TryGetUi(consoleUid, CyborgMonitoringConsoleUiKey.Key, out var ui))
             return;
         var state = new LawsUpdateState(component.Laws, uid);
-        _ui.SetUiState(ui, state);
+
+        UserInterfaceSystem.SetUiState(ui, state);
     }
 }

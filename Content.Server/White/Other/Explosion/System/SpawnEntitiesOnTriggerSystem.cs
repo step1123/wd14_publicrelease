@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Server.White.Other.Explosion.Components;

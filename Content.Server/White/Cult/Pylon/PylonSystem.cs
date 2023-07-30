@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Numerics;
 using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
 using Content.Server.Maps;
@@ -96,8 +97,8 @@ public sealed class PylonSystem : EntitySystem
             return;
 
         var radius = comp.TileConvertRange;
-        var tilesRefs = grid.GetLocalTilesIntersecting(new Box2(pylonPos.Position + (-radius, -radius),
-            pylonPos.Position + (radius, radius)));
+        var tilesRefs = grid.GetLocalTilesIntersecting(new Box2(pylonPos.Position + new Vector2(-radius, -radius),
+            pylonPos.Position + new Vector2(radius, radius)));
         var tiles = ShuffleTiles(tilesRefs);
 
         if (comp.ConvertEverything)
@@ -111,7 +112,7 @@ public sealed class PylonSystem : EntitySystem
             if (tilesConverted >= random)
                 return;
 
-            var tilePos = tile.GridPosition();
+            var tilePos = _turf.GetTileCenter(tile);
 
             if (pylonPos.InRange(EntityManager, tilePos, comp.TileConvertRange))
             {
@@ -135,7 +136,9 @@ public sealed class PylonSystem : EntitySystem
                 || !_turf.IsTileBlocked(tile, CollisionGroup.AirlockLayer))
                 continue;
 
-            foreach (var entity in _lookup.GetEntitiesIntersecting(tile.GridPosition()))
+            var posss = _turf.GetTileCenter(tile);
+
+            foreach (var entity in _lookup.GetEntitiesIntersecting(posss))
             {
                 if (TryComp<TagComponent>(entity, out var tag)
                     && tag.Tags.Contains("Wall")
@@ -144,7 +147,7 @@ public sealed class PylonSystem : EntitySystem
                     _entMan.SpawnEntity(comp.WallId, Transform(entity).Coordinates);
                     _entMan.SpawnEntity(comp.WallConvertEffect, Transform(entity).Coordinates);
                     _entMan.DeleteEntity(entity);
-                    _audio.PlayPvs(comp.ConvertTileSound, tile.GridPosition(), AudioParams.Default.WithVolume(-10));
+                    _audio.PlayPvs(comp.ConvertTileSound, posss, AudioParams.Default.WithVolume(-10));
                     return;
                 }
 
@@ -153,7 +156,7 @@ public sealed class PylonSystem : EntitySystem
                     _entMan.SpawnEntity(comp.AirlockId, Transform(entity).Coordinates);
                     _entMan.SpawnEntity(comp.AirlockConvertEffect, Transform(entity).Coordinates);
                     _entMan.DeleteEntity(entity);
-                    _audio.PlayPvs(comp.ConvertTileSound, tile.GridPosition(), AudioParams.Default.WithVolume(-10));
+                    _audio.PlayPvs(comp.ConvertTileSound, posss, AudioParams.Default.WithVolume(-10));
                     return;
                 }
             }

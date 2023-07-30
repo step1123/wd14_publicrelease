@@ -72,8 +72,11 @@ public sealed class CyborgMonitoringConsoleSystem : EntitySystem
 
         var allSensors = component.ConnectedSensors.Values.ToList();
         var state = new CyborgMonitoringState(allSensors);
-        var ui = _ui.GetUi(uid, CyborgMonitoringConsoleUiKey.Key);
-        _ui.SetUiState(ui, state);
+
+        if (_ui.TryGetUi(uid, CyborgMonitoringConsoleUiKey.Key, out var bui))
+        {
+            UserInterfaceSystem.SetUiState(bui, state);
+        }
     }
 
     private void UpdateAvailableActions(EntityUid uid, List<ActionData> availableAction,

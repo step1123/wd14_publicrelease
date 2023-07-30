@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Content.Client.Message;
@@ -120,7 +121,7 @@ public partial class RadialContainer : Control
         UpdateButtons();
     }
 
-    public void OpenCenteredLeft() => OpenCenteredAt((0.37f, 0.5f));
+    public void OpenCenteredLeft() => OpenCenteredAt(new Vector2(0.37f, 0.5f));
 
     public void OpenCenteredAt(Vector2 position)
     {
@@ -343,7 +344,7 @@ public partial class RadialContainer : Control
         {
             var onePoint = xform.WorldPosition;
             var twoPoint = myxform.WorldPosition;
-            var distance = (onePoint - twoPoint).Length;
+            var distance = (onePoint - twoPoint).Length();
 
             if (DistanceAvaible < distance)
             {
@@ -356,7 +357,7 @@ public partial class RadialContainer : Control
         var worldPos = xform.WorldPosition + offset;
 
         var lowerCenter = eyeManager.WorldToScreen(worldPos) / UIScale;
-        var screenPos = lowerCenter - (this.DesiredSize.X / 2, this.DesiredSize.Y / 2);
+        var screenPos = lowerCenter - new Vector2(DesiredSize.X / 2, DesiredSize.Y / 2);
         // Round to nearest 0.5
         screenPos = (screenPos * 2).Rounded() / 2;
         LayoutContainer.SetPosition(this, screenPos);

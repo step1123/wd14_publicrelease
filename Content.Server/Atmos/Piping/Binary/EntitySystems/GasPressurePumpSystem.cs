@@ -4,6 +4,7 @@ using Content.Server.Atmos.Piping.Binary.Components;
 using Content.Server.Atmos.Piping.Components;
 using Content.Server.Chat.Managers;
 using Content.Server.NodeContainer;
+using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NodeContainer.Nodes;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Piping;
@@ -26,6 +27,7 @@ namespace Content.Server.Atmos.Piping.Binary.EntitySystems
         [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
         [Dependency] private readonly SharedAmbientSoundSystem _ambientSoundSystem = default!;
         [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+        [Dependency] private readonly NodeContainerSystem _nodeContainer = default!;
         [Dependency] private readonly EntityManager _entityManager = default!;
         [Dependency] private readonly IChatManager _chatManager = default!;
 
@@ -64,8 +66,8 @@ namespace Content.Server.Atmos.Piping.Binary.EntitySystems
         {
             if (!pump.Enabled
                 || !EntityManager.TryGetComponent(uid, out NodeContainerComponent? nodeContainer)
-                || !nodeContainer.TryGetNode(pump.InletName, out PipeNode? inlet)
-                || !nodeContainer.TryGetNode(pump.OutletName, out PipeNode? outlet))
+                || !_nodeContainer.TryGetNode(nodeContainer, pump.InletName, out PipeNode? inlet)
+                || !_nodeContainer.TryGetNode(nodeContainer, pump.OutletName, out PipeNode? outlet))
             {
                 _ambientSoundSystem.SetAmbience(pump.Owner, false);
                 return;

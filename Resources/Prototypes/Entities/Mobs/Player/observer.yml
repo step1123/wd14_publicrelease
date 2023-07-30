@@ -56,7 +56,7 @@
       - state: animated
         shader: unshaded
   - type: MovementSpeedModifier
-    baseSprintSpeed: 10
+    baseSprintSpeed: 12
     baseWalkSpeed: 8
   - type: MovementIgnoreGravity
   - type: Tag

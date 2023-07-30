@@ -11,12 +11,12 @@ public sealed class JukeboxBUI : BoundUserInterface
     private readonly SharedPopupSystem _sharedPopupSystem = default!;
 
     private JukeboxMenu? _window;
-    public JukeboxBUI(ClientUserInterfaceComponent owner, Enum uiKey) : base(owner, uiKey)
+    public JukeboxBUI(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         IoCManager.InjectDependencies(this);
         _sharedPopupSystem = _entityManager.System<SharedPopupSystem>();
 
-        var uid = owner.Owner;
+        var uid = owner;
 
         if (!_entityManager.TryGetComponent<JukeboxComponent>(uid, out var jukeboxComponent))
         {

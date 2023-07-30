@@ -6,7 +6,9 @@ using Robust.Client.Graphics;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.CompilerServices;
+using Vector4 = Robust.Shared.Maths.Vector4;
 
 namespace Content.Client.White.Trail.Line;
 
@@ -61,7 +63,7 @@ public sealed class TrailSpline : ITrailLine
         if (_virtualSegmentPos.HasValue)
         {
             var vPos = _virtualSegmentPos.Value;
-            if ((vPos - pos).LengthSquared > Settings.СreationDistanceThresholdSquared)
+            if ((vPos - pos).LengthSquared() > Settings.СreationDistanceThresholdSquared)
             {
                 _segments.AddLast(new TrailSplineSegment() { Position = vPos, ExistTil = _curLifetime + Settings.Lifetime });
                 _virtualSegmentPos = null;
@@ -70,7 +72,7 @@ public sealed class TrailSpline : ITrailLine
         }
 
         var lastPos = _segments.Last?.Value.Position;
-        if (!lastPos.HasValue || (lastPos.Value - pos).LengthSquared > Settings.СreationDistanceThresholdSquared)
+        if (!lastPos.HasValue || (lastPos.Value - pos).LengthSquared() > Settings.СreationDistanceThresholdSquared)
             _virtualSegmentPos = pos;
     }
 
@@ -102,9 +104,10 @@ public sealed class TrailSpline : ITrailLine
                     }
 
                     var effectiveRandomWalk = maxRandomWalk * (curValue.ExistTil - _curLifetime) / lifetime;
-                    var gradientNorm = -SplineIterator.SampleVelocity(positions, (float)i).Normalized;
+                    var gradientNorm = -SplineIterator.SampleVelocity(positions, (float)i).Normalized();
                     offset += gradientNorm * effectiveRandomWalk.Y * Random.NextFloat(-1.0f, 1.0f);
-                    offset += gradientNorm.Rotated90DegreesAnticlockwiseWorld * effectiveRandomWalk.X * Random.NextFloat(-1.0f, 1.0f);
+                    var rotated90Degrees = new Vector2(-gradientNorm.Y, gradientNorm.X);
+                    offset += rotated90Degrees * effectiveRandomWalk.X * Random.NextFloat(-1.0f, 1.0f);
                 }
                 curValue.Position += offset;
                 i++;

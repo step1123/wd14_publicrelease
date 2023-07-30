@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Client.Ghost;
 using Content.Shared.White.CustomGhostSystem;
 using Robust.Client.GameObjects;

@@ -1,5 +1,7 @@
+using System.Numerics;
 using Content.Shared.White.Spline;
 using Robust.Shared.Serialization;
+using Vector4 = Robust.Shared.Maths.Vector4;
 
 namespace Content.Shared.White.Trail;
 
@@ -9,16 +11,16 @@ public sealed class TrailSettings : ITrailSettings
 {
     public static readonly TrailSettings Default = new();
 
-    public Vector2 Scale { get; set; } = (0.5f, 1f);
+    public Vector2 Scale { get; set; } = new(0.5f, 1f);
     public float СreationDistanceThresholdSquared { get; set; } = 0.1f;
     public SegmentCreationMethod СreationMethod { get; set; } = SegmentCreationMethod.OnFrameUpdate;
     public Vector2 CreationOffset { get; set; } = Vector2.Zero;
-    public Vector2 Gravity { get; set; } = (0.01f, 0.01f);
-    public Vector2 MaxRandomWalk { get; set; } = (0.005f, 0.005f);
-    public float Lifetime { get; set; } = 0f;
+    public Vector2 Gravity { get; set; } = new(0.01f, 0.01f);
+    public Vector2 MaxRandomWalk { get; set; } = new(0.005f, 0.005f);
+    public float Lifetime { get; set; }
     public float LengthStep { get; set; } = 0.1f;
     public string? TexurePath { get; set; }
-    public Vector4[] Gradient { get; set; } = new[] { new Vector4(1f, 1f, 1f, 1f), new Vector4(1f, 1f, 1f, 0f) };
+    public Vector4[] Gradient { get; set; } = { new(1f, 1f, 1f, 1f), new(1f, 1f, 1f, 0f) };
     public Spline4DType GradientIteratorType { get; set; }
     public Spline2DType SplineIteratorType { get; set; }
     public TrailSplineRendererType SplineRendererType { get; set; }

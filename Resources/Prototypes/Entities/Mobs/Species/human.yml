@@ -9,6 +9,10 @@
     - SlimHuman
   components:
   - type: Hunger
+    starvationDamage:
+      types:
+        Cold: 0.5
+        Bloodloss: 0.5
   - type: Thirst
   - type: Perishable
   - type: Butcherable

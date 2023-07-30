@@ -47,8 +47,6 @@
           amountRange: 1, 1
         - entity: D22
           amountRange: 1, 1
-        - entity: D23
-          amountRange: 1, 1
         - entity: D24
           amountRange: 1, 1
         - entity: D25

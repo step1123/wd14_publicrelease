@@ -1,4 +1,5 @@
 using System.Diagnostics.Contracts;
+using System.Numerics;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.RichText;
@@ -44,7 +45,7 @@ public class ChatRichTextLabel : Control
         var font = _getFont();
         _entry.Update(font, availableSize.X * UIScale, UIScale);
 
-        return (_entry.Width / UIScale, _entry.Height / UIScale);
+        return new Vector2(_entry.Width / UIScale, _entry.Height / UIScale);
     }
 
     protected override void Draw(DrawingHandleScreen handle)

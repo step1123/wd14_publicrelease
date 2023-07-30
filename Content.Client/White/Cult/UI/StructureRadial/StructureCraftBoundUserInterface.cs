@@ -22,7 +22,7 @@ public sealed class StructureCraftBoundUserInterface : BoundUserInterface
 
     private RadialContainer? _radialContainer;
 
-    public StructureCraftBoundUserInterface(ClientUserInterfaceComponent owner, Enum uiKey) : base(owner, uiKey)
+    public StructureCraftBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         IoCManager.InjectDependencies(this);
     }

@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Numerics;
 using Content.Client.Humanoid;
 using Content.Client.Info;
 using Content.Client.Lobby.UI;
@@ -194,9 +195,7 @@ namespace Content.Client.Preferences.UI
                 var view = new SpriteView
                 {
                     Sprite = entityManager.GetComponent<SpriteComponent>(_previewDummy),
-                    // WD-EDIT start
-                    Scale = ((float) 1.45, (float) 1.45),
-                    // WD-EDIT end
+                    Scale = new Vector2(2, 2),
                     OverrideDirection = Direction.South
                 };
 
@@ -214,7 +213,7 @@ namespace Content.Client.Preferences.UI
                     Text = description,
                     ClipText = true,
                     // WD-EDIT start
-                    MinSize = (100, 0),
+                    MinSize = new Vector2(100, 0),
                     // WD-EDIT end
                     HorizontalExpand = true
                 };
@@ -248,7 +247,7 @@ namespace Content.Client.Preferences.UI
                     Orientation = LayoutOrientation.Horizontal,
                     HorizontalExpand = true,
                     // WD-EDIT start
-                    MinSize = (125, 0),
+                    MinSize = new Vector2(125, 0),
                     // WD-EDIT end
                     SeparationOverride = 0,
                     Children =

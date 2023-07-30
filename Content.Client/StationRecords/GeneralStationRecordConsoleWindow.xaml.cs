@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Numerics;
 using Content.Client.Humanoid;
 using Content.Client.Inventory;
 using Content.Shared.GameTicking;
@@ -217,8 +218,8 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
         var spriteViewBox = new BoxContainer();
         var sprite = entityManager.GetComponent<SpriteComponent>(_previewDummy);
 
-        spriteViewBox.AddChild(new SpriteView() { Sprite = sprite, Scale = (5, 5)});
-        spriteViewBox.AddChild(new SpriteView() { Sprite = sprite, Scale = (5, 5), OverrideDirection = Direction.East});
+        spriteViewBox.AddChild(new SpriteView() { Sprite = sprite, Scale = new Vector2(5, 5)});
+        spriteViewBox.AddChild(new SpriteView() { Sprite = sprite, Scale = new Vector2(5, 5), OverrideDirection = Direction.East});
 
         return spriteViewBox;
     }
