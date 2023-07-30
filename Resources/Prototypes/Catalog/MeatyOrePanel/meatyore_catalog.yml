@@ -439,14 +439,6 @@
 #glasses
 
 - type: listing
-  id: MeatyClothingEyesGlassesBeer
-  productEntity: ClothingEyesGlassesBeer
-  cost:
-    MeatyOreCoin: 1
-  categories:
-    - MeatyOreGlasses
-
-- type: listing
   id: MeatyClothingEyesGlasses
   productEntity: ClothingEyesGlasses
   cost:
@@ -1215,14 +1207,6 @@
 - type: listing
   id: MeatyToyNuke
   productEntity: ToyNuke
-  cost:
-    MeatyOreCoin: 1
-  categories:
-    - MeatyOreToys
-
-- type: listing
-  id: MeatyToyAssistant
-  productEntity: ToyAssistant
   cost:
     MeatyOreCoin: 1
   categories:

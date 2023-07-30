@@ -74,7 +74,7 @@
 - type: cargoProduct
   id: SecurityMindShield
   icon:
-    sprite: Clothing/OuterClothing/Vests/oldarmor.rsi
+    sprite: Clothing/OuterClothing/Armor/security.rsi
     state: icon
   product: CreateSecurityMindShield
   cost: 1000

@@ -70,7 +70,6 @@
       prototypes:
        - ToyAi
        - ToyNuke
-       - ToyAssistant
        - ToyGriffin
        - ToyHonk
        - ToyIan
