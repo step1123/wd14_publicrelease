@@ -1,4 +1,4 @@
-﻿- type: reaction
+- type: reaction
   id: Carpetium
   reactants:
     SpaceDrugs:
@@ -81,13 +81,3 @@
       amount: 1
   products:
     SpaceGlue: 2
-
-- type: reaction
-  id: Licoxide
-  reactants:
-    Lead:
-      amount: 1
-    Zinc:
-      amount: 1
-  products:
-    Licoxide: 1

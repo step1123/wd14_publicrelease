@@ -23,7 +23,7 @@
   - type: Extractable
     juiceSolution:
       reagents:
-        - ReagentId: Zinc
+        - ReagentId: Licoxide
           Quantity: 5
   - type: Tag
     tags:
