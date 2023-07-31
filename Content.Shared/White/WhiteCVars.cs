@@ -20,6 +20,13 @@ public sealed class WhiteCVars
         CVarDef.Create("ic.slang_filter", true, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
 
     /*
+ * Antispam
+    */
+
+    public static readonly CVarDef<bool> ChatAntispam =
+        CVarDef.Create("ic.antispam", true, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
+
+    /*
  * Sponsors
     */
 
