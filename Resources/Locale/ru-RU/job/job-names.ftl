@@ -1,7 +1,7 @@
 job-name-warden = смотритель
 job-name-security = офицер СБ
 job-name-cadet = кадет СБ
-job-name-hos = глава охранной службы
+job-name-hos = глава службы безопасности
 job-name-detective = детектив
 job-name-brigmedic = бригмедик
 job-name-scientist = учёный
@@ -64,7 +64,7 @@ JobERTLeader = лидер ОБР
 JobERTMedical = медик ОБР
 JobERTSecurity = офицер безопасности ОБР
 JobHeadOfPersonnel = глава персонала
-JobHeadOfSecurity = глава охранной службы
+JobHeadOfSecurity = глава службы безопасности
 JobJanitor = уборщик
 JobLawyer = адвокат
 JobLibrarian = библиотекарь
