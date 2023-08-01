@@ -5,6 +5,7 @@ using Content.Server.Fluids.EntitySystems;
 using Content.Server.Forensics;
 using Content.Server.HealthExaminable;
 using Content.Server.Popups;
+using Content.Shared.Alert;
 using Content.Server.White.EndOfRoundStats.BloodLost;
 using Content.Shared.Alert;
 using Content.Shared.Chemistry.Components;
@@ -389,7 +390,7 @@ public sealed class BloodstreamSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Change what someone's blood is made of, on the fly. 
+    ///     Change what someone's blood is made of, on the fly.
     /// </summary>
     public void ChangeBloodReagent(EntityUid uid, string reagent, BloodstreamComponent? component = null)
     {

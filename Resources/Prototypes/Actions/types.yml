@@ -2,6 +2,7 @@
   id: TurnUndead
   name: turn-undead-action-name
   description: turn-undead-action-description
+  checkCanInteract: false
   icon: Interface/Actions/zombie-turn.png
   event: !type:ZombifySelfActionEvent
 
@@ -171,3 +172,12 @@
   description: action-desc-honk
   icon: { sprite: Objects/Fun/bikehorn.rsi, state: icon }
   event: !type:ActivateImplantEvent
+
+- type: instantAction
+  id: Scream
+  useDelay: 10
+  icon: Interface/Actions/scream.png
+  name: action-name-scream
+  description: action-description-scream
+  serverEvent: !type:ScreamActionEvent
+  checkCanInteract: false

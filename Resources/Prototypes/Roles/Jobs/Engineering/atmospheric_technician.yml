@@ -21,7 +21,7 @@
   id: AtmosphericTechnicianGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitAtmos
-    back: ClothingBackpackEngineeringFilled
+    back: ClothingBackpackAtmosphericsFilled
     shoes: ClothingShoesColorWhite
     eyes: ClothingEyesGlassesMeson
     id: AtmosPDA
@@ -31,5 +31,5 @@
   underweart: ClothingUnderwearTopBraWhite # White-Underwear
   underwearb: ClothingUnderwearBottomPantiesWhite # White-Underwear
   innerclothingskirt: ClothingUniformJumpskirtAtmos
-  satchel: ClothingBackpackSatchelEngineeringFilled
-  duffelbag: ClothingBackpackDuffelEngineeringFilled
+  satchel: ClothingBackpackSatchelAtmosphericsFilled
+  duffelbag: ClothingBackpackDuffelAtmosphericsFilled

@@ -646,6 +646,14 @@
      Steel: 100
      Glass: 900
 
+- type: latheRecipe
+  id: MassMediaCircuitboard
+  result: ComputerMassMediaCircuitboard
+  completetime: 4
+  materials:
+     Steel: 100
+     Glass: 900
+
 # WD-EDIT
 
 - type: latheRecipe

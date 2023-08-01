@@ -18,7 +18,7 @@
   equipment:
     head: ClothingHeadHatCargosoft
     jumpsuit: ClothingUniformJumpsuitCargo
-    back: ClothingBackpackFilled
+    back: ClothingBackpackCargoFilled
     shoes: ClothingShoesColorBlack
     id: CargoPDA
     ears: ClothingHeadsetCargo
@@ -27,5 +27,5 @@
   underweart: ClothingUnderwearTopBraWhite # White-Underwear
   underwearb: ClothingUnderwearBottomPantiesWhite # White-Underwear
   innerclothingskirt: ClothingUniformJumpskirtCargo
-  satchel: ClothingBackpackSatchelFilled
-  duffelbag: ClothingBackpackDuffelFilled
+  satchel: ClothingBackpackSatchelCargoFilled
+  duffelbag: ClothingBackpackDuffelCargoFilled

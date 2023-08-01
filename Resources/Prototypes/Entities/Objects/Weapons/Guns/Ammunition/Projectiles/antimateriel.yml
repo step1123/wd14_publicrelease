@@ -7,8 +7,10 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 49
+        Piercing: 60
         Structural: 30
+    ignoreResistances: true
+  - type: StaminaDamageOnCollide
   - type: Trail
     splineIteratorType: CatmullRom
     splineRendererType: Continuous
