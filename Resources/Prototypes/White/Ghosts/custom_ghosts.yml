@@ -118,7 +118,7 @@
   id: centurion-ghost
   ckey: centurion
   sprite: White/Ghosts/vkuser_ghost.rsi
-  alpha: 0.5
-  ghostName: Мяу
+  alpha: 0.8
+  ghostName: Central Hampter
   ghostDescription: Мур!
   size: 0.8, 0.8
