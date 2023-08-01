@@ -35,6 +35,8 @@
     id: SecurityPDA
     ears: ClothingHeadsetSecurity
     belt: ClothingBeltSecurityFilled
+    pocket1: WeaponPistolMk58
+    pocket2: MagazinePistol
     underwearb: ClothingUnderwearBottomBoxersWhite # White-Underwear
   underweart: ClothingUnderwearTopBraSportsAlternative # White-Underwear
   underwearb: ClothingUnderwearBottomPantiesWhite # White-Underwear

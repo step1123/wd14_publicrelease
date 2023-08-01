@@ -46,6 +46,8 @@
     id: HoSPDA
     gloves: ClothingHandsGlovesCombat
     ears: ClothingHeadsetAltSecurity
+    pocket1: WeaponPistolMk58
+    pocket2: MagazinePistol
     belt: ClothingBeltSecurityFilled
     underwearb: ClothingUnderwearBottomBoxersHOS # White-Underwear
   underweart: ClothingUnderwearTopBraHOS # White-Underwear
