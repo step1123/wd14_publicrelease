@@ -153,3 +153,81 @@
   name: tts-voice-name-trump
   sex: Male
   speaker: trump
+
+- type: ttsVoice
+  id: Briman
+  name: tts-voice-name-briman
+  sex: Male
+  speaker: briman
+
+- type: ttsVoice
+  id: KleinerAlt
+  name: tts-voice-name-kleiner-alt
+  sex: Male
+  speaker: kleiner_alt
+
+- type: ttsVoice
+  id: FatherGrigori
+  name: tts-voice-name-father-grigori
+  sex: Male
+  speaker: father_grigori
+
+- type: ttsVoice
+  id: Vance
+  name: tts-voice-name-vance
+  sex: Male
+  speaker: vance
+
+- type: ttsVoice
+  id: Barni
+  name: tts-voice-name-barni
+  sex: Male
+  speaker: barni
+
+- type: ttsVoice
+  id: GmanAlt
+  name: tts-voice-name-gman-alt
+  sex: Male
+  speaker: gman_alt
+
+- type: ttsVoice
+  id: Alyx
+  name: tts-voice-name-alyx
+  sex: Female
+  speaker: alyx
+
+- type: ttsVoice
+  id: Mossman
+  name: tts-voice-name-mossman
+  sex: Female
+  speaker: mossman
+
+- type: ttsVoice
+  id: Bandit
+  name: tts-voice-name-bandit
+  sex: Male
+  speaker: bandit
+
+- type: ttsVoice
+  id: PapichAlt
+  name: tts-voice-name-papich-alt
+  sex: Male
+  speaker: papich_alt
+
+- type: ttsVoice
+  id: BebeyAlt
+  name: tts-voice-name-bebey-alt
+  sex: Male
+  speaker: bebey_alt
+
+- type: ttsVoice
+  id: GladosAlt
+  name: tts-voice-name-glados-alt
+  sex: Female
+  speaker: glados_alt
+
+- type: ttsVoice
+  id: Geralt
+  name: tts-voice-name-geralt
+  sex: Male
+  speaker: geralt
