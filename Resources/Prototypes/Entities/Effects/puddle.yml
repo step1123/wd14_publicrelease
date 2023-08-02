@@ -159,4 +159,5 @@
     examinable: false
   - type: ExaminableSolution
     solution: puddle
+  - type: PuddleFootPrints
   - type: BadDrink

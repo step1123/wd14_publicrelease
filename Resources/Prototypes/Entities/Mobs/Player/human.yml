@@ -32,6 +32,7 @@
   - type: NpcFactionMember
     factions:
     - NanoTrasen
+  - type: FootPrints
 
 #Syndie
 - type: entity
