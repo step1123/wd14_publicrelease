@@ -122,3 +122,12 @@
   ghostName: Central Hampter
   ghostDescription: Мур!
   size: 0.8, 0.8
+
+- type: customGhost
+  id: zmes2-ghost
+  ckey: zmes2
+  sprite: White/Ghosts/zmes2-ghost.rsi
+  alpha: 0.8
+  ghostName: Спящий
+  ghostDescription: Выглядит умиротвореным...
+  size: 0.8, 0.8
