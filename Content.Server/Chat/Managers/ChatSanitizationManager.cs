@@ -120,7 +120,7 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
 
         foreach (var (smiley, replacement) in SmileyToEmote)
         {
-            if (input.EndsWith(smiley, true, CultureInfo.InvariantCulture))
+            if (input == smiley || input.EndsWith($" {smiley}", true, CultureInfo.InvariantCulture)) // WD EDIT
             {
                 sanitized = input.Remove(input.Length - smiley.Length).TrimEnd();
                 emote = Loc.GetString(replacement, ("ent", speaker));
