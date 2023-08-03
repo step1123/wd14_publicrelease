@@ -131,3 +131,12 @@
   ghostName: Спящий
   ghostDescription: Выглядит умиротвореным...
   size: 0.8, 0.8
+
+- type: customGhost
+  id: hitpanda-ghost
+  ckey: hitpanda
+  sprite: White/Ghosts/hitpanda_ghost.rsi
+  alpha: 0.8
+  ghostName: Панда
+  ghostDescription: Полыхает...
+  size: 1, 1
