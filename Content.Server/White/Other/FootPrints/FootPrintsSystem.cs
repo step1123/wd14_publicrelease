@@ -32,13 +32,13 @@ public sealed class FootPrintsSystem : EntitySystem
 
         foreach (var comp in EntityManager.EntityQuery<FootPrintsComponent>())
         {
+            if (comp.PrintsColor.A <= 0f)
+                continue;
+
             if (!TryComp<TransformComponent>(comp.Owner, out var transform))
                 continue;
 
             if (!TryComp<MobThresholdsComponent>(comp.Owner, out var mobThreshHolds))
-                continue;
-
-            if (comp.PrintsColor.A <= 0f)
                 continue;
 
             var dragging = mobThreshHolds.CurrentThresholdState is MobState.Critical or MobState.Dead;

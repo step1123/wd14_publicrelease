@@ -28,10 +28,10 @@ public sealed class FootPrintsComponent : Component
         };
 
     [ViewVariables(VVAccess.ReadWrite), DataField("offsetCenter")]
-    public Vector2 OffsetCenter = new Vector2(-0.5f, -1f);
+    public Vector2 OffsetCenter = new(-0.5f, -1f);
 
     [ViewVariables(VVAccess.ReadWrite), DataField("offsetPrint")]
-    public Vector2 OffsetPrint = new Vector2(0.1f, 0f);
+    public Vector2 OffsetPrint = new(0.1f, 0f);
 
     [ViewVariables(VVAccess.ReadOnly), DataField("color")]
     public Color PrintsColor = Color.FromHex("#00000000");
@@ -49,9 +49,6 @@ public sealed class FootPrintsComponent : Component
 
     [ViewVariables(VVAccess.ReadWrite), DataField("colorReduceAlpha")]
     public float ColorReduceAlpha = 0.15f;
-
-    [ViewVariables(VVAccess.ReadWrite), DataField("colorQuantityMax")]
-    public float ColorQuantityMax = 1f;
 }
 
 
