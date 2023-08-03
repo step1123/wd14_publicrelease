@@ -1,6 +1,7 @@
 default-program-name = Программа
 notekeeper-program-name = Заметки
-net-probe-program-name = NetProbe
+news-read-program-name = Новости станции
+net-probe-program-name = Сетевой зонд
 net-probe-scan = Просканирован { $device }!
 net-probe-label-name = Название
 net-probe-label-address = Адрес

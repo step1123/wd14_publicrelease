@@ -22,6 +22,7 @@ rcd-component-examine-detail-count =
 # Shown when changing RCD Mode
 rcd-component-change-mode = РЦД переключён в режим { $mode }.
 rcd-component-no-ammo-message = В РЦД закончились заряды!
+rcd-component-tile-indestructible-message = Эта плитка не может быть уничтожена!
 rcd-component-tile-obstructed-message = Этот тайл заблокирован!
 rcd-component-deconstruct-target-not-on-whitelist-message = Вы не можете это деконструировать!
 rcd-component-cannot-build-floor-tile-not-empty-message = Пол можно построить только в космосе!

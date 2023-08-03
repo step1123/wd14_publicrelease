@@ -32,5 +32,7 @@ artifact-trigger-hint-magnet = Магнитные волны
 artifact-trigger-hint-death = Эссенция жизни
 artifact-trigger-hint-radiation = Радиация
 artifact-trigger-hint-pressure = Экстремальное давление
+artifact-trigger-hint-regular-gases = Стандартные атмосферные газы
+artifact-trigger-hint-plasma = Газовая плазма
 artifact-trigger-hint-gas = Газ
 artifact-trigger-hint-land = Активное замедление

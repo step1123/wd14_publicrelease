@@ -12,6 +12,7 @@ salvage-expedition-window-hostiles = Враги:
 salvage-expedition-window-duration = Продолжительность:
 salvage-expedition-window-biome = Биом:
 salvage-expedition-window-modifiers = Модификаторы:
+salvage-expedition-window-rewards = Награды:
 salvage-expedition-window-loot = Добыча:
 salvage-expedition-window-none = Н/А
 salvage-expedition-window-claimed = Получено
@@ -39,5 +40,6 @@ salvage-expedition-not-all-present = Не все утилизаторы нахо
 # Runner
 salvage-expedition-announcement-countdown-minutes = { $duration } минут осталось до завершения экспедиции.
 salvage-expedition-announcement-countdown-seconds = { $duration } секунд осталось до завершения экспедиции.
+salvage-expedition-reward-description = Награда за выполнение миссии
 salvage-expedition-announcement-dungeon = Подземелье расположено на { $direction }.
 salvage-expedition-completed = Экспедиция завершена.

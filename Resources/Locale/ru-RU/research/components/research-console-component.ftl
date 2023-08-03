@@ -14,6 +14,7 @@ research-console-cost = Стоимость: [color=orchid]{ $amount }[/color]
 research-console-unlocks-list-start = Разблокирует:
 research-console-unlocks-list-entry = - [color=yellow]{ $name }[/color]
 research-console-unlocks-list-entry-generic = - [color=green]{ $text }[/color]
+research-console-no-access-popup = Нет доступа!
 research-console-menu-research-points-text = Очки исследований: { $points }
 research-console-menu-points-per-second-text = Очков в секунду: { $pointsPerSecond }
 research-console-menu-server-selection-button = Список серверов

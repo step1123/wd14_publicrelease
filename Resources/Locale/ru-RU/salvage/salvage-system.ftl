@@ -18,3 +18,4 @@ salvage-system-magnet-examined-active =
     }
 salvage-system-magnet-examined-releasing = Магнит перестаёт удерживать обломки.
 salvage-system-magnet-examined-cooling-down = Магнит остывает.
+salvage-system-magnet-delay-upgrade = Задержка присоединения/перезарядки

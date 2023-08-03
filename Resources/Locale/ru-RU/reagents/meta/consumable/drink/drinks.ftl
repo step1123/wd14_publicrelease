@@ -54,5 +54,7 @@ reagent-name-kvass = квас
 reagent-desc-kvass = Прохладный освежающий напиток с привкусом социализма.
 reagent-name-the-martinez = мартинез
 reagent-desc-the-martinez = Легенда о киберпанке. Запомненный выпивкой, забытый пьяницей.
+reagent-name-white-gilgamesh = белый гильгамеш
+reagent-desc-white-gilgamesh = Отвратительная смесь молока и пива. Заставляет вас чувствовать, что вы сделаны из дерева.
 reagent-name-posca = поска
 reagent-desc-posca = Напиток бедных воинов из забытой эпохи.

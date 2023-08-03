@@ -16,3 +16,5 @@ tool-quality-sawing-name = Отпиливание
 tool-quality-sawing-tool-name = Пила
 tool-quality-honking-name = Хонк
 tool-quality-honking-tool-name = Велосипедный гудок
+tool-quality-woodcutting-name = Резьба по дереву
+tool-quality-woodcutting-tool-name = Топор

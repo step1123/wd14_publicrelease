@@ -172,6 +172,7 @@ flavor-complex-coffee-liquor = как крепкий, горький кофе
 flavor-complex-whiskey = как патока
 flavor-complex-shitty-wine = как виноградная кожура
 flavor-complex-iced-tea = как холодный чай
+flavor-complex-champagne = как свежеиспеченный хлеб
 flavor-complex-coffee = как кофе
 flavor-complex-milk = как молоко
 flavor-complex-tea = как чай
@@ -201,6 +202,7 @@ flavor-complex-screwdriver = как крепкий апельсиновый со
 
 flavor-complex-themartinez = как фиалки и лимонная водка
 flavor-complex-cogchamp = как медь
+flavor-complex-white-gilgamesh = как слегка газированные сливки
 flavor-complex-antifreeze = как что-то тёплое
 flavor-complex-pilk = как сладкое молоко
 
