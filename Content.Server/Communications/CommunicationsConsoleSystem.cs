@@ -41,7 +41,7 @@ namespace Content.Server.Communications
         [Dependency] private readonly IAdminLogManager _adminLogger = default!;
         [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
 
-        private const int MaxMessageLength = 256;
+        private const int MaxMessageLength = 1024; // WD EDIT
         private const int MaxMessageNewlines = 2;
         private const float UIUpdateInterval = 5.0f;
 
