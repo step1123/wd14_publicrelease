@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server.Atmos.Components;
 using Content.Server.Decals;
 using Content.Shared.Inventory;
@@ -15,10 +16,14 @@ public sealed class FootPrintsSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
 
+    private List<KeyValuePair<EntityUid, uint>> _storedDecals = new();
+    private const int MaxStoredDecals = 1000 ;
+
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<FootPrintsComponent, ComponentStartup>(OnStartupComponent);
+        SubscribeLocalEvent<FootPrintsComponent, MoveEvent>(OnMove);
     }
 
     private void OnStartupComponent(EntityUid uid, FootPrintsComponent comp, ComponentStartup args)
@@ -26,39 +31,52 @@ public sealed class FootPrintsSystem : EntitySystem
         comp.StepSize += _random.NextFloat(-0.05f, 0.05f);
     }
 
-    public override void Update(float frameTime)
+    private void OnMove(EntityUid uid, FootPrintsComponent comp, ref MoveEvent args)
     {
-        base.Update(frameTime);
+        if (comp.PrintsColor.A <= 0f)
+            return;
 
-        foreach (var comp in EntityManager.EntityQuery<FootPrintsComponent>())
+        if (!TryComp<TransformComponent>(comp.Owner, out var transform))
+            return;
+
+        if (!TryComp<MobThresholdsComponent>(comp.Owner, out var mobThreshHolds))
+            return;
+
+        var dragging = mobThreshHolds.CurrentThresholdState is MobState.Critical or MobState.Dead;
+        var distance = (transform.LocalPosition - comp.StepPos).Length();
+        var stepSize = dragging ? comp.DragSize : comp.StepSize;
+
+        if (distance > stepSize)
         {
-            if (comp.PrintsColor.A <= 0f)
-                continue;
+            comp.RightStep = !comp.RightStep;
 
-            if (!TryComp<TransformComponent>(comp.Owner, out var transform))
-                continue;
-
-            if (!TryComp<MobThresholdsComponent>(comp.Owner, out var mobThreshHolds))
-                continue;
-
-            var dragging = mobThreshHolds.CurrentThresholdState is MobState.Critical or MobState.Dead;
-            var distance = (transform.LocalPosition - comp.StepPos).Length();
-            var stepSize = dragging ? comp.DragSize : comp.StepSize;
-
-            if (distance > stepSize)
+            if (_storedDecals.Count > MaxStoredDecals)
             {
-                comp.RightStep = !comp.RightStep;
-
-                _decals.TryAddDecal(
-                    PickPrint(comp, dragging),
-                    CalcCoords(comp, transform, dragging),
-                    out _, comp.PrintsColor,
-                    dragging ? (transform.LocalPosition - comp.StepPos).ToAngle() + Angle.FromDegrees(-90f) : transform.LocalRotation + Angle.FromDegrees(180f),
-                    0, true);
-
-                comp.PrintsColor = comp.PrintsColor.WithAlpha(ReduceAlpha(comp.PrintsColor.A, comp.ColorReduceAlpha));
-                comp.StepPos = transform.LocalPosition;
+                for (var i = 0; i < 1; i++)
+                {
+                    var decalToRemove = _storedDecals[i];
+                    if (!_decals.RemoveDecal(decalToRemove.Key, decalToRemove.Value))
+                    {
+                        var randomDecalIndex = _random.Next(_storedDecals.Count);
+                        var randomDecal = _storedDecals[randomDecalIndex];
+                        _decals.RemoveDecal(randomDecal.Key, randomDecal.Value);
+                    }
+                }
+                _storedDecals = _storedDecals.Skip(1).ToList();
             }
+
+            _decals.TryAddDecal(
+                PickPrint(comp, dragging),
+                CalcCoords(comp, transform, dragging),
+                out var decalId, comp.PrintsColor,
+                dragging ? (transform.LocalPosition - comp.StepPos).ToAngle() + Angle.FromDegrees(-90f) : transform.LocalRotation + Angle.FromDegrees(180f),
+                0, true);
+
+            if (transform.GridUid != null)
+                _storedDecals.Add(new KeyValuePair<EntityUid, uint>(transform.GridUid.Value, decalId));
+
+            comp.PrintsColor = comp.PrintsColor.WithAlpha(ReduceAlpha(comp.PrintsColor.A, comp.ColorReduceAlpha));
+            comp.StepPos = transform.LocalPosition;
         }
     }
 
