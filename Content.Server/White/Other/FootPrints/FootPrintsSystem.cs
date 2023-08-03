@@ -17,7 +17,8 @@ public sealed class FootPrintsSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
 
     private List<KeyValuePair<EntityUid, uint>> _storedDecals = new();
-    private const int MaxStoredDecals = 1000 ;
+
+    private const int MaxStoredDecals = 750;
 
     public override void Initialize()
     {
@@ -50,19 +51,12 @@ public sealed class FootPrintsSystem : EntitySystem
         {
             comp.RightStep = !comp.RightStep;
 
+            CheckAndRemoveInvalidDecals();
+
             if (_storedDecals.Count > MaxStoredDecals)
             {
-                for (var i = 0; i < 1; i++)
-                {
-                    var decalToRemove = _storedDecals[i];
-                    if (!_decals.RemoveDecal(decalToRemove.Key, decalToRemove.Value))
-                    {
-                        var randomDecalIndex = _random.Next(_storedDecals.Count);
-                        var randomDecal = _storedDecals[randomDecalIndex];
-                        _decals.RemoveDecal(randomDecal.Key, randomDecal.Value);
-                    }
-                }
-                _storedDecals = _storedDecals.Skip(1).ToList();
+                var excessDecals = _storedDecals.Count - MaxStoredDecals;
+                RemoveExcessDecals(excessDecals);
             }
 
             _decals.TryAddDecal(
@@ -124,5 +118,23 @@ public sealed class FootPrintsSystem : EntitySystem
         }
 
         return alpha;
+    }
+
+    private void CheckAndRemoveInvalidDecals()
+    {
+        _storedDecals.RemoveAll(decal => !_decals.DoesDecalExist(decal.Key, decal.Value));
+    }
+
+    private void RemoveExcessDecals(int excessDecals)
+    {
+        // Ну а вдруг каким-то хуем так получилось..
+
+        for (var i = 0; i < excessDecals; i++)
+        {
+            var decalToRemove = _storedDecals[i];
+            _decals.RemoveDecal(decalToRemove.Key, decalToRemove.Value);
+        }
+
+        _storedDecals = _storedDecals.Skip(excessDecals).ToList();
     }
 }

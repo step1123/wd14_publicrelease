@@ -525,5 +525,14 @@ namespace Content.Server.Decals
             ReturnToPool(updatedChunks);
             ReturnToPool(staleChunks);
         }
+
+        public bool DoesDecalExist(EntityUid gridId, uint decalId, DecalGridComponent? component = null)
+        {
+            if (!Resolve(gridId, ref component))
+                return false;
+
+            return component.DecalIndex.ContainsKey(decalId);
+        }
+
     }
 }
