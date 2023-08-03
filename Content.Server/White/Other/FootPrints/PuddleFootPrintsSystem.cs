@@ -12,11 +12,11 @@ public sealed class PuddleFootPrintsSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SolutionContainerSystem _solutionContainerSystem = default!;
 
-    public override void Initialize()
+   /* public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<PuddleFootPrintsComponent, EndCollideEvent>(OnStepTrigger);
-    }
+    } */
 
     private void OnStepTrigger(EntityUid uid, PuddleFootPrintsComponent comp, ref EndCollideEvent args)
     {
