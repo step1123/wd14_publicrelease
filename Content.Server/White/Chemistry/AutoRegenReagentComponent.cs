@@ -21,6 +21,6 @@ namespace Content.Server.White.Chemistry
         public float Accumulator = 0f;
 
         [DataField("unitsPerSecond")]
-        public float unitsPerSecond = 0.2f;
+        public float unitsPerSecond = 5f;
     }
 }

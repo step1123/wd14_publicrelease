@@ -20,6 +20,6 @@ public sealed class CyborgReagentRegenSystem : EntitySystem
 
     private void OnReagentAdded(EntityUid uid, CyborgInstrumentComponent component, ReagentAddedEvent args)
     {
-        _cyborg.TryChangeEnergy(component.CyborgUid, -args.Accepted * 10);
+        _cyborg.TryChangeEnergy(component.CyborgUid, - args.Accepted / 5);
     }
 }

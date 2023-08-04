@@ -55,3 +55,13 @@ ent-PositronicBrain = Позитронный мозг
     .desc = Хранит в себе некий разум.
 ent-ManMachineInterface = Нейро-компьютерный интерфейс
     .desc = Данным интерфейсом вы можете подключить обычный мозг к роботизированным штучкам!
+
+medical-borg = Медицинский киборг
+security-borg = Киборг службы безопасности
+engineer-borg = Инженерный киборг
+neko-borg = Сервисный киборг
+
+ent-DrinkShakerBorg = Шейкер
+ .desc = Если было много пива
+
+job-supervisors-human = своим законам

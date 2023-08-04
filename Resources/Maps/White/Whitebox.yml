@@ -10570,7 +10570,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 21828
       type: Docking
-    - SecondsUntilStateChange: -36315.56
+    - SecondsUntilStateChange: -36390.996
       changeAirtight: False
       state: Opening
       type: Door
@@ -10618,7 +10618,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 562
       type: Docking
-    - SecondsUntilStateChange: -36315.56
+    - SecondsUntilStateChange: -36390.996
       changeAirtight: False
       state: Opening
       type: Door
@@ -151786,6 +151786,54 @@ entities:
   - uid: 26580
     components:
     - pos: 31.5,-20.5
+      parent: 8364
+      type: Transform
+- proto: SpawnPointPlayerCyborgEng
+  entities:
+  - uid: 26635
+    components:
+    - pos: -8.5,-62.5
+      parent: 8364
+      type: Transform
+  - uid: 26636
+    components:
+    - pos: -8.5,-63.5
+      parent: 8364
+      type: Transform
+- proto: SpawnPointPlayerCyborgMedical
+  entities:
+  - uid: 26633
+    components:
+    - pos: 33.5,-23.5
+      parent: 8364
+      type: Transform
+  - uid: 26634
+    components:
+    - pos: 27.5,-23.5
+      parent: 8364
+      type: Transform
+- proto: SpawnPointPlayerCyborgNeko
+  entities:
+  - uid: 26631
+    components:
+    - pos: 31.5,-10.5
+      parent: 8364
+      type: Transform
+  - uid: 26632
+    components:
+    - pos: 30.5,-10.5
+      parent: 8364
+      type: Transform
+- proto: SpawnPointPlayerCyborgSecurity
+  entities:
+  - uid: 26629
+    components:
+    - pos: 4.5,28.5
+      parent: 8364
+      type: Transform
+  - uid: 26630
+    components:
+    - pos: 3.5,28.5
       parent: 8364
       type: Transform
 - proto: SpawnPointPsychologist

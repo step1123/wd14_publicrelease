@@ -133328,6 +133328,54 @@ entities:
     - pos: 48.5,-17.5
       parent: 60
       type: Transform
+- proto: SpawnPointPlayerCyborgEng
+  entities:
+  - uid: 14892
+    components:
+    - pos: 1.5,17.5
+      parent: 60
+      type: Transform
+  - uid: 14893
+    components:
+    - pos: -0.5,17.5
+      parent: 60
+      type: Transform
+- proto: SpawnPointPlayerCyborgMedical
+  entities:
+  - uid: 15027
+    components:
+    - pos: 45.5,-19.5
+      parent: 60
+      type: Transform
+  - uid: 15028
+    components:
+    - pos: 45.5,-22.5
+      parent: 60
+      type: Transform
+- proto: SpawnPointPlayerCyborgNeko
+  entities:
+  - uid: 15005
+    components:
+    - pos: 17.5,-28.5
+      parent: 60
+      type: Transform
+  - uid: 15014
+    components:
+    - pos: 20.5,-31.5
+      parent: 60
+      type: Transform
+- proto: SpawnPointPlayerCyborgSecurity
+  entities:
+  - uid: 14939
+    components:
+    - pos: -28.5,-4.5
+      parent: 60
+      type: Transform
+  - uid: 14999
+    components:
+    - pos: -24.5,-4.5
+      parent: 60
+      type: Transform
 - proto: SpawnPointQuartermaster
   entities:
   - uid: 13101

@@ -1,0 +1,9 @@
+- type: department
+  id: Silicon
+  description: department-Silicon-description
+  color: "#A46106"
+  roles:
+    - MedicalCyborg
+    - SecurityCyborg
+    - EngineerCyborg
+    - NekoCyborg

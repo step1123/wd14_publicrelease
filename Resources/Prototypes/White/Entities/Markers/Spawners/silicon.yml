@@ -1,0 +1,139 @@
+# SPAWNERS
+- type: entity
+  name: PlayerCyborgMedical Spawner
+  id: SpawnMobPlayerCyborgMedical
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: green
+        - sprite: White/Mobs/Player/Borgs/cyborg_medical.rsi
+          state: robot
+    - type: ConditionalSpawner
+      prototypes:
+        - PlayerCyborgMedicalBattery
+
+- type: entity
+  name: PlayerCyborgSecurity Spawner
+  id: SpawnMobPlayerCyborgSecurity
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: green
+        - sprite: White/Mobs/Player/Borgs/cyborg_sec.rsi
+          state: robot
+    - type: ConditionalSpawner
+      prototypes:
+        - PlayerCyborgSecurityBattery
+
+- type: entity
+  name: PlayerCyborgEng Spawner
+  id: SpawnMobPlayerCyborgEng
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: green
+        - sprite: White/Mobs/Player/Borgs/cyborg_eng.rsi
+          state: robot
+    - type: ConditionalSpawner
+      prototypes:
+        - PlayerCyborgEngBattery
+
+- type: entity
+  name: PlayerCyborgSynd Spawner
+  id: SpawnMobPlayerCyborgSynd
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: green
+        - sprite: White/Mobs/Player/Borgs/cyborg_synd.rsi
+          state: robot
+    - type: ConditionalSpawner
+      prototypes:
+        - PlayerCyborgSyndBattery
+
+- type: entity
+  name: PlayerCyborgNeko Spawner
+  id: SpawnMobPlayerCyborgNeko
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: green
+        - sprite: White/Mobs/Player/Borgs/cyborg_neko.rsi
+          state: robot
+    - type: ConditionalSpawner
+      prototypes:
+        - PlayerCyborgNekoBattery
+
+- type: entity
+  name: PlayerCyborgStart Spawner
+  id: SpawnMobPlayerCyborgStart
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: green
+        - sprite: White/Mobs/Player/Borgs/cyborg.rsi
+          state: robot
+    - type: ConditionalSpawner
+      prototypes:
+        - PlayerCyborgStartBattery
+
+
+# job
+- type: entity
+  id: SpawnPointPlayerCyborgMedical
+  parent: SpawnPointJobBase
+  name: job spawner PlayerCyborgMedical
+  components:
+    - type: SpawnPoint
+      job_id: MedicalCyborg
+    - type: Sprite
+      layers:
+        - state: green
+        - sprite: White/Mobs/Player/Borgs/cyborg_medical.rsi
+          state: robot
+
+
+- type: entity
+  id: SpawnPointPlayerCyborgSecurity
+  parent: SpawnPointJobBase
+  name: job spawner PlayerCyborgSecurity
+  components:
+    - type: SpawnPoint
+      job_id: SecurityCyborg
+    - type: Sprite
+      layers:
+        - state: green
+        - sprite: White/Mobs/Player/Borgs/cyborg_sec.rsi
+          state: robot
+
+- type: entity
+  id: SpawnPointPlayerCyborgEng
+  parent: SpawnPointJobBase
+  name: job spawner PlayerPlayerCyborgEng
+  components:
+    - type: SpawnPoint
+      job_id: EngineerCyborg
+    - type: Sprite
+      layers:
+        - state: green
+        - sprite: White/Mobs/Player/Borgs/cyborg_eng.rsi
+          state: robot
+
+- type: entity
+  id: SpawnPointPlayerCyborgNeko
+  parent: SpawnPointJobBase
+  name: job spawner PlayerCyborgNeko
+  components:
+    - type: SpawnPoint
+      job_id: NekoCyborg
+    - type: Sprite
+      layers:
+        - state: green
+        - sprite: White/Mobs/Player/Borgs/cyborg_neko.rsi
+          state: robot

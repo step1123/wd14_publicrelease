@@ -251,7 +251,7 @@
           - AdvMopItem
           - TrashBag
           - KitchenKnife
-          - DrinkShaker
+          - DrinkShakerBorg
           - FireExtinguisherBorg
 
 - type: entity

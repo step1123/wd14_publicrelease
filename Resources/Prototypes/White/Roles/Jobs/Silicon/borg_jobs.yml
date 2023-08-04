@@ -1,47 +1,139 @@
 - type: job
   id: MedicalCyborg
-  name: MedicalCyborg
+  name: medical-borg
   description: MedicalCyborg
   playTimeTracker: JobPassenger
+  startingGear: MedicalCyborgGear
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 36000 #10 hrs
-  supervisors: job-supervisors-all
+  icon: "MedicalDoctor"
+  supervisors: job-supervisors-human
   jobEntity: PlayerCyborgMedicalBattery
   canBeAntag: false
 
 - type: job
   id: SecurityCyborg
-  name: SecurityCyborg
+  name: security-borg
   description: SecurityCyborg
   playTimeTracker: JobPassenger
+  startingGear: SecurityCyborgGear
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 36000 #10 hrs
-  supervisors: job-supervisors-all
+  supervisors: job-supervisors-human
   jobEntity: PlayerCyborgSecurityBattery
   canBeAntag: false
+  icon: SecurityOfficer
 
 - type: job
   id: EngineerCyborg
-  name: EngineerCyborg
+  name: engineer-borg
   description: EngineerCyborg
   playTimeTracker: JobPassenger
+  startingGear: EngineerCyborgGear
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 36000 #10 hrs
-  supervisors: job-supervisors-all
+  supervisors: job-supervisors-human
   jobEntity: PlayerCyborgEngBattery
   canBeAntag: false
+  icon: StationEngineer
 
 - type: job
   id: NekoCyborg
-  name: NekoCyborg
+  name: neko-borg
   description: NekoCyborg
   playTimeTracker: JobPassenger
+  startingGear: NekoCyborgGear
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 36000 #10 hrs
-  supervisors: job-supervisors-all
+      time: 10000
+  supervisors: job-supervisors-human
   jobEntity: PlayerCyborgNekoBattery
   canBeAntag: false
+  icon: Bartender
+
+
+# ёбанный костыль! Чтобы борги отображались при выборе профессии..
+
+- type: startingGear
+  id: MedicalCyborgGear
+  equipment:
+    outerClothing: ClothingIconMedicalCyborg
+
+- type: startingGear
+  id: SecurityCyborgGear
+  equipment:
+    outerClothing: ClothingIconSecurityCyborgGear
+
+- type: startingGear
+  id: EngineerCyborgGear
+  equipment:
+    outerClothing: ClothingIconEngineerCyborgGear
+
+- type: startingGear
+  id: NekoCyborgGear
+  equipment:
+    outerClothing: ClothingIconNekoCyborgGear
+
+
+- type: entity
+  parent: ClothingOuterBaseLarge
+  id: ClothingIconMedicalCyborg
+  name: meow
+  description: mew
+  components:
+    - type: HumanHide
+    - type: Sprite
+      sprite: White/Mobs/Player/Borgs/cyborg_medical.rsi
+      layers:
+        - state: robot
+    - type: Clothing
+      sprite: White/Mobs/Player/Borgs/cyborg_medical.rsi
+      equippedState: robot
+
+- type: entity
+  parent: ClothingOuterBaseLarge
+  id: ClothingIconSecurityCyborgGear
+  name: meow
+  description: mew
+  components:
+    - type: HumanHide
+    - type: Sprite
+      sprite: White/Mobs/Player/Borgs/cyborg_sec.rsi
+      layers:
+        - state: robot
+    - type: Clothing
+      sprite: White/Mobs/Player/Borgs/cyborg_sec.rsi
+      equippedState: robot
+
+- type: entity
+  parent: ClothingOuterBaseLarge
+  id: ClothingIconEngineerCyborgGear
+  name: meow
+  description: mew
+  components:
+    - type: HumanHide
+    - type: Sprite
+      sprite: White/Mobs/Player/Borgs/cyborg_eng.rsi
+      layers:
+        - state: robot
+    - type: Clothing
+      sprite: White/Mobs/Player/Borgs/cyborg_eng.rsi
+      equippedState: robot
+
+- type: entity
+  parent: ClothingOuterBaseLarge
+  id: ClothingIconNekoCyborgGear
+  name: meow
+  description: mew
+  components:
+    - type: HumanHide
+    - type: Sprite
+      sprite: White/Mobs/Player/Borgs/cyborg_neko.rsi
+      layers:
+        - state: robot
+    - type: Clothing
+      sprite: White/Mobs/Player/Borgs/cyborg_neko.rsi
+      equippedState: robot
