@@ -100,6 +100,18 @@
       clothingPrototype: ClothingHeadHelmetHardsuitWizard
 
 
+
+# KILL ME PLEASE
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingSerbwoNeckFluff
+  name: плащ гильдии
+  description: излучает ауру спокойствия и умиротворения!
+  components:
+    - type: Sprite
+      sprite: White/Fluff/serbwo/admiralcloak.rsi
+
 - type: loadout
   id: CapLoadoutSO
   entity: ClothingOuterHardsuitERTLeaderFluff
@@ -141,3 +153,9 @@
   entity: ClothingOuterSuitDeadSquadFake
   sponsorOnly: true
   whitelistJobs: [Passenger]
+
+- type: loadout
+  id: NeckLoadoutSO
+  entity: ClothingSerbwoNeckFluff
+  sponsorOnly: true
+  whitelistJobs: [Captain, HeadOfSecurity, ResearchDirector, ChiefEngineer, AtmosphericTechnician, StationEngineer, TechnicalAssistant, CargoTechnician, Quartermaster, SalvageSpecialist, ResearchAssistant, Scientist]
