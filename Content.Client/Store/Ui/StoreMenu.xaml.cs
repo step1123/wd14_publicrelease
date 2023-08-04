@@ -133,8 +133,12 @@ public sealed partial class StoreMenu : DefaultWindow
                 texture = spriteSys.Frame0(action.Icon);
         }
 
-        if (listing.SaleAmount > 0) // WD
+        // WD START
+        if (listing.SaleAmount > 0)
             listingName += $" [СКИДКА] ({listing.SaleAmount}%!)";
+        else if (listing.OldCost.Count > 0)
+            listingName += " [Скидка закончилась]";
+        // WD END
 
         var newListing = new StoreListingControl(listingName, listingDesc, GetListingPriceString(listing), canBuy, texture);
 

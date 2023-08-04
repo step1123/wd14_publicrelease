@@ -38,8 +38,10 @@ public sealed partial class StoreSystem
 
                 if (listing.Cost.Any(x => x.Value.Int() != newCost[x.Key].Int()))
                 {
+                    var key = listing.Cost.First(x => x.Value > 0).Key;
+                    listingData.OldCost = listing.Cost;
+                    listingData.SaleAmount = 100 - (newCost[key] / listing.Cost[key] * 100).Int();
                     listingData.Cost = newCost;
-                    listingData.SaleAmount = 100 - (int) MathF.Round(sale.Item1 * 100);
                     listingData.Categories = new() {sale.Item2};
                 }
             }
