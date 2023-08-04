@@ -133,7 +133,14 @@ public sealed partial class StoreMenu : DefaultWindow
                 texture = spriteSys.Frame0(action.Icon);
         }
 
+        if (listing.SaleAmount > 0) // WD
+            listingName += $" [СКИДКА] ({listing.SaleAmount}%!)";
+
         var newListing = new StoreListingControl(listingName, listingDesc, GetListingPriceString(listing), canBuy, texture);
+
+        if (listing.SaleAmount > 0) // WD
+            newListing.StoreItemBuyButton.AddStyleClass("ButtonColorRed");
+
         newListing.StoreItemBuyButton.OnButtonDown += args
             => OnListingButtonPressed?.Invoke(args, listing);
 

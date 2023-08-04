@@ -1,4 +1,6 @@
+using System.Linq;
 using Content.Server.Store.Components;
+using Content.Shared.FixedPoint;
 using Content.Shared.Store;
 
 namespace Content.Server.Store.Systems;
@@ -27,7 +29,22 @@ public sealed partial class StoreSystem
 
         foreach (var listing in allListings)
         {
-            allData.Add((ListingData) listing.Clone());
+            // WD EDIT
+            var listingData = (ListingData) listing.Clone();
+            if (_sales.TryGetValue(listing, out var sale))
+            {
+                var newCost = listing.Cost.ToDictionary(x => x.Key,
+                    x => FixedPoint2.New(Math.Max(1, (int) MathF.Round(x.Value.Float() * sale.Item1))));
+
+                if (listing.Cost.Any(x => x.Value.Int() != newCost[x.Key].Int()))
+                {
+                    listingData.Cost = newCost;
+                    listingData.SaleAmount = 100 - (int) MathF.Round(sale.Item1 * 100);
+                    listingData.Categories = new() {sale.Item2};
+                }
+            }
+            allData.Add(listingData);
+            // WD EDIT END
         }
 
         return allData;

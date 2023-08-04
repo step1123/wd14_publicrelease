@@ -2,6 +2,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Set;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
 using Content.Shared.FixedPoint;
+using Content.Shared.White.Sales;
 
 namespace Content.Shared.Store;
 
@@ -38,4 +39,7 @@ public sealed class StorePresetPrototype : IPrototype
     /// </summary>
     [DataField("currencyWhitelist", customTypeSerializer: typeof(PrototypeIdHashSetSerializer<CurrencyPrototype>))]
     public HashSet<string> CurrencyWhitelist { get; } = new();
+
+    [DataField("sales")]
+    public SalesSpecifier Sales { get; } = new(); // WD
 }

@@ -85,6 +85,13 @@ public class ListingData : IEquatable<ListingData>, ICloneable
     /// </summary>
     public int PurchaseAmount;
 
+    // WD START
+    [DataField("saleBlacklist")]
+    public bool SaleBlacklist;
+
+    public int SaleAmount;
+    // WD END
+
     public bool Equals(ListingData? listing)
     {
         if (listing == null)
@@ -136,6 +143,10 @@ public class ListingData : IEquatable<ListingData>, ICloneable
             ProductAction = ProductAction,
             ProductEvent = ProductEvent,
             PurchaseAmount = PurchaseAmount,
+            // WD START
+            SaleBlacklist = SaleBlacklist,
+            SaleAmount = SaleAmount,
+            // WD END
         };
     }
 }
