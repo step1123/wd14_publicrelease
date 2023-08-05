@@ -37,8 +37,12 @@ namespace Content.Server.Administration.Commands
                 shell.WriteLine("You can't ghost here! Could not find 'mind'");
                 return;
             }
-            
+
             var mindSystem = _entities.System<MindSystem>();
+
+            EntityCoordinates? coordinates = null;
+            if (player.AttachedEntity != null)
+                coordinates = _entities.GetComponent<TransformComponent>(player.AttachedEntity.Value).Coordinates;
 
             if (mind.VisitingEntity != default && _entities.TryGetComponent<GhostComponent>(mind.VisitingEntity, out var oldGhostComponent))
             {
@@ -50,10 +54,10 @@ namespace Content.Server.Administration.Commands
 
             var canReturn = mind.CurrentEntity != null
                             && !_entities.HasComponent<GhostComponent>(mind.CurrentEntity);
-            var coordinates = player.AttachedEntity != null
+            coordinates ??= player.AttachedEntity != null
                 ? _entities.GetComponent<TransformComponent>(player.AttachedEntity.Value).Coordinates
                 : _entities.System<GameTicker>().GetObserverSpawnPoint();
-            var ghost = SpawnGhost(coordinates, player, canReturn);
+            var ghost = SpawnGhost(coordinates.Value, player, canReturn);
             _entities.GetComponent<TransformComponent>(ghost).AttachToGridOrMap();
 
             if (canReturn)
