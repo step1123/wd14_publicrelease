@@ -218,12 +218,6 @@ public sealed class DefibrillatorSystem : EntitySystem
         }
         else
         {
-            _mobThreshold.SetAllowRevives(target, true, thresholds);
-            if (_mobState.IsDead(target, mob))
-                _damageable.TryChangeDamage(target, component.ZapHeal, true, origin: uid);
-            _mobState.ChangeMobState(target, MobState.Critical, mob, uid);
-            _mobThreshold.SetAllowRevives(target, false, thresholds);
-
             if (TryComp<MindContainerComponent>(target, out var mindComp) &&
                 mindComp.Mind?.Session is { } playerSession)
             {
@@ -235,6 +229,14 @@ public sealed class DefibrillatorSystem : EntitySystem
                         InGameICChatType.Speak, true);
                     _euiManager.OpenEui(new ReturnToBodyEui(mindComp.Mind, _mind), session);
                 }
+                else // WD EDIT
+                {
+                    _mobThreshold.SetAllowRevives(target, true, thresholds);
+                    if (_mobState.IsDead(target, mob))
+                        _damageable.TryChangeDamage(target, component.ZapHeal, true, origin: uid);
+                    _mobState.ChangeMobState(target, MobState.Critical, mob, uid);
+                    _mobThreshold.SetAllowRevives(target, false, thresholds);
+                } // WD EDIT END
             }
             else
             {
