@@ -87,7 +87,7 @@ public class ListingData : IEquatable<ListingData>, ICloneable
 
     // WD START
     [DataField("saleLimit")]
-    public int SaleLimit;
+    public int SaleLimit = 5;
 
     [DataField("saleBlacklist")]
     public bool SaleBlacklist;

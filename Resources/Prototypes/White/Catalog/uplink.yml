@@ -16,3 +16,4 @@
       blacklist:
         components:
           - SurplusBundle
+  saleLimit: 1
