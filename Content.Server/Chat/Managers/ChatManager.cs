@@ -162,7 +162,7 @@ namespace Content.Server.Chat.Managers
                 ("adminChannelName", Loc.GetString("chat-manager-admin-discord-channel-name")),
                 ("playerName", sender), ("message", FormattedMessage.EscapeText(message)));
 
-            ChatMessageToMany(ChatChannel.Admin, message, wrappedMessage, EntityUid.Invalid, false, true, admins.Select(p => p.ConnectedClient));
+            ChatMessageToMany(ChatChannel.Admin, message, wrappedMessage, EntityUid.Invalid, false, false, admins.Select(p => p.ConnectedClient));
 
             var asayEventMessage = new UtkaChatEventMessage()
             {
