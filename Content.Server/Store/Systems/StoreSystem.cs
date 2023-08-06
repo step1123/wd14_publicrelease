@@ -10,8 +10,6 @@ using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using System.Linq;
-using Content.Server.GameTicking.Events;
-using Robust.Shared.Random;
 
 namespace Content.Server.Store.Systems;
 
@@ -23,9 +21,6 @@ public sealed partial class StoreSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IRobustRandom _random = default!; // WD
-
-    private Dictionary<ListingPrototype, (float, string)> _sales = new(); // WD
 
     public override void Initialize()
     {
@@ -39,44 +34,9 @@ public sealed partial class StoreSystem : EntitySystem
         SubscribeLocalEvent<StoreComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<StoreComponent, OpenUplinkImplantEvent>(OnImplantActivate);
 
-        SubscribeLocalEvent<RoundStartingEvent>(OnRoundStart); // WD
-
         InitializeUi();
         InitializeCommand();
     }
-
-    // WD START
-    private void OnRoundStart(RoundStartingEvent ev)
-    {
-        CalculateSales();
-    }
-
-    private void CalculateSales()
-    {
-        _sales.Clear();
-        foreach (var store in _proto.EnumeratePrototypes<StorePresetPrototype>())
-        {
-            if (!store.Sales.Enabled)
-                continue;
-
-            var count = _random.Next(store.Sales.MinItems, store.Sales.MaxItems + 1);
-
-            var storeListings = _proto.EnumeratePrototypes<ListingPrototype>()
-                .Where(l => !l.SaleBlacklist && l.Cost.Any(x => x.Value > 1) && !_sales.ContainsKey(l) &&
-                            store.Categories.Overlaps(l.Categories)).OrderBy(_ => _random.Next()).Take(count)
-                .ToDictionary(l => l,
-                    _ => (GetSale(store.Sales.MinMultiplier, store.Sales.MaxMultiplier), store.Sales.SalesCategory));
-
-            _sales = _sales.Concat(storeListings).ToDictionary(x => x.Key, x => x.Value);
-        }
-    }
-
-    private float GetSale(float minMultiplier, float maxMultiplier)
-    {
-        return _random.NextFloat() * (maxMultiplier - minMultiplier) + minMultiplier;
-    }
-    // WD END
-
 
     private void OnMapInit(EntityUid uid, StoreComponent component, MapInitEvent args)
     {
@@ -219,6 +179,8 @@ public sealed partial class StoreSystem : EntitySystem
         component.Categories.UnionWith(preset.Categories);
         if (component.Balance == new Dictionary<string, FixedPoint2>() && preset.InitialBalance != null) //if we don't have a value stored, use the preset
             TryAddCurrency(preset.InitialBalance, uid, component);
+
+        ApplySales(component.Listings, preset); // WD
 
         var ui = _ui.GetUiOrNull(uid, StoreUiKey.Key);
         if (ui != null)

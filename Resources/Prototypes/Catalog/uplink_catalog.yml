@@ -120,7 +120,6 @@
     Telecrystal: 4
   categories:
   - UplinkExplosives
-  saleLimit: 3
 
 - type: listing
   id: UplinkBeeGrenade
@@ -131,7 +130,6 @@
     Telecrystal: 8
   categories:
     - UplinkExplosives
-  saleLimit: 3
 
 - type: listing
   id: UplinkExplosiveSmokeGrenade
@@ -142,7 +140,6 @@
     Telecrystal: 1
   categories:
     - UplinkExplosives
-  saleLimit: 3
 
 - type: listing
   id: UplinkExplosiveGrenadeFlash
@@ -153,7 +150,6 @@
     Telecrystal: 1
   categories:
   - UplinkExplosives
-  saleLimit: 3
 
 - type: listing
   id: UplinkSyndieMiniBomb
@@ -164,7 +160,6 @@
     Telecrystal: 6
   categories:
     - UplinkExplosives
-  saleLimit: 3
 
 - type: listing
   id: UplinkGrenadePenguin
@@ -180,7 +175,6 @@
     blacklist:
       components:
       - SurplusBundle
-  saleLimit: 3
 
 - type: listing
   id: UplinkC4
@@ -191,7 +185,6 @@
     Telecrystal: 4
   categories:
   - UplinkExplosives
-  saleLimit: 3
 
 - type: listing
   id: UplinkGrenadierRig
@@ -229,7 +222,6 @@
     Telecrystal: 3
   categories:
   - UplinkExplosives
-  saleLimit: 3
 
 - type: listing
   id: UplinkExplodingPen
@@ -241,7 +233,6 @@
     Telecrystal: 5
   categories:
   - UplinkExplosives
-  saleLimit: 3
 
 # Ammo
 
@@ -319,6 +310,7 @@
     blacklist:
       tags:
       - NukeOpsUplink
+  saleLimit: 1
 
 - type: listing
   id: UplinkHolster
@@ -404,7 +396,6 @@
     Telecrystal: 8
   categories:
   - UplinkUtility
-  saleLimit: 3
 
 - type: listing
   id: UplinkStealthBox
@@ -878,7 +869,6 @@
   - !type:BuyerJobCondition
     whitelist:
     - Chaplain
-  saleLimit: 3
 
 - type: listing
   id: uplinkRevolverCapGunFake
@@ -909,7 +899,6 @@
   - !type:BuyerJobCondition
     whitelist:
     - Clown
-  saleLimit: 3
 
 - type: listing
   id: uplinkHotPotato
@@ -927,7 +916,6 @@
     - Botanist
     - Clown
     - Mime
-  saleLimit: 3
 
 - type: listing
   id: UplinkChimpAmmo
@@ -963,7 +951,6 @@
     blacklist:
       components:
       - SurplusBundle
-  saleLimit: 3
 
 - type: listing
   id: UplinkSyndicateSpongeBox

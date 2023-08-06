@@ -20,6 +20,6 @@
     enabled: true
     minMultiplier: 0.01
     maxMultiplier: 0.99
-    minItems: 5
-    maxItems: 10
+    minItems: 3
+    maxItems: 8
     salesCategory: UplinkSales

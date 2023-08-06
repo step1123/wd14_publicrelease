@@ -2,11 +2,49 @@ using System.Linq;
 using Content.Server.Store.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.Store;
+using Robust.Shared.Random;
 
 namespace Content.Server.Store.Systems;
 
 public sealed partial class StoreSystem
 {
+    // WD START
+    [Dependency] private readonly IRobustRandom _random = default!; // WD
+
+    private void ApplySales(IEnumerable<ListingData> listings, StorePresetPrototype store)
+    {
+        if (!store.Sales.Enabled)
+            return;
+
+        var count = _random.Next(store.Sales.MinItems, store.Sales.MaxItems + 1);
+
+        listings = listings
+            .Where(l => !l.SaleBlacklist && l.Cost.Any(x => x.Value > 1) && store.Categories.Overlaps(l.Categories))
+            .OrderBy(_ => _random.Next()).Take(count).ToList();
+
+        foreach (var listing in listings)
+        {
+            var sale = GetSale(store.Sales.MinMultiplier, store.Sales.MaxMultiplier);
+            var newCost = listing.Cost.ToDictionary(x => x.Key,
+                x => FixedPoint2.New(Math.Max(1, (int) MathF.Round(x.Value.Float() * sale))));
+
+            if (listing.Cost.All(x => x.Value.Int() == newCost[x.Key].Int()))
+                continue;
+
+            var key = listing.Cost.First(x => x.Value > 0).Key;
+            listing.OldCost = listing.Cost;
+            listing.SaleAmount = 100 - (newCost[key] / listing.Cost[key] * 100).Int();
+            listing.Cost = newCost;
+            listing.Categories = new() {store.Sales.SalesCategory};
+        }
+    }
+
+    private float GetSale(float minMultiplier, float maxMultiplier)
+    {
+        return _random.NextFloat() * (maxMultiplier - minMultiplier) + minMultiplier;
+    }
+    // WD END
+
     /// <summary>
     /// Refreshes all listings on a store.
     /// Do not use if you don't know what you're doing.
@@ -29,24 +67,7 @@ public sealed partial class StoreSystem
 
         foreach (var listing in allListings)
         {
-            // WD EDIT
-            var listingData = (ListingData) listing.Clone();
-            if (_sales.TryGetValue(listing, out var sale))
-            {
-                var newCost = listing.Cost.ToDictionary(x => x.Key,
-                    x => FixedPoint2.New(Math.Max(1, (int) MathF.Round(x.Value.Float() * sale.Item1))));
-
-                if (listing.Cost.Any(x => x.Value.Int() != newCost[x.Key].Int()))
-                {
-                    var key = listing.Cost.First(x => x.Value > 0).Key;
-                    listingData.OldCost = listing.Cost;
-                    listingData.SaleAmount = 100 - (newCost[key] / listing.Cost[key] * 100).Int();
-                    listingData.Cost = newCost;
-                    listingData.Categories = new() {sale.Item2};
-                }
-            }
-            allData.Add(listingData);
-            // WD EDIT END
+            allData.Add((ListingData) listing.Clone());
         }
 
         return allData;
