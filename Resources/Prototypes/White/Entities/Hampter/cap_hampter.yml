@@ -1,0 +1,21 @@
+- type: entity
+  name: Капитан
+  parent: BasePlushie
+  id: HampterCap
+  description: Я капитан!
+  components:
+  - type: Sprite
+    sprite: Objects/Hampter/caphampter.rsi
+    state: icon
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Items/Toys/mousesqueek.ogg

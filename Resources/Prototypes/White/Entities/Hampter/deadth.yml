@@ -1,0 +1,21 @@
+- type: entity
+  name: Смерть!
+  parent: BasePlushie
+  id: DeadthHampter
+  description: Я сама смерть!
+  components:
+  - type: Sprite
+    sprite: Objects/Hampter/deadth.rsi
+    state: icon
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Items/Toys/mousesqueek.ogg

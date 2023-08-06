@@ -1,0 +1,21 @@
+- type: entity
+  name: Адский
+  parent: BasePlushie
+  id: Hampterhell
+  description: Палка
+  components:
+    - type: Sprite
+      sprite: Objects/Hampter/hamphell.rsi
+      state: icon
+    - type: EmitSoundOnUse
+      sound:
+        path: /Audio/Items/Toys/mousesqueek.ogg
+    - type: EmitSoundOnLand
+      sound:
+        path: /Audio/Items/Toys/mousesqueek.ogg
+    - type: EmitSoundOnActivate
+      sound:
+        path: /Audio/Items/Toys/mousesqueek.ogg
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/Items/Toys/mousesqueek.ogg

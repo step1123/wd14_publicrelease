@@ -148,6 +148,32 @@
   - type: EyeProtection
     protectionTime: 5
 
+- type: entity
+  parent: ClothingEyesBase
+  id: ClothingEyesGlassesMercenaryMeaty
+  name: mercenary glasses
+  description: Glasses made for combat.
+  components:
+    - type: Sprite
+      sprite: Clothing/Eyes/Glasses/mercglasses.rsi
+    - type: Clothing
+      sprite: Clothing/Eyes/Glasses/mercglasses.rsi
+
+- type: entity
+  parent: ClothingEyesBase
+  id: ClothingEyesGlassesSunglassesMeaty
+  name: sun glasses
+  description: Useful both for security and cargonia.
+  components:
+    - type: Sprite
+      sprite: Clothing/Eyes/Glasses/sunglasses.rsi
+    - type: Clothing
+      sprite: Clothing/Eyes/Glasses/sunglasses.rsi
+    - type: Tag
+      tags:
+        - HamsterWearable
+        - WhitelistChameleon
+
 #Make a scanner category when these actually function and we get the trayson
 - type: entity
   parent: ClothingEyesBase

@@ -1,0 +1,21 @@
+- type: entity
+  name: Вирусолог
+  parent: BasePlushie
+  id: VirusologHampter
+  description: Болезни? Не слышал!
+  components:
+    - type: Sprite
+      sprite: Objects/Hampter/virusolog.rsi
+      state: icon
+    - type: EmitSoundOnUse
+      sound:
+        path: /Audio/Items/Toys/mousesqueek.ogg
+    - type: EmitSoundOnLand
+      sound:
+        path: /Audio/Items/Toys/mousesqueek.ogg
+    - type: EmitSoundOnActivate
+      sound:
+        path: /Audio/Items/Toys/mousesqueek.ogg
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/Items/Toys/mousesqueek.ogg

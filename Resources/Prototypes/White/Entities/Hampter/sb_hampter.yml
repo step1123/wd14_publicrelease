@@ -1,0 +1,21 @@
+- type: entity
+  name: Офицер Хамптер
+  parent: BasePlushie
+  id: SbHampter
+  description: Люблю бить клоунов!
+  components:
+  - type: Sprite
+    sprite: Objects/Hampter/sbhampter.rsi
+    state: icon
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Items/Toys/mousesqueek.ogg

@@ -1,0 +1,21 @@
+- type: entity
+  name: Курочка из КФС
+  parent: BasePlushie
+  id: HampterKrah
+  description: Люблю курочку из кфс!
+  components:
+  - type: Sprite
+    sprite: Objects/Hampter/Krah.rsi
+    state: icon
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Items/Toys/mousesqueek.ogg

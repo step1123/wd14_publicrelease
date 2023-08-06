@@ -1,0 +1,21 @@
+- type: entity
+  name: Ядерный хомяк
+  parent: BasePlushie
+  id: Nukehampter
+  description: Дайте мне уже пульт от ядерки!
+  components:
+  - type: Sprite
+    sprite: Objects/Hampter/nukehampter.rsi
+    state: icon
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Items/Toys/mousesqueek.ogg

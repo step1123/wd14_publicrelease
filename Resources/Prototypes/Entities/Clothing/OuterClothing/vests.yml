@@ -40,6 +40,18 @@
   - type: ExplosionResistance
     damageCoefficient: 0.9
 
+- type: entity
+  parent: ClothingOuterStorageBase #web vest so it should have some pockets for ammo
+  id: ClothingOuterVestWebMercMeaty
+  name: merc web vest
+  description: Самое то для мяукалок!
+  components:
+    - type: Sprite
+      sprite: Clothing/OuterClothing/Vests/mercwebvest.rsi
+    - type: Clothing
+      sprite: Clothing/OuterClothing/Vests/mercwebvest.rsi
+
+
 #Detective's vest
 - type: entity
   parent: ClothingOuterArmorBasic

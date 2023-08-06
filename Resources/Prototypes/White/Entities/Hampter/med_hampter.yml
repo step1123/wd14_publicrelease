@@ -1,0 +1,21 @@
+- type: entity
+  name: Медик
+  parent: BasePlushie
+  id: HampterMed
+  description: Лечу как бог!
+  components:
+  - type: Sprite
+    sprite: Objects/Hampter/medhampter.rsi
+    state: icon
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Items/Toys/mousesqueek.ogg

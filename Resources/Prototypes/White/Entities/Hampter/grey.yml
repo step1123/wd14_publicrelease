@@ -1,0 +1,21 @@
+- type: entity
+  name: Ассистент
+  parent: BasePlushie
+  id: GreyHampter
+  description: Серый
+  components:
+  - type: Sprite
+    sprite: Objects/Hampter/grey.rsi
+    state: icon
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Items/Toys/mousesqueek.ogg

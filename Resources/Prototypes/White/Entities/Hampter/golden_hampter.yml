@@ -1,0 +1,21 @@
+- type: entity
+  name: Золотце
+  parent: BasePlushie
+  id: GoldenHampter
+  description: Золотце!
+  components:
+  - type: Sprite
+    sprite: Objects/Hampter/goldenhampter.rsi
+    state: icon
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Items/Toys/mousesqueek.ogg

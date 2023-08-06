@@ -1,0 +1,21 @@
+- type: entity
+  name: Я слежу за тобой!
+  parent: BasePlushie
+  id: EmergencyHampter
+  description: Я из отряда Медленного Реагирования!
+  components:
+  - type: Sprite
+    sprite: Objects/Hampter/emergency.rsi
+    state: icon
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Items/Toys/mousesqueek.ogg

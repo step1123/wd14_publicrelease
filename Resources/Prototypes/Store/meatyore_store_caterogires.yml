@@ -43,6 +43,10 @@
   name: meatyore-store-category-special
 
 - type: storeCategory
+  id: MeatyOreNew
+  name: НОВОЕ!!!
+
+- type: storeCategory
   id: MeatyOreAntag
   name: meatyore-store-category-antag
 

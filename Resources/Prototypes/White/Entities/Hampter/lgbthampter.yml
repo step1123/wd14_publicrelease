@@ -1,0 +1,21 @@
+- type: entity
+  name: Разноцветный
+  parent: BasePlushie
+  id: Lgbthampter
+  description: Я за равноправие!
+  components:
+  - type: Sprite
+    sprite: Objects/Hampter/lgbthampter.rsi
+    state: icon
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Items/Toys/mousesqueek.ogg
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Items/Toys/mousesqueek.ogg

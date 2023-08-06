@@ -1,0 +1,22 @@
+- type: entity
+  name: Бармен
+  parent: BasePlushie
+  id: HampterBarmen
+  description: Я бармен!
+  components:
+    - type: Sprite
+      sprite: Objects/Hampter/barmen.rsi
+      state: icon
+    - type: EmitSoundOnUse
+      sound:
+        path: /Audio/Items/Toys/mousesqueek.ogg
+    - type: EmitSoundOnLand
+      sound:
+        path: /Audio/Items/Toys/mousesqueek.ogg
+    - type: EmitSoundOnActivate
+      sound:
+        path: /Audio/Items/Toys/mousesqueek.ogg
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/Items/Toys/mousesqueek.ogg
+
