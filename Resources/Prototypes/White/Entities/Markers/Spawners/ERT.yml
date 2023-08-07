@@ -1,0 +1,139 @@
+- type: entity
+  id: SpawnPointEventBase
+  parent: MarkerBase
+  abstract: true
+  suffix: Event Spawn
+  components:
+    - type: EventSpawnPoint
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+
+- type: entity
+  id: SpawnPointERTEventERTLeader
+  parent: SpawnPointEventBase
+  name: ERTLeader
+  components:
+    - type: EventSpawnPoint
+      prototype: RandomHumanoidSpawnerERTLeader
+      event: ERT
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ERTLeader
+
+- type: entity
+  id: SpawnPointERTEventERTLeaderEVA
+  parent: SpawnPointEventBase
+  name: ERTLeaderEVA
+  components:
+    - type: EventSpawnPoint
+      prototype: RandomHumanoidSpawnerERTLeaderEVA
+      event: ERT
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ERTLeaderEVA
+
+- type: entity
+  id: SpawnPointERTEventERTJanitor
+  parent: SpawnPointEventBase
+  name: ERTJanitor
+  components:
+    - type: EventSpawnPoint
+      prototype: RandomHumanoidSpawnerERTJanitor
+      event: ERT
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ERTJanitor
+
+- type: entity
+  id: SpawnPointERTEventERTJanitorEVA
+  parent: SpawnPointEventBase
+  name: ERTJanitorEVA
+  components:
+    - type: EventSpawnPoint
+      prototype: RandomHumanoidSpawnerERTJanitorEVA
+      event: ERT
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ERTJanitorEVA
+
+- type: entity
+  id: SpawnPointERTEventERTEngineer
+  parent: SpawnPointEventBase
+  name: ERTEngineer
+  components:
+    - type: EventSpawnPoint
+      prototype: RandomHumanoidSpawnerERTEngineer
+      event: ERT
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ERTEngineer
+
+- type: entity
+  id: SpawnPointERTEventERTEngineerEVA
+  parent: SpawnPointEventBase
+  name: ERTEngineerEVA
+  components:
+    - type: EventSpawnPoint
+      prototype: RandomHumanoidSpawnerERTEngineerEVA
+      event: ERT
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ERTEngineerEVA
+
+- type: entity
+  id: SpawnPointERTEventERTSecurity
+  parent: SpawnPointEventBase
+  name: ERTSecurity
+  components:
+    - type: EventSpawnPoint
+      prototype: RandomHumanoidSpawnerERTSecurity
+      event: ERT
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ERTSecurity
+
+- type: entity
+  id: SpawnPointERTEventERTSecurityEVA
+  parent: SpawnPointEventBase
+  name: ERTSecurityEVA
+  components:
+    - type: EventSpawnPoint
+      prototype: RandomHumanoidSpawnerERTSecurityEVA
+      event: ERT
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ERTSecurityEVA
+
+- type: entity
+  id: SpawnPointERTEventERTMedical
+  parent: SpawnPointEventBase
+  name: ERTMedical
+  components:
+    - type: EventSpawnPoint
+      prototype: RandomHumanoidSpawnerERTMedical
+      event: ERT
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ERTMedical
+
+- type: entity
+  id: SpawnPointERTEventERTMedicalEVA
+  parent: SpawnPointEventBase
+  name: ERTMedicalEVA
+  components:
+    - type: EventSpawnPoint
+      prototype: RandomHumanoidSpawnerERTMedicalEVA
+      event: ERT
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ERTMedicalEVA
