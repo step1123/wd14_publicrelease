@@ -18,16 +18,14 @@ public sealed class MindShieldOverlay : Overlay
 {
     private readonly IEntityManager _entManager;
     private readonly SharedTransformSystem _transform;
-    private readonly ShaderInstance _shader;
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
     private string _hudPath = "/Textures/White/Overlays/MindShield/hud.rsi";
 
-    public MindShieldOverlay(IEntityManager entManager, IPrototypeManager protoManager)
+    public MindShieldOverlay(IEntityManager entManager)
     {
         _entManager = entManager;
         _transform = _entManager.EntitySysManager.GetEntitySystem<SharedTransformSystem>();
-        _shader = protoManager.Index<ShaderPrototype>("unshaded").Instance();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -40,7 +38,6 @@ public sealed class MindShieldOverlay : Overlay
         const float scale = 1.15f;
         var scaleMatrix = Matrix3.CreateScale(new Vector2(scale, scale));
         var rotationMatrix = Matrix3.CreateRotation(-rotation);
-        handle.UseShader(_shader);
 
         var entities = _entManager.EntityQuery<HumanoidAppearanceComponent, MindShieldComponent>();
         foreach (var (_, mindShieldComponent) in entities)

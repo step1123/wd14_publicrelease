@@ -1,16 +1,13 @@
-﻿using Content.Shared.EntityJobInfo;
-using Content.Shared.White.Cult;
+﻿using Content.Shared.White.Cult;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Client.White.Cult;
 
 public sealed class ShowCultHudSystem : EntitySystem
 {
     [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IOverlayManager _overlayManager = default!;
 
     private Overlay _overlay = default!;
@@ -22,7 +19,7 @@ public sealed class ShowCultHudSystem : EntitySystem
         SubscribeLocalEvent<CultistComponent, PlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<CultistComponent, PlayerDetachedEvent>(OnPlayerDetached);
 
-        _overlay = new CultHudOverlay(EntityManager, _prototypeManager);
+        _overlay = new CultHudOverlay(EntityManager);
     }
 
     private void OnComponentInit(EntityUid uid, CultistComponent component, ComponentInit args)

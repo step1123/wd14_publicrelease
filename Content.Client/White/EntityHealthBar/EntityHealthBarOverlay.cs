@@ -11,7 +11,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Robust.Shared.Timing;
 
-namespace Content.Client.EntityHealthBar;
+namespace Content.Client.White.EntityHealthBar;
 
 /// <summary>
 /// Yeah a lot of this is duplicated from doafters.
@@ -24,14 +24,13 @@ public sealed class EntityHealthBarOverlay : Overlay
     private readonly MobStateSystem _mobStateSystem;
     private readonly MobThresholdSystem _mobThresholdSystem;
     private readonly Texture _barTexture;
-    private readonly ShaderInstance _shader;
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
     public string? DamageContainer;
     // for icon frame change timer
     int iconFrame = 1;
     double delayTime = 0.25;
 
-    public EntityHealthBarOverlay(IEntityManager entManager, IPrototypeManager protoManager)
+    public EntityHealthBarOverlay(IEntityManager entManager)
     {
         _entManager = entManager;
         _transform = _entManager.EntitySysManager.GetEntitySystem<SharedTransformSystem>();
@@ -41,7 +40,6 @@ public sealed class EntityHealthBarOverlay : Overlay
         var sprite = new SpriteSpecifier.Rsi(new ResPath("/Textures/Interface/Misc/health_status.rsi"), "background");
         _barTexture = _entManager.EntitySysManager.GetEntitySystem<SpriteSystem>().Frame0(sprite);
 
-        _shader = protoManager.Index<ShaderPrototype>("unshaded").Instance();
         Timer.SpawnRepeating(TimeSpan.FromSeconds(delayTime), () => {
             if (iconFrame < 8)
                 iconFrame++;
@@ -62,7 +60,6 @@ public sealed class EntityHealthBarOverlay : Overlay
         const float scale = 1f;
         var scaleMatrix = Matrix3.CreateScale(new Vector2(scale, scale));
         var rotationMatrix = Matrix3.CreateRotation(-rotation);
-        handle.UseShader(_shader);
 
         foreach (var (mob, dmg, threasholds) in _entManager.EntityQuery<MobStateComponent, DamageableComponent, MobThresholdsComponent>(true))
         {

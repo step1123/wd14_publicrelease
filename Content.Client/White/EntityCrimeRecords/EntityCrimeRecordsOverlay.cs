@@ -19,24 +19,19 @@ public sealed class EntityCrimeRecordsOverlay : Overlay
 {
     private readonly IEntityManager _entManager;
     private readonly SharedTransformSystem _transform;
-    private readonly IPrototypeManager _prototypeManager;
     private readonly InventorySystem _inventorySystem;
-    private readonly ShaderInstance _shader;
     private readonly ShowCrimeRecordsSystem _parentSystem;
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
     public EntityCrimeRecordsOverlay(
         IEntityManager entManager,
-        IPrototypeManager protoManager,
         InventorySystem inventorySystem,
         ShowCrimeRecordsSystem showCrimSystem)
     {
         _entManager = entManager;
-        _prototypeManager = protoManager;
         _inventorySystem = inventorySystem;
         _parentSystem = showCrimSystem;
         _transform = _entManager.EntitySysManager.GetEntitySystem<SharedTransformSystem>();
-        _shader = protoManager.Index<ShaderPrototype>("unshaded").Instance();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -49,7 +44,6 @@ public sealed class EntityCrimeRecordsOverlay : Overlay
         const float scale = 1f;
         var scaleMatrix = Matrix3.CreateScale(new Vector2(scale, scale));
         var rotationMatrix = Matrix3.CreateRotation(-rotation);
-        handle.UseShader(_shader);
         // da pizda
         this.ZIndex = this.ZIndex -= 1;
 

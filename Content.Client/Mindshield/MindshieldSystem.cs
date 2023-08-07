@@ -30,7 +30,7 @@ public sealed class MindshieldSystem : EntitySystem
         SubscribeLocalEvent<ShowMindShieldHudComponent, PlayerDetachedEvent>(OnPlayerDetached);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
 
-        _overlay = new(EntityManager, _prototypeManager);
+        _overlay = new(EntityManager);
     }
 
     private void OnInit(EntityUid uid, ShowMindShieldHudComponent component, ComponentInit args)

@@ -29,7 +29,7 @@ namespace Content.Client.White.EntityCrimeRecords
             SubscribeLocalEvent<ShowCrimeRecordsComponent, PlayerDetachedEvent>(OnPlayerDetached);
             SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
 
-            _overlay = new(EntityManager, _protoMan, _inventorySystem, this);
+            _overlay = new(EntityManager, _inventorySystem, this);
         }
 
         private void OnInit(EntityUid uid, ShowCrimeRecordsComponent component, ComponentInit args)

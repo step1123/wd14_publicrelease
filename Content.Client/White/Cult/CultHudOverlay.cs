@@ -14,8 +14,6 @@ public sealed class CultHudOverlay : Overlay
 
     private readonly IEntityManager _entityManager;
     private readonly SharedTransformSystem _transformSystem;
-    private readonly ShaderInstance _shader;
-    private readonly IPrototypeManager _prototypeManager;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
@@ -31,7 +29,6 @@ public sealed class CultHudOverlay : Overlay
         const float scale = 1f;
         var scaleMatrix = Matrix3.CreateScale(new Vector2(scale, scale));
         var rotationMatrix = Matrix3.CreateRotation(-rotation);
-        handle.UseShader(_shader);
 
         foreach (var cultist in _entityManager.EntityQuery<CultistComponent>(true))
         {
@@ -81,12 +78,9 @@ public sealed class CultHudOverlay : Overlay
         handle.SetTransform(Matrix3.Identity);
     }
 
-    public CultHudOverlay(IEntityManager entityManager, IPrototypeManager prototypeManager)
+    public CultHudOverlay(IEntityManager entityManager)
     {
         _entityManager = entityManager;
-        _prototypeManager = prototypeManager;
         _transformSystem = _entityManager.EntitySysManager.GetEntitySystem<SharedTransformSystem>();
-        _shader = prototypeManager.Index<ShaderPrototype>("unshaded").Instance();
-
     }
 }
