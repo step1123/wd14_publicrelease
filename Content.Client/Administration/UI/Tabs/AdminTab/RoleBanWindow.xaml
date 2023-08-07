@@ -69,6 +69,7 @@
                         <CheckBox Name="SalvageSpecialist" Text="{Loc job-name-salvagespec}"/>
                         <Label Text="{Loc department-Science}" FontColorOverride="MediumOrchid"/>
                         <CheckBox Name="Scientist" Text="{Loc job-name-scientist}"/>
+                        <CheckBox Name="ResearchAssistant" Text="{Loc job-name-research-assistant}"/>
                         <Label Text="{Loc department-Civilian}" FontColorOverride="Lime"/>
                         <CheckBox Name="ServiceWorker" Text="{Loc job-name-serviceworker}"/>
                         <CheckBox Name="Bartender" Text="{Loc job-name-bartender}"/>
@@ -83,11 +84,11 @@
                         <CheckBox Name="Musician" Text="{Loc job-name-musician}"/>
                         <CheckBox Name="Reporter" Text="{Loc job-name-reporter}"/>
                         <CheckBox Name="Zookeeper" Text="{Loc job-name-zookeeper}"/>
-                        <!--<Label Text="{Loc department-Silicon}" FontColorOverride="LightGray"/>
-                        <CheckBox Name="Cyborg" Text="{Loc job-name-cyborg}"/>
-                        <CheckBox Name="MedicalCyborg" Text="{Loc job-name-medical-cyborg}"/>
-                        <CheckBox Name="EngCyborg" Text="Инженерный борг"/>
-                        <CheckBox Name="SecCyborg" Text="Охранный борг"/>-->
+                        <Label Text="{Loc department-Silicon}" FontColorOverride="LightGray"/>
+                        <CheckBox Name="NekoCyborg" Text="{Loc neko-borg}"/>
+                        <CheckBox Name="MedicalCyborg" Text="{Loc medical-borg}"/>
+                        <CheckBox Name="EngineerCyborg" Text="{Loc engineer-borg}"/>
+                        <CheckBox Name="SecurityCyborg" Text="{Loc security-borg}"/>
                     </BoxContainer>
                 </BoxContainer>
                 <Button Name="SubmitListButton" Text="{Loc admin-job-ban-window-button-ban}"/>

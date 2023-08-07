@@ -39,7 +39,7 @@ public sealed class PositronicBrainSystem : SharedPositronicBrainSystem
 
     private void OnMindAddedParent(EntityUid uid, SiliconBrainContainerComponent component, MindAddedMessage args)
     {
-        if (!component.BrainUid.HasValue || HasComp<PositronicBrainComponent>(component.BrainUid.Value))
+        if (!component.BrainUid.HasValue || !HasComp<PositronicBrainComponent>(component.BrainUid.Value))
             return;
 
         PositronicBrainTurningOff(component.BrainUid.Value);

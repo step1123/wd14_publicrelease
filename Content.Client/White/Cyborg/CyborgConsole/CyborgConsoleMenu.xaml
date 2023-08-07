@@ -8,10 +8,17 @@
     <BoxContainer Orientation="Horizontal"
                   HorizontalExpand="True"
                   VerticalExpand="True">
-        <BoxContainer Orientation="Vertical"
-                      SizeFlagsStretchRatio="1"
-                      Name="CyborgList" />
+
+        <ScrollContainer HScrollEnabled="False"
+                         VerticalExpand="True"
+                         HorizontalExpand="True"
+                         SizeFlagsStretchRatio="1">
+            <BoxContainer Orientation="Vertical"
+                          Name="CyborgList" />
+        </ScrollContainer>
+
         <customControls:VSeparator StyleClasses="LowDivider" />
+
         <PanelContainer VerticalExpand="True"
                         HorizontalExpand="True"
                         SizeFlagsStretchRatio="3"
