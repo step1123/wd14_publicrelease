@@ -85,7 +85,6 @@ public sealed class PositronicBrainSystem : SharedPositronicBrainSystem
     private void OnMindRemoved(EntityUid uid, PositronicBrainComponent component, MindRemovedMessage args)
     {
         PositronicBrainTurningOff(uid);
-        //SearchMind(uid);
     }
 
     private void OnMindAdded(EntityUid uid, PositronicBrainComponent component, MindAddedMessage args)
@@ -114,6 +113,9 @@ public sealed class PositronicBrainSystem : SharedPositronicBrainSystem
         if (!Resolve(uid, ref component))
             return;
         RemComp<ActiveSiliconBrainComponent>(uid);
+        RemComp<GhostTakeoverAvailableComponent>(uid);
+        RemComp<GhostRoleComponent>(uid);
+        RemComp<MindContainerComponent>(uid);
         UpdatePositronicBrainAppearance(uid, PosiStatus.Standby);
     }
 
@@ -134,8 +136,6 @@ public sealed class PositronicBrainSystem : SharedPositronicBrainSystem
             verb.Text = Loc.GetString("positronic-brain-wipe-verb-text");
             verb.Act = () =>
             {
-                RemComp<MindContainerComponent>(uid);
-
                 _popupSystem.PopupEntity(Loc.GetString("positronic-brain-wiped"), uid, args.User, PopupType.Large);
                 PositronicBrainTurningOff(uid);
             };
@@ -147,9 +147,6 @@ public sealed class PositronicBrainSystem : SharedPositronicBrainSystem
             verb.Text = Loc.GetString("positronic-brain-stop-searching-verb-text");
             verb.Act = () =>
             {
-                RemComp<GhostTakeoverAvailableComponent>(uid);
-                RemComp<GhostRoleComponent>(uid);
-
                 _popupSystem.PopupEntity(Loc.GetString("positronic-brain-stopped-searching"), uid, args.User);
                 PositronicBrainTurningOff(uid);
             };
