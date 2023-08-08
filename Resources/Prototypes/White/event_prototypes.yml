@@ -1,4 +1,7 @@
 - type: serverEvent
-  id: ERT
+  id: ERTRecruitment
   name: ERT
   description: Your tasks is meow!
+  onStart: !type:ERTRecruitmentStartEvent
+  onEnd: !type:ERTRecruitmentEndEvent
+  minPlayer: 1

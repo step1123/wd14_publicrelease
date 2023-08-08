@@ -15,11 +15,11 @@
   components:
     - type: EventSpawnPoint
       prototype: RandomHumanoidSpawnerERTLeader
-      event: ERT
+      event: ERTRecruitment
     - type: Sprite
       layers:
         - state: green
-        - state: ERTLeader
+        - state: ertleader
 
 - type: entity
   id: SpawnPointERTEventERTLeaderEVA
@@ -28,11 +28,11 @@
   components:
     - type: EventSpawnPoint
       prototype: RandomHumanoidSpawnerERTLeaderEVA
-      event: ERT
+      event: ERTRecruitment
     - type: Sprite
       layers:
         - state: green
-        - state: ERTLeaderEVA
+        - state: ertleadereva
 
 - type: entity
   id: SpawnPointERTEventERTJanitor
@@ -41,11 +41,11 @@
   components:
     - type: EventSpawnPoint
       prototype: RandomHumanoidSpawnerERTJanitor
-      event: ERT
+      event: ERTRecruitment
     - type: Sprite
       layers:
         - state: green
-        - state: ERTJanitor
+        - state: ertjanitor
 
 - type: entity
   id: SpawnPointERTEventERTJanitorEVA
@@ -54,11 +54,11 @@
   components:
     - type: EventSpawnPoint
       prototype: RandomHumanoidSpawnerERTJanitorEVA
-      event: ERT
+      event: ERTRecruitment
     - type: Sprite
       layers:
         - state: green
-        - state: ERTJanitorEVA
+        - state: ertjanitoreva
 
 - type: entity
   id: SpawnPointERTEventERTEngineer
@@ -67,11 +67,11 @@
   components:
     - type: EventSpawnPoint
       prototype: RandomHumanoidSpawnerERTEngineer
-      event: ERT
+      event: ERTRecruitment
     - type: Sprite
       layers:
         - state: green
-        - state: ERTEngineer
+        - state: ertengineer
 
 - type: entity
   id: SpawnPointERTEventERTEngineerEVA
@@ -80,11 +80,11 @@
   components:
     - type: EventSpawnPoint
       prototype: RandomHumanoidSpawnerERTEngineerEVA
-      event: ERT
+      event: ERTRecruitment
     - type: Sprite
       layers:
         - state: green
-        - state: ERTEngineerEVA
+        - state: ertengineereva
 
 - type: entity
   id: SpawnPointERTEventERTSecurity
@@ -93,11 +93,11 @@
   components:
     - type: EventSpawnPoint
       prototype: RandomHumanoidSpawnerERTSecurity
-      event: ERT
+      event: ERTRecruitment
     - type: Sprite
       layers:
         - state: green
-        - state: ERTSecurity
+        - state: ertsecurity
 
 - type: entity
   id: SpawnPointERTEventERTSecurityEVA
@@ -106,11 +106,11 @@
   components:
     - type: EventSpawnPoint
       prototype: RandomHumanoidSpawnerERTSecurityEVA
-      event: ERT
+      event: ERTRecruitment
     - type: Sprite
       layers:
         - state: green
-        - state: ERTSecurityEVA
+        - state: ertsecurityeva
 
 - type: entity
   id: SpawnPointERTEventERTMedical
@@ -119,11 +119,11 @@
   components:
     - type: EventSpawnPoint
       prototype: RandomHumanoidSpawnerERTMedical
-      event: ERT
+      event: ERTRecruitment
     - type: Sprite
       layers:
         - state: green
-        - state: ERTMedical
+        - state: ertmedical
 
 - type: entity
   id: SpawnPointERTEventERTMedicalEVA
@@ -132,8 +132,8 @@
   components:
     - type: EventSpawnPoint
       prototype: RandomHumanoidSpawnerERTMedicalEVA
-      event: ERT
+      event: ERTRecruitment
     - type: Sprite
       layers:
         - state: green
-        - state: ERTMedicalEVA
+        - state: ertmedicaleva

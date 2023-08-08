@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Server.Humanoid.Components;
 using Content.Shared.White.ServerEvent;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -12,12 +13,6 @@ public sealed class ServerEventSystem : EntitySystem
 
     private readonly Dictionary<string,ServerEventPrototype> _eventCache = new();
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-
-    }
 
     public bool TryGetEvent(string eventName,[MaybeNullWhen(false)] out ServerEventPrototype prototype)
     {
@@ -33,9 +28,8 @@ public sealed class ServerEventSystem : EntitySystem
 
     public bool IsEventRunning(string eventName)
     {
-        if (_eventCache.TryGetValue(eventName, out var prototype) || prototype == null)
+        if (!TryGetEvent(eventName, out var prototype))
             return false;
-
         return prototype.EndPlayerGatherTime.HasValue;
     }
 
@@ -48,6 +42,33 @@ public sealed class ServerEventSystem : EntitySystem
         }
     }
 
+    public void BreakEvent(string eventName)
+    {
+        if(!TryGetEvent(eventName,out var prototype))
+            return;
+
+        prototype.CurrentPlayerGatherTime = null;
+        prototype.EndPlayerGatherTime = null;
+    }
+
+    public IEnumerable<(EntityUid, EventSpawnPointComponent)> GetEventSpawners(string eventName)
+    {
+        if (!TryGetEvent(eventName, out var prototype))
+            yield break;
+
+        var query = EntityQueryEnumerator<EventSpawnPointComponent>();
+        while (query.MoveNext(out var uid, out var component))
+        {
+            if (component.EventType == eventName)
+                yield return (uid, component);
+        }
+    }
+
+    public void AddPlayer(EntityUid uid,ServerEventPrototype prototype)
+    {
+        prototype.PlayerCount += 1;
+    }
+
     public bool TryStartEvent(string eventName)
     {
         if (!TryGetEvent(eventName, out var prototype) || IsEventRunning(eventName))
@@ -57,6 +78,15 @@ public sealed class ServerEventSystem : EntitySystem
         return true;
     }
 
+    public EntityUid? Spawn(EntityUid spawnerUid,EventSpawnPointComponent? component = null)
+    {
+        if (!Resolve(spawnerUid, ref component))
+            return null;
+
+        var uid = EntityManager.SpawnEntity(component.EntityPrototype, Transform(spawnerUid).Coordinates);
+
+        return HasComp<RandomHumanoidSpawnerComponent>(uid) ? new EntityUid((int)uid + 1) : uid;
+    }
 
     public override void Update(float frameTime)
     {
@@ -66,15 +96,16 @@ public sealed class ServerEventSystem : EntitySystem
         {
             if (!prototype.CurrentPlayerGatherTime.HasValue)
             {
-                Logger.Debug("Start event " + prototype.Name );
+                prototype.OnStart?.Execute(prototype);
             }
             prototype.CurrentPlayerGatherTime = _timing.CurTime;
 
             if (prototype.CurrentPlayerGatherTime > prototype.EndPlayerGatherTime)
             {
-                Logger.Debug("End event " + prototype.Name );
+                prototype.OnEnd?.Execute(prototype);
                 prototype.CurrentPlayerGatherTime = null;
                 prototype.EndPlayerGatherTime = null;
+                prototype.PlayerCount = 0;
             }
         }
     }
