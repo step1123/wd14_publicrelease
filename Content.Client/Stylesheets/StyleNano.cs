@@ -111,6 +111,9 @@ namespace Content.Client.Stylesheets
         public static readonly Color ButtonColorGoodDefault = Color.FromHex("#3E6C45");
         public static readonly Color ButtonColorGoodHovered = Color.FromHex("#31843E");
 
+        public static readonly Color ButtonColorPurpleDefault = Color.FromHex("#4a2eab");
+        public static readonly Color ButtonColorPurpleHovered = Color.FromHex("#654cbf");
+
         //NavMap
         public static readonly Color PointRed = Color.FromHex("#B02E26");
         public static readonly Color PointGreen = Color.FromHex("#38b026");
@@ -150,6 +153,7 @@ namespace Content.Client.Stylesheets
         public const string StyleClassCrossButtonRed = "CrossButtonRed";
         public const string StyleClassButtonColorRed = "ButtonColorRed";
         public const string StyleClassButtonColorGreen = "ButtonColorGreen";
+        public const string StyleClassButtonColorPurple = "ButtonColorPurple";
 
         public override Stylesheet Stylesheet { get; }
 
@@ -1470,6 +1474,17 @@ namespace Content.Client.Stylesheets
 
                 Element<Button>().Class("ButtonColorGreen").Pseudo(ContainerButton.StylePseudoClassHover)
                     .Prop(Control.StylePropertyModulateSelf, ButtonColorGoodHovered),
+                // ---
+
+                // Purple Button ---
+                Element<Button>().Class("ButtonColorPurple")
+                    .Prop(Control.StylePropertyModulateSelf, ButtonColorPurpleDefault),
+
+                Element<Button>().Class("ButtonColorPurple").Pseudo(ContainerButton.StylePseudoClassNormal)
+                    .Prop(Control.StylePropertyModulateSelf, ButtonColorPurpleDefault),
+
+                Element<Button>().Class("ButtonColorPurple").Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Control.StylePropertyModulateSelf, ButtonColorPurpleHovered),
                 // ---
 
                 Element<Label>().Class("StatusFieldTitle")
