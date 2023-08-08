@@ -383,3 +383,36 @@
     - type: TemperatureProtection
       coefficient: 0.005
 
+#koitorra
+- type: entity
+  parent: ClothingMaskGas
+  id: ClothingMaskGasKoitorra
+  name: бионическая нейрочелюсть
+  description: "Жесткая и темная. По центру шеи расположен светодиод, обрамлённый металлическими вставками, что плавно двигаются вниз. На краю шеи есть еле видное обозначение модели: 'JawV-02, Роджер Фенелон'."
+  components:
+    - type: Sprite
+      sprite: White/Fluff/koitorra/koitorra_mask.rsi
+    - type: Item
+      sprite: White/Fluff/koitorra/koitorra_mask.rsi
+    - type: Clothing
+      sprite:
+    - type: VoiceMasker
+      default: ClothingMaskGas
+    - type: UserInterface
+      interfaces:
+        - key: enum.InstrumentUiKey.Key
+          type: InstrumentBoundUserInterface
+    - type: ClothingMidi
+      midiAction:
+        name: MIDI
+        checkCanInteract: false
+        icon: White/Fluff/koitorra/koitorra_mask.rsi/icon.png
+        description: Проиграть MIDI.
+        event: !type:OpenUiActionEvent
+          key: enum.InstrumentUiKey.Key
+    - type: Instrument
+      allowPercussion: false
+      handheld: false
+      bank: 1
+      program: 2
+
