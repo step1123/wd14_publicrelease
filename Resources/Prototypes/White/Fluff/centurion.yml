@@ -116,6 +116,56 @@
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitRdDeathSquadFluff
 
+# Utilizator
+- type: entity
+  parent: ClothingOuterHardsuitSalvage
+  id: ClothingOuterHardsuitSalvageCenturion
+  name: Штурмовой Скафандр
+  description: Робаст.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/centurion/breacher.rsi
+    - type: Clothing
+      sprite: White/Fluff/centurion/breacher.rsi
+    - type: ToggleableClothing
+      clothingPrototype: ClothingHeadHelmetHardsuitSalvageCenturion
+
+- type: entity
+  parent: ClothingHeadHelmetHardsuitSalvage
+  id: ClothingHeadHelmetHardsuitSalvageCenturion
+  name: Штурмовой Шлем
+  description: Анробаст.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/centurion/breacher-helmet.rsi
+    - type: Clothing
+      sprite: White/Fluff/centurion/breacher-helmet.rsi
+
+# Security
+- type: entity
+  parent: ClothingOuterHardsuitSecurity
+  id: ClothingOuterHardsuitSecurityCenturion
+  name: Штурмовой Скафандр
+  description: Робаст.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/centurion/breacher.rsi
+    - type: Clothing
+      sprite: White/Fluff/centurion/breacher.rsi
+    - type: ToggleableClothing
+      clothingPrototype: ClothingHeadHelmetHardsuitSecurityCenturion
+
+- type: entity
+  parent: ClothingHeadHelmetHardsuitSecurity
+  id: ClothingHeadHelmetHardsuitSecurityCenturion
+  name: Штурмовой Шлем
+  description: Анробаст.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/centurion/breacher-helmet.rsi
+    - type: Clothing
+      sprite: White/Fluff/centurion/breacher-helmet.rsi
+
 - type: entity
   parent: ClothingHeadHelmetHardsuitRd
   id: ClothingHeadHelmetHardsuitRdDeathSquadFluff
@@ -157,3 +207,15 @@
   entity: ClothingOuterHardsuitSecurityRedDeathSquadFluff
   sponsorOnly: true
   whitelistJobs: [HeadOfSecurity]
+
+- type: loadout
+  id: SecLoadoutCenturion
+  entity: ClothingOuterHardsuitSecurityCenturion
+  sponsorOnly: true
+  whitelistJobs: [SecurityOfficer, Warden, SecurityCadet, Detective, SeniorOfficer]
+
+- type: loadout
+  id: SalvageLoadoutCenturion
+  entity: ClothingOuterHardsuitSalvageCenturion
+  sponsorOnly: true
+  whitelistJobs: [SalvageSpecialist]
