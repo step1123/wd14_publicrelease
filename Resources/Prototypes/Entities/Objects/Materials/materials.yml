@@ -8,7 +8,6 @@
     sprite: Objects/Materials/materials.rsi
   - type: Item
     sprite: Objects/Materials/materials.rsi
-    size: 30
   - type: ItemStatus
   - type: Tag
     tags:
@@ -42,6 +41,7 @@
     - cardboard
     - cardboard_2
     - cardboard_3
+    sizeMultiplier: 0.17
   - type: Sprite
     state: cardboard_3
     layers:
@@ -49,7 +49,6 @@
       map: ["base"]
   - type: Appearance
   - type: Item
-    size: 30
 
 - type: entity
   parent: MaterialCardboard
@@ -60,6 +59,7 @@
     state: cardboard
   - type: Stack
     count: 1
+    sizeMultiplier: 0.17
   - type: Item
     size: 1
 
@@ -93,6 +93,7 @@
     - cloth
     - cloth_2
     - cloth_3
+    sizeMultiplier: 0.17
   - type: Material
   - type: PhysicalComposition
     materialComposition:
@@ -109,7 +110,6 @@
       map: ["base"]
   - type: Appearance
   - type: Item
-    size: 30
 
 - type: entity
   parent: MaterialCloth
@@ -120,6 +120,7 @@
     state: cloth
   - type: Stack
     count: 1
+    sizeMultiplier: 0.17
   - type: Item
     size: 1
 
@@ -136,6 +137,7 @@
     - durathread
     - durathread_2
     - durathread_3
+    sizeMultiplier: 0.17
   - type: Material
   - type: PhysicalComposition
     materialComposition:
@@ -159,6 +161,7 @@
     state: durathread
   - type: Stack
     count: 1
+    sizeMultiplier: 0.17
   - type: Item
     size: 1
 
@@ -179,6 +182,7 @@
     - wood
     - wood_2
     - wood_3
+    sizeMultiplier: 0.17
   - type: Sprite
     state: wood
     layers:
@@ -188,6 +192,7 @@
   - type: Item
     heldPrefix: wood
 
+
 - type: entity
   parent: MaterialWoodPlank
   id: MaterialWoodPlank1
@@ -195,6 +200,7 @@
   components:
   - type: Stack
     count: 1
+    sizeMultiplier: 0.17
   - type: Item
     size: 1
 
@@ -211,6 +217,7 @@
   - type: Stack
     stackType: Biomass
     count: 100
+    sizeMultiplier: 0.05
   - type: Sprite
     sprite: /Textures/Objects/Misc/monkeycube.rsi
     state: cube
@@ -219,7 +226,6 @@
     guides:
     - Cloning
   - type: Item
-    size: 100
 
 - type: entity
   parent: MaterialBiomass
@@ -228,6 +234,7 @@
   components:
   - type: Stack
     count: 1
+    sizeMultiplier: 0.05
   - type: Item
     size: 1
 
@@ -267,11 +274,11 @@
   components:
   - type: Stack
     stackType: Diamond
+    sizeMultiplier: 0.17
   - type: Sprite
     state: diamond
   - type: Item
     heldPrefix: diamond
-    size: 60
 
 - type: entity
   parent: MaterialDiamond
@@ -280,8 +287,9 @@
   components:
   - type: Stack
     count: 1
+    sizeMultiplier: 0.17
   - type: Item
-    size: 2
+    size: 1
 
 - type: entity
   parent: MaterialBase
@@ -296,6 +304,7 @@
     - cotton
     - cotton_2
     - cotton_3
+    sizeMultiplier: 0.17
   - type: Sprite
     state: cotton_3
     layers:
@@ -303,8 +312,6 @@
       map: ["base"]
   - type: Appearance
   - type: Item
-    size: 30
-
 
 - type: entity
   parent: MaterialCotton
@@ -315,6 +322,7 @@
     state: cotton
   - type: Stack
     count: 1
+    sizeMultiplier: 0.17
   - type: Item
     size: 1
 
@@ -368,7 +376,7 @@
         Quantity: 5
   - type: Appearance
   - type: Item
-    size: 20
+    size: 10
 
 - type: entity
   parent: MaterialBananium
@@ -380,4 +388,4 @@
   - type: Stack
     count: 1
   - type: Item
-    size: 2
+    size: 1

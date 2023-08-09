@@ -39,13 +39,12 @@
     - rods_3
     - rods_4
     - rods_5
+    sizeMultiplier: 0.17
   - type: Sprite
     state: rods_5
     layers:
     - state: rods_5
       map: ["base"]
-  - type: Item
-    size: 30
 #    heldPrefix: rods
   - type: Construction
     graph: MetalRod
@@ -74,5 +73,6 @@
     state: rods
   - type: Stack
     count: 1
+    sizeMultiplier: 0.17
   - type: Item
     size: 1

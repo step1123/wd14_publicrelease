@@ -87,7 +87,7 @@ public abstract class SharedItemSystem : EntitySystem
             stackProto.ItemSize is not { } size)
             return;
 
-        SetSize(uid, args.NewCount * size, component);
+        SetSize(uid, Math.Max(1, (int) MathF.Round(args.NewCount * size * stack.SizeMultiplier)), component); // WD EDIT
     }
 
     private void OnHandleState(EntityUid uid, ItemComponent component, ref ComponentHandleState args)

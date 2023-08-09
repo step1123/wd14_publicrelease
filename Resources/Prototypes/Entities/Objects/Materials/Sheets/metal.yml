@@ -8,7 +8,6 @@
     sprite: Objects/Materials/Sheets/metal.rsi
   - type: Item
     sprite: Objects/Materials/Sheets/metal.rsi
-    size: 30
   - type: StaticPrice
     price: 0
   - type: ItemStatus
@@ -46,6 +45,7 @@
     - steel
     - steel_2
     - steel_3
+    sizeMultiplier: 0.17
   - type: Sprite
     state: steel_3
     layers:
@@ -83,6 +83,7 @@
   - type: Stack
     stackType: Steel
     count: 1
+    sizeMultiplier: 0.17
 
 - type: entity
   parent: SheetMetalBase
@@ -101,6 +102,7 @@
     - plasteel
     - plasteel_2
     - plasteel_3
+    sizeMultiplier: 0.17
   - type: Sprite
     state: plasteel_3
     layers:
@@ -121,5 +123,6 @@
   - type: Stack
     stackType: Plasteel
     count: 1
+    sizeMultiplier: 0.17
   - type: Item
     size: 1

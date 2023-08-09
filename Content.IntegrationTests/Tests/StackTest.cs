@@ -29,7 +29,7 @@ public sealed class StackTest
                     stackProto.ItemSize == null)
                     continue;
 
-                var expectedSize = stackProto.ItemSize * stackComponent.Count;
+                var expectedSize = Math.Max(1, (int) MathF.Round(stackProto.ItemSize.Value * stackComponent.Count * stackComponent.SizeMultiplier)); // WD EDIT
                 Assert.That(itemComponent.Size, Is.EqualTo(expectedSize), $"Prototype id: {entity.ID} has an item size of {itemComponent.Size} but expected size of {expectedSize}.");
             }
         });

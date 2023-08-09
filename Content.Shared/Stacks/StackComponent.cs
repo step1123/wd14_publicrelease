@@ -39,7 +39,7 @@ namespace Content.Shared.Stacks
 
         [ViewVariables]
         public bool UiUpdateNeeded { get; set; }
-    
+
         /// <summary>
         /// Default IconLayer stack.
         /// </summary>
@@ -71,6 +71,12 @@ namespace Content.Shared.Stacks
         [DataField("layerStates")]
         [ViewVariables(VVAccess.ReadWrite)]
         public List<string> LayerStates = new();
+
+        // WD START
+        [DataField("sizeMultiplier")]
+        [ViewVariables]
+        public float SizeMultiplier { get; } = 1f;
+        // WD END
     }
 
     [Serializable, NetSerializable]

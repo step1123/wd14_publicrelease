@@ -15,11 +15,12 @@
     - DroneUsable
   - type: Stack
     stackType: Cable
+    sizeMultiplier: 0.33
   - type: Sprite
     sprite: Objects/Tools/cable-coils.rsi
   - type: Item
     sprite: Objects/Tools/cable-coils.rsi
-    size: 30
+    size: 10
   - type: CablePlacer
   - type: Clickable
   - type: StaticPrice
@@ -41,6 +42,7 @@
     - coilhv-10
     - coilhv-20
     - coilhv-30
+    sizeMultiplier: 0.33
   - type: Sprite
     state: coilhv-30
     layers:
@@ -61,9 +63,10 @@
   - type: Sprite
     state: coilhv-10
   - type: Stack
+    sizeMultiplier: 0.33
     count: 10
   - type: Item
-    size: 10
+    size: 3
 
 - type: entity
   parent: CableHVStack
@@ -74,6 +77,7 @@
     state: coilhv-10
   - type: Stack
     count: 1
+    sizeMultiplier: 0.33
   - type: Item
     size: 1
 
@@ -91,6 +95,7 @@
     - coilmv-10
     - coilmv-20
     - coilmv-30
+    sizeMultiplier: 0.33
   - type: Sprite
     state: coilmv-30
     layers:
@@ -112,8 +117,9 @@
     state: coilmv-10
   - type: Stack
     count: 10
+    sizeMultiplier: 0.33
   - type: Item
-    size: 10
+    size: 3
 
 - type: entity
   parent: CableMVStack
@@ -124,6 +130,7 @@
     state: coilmv-10
   - type: Stack
     count: 1
+    sizeMultiplier: 0.33
   - type: Item
     size: 1
 
@@ -147,6 +154,7 @@
     - coillv-10
     - coillv-20
     - coillv-30
+    sizeMultiplier: 0.33
   - type: CablePlacer
     cablePrototypeID: CableApcExtension
     blockingWireType: Apc
@@ -161,8 +169,9 @@
       state: coillv-10
     - type: Stack
       count: 10
+      sizeMultiplier: 0.33
     - type: Item
-      size: 10
+      size: 3
 
 - type: entity
   parent: CableApcStack
@@ -173,5 +182,6 @@
     state: coillv-10
   - type: Stack
     count: 1
+    sizeMultiplier: 0.33
   - type: Item
     size: 1

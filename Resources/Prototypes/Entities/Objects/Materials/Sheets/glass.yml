@@ -9,7 +9,6 @@
     sprite: Objects/Materials/Sheets/glass.rsi
   - type: Item
     sprite: Objects/Materials/Sheets/glass.rsi
-    size: 30
   - type: StaticPrice
     price: 0
   - type: ItemStatus
@@ -60,6 +59,7 @@
     - glass
     - glass_2
     - glass_3
+    sizeMultiplier: 0.17
   - type: Sprite
     state: glass_3
     layers:
@@ -84,6 +84,7 @@
   - type: Stack
     stackType: Glass
     count: 1
+    sizeMultiplier: 0.17
   - type: Item
     size: 1
 
@@ -104,6 +105,7 @@
     - rglass
     - rglass_2
     - rglass_3
+    sizeMultiplier: 0.17
   - type: Sprite
     state: rglass_3
     layers:
@@ -151,6 +153,7 @@
   - type: Stack
     stackType: ReinforcedGlass
     count: 1
+    sizeMultiplier: 0.17
   - type: Item
     size: 1
 
@@ -171,6 +174,7 @@
     - pglass
     - pglass_2
     - pglass_3
+    sizeMultiplier: 0.17
   - type: Sprite
     state: pglass_3
     layers:
@@ -178,7 +182,6 @@
       map: ["base"]
   - type: Item
     heldPrefix: pglass
-    size: 30
   - type: Construction
     graph: Glass
     node: SheetPGlass
@@ -216,6 +219,7 @@
   - type: Stack
     stackType: PlasmaGlass
     count: 1
+    sizeMultiplier: 0.17
   - type: Item
     size: 1
 
@@ -236,6 +240,7 @@
     - rpglass
     - rpglass_2
     - rpglass_3
+    sizeMultiplier: 0.17
   - type: Sprite
     state: rpglass_3
     layers:
@@ -258,6 +263,7 @@
   - type: Stack
     stackType: ReinforcedPlasmaGlass
     count: 1
+    sizeMultiplier: 0.17
   - type: Item
     size: 1
 
@@ -278,6 +284,7 @@
     - uglass
     - uglass_2
     - uglass_3
+    sizeMultiplier: 0.17
   - type: Sprite
     state: uglass_3
     layers:
@@ -322,6 +329,7 @@
   - type: Stack
     stackType: UraniumGlass
     count: 1
+    sizeMultiplier: 0.17
   - type: Item
     size: 1
 
@@ -341,6 +349,7 @@
     - ruglass
     - ruglass_2
     - ruglass_3
+    sizeMultiplier: 0.17
   - type: Sprite
     state: ruglass_3
     layers:
@@ -363,5 +372,6 @@
   - type: Stack
     stackType: ReinforcedUraniumGlass
     count: 1
+    sizeMultiplier: 0.17
   - type: Item
     size: 1
