@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Buckle.Components;
@@ -12,6 +13,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Timing;
 
 namespace Content.Shared.Pulling
 {
@@ -23,6 +25,8 @@ namespace Content.Shared.Pulling
         [Dependency] private readonly SharedInteractionSystem _interaction = default!;
         [Dependency] private readonly SharedPhysicsSystem _physics = default!;
         [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+        [Dependency] private readonly SharedJointSystem _jointSystem = default!; // WD
+        [Dependency] private readonly IGameTiming _timing = default!; // WD
 
         public bool CanPull(EntityUid puller, EntityUid pulled)
         {
@@ -92,6 +96,7 @@ namespace Content.Shared.Pulling
         {
             if (!pullable.BeingPulled)
             {
+                ClearPullJoints(pullable); // WD
                 return false;
             }
 
@@ -110,6 +115,31 @@ namespace Content.Shared.Pulling
             _pullSm.ForceRelationship(null, pullable);
             return true;
         }
+
+
+        // WD START
+        private void ClearPullJoints(SharedPullableComponent pullable)
+        {
+            var uid = pullable.Owner;
+
+            if (_timing.ApplyingState || !TryComp(uid, out JointComponent? jointComp))
+                return;
+
+            TryComp(uid, out SharedPullerComponent? puller);
+
+            foreach (var joint in jointComp.GetJoints.Where(j => j.Key.StartsWith("pull-joint")))
+            {
+                if (pullable.PullJointId == joint.Key)
+                    continue;
+
+                if (puller is {Pulling: not null} &&
+                    EntityManager.GetComponent<SharedPullableComponent>(puller.Pulling.Value).PullJointId == joint.Key)
+                    continue;
+
+                _jointSystem.RemoveJoint(joint.Value);
+            }
+        }
+        // WD END
 
         public bool TryStartPull(EntityUid puller, EntityUid pullable)
         {
