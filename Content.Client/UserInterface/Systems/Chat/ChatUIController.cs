@@ -73,6 +73,7 @@ public sealed class ChatUIController : UIController
         {SharedChatSystem.AdminPrefix, ChatSelectChannel.Admin},
         // WD EDIT
         {SharedChatSystem.CultPrefix, ChatSelectChannel.Cult},
+        {SharedChatSystem.MOOCPrefix, ChatSelectChannel.MOOC},
         // WD EDIT END
         {SharedChatSystem.RadioCommonPrefix, ChatSelectChannel.Radio},
         {SharedChatSystem.DeadPrefix, ChatSelectChannel.Dead}
@@ -89,7 +90,8 @@ public sealed class ChatUIController : UIController
         {ChatSelectChannel.Admin, SharedChatSystem.AdminPrefix},
         {ChatSelectChannel.Radio, SharedChatSystem.RadioCommonPrefix},
         {ChatSelectChannel.Dead, SharedChatSystem.DeadPrefix},
-        {ChatSelectChannel.Cult , SharedChatSystem.CultPrefix}
+        {ChatSelectChannel.Cult, SharedChatSystem.CultPrefix},
+        {ChatSelectChannel.MOOC, SharedChatSystem.MOOCPrefix}
     };
 
     /// <summary>
@@ -200,6 +202,9 @@ public sealed class ChatUIController : UIController
 
         _input.SetInputCommand(ContentKeyFunctions.FocusCultChat,
             InputCmdHandler.FromDelegate(_ => FocusChannel(ChatSelectChannel.Cult)));
+
+        _input.SetInputCommand(ContentKeyFunctions.FocusMOOC,
+            InputCmdHandler.FromDelegate(_ => FocusChannel(ChatSelectChannel.MOOC)));
 
         _input.SetInputCommand(ContentKeyFunctions.FocusRadio,
             InputCmdHandler.FromDelegate(_ => FocusChannel(ChatSelectChannel.Radio)));
@@ -521,6 +526,7 @@ public sealed class ChatUIController : UIController
         CanSendChannels |= ChatSelectChannel.LOOC;
         FilterableChannels |= ChatChannel.OOC;
         FilterableChannels |= ChatChannel.LOOC;
+        FilterableChannels |= ChatChannel.MOOC; // WD
 
         // can always hear server (nobody can actually send server messages).
         FilterableChannels |= ChatChannel.Server;
@@ -558,6 +564,7 @@ public sealed class ChatUIController : UIController
             FilterableChannels |= ChatChannel.AdminAlert;
             FilterableChannels |= ChatChannel.AdminChat;
             CanSendChannels |= ChatSelectChannel.Admin;
+            CanSendChannels |= ChatSelectChannel.MOOC; // WD
         }
         // WD EDIT
         // Shity code, i know. But cult feature is more shity lol

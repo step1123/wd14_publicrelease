@@ -273,6 +273,9 @@ public sealed partial class ChatSystem : SharedChatSystem
             case InGameOOCChatType.Cult:
                 SendCultChat(source, player, message, hideChat);
                 break;
+            case InGameOOCChatType.Mooc:
+                SendMOOC(source, player, message, hideChat);
+                break;
         }
     }
 
@@ -609,6 +612,33 @@ public sealed partial class ChatSystem : SharedChatSystem
             .Union(_adminManager.ActiveAdmins)
             .Select(p => p.ConnectedClient);
     }
+
+    // ReSharper disable once InconsistentNaming
+    private void SendMOOC(EntityUid source, IPlayerSession player, string message, bool hideChat)
+    {
+        var name = FormattedMessage.EscapeText(Identity.Name(source, EntityManager));
+
+        if (!_adminLoocEnabled)
+            return;
+
+        var wrappedMessage = Loc.GetString("chat-manager-entity-mooc-wrap-message",
+            ("entityName", name),
+            ("message", FormattedMessage.EscapeText(message)));
+
+        var clients = GetMOOCClients(source);
+        _chatManager.ChatMessageToMany(ChatChannel.MOOC, message, wrappedMessage, source, hideChat, false, clients.ToList());
+        _adminLogger.Add(LogType.Chat, LogImpact.Low, $"MOOC from {player:Player}: {message}");
+    }
+
+    // ReSharper disable once InconsistentNaming
+    private IEnumerable<INetChannel> GetMOOCClients(EntityUid source)
+    {
+        var sourceMapId = EntityManager.GetComponent<TransformComponent>(source).MapID;
+        return Filter.BroadcastMap(sourceMapId)
+            .Recipients
+            .Union(_adminManager.ActiveAdmins)
+            .Select(p => p.ConnectedClient);
+    }
     // WD EDIT END
     #endregion
 
@@ -932,7 +962,8 @@ public enum InGameOOCChatType : byte
     Looc,
     Dead,
     // WD EDIT
-    Cult
+    Cult,
+    Mooc
     // WD EDIT END
 }
 

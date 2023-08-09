@@ -52,6 +52,10 @@ namespace Content.Client.Chat.Managers
                     if (_entities.TryGetComponent(localEnt, out CultistComponent? comp))
                         _consoleHost.ExecuteCommand($"csay \"{CommandParsing.Escape(str)}\"");
                     break;
+
+                case ChatSelectChannel.MOOC:
+                    _consoleHost.ExecuteCommand($"mooc \"{CommandParsing.Escape(str)}\"");
+                    break;
                 // WD EDIT END
                 case ChatSelectChannel.Emotes:
                     _consoleHost.ExecuteCommand($"me \"{CommandParsing.Escape(str)}\"");
