@@ -1,8 +1,8 @@
 using System.Linq;
 using Content.Server.Chat.Managers;
+using Content.Server.EUI;
 using Content.Server.Ghost.Components;
 using Content.Server.Mind;
-using Content.Server.Mind.Components;
 using Content.Server.White.ServerEvent;
 using Content.Shared.White.ServerEvent;
 using Robust.Server.GameObjects;
@@ -19,6 +19,7 @@ public sealed class ERTRecruitmentSystem : EntitySystem
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly EuiManager _eui = default!;
 
     public override void Initialize()
     {
@@ -35,12 +36,19 @@ public sealed class ERTRecruitmentSystem : EntitySystem
             return;
         }
 
-        var query = EntityQueryEnumerator<GhostComponent>();
-        while (query.MoveNext(out var uid,out _))
+        var query = EntityQueryEnumerator<GhostComponent,ActorComponent>();
+        while (query.MoveNext(out var uid,out _,out var actorComponent))
         {
-            EnsureComp<ERTRecrutedComponent>(uid);
-            _event.AddPlayer(uid,prototype);
+            _eui.OpenEui(new ERTRecruitmentAcceptEui(uid,this),actorComponent.PlayerSession);
         }
+    }
+
+    public void Recruit(EntityUid uid)
+    {
+        EnsureComp<ERTRecrutedComponent>(uid);
+        if (!_event.TryGetEvent(EventName, out var prototype) )
+            return;
+        _event.AddPlayer(uid,prototype);
     }
 
     public void EndRecruitment()
@@ -63,15 +71,9 @@ public sealed class ERTRecruitmentSystem : EntitySystem
             if (go)
             {
                 var (spawnerUid, spawnerComponent) = spawners[count];
-                var entityUid = _event.Spawn(spawnerUid, spawnerComponent);
-                count += 1;
 
-                _logger.Debug(entityUid + " " + uid);
-                if(!entityUid.HasValue || !_mind.TryGetMind(uid,out var mind))
-                    continue;
-
-                _mind.TransferTo(mind,entityUid.Value);
-
+                _event.TransferMind(uid,spawnerUid,spawnerComponent);
+                count++;
                 _chat.DispatchServerMessage(actor.PlayerSession, prototype.Description);
             }
             else
