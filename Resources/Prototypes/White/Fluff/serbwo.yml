@@ -100,6 +100,56 @@
       clothingPrototype: ClothingHeadHelmetHardsuitWizard
 
 
+# Penis
+
+- type: entity
+  parent: ClothingOuterHardsuitVoidParamed
+  id: ClothingOuterParamedicSuitFluff
+  name: Ревуела Гильдии
+  description: Трава...
+  components:
+    - type: Sprite
+      sprite: White/Fluff/serbwo/suits/ertleader.rsi
+    - type: Clothing
+      sprite: White/Fluff/serbwo/suits/ertleader.rsi
+    - type: ToggleableClothing
+      clothingPrototype: ClothingOuterParamedicHelmetFluff
+
+- type: entity
+  parent: ClothingHeadHardsuitWithLightBase
+  id: ClothingOuterParamedicHelmetFluff
+  name: Ревуела Гильдии
+  description: Трава...
+  components:
+    - type: Sprite
+      sprite: White/Fluff/serbwo/helmets/ertleader.rsi
+    - type: Clothing
+      sprite: White/Fluff/serbwo/helmets/ertleader.rsi
+
+
+- type: entity
+  parent: ClothingOuterHardsuitSalvage
+  id: ClothingOuterCargoSuitFluff
+  name: Ревуела Гильдии
+  description: Трава...
+  components:
+    - type: Sprite
+      sprite: White/Fluff/serbwo/suits/ertmedical.rsi
+    - type: Clothing
+      sprite: White/Fluff/serbwo/suits/ertmedical.rsi
+    - type: ToggleableClothing
+      clothingPrototype: ClothingOuterCargoHelmetFluff
+
+- type: entity
+  parent: ClothingHeadHelmetHardsuitSalvage
+  id: ClothingOuterCargoHelmetFluff
+  name: Ревуела Гильдии
+  description: Трава...
+  components:
+    - type: Sprite
+      sprite: White/Fluff/serbwo/helmets/ertmedical.rsi
+    - type: Clothing
+      sprite: White/Fluff/serbwo/helmets/ertmedical.rsi
 
 # KILL ME PLEASE
 
@@ -159,3 +209,21 @@
   entity: ClothingSerbwoNeckFluff
   sponsorOnly: true
   whitelistJobs: [Captain, HeadOfSecurity, ResearchDirector, ChiefEngineer, AtmosphericTechnician, StationEngineer, TechnicalAssistant, CargoTechnician, Quartermaster, SalvageSpecialist, ResearchAssistant, Scientist]
+
+- type: loadout
+  id: MaskSerbwoLoadoutSO
+  entity: ClothingMaskBreathMedicalSecurity
+  sponsorOnly: true
+  whitelistJobs: [Captain, HeadOfSecurity, ResearchDirector, ChiefEngineer, AtmosphericTechnician, StationEngineer, TechnicalAssistant, CargoTechnician, Quartermaster, SalvageSpecialist, ResearchAssistant, Scientist]
+
+- type: loadout
+  id: CargoLoadoutSerbwoSO
+  entity: ClothingOuterCargoSuitFluff
+  sponsorOnly: true
+  whitelistJobs: [Quartermaster, SalvageSpecialist]
+
+- type: loadout
+  id: ParamedicLoadoutSerbwoSO
+  entity: ClothingOuterParamedicSuitFluff
+  sponsorOnly: true
+  whitelistJobs: [Paramedic]
