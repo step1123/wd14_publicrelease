@@ -65,3 +65,6 @@ ent-DrinkShakerBorg = Шейкер
  .desc = Если было много пива
 
 job-supervisors-human = своим законам
+
+ghost-role-information-start-cyborg-name = Стартовый киборг
+ghost-role-information-start-cyborg-description = Вас только создали! Выберите желаемую профессию.
