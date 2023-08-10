@@ -17,10 +17,17 @@ namespace Content.Server.StationEvents.Events;
 public sealed class VentClogRule : StationEventSystem<VentClogRuleComponent>
 {
     [Dependency] private readonly SmokeSystem _smoke = default!;
+    [Dependency] private readonly RampingStationEventSchedulerSystem _rampingEventSystem = default!; // WD
 
     protected override void Started(EntityUid uid, VentClogRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
     {
         base.Started(uid, component, gameRule, args);
+
+        if (_rampingEventSystem.CheckRampingEventRule()) // WD START
+        {
+            ForceEndSelf(uid, gameRule);
+            return;
+        } // WD END
 
         if (!TryGetRandomStation(out var chosenStation))
             return;
@@ -58,5 +65,16 @@ public sealed class VentClogRule : StationEventSystem<VentClogRuleComponent>
             _smoke.Start(foamEnt, smoke, solution, component.Time);
             Audio.PlayPvs(component.Sound, transform.Coordinates);
         }
+    }
+
+    protected override void Added(EntityUid uid, VentClogRuleComponent component, GameRuleComponent gameRule, GameRuleAddedEvent args) // WD
+    {
+        if (_rampingEventSystem.CheckRampingEventRule()) // WD START
+        {
+            ForceEndSelf(uid, gameRule);
+            return;
+        } // WD END
+
+        base.Added(uid, component, gameRule, args);
     }
 }
