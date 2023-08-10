@@ -4,7 +4,7 @@
   abstract: true
   suffix: Event Spawn
   components:
-    - type: EventSpawnPoint
+    - type: GhostRecruitmentSpawnPoint
     - type: Sprite
       sprite: Markers/jobs.rsi
 
@@ -13,9 +13,9 @@
   parent: SpawnPointEventBase
   name: ERTLeader
   components:
-    - type: EventSpawnPoint
+    - type: GhostRecruitmentSpawnPoint
       prototype: RandomHumanoidSpawnerERTLeader
-      event: ERTRecruitment
+      recruitmentName: ERTRecruitment
     - type: Sprite
       layers:
         - state: green
@@ -26,9 +26,9 @@
   parent: SpawnPointEventBase
   name: ERTLeaderEVA
   components:
-    - type: EventSpawnPoint
+    - type: GhostRecruitmentSpawnPoint
       prototype: RandomHumanoidSpawnerERTLeaderEVA
-      event: ERTRecruitment
+      recruitmentName: ERTRecruitment
     - type: Sprite
       layers:
         - state: green
@@ -39,9 +39,9 @@
   parent: SpawnPointEventBase
   name: ERTJanitor
   components:
-    - type: EventSpawnPoint
+    - type: GhostRecruitmentSpawnPoint
       prototype: RandomHumanoidSpawnerERTJanitor
-      event: ERTRecruitment
+      recruitmentName: ERTRecruitment
     - type: Sprite
       layers:
         - state: green
@@ -52,9 +52,9 @@
   parent: SpawnPointEventBase
   name: ERTJanitorEVA
   components:
-    - type: EventSpawnPoint
+    - type: GhostRecruitmentSpawnPoint
       prototype: RandomHumanoidSpawnerERTJanitorEVA
-      event: ERTRecruitment
+      recruitmentName: ERTRecruitment
     - type: Sprite
       layers:
         - state: green
@@ -65,9 +65,9 @@
   parent: SpawnPointEventBase
   name: ERTEngineer
   components:
-    - type: EventSpawnPoint
+    - type: GhostRecruitmentSpawnPoint
       prototype: RandomHumanoidSpawnerERTEngineer
-      event: ERTRecruitment
+      recruitmentName: ERTRecruitment
     - type: Sprite
       layers:
         - state: green
@@ -78,9 +78,9 @@
   parent: SpawnPointEventBase
   name: ERTEngineerEVA
   components:
-    - type: EventSpawnPoint
+    - type: GhostRecruitmentSpawnPoint
       prototype: RandomHumanoidSpawnerERTEngineerEVA
-      event: ERTRecruitment
+      recruitmentName: ERTRecruitment
     - type: Sprite
       layers:
         - state: green
@@ -91,9 +91,9 @@
   parent: SpawnPointEventBase
   name: ERTSecurity
   components:
-    - type: EventSpawnPoint
+    - type: GhostRecruitmentSpawnPoint
       prototype: RandomHumanoidSpawnerERTSecurity
-      event: ERTRecruitment
+      recruitmentName: ERTRecruitment
     - type: Sprite
       layers:
         - state: green
@@ -104,9 +104,9 @@
   parent: SpawnPointEventBase
   name: ERTSecurityEVA
   components:
-    - type: EventSpawnPoint
+    - type: GhostRecruitmentSpawnPoint
       prototype: RandomHumanoidSpawnerERTSecurityEVA
-      event: ERTRecruitment
+      recruitmentName: ERTRecruitment
     - type: Sprite
       layers:
         - state: green
@@ -117,9 +117,9 @@
   parent: SpawnPointEventBase
   name: ERTMedical
   components:
-    - type: EventSpawnPoint
+    - type: GhostRecruitmentSpawnPoint
       prototype: RandomHumanoidSpawnerERTMedical
-      event: ERTRecruitment
+      recruitmentName: ERTRecruitment
     - type: Sprite
       layers:
         - state: green
@@ -130,9 +130,9 @@
   parent: SpawnPointEventBase
   name: ERTMedicalEVA
   components:
-    - type: EventSpawnPoint
+    - type: GhostRecruitmentSpawnPoint
       prototype: RandomHumanoidSpawnerERTMedicalEVA
-      event: ERTRecruitment
+      recruitmentName: ERTRecruitment
     - type: Sprite
       layers:
         - state: green

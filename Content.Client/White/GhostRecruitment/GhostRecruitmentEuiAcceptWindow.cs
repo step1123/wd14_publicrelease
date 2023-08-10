@@ -1,16 +1,17 @@
-namespace Content.Client.White.ERTRecruitment;
+using Robust.Client.UserInterface.CustomControls;
 using System.Numerics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using Robust.Client.UserInterface.CustomControls;
-using Robust.Shared.Localization;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
-public sealed class ERTRecruitmentAcceptWindow : DefaultWindow
+
+namespace Content.Client.White.GhostRecruitment;
+
+public sealed class GhostRecruitmentEuiAcceptWindow : DefaultWindow
 {
     public readonly Button DenyButton;
     public readonly Button AcceptButton;
 
-    public ERTRecruitmentAcceptWindow()
+    public GhostRecruitmentEuiAcceptWindow()
     {
 
         Title = Loc.GetString("accept-ert-window-title");

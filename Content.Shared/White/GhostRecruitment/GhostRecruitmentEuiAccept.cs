@@ -1,10 +1,9 @@
 using Content.Shared.Eui;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.White.ServerEvent;
-
-public sealed class ERTRecruitmentAcceptMessage
+namespace Content.Shared.White.GhostRecruitment
 {
+
     [Serializable, NetSerializable]
     public enum AcceptRecruitmentUiButton
     {
@@ -22,4 +21,5 @@ public sealed class ERTRecruitmentAcceptMessage
             Button = button;
         }
     }
+
 }

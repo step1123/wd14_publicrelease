@@ -24,8 +24,6 @@ public sealed class ServerEventPrototype : IPrototype
 
     [DataField("minPlayer")] public int MinPlayer;
 
-    [ViewVariables] public int PlayerCount = 0;
-
     [ViewVariables] public TimeSpan? CurrentPlayerGatherTime = null;
     [ViewVariables] public TimeSpan? EndPlayerGatherTime = null;
 }

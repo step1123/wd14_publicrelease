@@ -8,10 +8,13 @@ using Content.Server.Ghost.Components;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Systems;
+using Content.Server.White.GhostRecruitment;
 using Content.Server.White.ServerEvent;
+using Content.Shared.White.GhostRecruitment;
 using Content.Shared.White.ServerEvent;
 using Robust.Server.GameObjects;
 using Robust.Server.Maps;
+using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
@@ -25,7 +28,10 @@ public sealed class ERTRecruitmentSystem : EntitySystem
     private MapId? _mapId = null;
 
     public ResPath OutpostMap = new("/Maps/ERT/ERTStation.yml");
-    public ResPath ShuttleMap = new("/Maps/Shuttles/emergency_box.yml");
+    public ResPath ShuttleMap = new("/Maps/ERT/ERTShuttle.yml");
+
+    public SoundSpecifier ERTYes = new SoundPathSpecifier("/Audio/Announcements/ert_yes.ogg");
+    public SoundSpecifier ERTNo = new SoundPathSpecifier("/Audio/Announcements/ert_no.ogg");
 
     public EntityUid? Outpost;
     public EntityUid? Shuttle;
@@ -33,8 +39,7 @@ public sealed class ERTRecruitmentSystem : EntitySystem
 
     [Dependency] private readonly ServerEventSystem _event = default!;
     [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly EuiManager _eui = default!;
+    [Dependency] private readonly GhostRecruitmentSystem _recruitment = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly MapLoaderSystem _map = default!;
     [Dependency] private readonly ShuttleSystem _shuttle = default!;
@@ -45,7 +50,32 @@ public sealed class ERTRecruitmentSystem : EntitySystem
     {
         _logger = Logger.GetSawmill(EventName);
         SubscribeLocalEvent<RoundStartAttemptEvent>(OnRoundStart);
+        SubscribeLocalEvent<RecruitedComponent,GhostRecruitmentSuccessEvent>(OnRecruitmentSuccess);
     }
+
+    public override void Shutdown()
+    {
+        if (_mapId != null)
+        {
+            _mapManager.DeleteMap(_mapId.Value);
+        }
+
+        Outpost = null;
+        Shuttle = null;
+        TargetStation = null;
+
+        _mapId = null;
+    }
+
+    private void OnRecruitmentSuccess(EntityUid uid, RecruitedComponent component, GhostRecruitmentSuccessEvent args)
+    {
+        if(!TryComp<ActorComponent>(uid,out var actor) || !_event.TryGetEvent(EventName, out var prototype))
+            return;
+
+        _chat.DispatchServerMessage(actor.PlayerSession, prototype.Description);
+    }
+
+
 
     private void OnRoundStart(RoundStartAttemptEvent ev)
     {
@@ -58,30 +88,13 @@ public sealed class ERTRecruitmentSystem : EntitySystem
         SpawnMap();
     }
 
-    private void AcceptERT()
+    public void EventStart()
     {
-       if(TargetStation != null)
-           _chatSystem.DispatchStationAnnouncement(TargetStation.Value,"ERT is accept! Please wait!",colorOverride: Color.Gold);
-    }
-
-    private void DeclineERT()
-    {
-        if(TargetStation != null)
-            _chatSystem.DispatchStationAnnouncement(TargetStation.Value,"ERT is decline!",colorOverride: Color.Gold);
-    }
-
-    public void StartRecruitment(EntityUid? targetStation = null)
-    {
-        if (targetStation != null)
-        {
-            TargetStation = targetStation;
-        }
-
         if(TargetStation == null)
             return;
 
         if (!_event.TryGetEvent(EventName, out var prototype) ||
-            _event.GetEventSpawners(EventName).Count() < prototype.MinPlayer)
+            _recruitment.GetEventSpawners(EventName).Count() < prototype.MinPlayer)
         {
             _logger.Error("Not enough spawners!");
             _event.BreakEvent(EventName);
@@ -89,28 +102,47 @@ public sealed class ERTRecruitmentSystem : EntitySystem
             return;
         }
 
-        _chatSystem.DispatchStationAnnouncement(TargetStation.Value,"Please wait for a decision of ERT");
+        _chatSystem.DispatchStationAnnouncement(TargetStation.Value,Loc.GetString("ert-wait-message"),colorOverride: Color.Gold);
 
         if (TryComp<ShuttleComponent>(Shuttle, out var shuttle) && Outpost != null)
         {
             _shuttle.TryFTLDock(Shuttle.Value, shuttle, Outpost.Value);
-            _shuttle.AddFTLDestination(TargetStation.Value, true);
         }
 
-        var query = EntityQueryEnumerator<GhostComponent,ActorComponent>();
-        while (query.MoveNext(out var uid,out _,out var actorComponent))
-        {
-            _eui.OpenEui(new ERTRecruitmentAcceptEui(uid,this),actorComponent.PlayerSession);
-        }
+        _recruitment.StartRecruitment(EventName);
     }
 
-    public void Recruit(EntityUid uid)
+    public void EventEnd()
     {
         if (!_event.TryGetEvent(EventName, out var prototype) )
             return;
 
-        EnsureComp<ERTRecrutedComponent>(uid);
-        _event.AddPlayer(uid,prototype);
+        if (_recruitment.GetAllRecruited(EventName).Count() < prototype.MinPlayer ||
+            !_recruitment.EndRecruitment(EventName))
+        {
+            DeclineERT();
+            return;
+        }
+
+        AcceptERT();
+    }
+
+    private void AcceptERT()
+    {
+       if(TargetStation == null)
+           return;
+
+       _chatSystem.DispatchStationAnnouncement(TargetStation.Value,Loc.GetString("ert-accept-message"),
+           colorOverride: Color.Gold,announcementSound:ERTYes);
+    }
+
+    private void DeclineERT()
+    {
+        if(TargetStation == null)
+            return;
+
+        _chatSystem.DispatchStationAnnouncement(TargetStation.Value,Loc.GetString("ert-deny-message"),
+            colorOverride: Color.Gold,announcementSound:ERTNo);
     }
 
     private bool SpawnMap()
@@ -154,52 +186,11 @@ public sealed class ERTRecruitmentSystem : EntitySystem
             return false;
         }
 
-        if (TryComp<ShuttleComponent>(shuttleId, out var shuttle))
-        {
-            _shuttle.TryFTLDock(shuttleId, shuttle, Outpost.Value);
-        }
-
         _mapId = mapId;
         Shuttle = shuttleId;
         return true;
     }
 
 
-    public void EndRecruitment()
-    {
-        if (!_event.TryGetEvent(EventName, out var prototype) )
-            return;
 
-        var query = EntityQueryEnumerator<ERTRecrutedComponent>();
-        var go = prototype.PlayerCount >= prototype.MinPlayer;
-
-        var spawners = _event.GetEventSpawners(EventName).ToList();
-        _random.Shuffle(spawners);
-        var count = 0;
-
-        while (query.MoveNext(out var uid,out _))
-        {
-            RemComp<ERTRecrutedComponent>(uid);
-            if(!TryComp<ActorComponent>(uid,out var actor) || count >= spawners.Count)
-                continue;
-
-            if (go)
-            {
-                var (spawnerUid, spawnerComponent) = spawners[count];
-
-                _event.TransferMind(uid,spawnerUid,spawnerComponent);
-                count++;
-                _chat.DispatchServerMessage(actor.PlayerSession, prototype.Description);
-            }
-            else
-            {
-                _chat.DispatchServerMessage(actor.PlayerSession,"Not enough player for " + prototype.Name);
-            }
-        }
-
-        if(go)
-            AcceptERT();
-        else
-            DeclineERT();
-    }
 }

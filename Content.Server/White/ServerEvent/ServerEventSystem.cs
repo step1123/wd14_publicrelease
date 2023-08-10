@@ -13,7 +13,6 @@ public sealed class ServerEventSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
 
     private readonly Dictionary<string,ServerEventPrototype> _eventCache = new();
 
@@ -61,25 +60,6 @@ public sealed class ServerEventSystem : EntitySystem
     {
         prototype.CurrentPlayerGatherTime = null;
         prototype.EndPlayerGatherTime = null;
-        prototype.PlayerCount = 0;
-    }
-
-    public IEnumerable<(EntityUid, EventSpawnPointComponent)> GetEventSpawners(string eventName)
-    {
-        if (!TryGetEvent(eventName, out var prototype))
-            yield break;
-
-        var query = EntityQueryEnumerator<EventSpawnPointComponent>();
-        while (query.MoveNext(out var uid, out var component))
-        {
-            if (component.EventType == eventName)
-                yield return (uid, component);
-        }
-    }
-
-    public void AddPlayer(EntityUid uid,ServerEventPrototype prototype)
-    {
-        prototype.PlayerCount += 1;
     }
 
     public bool TryStartEvent(string eventName)
@@ -90,35 +70,6 @@ public sealed class ServerEventSystem : EntitySystem
         prototype.EndPlayerGatherTime = _timing.CurTime + prototype.PlayerGatherTime;
         return true;
     }
-
-    public void TransferMind(EntityUid from,EntityUid spawnerUid,EventSpawnPointComponent? component = null)
-    {
-        if (!Resolve(spawnerUid, ref component) || !TryComp<ActorComponent>(from,out var actorComponent))
-            return;
-
-        var entityUid = Spawn(spawnerUid, component);
-
-        if(!entityUid.HasValue)
-            return;
-        var mind = actorComponent.PlayerSession.GetMind()!;
-
-        if (HasComp<RandomHumanoidSpawnerComponent>(entityUid.Value))
-        {
-            entityUid = new EntityUid((int) entityUid.Value + 1);
-        }
-
-        _mind.TransferTo(mind,entityUid.Value);
-        _mind.UnVisit(mind);
-    }
-
-    public EntityUid? Spawn(EntityUid spawnerUid,EventSpawnPointComponent? component = null)
-    {
-        if (!Resolve(spawnerUid, ref component))
-            return null;
-
-        return EntityManager.SpawnEntity(component.EntityPrototype, Transform(spawnerUid).Coordinates);
-    }
-
 
     public override void Update(float frameTime)
     {

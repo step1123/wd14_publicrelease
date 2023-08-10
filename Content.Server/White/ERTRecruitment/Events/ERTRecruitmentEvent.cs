@@ -8,7 +8,7 @@ public sealed class ERTRecruitmentStartEvent : IEventAction
     public void Execute(ServerEventPrototype p)
     {
         Logger.Debug("Event " + p.ID + " is started!");
-        IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<ERTRecruitmentSystem>().StartRecruitment();
+        IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<ERTRecruitmentSystem>().EventStart();
     }
 }
 
@@ -17,6 +17,6 @@ public sealed class ERTRecruitmentEndEvent : IEventAction
     public void Execute(ServerEventPrototype p)
     {
         Logger.Debug("Event " + p.ID + " is end!");
-        IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<ERTRecruitmentSystem>().EndRecruitment();
+        IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<ERTRecruitmentSystem>().EventEnd();
     }
 }
