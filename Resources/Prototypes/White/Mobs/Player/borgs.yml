@@ -579,10 +579,6 @@
   id: PlayerCyborgStartBattery
   suffix: Battery
   components:
-    - type: GhostRole
-      name: ghost-role-information-start-cyborg-name
-      description: ghost-role-information-start-cyborg-description
-    - type: GhostTakeoverAvailable
     - type: ContainerFill
       containers:
         battery-slot:

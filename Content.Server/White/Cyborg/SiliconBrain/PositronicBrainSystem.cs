@@ -31,7 +31,7 @@ public sealed class PositronicBrainSystem : SharedPositronicBrainSystem
         SubscribeLocalEvent<PositronicBrainComponent, MindAddedMessage>(OnMindAdded);
         SubscribeLocalEvent<PositronicBrainComponent, MindRemovedMessage>(OnMindRemoved);
         SubscribeLocalEvent<PositronicBrainComponent, GetVerbsEvent<ActivationVerb>>(AddWipeVerb);
-        //SubscribeLocalEvent<PositronicBrainComponent, BrainInsertEvent>(OnInserted);
+        SubscribeLocalEvent<PositronicBrainComponent, BrainInsertEvent>(OnInserted);
 
         SubscribeLocalEvent<SiliconBrainContainerComponent, SiliconMindDoAfterEvent>(OnMindBAdded);
         SubscribeLocalEvent<SiliconBrainContainerComponent, MindAddedMessage>(OnMindAddedParent);
@@ -51,11 +51,10 @@ public sealed class PositronicBrainSystem : SharedPositronicBrainSystem
             _mind.TransferTo(mind, uid);
     }
 
-    // Возможно дело в этом пидорасине! Позволяющий создавать гостроль для джобборгов!
     private void OnInserted(EntityUid uid, PositronicBrainComponent component, BrainInsertEvent args)
     {
         if (!TryComp<SiliconBrainComponent>(uid,out var siliconBrainComponent) ||
-            siliconBrainComponent.ParentUid.HasValue || _mind.TryGetMind(uid,out _))
+            !siliconBrainComponent.ParentUid.HasValue || HasComp<MindContainerComponent>(siliconBrainComponent.ParentUid.Value))
             return;
 
         SearchMind(uid);
