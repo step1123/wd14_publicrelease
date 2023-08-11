@@ -16,6 +16,11 @@ public sealed class ServerEventSystem : EntitySystem
 
     private readonly Dictionary<string,ServerEventPrototype> _eventCache = new();
 
+    public override void Shutdown()
+    {
+        _eventCache.Clear();
+    }
+
     public bool TryGetEvent(string eventName,[MaybeNullWhen(false)] out ServerEventPrototype prototype)
     {
         if (!_eventCache.TryGetValue(eventName, out prototype))
@@ -32,19 +37,20 @@ public sealed class ServerEventSystem : EntitySystem
     {
         if (!TryGetEvent(eventName, out var prototype))
             return false;
+
         return IsEventRunning(prototype);
     }
 
     private bool IsEventRunning(ServerEventPrototype prototype)
     {
-        return prototype.EndPlayerGatherTime.HasValue;
+        return prototype.EndPlayerGatherTime.HasValue && !prototype.IsBreak;
     }
 
     public IEnumerable<ServerEventPrototype> GetActiveEvents()
     {
         foreach (var (_,prototype) in _eventCache)
         {
-            if (prototype.EndPlayerGatherTime.HasValue)
+            if (IsEventRunning(prototype))
                 yield return prototype;
         }
     }
@@ -60,6 +66,7 @@ public sealed class ServerEventSystem : EntitySystem
     {
         prototype.CurrentPlayerGatherTime = null;
         prototype.EndPlayerGatherTime = null;
+        prototype.IsBreak = true;
     }
 
     public bool TryStartEvent(string eventName)
@@ -67,6 +74,7 @@ public sealed class ServerEventSystem : EntitySystem
         if (!TryGetEvent(eventName, out var prototype) || IsEventRunning(prototype))
             return false;
 
+        prototype.IsBreak = false;
         prototype.EndPlayerGatherTime = _timing.CurTime + prototype.PlayerGatherTime;
         return true;
     }
@@ -77,6 +85,7 @@ public sealed class ServerEventSystem : EntitySystem
 
         foreach (var prototype in GetActiveEvents())
         {
+            Logger.Debug(prototype.CurrentPlayerGatherTime + " " + prototype.EndPlayerGatherTime + " " + prototype.IsBreak );
             if (!prototype.CurrentPlayerGatherTime.HasValue)
             {
                 prototype.OnStart?.Execute(prototype);

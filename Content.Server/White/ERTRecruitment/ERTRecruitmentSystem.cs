@@ -84,13 +84,11 @@ public sealed class ERTRecruitmentSystem : EntitySystem
         {
             TargetStation = stations[0];
         }
-
-        SpawnMap();
     }
 
     public void EventStart()
     {
-        if(TargetStation == null)
+        if(TargetStation == null || !SpawnMap())
             return;
 
         if (!_event.TryGetEvent(EventName, out var prototype) ||
@@ -147,7 +145,7 @@ public sealed class ERTRecruitmentSystem : EntitySystem
 
     private bool SpawnMap()
     {
-        _logger.Debug("Loading maps!");
+        _logger.Debug("Loading maps!" + (_mapId != null));
         if (_mapId != null)
             return true;
 

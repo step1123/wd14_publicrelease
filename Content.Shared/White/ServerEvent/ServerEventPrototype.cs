@@ -26,4 +26,6 @@ public sealed class ServerEventPrototype : IPrototype
 
     [ViewVariables] public TimeSpan? CurrentPlayerGatherTime = null;
     [ViewVariables] public TimeSpan? EndPlayerGatherTime = null;
+
+    [ViewVariables] public bool IsBreak;
 }
