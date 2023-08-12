@@ -6,36 +6,58 @@ using Content.Server.Mind;
 using Content.Server.Players;
 using Content.Shared.White.GhostRecruitment;
 using Robust.Server.GameObjects;
+using Robust.Server.Player;
 using Robust.Shared.Random;
 
 namespace Content.Server.White.GhostRecruitment;
 
+/// <summary>
+/// responsible for recruiting guests for all sorts of roles
+/// </summary>
 public sealed class GhostRecruitmentSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly EuiManager _eui = default!;
     [Dependency] private readonly MindSystem _mind = default!;
 
+    private readonly Dictionary<IPlayerSession, GhostRecruitmentEuiAccept> _openUis = new();
+
+    /// <summary>
+    /// starts recruiting ghosts, showing them a menu with a choice to recruit.
+    /// </summary>
+    /// <param name="recruitmentName">name of recruitment. <see cref="GhostRecruitmentSpawnPointComponent"/></param>
     public void StartRecruitment(string recruitmentName)
     {
         var query = EntityQueryEnumerator<GhostComponent,ActorComponent>();
         while (query.MoveNext(out var uid,out _,out var actorComponent))
         {
-            _eui.OpenEui(new GhostRecruitmentEuiAccept(uid,recruitmentName,this),actorComponent.PlayerSession);
+            OpenEui(uid,recruitmentName,actorComponent);
         }
     }
 
+    /// <summary>
+    /// if the ghost agrees, then he queues up for the role
+    /// </summary>
+    /// <param name="uid"></param>
+    /// <param name="recruitmentName">name of recruitment. <see cref="GhostRecruitmentSpawnPointComponent"/></param>
     public void Recruit(EntityUid uid,string recruitmentName)
     {
         EnsureComp<GhostRecruitedComponent>(uid).RecruitmentName = recruitmentName;
     }
 
+    /// <summary>
+    /// Arranges the ghosts that agreed by roles.
+    /// </summary>
+    /// <param name="recruitmentName">name of recruitment. <see cref="GhostRecruitmentSpawnPointComponent"/></param>
+    /// <returns>is success?</returns>
     public bool EndRecruitment(string recruitmentName)
     {
         var query = EntityQueryEnumerator<GhostRecruitedComponent>();
 
         var spawners = GetEventSpawners(recruitmentName).ToList();
-        _random.Shuffle(spawners);
+
+        // We prioritize the queue, for example, the commander first, and then the engineer
+        spawners = spawners.OrderBy(o => o.Item2.Priority).ToList();
+
         var count = 0;
 
         var attemptRecruitment = new GhostRecruitmentAttemptEvent(recruitmentName);
@@ -55,7 +77,14 @@ public sealed class GhostRecruitmentSystem : EntitySystem
                 continue;
 
             RemComp<GhostRecruitedComponent>(uid);
-            if(!HasComp<ActorComponent>(uid) || count >= spawners.Count)
+
+            if (!TryComp<ActorComponent>(uid, out var actorComponent))
+                continue;
+
+            CloseEui(uid,recruitmentName,actorComponent);
+
+            // if there are too many recruited, then just skip
+            if(count >= spawners.Count)
                 continue;
 
             var (spawnerUid, spawnerComponent) = spawners[count];
@@ -74,7 +103,7 @@ public sealed class GhostRecruitmentSystem : EntitySystem
         return true;
     }
 
-    public void TransferMind(EntityUid from,EntityUid spawnerUid,GhostRecruitmentSpawnPointComponent? component = null)
+    private void TransferMind(EntityUid from,EntityUid spawnerUid,GhostRecruitmentSpawnPointComponent? component = null)
     {
         if (!Resolve(spawnerUid, ref component) || !TryComp<ActorComponent>(from,out var actorComponent))
             return;
@@ -89,7 +118,7 @@ public sealed class GhostRecruitmentSystem : EntitySystem
         _mind.UnVisit(mind);
     }
 
-    public EntityUid? Spawn(EntityUid spawnerUid,GhostRecruitmentSpawnPointComponent? component = null)
+    private EntityUid? Spawn(EntityUid spawnerUid,GhostRecruitmentSpawnPointComponent? component = null)
     {
         if (!Resolve(spawnerUid, ref component))
             return null;
@@ -122,6 +151,31 @@ public sealed class GhostRecruitmentSystem : EntitySystem
             if (component.RecruitmentName == recruitmentName)
                 yield return (uid, component);
         }
+    }
+
+    public void OpenEui(EntityUid uid,string recruitmentName,ActorComponent? actorComponent = null)
+    {
+        if(!Resolve(uid,ref actorComponent))
+            return;
+        var eui = new GhostRecruitmentEuiAccept(uid, recruitmentName, this);
+
+        _openUis.Add(actorComponent.PlayerSession,eui);
+        _eui.OpenEui(eui,actorComponent.PlayerSession);
+    }
+
+    public void CloseEui(EntityUid uid,string recruitmentName,ActorComponent? actorComponent = null)
+    {
+        if(!Resolve(uid,ref actorComponent))
+            return;
+
+        var session = actorComponent.PlayerSession;
+
+        if (!_openUis.ContainsKey(session))
+            return;
+
+        _openUis.Remove(session, out var eui);
+
+        eui?.Close();
     }
 }
 

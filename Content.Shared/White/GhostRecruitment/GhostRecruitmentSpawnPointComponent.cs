@@ -11,4 +11,6 @@ public sealed class GhostRecruitmentSpawnPointComponent : Component
 
     [DataField("recruitmentName")]
     public string RecruitmentName = "default";
+
+    [DataField("priority")] public int Priority = 5;
 }

@@ -16,6 +16,7 @@
     - type: GhostRecruitmentSpawnPoint
       prototype: RandomHumanoidSpawnerERTLeader
       recruitmentName: ERTRecruitment
+      priority: 1
     - type: Sprite
       layers:
         - state: green
@@ -29,6 +30,7 @@
     - type: GhostRecruitmentSpawnPoint
       prototype: RandomHumanoidSpawnerERTLeaderEVA
       recruitmentName: ERTRecruitment
+      priority: 1
     - type: Sprite
       layers:
         - state: green
@@ -68,6 +70,7 @@
     - type: GhostRecruitmentSpawnPoint
       prototype: RandomHumanoidSpawnerERTEngineer
       recruitmentName: ERTRecruitment
+      priority: 2
     - type: Sprite
       layers:
         - state: green
@@ -81,6 +84,7 @@
     - type: GhostRecruitmentSpawnPoint
       prototype: RandomHumanoidSpawnerERTEngineerEVA
       recruitmentName: ERTRecruitment
+      priority: 2
     - type: Sprite
       layers:
         - state: green
@@ -120,6 +124,7 @@
     - type: GhostRecruitmentSpawnPoint
       prototype: RandomHumanoidSpawnerERTMedical
       recruitmentName: ERTRecruitment
+      priority: 2
     - type: Sprite
       layers:
         - state: green
@@ -133,6 +138,7 @@
     - type: GhostRecruitmentSpawnPoint
       prototype: RandomHumanoidSpawnerERTMedicalEVA
       recruitmentName: ERTRecruitment
+      priority: 2
     - type: Sprite
       layers:
         - state: green
