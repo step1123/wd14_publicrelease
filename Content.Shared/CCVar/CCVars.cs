@@ -374,7 +374,7 @@ namespace Content.Shared.CCVar
             CVarDef.Create("traitor.starting_balance", 20);
 
         public static readonly CVarDef<int> TraitorMaxDifficulty =
-            CVarDef.Create("traitor.max_difficulty", 5);
+            CVarDef.Create("traitor.max_difficulty", 8);
 
         public static readonly CVarDef<int> TraitorMinObjectives =
             CVarDef.Create("traitor.min_objectives", 3);
