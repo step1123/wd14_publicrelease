@@ -7,7 +7,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Melee/blood_dagger.rsi, state: icon }
   productEntity: BloodSuckerDagger
   cost:
-    Telecrystal: 10
+    Telecrystal: 8
   categories:
     - UplinkWeapons
   conditions:
@@ -70,7 +70,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_sword.rsi, state: icon }
   productEntity: EnergySword
   cost:
-    Telecrystal: 10
+    Telecrystal: 8
   categories:
   - UplinkWeapons
   saleLimit: 2
@@ -117,7 +117,7 @@
   description: uplink-explosive-grenade-desc
   productEntity: ExGrenade
   cost:
-    Telecrystal: 4
+    Telecrystal: 2
   categories:
   - UplinkExplosives
 
@@ -167,7 +167,7 @@
   description: uplink-penguin-grenade-desc
   productEntity: MobGrenadePenguin
   cost:
-    Telecrystal: 5
+    Telecrystal: 4
   categories:
     - UplinkExplosives
   conditions:
@@ -208,7 +208,7 @@
   description: uplink-c4-bundle-desc
   productEntity: ClothingBackpackDuffelSyndicateC4tBundle
   cost:
-    Telecrystal: 20
+    Telecrystal: 16
   categories:
   - UplinkExplosives
   saleLimit: 1
@@ -219,7 +219,7 @@
   description: uplink-emp-grenade-desc
   productEntity: EmpGrenade
   cost:
-    Telecrystal: 3
+    Telecrystal: 1
   categories:
   - UplinkExplosives
 
@@ -302,7 +302,7 @@
   icon: { sprite: /Textures/Objects/Misc/guardian_info.rsi, state: icon }
   productEntity: BoxHoloparasite
   cost:
-    Telecrystal: 14
+    Telecrystal: 12
   categories:
   - UplinkUtility
   conditions:
@@ -328,7 +328,7 @@
   description: uplink-emag-desc
   productEntity: Emag
   cost:
-    Telecrystal: 8
+    Telecrystal: 6
   categories:
   - UplinkUtility
 
@@ -436,7 +436,7 @@
   icon: { sprite: /Textures/Objects/Misc/bureaucracy.rsi, state: pen }
   productEntity: HypopenBox
   cost:
-    Telecrystal: 6
+    Telecrystal: 4
   categories:
   - UplinkUtility
 
@@ -527,7 +527,7 @@
   icon: { sprite: /Textures/Objects/Magic/magicactions.rsi, state: shield }
   productEntity: EmpImplanter
   cost:
-    Telecrystal: 5
+    Telecrystal: 3
   categories:
     - UplinkImplants
 
@@ -1044,7 +1044,7 @@
   icon: { sprite: /Textures/Clothing/OuterClothing/Hardsuits/syndicate.rsi, state: icon }
   productEntity: ClothingBackpackDuffelSyndicateHardsuitBundle
   cost:
-    Telecrystal: 8
+    Telecrystal: 6
   categories:
   - UplinkArmor
   saleLimit: 1
@@ -1120,7 +1120,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_shield.rsi, state: eshield-on }
   productEntity: EnergyShield
   cost:
-    Telecrystal: 6
+    Telecrystal: 5
   categories:
   - UplinkMisc
   saleLimit: 1
