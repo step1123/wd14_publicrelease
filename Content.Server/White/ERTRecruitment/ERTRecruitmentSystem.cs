@@ -10,6 +10,7 @@ using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Systems;
 using Content.Server.White.GhostRecruitment;
 using Content.Server.White.ServerEvent;
+using Content.Shared.GameTicking;
 using Content.Shared.White.GhostRecruitment;
 using Content.Shared.White.ServerEvent;
 using Robust.Server.GameObjects;
@@ -50,21 +51,18 @@ public sealed class ERTRecruitmentSystem : EntitySystem
     {
         _logger = Logger.GetSawmill(EventName);
         SubscribeLocalEvent<RoundStartAttemptEvent>(OnRoundStart);
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundEnd);
         SubscribeLocalEvent<RecruitedComponent,GhostRecruitmentSuccessEvent>(OnRecruitmentSuccess);
     }
 
-    public override void Shutdown()
+    private void OnRoundEnd(RoundRestartCleanupEvent ev)
     {
-        if (_mapId != null)
-        {
-            _mapManager.DeleteMap(_mapId.Value);
-        }
-
         Outpost = null;
         Shuttle = null;
         TargetStation = null;
 
         _mapId = null;
+        _logger.Debug("Deleted map");
     }
 
     private void OnRecruitmentSuccess(EntityUid uid, RecruitedComponent component, GhostRecruitmentSuccessEvent args)
@@ -145,9 +143,12 @@ public sealed class ERTRecruitmentSystem : EntitySystem
 
     private bool SpawnMap()
     {
-        _logger.Debug("Loading maps!" + (_mapId != null));
+        _logger.Debug($"Loading maps!");
         if (_mapId != null)
+        {
+            _logger.Debug("Oopsie! Map is exists!" + _mapId);
             return true;
+        }
 
         var path = OutpostMap;
         var shuttlePath = ShuttleMap;
@@ -163,6 +164,7 @@ public sealed class ERTRecruitmentSystem : EntitySystem
             _logger.Error( $"Error loading map {path}!");
             return false;
         }
+        _logger.Debug($"Loaded map {path} on {mapId}!");
 
         // Assume the first grid is the outpost grid.
         Outpost = outpostGrids[0];
@@ -173,6 +175,7 @@ public sealed class ERTRecruitmentSystem : EntitySystem
             _logger.Error( $"Error loading grid {shuttlePath}!");
             return false;
         }
+        _logger.Debug($"Loaded shuttle {shuttlePath} on {mapId}!");
 
         var shuttleId = grids.First();
 

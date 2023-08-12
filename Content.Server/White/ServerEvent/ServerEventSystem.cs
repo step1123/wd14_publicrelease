@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Server.Humanoid.Components;
 using Content.Server.Mind;
 using Content.Server.Players;
+using Content.Shared.GameTicking;
 using Content.Shared.White.ServerEvent;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
@@ -16,7 +17,12 @@ public sealed class ServerEventSystem : EntitySystem
 
     private readonly Dictionary<string,ServerEventPrototype> _eventCache = new();
 
-    public override void Shutdown()
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnEnd);
+    }
+
+    private void OnEnd(RoundRestartCleanupEvent ev)
     {
         _eventCache.Clear();
     }
@@ -26,10 +32,15 @@ public sealed class ServerEventSystem : EntitySystem
         if (!_eventCache.TryGetValue(eventName, out prototype))
         {
             if (!_prototype.TryIndex(eventName, out prototype))
+            {
+                Logger.Debug("Failed load " + eventName);
                 return false;
+            }
+            Logger.Debug("Caching " + eventName);
             _eventCache.Add(eventName,prototype);
         }
 
+        Logger.Debug("Successful get " + eventName);
         return true;
     }
 
@@ -64,6 +75,7 @@ public sealed class ServerEventSystem : EntitySystem
 
     private void BreakEvent(ServerEventPrototype prototype)
     {
+        Logger.Debug("Event is break! " + prototype.ID);
         prototype.CurrentPlayerGatherTime = null;
         prototype.EndPlayerGatherTime = null;
         prototype.IsBreak = true;
@@ -76,6 +88,8 @@ public sealed class ServerEventSystem : EntitySystem
 
         prototype.IsBreak = false;
         prototype.EndPlayerGatherTime = _timing.CurTime + prototype.PlayerGatherTime;
+
+        Logger.Debug("Event is started " + eventName);
         return true;
     }
 
@@ -85,9 +99,9 @@ public sealed class ServerEventSystem : EntitySystem
 
         foreach (var prototype in GetActiveEvents())
         {
-            Logger.Debug(prototype.CurrentPlayerGatherTime + " " + prototype.EndPlayerGatherTime + " " + prototype.IsBreak );
             if (!prototype.CurrentPlayerGatherTime.HasValue)
             {
+                Logger.Debug("Started with " + prototype.CurrentPlayerGatherTime + " " + prototype.EndPlayerGatherTime + " " + prototype.IsBreak );
                 prototype.OnStart?.Execute(prototype);
             }
             prototype.CurrentPlayerGatherTime = _timing.CurTime;
@@ -95,6 +109,7 @@ public sealed class ServerEventSystem : EntitySystem
             if (prototype.CurrentPlayerGatherTime > prototype.EndPlayerGatherTime)
             {
                 prototype.OnEnd?.Execute(prototype);
+                Logger.Debug("Ended with " + prototype.CurrentPlayerGatherTime + " " + prototype.EndPlayerGatherTime + " " + prototype.IsBreak );
                 BreakEvent(prototype);
             }
         }
