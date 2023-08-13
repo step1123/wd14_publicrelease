@@ -1,6 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
+  "copyright": "FDev",
   "size": {
     "x": 16,
     "y": 16
@@ -9,6 +10,6 @@
     {
       "name": "icon"
     }
-    
+
   ]
 }
