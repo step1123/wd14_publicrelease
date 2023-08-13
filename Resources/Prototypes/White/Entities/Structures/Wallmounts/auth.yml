@@ -1,0 +1,44 @@
+- type: entity
+  id: AuthPanel
+  name: AuthPanel
+  description: Kaboom?
+  components:
+    - type: WallMount
+    - type: ApcPowerReceiver
+    - type: Electrified
+      enabled: false
+      usesApcPower: true
+    - type: ExtensionCableReceiver
+    - type: Clickable
+    - type: InteractionOutline
+    - type: Appearance
+    - type: AuthPanel
+    - type: Sprite
+      noRot: false
+      sprite: White/Structures/Machines/auth.rsi
+      layers:
+        - state: auth_off
+        - state: auth_on
+          map: ["enabled"]
+          shader: unshaded
+          visible: false
+    - type: Transform
+      noRot: false
+      anchored: true
+    - type: ActivatableUIRequiresPower
+    - type: ActivatableUI
+      key: enum.AuthPanelUiKey.Key
+    - type: UserInterface
+      interfaces:
+        - key: enum.AuthPanelUiKey.Key
+          type: AuthPanelBoundUserInterface
+    - type: GenericVisualizer
+      visuals:
+        enum.AuthPanelVisualLayers.Confirm:
+          enabled:
+            True: { visible: true }
+            False: { visible: false }
+  placement:
+    mode: SnapgridCenter
+    snap:
+      - Wallmount

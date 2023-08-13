@@ -1,10 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
-using Content.Server.Humanoid.Components;
-using Content.Server.Mind;
-using Content.Server.Players;
+using Content.Server.GameTicking;
 using Content.Shared.GameTicking;
 using Content.Shared.White.ServerEvent;
-using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -14,6 +11,7 @@ public sealed class ServerEventSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly GameTicker _gameTicker = default!;
 
     private readonly Dictionary<string,ServerEventPrototype> _eventCache = new();
 
@@ -24,6 +22,11 @@ public sealed class ServerEventSystem : EntitySystem
 
     private void OnEnd(RoundRestartCleanupEvent ev)
     {
+        foreach (var eventPrototype in GetActiveEvents())
+        {
+            BreakEvent(eventPrototype);
+        }
+
         _eventCache.Clear();
     }
 
@@ -83,7 +86,7 @@ public sealed class ServerEventSystem : EntitySystem
 
     public bool TryStartEvent(string eventName)
     {
-        if (!TryGetEvent(eventName, out var prototype) || IsEventRunning(prototype))
+        if (!TryGetEvent(eventName, out var prototype) || IsEventRunning(prototype) || _gameTicker.RunLevel != GameRunLevel.InRound)
             return false;
 
         prototype.IsBreak = false;
