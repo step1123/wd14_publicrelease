@@ -6,6 +6,7 @@ using Content.Shared.Access.Systems;
 using Content.Shared.GameTicking;
 using Content.Shared.White.AuthPanel;
 using Robust.Server.GameObjects;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Server.White.AuthPanel;
@@ -18,6 +19,8 @@ public sealed class AuthPanelSystem : EntitySystem
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly ServerEventSystem _event = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly ERTRecruitmentSystem _ert = default!;
 
     public Dictionary<AuthPanelAction, HashSet<EntityUid>> Counter = new();
     public Dictionary<AuthPanelAction, HashSet<int>> CardIndexes = new();
@@ -46,7 +49,14 @@ public sealed class AuthPanelSystem : EntitySystem
     {
         if (args.Action is AuthPanelAction.ERTRecruit)
         {
-            _event.TryStartEvent(ERTRecruitmentSystem.EventName);
+            if (_random.Next(0, 10) < 2)
+            {
+                _event.TryStartEvent(ERTRecruitmentSystem.EventName);
+            }
+            else
+            {
+                _ert.DeclineERT();
+            }
         }
     }
 

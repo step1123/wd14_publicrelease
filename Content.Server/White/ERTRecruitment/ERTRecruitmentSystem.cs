@@ -139,7 +139,7 @@ public sealed class ERTRecruitmentSystem : EntitySystem
         AcceptERT();
     }
 
-    private void AcceptERT()
+    public void AcceptERT()
     {
        if(TargetStation == null)
            return;
@@ -148,7 +148,7 @@ public sealed class ERTRecruitmentSystem : EntitySystem
            colorOverride: Color.Gold,announcementSound:ERTYes);
     }
 
-    private void DeclineERT()
+    public void DeclineERT()
     {
         if(TargetStation == null)
             return;
