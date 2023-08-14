@@ -18,19 +18,19 @@
 
         <controls:StripeBack HasBottomEdge="True" HasMargins="False" HorizontalExpand="True">
             <BoxContainer Orientation="Vertical">
-                <BoxContainer>
-                    <Button Name="RedButton" Margin="0 5 0 0" Text="Красная тревога"/>
-                    <Label Name="RedCount" Margin="15 0 15 0" Visible="False"/>
+                <BoxContainer HorizontalExpand="True">
+                    <Button Name="RedButton" MinWidth="310" Margin="0 5 0 0" HorizontalAlignment="Left" Text="Красная тревога"/>
+                    <Label Name="RedCount" Margin="15 0 15 0" HorizontalAlignment="Right" Visible="False"/>
                 </BoxContainer>
 
-                <BoxContainer>
-                    <Button Name="AccessButton" Margin="0 5 0 0" Text="Аварийный доступ к тех. тоннелям" Disabled="True"/>
-                    <Label Name="AccessCount" Margin="15 0 15 0" Visible="False"/>
+                <BoxContainer HorizontalExpand="True">
+                    <Button Name="AccessButton" MinWidth="310" Margin="0 5 0 0" HorizontalAlignment="Left" Text="Аварийный доступ к тех. тоннелям" Disabled="True"/>
+                    <Label Name="AccessCount" Margin="45 0 5 0" HorizontalAlignment="Right" Visible="False"/>
                 </BoxContainer>
 
-                <BoxContainer>
-                    <Button Name="BluespaceWeaponButton" Margin="0 5 0 5" Text="Разблокировка блюспейс артилерии" Disabled="True"/>
-                    <Label Name="BluespaceWeaponCount" Margin="15 0 15 0" Visible="False"/>
+                <BoxContainer HorizontalExpand="True">
+                    <Button Name="BluespaceWeaponButton" MinWidth="310" Margin="0 5 0 5" HorizontalAlignment="Left" Text="Разблокировка блюспейс артилерии" Disabled="True"/>
+                    <Label Name="BluespaceWeaponCount" Margin="45 0 5 0" HorizontalAlignment="Right" Visible="False"/>
                 </BoxContainer>
             </BoxContainer>
         </controls:StripeBack>

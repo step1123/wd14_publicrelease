@@ -5,6 +5,7 @@ using Content.Server.White.ServerEvent;
 using Content.Shared.Access.Systems;
 using Content.Shared.White.AuthPanel;
 using Robust.Server.GameObjects;
+using Robust.Shared.Timing;
 
 namespace Content.Server.White.AuthPanel;
 
@@ -15,11 +16,15 @@ public sealed class AuthPanelSystem : EntitySystem
     [Dependency] private readonly AccessReaderSystem _access = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly ServerEventSystem _event = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public Dictionary<AuthPanelAction, HashSet<EntityUid>> Counter = new();
     public Dictionary<AuthPanelAction, HashSet<int>> CardIndexes = new();
 
     public static int MaxCount = 2;
+
+    private TimeSpan? _delay;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<AuthPanelComponent,AuthPanelButtonPressedMessage>(OnButtonPressed);
@@ -46,6 +51,13 @@ public sealed class AuthPanelSystem : EntitySystem
         if (!access.Contains("Command"))
         {
             _popup.PopupEntity("Нет доступа",
+                args.Session.AttachedEntity.Value,args.Session.AttachedEntity.Value);
+            return;
+        }
+
+        if (_delay != null)
+        {
+            _popup.PopupEntity("Пожалуйста, подождите прежде чем активировать кнопку",
                 args.Session.AttachedEntity.Value,args.Session.AttachedEntity.Value);
             return;
         }
@@ -80,6 +92,7 @@ public sealed class AuthPanelSystem : EntitySystem
         }
 
         cardSet.Add(access.Count);
+        _delay = _timing.CurTime + TimeSpan.FromSeconds(5);
 
         UpdateUserInterface();
 
@@ -111,6 +124,17 @@ public sealed class AuthPanelSystem : EntitySystem
 
             UserInterfaceSystem.SetUiState(ui, state);
             _appearance.SetData(uid,AuthPanelVisualLayers.Confirm,true);
+        }
+    }
+
+    public override void Update(float frameTime)
+    {
+        if (_delay == null)
+            return;
+
+        if (_timing.CurTime >= _delay)
+        {
+            _delay = null;
         }
     }
 }

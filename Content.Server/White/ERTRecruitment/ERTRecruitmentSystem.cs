@@ -78,11 +78,13 @@ public sealed class ERTRecruitmentSystem : EntitySystem
         {
             TargetStation = stations[0];
         }
+
+        SpawnMap();
     }
 
     public void EventStart()
     {
-        if(TargetStation == null || !SpawnMap())
+        if(TargetStation == null)
             return;
 
         if (!_event.TryGetEvent(EventName, out var prototype) ||
