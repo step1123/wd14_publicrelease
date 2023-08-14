@@ -3,6 +3,7 @@ using Content.Server.Popups;
 using Content.Server.White.ERTRecruitment;
 using Content.Server.White.ServerEvent;
 using Content.Shared.Access.Systems;
+using Content.Shared.GameTicking;
 using Content.Shared.White.AuthPanel;
 using Robust.Server.GameObjects;
 using Robust.Shared.Timing;
@@ -29,12 +30,20 @@ public sealed class AuthPanelSystem : EntitySystem
     {
         SubscribeLocalEvent<AuthPanelComponent,AuthPanelButtonPressedMessage>(OnButtonPressed);
         SubscribeLocalEvent<AuthPanelComponent,AuthPanelPerformActionEvent>(OnPerformAction);
+
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRestart);
+    }
+
+    private void OnRestart(RoundRestartCleanupEvent ev)
+    {
+        Counter.Clear();
+        CardIndexes.Clear();
+
+        _delay = null;
     }
 
     private void OnPerformAction(EntityUid uid, AuthPanelComponent component, AuthPanelPerformActionEvent args)
     {
-        Logger.Debug("Performed action " + args.Action);
-
         if (args.Action is AuthPanelAction.ERTRecruit)
         {
             _event.TryStartEvent(ERTRecruitmentSystem.EventName);
