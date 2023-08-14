@@ -277,7 +277,7 @@
 - type: ttsVoice
   id: TurretFloor
   name: tts-voice-name-turret-floor
-  sex: Male
+  sex: Female
   speaker: turret_floor
 
 - type: ttsVoice
