@@ -10,6 +10,7 @@ using Content.Server.White.GhostRecruitment;
 using Content.Server.White.ServerEvent;
 using Content.Shared.GameTicking;
 using Content.Shared.White.GhostRecruitment;
+using Content.Shared.White.ServerEvent;
 using Robust.Server.GameObjects;
 using Robust.Server.Maps;
 using Robust.Shared.Audio;
@@ -49,6 +50,23 @@ public sealed class ERTRecruitmentSystem : EntitySystem
         SubscribeLocalEvent<RoundStartAttemptEvent>(OnRoundStart);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundEnd);
         SubscribeLocalEvent<RecruitedComponent,GhostRecruitmentSuccessEvent>(OnRecruitmentSuccess);
+
+        SubscribeLocalEvent<EventStarted>(OnEventStart);
+        SubscribeLocalEvent<EventEnded>(OnEventEnd);
+    }
+
+    private void OnEventEnd(EventEnded ev)
+    {
+        if(ev.EventName != EventName)
+            return;
+        EventEnd();
+    }
+
+    private void OnEventStart(EventStarted ev)
+    {
+        if(ev.EventName != EventName)
+            return;
+        EventStart();
     }
 
     private void OnRoundEnd(RoundRestartCleanupEvent ev)

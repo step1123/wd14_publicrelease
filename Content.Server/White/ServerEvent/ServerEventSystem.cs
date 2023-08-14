@@ -105,6 +105,7 @@ public sealed class ServerEventSystem : EntitySystem
             if (!prototype.CurrentPlayerGatherTime.HasValue)
             {
                 Logger.Debug("Started with " + prototype.CurrentPlayerGatherTime + " " + prototype.EndPlayerGatherTime + " " + prototype.IsBreak );
+                RaiseLocalEvent(new EventStarted(prototype.ID));
                 prototype.OnStart?.Execute(prototype);
             }
             prototype.CurrentPlayerGatherTime = _timing.CurTime;
@@ -112,6 +113,7 @@ public sealed class ServerEventSystem : EntitySystem
             if (prototype.CurrentPlayerGatherTime > prototype.EndPlayerGatherTime)
             {
                 prototype.OnEnd?.Execute(prototype);
+                RaiseLocalEvent(new EventEnded(prototype.ID));
                 Logger.Debug("Ended with " + prototype.CurrentPlayerGatherTime + " " + prototype.EndPlayerGatherTime + " " + prototype.IsBreak );
                 BreakEvent(prototype);
             }
