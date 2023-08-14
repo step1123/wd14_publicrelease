@@ -227,8 +227,7 @@
           bounds: "-0.15,-0.3,0.15,0.3"
         hard: false
         mask:
-        - Impassable
-        - BulletImpassable
+        - Opaque
       fly-by: *flybyfixture
   - type: Ammo
   - type: StaminaDamageOnCollide

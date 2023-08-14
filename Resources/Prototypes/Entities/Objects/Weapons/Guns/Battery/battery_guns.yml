@@ -478,6 +478,10 @@
           shader: unshaded
     - type: Clothing
       sprite: Objects/Weapons/Guns/Battery/egun.rsi
+      quickEquip: false
+      slots:
+      - Belt
+      - suitStorage
     - type: Gun
       soundGunshot:
         path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
