@@ -3,7 +3,9 @@ using Content.Client.Gameplay;
 using Content.Client.Interactable.Components;
 using Content.Client.Viewport;
 using Content.Shared.CCVar;
+using Content.Shared.CombatMode;
 using Content.Shared.Interaction;
+using Content.Shared.Weapons.Melee;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
@@ -24,6 +26,8 @@ public sealed class InteractionOutlineSystem : EntitySystem
     [Dependency] private readonly IStateManager _stateManager = default!;
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
     [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
+    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!; // WD
+    [Dependency] private readonly SharedMeleeWeaponSystem _meleeWeapon = default!; // WD
 
     /// <summary>
     ///     Whether to currently draw the outline. The outline may be temporarily disabled by other systems
@@ -139,6 +143,18 @@ public sealed class InteractionOutlineSystem : EntitySystem
         if (localPlayer.ControlledEntity != null && !Deleted(entityToClick))
         {
             inRange = _interactionSystem.InRangeUnobstructed(localPlayer.ControlledEntity.Value, entityToClick.Value);
+
+            // WD START
+            if (_combatMode.IsInCombatMode(localPlayer.ControlledEntity) &&
+                (_meleeWeapon.TryGetWeapon(localPlayer.ControlledEntity.Value, out _, out var weapon) ||
+                 TryComp(localPlayer.ControlledEntity, out weapon)))
+            {
+                var mousePos = _eyeManager.ScreenToMap(_inputManager.MouseScreenPosition);
+                var userPos = Transform(localPlayer.ControlledEntity.Value).MapPosition;
+
+                if (mousePos.MapId != userPos.MapId || (userPos.Position - mousePos.Position).Length() > weapon.Range)
+                    inRange = false;
+            } // WD END
         }
 
         InteractionOutlineComponent? outline;
