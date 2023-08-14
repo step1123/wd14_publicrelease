@@ -1,0 +1,46 @@
+- type: constructionGraph
+  id: EnergyDoubleSwordGraph
+  start: esword
+  graph:
+  - node: esword
+    entity: EnergySword
+    edges:
+      - to: desword
+        steps:
+          - tag: EnergySword
+  - node: desword
+    entity: EnergyDoubleSword
+
+- type: constructionGraph
+  id: WeaponFlamethrowerGraph
+  start: welder
+  graph:
+  - node: welder
+    entity: Welder
+    edges:
+      - to: screwed-welder
+        steps:
+        - tool: Screwing
+          doAfter: 1
+  - node: screwed-welder
+    edges:
+      - to: no-igniter
+        steps:
+          - material: MetalRod
+            amount: 5
+            doAfter: 5
+  - node: no-igniter
+    entity: WeaponFlamethrowerNoIgniter
+    edges:
+      - to: unscrewed
+        steps:
+          - tag: Lighter
+  - node: unscrewed
+    entity: WeaponFlamethrowerUnscrewed
+    edges:
+      - to: flamethrower
+        steps:
+          - tool: Screwing
+            doAfter: 1
+  - node: flamethrower
+    entity: WeaponFlamethrower

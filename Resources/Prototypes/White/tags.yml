@@ -3,3 +3,12 @@
 
 - type: Tag
   id: BorgRightArm
+
+- type: Tag
+  id: TankPlasma
+
+- type: Tag
+  id: EnergySword
+
+- type: Tag
+  id: Lighter

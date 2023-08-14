@@ -1,0 +1,32 @@
+- type: entity
+  id: ProjectileFlamethrower
+  name: ProjectileFlamethrower
+  description: ProjectileFlamethrower
+  noSpawn: true
+  components:
+  - type: GasProjectile
+    gasUsagePerTile: 0.7
+  - type: Projectile
+    damage:
+      types:
+        Structural: 0
+  - type: TimedDespawn
+    lifetime: 0.2
+  - type: Physics
+    bodyType: Dynamic
+    linearDamping: 0
+    angularDamping: 0
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+  - type: IgnitionSource
+    temperature: 4000
+  - type: Ammo
+    muzzleFlash: null

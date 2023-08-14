@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server.Construction.Components;
 using Content.Server.Containers;
 using Content.Shared.Construction;
@@ -5,6 +6,8 @@ using Content.Shared.Construction.Prototypes;
 using Content.Shared.Construction.Steps;
 using Content.Shared.Containers;
 using Content.Shared.Database;
+using Content.Shared.Hands.Components;
+using Content.Shared.Item;
 using Robust.Server.Containers;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
@@ -369,6 +372,16 @@ namespace Content.Server.Construction
                 }
             }
 
+            if (userUid != null && IsTransformParentOf(userUid.Value, transform) &&
+                TryComp(userUid, out HandsComponent? hands))
+            {
+                var hand = hands.Hands.Values.FirstOrDefault(h => h.HeldEntity == uid);
+                if (hand != null)
+                    _handsSystem.TryDrop(userUid.Value, hand, handsComp: hands);
+
+                _handsSystem.PickupOrDrop(userUid, newUid, handsComp: hands);
+            }
+
             var entChangeEv = new ConstructionChangeEntityEvent(newUid, uid);
             RaiseLocalEvent(uid, entChangeEv);
             RaiseLocalEvent(newUid, entChangeEv, broadcast: true);
@@ -383,6 +396,14 @@ namespace Content.Server.Construction
             QueueDel(uid);
 
             return newUid;
+        }
+
+        bool IsTransformParentOf(EntityUid uid, TransformComponent target) // WD
+        {
+            var parentUid = target.ParentUid;
+
+            return parentUid == uid ||
+                   TryComp(parentUid, out TransformComponent? trans) && IsTransformParentOf(uid, trans);
         }
 
         /// <summary>

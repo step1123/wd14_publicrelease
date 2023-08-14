@@ -53,7 +53,13 @@
     malus: 0
   - type: Reflect
     enabled: false
-  - type: DoubleSwordCraft
+  - type: Tag
+    tags:
+    - EnergySword
+  - type: Construction
+    deconstructionTarget: null
+    graph: EnergyDoubleSwordGraph
+    node: esword
 
 - type: entity
   name: pen
@@ -193,3 +199,7 @@
     - type: Reflect
       reflectProb: 0.55
       enabled: false
+    - type: Construction
+      deconstructionTarget: null
+      graph: EnergyDoubleSwordGraph
+      node: desword

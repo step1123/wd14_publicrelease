@@ -1,0 +1,106 @@
+- type: entity
+  name: огнемёт
+  parent: BaseWelder
+  id: WeaponFlamethrower
+  description: Отлично подходит для сжигания фурри.
+  components:
+  - type: Sprite
+    sprite: White/Objects/Weapons/flamethrower.rsi
+    layers:
+    - state: icon
+      map: ["enum.WelderLayers.Base"]
+    - state: tank
+      map: [ "tank" ]
+      visible: false
+    - state: flame
+      map: ["enum.WelderLayers.Flame"]
+      shader: unshaded
+      visible: false
+  - type: Item
+    size: 50
+    sprite: White/Objects/Weapons/flamethrower.rsi
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Back
+  - type: Gun
+    cameraRecoilScalar: 0
+    fireRate: 2
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/water_spray.ogg
+  - type: GasAmmoProvider
+    gasUsage: 2.1
+    proto: ProjectileFlamethrower
+  - type: Flamethrower
+  - type: ItemMapper
+    containerWhitelist: [gas_tank]
+    mapLayers:
+      tank:
+        whitelist:
+          tags:
+            - TankPlasma
+  - type: ItemSlots
+    slots:
+      gas_tank:
+        name: Баллон с плазмой
+        whitelist:
+          tags:
+            - TankPlasma
+        insertSound:
+          path: /Audio/Weapons/click.ogg
+          params:
+            volume: -3
+  - type: ContainerContainer
+    containers:
+      gas_tank: !type:ContainerSlot
+  - type: ToggleableLightVisuals
+    spriteLayer: flame
+    inhandVisuals:
+      left:
+      - state: inhand-left-flame
+        shader: unshaded
+      right:
+      - state: inhand-right-flame
+        shader: unshaded
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponFlamethrowerGraph
+    node: flamethrower
+
+- type: entity
+  name: часть огнемёта
+  parent: BaseItem
+  id: WeaponFlamethrowerNoIgniter
+  description: Недоделанный огнемёт.
+  components:
+  - type: Sprite
+    sprite: White/Objects/Weapons/flamethrower.rsi
+    layers:
+    - state: no-igniter
+  - type: Item
+    size: 50
+    sprite: White/Objects/Weapons/flamethrower.rsi
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Back
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponFlamethrowerGraph
+    node: no-igniter
+
+- type: entity
+  name: часть огнемёта
+  parent: WeaponFlamethrowerNoIgniter
+  id: WeaponFlamethrowerUnscrewed
+  description: Недоделанный огнемёт.
+  components:
+  - type: Sprite
+    sprite: White/Objects/Weapons/flamethrower.rsi
+    layers:
+    - state: icon
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponFlamethrowerGraph
+    node: unscrewed
+
