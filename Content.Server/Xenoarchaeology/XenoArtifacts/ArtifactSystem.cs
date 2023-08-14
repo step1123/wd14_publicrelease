@@ -79,6 +79,8 @@ public sealed partial class ArtifactSystem : EntitySystem
         var sumValue = component.NodeTree.Sum(n => GetNodePointValue(n, component, getMaxPrice));
         var fullyExploredBonus = component.NodeTree.All(x => x.Triggered) || getMaxPrice ? 1.25f : 1;
 
+        sumValue *= 2f; // WD
+
         return (int) (sumValue * fullyExploredBonus) - component.ConsumedPoints;
     }
 
