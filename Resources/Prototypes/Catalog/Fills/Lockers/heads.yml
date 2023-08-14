@@ -288,6 +288,7 @@
       - id: JetpackSecurityFilled
       - id: BoxEncryptionKeySecurity
       - id: HoloprojectorSecurity
+      - id: BookSpaceLaws
 
 - type: entity
   id: LockerHeadOfSecurityFilled
@@ -316,3 +317,4 @@
       - id: SecurityTechFabCircuitboard
       - id: BoxEncryptionKeySecurity
       - id: HoloprojectorSecurity
+      - id: BookSpaceLaws

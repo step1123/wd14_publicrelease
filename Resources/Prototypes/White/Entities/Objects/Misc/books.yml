@@ -1,0 +1,16 @@
+- type: entity
+  parent: BookBase
+  id: BookSpaceLaws
+  name: Космозакон
+  description: Книга, содержащая весь космозакон.
+  components:
+    - type: Sprite
+      sprite: Objects/Misc/books.rsi
+      layers:
+        - state: book_space_law
+    - type: MeleeWeapon
+      damage:
+        types:
+          Blunt: 6
+    - type: Paper
+      content: book-text-spacelaw

@@ -53,6 +53,8 @@
 
         //WD EDIT
         Cult = ChatChannel.Cult,
+
+        MOOC = ChatChannel.MOOC,
         //WD EDIT END
 
         Console = ChatChannel.Unspecified

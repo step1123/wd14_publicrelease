@@ -181,7 +181,7 @@ public partial class ChatBox : UIWidget
 
     private bool IsValidChannel()
     {
-        return SelectedChannel is not (ChatSelectChannel.Admin or ChatSelectChannel.Dead or ChatSelectChannel.OOC or ChatSelectChannel.LOOC);
+        return SelectedChannel is not (ChatSelectChannel.Admin or ChatSelectChannel.Dead or ChatSelectChannel.OOC or ChatSelectChannel.LOOC or ChatSelectChannel.MOOC);
     }
 
     protected override void Dispose(bool disposing)

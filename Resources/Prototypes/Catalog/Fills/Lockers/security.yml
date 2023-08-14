@@ -22,6 +22,7 @@
       - id: DoorRemoteArmory
       - id: ClothingOuterHardsuitWarden
       - id: HoloprojectorSecurity
+      - id: BookSpaceLaws
 
 - type: entity
   id: LockerWardenFilled
@@ -45,6 +46,7 @@
       - id: RubberStampWarden
       - id: DoorRemoteArmory
       - id: HoloprojectorSecurity
+      - id: BookSpaceLaws
 
 - type: entity
   id: LockerSecurityFilled
@@ -67,6 +69,7 @@
       - id: ClothingHandsGlovesColorBlack
       - id: ClothingShoesBootsJack
       - id: WeaponDisabler
+      - id: BookSpaceLaws
 
 - type: entity
   id: LockerBrigmedicFilled
@@ -102,6 +105,7 @@
       - id: ClothingNeckCloakMoth #bzzz Moth-pocalypse
         prob: 0.15
       - id: WeaponDisabler
+      - id: BookSpaceLaws
 
 - type: entity
   id: LockerDetectiveFilled
@@ -121,6 +125,7 @@
       - id: DrinkDetFlask
       - id: SpeedLoaderMagnum
       - id: ClothingHandsGlovesForensic
+      - id: BookSpaceLaws
 
 - type: entity
   id: ClosetBombFilled

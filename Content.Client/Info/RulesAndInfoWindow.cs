@@ -1,5 +1,7 @@
 using System.Numerics;
 using Content.Client.UserInterface.Systems.EscapeMenu;
+using Content.Client.White.Rules;
+using Content.Shared.White;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
@@ -12,7 +14,11 @@ namespace Content.Client.Info
     public sealed class RulesAndInfoWindow : DefaultWindow
     {
         [Dependency] private readonly IResourceCache _resourceManager = default!;
-        [Dependency] private readonly RulesManager _rules = default!;
+        // WD EDIT
+        // [Dependency] private readonly RulesManager _rules = default!;
+        [Dependency] private readonly IUriOpener _uri = default!;
+        [Dependency] private readonly IConfigurationManager _cfg = default!;
+        // WD EDIT END
 
         public RulesAndInfoWindow()
         {
@@ -31,7 +37,12 @@ namespace Content.Client.Info
             TabContainer.SetTabTitle(rulesList, Loc.GetString("ui-info-tab-rules"));
             TabContainer.SetTabTitle(tutorialList, Loc.GetString("ui-info-tab-tutorial"));
 
-            AddSection(rulesList, _rules.RulesSection());
+            // WD EDIT
+            // AddSection(rulesList, _rules.RulesSection());
+            var rulesWikiSection = new RulesWikiSection();
+            rulesList.InfoContainer.AddChild(rulesWikiSection);
+            rulesWikiSection.RulesButton.OnPressed += _ => _uri.OpenUri(_cfg.GetCVar(WhiteCVars.RulesWiki));
+            // WD EDIT END
             PopulateTutorial(tutorialList);
 
             Contents.AddChild(rootContainer);

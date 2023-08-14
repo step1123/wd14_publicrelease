@@ -24,6 +24,7 @@ using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Wires;
 using Robust.Shared.Audio;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
@@ -206,6 +207,11 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
         TryDoElectrifiedAct(uid, args.User, siemens, electrified);
     }
 
+    private bool IsPanelClosed(EntityUid uid) // WD
+    {
+        return TryComp(uid, out WiresPanelComponent? panel) && !panel.Open;
+    }
+
     public bool TryDoElectrifiedAct(EntityUid uid, EntityUid targetUid,
         float siemens = 1,
         ElectrifiedComponent? electrified = null,
@@ -216,6 +222,9 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
             return false;
 
         if (!IsPowered(uid, electrified, transform))
+            return false;
+
+        if (IsPanelClosed(uid)) // WD
             return false;
 
         EnsureComp<ActivatedElectrifiedComponent>(uid);
@@ -229,11 +238,10 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
         GetChainedElectrocutionTargets(targetUid, targets);
         if (!electrified.RequirePower || electrified.UsesApcPower)
         {
-            var lastRet = true;
-            for (var i = targets.Count - 1; i >= 0; i--)
+            for (var i = 0; i < targets.Count; i++) // WD EDIT
             {
                 var (entity, depth) = targets[i];
-                lastRet = TryDoElectrocution(
+                var ret = TryDoElectrocution( // WD EDIT
                     entity,
                     uid,
                     (int) (electrified.ShockDamage * MathF.Pow(RecursiveDamageMultiplier, depth)),
@@ -241,8 +249,11 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
                     true,
                     electrified.SiemensCoefficient
                 );
+
+                if (!ret) // WD
+                    return i != 0;
             }
-            return lastRet;
+            return true;
         }
 
         var node = PoweredNode(uid, electrified, nodeContainer);
@@ -257,11 +268,10 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
         };
 
         {
-            var lastRet = true;
-            for (var i = targets.Count - 1; i >= 0; i--)
+            for (var i = 0; i < targets.Count; i++) // WD EDIT
             {
                 var (entity, depth) = targets[i];
-                lastRet = TryDoElectrocutionPowered(
+                var ret = TryDoElectrocutionPowered( // WD EDIT
                     entity,
                     uid,
                     node,
@@ -269,8 +279,11 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
                     TimeSpan.FromSeconds(electrified.ShockTime * MathF.Pow(RecursiveTimeMultiplier, depth) * timeMult),
                     true,
                     electrified.SiemensCoefficient);
+
+                if (!ret) // WD
+                    return i != 0;
             }
-            return lastRet;
+            return true;
         }
     }
 

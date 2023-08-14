@@ -551,7 +551,6 @@
       containers:
         module-slots:
           - CyborgRadioModule
-
           - CyborgLawsModule
           - CyborgInstrumentModuleFilledEngineer
         battery-slot:
@@ -568,7 +567,6 @@
       containers:
         module-slots:
           - CyborgRadioModule
-
           - CyborgLawsModule
           - CyborgInstrumentModuleFilledService
         battery-slot:

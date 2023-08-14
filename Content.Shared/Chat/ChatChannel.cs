@@ -76,12 +76,14 @@ namespace Content.Shared.Chat
 
         //WD EDIT
         Cult = 1 << 13,
+
+        MOOC = 1 << 14,
         //WD EDIT END
 
         /// <summary>
         ///     Unspecified.
         /// </summary>
-        Unspecified = 1 << 14,
+        Unspecified = 1 << 15,
 
         /// <summary>
         ///     Channels considered to be IC.

@@ -14,9 +14,16 @@ public sealed class CargoGiftsRule : StationEventSystem<CargoGiftsRuleComponent>
     [Dependency] private readonly CargoSystem _cargoSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly GameTicker _ticker = default!;
+    [Dependency] private readonly RampingStationEventSchedulerSystem _rampingEventSystem = default!; // WD
 
     protected override void Added(EntityUid uid, CargoGiftsRuleComponent component, GameRuleComponent gameRule, GameRuleAddedEvent args)
     {
+        if (_rampingEventSystem.CheckRampingEventRule()) // WD START
+        {
+            ForceEndSelf(uid, gameRule);
+            return;
+        } // WD END
+
         base.Added(uid, component, gameRule, args);
 
         var str = Loc.GetString(component.Announce,

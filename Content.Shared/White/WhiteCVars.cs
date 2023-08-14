@@ -13,6 +13,14 @@ namespace Content.Shared.White;
 public sealed class WhiteCVars
 {
     /*
+ * Wiki rules
+    */
+
+    public static readonly CVarDef<string> RulesWiki =
+        CVarDef.Create("white.wiki_rules", "https://wiki.ss14.su/%D0%9F%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0",
+            CVar.SERVER | CVar.REPLICATED);
+
+    /*
  * Slang
     */
 

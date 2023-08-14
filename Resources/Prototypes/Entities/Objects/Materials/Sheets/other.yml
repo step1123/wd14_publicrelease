@@ -8,7 +8,6 @@
     sprite: Objects/Materials/Sheets/other.rsi
   - type: Item
     sprite: Objects/Materials/Sheets/other.rsi
-    size: 30
   - type: ItemStatus
   - type: Tag
     tags:
@@ -38,6 +37,7 @@
     - paper
     - paper_2
     - paper_3
+    sizeMultiplier: 0.17
   - type: Sprite
     state: paper_3
     layers:
@@ -57,6 +57,7 @@
     state: paper
   - type: Stack
     count: 1
+    sizeMultiplier: 0.17
   - type: Item
     size: 1
 
@@ -77,6 +78,7 @@
     - plasma
     - plasma_2
     - plasma_3
+    sizeMultiplier: 0.17
   - type: Sprite
     state: plasma_3
     layers:
@@ -107,6 +109,7 @@
     state: plasma
   - type: Stack
     count: 1
+    sizeMultiplier: 0.17
   - type: Item
     size: 1
 
@@ -132,6 +135,7 @@
     - plastic
     - plastic_2
     - plastic_3
+    sizeMultiplier: 0.17
   - type: Sprite
     state: plastic_3
     layers:
@@ -139,7 +143,6 @@
       map: ["base"]
   - type: Item
     heldPrefix: plastic
-    size: 30
   - type: Appearance
 
 - type: entity
@@ -154,6 +157,7 @@
     size: 1
   - type: Stack
     count: 1
+    sizeMultiplier: 0.17
 
 - type: entity
   parent: [SheetOtherBase, FoodBase]
@@ -175,6 +179,7 @@
     - uranium
     - uranium_2
     - uranium_3
+    sizeMultiplier: 0.17
   - type: Sprite
     state: uranium_3
     layers:
@@ -200,6 +205,7 @@
   components:
   - type: Stack
     count: 1
+    sizeMultiplier: 0.17
   - type: Item
     size: 1
 
@@ -229,6 +235,7 @@
         - meat
         - meat_2
         - meat_3
+      sizeMultiplier: 0.17
     - type: Item
       sprite: Objects/Materials/Sheets/meaterial.rsi
       heldPrefix: meat
@@ -243,5 +250,6 @@
       state: meat
     - type: Stack
       count: 1
+      sizeMultiplier: 0.17
     - type: Item
       size: 1
