@@ -14,7 +14,7 @@ public sealed class ServerEventPrototype : IPrototype
     public string Name { get; } = string.Empty;
 
     [DataField("description")]
-    public string Description { get; } = string.Empty;
+    public string Description = string.Empty;
 
     [DataField("playerGatherTime", customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan PlayerGatherTime = TimeSpan.FromSeconds(10);

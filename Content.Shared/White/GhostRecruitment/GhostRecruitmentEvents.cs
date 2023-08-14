@@ -3,17 +3,6 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.White.GhostRecruitment;
 
 [Serializable,NetSerializable]
-public sealed class GhostRecruitmentSuccessEvent : EntityEventArgs
-{
-    public string RecruitmentName;
-
-    public GhostRecruitmentSuccessEvent(string recruitmentName)
-    {
-        RecruitmentName = recruitmentName;
-    }
-}
-
-[Serializable,NetSerializable]
 public sealed class GhostsRecruitmentSuccessEvent
 {
     public string RecruitmentName;

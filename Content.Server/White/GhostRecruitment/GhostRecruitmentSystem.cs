@@ -94,7 +94,7 @@ public sealed class GhostRecruitmentSystem : EntitySystem
 
             EnsureComp<RecruitedComponent>(uid).RecruitmentName = recruitmentName;
 
-            var ghostEvent = new GhostRecruitmentSuccessEvent(recruitmentName);
+            var ghostEvent = new GhostRecruitmentSuccessEvent(recruitmentName,actorComponent.PlayerSession);
             RaiseLocalEvent(uid,ghostEvent);
         }
 

@@ -33,17 +33,34 @@ public sealed partial class AuthPanelMenu : FancyWindow
     {
         SetCount(RedCount,conf,maxconf);
         RedButton.Disabled = conf >= maxconf;
+        AccessContainer.Visible = false;
+        BluespaceWeaponContainer.Visible = false;
     }
 
     public void SetAccessCount(int conf, int maxconf)
     {
         SetCount(AccessCount,conf,maxconf);
         AccessButton.Disabled = conf >= maxconf;
+        RedContainer.Visible = false;
+        BluespaceWeaponContainer.Visible = false;
     }
 
     public void SetWeaponCount(int conf, int maxconf)
     {
         SetCount(BluespaceWeaponCount,conf,maxconf);
         BluespaceWeaponButton.Disabled = conf >= maxconf;
+        RedContainer.Visible = false;
+        AccessContainer.Visible = false;
+    }
+
+    public string GetReason()
+    {
+        return Reason.Text;
+    }
+
+    public void SetReason(string reason)
+    {
+        Reason.Text = reason;
+        Reason.Editable = false;
     }
 }

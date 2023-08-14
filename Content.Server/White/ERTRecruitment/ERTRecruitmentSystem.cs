@@ -31,6 +31,8 @@ public sealed class ERTRecruitmentSystem : EntitySystem
     public SoundSpecifier ERTYes = new SoundPathSpecifier("/Audio/Announcements/ert_yes.ogg");
     public SoundSpecifier ERTNo = new SoundPathSpecifier("/Audio/Announcements/ert_no.ogg");
 
+    public bool IsBlocked = false;
+
     public EntityUid? Outpost;
     public EntityUid? Shuttle;
     public EntityUid? TargetStation;
@@ -81,12 +83,12 @@ public sealed class ERTRecruitmentSystem : EntitySystem
 
     private void OnRecruitmentSuccess(EntityUid uid, RecruitedComponent component, GhostRecruitmentSuccessEvent args)
     {
-        if(!TryComp<ActorComponent>(uid,out var actor) || !_event.TryGetEvent(EventName, out var prototype))
+        if(args.RecruitmentName != EventName || !_event.TryGetEvent(EventName, out var prototype))
             return;
 
-        _chat.DispatchServerMessage(actor.PlayerSession, prototype.Description);
+        _chat.DispatchServerMessage(args.PlayerSession,Loc.GetString("ert-description"));
+        _chat.DispatchServerMessage(args.PlayerSession, Loc.GetString("ert-reason",("reason",prototype.Description)));
     }
-
 
 
     private void OnRoundStart(RoundStartAttemptEvent ev)
@@ -102,7 +104,7 @@ public sealed class ERTRecruitmentSystem : EntitySystem
 
     public void EventStart()
     {
-        if(TargetStation == null)
+        if(TargetStation == null || IsBlocked)
             return;
 
         if (!_event.TryGetEvent(EventName, out var prototype) ||

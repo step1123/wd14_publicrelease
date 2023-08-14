@@ -28,7 +28,7 @@ public sealed class AuthPanelBoundUserInterface : BoundUserInterface
 
     public void SendButtonPressed(AuthPanelAction button)
     {
-        SendMessage(new AuthPanelButtonPressedMessage(button));
+        SendMessage(new AuthPanelButtonPressedMessage(button,_menu?.GetReason()));
     }
 
 
@@ -37,15 +37,17 @@ public sealed class AuthPanelBoundUserInterface : BoundUserInterface
         if(state is not AuthPanelConfirmationActionState confirmationActionState)
             return;
 
-        foreach (var action in confirmationActionState.Actions)
-        {
-            if(action.Action is AuthPanelAction.AddAccess)
-                _menu?.SetAccessCount(action.ConfirmedPeopleCount,action.MaxConfirmedPeopleCount);
-            if(action.Action is AuthPanelAction.ERTRecruit)
-                _menu?.SetRedCount(action.ConfirmedPeopleCount,action.MaxConfirmedPeopleCount);
-            if(action.Action is AuthPanelAction.BluespaceWeapon)
-                _menu?.SetWeaponCount(action.ConfirmedPeopleCount,action.MaxConfirmedPeopleCount);
-        }
+        var action = confirmationActionState.Action;
+
+        if(action.Action is AuthPanelAction.AddAccess)
+            _menu?.SetAccessCount(action.ConfirmedPeopleCount,action.MaxConfirmedPeopleCount);
+        if(action.Action is AuthPanelAction.ERTRecruit)
+            _menu?.SetRedCount(action.ConfirmedPeopleCount,action.MaxConfirmedPeopleCount);
+        if(action.Action is AuthPanelAction.BluespaceWeapon)
+            _menu?.SetWeaponCount(action.ConfirmedPeopleCount,action.MaxConfirmedPeopleCount);
+
+        _menu?.SetReason(action.Reason);
+
     }
 
     protected override void Dispose(bool disposing)

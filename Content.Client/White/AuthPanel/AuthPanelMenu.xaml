@@ -2,8 +2,8 @@
                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
                      xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
                      Title="Auth panel"
-                     MinSize="500 240"
-                     SetSize="500 240">
+                     MinSize="500 350"
+                     SetSize="500 350">
     <BoxContainer Orientation="Vertical"
                   HorizontalExpand="True"
                   VerticalExpand="True"
@@ -12,22 +12,24 @@
         <controls:StripeBack HasBottomEdge="True" HasMargins="False" HorizontalExpand="True">
             <Label Align="Center" Text="Внимание!"/>
         </controls:StripeBack>
-        <Label Margin="0 10 0 10" Align="Center" Text="Воспользуйтесь данной панелью ТОЛЬКО на крайний случай!"/>
+        <Label Margin="0 10 0 2" Align="Center" Text="Воспользуйтесь данной панелью ТОЛЬКО на крайний случай!"/>
+        <Label Margin="0 2 0 2" Align="Center" Text="Снизу опишите причину ваших действий."/>
+        <LineEdit Margin="0 2 0 10" Name="Reason" PlaceHolder="Причина"/>
         <customControls:HSeparator/>
 
         <controls:StripeBack HasBottomEdge="True" HasMargins="False" HorizontalExpand="True">
             <BoxContainer Orientation="Vertical">
-                <BoxContainer HorizontalExpand="True">
+                <BoxContainer HorizontalExpand="True" Name="RedContainer">
                     <Button Name="RedButton" MinWidth="410" Margin="0 5 0 0" HorizontalAlignment="Left" Text="Красная тревога"/>
                     <Label Name="RedCount" Margin="25 0 4 0" HorizontalAlignment="Right" Visible="False"/>
                 </BoxContainer>
 
-                <BoxContainer HorizontalExpand="True">
+                <BoxContainer HorizontalExpand="True" Name="AccessContainer">
                     <Button Name="AccessButton" MinWidth="410" Margin="0 5 0 0" HorizontalAlignment="Left" Text="Аварийный доступ к тех. тоннелям" Disabled="True"/>
                     <Label Name="AccessCount" Margin="25 0 4 0" HorizontalAlignment="Right" Visible="False"/>
                 </BoxContainer>
 
-                <BoxContainer HorizontalExpand="True">
+                <BoxContainer HorizontalExpand="True" Name="BluespaceWeaponContainer">
                     <Button Name="BluespaceWeaponButton" MinWidth="410" Margin="0 5 0 5" HorizontalAlignment="Left" Text="Разблокировка блюспейс артилерии" Disabled="True"/>
                     <Label Name="BluespaceWeaponCount" Margin="25 0 4 0" HorizontalAlignment="Right" Visible="False"/>
                 </BoxContainer>

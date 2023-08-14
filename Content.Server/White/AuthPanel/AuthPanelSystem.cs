@@ -3,8 +3,11 @@ using Content.Server.Popups;
 using Content.Server.White.ERTRecruitment;
 using Content.Server.White.ServerEvent;
 using Content.Shared.Access.Systems;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.White.AuthPanel;
+using Content.Shared.White.Cyborg.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -21,9 +24,11 @@ public sealed class AuthPanelSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ERTRecruitmentSystem _ert = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
 
     public Dictionary<AuthPanelAction, HashSet<EntityUid>> Counter = new();
     public Dictionary<AuthPanelAction, HashSet<int>> CardIndexes = new();
+    public string Reason = "";
 
     public static int MaxCount = 2;
 
@@ -49,13 +54,24 @@ public sealed class AuthPanelSystem : EntitySystem
     {
         if (args.Action is AuthPanelAction.ERTRecruit)
         {
-            if (_random.Next(0, 10) < 2)
+            if (_random.Next(0, 10) < 2
+                && _event.TryStartEvent(ERTRecruitmentSystem.EventName)
+                && _event.TryGetEvent(ERTRecruitmentSystem.EventName,out var eventPrototype))
             {
-                _event.TryStartEvent(ERTRecruitmentSystem.EventName);
+                eventPrototype.Description = Reason;
             }
             else
             {
                 _ert.DeclineERT();
+            }
+
+            foreach (var entities in Counter.Values)
+            {
+                foreach (var entity in entities)
+                {
+                    _adminLogger.Add(LogType.EventStarted, LogImpact.High,
+                        $"{ToPrettyString(entity):player} just called ERT. Reason: {Reason}");
+                }
             }
         }
     }
@@ -65,18 +81,28 @@ public sealed class AuthPanelSystem : EntitySystem
         if(args.Session.AttachedEntity == null)
             return;
 
+        if(HasComp<CyborgComponent>(args.Session.AttachedEntity))
+            return;
+
         var access = _access.FindAccessTags(args.Session.AttachedEntity.Value);
 
         if (!access.Contains("Command"))
         {
-            _popup.PopupEntity("Нет доступа",
+            _popup.PopupEntity(Loc.GetString("auth-panel-no-access"),
+                args.Session.AttachedEntity.Value,args.Session.AttachedEntity.Value);
+            return;
+        }
+
+        if (string.IsNullOrEmpty(args.Reason))
+        {
+            _popup.PopupEntity(Loc.GetString("auth-panel-no-reason"),
                 args.Session.AttachedEntity.Value,args.Session.AttachedEntity.Value);
             return;
         }
 
         if (_delay != null)
         {
-            _popup.PopupEntity("Пожалуйста, подождите прежде чем активировать кнопку",
+            _popup.PopupEntity(Loc.GetString("auth-panel-wait"),
                 args.Session.AttachedEntity.Value,args.Session.AttachedEntity.Value);
             return;
         }
@@ -98,14 +124,14 @@ public sealed class AuthPanelSystem : EntitySystem
 
         if (cardSet.Contains(access.Count))
         {
-            _popup.PopupEntity("Похоже, вы уже использовали данную ID карту",
+            _popup.PopupEntity(Loc.GetString("auth-panel-used-ID"),
                 args.Session.AttachedEntity.Value,args.Session.AttachedEntity.Value);
             return;
         }
 
         if (!hashSet.Add(args.Session.AttachedEntity.Value))
         {
-            _popup.PopupEntity("Вы уже нажали на эту кнопку",
+            _popup.PopupEntity(Loc.GetString("auth-panel-pressed"),
                 args.Session.AttachedEntity.Value,args.Session.AttachedEntity.Value);
             return;
         }
@@ -113,7 +139,10 @@ public sealed class AuthPanelSystem : EntitySystem
         cardSet.Add(access.Count);
         _delay = _timing.CurTime + TimeSpan.FromSeconds(5);
 
-        UpdateUserInterface();
+        Reason = args.Reason;
+        UpdateUserInterface(args.Button);
+        _adminLogger.Add(LogType.EventStarted, LogImpact.High,
+            $"{ToPrettyString(args.Session.AttachedEntity.Value):player} vote for {args.Button}. Reason: {Reason}");
 
         if (hashSet.Count == MaxCount)
         {
@@ -123,14 +152,12 @@ public sealed class AuthPanelSystem : EntitySystem
 
     }
 
-    public void UpdateUserInterface()
+    public void UpdateUserInterface(AuthPanelAction rawaction)
     {
-        var actions = new HashSet<AuthPanelConfirmationAction>();
+        if(!Counter.TryGetValue(rawaction,out var hashSet))
+            return;
 
-        foreach (var (action,hashSet) in Counter)
-        {
-            actions.Add(new AuthPanelConfirmationAction(action,hashSet.Count,MaxCount));
-        }
+        var action = new AuthPanelConfirmationAction(rawaction, hashSet.Count, MaxCount,Reason);
 
         var query = EntityQueryEnumerator<AuthPanelComponent>();
         while (query.MoveNext(out var uid,out _))
@@ -138,7 +165,7 @@ public sealed class AuthPanelSystem : EntitySystem
             if (!_ui.HasUi(uid, AuthPanelUiKey.Key))
                 return;
 
-            var state = new AuthPanelConfirmationActionState(actions);
+            var state = new AuthPanelConfirmationActionState(action);
             var ui = _ui.GetUi(uid, AuthPanelUiKey.Key);
 
             UserInterfaceSystem.SetUiState(ui, state);

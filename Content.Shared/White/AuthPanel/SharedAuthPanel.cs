@@ -21,21 +21,23 @@ public enum AuthPanelAction
 public sealed class AuthPanelButtonPressedMessage : BoundUserInterfaceMessage
 {
     public AuthPanelAction Button;
+    public string? Reason;
 
-    public AuthPanelButtonPressedMessage(AuthPanelAction button)
+    public AuthPanelButtonPressedMessage(AuthPanelAction button, string? reason)
     {
         Button = button;
+        Reason = reason;
     }
 }
 
 [Serializable, NetSerializable]
 public sealed class AuthPanelConfirmationActionState : BoundUserInterfaceState
 {
-    public HashSet<AuthPanelConfirmationAction> Actions;
+    public AuthPanelConfirmationAction Action;
 
-    public AuthPanelConfirmationActionState(HashSet<AuthPanelConfirmationAction> actions)
+    public AuthPanelConfirmationActionState(AuthPanelConfirmationAction action)
     {
-        Actions = actions;
+        Action = action;
     }
 }
 
@@ -45,12 +47,14 @@ public sealed class AuthPanelConfirmationAction
     public AuthPanelAction Action;
     public int ConfirmedPeopleCount;
     public int MaxConfirmedPeopleCount;
+    public string Reason;
 
-    public AuthPanelConfirmationAction(AuthPanelAction action, int confirmedPeopleCount, int maxConfirmedPeopleCount)
+    public AuthPanelConfirmationAction(AuthPanelAction action, int confirmedPeopleCount, int maxConfirmedPeopleCount, string reason)
     {
         Action = action;
         ConfirmedPeopleCount = confirmedPeopleCount;
         MaxConfirmedPeopleCount = maxConfirmedPeopleCount;
+        Reason = reason;
     }
 }
 
