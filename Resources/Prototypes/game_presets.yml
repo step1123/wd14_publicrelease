@@ -94,7 +94,7 @@
     - cult
   name: CULT
   description: CULT
-  showInVote: false
+  showInVote: true
   rules:
     - Cult
     - BasicStationEventScheduler
