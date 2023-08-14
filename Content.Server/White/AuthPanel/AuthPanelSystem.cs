@@ -1,5 +1,7 @@
 using Content.Server.Access.Systems;
 using Content.Server.Popups;
+using Content.Server.White.ERTRecruitment;
+using Content.Server.White.ServerEvent;
 using Content.Shared.Access.Systems;
 using Content.Shared.White.AuthPanel;
 using Robust.Server.GameObjects;
@@ -12,8 +14,11 @@ public sealed class AuthPanelSystem : EntitySystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly AccessReaderSystem _access = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
+    [Dependency] private readonly ServerEventSystem _event = default!;
 
     public Dictionary<AuthPanelAction, HashSet<EntityUid>> Counter = new();
+    public Dictionary<AuthPanelAction, HashSet<int>> CardIndexes = new();
+
     public static int MaxCount = 2;
     public override void Initialize()
     {
@@ -24,6 +29,11 @@ public sealed class AuthPanelSystem : EntitySystem
     private void OnPerformAction(EntityUid uid, AuthPanelComponent component, AuthPanelPerformActionEvent args)
     {
         Logger.Debug("Performed action " + args.Action);
+
+        if (args.Action is AuthPanelAction.ERTRecruit)
+        {
+            _event.TryStartEvent(ERTRecruitmentSystem.EventName);
+        }
     }
 
     private void OnButtonPressed(EntityUid uid, AuthPanelComponent component, AuthPanelButtonPressedMessage args)
@@ -31,7 +41,9 @@ public sealed class AuthPanelSystem : EntitySystem
         if(args.Session.AttachedEntity == null)
             return;
 
-        if (!_access.FindAccessTags(args.Session.AttachedEntity.Value).Contains("Command"))
+        var access = _access.FindAccessTags(args.Session.AttachedEntity.Value);
+
+        if (!access.Contains("Command"))
         {
             _popup.PopupEntity("Нет доступа",
                 args.Session.AttachedEntity.Value,args.Session.AttachedEntity.Value);
@@ -47,12 +59,27 @@ public sealed class AuthPanelSystem : EntitySystem
         if(hashSet.Count == MaxCount)
             return;
 
+        if (!CardIndexes.TryGetValue(args.Button, out var cardSet))
+        {
+            cardSet = new HashSet<int>();
+            CardIndexes.Add(args.Button,cardSet);
+        }
+
+        if (cardSet.Contains(access.Count))
+        {
+            _popup.PopupEntity("Похоже, вы уже использовали данную ID карту",
+                args.Session.AttachedEntity.Value,args.Session.AttachedEntity.Value);
+            return;
+        }
+
         if (!hashSet.Add(args.Session.AttachedEntity.Value))
         {
             _popup.PopupEntity("Вы уже нажали на эту кнопку",
                 args.Session.AttachedEntity.Value,args.Session.AttachedEntity.Value);
             return;
         }
+
+        cardSet.Add(access.Count);
 
         UpdateUserInterface();
 
