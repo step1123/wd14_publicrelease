@@ -13967,6 +13967,43 @@ entities:
     - pos: -45.5,40.5
       parent: 60
       type: Transform
+- proto: AuthPanel
+  entities:
+  - uid: 15029
+    components:
+    - pos: -6.5,-7.5
+      parent: 60
+      type: Transform
+  - uid: 15030
+    components:
+    - pos: -23.5,0.5
+      parent: 60
+      type: Transform
+  - uid: 15050
+    components:
+    - pos: -45.5,8.5
+      parent: 60
+      type: Transform
+  - uid: 15053
+    components:
+    - pos: 2.5,-30.5
+      parent: 60
+      type: Transform
+  - uid: 15054
+    components:
+    - pos: 28.5,-13.5
+      parent: 60
+      type: Transform
+  - uid: 15056
+    components:
+    - pos: 10.5,22.5
+      parent: 60
+      type: Transform
+  - uid: 15072
+    components:
+    - pos: 46.5,14.5
+      parent: 60
+      type: Transform
 - proto: Autolathe
   entities:
   - uid: 5288

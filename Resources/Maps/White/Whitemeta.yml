@@ -13620,6 +13620,43 @@ entities:
     - pos: 69.5,-14.5
       parent: 5350
       type: Transform
+- proto: AuthPanel
+  entities:
+  - uid: 11215
+    components:
+    - pos: -10.5,-1.5
+      parent: 5350
+      type: Transform
+  - uid: 11216
+    components:
+    - pos: 9.5,1.5
+      parent: 5350
+      type: Transform
+  - uid: 11217
+    components:
+    - pos: 48.5,7.5
+      parent: 5350
+      type: Transform
+  - uid: 11218
+    components:
+    - pos: 18.5,-34.5
+      parent: 5350
+      type: Transform
+  - uid: 11219
+    components:
+    - pos: -15.5,-39.5
+      parent: 5350
+      type: Transform
+  - uid: 11220
+    components:
+    - pos: -27.5,16.5
+      parent: 5350
+      type: Transform
+  - uid: 11221
+    components:
+    - pos: 13.5,45.5
+      parent: 5350
+      type: Transform
 - proto: Autolathe
   entities:
   - uid: 3919
@@ -139511,7 +139548,7 @@ entities:
     - pos: 9.5,-47.5
       parent: 5350
       type: Transform
-    - SecondsUntilStateChange: -29859.527
+    - SecondsUntilStateChange: -30007.1
       state: Closing
       type: Door
     - links:
@@ -139522,7 +139559,7 @@ entities:
     - pos: 10.5,-47.5
       parent: 5350
       type: Transform
-    - SecondsUntilStateChange: -29859.527
+    - SecondsUntilStateChange: -30007.1
       state: Closing
       type: Door
     - links:
@@ -139533,7 +139570,7 @@ entities:
     - pos: 11.5,-47.5
       parent: 5350
       type: Transform
-    - SecondsUntilStateChange: -29859.527
+    - SecondsUntilStateChange: -30007.1
       state: Closing
       type: Door
     - links:
@@ -139544,7 +139581,7 @@ entities:
     - pos: 13.5,-47.5
       parent: 5350
       type: Transform
-    - SecondsUntilStateChange: -29859.527
+    - SecondsUntilStateChange: -30007.1
       state: Closing
       type: Door
     - links:
@@ -139555,7 +139592,7 @@ entities:
     - pos: 14.5,-47.5
       parent: 5350
       type: Transform
-    - SecondsUntilStateChange: -29859.527
+    - SecondsUntilStateChange: -30007.1
       state: Closing
       type: Door
     - links:
@@ -139566,7 +139603,7 @@ entities:
     - pos: 15.5,-47.5
       parent: 5350
       type: Transform
-    - SecondsUntilStateChange: -29859.527
+    - SecondsUntilStateChange: -30007.1
       state: Closing
       type: Door
     - links:

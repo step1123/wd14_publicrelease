@@ -1,0 +1,145 @@
+- type: entity
+  id: SpawnPointEventBase
+  parent: MarkerBase
+  abstract: true
+  suffix: Event Spawn
+  components:
+    - type: GhostRecruitmentSpawnPoint
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+
+- type: entity
+  id: SpawnPointERTEventERTLeader
+  parent: SpawnPointEventBase
+  name: ERTLeader
+  components:
+    - type: GhostRecruitmentSpawnPoint
+      prototype: RandomHumanoidSpawnerERTLeader
+      recruitmentName: ERTRecruitment
+      priority: 1
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ertleader
+
+- type: entity
+  id: SpawnPointERTEventERTLeaderEVA
+  parent: SpawnPointEventBase
+  name: ERTLeaderEVA
+  components:
+    - type: GhostRecruitmentSpawnPoint
+      prototype: RandomHumanoidSpawnerERTLeaderEVA
+      recruitmentName: ERTRecruitment
+      priority: 1
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ertleadereva
+
+- type: entity
+  id: SpawnPointERTEventERTJanitor
+  parent: SpawnPointEventBase
+  name: ERTJanitor
+  components:
+    - type: GhostRecruitmentSpawnPoint
+      prototype: RandomHumanoidSpawnerERTJanitor
+      recruitmentName: ERTRecruitment
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ertjanitor
+
+- type: entity
+  id: SpawnPointERTEventERTJanitorEVA
+  parent: SpawnPointEventBase
+  name: ERTJanitorEVA
+  components:
+    - type: GhostRecruitmentSpawnPoint
+      prototype: RandomHumanoidSpawnerERTJanitorEVA
+      recruitmentName: ERTRecruitment
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ertjanitoreva
+
+- type: entity
+  id: SpawnPointERTEventERTEngineer
+  parent: SpawnPointEventBase
+  name: ERTEngineer
+  components:
+    - type: GhostRecruitmentSpawnPoint
+      prototype: RandomHumanoidSpawnerERTEngineer
+      recruitmentName: ERTRecruitment
+      priority: 2
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ertengineer
+
+- type: entity
+  id: SpawnPointERTEventERTEngineerEVA
+  parent: SpawnPointEventBase
+  name: ERTEngineerEVA
+  components:
+    - type: GhostRecruitmentSpawnPoint
+      prototype: RandomHumanoidSpawnerERTEngineerEVA
+      recruitmentName: ERTRecruitment
+      priority: 2
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ertengineereva
+
+- type: entity
+  id: SpawnPointERTEventERTSecurity
+  parent: SpawnPointEventBase
+  name: ERTSecurity
+  components:
+    - type: GhostRecruitmentSpawnPoint
+      prototype: RandomHumanoidSpawnerERTSecurity
+      recruitmentName: ERTRecruitment
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ertsecurity
+
+- type: entity
+  id: SpawnPointERTEventERTSecurityEVA
+  parent: SpawnPointEventBase
+  name: ERTSecurityEVA
+  components:
+    - type: GhostRecruitmentSpawnPoint
+      prototype: RandomHumanoidSpawnerERTSecurityEVA
+      recruitmentName: ERTRecruitment
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ertsecurityeva
+
+- type: entity
+  id: SpawnPointERTEventERTMedical
+  parent: SpawnPointEventBase
+  name: ERTMedical
+  components:
+    - type: GhostRecruitmentSpawnPoint
+      prototype: RandomHumanoidSpawnerERTMedical
+      recruitmentName: ERTRecruitment
+      priority: 2
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ertmedical
+
+- type: entity
+  id: SpawnPointERTEventERTMedicalEVA
+  parent: SpawnPointEventBase
+  name: ERTMedicalEVA
+  components:
+    - type: GhostRecruitmentSpawnPoint
+      prototype: RandomHumanoidSpawnerERTMedicalEVA
+      recruitmentName: ERTRecruitment
+      priority: 2
+    - type: Sprite
+      layers:
+        - state: green
+        - state: ertmedicaleva
