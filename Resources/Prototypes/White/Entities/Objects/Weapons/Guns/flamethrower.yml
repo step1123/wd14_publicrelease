@@ -29,7 +29,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/water_spray.ogg
   - type: GasAmmoProvider
-    gasUsage: 2.1
+    gasUsage: 6.25
     proto: ProjectileFlamethrower
   - type: Flamethrower
   - type: ItemMapper
@@ -70,7 +70,7 @@
 - type: entity
   name: часть огнемёта
   parent: BaseItem
-  id: WeaponFlamethrowerNoIgniter
+  id: WeaponFlamethrowerUnfinished
   description: Недоделанный огнемёт.
   components:
   - type: Sprite
@@ -88,19 +88,3 @@
     deconstructionTarget: null
     graph: WeaponFlamethrowerGraph
     node: no-igniter
-
-- type: entity
-  name: часть огнемёта
-  parent: WeaponFlamethrowerNoIgniter
-  id: WeaponFlamethrowerUnscrewed
-  description: Недоделанный огнемёт.
-  components:
-  - type: Sprite
-    sprite: White/Objects/Weapons/flamethrower.rsi
-    layers:
-    - state: icon
-  - type: Construction
-    deconstructionTarget: null
-    graph: WeaponFlamethrowerGraph
-    node: unscrewed
-

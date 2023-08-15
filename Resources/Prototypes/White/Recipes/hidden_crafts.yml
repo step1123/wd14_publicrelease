@@ -30,13 +30,12 @@
             amount: 5
             doAfter: 5
   - node: no-igniter
-    entity: WeaponFlamethrowerNoIgniter
+    entity: WeaponFlamethrowerUnfinished
     edges:
       - to: unscrewed
         steps:
           - tag: Lighter
   - node: unscrewed
-    entity: WeaponFlamethrowerUnscrewed
     edges:
       - to: flamethrower
         steps:

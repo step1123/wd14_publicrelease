@@ -125,6 +125,8 @@
       - SubstationMachineCircuitboard
       - CellRechargerCircuitboard
       - WeaponCapacitorRechargerCircuitboard
+      - OxygenTank
+      - PlasmaTank
 
 - type: entity
   id: Protolathe

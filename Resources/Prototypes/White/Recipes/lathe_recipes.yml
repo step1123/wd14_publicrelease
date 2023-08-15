@@ -1,0 +1,13 @@
+- type: latheRecipe
+  id: OxygenTank
+  result: OxygenTank
+  completetime: 5
+  materials:
+    Steel: 1000
+
+- type: latheRecipe
+  id: PlasmaTank
+  result: PlasmaTank
+  completetime: 5
+  materials:
+    Steel: 1000

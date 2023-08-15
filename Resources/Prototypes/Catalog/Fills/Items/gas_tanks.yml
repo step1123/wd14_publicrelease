@@ -157,5 +157,5 @@
           - 0           # oxygen
           - 0           # nitrogen
           - 0           # CO2
-          - 6.154137219 # plasma
-        temperature: 293.15
+          - 18.74958767 # plasma
+        temperature: 96.22
