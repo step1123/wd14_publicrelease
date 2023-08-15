@@ -231,3 +231,63 @@
   name: tts-voice-name-geralt
   sex: Male
   speaker: geralt
+
+- type: ttsVoice
+  id: Triss
+  name: tts-voice-name-triss
+  sex: Female
+  speaker: triss
+
+- type: ttsVoice
+  id: KodlakWhiteMane
+  name: tts-voice-name-kodlak-white-mane
+  sex: Male
+  speaker: kodlakwhitemane
+
+- type: ttsVoice
+  id: Cicero
+  name: tts-voice-name-cicero
+  sex: Male
+  speaker: cicero
+
+- type: ttsVoice
+  id: Sheogorath
+  name: tts-voice-name-sheogorath
+  sex: Male
+  speaker: sheogorath
+
+- type: ttsVoice
+  id: AdventureCoreAlt
+  name: tts-voice-name-adventure-core-alt
+  sex: Male
+  speaker: adventure_core_alt
+
+- type: ttsVoice
+  id: FactCoreAlt
+  name: tts-voice-name-fact-core-alt
+  sex: Male
+  speaker: fact_core_alt
+
+- type: ttsVoice
+  id: SpaceCoreAlt
+  name: tts-voice-name-space-core-alt
+  sex: Male
+  speaker: space_core_alt
+
+- type: ttsVoice
+  id: TurretFloor
+  name: tts-voice-name-turret-floor
+  sex: Female
+  speaker: turret_floor
+
+- type: ttsVoice
+  id: Cirilla
+  name: tts-voice-name-cirilla
+  sex: Female
+  speaker: cirilla
+
+- type: ttsVoice
+  id: Lambert
+  name: tts-voice-name-lambert
+  sex: Male
+  speaker: lambert
