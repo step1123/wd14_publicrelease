@@ -450,7 +450,6 @@
   meltingPoint: 36.0
   metabolisms:
     Narcotic:
-      metabolismRate: 5
       effects:
         - !type:PopupMessage
           type: Local
@@ -473,7 +472,7 @@
             - norepinephricacid-effect-blindness
           conditions:
             - !type:ReagentThreshold
-              min: 100
+              min: 15
           probability: 0.03
         - !type:Emote
           emote: Scream
@@ -483,4 +482,4 @@
           component: TemporaryBlindness
           conditions:
             - !type:ReagentThreshold
-              min: 100
+              min: 15
