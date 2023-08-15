@@ -13,3 +13,12 @@ auth-panel-no-access = Нет доступа
 auth-panel-wait = Пожалуйста, подождите прежде чем активировать кнопку
 auth-panel-used-ID = Похоже, вы уже использовали данную ID карту
 auth-panel-pressed = Вы уже нажали на эту кнопку
+
+auth-panel-attention = Внимание!
+auth-panel-critical-only = Воспользуйтесь данной панелью ТОЛЬКО на крайний случай!
+auth-panel-reason-write = Снизу опишите причину ваших действий.
+auth-panel-reason = Причина:
+
+auth-panel-red-button = Красная кнопка
+auth-panel-access-button = Аварийный доступ к тех. тоннелям
+auth-panel-unlock-weapon = Разблокировка блюспейс артилерии
