@@ -1,10 +1,15 @@
+using Content.Server.Administration;
+using Content.Server.Chat.Managers;
+using Content.Shared.Administration;
 using Robust.Shared.Console;
 
 namespace Content.Server.White.ERTRecruitment.Commands;
 
+[AdminCommand(AdminFlags.Admin)]
 public sealed class BlockERT : IConsoleCommand
 {
     [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private readonly IChatManager _chatManager = default!;
 
     public string Command => "blockert";
     public string Description => "block or unblock call ERT";
@@ -20,6 +25,8 @@ public sealed class BlockERT : IConsoleCommand
         }
 
         ertsys.IsBlocked = isBlocked;
-        shell.WriteLine(isBlocked ? "ERT is blocked!" : "ERT is no longer blocked!");
+        var message = isBlocked ? "ERT is blocked!" : "ERT is no longer blocked!";
+        shell.WriteLine(message);
+        _chatManager.SendAdminAnnouncement(message);
     }
 }

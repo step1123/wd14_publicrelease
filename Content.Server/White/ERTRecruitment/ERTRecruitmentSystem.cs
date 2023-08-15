@@ -164,12 +164,10 @@ public sealed class ERTRecruitmentSystem : EntitySystem
         _logger.Debug($"Loading maps!");
         if (_mapId != null)
         {
-            _logger.Debug("Oopsie! Map is exists!" + _mapId);
+            // The map is already loaded, so there is no point in loading further
+            _logger.Debug("Map is already loaded " + _mapId);
             return true;
         }
-
-        var path = OutpostMap;
-        var shuttlePath = ShuttleMap;
 
         var mapId = _mapManager.CreateMap();
         var options = new MapLoadOptions
@@ -177,23 +175,23 @@ public sealed class ERTRecruitmentSystem : EntitySystem
             LoadMap = true,
         };
 
-        if (!_map.TryLoad(mapId, path.ToString(), out var outpostGrids, options) || outpostGrids.Count == 0)
+        if (!_map.TryLoad(mapId, OutpostMap.ToString(), out var outpostGrids, options) || outpostGrids.Count == 0)
         {
-            _logger.Error( $"Error loading map {path}!");
+            _logger.Error( $"Error loading map {OutpostMap}!");
             return false;
         }
-        _logger.Debug($"Loaded map {path} on {mapId}!");
+        _logger.Debug($"Loaded map {OutpostMap} on {mapId}!");
 
         // Assume the first grid is the outpost grid.
         Outpost = outpostGrids[0];
 
         // Listen I just don't want it to overlap.
-        if (!_map.TryLoad(mapId, shuttlePath.ToString(), out var grids, new MapLoadOptions {Offset = Vector2.One * 1000f}) || !grids.Any())
+        if (!_map.TryLoad(mapId, ShuttleMap.ToString(), out var grids, new MapLoadOptions {Offset = Vector2.One * 1000f}) || !grids.Any())
         {
-            _logger.Error( $"Error loading grid {shuttlePath}!");
+            _logger.Error( $"Error loading grid {ShuttleMap}!");
             return false;
         }
-        _logger.Debug($"Loaded shuttle {shuttlePath} on {mapId}!");
+        _logger.Debug($"Loaded shuttle {ShuttleMap} on {mapId}!");
 
         var shuttleId = grids.First();
 
