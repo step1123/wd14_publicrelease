@@ -1,5 +1,12 @@
-- type: serverEvent
+- type: entity
   id: ERTRecruitment
-  name: ERT
-  description: Your tasks is meow!
-  minPlayer: 4
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: StationEvent
+      earliestStart: 25
+      weight: 0
+      minimumPlayers: 125
+      duration: 20
+    - type: ERTRecruitmentRule
+

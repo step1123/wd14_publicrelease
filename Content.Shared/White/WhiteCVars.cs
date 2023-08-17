@@ -313,4 +313,9 @@ public sealed class WhiteCVars
 
     public static readonly CVarDef<string>
         ServerCulture = CVarDef.Create("white.culture", "ru-RU", CVar.REPLICATED | CVar.SERVER);
+
+    /// <summary>
+    ///     Should load a ERT map?
+    /// </summary>
+    public static readonly CVarDef<bool> LoadERTMap = CVarDef.Create("white.ert_load", true, CVar.SERVERONLY);
 }

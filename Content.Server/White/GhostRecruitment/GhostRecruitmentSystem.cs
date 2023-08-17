@@ -51,8 +51,6 @@ public sealed class GhostRecruitmentSystem : EntitySystem
     /// <returns>is success?</returns>
     public bool EndRecruitment(string recruitmentName)
     {
-        var query = EntityQueryEnumerator<GhostRecruitedComponent>();
-
         var spawners = GetEventSpawners(recruitmentName).ToList();
 
         // We prioritize the queue, for example, the commander first, and then the engineer
@@ -60,28 +58,15 @@ public sealed class GhostRecruitmentSystem : EntitySystem
 
         var count = 0;
 
-        var attemptRecruitment = new GhostRecruitmentAttemptEvent(recruitmentName);
-        RaiseLocalEvent(attemptRecruitment);
-
-        if (attemptRecruitment.Cancelled)
-        {
-            var failEvent = new GhostsRecruitmentFailEvent(recruitmentName);
-            RaiseLocalEvent(failEvent);
-
-            return false;
-        }
+        var query = EntityQueryEnumerator<GhostRecruitedComponent>();
 
         while (query.MoveNext(out var uid,out var ghostRecruitedComponent))
         {
             if(ghostRecruitedComponent.RecruitmentName != recruitmentName)
                 continue;
 
-            RemComp<GhostRecruitedComponent>(uid);
-
             if (!TryComp<ActorComponent>(uid, out var actorComponent))
                 continue;
-
-            CloseEui(uid,recruitmentName,actorComponent);
 
             // if there are too many recruited, then just skip
             if(count >= spawners.Count)
@@ -100,7 +85,24 @@ public sealed class GhostRecruitmentSystem : EntitySystem
 
         var ghostsEvent = new GhostsRecruitmentSuccessEvent(recruitmentName);
         RaiseLocalEvent(ghostsEvent);
+
+        Cleanup(recruitmentName);
         return true;
+    }
+
+    public void Cleanup(string recruitmentName)
+    {
+        ClearEui(recruitmentName);
+
+        var query = EntityQueryEnumerator<GhostRecruitedComponent>();
+
+        while (query.MoveNext(out var uid, out var ghostRecruitedComponent))
+        {
+            if (ghostRecruitedComponent.RecruitmentName != recruitmentName)
+                continue;
+
+            RemComp<GhostRecruitedComponent>(uid);
+        }
     }
 
     private void TransferMind(EntityUid from,EntityUid spawnerUid,GhostRecruitmentSpawnPointComponent? component = null)
@@ -159,20 +161,32 @@ public sealed class GhostRecruitmentSystem : EntitySystem
             return;
         var eui = new GhostRecruitmentEuiAccept(uid, recruitmentName, this);
 
-        _openUis.Add(actorComponent.PlayerSession,eui);
-        _eui.OpenEui(eui,actorComponent.PlayerSession);
+        Logger.Debug("Added EUI to "+ uid);
+        if(_openUis.TryAdd(actorComponent.PlayerSession,eui))
+            _eui.OpenEui(eui,actorComponent.PlayerSession);
+    }
+
+    public void ClearEui(string recruitmentName)
+    {
+        foreach (var (session,eui) in _openUis)
+        {
+            if (session.AttachedEntity != null)
+                CloseEui(session.AttachedEntity.Value, recruitmentName);
+        }
     }
 
     public void CloseEui(EntityUid uid,string recruitmentName,ActorComponent? actorComponent = null)
     {
-        if(!Resolve(uid,ref actorComponent))
+        if (!Resolve(uid, ref actorComponent))
             return;
+
 
         var session = actorComponent.PlayerSession;
 
         if (!_openUis.ContainsKey(session))
             return;
 
+        Logger.Debug("Removed EUI from "+ uid);
         _openUis.Remove(session, out var eui);
 
         eui?.Close();

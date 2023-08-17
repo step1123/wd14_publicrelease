@@ -16,16 +16,16 @@ public sealed class BlockERT : IConsoleCommand
     public string Help => "blockert <true/false>";
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
-        var ertsys = _entities.System<ERTRecruitmentSystem>();
-        var isBlocked = !ertsys.IsBlocked;
+        var ertsys = _entities.System<ERTRecruitmentRule>();
+        var isDisabled = !ertsys.IsDisabled;
 
         if (args.Length > 0)
         {
-            isBlocked = args[0] == "true";
+            isDisabled = args[0] == "true";
         }
 
-        ertsys.IsBlocked = isBlocked;
-        var message = isBlocked ? "ERT is blocked!" : "ERT is no longer blocked!";
+        ertsys.IsDisabled = isDisabled;
+        var message = isDisabled ? "ERT is blocked!" : "ERT is no longer blocked!";
         shell.WriteLine(message);
         _chatManager.SendAdminAnnouncement(message);
     }

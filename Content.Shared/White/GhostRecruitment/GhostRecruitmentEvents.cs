@@ -13,27 +13,6 @@ public sealed class GhostsRecruitmentSuccessEvent
     }
 }
 
-[Serializable,NetSerializable]
-public sealed class GhostsRecruitmentFailEvent
-{
-    public string RecruitmentName;
-
-    public GhostsRecruitmentFailEvent(string recruitmentName)
-    {
-        RecruitmentName = recruitmentName;
-    }
-}
-
-[Serializable,NetSerializable]
-public sealed class GhostRecruitmentAttemptEvent : CancelableEventArgs
-{
-    public string RecruitmentName;
-
-    public GhostRecruitmentAttemptEvent(string recruitmentName)
-    {
-        RecruitmentName = recruitmentName;
-    }
-}
 
 
 [Serializable,NetSerializable]

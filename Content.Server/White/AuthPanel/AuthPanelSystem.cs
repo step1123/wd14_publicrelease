@@ -1,13 +1,14 @@
-using Content.Server.Access.Systems;
+using Content.Server.GameTicking;
 using Content.Server.Popups;
+using Content.Server.Station.Systems;
 using Content.Server.White.ERTRecruitment;
-using Content.Server.White.ServerEvent;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.White.AuthPanel;
 using Content.Shared.White.Cyborg.Components;
+using Content.Shared.White.GhostRecruitment;
 using Robust.Server.GameObjects;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -20,11 +21,12 @@ public sealed class AuthPanelSystem : EntitySystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly AccessReaderSystem _access = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
-    [Dependency] private readonly ServerEventSystem _event = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly ERTRecruitmentSystem _ert = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly ERTRecruitmentRule _ert = default!;
+    [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly StationSystem _station = default!;
 
     public Dictionary<AuthPanelAction, HashSet<EntityUid>> Counter = new();
     public Dictionary<AuthPanelAction, HashSet<int>> CardIndexes = new();
@@ -38,8 +40,14 @@ public sealed class AuthPanelSystem : EntitySystem
     {
         SubscribeLocalEvent<AuthPanelComponent,AuthPanelButtonPressedMessage>(OnButtonPressed);
         SubscribeLocalEvent<AuthPanelComponent,AuthPanelPerformActionEvent>(OnPerformAction);
+        SubscribeLocalEvent<RecruitedComponent,ERTRecruitedReasonEvent>(OnReason);
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRestart);
+    }
+
+    private void OnReason(EntityUid uid, RecruitedComponent component, ERTRecruitedReasonEvent args)
+    {
+        args.Reason = Reason;
     }
 
     private void OnRestart(RoundRestartCleanupEvent ev)
@@ -54,15 +62,16 @@ public sealed class AuthPanelSystem : EntitySystem
     {
         if (args.Action is AuthPanelAction.ERTRecruit)
         {
-            if (_random.Next(0, 10) < 2
-                && _event.TryStartEvent(ERTRecruitmentSystem.EventName)
-                && _event.TryGetEvent(ERTRecruitmentSystem.EventName,out var eventPrototype))
+            if (_random.Next(10) < 2)
             {
-                eventPrototype.Description = Reason;
+                _gameTicker.AddGameRule(ERTRecruitmentRuleComponent.EventName);
             }
             else
             {
-                _ert.DeclineERT();
+                var station = _station.GetStationInMap(Transform(uid).MapID);
+
+                if (station != null)
+                    _ert.DeclineERT(station.Value);
             }
 
             foreach (var entities in Counter.Values)

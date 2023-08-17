@@ -24,3 +24,6 @@ arrivals = false
 
 [worldgen]
 enabled = false
+
+[white]
+ert_load = false
