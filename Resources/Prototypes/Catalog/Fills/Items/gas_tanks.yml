@@ -152,10 +152,10 @@
       outputPressure: 101.3
       air:
         # 20 minutes of agony
-        volume: 15
+        volume: 45
         moles:
           - 0           # oxygen
           - 0           # nitrogen
           - 0           # CO2
-          - 18.74958767 # plasma
-        temperature: 96.22
+          - 18.46241166 # plasma
+        temperature: 293.15

@@ -199,14 +199,17 @@
   - type: Sprite
     sprite: Objects/Tanks/plasma.rsi
   - type: Item
+    size: 25
     sprite: Objects/Tanks/plasma.rsi
   - type: GasTank
     outputPressure: 101.3
     air:
-      volume: 15
+      volume: 45
       temperature: 293.15
   - type: Clothing
     sprite: Objects/Tanks/plasma.rsi
+    slots:
+    - Back
   - type: Tag
     tags:
       - TankPlasma

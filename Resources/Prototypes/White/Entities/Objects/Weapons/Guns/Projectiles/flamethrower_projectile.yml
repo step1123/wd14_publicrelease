@@ -5,7 +5,7 @@
   noSpawn: true
   components:
   - type: GasProjectile
-    gasUsagePerTile: 1.05
+    gasUsagePerTile: 0.9375
   - type: Projectile
     damage:
       types:

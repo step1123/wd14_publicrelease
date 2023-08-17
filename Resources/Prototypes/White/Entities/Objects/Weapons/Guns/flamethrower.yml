@@ -29,7 +29,7 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/water_spray.ogg
   - type: GasAmmoProvider
-    gasUsage: 6.25
+    gasUsage: 4.6875
     proto: ProjectileFlamethrower
   - type: Flamethrower
   - type: ItemMapper
