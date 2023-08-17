@@ -19,6 +19,11 @@
   startingGear: SeniorOfficerGear
   icon: "SeniorOfficer"
   supervisors: job-supervisors-hos
+  special:
+    - !type:AddImplantSpecial
+      implants: [ MindShieldImplant ]
+  whitelistedSpecies:
+    - Human
   canBeAntag: false
   access:
   - Security
