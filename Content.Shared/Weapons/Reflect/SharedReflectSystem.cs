@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Numerics;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Audio;
@@ -63,6 +64,14 @@ public abstract class SharedReflectSystem : EntitySystem
 
         if (hands.ActiveHandEntity != null && TryReflectProjectile(hands.ActiveHandEntity.Value, args.ProjUid))
             args.Cancelled = true;
+        else // WD START
+        {
+            var proj = args.ProjUid;
+            args.Cancelled = hands.Hands.Where(h => h.Value != hands.ActiveHand)
+                .Select(h => h.Value.HeldEntity)
+                .Any(e => TryComp(e, out ReflectComponent? reflect) && reflect.PassiveReflect &&
+                          TryReflectProjectile(e.Value, proj, reflect: reflect));
+        } // WD END
     }
 
     private bool TryReflectProjectile(EntityUid reflector, EntityUid projectile, ProjectileComponent? projectileComp = null, ReflectComponent? reflect = null)

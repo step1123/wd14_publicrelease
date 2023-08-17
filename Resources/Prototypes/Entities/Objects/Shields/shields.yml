@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   name: base shield
   parent: BaseItem
   id: BaseShield
@@ -350,6 +350,7 @@
       reflectProb: 0.95
       reflects:
         - Energy
+      passiveReflect: true
     - type: Blocking
       passiveBlockModifier:
         coefficients:

@@ -778,6 +778,9 @@
       radius: 3.5
       color: red
       energy: 1
+    - type: Reflective
+      reflective:
+      - Energy
 
 
 - type: entity
@@ -825,6 +828,9 @@
       radius: 3.5
       color: red
       energy: 1
+    - type: Reflective
+      reflective:
+      - Energy
 
 
 
@@ -920,6 +926,9 @@
       radius: 3.5
       color: red
       energy: 1
+    - type: Reflective
+      reflective:
+      - Energy
 
 
 
@@ -968,6 +977,9 @@
       radius: 3.5
       color: green
       energy: 1
+    - type: Reflective
+      reflective:
+      - Energy
 
 
 - type: entity
@@ -1015,3 +1027,6 @@
       radius: 3.5
       color: red
       energy: 1
+    - type: Reflective
+      reflective:
+      - Energy
