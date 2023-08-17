@@ -1,0 +1,17 @@
+- type: entity
+  parent: MobHuman
+  id: MobHumanGhost
+  name: Урист МакГост
+  components:
+    - type: RandomHumanoidAppearance
+      randomizeName: true
+    - type: GhostRole
+      allowMovement: true
+      allowSpeech: true
+      makeSentient: true
+      name: Человек
+      description: "Гост роль, но для чего же она?"
+    - type: GhostTakeoverAvailable
+    - type: Tag
+      tags:
+        - CannotSuicide
