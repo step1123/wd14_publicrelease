@@ -498,7 +498,7 @@
         Steel: 30
         Plastic: 30
     - type: StaticPrice
-      price: 15
+      price: 10
 
 - type: entity
   id: WeaponCapacitorRechargerCircuitboard
@@ -520,7 +520,7 @@
         Steel: 30
         Plastic: 30
     - type: StaticPrice
-      price: 15
+      price: 10
 
 - type: entity
   id: SubstationMachineCircuitboard
@@ -541,7 +541,7 @@
       chemicalComposition:
         Silicon: 20
     - type: StaticPrice
-      price: 58
+      price: 55
 
 - type: entity
   parent: BaseMachineCircuitboard

@@ -41,7 +41,7 @@
     materialComposition:
       Steel: 100
   - type: StaticPrice
-    price: 30
+    price: 25
 
 - type: entity
   name: screwdriver
@@ -84,7 +84,7 @@
     materialComposition:
       Steel: 100
   - type: StaticPrice
-    price: 30
+    price: 25
 
 - type: entity
   name: wrench
@@ -216,7 +216,7 @@
       Steel: 100
       Plastic: 100
   - type: StaticPrice
-    price: 56
+    price: 45
 
 - type: entity
   name: network configurator
@@ -264,7 +264,7 @@
       tags:
         - DroneUsable
     - type: StaticPrice
-      price: 56
+      price: 45
     - type: GuideHelp
       guides:
         - NetworkConfigurator

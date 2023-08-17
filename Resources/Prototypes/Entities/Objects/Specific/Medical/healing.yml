@@ -44,7 +44,7 @@
     count: 10
     sizeMultiplier: 0.5
   - type: StackPrice
-    price: 10
+    price: 5
 
 - type: entity
   id: Ointment1
@@ -129,7 +129,7 @@
     count: 10
     sizeMultiplier: 0.5
   - type: StackPrice
-    price: 10
+    price: 5
 
 - type: entity
   id: Brutepack1
