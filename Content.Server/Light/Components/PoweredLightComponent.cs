@@ -63,6 +63,9 @@ namespace Content.Server.Light.Components
         [DataField("togglePort", customTypeSerializer: typeof(PrototypeIdSerializer<SinkPortPrototype>))]
         public string TogglePort = "Toggle";
 
+        [DataField("statusPort", customTypeSerializer: typeof(PrototypeIdSerializer<SourcePortPrototype>))]
+        public string StatusPort = "LightStatus";
+
         /// <summary>
         /// How long it takes to eject a bulb from this
         /// </summary>

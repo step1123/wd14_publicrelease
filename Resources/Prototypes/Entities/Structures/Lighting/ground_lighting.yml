@@ -95,6 +95,9 @@
     receiveFrequencyId: SmartLight
   - type: WirelessNetworkConnection
     range: 200
+  - type: DeviceLinkSource
+    ports:
+    - LightStatus
   - type: DeviceLinkSink
     ports:
       - On
