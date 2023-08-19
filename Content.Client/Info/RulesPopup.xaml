@@ -4,11 +4,10 @@
          VerticalExpand="True" HorizontalExpand="True"
          MouseFilter="Stop">
     <parallax:ParallaxControl />
-    <Control VerticalExpand="True"
-             MaxWidth="650">
+    <Control MaxWidth="650" MaxHeight="150">
         <PanelContainer StyleClasses="windowPanel" />
         <ScrollContainer HScrollEnabled="False">
-            <BoxContainer Orientation="Vertical" SeparationOverride="10">
+            <BoxContainer Orientation="Vertical" SeparationOverride="10" VerticalAlignment="Center">
                 <info:RulesControl />
                 <Label Name="WaitLabel" />
                 <BoxContainer Orientation="Horizontal">
