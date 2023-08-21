@@ -140,3 +140,12 @@
   ghostName: Панда
   ghostDescription: Полыхает...
   size: 1, 1
+
+- type: customGhost
+  id: quazvr-ghost
+  ckey: quazvr
+  sprite: White/Ghosts/quazvr-ghost.rsi
+  alpha: 0.8
+  ghostName: Neco
+  ghostDescription: Buranyaaa...
+  size: 0.6, 0.6
