@@ -10,7 +10,7 @@ namespace Content.Server.Chemistry.Components
     /// A machine that dispenses reagents into a solution container.
     /// </summary>
     [RegisterComponent]
-    [Access(typeof(ReagentDispenserSystem))]
+    [Access(typeof(ReagentDispenserSystem), typeof(ChemMasterSystem))]
     public sealed class ReagentDispenserComponent : Component
     {
 
@@ -27,5 +27,15 @@ namespace Content.Server.Chemistry.Components
 
         [ViewVariables(VVAccess.ReadWrite)]
         public ReagentDispenserDispenseAmount DispenseAmount = ReagentDispenserDispenseAmount.U10;
+
+        // WD START
+        public const string ChemMasterPort = "ChemMasterSender";
+
+        [ViewVariables]
+        public bool ChemMasterInRange;
+
+        [ViewVariables]
+        public EntityUid? ChemMaster;
+        // WD END
     }
 }

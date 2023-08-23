@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: ChemDispenser
   name: chemical dispenser
   parent: ReagentDispenserBase
@@ -35,3 +35,6 @@
     guides:
     - Chemicals
     - Chemist
+  - type: DeviceNetwork
+    deviceNetId: Wired
+    receiveFrequencyId: BasicDevice

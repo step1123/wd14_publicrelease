@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Chemistry.Components;
+using Content.Server.DeviceLinking.Systems;
 using Content.Server.Labels;
 using Content.Server.Popups;
 using Content.Server.Storage.Components;
@@ -10,6 +11,7 @@ using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
+using Content.Shared.DeviceLinking.Events;
 using Content.Shared.FixedPoint;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
@@ -35,12 +37,20 @@ namespace Content.Server.Chemistry.EntitySystems
         [Dependency] private readonly LabelSystem _labelSystem = default!;
         [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
         [Dependency] private readonly AppearanceSystem _appearance = default!;
+        [Dependency] private readonly ReagentDispenserSystem _dispenserSystem = default!; // WD
+        [Dependency] private readonly DeviceLinkSystem _signalSystem = default!; // WD
 
         private const string PillPrototypeId = "Pill";
 
         public override void Initialize()
         {
             base.Initialize();
+
+            // WD START
+            SubscribeLocalEvent<ChemMasterComponent, ComponentInit>(OnComponentInit);
+            SubscribeLocalEvent<ChemMasterComponent, PortDisconnectedEvent>(OnPortDisconnected);
+            SubscribeLocalEvent<ChemMasterComponent, AnchorStateChangedEvent>(OnAnchor);
+            // WD END
 
             SubscribeLocalEvent<ChemMasterComponent, ComponentStartup>((_, comp, _) => UpdateUiState(comp));
             SubscribeLocalEvent<ChemMasterComponent, SolutionChangedEvent>((_, comp, _) => UpdateUiState(comp));
@@ -55,7 +65,31 @@ namespace Content.Server.Chemistry.EntitySystems
             SubscribeLocalEvent<ChemMasterComponent, ChemMasterOutputToBottleMessage>(OnOutputToBottleMessage);
         }
 
-        private void UpdateUiState(ChemMasterComponent chemMaster, bool updateLabel = false)
+        // WD START
+        private void OnComponentInit(EntityUid uid, ChemMasterComponent clonePod, ComponentInit args)
+        {
+            _signalSystem.EnsureSinkPorts(uid, ChemMasterComponent.ChemMasterPort);
+        }
+
+        private void OnPortDisconnected(EntityUid uid, ChemMasterComponent component, PortDisconnectedEvent args)
+        {
+            component.ConnectedDispenser = null;
+        }
+
+        private void OnAnchor(EntityUid uid, ChemMasterComponent component, ref AnchorStateChangedEvent args)
+        {
+            if (component.ConnectedDispenser == null ||
+                !TryComp<ReagentDispenserComponent>(component.ConnectedDispenser, out var dispenserComp))
+                return;
+
+            if (!args.Anchored)
+                return;
+
+            _dispenserSystem.UpdateConnection(component.ConnectedDispenser.Value, uid, dispenserComp, component);
+        }
+        // WD END
+
+        public void UpdateUiState(ChemMasterComponent chemMaster, bool updateLabel = false) // WD EDIT
         {
             if (!_solutionContainerSystem.TryGetSolution(chemMaster.Owner, SharedChemMaster.BufferSolutionName, out var bufferSolution))
                 return;
@@ -116,7 +150,7 @@ namespace Content.Server.Chemistry.EntitySystems
             ClickSound(chemMaster);
         }
 
-        private void TransferReagents(ChemMasterComponent chemMaster, string reagentId, FixedPoint2 amount, bool fromBuffer)
+        private void TransferReagents(ChemMasterComponent chemMaster, string reagentId, FixedPoint2 amount, bool fromBuffer) // WD EDIT
         {
             var container = _itemSlotsSystem.GetItemOrNull(chemMaster.Owner, SharedChemMaster.InputSlotName);
             if (container is null ||

@@ -9,7 +9,7 @@ namespace Content.Server.Chemistry.Components
     /// <seealso cref="ChemMasterSystem"/>
     /// </summary>
     [RegisterComponent]
-    [Access(typeof(ChemMasterSystem))]
+    [Access(typeof(ChemMasterSystem), typeof(ReagentDispenserSystem))] // WD EDIT
     public sealed class ChemMasterComponent : Component
     {
         [DataField("pillType"), ViewVariables(VVAccess.ReadWrite)]
@@ -23,5 +23,12 @@ namespace Content.Server.Chemistry.Components
 
         [DataField("clickSound"), ViewVariables(VVAccess.ReadWrite)]
         public SoundSpecifier ClickSound = new SoundPathSpecifier("/Audio/Machines/machine_switch.ogg");
+
+        // WD START
+        public const string ChemMasterPort = "ChemMasterReceiver";
+
+        [ViewVariables]
+        public EntityUid? ConnectedDispenser;
+        // WD END
     }
 }

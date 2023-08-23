@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   id: ReagentDispenserBase
   parent: ConstructibleMachine
@@ -71,3 +71,10 @@
     price: 1000
   - type: Wires
   - type: WiresPanel
+  - type: DeviceList
+  - type: DeviceNetwork
+    deviceNetId: Wired
+  - type: DeviceLinkSource
+    range: 1.5
+    ports:
+      - ChemMasterSender
