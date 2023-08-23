@@ -26,6 +26,9 @@
       solutions:
         stomach:
           maxVol: 50.0
+    - type: Tag
+      tags:
+        - Brain
 
 
 - type: entity

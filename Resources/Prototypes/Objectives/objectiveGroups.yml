@@ -39,6 +39,11 @@
     KillRandomObjective: 1
     KillAllOtherAntagonistsObjective: 0.02
     KillRandomHeadObjective: 0.25
+    HarvestBrainsObjective: 0.1
+    HarvestHeartsObjective: 0.1
+    HarvestKidneysObjective: 0.1
+    KillAllHeadsObjective: 0.15
+    KillAllSecurityObjective: 0.08
 
 - type: weightedRandom
   id: TraitorObjectiveGroupState

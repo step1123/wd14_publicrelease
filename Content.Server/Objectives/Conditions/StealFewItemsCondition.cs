@@ -6,6 +6,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 using System.Linq;
+using Content.Shared.Tag;
 
 namespace Content.Server.Objectives.Conditions
 {
@@ -20,6 +21,9 @@ namespace Content.Server.Objectives.Conditions
 
         [DataField("prototypeParent")]
         private string _prototypeParentId = string.Empty;
+
+        [DataField("tag")]
+        private string _tag = string.Empty;
 
         [DataField("quantityRange")]
         private List<int> _quantityRange = new();
@@ -62,6 +66,7 @@ namespace Content.Server.Objectives.Conditions
                 _mind = mind,
                 _prototypeId = _prototypeId,
                 _prototypeParentId = _prototypeParentId,
+                _tag = _tag,
                 _owner = _owner,
                 _quantity = IoCManager.Resolve<IRobustRandom>().Next(_quantityRange[0], _quantityRange[1])
             };
@@ -77,6 +82,7 @@ namespace Content.Server.Objectives.Conditions
 
                 var metaQuery = entMan.GetEntityQuery<MetaDataComponent>();
                 var managerQuery = entMan.GetEntityQuery<ContainerManagerComponent>();
+                var tagQuery = entMan.GetEntityQuery<TagComponent>();
                 var stack = new Stack<ContainerManagerComponent>();
 
                 if (!metaQuery.TryGetComponent(_mind?.OwnedEntity, out var meta))
@@ -92,10 +98,17 @@ namespace Content.Server.Objectives.Conditions
                 {
                     foreach (var container in currentManager.Containers.Values)
                     {
+                        if (container.ID == "BodyContainer")
+                            continue;
+
                         foreach (var entity in container.ContainedEntities)
                         {
-                            var isParentProto = metaQuery.GetComponent(entity).EntityPrototype?.Parents?.Contains(_prototypeParentId) ?? false;
-                            if (metaQuery.GetComponent(entity).EntityPrototype?.ID == _prototypeId || isParentProto)
+                            var isParentProto = metaQuery.GetComponent(entity).EntityPrototype?.Parents
+                                ?.Contains(_prototypeParentId) ?? false;
+                            var hasTag = _tag != string.Empty && tagQuery.TryGetComponent(entity, out var tag) &&
+                                         tag.Tags.Contains(_tag);
+                            if (metaQuery.GetComponent(entity).EntityPrototype?.ID == _prototypeId || isParentProto ||
+                                hasTag)
                                 currentQuantity += 1;
 
                             if (!managerQuery.TryGetComponent(entity, out var containerManager))

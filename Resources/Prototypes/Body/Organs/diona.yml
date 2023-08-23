@@ -49,6 +49,9 @@
     groups:
     - id: Gas
       rateModifier: 100.0
+  - type: Tag
+    tags:
+      - Brain
 
 - type: entity
   id: OrganDionaEyes

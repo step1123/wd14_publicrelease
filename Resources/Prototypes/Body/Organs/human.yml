@@ -29,6 +29,9 @@
     context: "ghost"
   - type: InputMover
   - type: Brain
+  - type: Tag
+    tags:
+      - Brain
 
 - type: entity
   id: OrganHumanEyes
@@ -123,6 +126,9 @@
     - id: Medicine
     - id: Poison
     - id: Narcotic
+  - type: Tag
+    tags:
+      - Heart
 
 - type: entity
   id: OrganHumanStomach
@@ -181,3 +187,6 @@
     maxReagents: 5
     metabolizerTypes: [Human]
     removeEmpty: true
+  - type: Tag
+    tags:
+      - Kidneys

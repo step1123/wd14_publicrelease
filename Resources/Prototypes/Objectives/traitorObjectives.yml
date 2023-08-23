@@ -22,6 +22,9 @@
         conditions:
           - RandomTraitorAliveCondition
           - KillAllOtherAntagonistsCondition
+          - SaveRandomNoTraitorPersonObjective
+          - KillAllSecurityCondition
+          - KillAllHeadsCondition
   conditions:
     - !type:KillRandomPersonCondition {}
   canBeDuplicate: true
@@ -66,6 +69,10 @@
         - StealCondition
         - EscapeShuttleCondition
         - EscapeAloneShuttleCondition
+        - StealFewItemsCondition
+        - StayAliveCondition
+        - SaveRandomNoTraitorPersonCondition
+        - KillAllOtherAntagonistsCondition
   conditions:
     - !type:DieCondition {}
 
@@ -252,6 +259,9 @@
   requirements:
     - !type:TraitorRequirement {}
     - !type:MultipleTraitorsRequirement
+    - !type:IncompatibleConditionsRequirement
+      conditions:
+        - KillAllOtherAntagonistsCondition
   conditions:
     - !type:RandomTraitorProgressCondition {}
   canBeDuplicate: true
@@ -418,6 +428,51 @@
       quantityRange: [2, 5]
 
 - type: objective
+  id: HarvestBrainsObjective
+  issuer: syndicate
+  difficultyOverride: 4.0
+  requirements:
+    - !type:TraitorRequirement {}
+    - !type:IncompatibleConditionsRequirement
+      conditions:
+        - DieCondition
+  conditions:
+    - !type:StealFewItemsCondition
+      prototype: OrganHumanBrain
+      tag: Brain
+      quantityRange: [8, 12]
+
+- type: objective
+  id: HarvestHeartsObjective
+  issuer: syndicate
+  difficultyOverride: 4.0
+  requirements:
+    - !type:TraitorRequirement {}
+    - !type:IncompatibleConditionsRequirement
+      conditions:
+        - DieCondition
+  conditions:
+    - !type:StealFewItemsCondition
+      prototype: OrganHumanHeart
+      tag: Heart
+      quantityRange: [8, 12]
+
+- type: objective
+  id: HarvestKidneysObjective
+  issuer: syndicate
+  difficultyOverride: 4.0
+  requirements:
+    - !type:TraitorRequirement {}
+    - !type:IncompatibleConditionsRequirement
+      conditions:
+        - DieCondition
+  conditions:
+    - !type:StealFewItemsCondition
+      prototype: OrganHumanKidneys
+      tag: Kidneys
+      quantityRange: [8, 12]
+
+- type: objective
   id: SaveRandomNoTraitorPersonObjective
   issuer: syndicate
   requirements:
@@ -429,3 +484,26 @@
         - KillAllOtherAntagonistsCondition
   conditions:
     - !type:SaveRandomNoTraitorPersonCondition {}
+
+- type: objective
+  id: KillAllHeadsObjective
+  issuer: syndicate
+  requirements:
+    - !type:TraitorRequirement {}
+    - !type:IncompatibleConditionsRequirement
+      conditions:
+        - KillRandomPersonCondition
+  conditions:
+    - !type:KillAllHeadsCondition {}
+
+- type: objective
+  id: KillAllSecurityObjective
+  issuer: syndicate
+  difficultyOverride: 5.0
+  requirements:
+    - !type:TraitorRequirement {}
+    - !type:IncompatibleConditionsRequirement
+      conditions:
+        - KillRandomPersonCondition
+  conditions:
+    - !type:KillAllSecurityCondition {}
