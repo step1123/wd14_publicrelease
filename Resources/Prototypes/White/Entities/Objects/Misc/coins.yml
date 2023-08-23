@@ -1,0 +1,258 @@
+- type: stack
+  id: CoinGold
+  name: Золотая монета
+  icon: { sprite: White/Objects/Misc/Coins/gold.rsi, state: coingold }
+  spawn: GoldCoin
+
+
+- type: entity
+  parent: BaseItem
+  id: GoldCoin
+  name: Золотая монета
+  description: Что они ещё для днд сделают?
+  components:
+    - type: Material
+    - type: PhysicalComposition
+      materialComposition:
+        Credit: 1
+    - type: StaticPrice
+      price: 0
+    - type: Stack
+      stackType: CoinGold
+      count: 1
+    - type: Sprite
+      sprite: White/Objects/Misc/Coins/gold.rsi
+      state: coingold
+    - type: Physics
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures:
+        fix1:
+          density: 30
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.35,-0.2,0.25,0.1"
+          mask:
+            - ItemMask
+    - type: Appearance
+
+- type: entity
+  parent: GoldCoin
+  id: GoldCoin5
+  suffix: 5
+  components:
+    - type: Icon
+      sprite: White/Objects/Misc/Coins/gold.rsi
+      state: coingold
+    - type: Stack
+      count: 5
+
+- type: entity
+  parent: GoldCoin
+  id: GoldCoin10
+  suffix: 10
+  components:
+    - type: Icon
+      sprite: White/Objects/Misc/Coins/gold.rsi
+      state: coingold
+    - type: Stack
+      count: 10
+
+- type: entity
+  parent: GoldCoin
+  id: GoldCoin100
+  suffix: 100
+  components:
+    - type: Icon
+      sprite: White/Objects/Misc/Coins/gold.rsi
+      state: coingold
+    - type: Stack
+      count: 100
+
+
+- type: entity
+  parent: GoldCoin
+  id: GoldCoin1000000
+  suffix: 1000000
+  components:
+    - type: Icon
+      sprite: White/Objects/Misc/Coins/gold.rsi
+      state: coingold
+    - type: Stack
+      count: 1000000
+
+- type: stack
+  id: CoinSilver
+  name: Серебряная монета
+  icon: { sprite: White/Objects/Misc/Coins/silver.rsi, state: coin-silver }
+  spawn: SilverCoin
+
+- type: entity
+  parent: BaseItem
+  id: SilverCoin
+  name: Серебряная монета
+  description: Что они ещё для днд сделают?
+  components:
+    - type: Material
+    - type: PhysicalComposition
+      materialComposition:
+        Credit: 1
+    - type: StaticPrice
+      price: 0
+    - type: Stack
+      stackType: CoinSilver
+      count: 1
+    - type: Sprite
+      sprite: White/Objects/Misc/Coins/silver.rsi
+      state: coin-silver
+    - type: Physics
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures:
+        fix1:
+          density: 30
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.35,-0.2,0.25,0.1"
+          mask:
+            - ItemMask
+    - type: Appearance
+
+- type: entity
+  parent: SilverCoin
+  id: SilverCoin5
+  suffix: 5
+  components:
+    - type: Icon
+      sprite: White/Objects/Misc/Coins/silver.rsi
+      state: coin-silver
+    - type: Stack
+      count: 5
+
+- type: entity
+  parent: SilverCoin
+  id: SilverCoin10
+  suffix: 10
+  components:
+    - type: Icon
+      sprite: White/Objects/Misc/Coins/silver.rsi
+      state: coin-silver
+    - type: Stack
+      count: 10
+
+- type: entity
+  parent: SilverCoin
+  id: SilverCoin30
+  suffix: 30
+  components:
+    - type: Icon
+      sprite: White/Objects/Misc/Coins/silver.rsi
+      state: coin-silver
+    - type: Stack
+      count: 30
+
+- type: entity
+  parent: SilverCoin
+  id: SilverCoin100
+  suffix: 100
+  components:
+    - type: Icon
+      sprite: White/Objects/Misc/Coins/silver.rsi
+      state: coin-silver
+    - type: Stack
+      count: 100
+
+
+- type: entity
+  parent: SilverCoin
+  id: SilverCoin1000000
+  suffix: 1000000
+  components:
+    - type: Icon
+      sprite: White/Objects/Misc/Coins/silver.rsi
+      state: coin-silver
+    - type: Stack
+      count: 1000000
+
+- type: stack
+  id: CoinCoopper
+  name: Медная монета
+  icon: { sprite: White/Objects/Misc/Coins/med.rsi, state: med }
+  spawn: CopperCoin
+
+- type: entity
+  parent: BaseItem
+  id: CopperCoin
+  name: Медная монета
+  description: Что они ещё для днд сделают?
+  components:
+    - type: Material
+    - type: PhysicalComposition
+      materialComposition:
+        Credit: 1
+    - type: StaticPrice
+      price: 0
+    - type: Stack
+      stackType: CoinCoopper
+      count: 1
+    - type: Sprite
+      sprite: White/Objects/Misc/Coins/med.rsi
+      state: med
+    - type: Physics
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures:
+        fix1:
+          density: 30
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.35,-0.2,0.25,0.1"
+          mask:
+            - ItemMask
+    - type: Appearance
+
+- type: entity
+  parent: CopperCoin
+  id: CopperCoin5
+  suffix: 5
+  components:
+    - type: Icon
+      sprite: White/Objects/Misc/Coins/med.rsi
+      state: med
+    - type: Stack
+      count: 5
+
+- type: entity
+  parent: CopperCoin
+  id: CopperCoin10
+  suffix: 10
+  components:
+    - type: Icon
+      sprite: White/Objects/Misc/Coins/med.rsi
+      state: med
+    - type: Stack
+      count: 10
+
+
+- type: entity
+  parent: CopperCoin
+  id: CopperCoin100
+  suffix: 100
+  components:
+    - type: Icon
+      sprite: White/Objects/Misc/Coins/med.rsi
+      state: med
+    - type: Stack
+      count: 100
+
+
+- type: entity
+  parent: CopperCoin
+  id: CopperCoin1000000
+  suffix: 1000000
+  components:
+    - type: Icon
+      sprite: White/Objects/Misc/Coins/med.rsi
+      state: med
+    - type: Stack
+      count: 1000000
