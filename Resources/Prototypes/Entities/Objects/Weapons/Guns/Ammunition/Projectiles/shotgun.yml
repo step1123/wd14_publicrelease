@@ -101,8 +101,8 @@
     state: buckshot-flare
   - type: Projectile
     damage:
-      groups:
-        Burn: 7
+      types:
+        Heat: 7
   - type: Trail
     splineIteratorType: CatmullRom
     splineRendererType: Continuous

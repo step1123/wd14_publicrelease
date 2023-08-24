@@ -39,10 +39,10 @@ namespace Content.Shared.CombatMode
         /// Chance to outright disarm a target.
         /// </summary>
         [ViewVariables(VVAccess.ReadWrite), DataField("disarmFailChance")]
-        public readonly float DisarmChance = 0.20f;
+        public readonly float DisarmChance = 0.6f;
 
         [ViewVariables(VVAccess.ReadWrite), DataField("disarmStaminaDamage")]
-        public float DisarmStaminaDamage = 20f;
+        public float DisarmStaminaDamage = 12;
 
         #endregion
 

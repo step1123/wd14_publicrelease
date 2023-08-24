@@ -485,6 +485,7 @@
     - type: Gun
       soundGunshot:
         path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+      projectileSpeed: 12
     - type: TwoModeEnergyAmmoProvider
       projProto: BulletTaser
       fireCost: 100

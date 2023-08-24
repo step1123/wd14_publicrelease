@@ -71,7 +71,6 @@
   - type: ClothingGrantComponent
     component:
       - type: StaminaProtection
-        damageReduction: 1
 
 #NTSRA Voidsuit / Ancient Voidsuit
 - type: entity
