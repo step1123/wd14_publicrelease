@@ -53,6 +53,10 @@ namespace Content.Shared.Projectiles
 
         private void OnEmbedActivate(EntityUid uid, EmbeddableProjectileComponent component, ActivateInWorldEvent args)
         {
+            if (args.Handled || !TryComp<PhysicsComponent>(uid, out var physics) || physics.BodyType != BodyType.Static)
+                return;
+
+            args.Handled = true;
             AttemptEmbedRemove(uid, args.User, component);
         }
 
