@@ -106,6 +106,13 @@
           Quantity: 3
   - type: Tag
     tags: []
+  - type: MeleeWeapon
+    animation: WeaponArcPunch
+    soundHit:
+      path: /Audio/Weapons/syringe.ogg
+    damage:
+      groups:
+        Brute: 3
 
 
 - type: entity
@@ -130,6 +137,13 @@
           Quantity: 5
   - type: Tag
     tags: []
+  - type: MeleeWeapon
+    animation: WeaponArcPunch
+    soundHit:
+      path: /Audio/Weapons/syringe.ogg
+    damage:
+      groups:
+        Brute: 3
 
 - type: entity
   name: space medipen
@@ -161,6 +175,13 @@
             Quantity: 20
   - type: Tag
     tags: []
+  - type: MeleeWeapon
+    animation: WeaponArcPunch
+    soundHit:
+      path: /Audio/Weapons/syringe.ogg
+    damage:
+      groups:
+        Brute: 3
 
 - type: entity
   name: stimulant injector
@@ -190,6 +211,13 @@
     price: 500
   - type: Tag
     tags: []
+  - type: MeleeWeapon
+    animation: WeaponArcPunch
+    soundHit:
+      path: /Audio/Weapons/syringe.ogg
+    damage:
+      groups:
+        Brute: 3
 
 - type: entity
   name: stimulant microinjector
@@ -216,6 +244,13 @@
     price: 100
   - type: Tag
     tags: []
+  - type: MeleeWeapon
+    animation: WeaponArcPunch
+    soundHit:
+      path: /Audio/Weapons/syringe.ogg
+    damage:
+      groups:
+        Brute: 3
 
 - type: entity
   name: combat medipen
@@ -247,6 +282,13 @@
     price: 500
   - type: Tag
     tags: []
+  - type: MeleeWeapon
+    animation: WeaponArcPunch
+    soundHit:
+      path: /Audio/Weapons/syringe.ogg
+    damage:
+      groups:
+        Brute: 3
 
 - type: entity
   name: experimental stimulant injector
@@ -276,6 +318,13 @@
     price: 1000
   - type: Tag
     tags: []
+  - type: MeleeWeapon
+    animation: WeaponArcPunch
+    soundHit:
+      path: /Audio/Weapons/syringe.ogg
+    damage:
+      groups:
+        Brute: 3
 
 
 - type: entity

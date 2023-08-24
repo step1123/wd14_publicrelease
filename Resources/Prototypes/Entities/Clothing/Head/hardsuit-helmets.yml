@@ -145,13 +145,6 @@
   - type: PressureProtection
     highPressureMultiplier: 0.525
     lowPressureMultiplier: 1000
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
 
 #Brigmedic Hardsuit
 - type: entity
@@ -167,15 +160,6 @@
     sprite: Clothing/Head/Hardsuits/brigmedic.rsi
   - type: PointLight
     color: "#00FFFF"
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.95
-        Slash: 0.95
-        Piercing: 0.95
-        Heat: 0.95
-        Radiation: 0.90
-        Caustic: 0.90
   - type: PressureProtection
     highPressureMultiplier: 0.6
     lowPressureMultiplier: 1000
@@ -197,13 +181,6 @@
   - type: PressureProtection
     highPressureMultiplier: 0.525
     lowPressureMultiplier: 1000
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
 
 #Captain's Hardsuit
 - type: entity
@@ -292,13 +269,6 @@
   - type: PressureProtection
     highPressureMultiplier: 0.45
     lowPressureMultiplier: 1000
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
 
 #ANTAG HARDSUITS
 #Blood-red Hardsuit
@@ -318,13 +288,6 @@
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
 
 #Cybersun Juggernaut Hardsuit
 - type: entity
@@ -341,13 +304,6 @@
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
 
 #Syndicate Elite Hardsuit
 - type: entity
@@ -368,13 +324,6 @@
     lowPressureMultiplier: 1000
   - type: TemperatureProtection
     coefficient: 0.005
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
 
 #Syndicate Commander Hardsuit
 - type: entity
@@ -393,13 +342,6 @@
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
 
 #Wizard Hardsuit
 - type: entity
@@ -418,13 +360,6 @@
   - type: PressureProtection
     highPressureMultiplier: 0.27
     lowPressureMultiplier: 1000
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.9
 
 #Organic Space Suit
 - type: entity
@@ -498,6 +433,7 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
+        Laser: 0.9
 
 #ERT Engineer Hardsuit
 - type: entity
@@ -519,6 +455,7 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
+        Laser: 0.9
 
 #ERT Medical Hardsuit
 - type: entity
@@ -554,6 +491,7 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
+        Laser: 0.9
 
 #ERT Janitor Hardsuit
 - type: entity
@@ -607,6 +545,7 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
+        Laser: 0.9
 
 #Deathsquad Hardsuit
 - type: entity
@@ -632,6 +571,12 @@
         Heat: 0.80
         Radiation: 0.80
         Caustic: 0.95
+        Laser: 0.9
+  - type: ClothingGrantComponent
+    component:
+      - type: ShowHealthBars
+        damageContainer: Biological
+      - type: NightVision
 
 #MISC. HARDSUITS
 #Clown Hardsuit

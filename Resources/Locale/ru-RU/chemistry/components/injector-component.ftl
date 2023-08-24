@@ -22,3 +22,6 @@ injector-component-target-is-empty-message = { $target } пуст!
 
 injector-component-injecting-user = Вы начинаете вводить иглу.
 injector-component-injecting-target = { CAPITALIZE($user) } пытается ввести вам иглу!
+
+injector-component-injecting-user-suit = Вы начинаете вводить иглу через специально отведенный порт.
+injector-component-injecting-target-suit = { CAPITALIZE($user) } пытается ввести вам иглу через специально отведенный порт!

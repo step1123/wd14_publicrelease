@@ -261,6 +261,7 @@
     equippedPrefix: holding
   - type: Storage
     capacity: 9999
+  - type: SingoCall
 
 - type: entity
   parent: ClothingBackpackClown

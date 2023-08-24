@@ -20,6 +20,7 @@ health-analyzer-window-damage-type-Bloodloss = Кровопотеря
 health-analyzer-window-damage-group-Toxin = Токсины
 health-analyzer-window-damage-type-Poison = Яды
 health-analyzer-window-damage-type-Radiation = Радиация
+health-analyzer-window-damage-type-Laser = Лазерный
 health-analyzer-window-damage-group-Genetic = Генетические
 health-analyzer-window-damage-type-Cellular = Клеточные
 health-analyzer-window-damage-group-Caustic = Кислотные

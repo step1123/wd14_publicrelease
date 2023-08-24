@@ -18,17 +18,17 @@
   id: Blunt
   armorCoefficientPrice: 2
   armorFlatPrice: 10
-  
+
 - type: damageType
   id: Cellular
   armorCoefficientPrice: 5
   armorFlatPrice: 30
-  
+
 - type: damageType
   id: Caustic
   armorCoefficientPrice: 5
   armorFlatPrice: 30
-  
+
 - type: damageType
   id: Cold
   armorCoefficientPrice: 2.5
@@ -36,6 +36,11 @@
 
 - type: damageType
   id: Heat
+  armorCoefficientPrice: 2.5
+  armorFlatPrice: 20
+
+- type: damageType
+  id: Laser
   armorCoefficientPrice: 2.5
   armorFlatPrice: 20
 

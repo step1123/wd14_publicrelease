@@ -50,7 +50,35 @@
   - type: MeleeWeapon
     damage:
       types:
-        Blunt: 10
+        Blunt: 5
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 15
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Piercing: 15
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 5
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: GlassBreak
+          - !type:SpillBehavior { }
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              ShardGlass:
+                min: 0
+                max: 1
+            transferForensics: true
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
 
 - type: entity
   parent: ClothingEyesBase

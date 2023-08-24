@@ -11,3 +11,6 @@ hypospray-component-empty-message = Он пустой!
 hypospray-component-feel-prick-message = Вы чувствуете слабый укольчик!
 hypospray-component-transfer-already-full-message = { $owner } уже заполнен!
 hypospray-cant-inject = Нельзя сделать инъекцию в { $target }!
+
+hypospray-component-inject-self-message-space = Вы пытаетесь сделать инъекцию через специально отведенный порт!
+injector-component-injecting-target-suit = { CAPITALIZE($user) } пытается сделать вам инъекцию через специально отведенный порт!

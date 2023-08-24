@@ -44,6 +44,12 @@
   - type: GuideHelp
     guides:
     - Chef
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 8
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
 
 - type: entity
   name: butcher's cleaver
@@ -62,7 +68,7 @@
     attackRate: 1.5
     damage:
       types:
-        Slash: 10
+        Slash: 15
   - type: Item
     size: 10
     sprite: Objects/Weapons/Melee/cleaver.rsi
@@ -92,8 +98,6 @@
   - type: Item
     size: 10
     sprite: Objects/Weapons/Melee/combat_knife.rsi
-  - type: DisarmMalus
-    malus: 0.225
 
 - type: entity
   name: survival knife
@@ -123,7 +127,7 @@
     attackRate: 1.0
     damage:
       types:
-        Slash: 15
+        Slash: 19
   - type: Item
     size: 10
     sprite: Objects/Weapons/Melee/kukri_knife.rsi
@@ -154,8 +158,6 @@
   - type: Item
     size: 4 #as much as a regular glass shard
     sprite: Objects/Weapons/Melee/shiv.rsi
-  - type: DisarmMalus
-    malus: 0.225
 
 - type: entity
   name: reinforced shiv

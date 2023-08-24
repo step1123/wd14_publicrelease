@@ -27,6 +27,10 @@
   - type: Tag
     tags:
     - SuitEVA
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.1
 
 #Emergency EVA
 - type: entity
@@ -64,6 +68,10 @@
   - type: Tag
     tags:
     - SuitEVA
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 1
 
 #NTSRA Voidsuit / Ancient Voidsuit
 - type: entity

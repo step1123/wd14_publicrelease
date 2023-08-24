@@ -1,10 +1,12 @@
 using System.Linq;
 using System.Diagnostics.CodeAnalysis;
+using Content.Server.Atmos.Components;
 using Content.Server.Chemistry.Components;
 using Content.Server.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Database;
+using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
@@ -12,6 +14,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Timing;
+using Content.Shared.Weapons.Melee;
 using Robust.Shared.GameStates;
 
 namespace Content.Server.Chemistry.EntitySystems
@@ -27,6 +30,7 @@ namespace Content.Server.Chemistry.EntitySystems
             SubscribeLocalEvent<HyposprayComponent, SolutionChangedEvent>(OnSolutionChange);
             SubscribeLocalEvent<HyposprayComponent, UseInHandEvent>(OnUseInHand);
             SubscribeLocalEvent<HyposprayComponent, ComponentGetState>(OnHypoGetState);
+            SubscribeLocalEvent<HyposprayComponent, HypoSprayDoAfterEvent>(OnHypoDoAfter);
         }
 
         private void OnHypoGetState(EntityUid uid, HyposprayComponent component, ref ComponentGetState args)
@@ -66,10 +70,13 @@ namespace Content.Server.Chemistry.EntitySystems
             if (!args.HitEntities.Any())
                 return;
 
-            TryDoInject(uid, args.HitEntities.First(), args.User);
+            if (TryDoInject(uid, args.HitEntities.First(), args.User, hard: true))
+            {
+                EntityManager.RemoveComponent<MeleeWeaponComponent>(args.Weapon);
+            }
         }
 
-        public bool TryDoInject(EntityUid uid, EntityUid? target, EntityUid user, HyposprayComponent? component=null)
+        public bool TryDoInject(EntityUid uid, EntityUid? target, EntityUid user, HyposprayComponent? component = null, bool hard = false)
         {
             if (!Resolve(uid, ref component))
                 return false;
@@ -104,6 +111,55 @@ namespace Content.Server.Chemistry.EntitySystems
                 return false;
             }
 
+            // WD EDIT Start
+
+            if (hard == false && _inventorySystem.TryGetSlotEntity(target.Value, "outerClothing", out var suit) && TryComp<PressureProtectionComponent>(suit, out _))
+            {
+                // If the target is wearing a pressure protection component, let's add a delay.
+                msgFormat = Loc.GetString("hypospray-component-inject-self-message-space");
+
+                var delay = _random.Next(2, 3);
+
+                if (delayComp is not null)
+                    _useDelay.BeginDelay(uid, delayComp);
+
+                // Get transfer amount. May be smaller than component.TransferAmount if not enough room
+                var realTransferAmountDoAfter = FixedPoint2.Min(component.TransferAmount, targetSolution.AvailableVolume);
+
+                if (realTransferAmountDoAfter <= 0)
+                {
+                    _popup.PopupCursor(Loc.GetString("hypospray-component-transfer-already-full-message", ("owner", target)), user);
+                    return true;
+                }
+
+                _doAfter.TryStartDoAfter(new DoAfterArgs(user, delay, new HypoSprayDoAfterEvent()
+                {
+                    HypoSpraySolution = hypoSpraySolution,
+                    TargetSolution = targetSolution,
+                    RealTransferAmount = realTransferAmountDoAfter
+                }, uid, target: target.Value, used: uid)
+                {
+                    BreakOnUserMove = true,
+                    BreakOnDamage = true,
+                    BreakOnTargetMove = true,
+                    MovementThreshold = 0.1f,
+                });
+
+                // For the user
+                _popup.PopupCursor(Loc.GetString(msgFormat), user);
+
+                // For the target
+                if (user != target)
+                {
+                    var userName = Identity.Entity(user, EntityManager);
+                    _popup.PopupEntity(Loc.GetString("injector-component-injecting-target-suit",("user", userName)), user, target.Value);
+                }
+
+                return true;
+            }
+
+            // WD EDIT End
+
             _popup.PopupCursor(Loc.GetString(msgFormat ?? "hypospray-component-inject-other-message", ("other", target)), user);
 
             if (target != user)
@@ -125,15 +181,31 @@ namespace Content.Server.Chemistry.EntitySystems
 
             if (realTransferAmount <= 0)
             {
-                _popup.PopupCursor(Loc.GetString("hypospray-component-transfer-already-full-message",("owner", target)), user);
+                _popup.PopupCursor(Loc.GetString("hypospray-component-transfer-already-full-message", ("owner", target)), user);
                 return true;
             }
 
+            // WD EDIT Start
+
+            if (DoInject(uid, target, user, hypoSpraySolution, targetSolution, realTransferAmount))
+            {
+                return true;
+            }
+
+            return true;
+        }
+
+        private bool DoInject(EntityUid uid, EntityUid? target, EntityUid user, Solution hypoSpraySolution, Solution targetSolution, FixedPoint2 realTransferAmount)
+        {
             // Move units from attackSolution to targetSolution
             var removedSolution = _solutions.SplitSolution(uid, hypoSpraySolution, realTransferAmount);
 
             if (!targetSolution.CanAddSolution(removedSolution))
                 return true;
+
+            if (target == null)
+                return false;
+
             _reactiveSystem.DoEntityReaction(target.Value, removedSolution, ReactionMethod.Injection);
             _solutions.TryAddSolution(target.Value, targetSolution, removedSolution);
 
@@ -142,6 +214,21 @@ namespace Content.Server.Chemistry.EntitySystems
 
             return true;
         }
+
+        private void OnHypoDoAfter(EntityUid uid, HyposprayComponent component, HypoSprayDoAfterEvent args)
+        {
+            if (args.Cancelled || args.Handled || args.Args.Target == null)
+                return;
+
+            if (DoInject(uid, args.Args.Target, args.Args.User, args.HypoSpraySolution, args.TargetSolution, args.RealTransferAmount))
+            {
+                args.Handled = true;
+                _audio.PlayPvs(component.InjectSound, args.Args.Target.Value);
+            }
+        }
+
+        // WD EDIT End
+
 
         static bool EligibleEntity([NotNullWhen(true)] EntityUid? entity, IEntityManager entMan)
         {

@@ -484,14 +484,14 @@
       - suitStorage
     - type: Gun
       soundGunshot:
-        path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+        path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
     - type: TwoModeEnergyAmmoProvider
-      projProto: BulletDisabler
-      fireCost: 50
-      projFireCost: 50
+      projProto: BulletTaser
+      fireCost: 100
+      projFireCost: 100
       hitscanProto: BulletTrailLaser
-      hitscanFireCost: 100
-      projSound: "/Audio/Weapons/Guns/Gunshots/taser2.ogg"
+      hitscanFireCost: 65
+      projSound: "/Audio/Weapons/Guns/Gunshots/taser.ogg"
       hitscanSound: "/Audio/Weapons/Guns/Gunshots/laser_cannon.ogg"
     - type: MagazineVisuals
       magState: mag

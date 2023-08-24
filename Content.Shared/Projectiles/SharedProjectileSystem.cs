@@ -72,3 +72,9 @@ namespace Content.Shared.Projectiles
 /// </summary>
 [ByRefEvent]
 public record struct ProjectileReflectAttemptEvent(EntityUid ProjUid, ProjectileComponent Component, bool Cancelled);
+
+/// <summary>
+/// Raised when projectile hits other entity
+/// </summary>
+[ByRefEvent]
+public readonly record struct ProjectileHitEvent(EntityUid Target);

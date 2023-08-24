@@ -1,7 +1,8 @@
+using System.Linq;
+using Content.Server.Atmos.Components;
 using Content.Server.Body.Components;
 using Content.Server.Chemistry.Components;
 using Content.Server.Chemistry.Components.SolutionManager;
-using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Database;
@@ -14,8 +15,8 @@ using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Verbs;
 using Content.Shared.Stacks;
+using Content.Shared.Weapons.Melee.Events;
 using Robust.Server.GameObjects;
-using Content.Shared.Popups;
 
 namespace Content.Server.Chemistry.EntitySystems;
 
@@ -35,6 +36,40 @@ public sealed partial class ChemistrySystem
         SubscribeLocalEvent<InjectorComponent, UseInHandEvent>(OnInjectorUse);
         SubscribeLocalEvent<InjectorComponent, AfterInteractEvent>(OnInjectorAfterInteract);
         SubscribeLocalEvent<InjectorComponent, ComponentGetState>(OnInjectorGetState);
+        SubscribeLocalEvent<InjectorComponent, MeleeHitEvent>(OnMeleeHit);
+    }
+
+    private void OnMeleeHit(EntityUid uid, InjectorComponent component, MeleeHitEvent ev)
+    {
+        if (!ev.HitEntities.Any())
+            return;
+
+        var target = ev.HitEntities.First();
+
+        if (!_solutions.TryGetSolution(uid, InjectorComponent.SolutionName, out var solution)
+            || solution.Volume == 0)
+            Break();
+
+        if (!EntityManager.TryGetComponent<BloodstreamComponent>(target, out var bloodstream))
+            return;
+
+        if (solution != null)
+        {
+            var availableVolume = solution.MaxVolume.Int();
+
+            component.TransferAmount = FixedPoint2.New(_random.Next(0, availableVolume));
+        }
+
+        TryInject(component, ev.Weapon, target, bloodstream.ChemicalSolution, ev.User, false);
+        Break();
+
+        return;
+
+        void Break()
+        {
+            _audio.PlayPvs("/Audio/Weapons/syringe_break.ogg", ev.User);
+            EntityManager.DeleteEntity(ev.Weapon);
+        }
     }
 
     private void AddSetTransferVerbs(EntityUid uid, InjectorComponent component, GetVerbsEvent<AlternativeVerb> args)
@@ -42,7 +77,7 @@ public sealed partial class ChemistrySystem
         if (!args.CanAccess || !args.CanInteract || args.Hands == null)
             return;
 
-        if (!EntityManager.TryGetComponent<ActorComponent?>(args.User, out var actor))
+        if (!EntityManager.TryGetComponent<ActorComponent?>(args.User, out _))
             return;
 
         // Add specific transfer verbs according to the container's size
@@ -211,9 +246,6 @@ public sealed partial class ChemistrySystem
     /// </summary>
     private void InjectDoAfter(InjectorComponent component, EntityUid user, EntityUid target, EntityUid injector)
     {
-        // Create a pop-up for the user
-        _popup.PopupEntity(Loc.GetString("injector-component-injecting-user"), target, user);
-
         if (!_solutions.TryGetSolution(injector, InjectorComponent.SolutionName, out var solution))
             return;
 
@@ -226,11 +258,6 @@ public sealed partial class ChemistrySystem
 
         if (isTarget)
         {
-            // Create a pop-up for the target
-            var userName = Identity.Entity(user, EntityManager);
-            _popup.PopupEntity(Loc.GetString("injector-component-injecting-target",
-                ("user", userName)), user, target);
-
             // Check if the target is incapacitated or in combat mode and modify time accordingly.
             if (_mobState.IsIncapacitated(target))
             {
@@ -242,6 +269,41 @@ public sealed partial class ChemistrySystem
                 // combat with fast syringes & lag.
                 actualDelay += 1;
             }
+
+            // WD-EDIT Start
+
+            if (component.ToggleState != SharedInjectorComponent.InjectorToggleMode.Draw && solution.Volume == 0)
+            {
+                _popup.PopupCursor(Loc.GetString("hypospray-component-empty-message"), user);
+                return;
+            }
+
+            // Check if the target is wearing suit
+            if (_inventorySystem.TryGetSlotEntity(target, "outerClothing", out var suit) && TryComp<PressureProtectionComponent>(suit, out _))
+            {
+                // Create a pop-up for the user
+                _popup.PopupEntity(Loc.GetString("injector-component-injecting-user-suit"), target, user);
+
+                // If the target has a suit with PressureProtectionComponent, add random time from the range (5-9)
+                actualDelay += _random.Next(5, 9);
+
+                // Create a pop-up for the target
+                var userName = Identity.Entity(user, EntityManager);
+                _popup.PopupEntity(Loc.GetString("injector-component-injecting-target-suit",
+                    ("user", userName)), user, target);
+            }
+            else
+            {
+                // Create a pop-up for the user
+                _popup.PopupEntity(Loc.GetString("injector-component-injecting-user"), target, user);
+
+                // Create a pop-up for the target
+                var userName = Identity.Entity(user, EntityManager);
+                _popup.PopupEntity(Loc.GetString("injector-component-injecting-target",
+                    ("user", userName)), user, target);
+            }
+
+            // WD-EDIT End
 
             // Add an admin log, using the "force feed" log type. It's not quite feeding, but the effect is the same.
             if (component.ToggleState == SharedInjectorComponent.InjectorToggleMode.Inject)
@@ -312,7 +374,7 @@ public sealed partial class ChemistrySystem
 
         // Move units from attackSolution to targetSolution
         Solution removedSolution;
-        if (TryComp<StackComponent>(targetEntity, out var stack)) 
+        if (TryComp<StackComponent>(targetEntity, out var stack))
             removedSolution = _solutions.SplitStackSolution(injector, solution, realTransferAmount, stack.Count);
         else
           removedSolution = _solutions.SplitSolution(injector, solution, realTransferAmount);
@@ -417,5 +479,4 @@ public sealed partial class ChemistrySystem
         Dirty(component);
         AfterDraw(component, injector);
     }
-
 }

@@ -191,13 +191,15 @@
   - type: Projectile
     damage:
       types:
-        Heat: 5
+        Laser: 2
     soundHit:
       path: "/Audio/Weapons/Guns/Hits/taser_hit.ogg"
     soundForce: true
-  - type: StunOnCollide
-    stunAmount: 5
-    knockdownAmount: 5
+  - type: StaminaDamageOnCollide
+    damage: 150
+  - type: Reflective
+    reflective:
+      - Energy
 
 - type: entity
   name : disabler bolt
@@ -236,7 +238,7 @@
     impactEffect: BulletImpactEffectDisabler
     damage:
       types:
-        Heat: 5
+        Laser: 0.1
     soundHit:
       path: "/Audio/Weapons/tap.ogg"
     soundForce: true
@@ -276,10 +278,13 @@
     impactEffect: BulletImpactEffectDisabler
     damage:
       types:
-        Heat: 1
+        Laser: 1
     soundHit:
       path: "/Audio/Weapons/tap.ogg"
     soundForce: true
+  - type: Reflective
+    reflective:
+      - Energy
 
 - type: entity
   name: emitter bolt
@@ -309,7 +314,7 @@
 #   soundHit:  Waiting on serv3
     damage:
       types:
-        Heat: 14
+        Laser: 14
   - type: Tag
     tags:
     - EmitterBolt
@@ -405,7 +410,7 @@
   - type: Projectile
     damage:
       types:
-        Heat: 5
+        Laser: 5
   - type: TimedDespawn
     lifetime: 3
 
@@ -485,7 +490,7 @@
     impactEffect: BulletImpactEffectKinetic
     damage:
       types:
-        Heat: 20
+        Laser: 20
 
 # Launcher projectiles (grenade / rocket)
 - type: entity
@@ -760,7 +765,7 @@
       #   soundHit:  Waiting on serv3
       damage:
         types:
-          Heat: 14
+          Laser: 23
     - type: TimedDespawn
       lifetime: 3
     - type: Trail
@@ -810,7 +815,7 @@
       #   soundHit:  Waiting on serv3
       damage:
         types:
-          Heat: 0
+          Laser: 0
     - type: TimedDespawn
       lifetime: 3
     - type: Trail
@@ -861,7 +866,7 @@
       #   soundHit:  Waiting on serv3
       damage:
         types:
-          Heat: 35
+          Laser: 35
     - type: TimedDespawn
       lifetime: 3
     - type: Trail
@@ -879,6 +884,9 @@
       radius: 3.5
       color: blue
       energy: 1
+    - type: Reflective
+      reflective:
+        - Energy
 
 
 - type: entity
@@ -908,7 +916,7 @@
       #   soundHit:  Waiting on serv3
       damage:
         types:
-          Heat: 28
+          Laser: 35
     - type: TimedDespawn
       lifetime: 3
     - type: Trail
@@ -929,8 +937,6 @@
     - type: Reflective
       reflective:
       - Energy
-
-
 
 - type: entity
   name: xray laser bolt
@@ -959,7 +965,8 @@
       #   soundHit:  Waiting on serv3
       damage:
         types:
-          Heat: 14
+          Laser: 14
+          Radiation: 14
     - type: TimedDespawn
       lifetime: 3
     - type: Trail
@@ -1009,7 +1016,7 @@
       #   soundHit:  Waiting on serv3
       damage:
         types:
-          Heat: 17
+          Laser: 23
     - type: TimedDespawn
       lifetime: 3
     - type: Trail

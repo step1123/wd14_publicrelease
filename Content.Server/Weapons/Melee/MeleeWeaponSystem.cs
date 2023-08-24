@@ -5,15 +5,13 @@ using Content.Server.Body.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Chemistry.Components;
 using Content.Server.Chemistry.EntitySystems;
-using Content.Server.CombatMode.Disarm;
-using Content.Server.Contests;
 using Content.Server.Examine;
 using Content.Server.Movement.Systems;
-using Content.Server.Popups;
 using Content.Shared.Administration.Components;
 using Content.Shared.Actions.Events;
 using Content.Shared.CombatMode;
-using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
@@ -27,7 +25,6 @@ using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Server.Player;
-using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Players;
@@ -40,13 +37,13 @@ public sealed class MeleeWeaponSystem : SharedMeleeWeaponSystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly ContestsSystem _contests = default!;
+    [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly ExamineSystem _examine = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly LagCompensationSystem _lag = default!;
     [Dependency] private readonly SolutionContainerSystem _solutions = default!;
+    [Dependency] private readonly StaminaSystem _stamina = default!;
     [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
 
     public override void Initialize()
     {
@@ -105,18 +102,6 @@ public sealed class MeleeWeaponSystem : SharedMeleeWeaponSystem
         return true;
     }
 
-
-    protected override void Popup(string message, EntityUid? uid, EntityUid? user)
-    {
-        if (uid == null)
-            return;
-
-        if (user == null)
-            PopupSystem.PopupEntity(message, uid.Value);
-        else
-            PopupSystem.PopupEntity(message, uid.Value, Filter.PvsExcept(user.Value, entityManager: EntityManager), true);
-    }
-
     protected override bool DoDisarm(EntityUid user, DisarmAttackEvent ev, EntityUid meleeUid, MeleeWeaponComponent component, ICommonSession? session)
     {
         if (!base.DoDisarm(user, ev, meleeUid, component, session))
@@ -150,6 +135,12 @@ public sealed class MeleeWeaponSystem : SharedMeleeWeaponSystem
 
         Interaction.DoContactInteraction(user, ev.Target);
 
+        // Apply stamina damage
+        if (combatMode.DisarmStaminaDamage != 0f && TryComp<StaminaComponent>(target, out var targetStamina))
+        {
+            _stamina.TakeStaminaDamage(target, combatMode.DisarmStaminaDamage, targetStamina, user);
+        }
+
         var attemptEvent = new DisarmAttemptEvent(target, user, inTargetHand);
 
         if (inTargetHand != null)
@@ -162,7 +153,7 @@ public sealed class MeleeWeaponSystem : SharedMeleeWeaponSystem
         if (attemptEvent.Cancelled)
             return false;
 
-        var chance = CalculateDisarmChance(user, target, inTargetHand, combatMode);
+        var chance = CalculateDisarmChance(user, target, combatMode);
 
         if (_random.Prob(chance))
         {
@@ -187,10 +178,10 @@ public sealed class MeleeWeaponSystem : SharedMeleeWeaponSystem
         PopupSystem.PopupEntity(msgOther, user, filterOther, true);
         PopupSystem.PopupEntity(msgUser, target, user);
 
-        Audio.PlayPvs(combatMode.DisarmSuccessSound, user, AudioParams.Default.WithVariation(0.025f).WithVolume(5f));
+        Audio.PlayPvs(combatMode.DisarmSuccessSound, user);
         AdminLogger.Add(LogType.DisarmedAction, $"{ToPrettyString(user):user} used disarm on {ToPrettyString(target):target}");
 
-        var eventArgs = new DisarmedEvent { Target = target, Source = user, PushProbability = 1 - chance };
+        var eventArgs = new DisarmedEvent { Target = target, Source = user };
         RaiseLocalEvent(target, eventArgs);
 
         RaiseNetworkEvent(new DamageEffectEvent(Color.Aqua, new List<EntityUid>() { target }));
@@ -222,7 +213,7 @@ public sealed class MeleeWeaponSystem : SharedMeleeWeaponSystem
         RaiseNetworkEvent(new DamageEffectEvent(Color.Red, targets), filter);
     }
 
-    private float CalculateDisarmChance(EntityUid disarmer, EntityUid disarmed, EntityUid? inTargetHand, CombatModeComponent disarmerComp)
+    private float CalculateDisarmChance(EntityUid disarmer, EntityUid disarmed, CombatModeComponent disarmerComp)
     {
         if (HasComp<DisarmProneComponent>(disarmer))
             return 1.0f;
@@ -230,16 +221,7 @@ public sealed class MeleeWeaponSystem : SharedMeleeWeaponSystem
         if (HasComp<DisarmProneComponent>(disarmed))
             return 0.0f;
 
-        var contestResults = 1 - _contests.OverallStrengthContest(disarmer, disarmed);
-
-        float chance = (disarmerComp.BaseDisarmFailChance + contestResults);
-
-        if (inTargetHand != null && TryComp<DisarmMalusComponent>(inTargetHand, out var malus))
-        {
-            chance += malus.Malus;
-        }
-
-        return Math.Clamp(chance, 0f, 1f);
+        return Math.Clamp(disarmerComp.DisarmChance, 0f, 1f);
     }
 
     public override void DoLunge(EntityUid user, Angle angle, Vector2 localPos, string? animation, bool predicted = true)
@@ -261,16 +243,16 @@ public sealed class MeleeWeaponSystem : SharedMeleeWeaponSystem
     private void OnSpeechHit(EntityUid owner, MeleeSpeechComponent comp, MeleeHitEvent args)
     {
         if (!args.IsHit ||
-        !args.HitEntities.Any())
+            !args.HitEntities.Any())
         {
             return;
         }
 
-        if (comp.Battlecry != null)//If the battlecry is set to empty, doesn't speak
+        //If the battlecry is set to empty, doesn't speak
+        if (comp.Battlecry != null)
         {
             _chat.TrySendInGameICMessage(args.User, comp.Battlecry, InGameICChatType.Speak, true, true, checkRadioPrefix: false);  //Speech that isn't sent to chat or adminlogs
         }
-
     }
 
     private void OnChemicalInjectorHit(EntityUid owner, MeleeChemicalInjectorComponent comp, MeleeHitEvent args)

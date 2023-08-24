@@ -14,6 +14,14 @@
       Glass: 100
   - type: StaticPrice
     price: 50
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.95
+        Slash: 0.95
+        Piercing: 0.95
+        Heat: 0.95
+        Laser: 0.95
 
 - type: entity
   parent: WeldingMaskBase

@@ -10,7 +10,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 8  # Should have the same or less damage than a regular pellet
+        Blunt: 35  # Should have the same or less damage than a regular pellet
   - type: Trail
     splineIteratorType: CatmullRom
     splineRendererType: Continuous
@@ -72,7 +72,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 12
+        Piercing: 15
   - type: Trail
     splineIteratorType: CatmullRom
     splineRendererType: Continuous
@@ -154,7 +154,7 @@
   id: PelletShotgunImprovised
   name: improvised pellet
   noSpawn: true
-  parent: BaseBullet 
+  parent: BaseBullet
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi

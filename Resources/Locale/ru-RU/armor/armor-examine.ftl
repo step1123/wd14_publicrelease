@@ -11,6 +11,8 @@ armor-coefficient-value =
         [Heat] Тепловой
         [Radiation] Радиационный
         [Caustic] Кислотный
+        [Laser] Лазерный
+        [Cold] Холодный
     }[/color] урон снижается на [color=lightblue]{ $value }%[/color].
 armor-reduction-value =
     - [color=yellow]{ $type ->
@@ -21,4 +23,6 @@ armor-reduction-value =
         [Heat] Тепловой
         [Radiation] Радиационный
         [Caustic] Кислотный
+        [Laser] Лазерный
+        [Cold] Холодный
     }[/color] урон снижается на [color=lightblue]{ $value }[/color].

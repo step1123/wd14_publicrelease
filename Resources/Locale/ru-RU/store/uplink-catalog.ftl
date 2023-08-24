@@ -2,7 +2,7 @@
 uplink-pistol-viper-name = Гадюка
 uplink-pistol-viper-desc = Маленький, легко скрываемый, но несколько маломощный пистолет. Использует пистолетные магазины (.35 авто).
 uplink-revolver-python-name = Питон
-uplink-revolver-python-desc = Громкий и смертоносный револьвер. Использует "Магнум" 40-го калибра.
+uplink-revolver-python-desc = Громкий и смертоносный револьвер. Использует "Магнум" 45-го калибра.
 uplink-pistol-cobra-name = Кобра
 uplink-pistol-cobra-desc = Прочный, безотказный пистолет для оператора со встроенным глушителем. Используйте пистолетные магазины (безгильзовый 25 калибра).
 uplink-rifle-mosin-name = Винтовка Мосина

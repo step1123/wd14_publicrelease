@@ -189,3 +189,4 @@
       shader: unshaded
   - type: Storage
     capacity: 9999
+  - type: SingoCall

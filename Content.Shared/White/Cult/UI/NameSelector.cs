@@ -96,3 +96,32 @@ public class SummonCultistListWindowBUIState : BoundUserInterfaceState
         Label = labels;
     }
 }
+
+
+[Serializable, NetSerializable]
+public enum SinguloCallUIKey : byte
+{
+    Key
+}
+
+[Serializable, NetSerializable]
+public sealed class SinguloCallBuiState : BoundUserInterfaceState
+{
+    public string Name { get; set; }
+
+    public SinguloCallBuiState(string name)
+    {
+        Name = name;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class SinguloCallMessage : BoundUserInterfaceMessage
+{
+    public string Name { get; set; }
+
+    public SinguloCallMessage(string name)
+    {
+        Name = name;
+    }
+}

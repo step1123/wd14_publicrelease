@@ -68,7 +68,7 @@
     attackRate: 1
     damage:
       types:
-        Piercing: 6
+        Piercing: 5
     soundHit:
       path: "/Audio/Weapons/bladeslice.ogg"
   - type: Tool
@@ -108,7 +108,7 @@
     attackRate: 1.5
     damage:
       types:
-        Blunt: 4.5
+        Blunt: 6
   - type: Tool
     qualities:
       - Anchoring
@@ -142,7 +142,7 @@
   - type: MeleeWeapon
     damage:
       types:
-        Blunt: 8
+        Blunt: 7
         Structural: 3
   - type: Tool
     qualities:
@@ -473,7 +473,7 @@
   - type: MeleeWeapon
     damage:
       types:
-        Blunt: 14
+        Blunt: 10
   - type: Item
     sprite: Objects/Tools/shovel.rsi
   - type: PhysicalComposition

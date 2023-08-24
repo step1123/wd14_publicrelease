@@ -290,6 +290,8 @@
         type: TeleportRunesListWindowBUI
       - key: enum.SummonCultistUiKey.Key
         type: SummonCultistListWindowBUI
+      - key: enum.SinguloCallUIKey.Key
+        type: SinguloCallBUI
         # WD-EDIT
   - type: Puller
   - type: Butcherable

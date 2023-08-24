@@ -230,6 +230,7 @@
         damage:
           types:
             Heat: -1.5
+            Laser: -1.5
             Shock: -1.5
             Cold: -1.5
       - !type:HealthChange
@@ -446,6 +447,7 @@
         damage:
           types:
             Heat: -0.33
+            Laser: -0.33
             Shock: -0.33
             Cold: -0.33
       - !type:SatiateThirst
@@ -748,6 +750,7 @@
           types:
             Poison: -0.5 ##Should be about what it was when it healed the toxin group
             Heat: -0.33
+            Laser: -0.33
             Shock: -0.33
             Cold: -0.33
 

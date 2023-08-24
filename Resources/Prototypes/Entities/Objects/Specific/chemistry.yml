@@ -319,6 +319,13 @@
   - type: Tag
     tags:
     - Syringe
+  - type: MeleeWeapon
+    animation: WeaponArcPunch
+    soundHit:
+      path: /Audio/Weapons/syringe.ogg
+    damage:
+      groups:
+        Brute: 3
 
 - type: entity
   parent: BaseSyringe
@@ -359,6 +366,13 @@
     tags:
     - Syringe
     - Trash
+  - type: MeleeWeapon
+    animation: WeaponArcPunch
+    soundHit:
+      path: /Audio/Weapons/syringe.ogg
+    damage:
+      groups:
+        Brute: 3
 
 - type: entity
   name: pill

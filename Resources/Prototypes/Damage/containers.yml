@@ -15,6 +15,7 @@
     - Heat
     - Shock
     - Structural # this probably should be in separate container
+    - Laser
 
 - type: damageContainer
   id: Shield
@@ -22,6 +23,7 @@
     - Brute
   supportedTypes:
     - Heat
+    - Laser
 
 - type: damageContainer
   id: Box

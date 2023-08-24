@@ -18,9 +18,12 @@
         Blunt: 0.70
         Slash: 0.70
         Piercing: 0.70 #Can save you, but bullets will still hurt. Will take about 10 shots from a Viper before critting, as opposed to 7 while unarmored and 16~ with a bulletproof vest.
-        Heat: 0.80
+        Laser: 0.80
   - type: ExplosionResistance
     damageCoefficient: 0.90
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
 
 #Alternate / slim basic armor vest
 - type: entity
@@ -48,14 +51,17 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.4
-        Slash: 0.4
-        Piercing: 0.7
-        Heat: 0.9
-        Caustic: 0.9
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.8
+        Laser: 0.9
   - type: ExplosionResistance
     damageCoefficient: 0.9
   - type: GroupExamine
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.5
 
 - type: entity
   parent: ClothingOuterArmorBasic
@@ -72,10 +78,13 @@
       coefficients:
         Blunt: 0.9
         Slash: 0.9
-        Piercing: 0.4
-        Heat: 0.9
+        Piercing: 0.6
+        Laser: 0.9
   - type: ExplosionResistance
     damageCoefficient: 0.80
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
 
 - type: entity
   parent: ClothingOuterArmorBasic
@@ -90,12 +99,11 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.9
-        Slash: 0.9
-        Piercing: 0.9
-        Heat: 0.4 # this technically means it protects against fires pretty well? -heat is just for lasers and stuff, not atmos temperature
+        Laser: 0.5 # this technically means it protects against fires pretty well? -heat is just for lasers and stuff, not atmos temperature
   - type: Reflect
-    reflectProb: 1
+    reflectProb: 0.5
+    reflects:
+      - Energy
 
 - type: entity
   parent: ClothingOuterBaseLarge
@@ -113,7 +121,7 @@
         Blunt: 0.5
         Slash: 0.5
         Piercing: 0.6
-        Heat: 0.5
+        Laser: 0.5
   - type: GroupExamine
 
 - type: entity
@@ -132,7 +140,7 @@
         Blunt: 0.2
         Slash: 0.2
         Piercing: 0.2
-        Heat: 0.5
+        Laser: 0.5
         Radiation: 0
         Caustic: 0.75
   - type: GroupExamine
@@ -197,7 +205,7 @@
         Blunt: 0.7
         Slash: 0.7
         Piercing: 0.4
-        Heat: 0.9
+        Laser: 0.8
         Caustic: 0.9
   - type: ExplosionResistance
     damageCoefficient: 0.8
@@ -205,6 +213,13 @@
   - type: Tag
     tags:
     - Hardsuit
+  - type: ClothingSpeedModifier
+    walkModifier: 0.85
+    sprintModifier: 0.85
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.1
 
 - type: entity
   parent: ClothingOuterBaseLarge
@@ -219,14 +234,18 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.5
-        Slash: 0.5
+        Blunt: 0.7
+        Slash: 0.7
         Piercing: 0.6
-        Heat: 0.5
+        Laser: 0.7
         Caustic: 0.9
   - type: ExplosionResistance
     damageCoefficient: 0.65
   - type: GroupExamine
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.3
 
 - type: entity
   parent: ClothingOuterBaseLarge
@@ -244,7 +263,7 @@
         Blunt: 0.5
         Slash: 0.5
         Piercing: 0.5
-        Heat: 0.9
+        Laser: 0.9
         Radiation: 0.8
   - type: ClothingSpeedModifier
     walkModifier: 0.7
@@ -252,3 +271,6 @@
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: GroupExamine
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection

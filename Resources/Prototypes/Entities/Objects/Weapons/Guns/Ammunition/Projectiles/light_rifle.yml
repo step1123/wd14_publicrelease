@@ -34,7 +34,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 21
+        Piercing: 19
+    ignoreResistances: true
   - type: Trail
     splineIteratorType: CatmullRom
     splineRendererType: Continuous
@@ -115,7 +116,7 @@
   - type: Projectile
     damage:
       groups:
-        Burn: 17
+        Burn: 14
   - type: Trail
     splineIteratorType: CatmullRom
     splineRendererType: Continuous

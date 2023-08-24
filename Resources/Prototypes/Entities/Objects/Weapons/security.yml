@@ -14,12 +14,12 @@
   - type: MeleeWeapon
     damage:
       types:
-        Blunt: 7
+        Blunt: 9
     bluntStaminaDamageFactor: 2.0
     angle: 60
     animation: WeaponArcSlash
   - type: StaminaDamageOnHit
-    damage: 55
+    damage: 60
   - type: Battery
     maxCharge: 1000
     startingCharge: 1000
@@ -32,8 +32,6 @@
     quickEquip: false
     slots:
     - Belt
-  - type: DisarmMalus
-    malus: 0.225
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -77,8 +75,6 @@
     quickEquip: false
     slots:
     - Belt
-  - type: DisarmMalus
-    malus: 0.225
   - type: Appearance
   - type: StaticPrice
     price: 65

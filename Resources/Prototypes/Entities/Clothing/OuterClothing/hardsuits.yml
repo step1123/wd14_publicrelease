@@ -21,11 +21,16 @@
         Slash: 0.9
         Piercing: 0.9
         Caustic: 0.9
+        Laser: 0.9
   - type: ClothingSpeedModifier
     walkModifier: 0.80
     sprintModifier: 0.80
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitBasic
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.1
 
 #Atmospherics Hardsuit
 - type: entity
@@ -44,7 +49,7 @@
   - type: TemperatureProtection
     coefficient: 0.001
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.9
   - type: Armor
     modifiers:
       coefficients:
@@ -54,11 +59,16 @@
         Heat: 0.2
         Radiation: 0.5
         Caustic: 0.5
+        Laser: 0.7
   - type: ClothingSpeedModifier
     walkModifier: 0.7
     sprintModifier: 0.7
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitAtmos
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.1
 
 #Engineering Hardsuit
 - type: entity
@@ -77,7 +87,7 @@
   - type: TemperatureProtection
     coefficient: 0.01
   - type: ExplosionResistance
-    damageCoefficient: 0.5
+    damageCoefficient: 0.9
   - type: Armor
     modifiers:
       coefficients:
@@ -87,11 +97,15 @@
         Shock: 0.8
         Caustic: 0.5
         Radiation: 0.2
+        Laser: 0.8
   - type: ClothingSpeedModifier
     walkModifier: 0.7
     sprintModifier: 0.7
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitEngineering
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
 
 #Spationaut Hardsuit
 - type: entity
@@ -120,6 +134,10 @@
     sprintModifier: 0.8
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSpatio
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.1
 
 #Salvage Hardsuit
 - type: entity
@@ -136,20 +154,25 @@
     highPressureMultiplier: 0.5
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.3
+    damageCoefficient: 0.7
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.7
-        Slash: 0.7
-        Piercing: 0.5
+        Blunt: 0.8
+        Slash: 0.8
+        Piercing: 0.8
         Radiation: 0.3
-        Caustic: 0.7
+        Caustic: 0.8
+        Laser: 0.8
+        Heat: 0.8
   - type: ClothingSpeedModifier
     walkModifier: 0.75
     sprintModifier: 0.75
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSalvage
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
 
 #Security Hardsuit
 - type: entity
@@ -174,11 +197,17 @@
         Slash: 0.6
         Piercing: 0.6
         Caustic: 0.7
+        Heat: 0.7
+        Laser: 0.5
   - type: ClothingSpeedModifier
-    walkModifier: 0.75
-    sprintModifier: 0.75
+    walkModifier: 0.8
+    sprintModifier: 0.8
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSecurity
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.25
 
 #Brigmedic Hardsuit
 - type: entity
@@ -200,11 +229,15 @@
         Blunt: 0.8
         Slash: 0.8
         Piercing: 0.7
+        Laser: 0.8
   - type: ClothingSpeedModifier
     walkModifier: 0.65
     sprintModifier: 0.65
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitBrigmedic
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
 
 #Warden's Hardsuit
 - type: entity
@@ -229,11 +262,17 @@
         Slash: 0.6
         Piercing: 0.6
         Caustic: 0.7
+        Heat: 0.6
+        Laser: 0.5
   - type: ClothingSpeedModifier
-    walkModifier: 0.7
-    sprintModifier: 0.7
+    walkModifier: 0.85
+    sprintModifier: 0.85
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitWarden
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.30
 
 #Captain's Hardsuit
 - type: entity
@@ -260,11 +299,16 @@
         Heat: 0.5
         Radiation: 0.5
         Caustic: 0.6
+        Laser: 0.5
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitCap
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.5
 
 #Chief Engineer's Hardsuit
 - type: entity
@@ -281,7 +325,7 @@
     highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
   - type: ExplosionResistance
-    damageCoefficient: 0.2
+    damageCoefficient: 0.3
   - type: Armor
     modifiers:
       coefficients:
@@ -291,11 +335,16 @@
         Heat: 0.4
         Radiation: 0.0
         Caustic: 0.7
+        Laser: 0.6
   - type: ClothingSpeedModifier
     walkModifier: 0.75
     sprintModifier: 0.8
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitEngineeringWhite
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.3
 
 #Chief Medical Officer's Hardsuit
 - type: entity
@@ -314,12 +363,22 @@
   - type: Armor
     modifiers:
       coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+        Radiation: 0.5
         Caustic: 0.1
+        Laser: 0.8
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.95
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitMedical
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.1
 
 #Research Director's Hardsuit
 - type: entity
@@ -338,14 +397,15 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.6
+        Blunt: 0.7
         Slash: 0.8
         Piercing: 0.9
-        Heat: 0.3
-        Radiation: 0.1
+        Heat: 0.6
+        Radiation: 0.5
         Caustic: 0.2
+        Laser: 0.6
   - type: ExplosionResistance
-    damageCoefficient: 0.1
+    damageCoefficient: 0.3
   - type: ClothingSpeedModifier
     walkModifier: 0.75
     sprintModifier: 0.75
@@ -359,6 +419,10 @@
     clothingPrototype: ClothingHeadHelmetHardsuitRd
   - type: StaticPrice
     price: 750
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.3
 
 #Head of Security's Hardsuit
 - type: entity
@@ -384,11 +448,16 @@
         Piercing: 0.5
         Radiation: 0.5
         Caustic: 0.6
+        Laser: 0.5
   - type: ClothingSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
+    walkModifier: 0.9
+    sprintModifier: 0.9
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSecurityRed
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.4
 
 #ANTAG HARDSUITS
 #Blood-red Hardsuit
@@ -416,11 +485,16 @@
         Heat: 0.5
         Radiation: 0.5
         Caustic: 0.5
+        Laser: 0.7
   - type: ClothingSpeedModifier
     walkModifier: 0.9
     sprintModifier: 0.9
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSyndie
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.5
 
 #Cybersun Juggernaut Hardsuit
 - type: entity
@@ -447,11 +521,16 @@
         Heat: 0.2
         Radiation: 0.2
         Caustic: 0.2
+        Laser: 0.5
   - type: ClothingSpeedModifier
     walkModifier: 0.9
-    sprintModifier: 0.65
+    sprintModifier: 0.60
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitCybersun
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.9
 
 #Syndicate Elite Hardsuit
 - type: entity
@@ -480,11 +559,16 @@
         Heat: 0.2
         Radiation: 0.25
         Caustic: 0.5
+        Laser: 0.6
   - type: ClothingSpeedModifier
     walkModifier: 1.0
     sprintModifier: 1.0
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSyndieElite
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.5
 
 #Syndicate Commander Hardsuit
 - type: entity
@@ -511,11 +595,16 @@
         Heat: 0.5
         Radiation: 0.25
         Caustic: 0.4
+        Laser: 0.4
   - type: ClothingSpeedModifier
     walkModifier: 1.0
     sprintModifier: 1.0
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSyndieCommander
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.6
 
 #Wizard Hardsuit
 - type: entity
@@ -542,11 +631,15 @@
         Heat: 0.25
         Radiation: 0.25
         Caustic: 0.75
+        Laser: 0.25
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitWizard
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
 
 #Ling Space Suit
 - type: entity
@@ -571,11 +664,15 @@
         Slash: 0.95
         Piercing: 1
         Heat: 0.5
+        Laser: 0.5
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitLing
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
 
 #Pirate EVA Suit (Deep Space EVA Suit)
 #Despite visually appearing like a softsuit, it functions exactly like a hardsuit would (parents off of base hardsuit, has resistances and toggleable clothing, etc.) so it goes here.
@@ -600,11 +697,15 @@
         Piercing: 0.9
         Heat: 0.4
         Caustic: 0.75
+        Laser: 0.4
   - type: ClothingSpeedModifier
     walkModifier: 0.6
     sprintModifier: 0.6
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitPirateEVA
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
 
 #Pirate Captain Hardsuit
 - type: entity
@@ -630,17 +731,22 @@
         Piercing: 0.85
         Heat: 0.4
         Caustic: 0.75
+        Laser: 0.3
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitPirateCap
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.3
 
 
 #CENTCOMM / ERT HARDSUITS
 #ERT Leader Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitSyndieCommander
+  parent: ClothingOuterHardsuitBase
   id: ClothingOuterHardsuitERTLeader
   name: ERT leader's hardsuit
   description: A protective hardsuit worn by members of an emergency response team.
@@ -649,12 +755,34 @@
     sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertleader.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertleader.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.05
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.2
+        Heat: 0.6
+        Radiation: 0.25
+        Caustic: 0.4
+        Laser: 0.6
+  - type: ClothingSpeedModifier
+    walkModifier: 1.0
+    sprintModifier: 1.0
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitERTLeader
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.8
 
 #ERT Engineer Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitSyndie
+  parent: ClothingOuterHardsuitERTLeader
   id: ClothingOuterHardsuitERTEngineer
   name: ERT engineer's hardsuit
   components:
@@ -667,7 +795,7 @@
 
 #ERT Medic Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitSyndieElite
+  parent: ClothingOuterHardsuitERTLeader
   id: ClothingOuterHardsuitERTMedical
   name: ERT medic's hardsuit
   components:
@@ -680,7 +808,7 @@
 
 #ERT Security Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitSyndie
+  parent: ClothingOuterHardsuitERTLeader
   id: ClothingOuterHardsuitERTSecurity
   name: ERT security's hardsuit
   components:
@@ -693,7 +821,7 @@
 
 #ERT Janitor Hardsuit
 - type: entity
-  parent: ClothingOuterHardsuitSyndie
+  parent: ClothingOuterHardsuitERTLeader
   id: ClothingOuterHardsuitERTJanitor
   name: ERT janitor's hardsuit
   components:
@@ -731,11 +859,16 @@
         Heat: 0.1
         Radiation: 0.1
         Caustic: 0.2
+        Laser: 0.1
   - type: ClothingSpeedModifier
     walkModifier: 1.0
     sprintModifier: 1.0
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitDeathsquad
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.9
 
 #CBURN Hardsuit
 - type: entity
@@ -766,11 +899,16 @@
         Shock: 0.1
         Radiation: 0.1
         Caustic: 0.1
+        Laser: 0.1
   - type: ClothingSpeedModifier
     walkModifier: 1.0
     sprintModifier: 1.0
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetCBURN
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.7
 
 #MISC. HARDSUITS
 #Clown Hardsuit
@@ -792,15 +930,19 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.9
-        Slash: 0.9
+        Blunt: 0.1
+        Slash: 0.1
         Piercing: 0.9
         Caustic: 0.8
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
+    walkModifier: 0.7
+    sprintModifier: 0.7
   - type: Construction
     graph: ClownHardsuit
     node: clownHardsuit
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitClown
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: -1

@@ -35,6 +35,7 @@
         Cold: -5
         Shock: -5
         Caustic: -1.5
+        Laser: -5
     healingBeginSound:
       path: "/Audio/Items/Medical/ointment_begin.ogg"
     healingEndSound:
@@ -80,6 +81,7 @@
         Cold: -10
         Shock: -10
         Caustic: -10
+        Laser: -10
     healingBeginSound:
       path: "/Audio/Items/Medical/ointment_begin.ogg"
     healingEndSound:

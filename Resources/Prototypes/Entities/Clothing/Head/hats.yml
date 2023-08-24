@@ -79,6 +79,14 @@
     tags:
     - HamsterWearable
     - WhitelistChameleon
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+        Laser: 0.9
 
 - type: entity
   parent: ClothingHeadBase
@@ -90,6 +98,14 @@
     sprite: Clothing/Head/Hats/beret_warden.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/beret_warden.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+        Laser: 0.9
 
 - type: entity
   parent: ClothingHeadBase
@@ -138,6 +154,14 @@
     tags:
     - HamsterWearable
     - WhitelistChameleon
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+        Laser: 0.9
 
 - type: entity
   parent: ClothingHeadBase
@@ -255,6 +279,14 @@
     tags:
     - HamsterWearable
     - WhitelistChameleon
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+        Laser: 0.9
 
 - type: entity
   parent: ClothingHeadBase
@@ -430,6 +462,14 @@
     sprite: Clothing/Head/Hats/warden.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/warden.rsi
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+        Laser: 0.9
 
 - type: entity
   parent: ClothingHeadBase
@@ -730,7 +770,7 @@
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
-      
+
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatCapcap
@@ -745,3 +785,11 @@
     tags:
     - WhitelistChameleon
     - HamsterWearable
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9
+        Laser: 0.9

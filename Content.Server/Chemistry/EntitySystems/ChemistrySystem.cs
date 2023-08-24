@@ -5,7 +5,9 @@ using Content.Server.Popups;
 using Content.Shared.CombatMode;
 using Content.Shared.Chemistry;
 using Content.Shared.DoAfter;
+using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
+using Robust.Shared.Random;
 
 namespace Content.Server.Chemistry.EntitySystems;
 
@@ -22,6 +24,9 @@ public sealed partial class ChemistrySystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedCombatModeSystem _combat = default!;
     [Dependency] private readonly SolutionContainerSystem _solutions = default!;
+    [Dependency] private readonly InventorySystem _inventorySystem = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+
 
     public override void Initialize()
     {

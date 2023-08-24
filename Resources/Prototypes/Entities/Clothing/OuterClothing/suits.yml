@@ -11,16 +11,20 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.5
+        Blunt: 0.7
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.75
   - type: ExplosionResistance
-    damageCoefficient: 0.2
+    damageCoefficient: 0.1
   - type: GroupExamine
   - type: Tag
     tags:
     - Hardsuit
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.5
 
 - type: entity
   parent: ClothingOuterBaseLarge
@@ -40,13 +44,14 @@
     modifiers:
       coefficients:
         Slash: 0.9
-        Heat: 0.3
-        Cold: 0.2
+        Heat: 0.2
+        Cold: 0.5
+        Laser: 0.8
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.7
   - type: GroupExamine
-    
+
 - type: entity
   parent: ClothingOuterBaseLarge
   id: ClothingOuterSuitAtmosFire
@@ -66,8 +71,9 @@
       modifiers:
         coefficients:
           Slash: 0.9
-          Heat: 0.3
-          Cold: 0.2
+          Heat: 0.1
+          Cold: 0.4
+          Laser: 0.8
     - type: ClothingSpeedModifier
       walkModifier: 0.8
       sprintModifier: 0.8
@@ -107,6 +113,11 @@
         Slash: 0.6
         Piercing: 0.6
         Heat: 0.6
+        Laser: 0.6
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.3
 
 - type: entity
   parent: ClothingOuterBase

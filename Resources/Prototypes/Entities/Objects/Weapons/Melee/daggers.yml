@@ -18,7 +18,6 @@
       sprite: Objects/Weapons/Melee/blood_dagger.rsi
       slots:
         - back
-    - type: DisarmMalus
     - type: Crit
       critChance: 20
       critMultiplier: 2.2

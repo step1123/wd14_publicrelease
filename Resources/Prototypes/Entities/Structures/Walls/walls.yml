@@ -677,6 +677,8 @@
     bodyType: Static
   - type: Reflect
     reflectProb: 1
+    reflects:
+      - Energy
   - type: Pullable
   - type: Airtight
     noAirWhenFullyAirBlocked: false
@@ -750,6 +752,8 @@
       path: /Audio/Effects/metalbreak.ogg
   - type: Reflect
     reflectProb: 1
+    reflects:
+      - Energy
   - type: IconSmooth
     key: walls
     base: state

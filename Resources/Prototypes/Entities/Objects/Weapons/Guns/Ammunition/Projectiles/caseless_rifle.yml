@@ -7,7 +7,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 19
+        Piercing: 20
   - type: Trail
     splineIteratorType: CatmullRom
     splineRendererType: Continuous
@@ -34,7 +34,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 22
+        Piercing: 25
   - type: Trail
     splineIteratorType: CatmullRom
     splineRendererType: Continuous
@@ -61,7 +61,7 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 2
+        Blunt: 1
   - type: Trail
     splineIteratorType: CatmullRom
     splineRendererType: Continuous

@@ -9,6 +9,7 @@
   id: Burn
   damageTypes:
     - Heat
+    - Laser
     - Shock
     - Cold
     - Caustic
