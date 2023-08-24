@@ -311,36 +311,44 @@ namespace Content.Server.Construction
             var newUid = EntityManager.CreateEntityUninitialized(newEntity, transform.Coordinates);
 
             // Construction transferring.
-            var newConstruction = EntityManager.EnsureComponent<ConstructionComponent>(newUid);
+            // WD EDIT START
+            var finalNode = TryComp(newUid, out ConstructionComponent? newConstruction) &&
+                            newConstruction.Graph != construction.Graph;
 
-            // Transfer all construction-owned containers.
-            newConstruction.Containers.UnionWith(construction.Containers);
-
-            // Prevent MapInitEvent spawned entities from spawning into the containers.
-            // Containers created by ChangeNode() actions do not exist until after this function is complete,
-            // but this should be fine, as long as the target entity properly declared its managed containers.
-            if (TryComp(newUid, out ContainerFillComponent? containerFill) && containerFill.IgnoreConstructionSpawn)
+            if (!finalNode)
             {
-                foreach (var id in newConstruction.Containers)
+                newConstruction = EntityManager.EnsureComponent<ConstructionComponent>(newUid);
+
+                // Transfer all construction-owned containers.
+                newConstruction.Containers.UnionWith(construction.Containers);
+
+                // Prevent MapInitEvent spawned entities from spawning into the containers.
+                // Containers created by ChangeNode() actions do not exist until after this function is complete,
+                // but this should be fine, as long as the target entity properly declared its managed containers.
+                if (TryComp(newUid, out ContainerFillComponent? containerFill) && containerFill.IgnoreConstructionSpawn)
                 {
-                    containerFill.Containers.Remove(id);
+                    foreach (var id in newConstruction.Containers)
+                    {
+                        containerFill.Containers.Remove(id);
+                    }
                 }
+
+                // We set the graph and node accordingly.
+                ChangeGraph(newUid, userUid, construction.Graph, construction.Node, false, newConstruction);
+
+                if (construction.TargetNode is {} targetNode)
+                    SetPathfindingTarget(newUid, targetNode, newConstruction);
+
+                // Transfer all pending interaction events too.
+                while (construction.InteractionQueue.TryDequeue(out var ev))
+                {
+                    newConstruction.InteractionQueue.Enqueue(ev);
+                }
+
+                if (newConstruction.InteractionQueue.Count > 0 && _queuedUpdates.Add(newUid))
+                        _constructionUpdateQueue.Enqueue(newUid);
             }
-
-            // We set the graph and node accordingly.
-            ChangeGraph(newUid, userUid, construction.Graph, construction.Node, false, newConstruction);
-
-            if (construction.TargetNode is {} targetNode)
-                SetPathfindingTarget(newUid, targetNode, newConstruction);
-
-            // Transfer all pending interaction events too.
-            while (construction.InteractionQueue.TryDequeue(out var ev))
-            {
-                newConstruction.InteractionQueue.Enqueue(ev);
-            }
-
-            if (newConstruction.InteractionQueue.Count > 0 && _queuedUpdates.Add(newUid))
-                    _constructionUpdateQueue.Enqueue(newUid);
+            // WD EDIT END
 
             // Transform transferring.
             var newTransform = Transform(newUid);
@@ -373,7 +381,7 @@ namespace Content.Server.Construction
             }
 
             if (userUid != null && IsTransformParentOf(userUid.Value, transform) &&
-                TryComp(userUid, out HandsComponent? hands))
+                TryComp(userUid, out HandsComponent? hands)) // WD
             {
                 var hand = hands.Hands.Values.FirstOrDefault(h => h.HeldEntity == uid);
                 if (hand != null)
@@ -386,10 +394,13 @@ namespace Content.Server.Construction
             RaiseLocalEvent(uid, entChangeEv);
             RaiseLocalEvent(newUid, entChangeEv, broadcast: true);
 
-            foreach (var logic in GetCurrentNode(newUid, newConstruction)!.TransformLogic)
+            if (!finalNode) // WD EDIT START
             {
-                logic.Transform(uid, newUid, userUid, new(EntityManager));
-            }
+                foreach (var logic in GetCurrentNode(newUid, newConstruction)!.TransformLogic)
+                {
+                    logic.Transform(uid, newUid, userUid, new(EntityManager));
+                }
+            } // WD EDIT END
 
             EntityManager.InitializeAndStartEntity(newUid);
 

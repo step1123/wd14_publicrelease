@@ -1,5 +1,6 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Damage.Components;
+using Content.Server.White.Crossbow;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.Mobs.Components;
@@ -19,7 +20,17 @@ namespace Content.Server.Damage.Systems
 
         private void OnDoHit(EntityUid uid, DamageOtherOnHitComponent component, ThrowDoHitEvent args)
         {
-            var dmg = _damageableSystem.TryChangeDamage(args.Target, component.Damage, component.IgnoreResistances, origin: args.User);
+            // WD EDIT START
+            if (args.Handled)
+                return;
+
+            var damage = component.Damage;
+
+            if (TryComp(uid, out ThrowDamageModifierComponent? modifier))
+                damage += modifier.Damage;
+
+            var dmg = _damageableSystem.TryChangeDamage(args.Target, damage, component.IgnoreResistances, origin: args.User);
+            // WD EDIT END
 
             // Log damage only for mobs. Useful for when people throw spears at each other, but also avoids log-spam when explosions send glass shards flying.
             if (dmg != null && HasComp<MobStateComponent>(args.Target))

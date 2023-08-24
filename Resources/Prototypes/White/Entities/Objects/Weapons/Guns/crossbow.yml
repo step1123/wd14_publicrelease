@@ -1,0 +1,79 @@
+- type: entity
+  name: арбалет
+  parent: BaseItem
+  id: WeaponPoweredCrossbow
+  description: Опасная штука, страшная вещь.
+  components:
+  - type: Sprite
+    sprite: White/Objects/Weapons/crossbow.rsi
+    state: base
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Back
+  - type: Item
+    size: 80
+    sprite: White/Objects/Weapons/crossbow.rsi
+  - type: Gun
+    forceThrowingAngle: true
+    angle: 225
+    projectileSpeed: 35
+    fireRate: 0.5
+    soundGunshot:
+      path: /Audio/Weapons/click.ogg
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+        - CrossbowBolt
+    capacity: 1
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/revolver_magin.ogg
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+      cell_slot: !type:ContainerSlot
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+  - type: Drawable
+  - type: Appearance
+  - type: ModifyDamageOnShoot
+    addEmbedding: true
+    offset: 0.2,0.2
+    damage:
+      types:
+        Blunt: 15
+  - type: Powered
+    charge: 360
+    damage:
+      types:
+        Blunt: 30
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponPoweredCrossbowGraph
+    node: crossbow
+
+- type: entity
+  name: часть арбалета
+  parent: BaseItem
+  id: WeaponPoweredCrossbowUnfinished
+  description: Недоделанный арбалет.
+  components:
+  - type: Sprite
+    sprite: White/Objects/Weapons/crossbow.rsi
+    state: base
+  - type: Item
+    size: 80
+    sprite: White/Objects/Weapons/crossbow.rsi
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Back
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponPoweredCrossbowGraph
+    node: unfinished

@@ -326,6 +326,7 @@
   - type: DeathGasps
   - type: ExaminableClothes
   - type: CharacterInformation
+  - type: Penetrated
 
 - type: entity
   save: false

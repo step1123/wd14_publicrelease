@@ -43,3 +43,55 @@
             doAfter: 1
   - node: flamethrower
     entity: WeaponFlamethrower
+
+- type: constructionGraph
+  id: WeaponPoweredCrossbowGraph
+  start: stock
+  graph:
+  - node: stock
+    entity: RifleStock
+    edges:
+      - to: unfinished
+        steps:
+          - material: MetalRod
+            amount: 3
+            doAfter: 3
+  - node: unfinished
+    edges:
+      - to: rods
+  - node: unfinished
+    entity: WeaponPoweredCrossbowUnfinished
+    edges:
+      - to: welded
+        steps:
+          - tool: Welding
+            doAfter: 5
+  - node: welded
+    edges:
+      - to: cables
+        steps:
+          - material: Cable
+            amount: 5
+            doAfter: 0.5
+  - node: cables
+    edges:
+      - to: plastic
+        steps:
+          - material: Plastic
+            amount: 3
+            doAfter: 0.5
+  - node: plastic
+    edges:
+      - to: unscrewed
+        steps:
+          - material: Cable
+            amount: 5
+            doAfter: 0.5
+  - node: unscrewed
+    edges:
+      - to: crossbow
+        steps:
+          - tool: Screwing
+            doAfter: 1
+  - node: crossbow
+    entity: WeaponPoweredCrossbow

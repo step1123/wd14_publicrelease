@@ -30,6 +30,10 @@
   name: metal rods
   suffix: Full
   components:
+  - type: Tag
+    tags:
+    - DroneUsable
+    - CrossbowBolt
   - type: Stack
     stackType: MetalRod
     baseLayer: base
@@ -69,6 +73,13 @@
     tags:
     - RodMetal1
     - DroneUsable
+    - CrossbowBolt
+  - type: Ammo
+    muzzleFlash: null
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 0
   - type: Sprite
     state: rods
   - type: Stack
@@ -76,3 +87,17 @@
     sizeMultiplier: 0.17
   - type: Item
     size: 1
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PolygonShape
+          vertices:
+            - -0.20,-0.10
+            - -0.10,-0.20
+            - 0.40,0.30
+            - 0.30,0.40
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
