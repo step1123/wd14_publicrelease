@@ -277,6 +277,21 @@ namespace Content.Shared.Stunnable
             args.Modifier *= KnockDownModifier;
         }
 
+        public bool IsParalyzed(EntityUid uid)
+        {
+            return HasComp<StunnedComponent>(uid) || HasComp<KnockedDownComponent>(uid);
+        }
+
+        public bool IsStunned(EntityUid uid)
+        {
+            return HasComp<StunnedComponent>(uid);
+        }
+
+        public bool IsKnockedDown(EntityUid uid)
+        {
+            return HasComp<KnockedDownComponent>(uid);
+        }
+
         #region Attempt Event Handling
 
         private void OnMoveAttempt(EntityUid uid, StunnedComponent stunned, UpdateCanMoveEvent args)

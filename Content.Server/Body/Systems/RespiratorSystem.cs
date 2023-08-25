@@ -286,7 +286,7 @@ namespace Content.Server.Body.Systems
         private void DoCPR(EntityUid target, RespiratorComponent comp, EntityUid user)
         {
 
-            var doAfterEventArgs = new DoAfterArgs(user, comp.CycleDelay * 4, new CPREndedEvent(user, target), target, target: target)
+            var doAfterEventArgs = new DoAfterArgs(user, 1, new CPREndedEvent(user, target), target, target: target)
             {
                 BreakOnTargetMove = true,
                 BreakOnUserMove = true,

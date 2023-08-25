@@ -25,7 +25,7 @@ public partial class ListViewSelectorWindow : DefaultWindow
         foreach (var item in items)
         {
             var button = new Button();
-            var itemName = item;
+            var itemName = Loc.GetString($"ent-{item}");
 
             if (isPrototypes)
             {

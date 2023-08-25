@@ -3,9 +3,12 @@ using System.Threading;
 using Content.Server.Chemistry.Components.SolutionManager;
 using Content.Server.Chemistry.EntitySystems;
 using Content.Server.Stunnable;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Popups;
 using Content.Shared.White.Cult;
+using Robust.Server.GameObjects;
 using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Server.White.Cult.HolyWater;
@@ -13,6 +16,8 @@ namespace Content.Server.White.Cult.HolyWater;
 public sealed class HolyWaterSystem : EntitySystem
 {
     [Dependency] private readonly StunSystem _stun = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly AudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -41,6 +46,13 @@ public sealed class HolyWaterSystem : EntitySystem
 
                 solution.RemoveReagent(reagent.ReagentId, reagent.Quantity);
                 solution.AddReagent(component.ConvertedToId, amount);
+
+                if (args.Target == null)
+                    return;
+
+                _popup.PopupEntity(Loc.GetString("holy-water-converted"), args.Target.Value, args.User);
+                _audio.PlayPvs("/Audio/Effects/holy.ogg", args.Target.Value);
+
                 return;
             }
         }
@@ -55,6 +67,8 @@ public sealed class HolyWaterSystem : EntitySystem
             return;
 
         _stun.TryParalyze(uid, TimeSpan.FromSeconds(component.HolyConvertTime + 5f), true);
+        var target = Identity.Name(uid, EntityManager);
+        _popup.PopupEntity(Loc.GetString("holy-water-started-converting", ("target", target)), uid);
 
         component.HolyConvertToken = new CancellationTokenSource();
         Timer.Spawn(TimeSpan.FromSeconds(component.HolyConvertTime), () => ConvertCultist(uid), component.HolyConvertToken.Token);

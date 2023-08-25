@@ -98,7 +98,6 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
 
         while (querry.MoveNext(out var ruleEnt, out var cultRuleComponent, out var gameRule))
         {
-            //Максим гнида
             bool enoughCultists = cultRuleComponent.Cultists.Count > 10;
 
             var target = cultRuleComponent.CultTarget;

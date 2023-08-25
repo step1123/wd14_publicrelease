@@ -12,6 +12,7 @@ using Content.Server.Weapons.Ranged.Systems;
 using Content.Server.White.Cult.GameRule;
 using Content.Server.White.Cult.Runes.Comps;
 using Content.Shared.Actions;
+using Content.Shared.Cuffs.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
@@ -23,6 +24,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Pulling.Components;
 using Content.Shared.Rejuvenate;
 using Content.Shared.White.Cult;
 using Content.Shared.White.Cult.Components;
@@ -30,11 +32,11 @@ using Content.Shared.White.Cult.Runes;
 using Content.Shared.White.Cult.UI;
 using Content.Shared.White.Mindshield;
 using Robust.Server.GameObjects;
+using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
-using TerraFX.Interop.Windows;
 
 namespace Content.Server.White.Cult.Runes.Systems;
 
@@ -55,6 +57,7 @@ public partial class CultSystem : EntitySystem
     [Dependency] private readonly GunSystem _gunSystem = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly FlammableSystem _flammableSystem = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
 
     public override void Initialize()
     {
@@ -171,7 +174,7 @@ public partial class CultSystem : EntitySystem
         if (runePrototype == ApocalypseRunePrototypeId)
         {
             _timeToDraw = 120.0f;
-            _chat.DispatchGlobalAnnouncement("Cult started to draw ritual rune!", "CULT", true, _apocRuneStartDrawing, colorOverride: Color.DarkRed);
+            _chat.DispatchGlobalAnnouncement(Loc.GetString("cult-started-drawing-rune-end"), "CULT", true, _apocRuneStartDrawing, colorOverride: Color.DarkRed);
         }
 
         if (!IsAllowedToDraw(whoCalled))
@@ -277,7 +280,7 @@ public partial class CultSystem : EntitySystem
 
             if (_doAfterSystem.TryStartDoAfter(argsDoAfterEvent))
             {
-                _popupSystem.PopupEntity("You started erasing rune", target);
+                _popupSystem.PopupEntity(Loc.GetString("cult-started-erasing-rune"), target);
             }
         }
     }
@@ -288,7 +291,7 @@ public partial class CultSystem : EntitySystem
             return;
 
         _entityManager.DeleteEntity(args.TargetEntityId);
-        _popupSystem.PopupEntity("You erased rune.", args.User);
+        _popupSystem.PopupEntity(Loc.GetString("cult-erased-rune"), args.User);
     }
 
     //Erasing end
@@ -323,7 +326,7 @@ public partial class CultSystem : EntitySystem
 
         if (cultists.Count < component.InvokersMinCount)
         {
-            _popupSystem.PopupEntity("Not enough cultists.", args.User, args.User);
+            _popupSystem.PopupEntity(Loc.GetString("not-enough-cultists"), args.User, args.User);
             return;
         }
 
@@ -387,10 +390,9 @@ public partial class CultSystem : EntitySystem
              var canBeConverted = _entityManager.TryGetComponent<MindContainerComponent>(victim.Value, out var mind) && mind.HasMind;
              var isTarget = mind != null && mind.Mind == target;
 
-
              result = canBeConverted && !_entityManager.TryGetComponent<MindShieldComponent>(victim.Value, out _) && !isTarget
                  ? Convert(uid, victim.Value, args.User, args.Cultists)
-                 : Sacrifice(uid, victim.Value, args.User, args.Cultists);
+                 : Sacrifice(uid, victim.Value, args.User, args.Cultists, isTarget);
          }
          else
          {
@@ -400,15 +402,23 @@ public partial class CultSystem : EntitySystem
          args.Result = result;
     }
 
-    private bool Sacrifice(EntityUid rune,EntityUid target, EntityUid user, HashSet<EntityUid> cultists)
+    private bool Sacrifice(EntityUid rune,EntityUid target, EntityUid user, HashSet<EntityUid> cultists, bool isTarget = false)
     {
         if (!_entityManager.TryGetComponent<CultRuneOfferingComponent>(rune, out var offering))
             return false;
 
         if (cultists.Count < offering.SacrificeMinCount)
         {
-            _popupSystem.PopupEntity("Can`t be converted, not enough cultists to sacriface", user, user);
+            _popupSystem.PopupEntity(Loc.GetString("cult-convert-not-enough-cultists"), user, user);
             return false;
+        }
+
+        if (isTarget)
+        {
+            _bodySystem.GibBody(target);
+            AddUsesToRevive();
+
+            return true;
         }
 
         if (!SpawnShard(target))
@@ -431,7 +441,7 @@ public partial class CultSystem : EntitySystem
 
         if (cultists.Count < offering.SacrificeDeadMinCount)
         {
-            _popupSystem.PopupEntity("Not enough cultists to sacriface!", user, user);
+            _popupSystem.PopupEntity(Loc.GetString("cult-sacrifice-not-enough-cultists"), user, user);
             return false;
         }
 
@@ -455,12 +465,14 @@ public partial class CultSystem : EntitySystem
 
         if (cultists.Count < offering.ConvertMinCount)
         {
-            _popupSystem.PopupEntity("Not enough cultists to convert! Needed minimum 2!", user, user);
+            _popupSystem.PopupEntity(Loc.GetString("cult-offering-rune-not-enough"), user, user);
             return false;
         }
 
-        EnsureComp<CultistComponent>(target);
-        SpawnCultistItems(target);
+        if (!_entityManager.TryGetComponent<ActorComponent>(target, out var actorComponent))
+            return false;
+
+        _ruleSystem.MakeCultist(actorComponent.PlayerSession);
         HealCultist(target);
 
         return true;
@@ -507,7 +519,7 @@ public partial class CultSystem : EntitySystem
     {
         if (HasComp<CultBuffComponent>(target))
         {
-            _popupSystem.PopupEntity("He arleady buffed!", user, user);
+            _popupSystem.PopupEntity(Loc.GetString("cult-buff-already-buffed"), user, user);
             return false;
         }
 
@@ -582,7 +594,7 @@ public partial class CultSystem : EntitySystem
 
         if (list.Count == 0)
         {
-            _popupSystem.PopupEntity("Teleport runes not found.", user, user);
+            _popupSystem.PopupEntity(Loc.GetString("cult-teleport-rune-not-found"), user, user);
             return false;
         }
 
@@ -665,19 +677,19 @@ public partial class CultSystem : EntitySystem
 
         if (!canSummon)
         {
-            _popupSystem.PopupEntity(Loc.GetString("Do all your task! Need minimum 10 cultists in cult!"), user, user);
+            _popupSystem.PopupEntity(Loc.GetString("cult-narsie-not-completed-tasks"), user, user);
             return false;
         }
 
         if (cultists.Count < component.SummonMinCount)
         {
-            _popupSystem.PopupEntity("Need minimum 10 cultists!", user, user);
+            _popupSystem.PopupEntity(Loc.GetString("cult-narsie-summon-not-enough"), user, user);
             return false;
         }
 
         if (_doAfterAlreadyStarted)
         {
-            _popupSystem.PopupEntity("Someone arleady summoning narsie!", user, user);
+            _popupSystem.PopupEntity(Loc.GetString("cult-narsie-already-summoning"), user, user);
             return false;
         }
 
@@ -685,7 +697,7 @@ public partial class CultSystem : EntitySystem
         {
             if (doAfterComponent is { AwaitedDoAfters.Count: >= 1 })
             {
-                _popupSystem.PopupEntity("You arleady doing something!", user, user);
+                _popupSystem.PopupEntity(Loc.GetString("cult-narsie-summon-do-after"), user, user);
                 return false;
             }
         }
@@ -700,11 +712,11 @@ public partial class CultSystem : EntitySystem
         if (!_doAfterSystem.TryStartDoAfter(argsDoAfterEvent))
             return false;
 
-        _popupSystem.PopupEntity(Loc.GetString("You need to stay still!"), user, user, PopupType.LargeCaution);
+        _popupSystem.PopupEntity(Loc.GetString("cult-stay-still"), user, user, PopupType.LargeCaution);
 
         _doAfterAlreadyStarted = true;
 
-        _chat.DispatchGlobalAnnouncement("Cultists, started ritual. You have 40 sec to prevent this!", "CULT", false, colorOverride: Color.DarkRed);
+        _chat.DispatchGlobalAnnouncement(Loc.GetString("cult-ritual-started"), "CULT", false, colorOverride: Color.DarkRed);
         _playingStream = _audio.PlayGlobal(_narsie40Sec, Filter.Broadcast(), false, AudioParams.Default.WithLoop(true).WithVolume(0.15f));
 
         return true;
@@ -719,7 +731,7 @@ public partial class CultSystem : EntitySystem
 
         if (args.Cancelled)
         {
-            _chat.DispatchGlobalAnnouncement("Someone prevent ritual..", "CULT", false, colorOverride: Color.DarkRed);
+            _chat.DispatchGlobalAnnouncement(Loc.GetString("cult-ritual-prevented"), "CULT", false, colorOverride: Color.DarkRed);
             return;
         }
 
@@ -729,7 +741,7 @@ public partial class CultSystem : EntitySystem
 
         _entityManager.SpawnEntity(NarsiePrototypeId, transform.Value);
 
-        _chat.DispatchGlobalAnnouncement("NARSIE HAS RISEN", "CULT", true, _apocRuneEndDrawing, colorOverride: Color.DarkRed);
+        _chat.DispatchGlobalAnnouncement(Loc.GetString("cult-narsie-summoned"), "CULT", true, _apocRuneEndDrawing, colorOverride: Color.DarkRed);
 
         var ev = new CultNarsieSummoned();
         RaiseLocalEvent(ev);
@@ -767,7 +779,7 @@ public partial class CultSystem : EntitySystem
 
         if (state.CurrentState != MobState.Dead && state.CurrentState != MobState.Critical)
         {
-            _popupSystem.PopupEntity("He arleady alive!", args.User, args.User);
+            _popupSystem.PopupEntity(Loc.GetString("cult-revive-rune-already-alive"), args.User, args.User);
             return;
         }
 
@@ -780,7 +792,7 @@ public partial class CultSystem : EntitySystem
     {
         if (component.UsesToRevive < component.UsesHave)
         {
-            _popupSystem.PopupEntity("No charges", user, user);
+            _popupSystem.PopupEntity(Loc.GetString("cult-revive-rune-no-charges"), user, user);
             return false;
         }
 
@@ -841,7 +853,7 @@ public partial class CultSystem : EntitySystem
 
         if (cultistHashSet.Count < component.SummonMinCount)
         {
-            _popupSystem.PopupEntity("Needed minimum 2 cultist.", user, user);
+            _popupSystem.PopupEntity(Loc.GetString("cult-summon-rune-need-minimum-cultists"), user, user);
             return false;
         }
 
@@ -870,7 +882,7 @@ public partial class CultSystem : EntitySystem
 
         if (list.Count == 0)
         {
-            _popupSystem.PopupEntity("Cultists not found.", user, user);
+            _popupSystem.PopupEntity(Loc.GetString("cult-cultists-not-found"), user, user);
             return false;
         }
 
@@ -892,11 +904,32 @@ public partial class CultSystem : EntitySystem
         var target = new EntityUid(args.SelectedItem);
         var baseRune = component.BaseRune;
 
+        if (!TryComp<SharedPullableComponent>(target, out var pullableComponent))
+            return;
+
+        if (!TryComp<CuffableComponent>(target, out var cuffableComponent))
+            return;
+
         if (user == null || baseRune == null)
             return;
 
         if (!TryComp<TransformComponent>(baseRune, out var xFormBase))
             return;
+
+        var isCuffed = cuffableComponent.CuffedHandCount > 0;
+        var isPulled = pullableComponent.BeingPulled;
+
+        if (isPulled)
+        {
+            _popupSystem.PopupEntity("Его кто-то держит!", user.Value);
+            return;
+        }
+
+        if (isCuffed)
+        {
+            _popupSystem.PopupEntity("Он в наручниках!", user.Value);
+            return;
+        }
 
         _xform.SetCoordinates(target, xFormBase.Coordinates);
 
@@ -928,7 +961,7 @@ public partial class CultSystem : EntitySystem
     {
         if (cultists.Count < component.SummonMinCount)
         {
-            _popupSystem.PopupEntity("Needed minimum 3 cultists", user, user);
+            _popupSystem.PopupEntity(Loc.GetString("cult-blood-boil-rune-need-minimum"), user, user);
             return false;
         }
 
@@ -950,7 +983,7 @@ public partial class CultSystem : EntitySystem
 
         if (list.Count == 0)
         {
-            _popupSystem.PopupEntity("No targets!", user, user);
+            _popupSystem.PopupEntity(Loc.GetString("cult-blood-boil-rune-no-targets"), user, user);
             return false;
         }
 
@@ -1126,7 +1159,7 @@ public partial class CultSystem : EntitySystem
                 if (sex == null)
                     return;
 
-                label = string.IsNullOrEmpty(label) ? "безымянная метка" : label;
+                label = string.IsNullOrEmpty(label) ? Loc.GetString("cult-teleport-rune-default-label") : label;
 
                 if (label.Length > 18)
                 {
@@ -1150,7 +1183,7 @@ public partial class CultSystem : EntitySystem
             var x = (int) pos.X;
             var y = (int) pos.Y;
             var posText = $"(x = {x}, y = {y})";
-            _chat.DispatchGlobalAnnouncement($"Культ закончил рисовать руну ритуала разрыва измерений! Координаты: {posText}", "CULT", true, _apocRuneEndDrawing, colorOverride: Color.DarkRed);
+            _chat.DispatchGlobalAnnouncement(Loc.GetString("cult-narsie-summon-drawn-position", ("posText", posText)), "CULT", true, _apocRuneEndDrawing, colorOverride: Color.DarkRed);
         }
 
         _entityManager.SpawnEntity(rune, transform.Value);
@@ -1196,13 +1229,13 @@ public partial class CultSystem : EntitySystem
 
         if (!gridUid.HasValue)
         {
-            _popupSystem.PopupEntity("Нельзя рисовать в космосе.", uid, uid);
+            _popupSystem.PopupEntity(Loc.GetString("cult-cant-draw-rune"), uid, uid);
             return false;
         }
 
         if (!tile.HasValue)
         {
-            _popupSystem.PopupEntity("Нельзя рисовать в космосе.", uid, uid);
+            _popupSystem.PopupEntity(Loc.GetString("cult-cant-draw-rune"), uid, uid);
             return false;
         }
 

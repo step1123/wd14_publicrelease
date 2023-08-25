@@ -4,5 +4,5 @@
 public sealed class ReturnItemOnThrowComponent : Component
 {
     [ViewVariables(VVAccess.ReadWrite), DataField("stunTime")]
-    public float StunTime = 2f;
+    public float StunTime = 1f;
 }

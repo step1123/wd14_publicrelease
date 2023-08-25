@@ -21,13 +21,22 @@ public sealed class ReturnItemOnThrowSystem : EntitySystem
 
     private void OnThrowHit(EntityUid uid, ReturnItemOnThrowComponent component, ThrowDoHitEvent args)
     {
+        var isCultist = HasComp<CultistComponent>(args.Target);
+
         if (!HasComp<CultistComponent>(args.User))
             return;
 
         if (!HasComp<MobStateComponent>(args.Target))
             return;
 
-        _stun.TryParalyze(args.Target, TimeSpan.FromSeconds(component.StunTime), true);
+        if (!_stun.IsParalyzed(args.Target))
+        {
+            if (!isCultist)
+            {
+                _stun.TryParalyze(args.Target, TimeSpan.FromSeconds(component.StunTime), true);
+            }
+        }
+
         _hands.PickupOrDrop(args.User.Value, uid);
     }
 }

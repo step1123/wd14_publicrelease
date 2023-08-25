@@ -1,6 +1,6 @@
 ﻿- type: entity
   name: soul shard
-  description: Pohui
+  description: Mysterious glowing shard.
   parent: BaseItem
   id: SoulShard
   components:

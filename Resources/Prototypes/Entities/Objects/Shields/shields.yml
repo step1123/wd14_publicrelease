@@ -263,6 +263,7 @@
   name: Mirror Shield
   parent: BaseShield
   id: MirrorShield
+  noSpawn: true
   description: Eerily glows red... you hear the geometer whispering
   components:
     - type: Sprite

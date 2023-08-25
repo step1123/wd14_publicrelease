@@ -56,12 +56,8 @@ namespace Content.Server.Objectives.Conditions
 
                 var shuttleContainsAgent = false;
                 var agentIsAlive = !mindSystem.IsCharacterDeadIc(_mind);
-                var agentIsEscaping = true;
-
-                if (entMan.TryGetComponent<CuffableComponent>(_mind.OwnedEntity, out var cuffed)
-                    && cuffed.CuffedHandCount > 0)
-                    // You're not escaping if you're restrained!
-                    agentIsEscaping = false;
+                var agentIsEscaping = !(entMan.TryGetComponent<CuffableComponent>(_mind.OwnedEntity, out var cuffed)
+                                         && cuffed.CuffedHandCount > 0);
 
                 // Any emergency shuttle counts for this objective.
                 foreach (var stationData in entMan.EntityQuery<StationEmergencyShuttleComponent>())

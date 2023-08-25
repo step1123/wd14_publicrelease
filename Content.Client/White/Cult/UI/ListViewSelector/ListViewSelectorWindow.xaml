@@ -1,7 +1,7 @@
 ﻿<DefaultWindow xmlns="https://spacestation14.io"
                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-               Title="Runes"
-               MinWidth="300"
+               Title="{Loc runes-window-title}"
+               MinWidth="350"
                MinHeight="400">
     <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
         <BoxContainer Name="ItemsContainer" Orientation="Vertical"></BoxContainer>
