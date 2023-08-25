@@ -226,4 +226,5 @@
   - type: FloatingVisuals
   - type: Puller
     needsHands: false
+  - type: Penetrated
 

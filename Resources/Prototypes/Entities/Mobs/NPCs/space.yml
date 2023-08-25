@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   name: basic
   id: MobSpaceBasic
   parent: SimpleSpaceMobBase
@@ -65,6 +65,7 @@
     energy: 2
     color: "#4faffb"
   - type: GhostTakeoverAvailable
+  - type: Penetrated
 
 - type: entity
   name: space bear

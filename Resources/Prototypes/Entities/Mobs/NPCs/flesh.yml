@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: SimpleMobBase
   id: BaseMobFlesh
   name: aberrant flesh

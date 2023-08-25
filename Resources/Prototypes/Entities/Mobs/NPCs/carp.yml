@@ -74,6 +74,7 @@
         - DoorBumpOpener
     - type: ReplacementAccent
       accent: genericAggressive
+    - type: Penetrated
 
 - type: entity
   parent: BaseMobCarp

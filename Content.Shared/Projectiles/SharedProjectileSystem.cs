@@ -34,10 +34,33 @@ namespace Content.Shared.Projectiles
             SubscribeLocalEvent<EmbeddableProjectileComponent, ThrowDoHitEvent>(OnEmbedThrowDoHit);
             SubscribeLocalEvent<EmbeddableProjectileComponent, ActivateInWorldEvent>(OnEmbedActivate);
             SubscribeLocalEvent<EmbeddableProjectileComponent, RemoveEmbeddedProjectileEvent>(OnEmbedRemove);
+
             SubscribeLocalEvent<EmbeddableProjectileComponent, LandEvent>(OnLand); // WD
+            SubscribeLocalEvent<EmbeddableProjectileComponent, ComponentRemove>(OnRemove); // WD
+            SubscribeLocalEvent<EmbeddableProjectileComponent, EntityTerminatingEvent>(OnEntityTerminating); // WD
         }
 
         // WD EDIT START
+        private void OnEntityTerminating(EntityUid uid, EmbeddableProjectileComponent component,
+            ref EntityTerminatingEvent args)
+        {
+            FreePenetrated(component);
+        }
+
+        private void OnRemove(EntityUid uid, EmbeddableProjectileComponent component, ComponentRemove args)
+        {
+            FreePenetrated(component);
+        }
+
+        private void FreePenetrated(EmbeddableProjectileComponent component)
+        {
+            if (component.PenetratedUid == null)
+                return;
+
+            _penetratedSystem.FreePenetrated(component.PenetratedUid.Value);
+            component.PenetratedUid = null;
+        }
+
         private void OnLand(EntityUid uid, EmbeddableProjectileComponent component, ref LandEvent args)
         {
             if (component.PenetratedUid == null)
@@ -123,9 +146,10 @@ namespace Content.Shared.Projectiles
                 _physics.SetLinearVelocity(args.Target, Vector2.Zero, body: physics);
                 _physics.SetBodyType(args.Target, BodyType.Static, body: physics);
                 var xform = Transform(args.Target);
+                _transform.SetLocalPosition(xform, Transform(uid).LocalPosition);
                 _transform.SetParent(args.Target, xform, uid);
-                _transform.SetLocalPosition(xform,
-                    xform.LocalPosition + Transform(uid).LocalRotation.RotateVec(new Vector2(0.5f, 0.5f)));
+                if (TryComp(uid, out PhysicsComponent? projPhysics))
+                    _physics.SetLinearVelocity(uid, projPhysics.LinearVelocity / 2, body: projPhysics);
                 Dirty(component);
                 return;
             }

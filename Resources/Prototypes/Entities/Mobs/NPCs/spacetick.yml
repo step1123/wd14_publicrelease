@@ -82,6 +82,7 @@
   - type: GhostTakeoverAvailable
   - type: ReplacementAccent
     accent: genericAggressive
+  - type: Penetrated
 
 - type: entity
   id: MobTickSalvage
