@@ -16,6 +16,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Verbs;
 using Content.Shared.Stacks;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.White.Cyborg.Components;
 using Robust.Server.GameObjects;
 
 namespace Content.Server.Chemistry.EntitySystems;
@@ -45,6 +46,9 @@ public sealed partial class ChemistrySystem
             return;
 
         var target = ev.HitEntities.First();
+
+        if (HasComp<CyborgComponent>(target))
+            return;
 
         if (!_solutions.TryGetSolution(uid, InjectorComponent.SolutionName, out var solution)
             || solution.Volume == 0)
