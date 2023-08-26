@@ -36,13 +36,13 @@ public sealed partial class EmbeddableProjectileComponent : Component
     public Vector2 Offset = Vector2.Zero;
 
     // WD START
-    [AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public bool PreventEmbedding;
 
-    [AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public bool Penetrate;
 
-    [AutoNetworkedField]
+    [ViewVariables, AutoNetworkedField]
     public EntityUid? PenetratedUid;
     // WD END
 }

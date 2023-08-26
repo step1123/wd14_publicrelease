@@ -44,12 +44,14 @@ namespace Content.Shared.Projectiles
         private void OnEntityTerminating(EntityUid uid, EmbeddableProjectileComponent component,
             ref EntityTerminatingEvent args)
         {
-            FreePenetrated(component);
+            if (!_netManager.IsClient)
+                FreePenetrated(component);
         }
 
         private void OnRemove(EntityUid uid, EmbeddableProjectileComponent component, ComponentRemove args)
         {
-            FreePenetrated(component);
+            if (!_netManager.IsClient)
+                FreePenetrated(component);
         }
 
         private void FreePenetrated(EmbeddableProjectileComponent component)
@@ -77,7 +79,10 @@ namespace Content.Shared.Projectiles
         private void OnEmbedActivate(EntityUid uid, EmbeddableProjectileComponent component, ActivateInWorldEvent args)
         {
             if (args.Handled || !TryComp<PhysicsComponent>(uid, out var physics) || physics.BodyType != BodyType.Static)
+            {
+                FreePenetrated(component);
                 return;
+            }
 
             args.Handled = true;
             AttemptEmbedRemove(uid, args.User, component);
@@ -109,6 +114,10 @@ namespace Content.Shared.Projectiles
             if (component.DeleteOnRemove)
             {
                 QueueDel(uid);
+                // WD START
+                FreePenetrated(component);
+                RaiseLocalEvent(uid, new EmbedRemovedEvent());
+                // WD END
                 return;
             }
 
@@ -118,12 +127,7 @@ namespace Content.Shared.Projectiles
             _transform.AttachToGridOrMap(uid, xform);
 
             // WD START
-            if (component.PenetratedUid != null)
-            {
-                _penetratedSystem.FreePenetrated(component.PenetratedUid.Value);
-                component.PenetratedUid = null;
-            }
-
+            FreePenetrated(component);
             RaiseLocalEvent(uid, new EmbedRemovedEvent());
             // WD END
 
@@ -151,6 +155,7 @@ namespace Content.Shared.Projectiles
                 if (TryComp(uid, out PhysicsComponent? projPhysics))
                     _physics.SetLinearVelocity(uid, projPhysics.LinearVelocity / 2, body: projPhysics);
                 Dirty(component);
+                Dirty(penetrated);
                 return;
             }
 

@@ -23,19 +23,27 @@ public sealed class PenetratedSystem : EntitySystem
     {
         if (component is {ProjectileUid: not null, IsPinned: true})
             _projectile.AttemptEmbedRemove(component.ProjectileUid.Value, uid);
+        else if (component.ProjectileUid == null && TryComp(uid, out PhysicsComponent? physics) &&
+                 physics.BodyType == BodyType.Static)
+            FreePenetrated(uid, component, physics);
     }
 
-    public void FreePenetrated(EntityUid uid, PenetratedComponent? penetrated = null)
+    public void FreePenetrated(EntityUid uid, PenetratedComponent? penetrated = null, PhysicsComponent? physics = null)
     {
+        var xform = Transform(uid);
+        _transform.AttachToGridOrMap(uid, xform);
+
+        if (Resolve(uid, ref physics, false))
+        {
+            _physics.SetBodyType(uid, BodyType.KinematicController, body: physics, xform: xform);
+            _physics.WakeBody(uid, body: physics);
+        }
+
         if (!Resolve(uid, ref penetrated, false))
             return;
 
-        var xform = Transform(uid);
-        TryComp<PhysicsComponent>(uid, out var physics);
-        _physics.SetBodyType(uid, BodyType.Dynamic, body: physics, xform: xform);
-        _transform.AttachToGridOrMap(uid, xform);
         penetrated.ProjectileUid = null;
         penetrated.IsPinned = false;
-        _physics.WakeBody(uid, body: physics);
+        Dirty(penetrated);
     }
 }
