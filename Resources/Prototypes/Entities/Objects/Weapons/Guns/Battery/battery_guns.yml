@@ -489,7 +489,7 @@
     - type: TwoModeEnergyAmmoProvider
       projProto: BulletTaser
       fireCost: 100
-      projFireCost: 100
+      projFireCost: 142
       hitscanProto: BulletTrailLaser
       hitscanFireCost: 65
       projSound: "/Audio/Weapons/Guns/Gunshots/taser.ogg"

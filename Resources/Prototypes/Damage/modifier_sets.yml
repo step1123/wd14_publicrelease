@@ -212,13 +212,23 @@
     Radiation: 0.2
     Caustic: 0.0
 
-# WD EDIT
+- type: damageModifierSet
+  id: Dwarf
+  coefficients:
+    Blunt: 0.7
+    Slash: 1.2
+    Heat: 1.5
+    Laser: 1.5
+    Shock: 1.2
+
 - type: damageModifierSet
   id: Felinid
   coefficients:
-    Blunt: 1.15
-    Slash: 1.15
-    Piercing: 1.15
+    Blunt: 1.2
+    Slash: 1.2
+    Piercing: 1.2
+    Heat: 1.2
+    Laser: 1.2
 
 - type: damageModifierSet
   id: CultRobe
@@ -230,4 +240,3 @@
     Cold: 1.45
     Heat: 1.45
     Laser: 1.45
-# END

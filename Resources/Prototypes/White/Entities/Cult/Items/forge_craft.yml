@@ -31,6 +31,8 @@
       reflects:
         - Energy
     - type: ReturnItemOnThrow
+    - type: ChangeThrowForce
+      throwForce: 6.5
 
 - type: entity
   id: CultOuterArmor

@@ -18,6 +18,7 @@
     bluntStaminaDamageFactor: 2.0
     angle: 60
     animation: WeaponArcSlash
+    canHeavyAttack: false
   - type: StaminaDamageOnHit
     damage: 60
   - type: Battery

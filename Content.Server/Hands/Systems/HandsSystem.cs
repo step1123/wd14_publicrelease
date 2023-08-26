@@ -5,6 +5,7 @@ using Content.Server.Stack;
 using Content.Server.Storage.Components;
 using Content.Server.Storage.EntitySystems;
 using Content.Server.Stunnable;
+using Content.Server.White.Other.ChangeThrowForceSystem;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Body.Part;
 using Content.Shared.CombatMode;
@@ -211,6 +212,13 @@ namespace Content.Server.Hands.Systems
 
             // Let other systems change the thrown entity (useful for virtual items)
             // or the throw strength.
+
+            if (TryComp<ChangeThrowForceComponent>(throwEnt, out var thrownChangeForceComponent))
+            {
+                var component = EnsureComp<ChangeThrowForceComponent>(player);
+                component.ThrowForce = thrownChangeForceComponent.ThrowForce;
+            }
+
             var ev = new BeforeThrowEvent(throwEnt, direction, throwStrength, player);
             RaiseLocalEvent(player, ev, false);
 
@@ -222,6 +230,8 @@ namespace Content.Server.Hands.Systems
                 return false;
 
             _throwingSystem.TryThrow(ev.ItemUid, ev.Direction, ev.ThrowStrength, ev.PlayerUid);
+
+            RemComp<ChangeThrowForceComponent>(player);
 
             return true;
         }

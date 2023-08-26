@@ -196,7 +196,7 @@
       path: "/Audio/Weapons/Guns/Hits/taser_hit.ogg"
     soundForce: true
   - type: StaminaDamageOnCollide
-    damage: 150
+    damage: 100
   - type: Reflective
     reflective:
       - Energy

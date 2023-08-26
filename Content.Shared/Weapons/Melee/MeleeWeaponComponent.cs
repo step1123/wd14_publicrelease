@@ -61,6 +61,9 @@ public sealed class MeleeWeaponComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public bool Attacking = false;
 
+    [ViewVariables(VVAccess.ReadWrite), DataField("canHeavyAttack")]
+    public bool CanHeavyAttack = true;
+
     /// <summary>
     /// Base damage for this weapon. Can be modified via heavy damage or other means.
     /// </summary>

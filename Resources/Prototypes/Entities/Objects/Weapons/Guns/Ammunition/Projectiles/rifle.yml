@@ -114,8 +114,8 @@
   components:
   - type: Projectile
     damage:
-      groups:
-        Burn: 15
+      types:
+        Heat: 15
   - type: Trail
     splineIteratorType: CatmullRom
     splineRendererType: Continuous

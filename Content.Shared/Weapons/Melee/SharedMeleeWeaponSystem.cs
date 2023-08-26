@@ -189,6 +189,11 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             return;
         }
 
+        if (msg.Target == null)
+        {
+            return;
+        }
+
         AttemptAttack(args.SenderSession.AttachedEntity!.Value, msg.Weapon, weapon, msg, args.SenderSession);
     }
 
