@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
+using Content.Shared.Movement.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.Sound.Components;
 using Content.Shared.Throwing;
@@ -85,19 +86,20 @@ namespace Content.Shared.Projectiles
             }
 
             args.Handled = true;
-            AttemptEmbedRemove(uid, args.User, component);
+            if (!AttemptEmbedRemove(uid, args.User, component))
+                FreePenetrated(component);
         }
 
-        public void AttemptEmbedRemove(EntityUid uid, EntityUid user, EmbeddableProjectileComponent? component = null)
+        public bool AttemptEmbedRemove(EntityUid uid, EntityUid user, EmbeddableProjectileComponent? component = null)
         {
             if (!Resolve(uid, ref component, false))
-                return;
+                return false;
 
             // Nuh uh
             if (component.RemovalTime == null)
-                return;
+                return false;
 
-            _doAfter.TryStartDoAfter(new DoAfterArgs(user, component.RemovalTime.Value,
+            return _doAfter.TryStartDoAfter(new DoAfterArgs(user, component.RemovalTime.Value,
                 new RemoveEmbeddedProjectileEvent(), eventTarget: uid, target: uid)
             {
                 DistanceThreshold = SharedInteractionSystem.InteractionRange,
@@ -161,6 +163,8 @@ namespace Content.Shared.Projectiles
 
             if (component.PenetratedUid == args.Target)
                 args.Handled = true;
+            else if (HasComp<MobMoverComponent>(args.Target) || HasComp<InputMoverComponent>(args.Target))
+                FreePenetrated(component);
             // WD END
 
             Embed(uid, args.Target, component);

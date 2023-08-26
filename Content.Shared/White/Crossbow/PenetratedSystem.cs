@@ -22,10 +22,15 @@ public sealed class PenetratedSystem : EntitySystem
     private void OnMoveInput(EntityUid uid, PenetratedComponent component, ref MoveInputEvent args)
     {
         if (component is {ProjectileUid: not null, IsPinned: true})
-            _projectile.AttemptEmbedRemove(component.ProjectileUid.Value, uid);
+        {
+            if (!_projectile.AttemptEmbedRemove(component.ProjectileUid.Value, uid))
+                FreePenetrated(uid, component);
+        }
         else if (component.ProjectileUid == null && TryComp(uid, out PhysicsComponent? physics) &&
                  physics.BodyType == BodyType.Static)
+        {
             FreePenetrated(uid, component, physics);
+        }
     }
 
     public void FreePenetrated(EntityUid uid, PenetratedComponent? penetrated = null, PhysicsComponent? physics = null)
