@@ -54,7 +54,8 @@ public sealed class ExpendableLightSystem : VisualizerSystem<ExpendableLightComp
                     uid,
                     SharedExpendableLightComponent.LoopedSoundParams
                 );
-                if (args.Sprite.LayerMapTryGet(ExpendableLightVisualLayers.Overlay, out var layerIdx, true))
+                if (args.Sprite.LayerExists(ExpendableLightVisualLayers.Overlay) && // WD
+                    args.Sprite.LayerMapTryGet(ExpendableLightVisualLayers.Overlay, out var layerIdx, true))
                 {
                     if (!string.IsNullOrWhiteSpace(comp.IconStateLit))
                         args.Sprite.LayerSetState(layerIdx, comp.IconStateLit);
@@ -74,7 +75,8 @@ public sealed class ExpendableLightSystem : VisualizerSystem<ExpendableLightComp
                 break;
             case ExpendableLightState.Dead:
                 comp.PlayingStream?.Stop();
-                if (args.Sprite.LayerMapTryGet(ExpendableLightVisualLayers.Overlay, out layerIdx, true))
+                if (args.Sprite.LayerExists(ExpendableLightVisualLayers.Overlay) && // WD
+                    args.Sprite.LayerMapTryGet(ExpendableLightVisualLayers.Overlay, out layerIdx, true))
                 {
                     if (!string.IsNullOrWhiteSpace(comp.IconStateSpent))
                         args.Sprite.LayerSetState(layerIdx, comp.IconStateSpent);

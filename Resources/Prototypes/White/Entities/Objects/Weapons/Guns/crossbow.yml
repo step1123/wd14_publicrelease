@@ -48,10 +48,11 @@
       types:
         Blunt: 15
   - type: Powered
-    charge: 360
+    charge: 180
     damage:
       types:
-        Blunt: 30
+        Blunt: 10
+        Heat: 10
   - type: Construction
     deconstructionTarget: null
     graph: WeaponPoweredCrossbowGraph

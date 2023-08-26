@@ -1,8 +1,9 @@
 - type: entity
   name: energy sword
   parent: BaseItem
-  id: EnergySword
+  id: EnergySwordBase
   description: A very loud & dangerous sword with a beam made of pure, concentrated plasma. Cuts through unarmored targets like butter.
+  abstract: true
   components:
   - type: EnergySword
     litDamageBonus:
@@ -51,6 +52,13 @@
     enabled: false
     reflects:
       - Energy
+
+- type: entity
+  name: energy sword
+  parent: EnergySwordBase
+  id: EnergySword
+  description: A very loud & dangerous sword with a beam made of pure, concentrated plasma. Cuts through unarmored targets like butter.
+  components:
   - type: Construction
     deconstructionTarget: null
     graph: EnergyDoubleSwordGraph
@@ -61,7 +69,7 @@
 
 - type: entity
   name: pen
-  parent: EnergySword
+  parent: EnergySwordBase
   id: EnergyDagger
   suffix: E-Dagger
   description: 'A dark ink pen.'
@@ -139,7 +147,7 @@
 
 - type: entity
   name: energy cutlass
-  parent: EnergySword
+  parent: EnergySwordBase
   id: EnergyCutlass
   description: An exotic energy weapon.
   components:
@@ -165,7 +173,7 @@
 
 - type: entity
   name: double energy sword
-  parent: EnergySword
+  parent: EnergySwordBase
   id: EnergyDoubleSword
   description: A very dangerous doubled energy sword. Can be stored in pockets when turned off. Makes a lot of noise when used or turned on.
   components:
