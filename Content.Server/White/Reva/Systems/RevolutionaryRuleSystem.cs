@@ -212,6 +212,9 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
             if (ev.JobId == null || !_prototypeManager.TryIndex<JobPrototype>(ev.JobId, out var job))
                 return;
 
+            if (!ev.LateJoin)
+                return;
+
             if (GetHeadsPrototypes().Contains(job))
             {
                 revaRule.HeadPlayers.Add(ev.Player);
@@ -221,8 +224,6 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
             }
 
             if (revaRule.TotalHeadRevs >= revaRule.MaxHeadRev)
-                return;
-            if (!ev.LateJoin)
                 return;
 
             if (!ev.Profile.AntagPreferences.Contains(revaRule.RevaRoleProto))
@@ -300,7 +301,7 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
             if (session != null)
             {
                 revaRule.RevPlayers.Add(session);
-                revaRule.ScoreRevPlayers.Add($"{mindComponent.Mind?.CharacterName} ({session.Name})", false);
+                revaRule.ScoreRevPlayers.TryAdd($"{mindComponent.Mind?.CharacterName} ({session.Name})", component.HeadRevolutionary);
             }
 
             var mindSystem = EntityManager.EntitySysManager.GetEntitySystem<MindSystem>();
@@ -573,11 +574,15 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
                 continue;
 
             var minPlayers = revaRule.MinPlayers;
-            if (!ev.Forced && ev.Players.Length < minPlayers)
+            if (!ev.Forced)
             {
-                _chatManager.DispatchServerAnnouncement(Loc.GetString("rev-not-enough-ready-players", ("readyPlayersCount", ev.Players.Length), ("minimumPlayers", minPlayers)));
-                ev.Cancel();
-                return;
+                if (ev.Players.Length < minPlayers)
+                {
+                    _chatManager.DispatchServerAnnouncement(Loc.GetString("rev-not-enough-ready-players",
+                        ("readyPlayersCount", ev.Players.Length), ("minimumPlayers", minPlayers)));
+                    ev.Cancel();
+                    return;
+                }
             }
 
             if (ev.Players.Length != 0)
