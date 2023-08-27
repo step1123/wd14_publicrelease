@@ -1,3 +1,4 @@
+using Content.Shared.Interaction;
 using Content.Shared.Movement.Events;
 using Content.Shared.Projectiles;
 using Robust.Shared.Physics;
@@ -17,20 +18,35 @@ public sealed class PenetratedSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<PenetratedComponent, MoveInputEvent>(OnMoveInput);
+        SubscribeLocalEvent<PenetratedComponent, InteractHandEvent>(OnInteract);
     }
 
-    private void OnMoveInput(EntityUid uid, PenetratedComponent component, ref MoveInputEvent args)
+    private bool AttemptEmbedRemove(EntityUid uid, EntityUid user, PenetratedComponent component)
     {
         if (component is {ProjectileUid: not null, IsPinned: true})
         {
-            if (!_projectile.AttemptEmbedRemove(component.ProjectileUid.Value, uid))
+            if (!_projectile.AttemptEmbedRemove(component.ProjectileUid.Value, user))
                 FreePenetrated(uid, component);
+            else
+                return true;
         }
         else if (component.ProjectileUid == null && TryComp(uid, out PhysicsComponent? physics) &&
                  physics.BodyType == BodyType.Static)
         {
             FreePenetrated(uid, component, physics);
         }
+        return false;
+    }
+
+    private void OnInteract(EntityUid uid, PenetratedComponent component, InteractHandEvent args)
+    {
+        if (AttemptEmbedRemove(uid, args.User, component))
+            args.Handled = true;
+    }
+
+    private void OnMoveInput(EntityUid uid, PenetratedComponent component, ref MoveInputEvent args)
+    {
+        AttemptEmbedRemove(uid, uid, component);
     }
 
     public void FreePenetrated(EntityUid uid, PenetratedComponent? penetrated = null, PhysicsComponent? physics = null)
