@@ -2,6 +2,7 @@ using Content.Server.GameTicking.Rules;
 using Content.Server.Mind.Components;
 using Content.Server.White;
 using Content.Server.White.Cult.GameRule;
+using Content.Server.White.Reva.Systems;
 using Content.Server.Zombies;
 using Content.Shared.Administration;
 using Content.Shared.Database;
@@ -18,6 +19,7 @@ public sealed partial class AdminVerbSystem
     [Dependency] private readonly NukeopsRuleSystem _nukeopsRule = default!;
     [Dependency] private readonly PiratesRuleSystem _piratesRule = default!;
     [Dependency] private readonly CultRuleSystem _cultRuleSystem = default!;
+    [Dependency] private readonly RevolutionaryRuleSystem _revaRuleSystem = default!;
 
 
     // All antag verbs have names so invokeverb works.
@@ -117,5 +119,22 @@ public sealed partial class AdminVerbSystem
             Message = Loc.GetString("admin-verb-make-cult"),
         };
         args.Verbs.Add(cult);
+
+        Verb reva = new()
+        {
+            Text = "Make Head Reva",
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new("/Textures/White/Overlays/Revolution/hud.rsi"), "reva_head"),
+            Act = () =>
+            {
+                if (targetMindComp.Mind == null || targetMindComp.Mind.Session == null)
+                    return;
+
+                _revaRuleSystem.MakeHeadRevolution(targetMindComp.Mind.Session);
+            },
+            Impact = LogImpact.High,
+            Message = Loc.GetString("admin-verb-make-head-reva"),
+        };
+        args.Verbs.Add(reva);
     }
 }

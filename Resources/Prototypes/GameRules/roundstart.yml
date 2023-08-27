@@ -98,3 +98,12 @@
       cultistStartingItems:
         - RitualDagger
         - CultRunicMetal20
+
+- type: entity
+  id: Revolution
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: RevolutionaryRule
+      revStartingItems:
+        - Flash

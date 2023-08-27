@@ -109,3 +109,15 @@
   rules:
     - Pirates
     - BasicStationEventScheduler
+
+- type: gamePreset
+  id: Revolution
+  alias:
+    - revolution
+  name: rev-title
+  description: rev-description
+  minPlayers: 20
+  showInVote: true
+  rules:
+    - Revolution
+    - BasicStationEventScheduler

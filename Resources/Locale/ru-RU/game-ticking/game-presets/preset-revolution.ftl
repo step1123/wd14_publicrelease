@@ -16,7 +16,7 @@ rev-crewmajor = Крупная победа экипажа!
 rev-cond-allheadrevsdead = Все лидеры революции погибли.
 rev-cond-allcrewheadsdead = Все главы станции погибли.
 rev-list-revs-start = Революционерами были:
-rev-list = - [color=White]{ $name }[/color] ([color=gray]{ $user }[/color]) { $headrev }
+rev-list = - [color=White]{ $name }[/color] { $headrev }
 rev-list-heads-start = Главами станции были:
 rev-not-enough-ready-players = Недостаточно игроков готовы к игре! { $readyPlayersCount } игроков из необходимых { $minimumPlayers } готовы. Нельзя начать режим: Revolution.
 rev-no-one-ready = Нет готовых игроков! Нельзя начать Revolution.

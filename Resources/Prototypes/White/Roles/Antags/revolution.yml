@@ -1,0 +1,6 @@
+﻿- type: antag
+  id: HeadRev
+  name: rev-name
+  antagonist: true
+  setPreference: true
+  objective: rev-objective

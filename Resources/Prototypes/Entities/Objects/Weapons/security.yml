@@ -104,6 +104,7 @@
         types:
           Blunt: 0 # melee weapon to allow flashing individual targets
       angle: 10
+      canHeavyAttack: false
     - type: Item
       size: 5
       sprite: Objects/Weapons/Melee/flash.rsi
