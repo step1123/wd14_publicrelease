@@ -11,6 +11,7 @@ using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Server.White.TTS;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.CCVar;
@@ -285,6 +286,11 @@ namespace Content.Server.Communications
             }
             _chatSystem.DispatchStationAnnouncement(uid, msg, title, colorOverride: comp.AnnouncementColor);
 
+            //WD-start
+            var ev = new TTSAnnouncementEvent(message.Message, comp.TtsVoiceId, uid, comp.AnnounceGlobal);
+            RaiseLocalEvent(ev);
+            //WD-end
+
             if (message.Session.AttachedEntity != null)
                 _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(message.Session.AttachedEntity.Value):player} has sent the following station announcement: {msg}");
         }
@@ -292,9 +298,9 @@ namespace Content.Server.Communications
         private void OnCallShuttleMessage(EntityUid uid, CommunicationsConsoleComponent comp, CommunicationsConsoleCallEmergencyShuttleMessage message)
         {
             if (!CanCallOrRecall(comp)) return;
-            if (message.Session.AttachedEntity is not { Valid: true } mob) 
+            if (message.Session.AttachedEntity is not { Valid: true } mob)
                 return;
-            
+
             //WD-EDIT
             if (!OnStationCallOrRecall(uid))
             {
@@ -315,7 +321,7 @@ namespace Content.Server.Communications
         private void OnRecallShuttleMessage(EntityUid uid, CommunicationsConsoleComponent comp, CommunicationsConsoleRecallEmergencyShuttleMessage message)
         {
             if (!CanCallOrRecall(comp)) return;
-            if (message.Session.AttachedEntity is not { Valid: true } mob) 
+            if (message.Session.AttachedEntity is not { Valid: true } mob)
                 return;
 
             //WD-EDIT
@@ -325,7 +331,7 @@ namespace Content.Server.Communications
                 return;
             }
             //WD-EDIT
-            
+
             if (!CanUse(mob, uid))
             {
                 _popupSystem.PopupEntity(Loc.GetString("comms-console-permission-denied"), uid, message.Session);

@@ -7,6 +7,7 @@ using Content.Server.Mind.Components;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.White.Cyborg.Laws;
+using Content.Server.White.TTS;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.ActionBlocker;
@@ -21,9 +22,11 @@ using Content.Shared.White.Cyborg;
 using Content.Shared.White.Cyborg.Components;
 using Content.Shared.White.Cyborg.Events;
 using Content.Shared.White.Cyborg.Systems;
+using Content.Shared.White.TTS;
 using Content.Shared.Wires;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Server.White.Cyborg.Systems;
@@ -43,6 +46,7 @@ public sealed class CyborgSystem : SharedCyborgSystem
     [Dependency] private readonly AccessReaderSystem _reader = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     private ISawmill _logger = default!;
 
     public override void Initialize()
@@ -142,6 +146,17 @@ public sealed class CyborgSystem : SharedCyborgSystem
     {
         UpdateAlert(uid, component);
         Dirty(component);
+        AddTtsComponent(uid);
+    }
+
+    private void AddTtsComponent(EntityUid uid)
+    {
+        var ttsComp = EnsureComp<TTSComponent>(uid);
+        var borgVoices = _prototypeManager.EnumeratePrototypes<TTSVoicePrototype>()
+            .Where(voice => voice.BorgVoice).ToList();
+
+        var voice = borgVoices.ElementAt(new Random().Next(borgVoices.Count));
+        ttsComp.VoicePrototypeId = voice.ID;
     }
 
     private void OnGetAdditionalAccess(EntityUid uid, CyborgComponent component, ref GetAdditionalAccessEvent args)

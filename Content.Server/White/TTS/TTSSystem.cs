@@ -1,10 +1,14 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Content.Server.Chat.Systems;
+using Content.Server.Light.Components;
+using Content.Server.Station.Components;
+using Content.Server.Station.Systems;
 using Content.Shared.CCVar;
 using Content.Shared.White.TTS;
 using Content.Shared.GameTicking;
 using Content.Shared.White;
+using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
@@ -26,6 +30,9 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private readonly IServerNetManager _netMgr = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly TTSPitchRateSystem _ttsPitchRateSystem = default!;
+    [Dependency] private readonly StationSystem _stationSystem = default!;
+    [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
     private const int MaxMessageChars = 100 * 2; // same as SingleBubbleCharLimit * 2
     private bool _isEnabled = false;
@@ -40,7 +47,71 @@ public sealed partial class TTSSystem : EntitySystem
         SubscribeLocalEvent<TTSComponent, EntitySpokeEvent>(OnEntitySpoke);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
+        SubscribeLocalEvent<TTSAnnouncementEvent>(OnAnnounceRequest);
+
         _netMgr.RegisterNetMessage<MsgRequestTTS>(OnRequestTTS);
+    }
+
+    private async void OnAnnounceRequest(TTSAnnouncementEvent ev)
+    {
+        if (!_prototypeManager.TryIndex<TTSVoicePrototype>(ev.VoiceId, out var ttsPrototype))
+            return;
+
+        var message = FormattedMessage.RemoveMarkup(ev.Message);
+        var soundData = await GenerateTTS(null, message, ttsPrototype.Speaker);
+
+        if (soundData == null)
+            return;
+
+        Filter filter;
+        if (ev.Global)
+            filter = Filter.Broadcast();
+        else
+        {
+            var station = _stationSystem.GetOwningStation(ev.Source);
+            if (station == null)
+                return;
+
+            if (!EntityManager.TryGetComponent<StationDataComponent>(station, out var stationDataComp))
+                return;
+
+            filter = _stationSystem.GetInStation(stationDataComp);
+        }
+
+        foreach (var player in filter.Recipients)
+        {
+            if (player.AttachedEntity != null)
+            {
+                // Get emergency lights in range to broadcast from
+                var entities = _lookup.GetEntitiesInRange(player.AttachedEntity.Value, 20f)
+                    .Where(HasComp<EmergencyLightComponent>)
+                    .ToList();
+
+                if (entities.Count == 0)
+                    return;
+
+                // Get closest emergency light
+                var entity = entities.First();
+                var range = 100f;
+
+                foreach (var item in entities)
+                {
+                    var itemSource = _xforms.GetWorldPosition(Transform(item));
+                    var playerSource = _xforms.GetWorldPosition(Transform(player.AttachedEntity.Value));
+
+                    var distance = playerSource.Length() - itemSource.Length();
+
+                    if (range > distance)
+                    {
+                        range = distance;
+                        entity = item;
+                    }
+                }
+
+                RaiseNetworkEvent(new PlayTTSEvent(entity, soundData), Filter.SinglePlayer(player),
+                    false);
+            }
+        }
     }
 
     private async void OnRequestTTS(MsgRequestTTS ev)
@@ -140,7 +211,7 @@ public sealed partial class TTSSystem : EntitySystem
         _ttsManager.ResetCache();
     }
 
-    private async Task<byte[]?> GenerateTTS(EntityUid uid, string text, string speaker, string? speechPitch = null, string? speechRate = null)
+    private async Task<byte[]?> GenerateTTS(EntityUid? uid, string text, string speaker, string? speechPitch = null, string? speechRate = null)
     {
         var textSanitized = Sanitize(text);
         if (textSanitized == "")
@@ -150,7 +221,7 @@ public sealed partial class TTSSystem : EntitySystem
         string rate;
         if (speechPitch == null || speechRate == null)
         {
-            if (!_ttsPitchRateSystem.TryGetPitchRate(uid, out var pitchRate))
+            if (uid == null || !_ttsPitchRateSystem.TryGetPitchRate(uid.Value, out var pitchRate))
             {
                 pitch = "medium";
                 rate = "medium";

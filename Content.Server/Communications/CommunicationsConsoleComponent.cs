@@ -58,5 +58,10 @@ namespace Content.Server.Communications
         public SoundSpecifier AnnouncementSound = new SoundPathSpecifier("/Audio/Announcements/announce.ogg");
 
         public BoundUserInterface? UserInterface => Owner.GetUIOrNull(CommunicationsConsoleUiKey.Key);
+
+        //WD-start
+        [DataField("ttsVoiceId")]
+        public string TtsVoiceId = "Glados";
+        //WD-end
     }
 }
