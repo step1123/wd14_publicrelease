@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
 using Content.Server.Chat.Systems;
 using Content.Server.Light.Components;
@@ -92,23 +93,23 @@ public sealed partial class TTSSystem : EntitySystem
 
                 // Get closest emergency light
                 var entity = entities.First();
-                var range = 100f;
+                var range = new Vector2(100f);
 
                 foreach (var item in entities)
                 {
                     var itemSource = _xforms.GetWorldPosition(Transform(item));
                     var playerSource = _xforms.GetWorldPosition(Transform(player.AttachedEntity.Value));
 
-                    var distance = playerSource.Length() - itemSource.Length();
+                    var distance = playerSource - itemSource;
 
-                    if (range > distance)
+                    if (range.Length() > distance.Length())
                     {
                         range = distance;
                         entity = item;
                     }
                 }
 
-                RaiseNetworkEvent(new PlayTTSEvent(entity, soundData), Filter.SinglePlayer(player),
+                RaiseNetworkEvent(new PlayTTSEvent(entity, soundData, true), Filter.SinglePlayer(player),
                     false);
             }
         }
@@ -126,7 +127,7 @@ public sealed partial class TTSSystem : EntitySystem
 
         var soundData = await GenerateTTS(ev.Uid, ev.Text, protoVoice.Speaker);
         if (soundData != null)
-            RaiseNetworkEvent(new PlayTTSEvent(ev.Uid, soundData), Filter.SinglePlayer(session), false);
+            RaiseNetworkEvent(new PlayTTSEvent(ev.Uid, soundData, false), Filter.SinglePlayer(session), false);
     }
 
     private async void OnEntitySpoke(EntityUid uid, TTSComponent component, EntitySpokeEvent args)
@@ -153,7 +154,7 @@ public sealed partial class TTSSystem : EntitySystem
         var soundData = await GenerateTTS(uid, message, protoVoice.Speaker);
         if (soundData is null)
             return;
-        var ttsEvent = new PlayTTSEvent(uid, soundData);
+        var ttsEvent = new PlayTTSEvent(uid, soundData, false);
 
         // Say
         if (args.ObfuscatedMessage is null)
@@ -176,7 +177,7 @@ public sealed partial class TTSSystem : EntitySystem
         var obfSoundData = await GenerateTTS(uid, chosenWhisperText, protoVoice.Speaker);
         if (obfSoundData is null)
             return;
-        var obfTtsEvent = new PlayTTSEvent(uid, obfSoundData);
+        var obfTtsEvent = new PlayTTSEvent(uid, obfSoundData, false);
         var xformQuery = GetEntityQuery<TransformComponent>();
         var sourcePos = _xforms.GetWorldPosition(xformQuery.GetComponent(uid), xformQuery);
         var receptions = Filter.Pvs(uid).Recipients;
