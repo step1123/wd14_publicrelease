@@ -84,7 +84,7 @@ public sealed partial class TTSSystem : EntitySystem
             if (player.AttachedEntity != null)
             {
                 // Get emergency lights in range to broadcast from
-                var entities = _lookup.GetEntitiesInRange(player.AttachedEntity.Value, 20f)
+                var entities = _lookup.GetEntitiesInRange(player.AttachedEntity.Value, 30f)
                     .Where(HasComp<EmergencyLightComponent>)
                     .ToList();
 
