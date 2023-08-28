@@ -129,7 +129,7 @@ public sealed class ERTRecruitmentRule : StationEventSystem<ERTRecruitmentRuleCo
 
     private void OnStartAttempt(RoundStartAttemptEvent ev)
     {
-        if(_cfgManager.GetCVar(WhiteCVars.LoadERTMap))
+        if(_cfgManager.GetCVar(WhiteCVars.LoadErtMap))
             SpawnMap();
     }
 

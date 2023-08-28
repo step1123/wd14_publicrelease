@@ -327,6 +327,11 @@
   - type: ExaminableClothes
   - type: CharacterInformation
   - type: Penetrated
+  - type: MobStateActions
+    actions:
+      Critical:
+        - CritSuccumb
+        - CritLastWords
 
 - type: entity
   save: false

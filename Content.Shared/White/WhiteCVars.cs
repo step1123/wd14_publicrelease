@@ -90,13 +90,13 @@ public sealed class WhiteCVars
     /// <summary>
     /// URL of the TTS server API.
     /// </summary>
-    public static readonly CVarDef<bool> TTSEnabled =
+    public static readonly CVarDef<bool> TtsEnabled =
         CVarDef.Create("tts.enabled", true, CVar.SERVERONLY);
 
     /// <summary>
     /// URL of the TTS server API.
     /// </summary>
-    public static readonly CVarDef<string> TTSApiUrl =
+    public static readonly CVarDef<string> TtsApiUrl =
         CVarDef.Create("tts.api_url", "", CVar.SERVERONLY);
 
     /// <summary>
@@ -108,7 +108,7 @@ public sealed class WhiteCVars
     /// <summary>
     /// TTS Cache
     /// </summary>
-    public static readonly CVarDef<int> TTSMaxCacheSize =
+    public static readonly CVarDef<int> TtsMaxCacheSize =
         CVarDef.Create("tts.max_cash_size", 200, CVar.SERVERONLY | CVar.ARCHIVE);
 
 
@@ -183,7 +183,7 @@ public sealed class WhiteCVars
     * Jukebox
      */
 
-    public static readonly CVarDef<float> MaxJukeboxSongSizeInMB = CVarDef.Create("white.max_jukebox_song_size",
+    public static readonly CVarDef<float> MaxJukeboxSongSizeInMb = CVarDef.Create("white.max_jukebox_song_size",
         3.5f, CVar.SERVER | CVar.REPLICATED | CVar.ARCHIVE);
 
     public static readonly CVarDef<float> MaxJukeboxSoundRange = CVarDef.Create("white.max_jukebox_sound_range", 20f,
@@ -317,5 +317,8 @@ public sealed class WhiteCVars
     /// <summary>
     ///     Should load a ERT map?
     /// </summary>
-    public static readonly CVarDef<bool> LoadERTMap = CVarDef.Create("white.ert_load", true, CVar.SERVERONLY);
+    public static readonly CVarDef<bool> LoadErtMap = CVarDef.Create("white.ert_load", true, CVar.SERVERONLY);
+
+    public static readonly CVarDef<bool> LogInChat =
+        CVarDef.Create("white.log_in_chat", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 }

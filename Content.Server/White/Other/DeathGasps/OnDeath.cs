@@ -91,6 +91,4 @@ public sealed class OnDeath : EntitySystem
 
     private void OnDetach(EntityUid uid, DeathGaspsComponent component, PlayerDetachedEvent args)
         => StopPlayingStream(args.Entity);
-
-
 }

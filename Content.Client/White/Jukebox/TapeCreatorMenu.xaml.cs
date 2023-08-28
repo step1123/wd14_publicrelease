@@ -41,7 +41,7 @@ public sealed partial class TapeCreatorMenu : DefaultWindow
         _huetaSystem = _entityManager.System<CheZaHuetaSystem>();
         _popupSystem = _entityManager.System<SharedPopupSystem>();
 
-        _cfg.OnValueChanged(WhiteCVars.MaxJukeboxSongSizeInMB, x => _maxFileSize = x, true);
+        _cfg.OnValueChanged(WhiteCVars.MaxJukeboxSongSizeInMb, x => _maxFileSize = x, true);
 
         _component = component;
 

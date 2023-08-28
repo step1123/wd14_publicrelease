@@ -108,3 +108,12 @@ cult-role-greeting =
     В ваш рюкзак были добавлены предметы, которые помогут вам.
     И помните - вы не единственный.
     Слава Нар`си!
+
+
+# MobStateShit
+
+action-name-crit-succumb = Succumb
+action-description-crit-succumb = Accept your fate.
+
+action-name-crit-last-words = Say Last Words
+action-description-crit-last-words = Whisper your last words to anyone nearby, and then succumb to your fate. You only have 30 characters to work with.

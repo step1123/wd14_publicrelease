@@ -146,9 +146,9 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// <param name="player">The player doing the speaking</param>
     /// <param name="nameOverride">The name to use for the speaking entity. Usually this should just be modified via <see cref="TransformSpeakerNameEvent"/>. If this is set, the event will not get raised.</param>
     public void TrySendInGameICMessage(EntityUid source, string message, InGameICChatType desiredType, bool hideChat, bool hideLog = false,
-        IConsoleShell? shell = null, IPlayerSession? player = null, string? nameOverride = null, bool checkRadioPrefix = true)
+        IConsoleShell? shell = null, IPlayerSession? player = null, string? nameOverride = null, bool checkRadioPrefix = true, bool force = false)
     {
-        TrySendInGameICMessage(source, message, desiredType, hideChat ? ChatTransmitRange.HideChat : ChatTransmitRange.Normal, hideLog, shell, player, nameOverride, checkRadioPrefix, force: false);
+        TrySendInGameICMessage(source, message, desiredType, hideChat ? ChatTransmitRange.HideChat : ChatTransmitRange.Normal, hideLog, shell, player, nameOverride, checkRadioPrefix, force: force);
     }
 
     /// <summary>
@@ -216,7 +216,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         {
             if (TryProccessRadioMessage(source, message, out var modMessage, out var channel))
             {
-                SendEntityWhisper(source, modMessage, range, channel, nameOverride);
+                SendEntityWhisper(source, modMessage, range, channel, nameOverride, force: force);
                 return;
             }
         }
@@ -228,7 +228,7 @@ public sealed partial class ChatSystem : SharedChatSystem
                 SendEntitySpeak(source, message, range, nameOverride, hideLog);
                 break;
             case InGameICChatType.Whisper:
-                SendEntityWhisper(source, message, range, null, nameOverride, hideLog);
+                SendEntityWhisper(source, message, range, null, nameOverride, hideLog, force: force);
                 break;
             case InGameICChatType.Emote:
                 SendEntityEmote(source, message, range, nameOverride, hideLog, force: force);
@@ -420,9 +420,9 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
     }
 
-    private void SendEntityWhisper(EntityUid source, string originalMessage, ChatTransmitRange range, RadioChannelPrototype? channel, string? nameOverride, bool hideLog = false)
+    private void SendEntityWhisper(EntityUid source, string originalMessage, ChatTransmitRange range, RadioChannelPrototype? channel, string? nameOverride, bool hideLog = false, bool force = false)
     {
-        if (!_actionBlocker.CanSpeak(source))
+        if (!_actionBlocker.CanSpeak(source) && !force)
             return;
 
         var message = TransformSpeech(source, originalMessage);

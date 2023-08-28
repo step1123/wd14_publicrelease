@@ -57,8 +57,8 @@ public sealed class TTSManager
     /// <exception cref="Exception">Throws if url or token CCVar not set or http request failed</exception>
     public async Task<byte[]?> ConvertTextToSpeech(string speaker, string text, string pitch, string rate)
     {
-        var url = _cfg.GetCVar(WhiteCVars.TTSApiUrl);
-        var maxCacheSize = _cfg.GetCVar(WhiteCVars.TTSMaxCacheSize);
+        var url = _cfg.GetCVar(WhiteCVars.TtsApiUrl);
+        var maxCacheSize = _cfg.GetCVar(WhiteCVars.TtsMaxCacheSize);
         if (string.IsNullOrWhiteSpace(url))
         {
             throw new Exception("TTS Api url not specified");

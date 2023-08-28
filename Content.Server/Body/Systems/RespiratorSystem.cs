@@ -98,7 +98,11 @@ namespace Content.Server.Body.Systems
                     if (_gameTiming.CurTime >= respirator.LastGaspPopupTime + respirator.GaspPopupCooldown)
                     {
                         respirator.LastGaspPopupTime = _gameTiming.CurTime;
-                        _popupSystem.PopupEntity(Loc.GetString("lung-behavior-gasp"), uid);
+                        
+                        if (TryComp<MetaDataComponent>(uid, out var metaDataComponent))
+                        {
+                            _popupSystem.PopupEntity($"{metaDataComponent.EntityName} задыхается!", uid);
+                        }
                     }
 
                     TakeSuffocationDamage(uid, respirator);

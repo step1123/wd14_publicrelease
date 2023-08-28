@@ -4,21 +4,39 @@ using Robust.Shared.Enums;
 using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
 using Content.Shared.PDA;
+using Robust.Server.GameObjects;
+using Robust.Shared.Console;
 
 namespace Content.Server.White.Other.ExamineSystem
 {
+
+    //^.^
     public sealed class ExamineSystem : EntitySystem
     {
         [Dependency] private readonly InventorySystem _inventorySystem = default!;
         [Dependency] private readonly EntityManager _entityManager = default!;
+        [Dependency] private readonly IConsoleHost _consoleHost = default!;
 
         public override void Initialize()
         {
             SubscribeLocalEvent<ExaminableClothesComponent, ExaminedEvent>(HandleExamine);
         }
 
+        private void SendNoticeMessage(ActorComponent actorComponent, string message)
+            => _consoleHost.RemoteExecuteCommand(actorComponent.PlayerSession, $"notice {message}");
+
         private void HandleExamine(EntityUid uid, ExaminableClothesComponent comp, ExaminedEvent args)
         {
+            var infoLines = new List<string>();
+
+            infoLines.Add("⠀"); // :D DA POEBAT MNE
+
+            if (TryComp<ActorComponent>(args.Examiner, out var actorComponent) &&
+                TryComp<MetaDataComponent>(uid, out var metaDataComponent))
+            {
+                infoLines.Add($"Это же [bold]{metaDataComponent.EntityName}[/bold]!");
+            }
+
             var slotLabels = new Dictionary<string, string>
             {
                 { "head", "head-" },
@@ -62,15 +80,29 @@ namespace Content.Server.White.Other.ExamineSystem
                     continue;
 
                 if (_entityManager.TryGetComponent<MetaDataComponent>(slotEntity, out var metaData))
-                    args.PushMarkup($"[color=silver]{Loc.GetString(slotLabel)} [/color][font size=11][bold][color=lightgray]{metaData.EntityName}[/color][/bold][/font].");
+                {
+                    var item = $"[color=silver]{Loc.GetString(slotLabel)} [/color][font size=11][bold][color=lightgray]{metaData.EntityName}[/color][/bold][/font].";
+                    args.PushMarkup(item);
+                    infoLines.Add(item);
+                }
             }
 
-            var id = GetInfo(uid);
-            if (id != null)
-                args.PushMarkup(id);
+            var idInfoString = GetInfo(uid);
+            if (!string.IsNullOrEmpty(idInfoString))
+            {
+                infoLines.Add(idInfoString);
+                args.PushMarkup(idInfoString);
+            }
+
+            var combinedInfo = string.Join("\n", infoLines);
+
+            if (actorComponent != null)
+            {
+                SendNoticeMessage(actorComponent, combinedInfo);
+            }
         }
 
-        private string? GetInfo(EntityUid uid)
+        private string GetInfo(EntityUid uid)
         {
             if (_inventorySystem.TryGetSlotEntity(uid, "id", out var idUid))
             {
@@ -86,12 +118,12 @@ namespace Content.Server.White.Other.ExamineSystem
                     return GetNameAndJob(id);
                 }
             }
-            return null;
+            return "";
         }
 
         private string GetNameAndJob(IdCardComponent id)
         {
-            var jobSuffix = string.IsNullOrWhiteSpace(id.JobTitle) ? string.Empty : $" ({id.JobTitle})";
+            var jobSuffix = string.IsNullOrWhiteSpace(id.JobTitle) ? "" : $" ({id.JobTitle})";
 
             var val = string.IsNullOrWhiteSpace(id.FullName)
                 ? Loc.GetString("access-id-card-component-owner-name-job-title-text",

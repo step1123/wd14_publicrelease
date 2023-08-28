@@ -1,6 +1,9 @@
 using System.Linq;
+using Content.Client.Chat.Managers;
+using Content.Shared.Chat;
 using Content.Shared.GameTicking;
 using Content.Shared.Popups;
+using Content.Shared.White;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
@@ -28,6 +31,7 @@ namespace Content.Client.Popups
         [Dependency] private readonly IGameTiming _timing = default!;
         [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
         [Dependency] private readonly IReplayRecordingManager _replayRecording = default!;
+        [Dependency] private readonly IChatManager _chatManager = default!;
 
         public IReadOnlyList<WorldPopupLabel> WorldLabels => _aliveWorldLabels;
         public IReadOnlyList<CursorPopupLabel> CursorLabels => _aliveCursorLabels;
@@ -35,7 +39,11 @@ namespace Content.Client.Popups
         private readonly List<WorldPopupLabel> _aliveWorldLabels = new();
         private readonly List<CursorPopupLabel> _aliveCursorLabels = new();
 
-        public const float PopupLifetime = 3f;
+        public const float MinimumPopupLifetime = 0.7f;
+        public const float MaximumPopupLifetime = 5f;
+        public const float PopupLifetimePerCharacter = 0.04f;
+
+        private bool isLogging;
 
         public override void Initialize()
         {
@@ -45,6 +53,9 @@ namespace Content.Client.Popups
             SubscribeNetworkEvent<RoundRestartCleanupEvent>(OnRoundRestart);
             _overlay
                 .AddOverlay(new PopupOverlay(_configManager, EntityManager, _playerManager, _prototype, _resource, _uiManager, this));
+
+            isLogging = _configManager.GetCVar(WhiteCVars.LogInChat);
+            _configManager.OnValueChanged(WhiteCVars.LogInChat, (log) => { isLogging = log; });
         }
 
         public override void Shutdown()
@@ -71,6 +82,11 @@ namespace Content.Client.Popups
             };
 
             _aliveWorldLabels.Add(label);
+
+            if (isLogging)
+            {
+                _chatManager.SendMessage($"notice {message}", ChatSelectChannel.Console);
+            }
         }
 
         #region Abstract Method Implementations
@@ -183,6 +199,13 @@ namespace Content.Client.Popups
             _aliveWorldLabels.Clear();
         }
 
+        public static float GetPopupLifetime(PopupLabel label)
+        {
+            return Math.Clamp(PopupLifetimePerCharacter * label.Text.Length,
+                MinimumPopupLifetime,
+                MaximumPopupLifetime);
+        }
+
         #endregion
 
         public override void FrameUpdate(float frameTime)
@@ -195,7 +218,7 @@ namespace Content.Client.Popups
                 var label = _aliveWorldLabels[i];
                 label.TotalTime += frameTime;
 
-                if (label.TotalTime > PopupLifetime || Deleted(label.InitialPos.EntityId))
+                if (label.TotalTime > GetPopupLifetime(label) || Deleted(label.InitialPos.EntityId))
                 {
                     _aliveWorldLabels.RemoveSwap(i);
                     i--;
@@ -207,7 +230,7 @@ namespace Content.Client.Popups
                 var label = _aliveCursorLabels[i];
                 label.TotalTime += frameTime;
 
-                if (label.TotalTime > PopupLifetime)
+                if (label.TotalTime > GetPopupLifetime(label))
                 {
                     _aliveCursorLabels.RemoveSwap(i);
                     i--;
