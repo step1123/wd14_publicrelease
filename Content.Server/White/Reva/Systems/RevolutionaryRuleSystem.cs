@@ -11,6 +11,7 @@ using Content.Server.NPC.Systems;
 using Content.Server.Players;
 using Content.Server.Roles;
 using Content.Server.RoundEnd;
+using Content.Server.Station.Components;
 using Content.Server.Storage.EntitySystems;
 using Content.Server.Traits.Assorted;
 using Content.Server.White.Mindshield;
@@ -166,7 +167,7 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
     private void OnFlashAttempt(FlashAttemptEvent msg)
     {
         var query = EntityQueryEnumerator<RevolutionaryRuleComponent, GameRuleComponent>();
-        while (query.MoveNext(out var ruleEntity, out _, out var gameRule))
+        while (query.MoveNext(out var ruleEntity, out var revaRule, out var gameRule))
         {
             if (!GameTicker.IsGameRuleAdded(ruleEntity, gameRule))
                 continue;
@@ -196,6 +197,9 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
             var targetComp = EnsureComp<RevolutionaryComponent>(msg.Target);
             targetComp.HeadRevolutionary = false;
             Dirty(targetComp);
+
+            if (TryComp<MindContainerComponent>(msg.Target, out var mindComp))
+                revaRule.ScoreRevPlayers.TryAdd($"{mindComp.Mind?.CharacterName} ({mindComp.Mind?.Session?.Name})", false);
 
             _chatManager.DispatchServerMessage(actor.PlayerSession, Loc.GetString("rev-welcome-rev"));
         }
@@ -301,7 +305,6 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
             if (session != null)
             {
                 revaRule.RevPlayers.Add(session);
-                revaRule.ScoreRevPlayers.TryAdd($"{mindComponent.Mind?.CharacterName} ({session.Name})", component.HeadRevolutionary);
             }
 
             var mindSystem = EntityManager.EntitySysManager.GetEntitySystem<MindSystem>();
@@ -413,7 +416,9 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
 
                 if (TryComp<MobStateComponent>(headPlayer.AttachedEntity, out var stateComp) && stateComp.CurrentState != MobState.Dead
                     && TryComp<MindContainerComponent>(headPlayer.AttachedEntity, out var mindComp) && mindComp.HasMind
-                    && mindComp.Mind.CurrentJob?.Prototype != null && headJobPrototypes.Contains(mindComp.Mind?.CurrentJob?.Prototype!))
+                    && mindComp.Mind.CurrentJob?.Prototype != null && headJobPrototypes.Contains(mindComp.Mind?.CurrentJob?.Prototype!)
+                    && Transform(headPlayer.AttachedEntity!.Value).GridUid != null
+                    && HasComp<BecomesStationComponent>(Transform(headPlayer.AttachedEntity!.Value).GridUid))
                 {
                     headCrewAlive = true;
                     break;
@@ -560,6 +565,7 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
 
         EntityManager.EnsureComponent<RevolutionaryComponent>(entity);
         revaRule.RevHeadPlayers.Add(headRev);
+        revaRule.ScoreRevPlayers.TryAdd($"{mind.CharacterName} ({headRev.Name})", true);
 
         _audioSystem.PlayGlobal(revaRule.GreetSound, Filter.Empty().AddPlayer(headRev), false);
         _chatManager.DispatchServerMessage(headRev, Loc.GetString("rev-welcome-headrev"));
