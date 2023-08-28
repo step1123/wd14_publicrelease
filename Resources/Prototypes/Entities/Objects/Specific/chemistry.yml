@@ -326,6 +326,7 @@
     damage:
       groups:
         Brute: 3
+    canHeavyAttack: false
 
 - type: entity
   parent: BaseSyringe

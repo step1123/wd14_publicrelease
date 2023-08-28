@@ -31,7 +31,7 @@ namespace Content.Shared.Projectiles
         {
             base.Initialize();
             SubscribeLocalEvent<ProjectileComponent, PreventCollideEvent>(PreventCollision);
-            SubscribeLocalEvent<EmbeddableProjectileComponent, ProjectileCollideEvent>(OnEmbedProjectileCollide);
+            SubscribeLocalEvent<EmbeddableProjectileComponent, ProjectileHitEvent>(OnEmbedProjectileHit);
             SubscribeLocalEvent<EmbeddableProjectileComponent, ThrowDoHitEvent>(OnEmbedThrowDoHit);
             SubscribeLocalEvent<EmbeddableProjectileComponent, ActivateInWorldEvent>(OnEmbedActivate);
             SubscribeLocalEvent<EmbeddableProjectileComponent, RemoveEmbeddedProjectileEvent>(OnEmbedRemove);
@@ -99,11 +99,20 @@ namespace Content.Shared.Projectiles
             if (component.RemovalTime == null)
                 return false;
 
-            return _doAfter.TryStartDoAfter(new DoAfterArgs(user, component.RemovalTime.Value,
+            if (!TryComp(uid, out TransformComponent? xform) || !TryComp(user, out TransformComponent? userXform) ||
+                !xform.Coordinates.InRange(EntityManager, _transform, userXform.Coordinates,
+                    SharedInteractionSystem.InteractionRange + 1f) || !TryComp(user, out DoAfterComponent? doAfter))
+            {
+                return false;
+            }
+
+            _doAfter.TryStartDoAfter(new DoAfterArgs(user, component.RemovalTime.Value,
                 new RemoveEmbeddedProjectileEvent(), eventTarget: uid, target: uid)
             {
                 DistanceThreshold = SharedInteractionSystem.InteractionRange,
-            });
+            }, doAfter);
+
+            return true;
         }
         // WD EDIT END
 
@@ -170,14 +179,14 @@ namespace Content.Shared.Projectiles
             Embed(uid, args.Target, component);
         }
 
-        private void OnEmbedProjectileCollide(EntityUid uid, EmbeddableProjectileComponent component, ref ProjectileCollideEvent args)
+        private void OnEmbedProjectileHit(EntityUid uid, EmbeddableProjectileComponent component, ref ProjectileHitEvent args)
         {
-            Embed(uid, args.OtherEntity, component);
+            Embed(uid, args.Target, component);
 
             // Raise a specific event for projectiles.
             if (TryComp<ProjectileComponent>(uid, out var projectile))
             {
-                var ev = new ProjectileEmbedEvent(projectile.Shooter, projectile.Weapon, args.OtherEntity);
+                var ev = new ProjectileEmbedEvent(projectile.Shooter, projectile.Weapon, args.Target);
                 RaiseLocalEvent(uid, ref ev);
             }
         }
