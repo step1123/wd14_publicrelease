@@ -4,7 +4,9 @@ using Robust.Shared.Enums;
 using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
 using Content.Shared.PDA;
+using Content.Shared.White;
 using Robust.Server.GameObjects;
+using Robust.Shared.Configuration;
 using Robust.Shared.Console;
 
 namespace Content.Server.White.Other.ExamineSystem
@@ -16,6 +18,8 @@ namespace Content.Server.White.Other.ExamineSystem
         [Dependency] private readonly InventorySystem _inventorySystem = default!;
         [Dependency] private readonly EntityManager _entityManager = default!;
         [Dependency] private readonly IConsoleHost _consoleHost = default!;
+        [Dependency] private readonly INetConfigurationManager _netConfigManager = default!;
+
 
         public override void Initialize()
         {
@@ -23,7 +27,14 @@ namespace Content.Server.White.Other.ExamineSystem
         }
 
         private void SendNoticeMessage(ActorComponent actorComponent, string message)
-            => _consoleHost.RemoteExecuteCommand(actorComponent.PlayerSession, $"notice {message}");
+        {
+            var should = _netConfigManager.GetClientCVar(actorComponent.PlayerSession.ConnectedClient, WhiteCVars.LogChatActions);
+
+            if (should)
+            {
+                _consoleHost.RemoteExecuteCommand(actorComponent.PlayerSession, $"notice {message}");
+            }
+        }
 
         private void HandleExamine(EntityUid uid, ExaminableClothesComponent comp, ExaminedEvent args)
         {

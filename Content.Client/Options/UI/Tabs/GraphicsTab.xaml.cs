@@ -118,7 +118,7 @@ namespace Content.Client.Options.UI.Tabs
             ViewportLowResCheckBox.Pressed = !_cfg.GetCVar(CCVars.ViewportScaleRender);
             ParallaxLowQualityCheckBox.Pressed = _cfg.GetCVar(CCVars.ParallaxLowQuality);
             FpsCounterCheckBox.Pressed = _cfg.GetCVar(CCVars.HudFpsCounterVisible);
-            LogInChatCheckBox.Pressed = _cfg.GetCVar(WhiteCVars.LogInChat);
+            LogInChatCheckBox.Pressed = _cfg.GetCVar(WhiteCVars.LogChatActions);
             ShowHeldItemCheckBox.Pressed = _cfg.GetCVar(CCVars.HudHeldItemShow);
             ShowCombatModeIndicatorsCheckBox.Pressed = _cfg.GetCVar(CCVars.CombatModeIndicatorsPointShow);
             ViewportWidthSlider.Value = _cfg.GetCVar(CCVars.ViewportWidth);
@@ -165,7 +165,7 @@ namespace Content.Client.Options.UI.Tabs
             _cfg.SetCVar(CCVars.HudHeldItemShow, ShowHeldItemCheckBox.Pressed);
             _cfg.SetCVar(CCVars.CombatModeIndicatorsPointShow, ShowCombatModeIndicatorsCheckBox.Pressed);
             _cfg.SetCVar(CCVars.HudFpsCounterVisible, FpsCounterCheckBox.Pressed);
-            _cfg.SetCVar(WhiteCVars.LogInChat, LogInChatCheckBox.Pressed);
+            _cfg.SetCVar(WhiteCVars.LogChatActions, LogInChatCheckBox.Pressed);
             _cfg.SetCVar(CCVars.ViewportWidth, (int) ViewportWidthSlider.Value);
 
             if (HudLayoutOption.SelectedMetadata is string opt)
@@ -203,7 +203,7 @@ namespace Content.Client.Options.UI.Tabs
             var isShowHeldItemSame = ShowHeldItemCheckBox.Pressed == _cfg.GetCVar(CCVars.HudHeldItemShow);
             var isCombatModeIndicatorsSame = ShowCombatModeIndicatorsCheckBox.Pressed == _cfg.GetCVar(CCVars.CombatModeIndicatorsPointShow);
             var isFpsCounterVisibleSame = FpsCounterCheckBox.Pressed == _cfg.GetCVar(CCVars.HudFpsCounterVisible);
-            var isLogInChatSame = LogInChatCheckBox.Pressed == _cfg.GetCVar(WhiteCVars.LogInChat);
+            var isLogInChatSame = LogInChatCheckBox.Pressed == _cfg.GetCVar(WhiteCVars.LogChatActions);
             var isWidthSame = (int) ViewportWidthSlider.Value == _cfg.GetCVar(CCVars.ViewportWidth);
             var isLayoutSame = HudLayoutOption.SelectedMetadata is string opt && opt == _cfg.GetCVar(CCVars.UILayout);
 

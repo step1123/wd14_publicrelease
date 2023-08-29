@@ -54,8 +54,8 @@ namespace Content.Client.Popups
             _overlay
                 .AddOverlay(new PopupOverlay(_configManager, EntityManager, _playerManager, _prototype, _resource, _uiManager, this));
 
-            isLogging = _configManager.GetCVar(WhiteCVars.LogInChat);
-            _configManager.OnValueChanged(WhiteCVars.LogInChat, (log) => { isLogging = log; });
+            isLogging = _configManager.GetCVar(WhiteCVars.LogChatActions);
+            _configManager.OnValueChanged(WhiteCVars.LogChatActions, (log) => { isLogging = log; });
         }
 
         public override void Shutdown()
