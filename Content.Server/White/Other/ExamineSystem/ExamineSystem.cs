@@ -29,8 +29,6 @@ namespace Content.Server.White.Other.ExamineSystem
         {
             var infoLines = new List<string>();
 
-            infoLines.Add("⠀"); // :D DA POEBAT MNE
-
             if (TryComp<ActorComponent>(args.Examiner, out var actorComponent) &&
                 TryComp<MetaDataComponent>(uid, out var metaDataComponent))
             {
