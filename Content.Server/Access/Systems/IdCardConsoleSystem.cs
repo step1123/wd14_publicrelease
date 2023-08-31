@@ -44,7 +44,7 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
         if (args.Session.AttachedEntity is not { Valid: true } player)
             return;
 
-        TryWriteToTargetId(uid, args.FullName, args.JobTitle, args.AccessList, args.JobPrototype, player, component);
+        TryWriteToTargetId(uid, args.FullName, args.JobTitle, args.AccessList, args.JobPrototype, args.SelectedIcon, player, component); //WD-EDIT (SelectedIcon)
 
         UpdateUserInterface(uid, component, args);
     }
@@ -76,7 +76,8 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
                 possibleAccess,
                 string.Empty,
                 privilegedIdName,
-                string.Empty);
+                string.Empty,
+                "NoId"); //WD-EDIT
         }
         else
         {
@@ -84,12 +85,14 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
             var targetAccessComponent = EntityManager.GetComponent<AccessComponent>(targetId);
 
             var jobProto = string.Empty;
+            var jobIcon = string.Empty; //WD-EDIT
             if (_station.GetOwningStation(uid) is { } station
                 && EntityManager.TryGetComponent<StationRecordKeyStorageComponent>(targetId, out var keyStorage)
                 && keyStorage.Key != null
                 && _record.TryGetRecord<GeneralStationRecord>(station, keyStorage.Key.Value, out var record))
             {
                 jobProto = record.JobPrototype;
+                jobIcon = record.JobIcon; //WD-EDIT
             }
 
             newState = new IdCardConsoleBoundUserInterfaceState(
@@ -102,7 +105,8 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
                 possibleAccess,
                 jobProto,
                 privilegedIdName,
-                EntityManager.GetComponent<MetaDataComponent>(targetId).EntityName);
+                EntityManager.GetComponent<MetaDataComponent>(targetId).EntityName,
+                jobIcon); //WD-EDIT
         }
 
         _userInterface.TrySetUiState(uid, IdCardConsoleUiKey.Key, newState);
@@ -111,12 +115,14 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
     /// <summary>
     /// Called whenever an access button is pressed, adding or removing that access from the target ID card.
     /// Writes data passed from the UI into the ID stored in <see cref="IdCardConsoleComponent.TargetIdSlot"/>, if present.
+    /// WD-INFO: Also called when icon is changed, to update it on ID.
     /// </summary>
     private void TryWriteToTargetId(EntityUid uid,
         string newFullName,
         string newJobTitle,
         List<string> newAccessList,
         string newJobProto,
+        string? newJobIcon, //WD-EDIT
         EntityUid player,
         IdCardConsoleComponent? component = null)
     {
@@ -125,6 +131,14 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
 
         if (component.TargetIdSlot.Item is not { Valid: true } targetId || !PrivilegedIdIsAuthorized(uid, component))
             return;
+
+        //WD-EDIT
+        if (TryComp<IdCardComponent>(targetId, out var idCardComponent))
+        {
+            idCardComponent.CustomIcon = newJobIcon;
+            Dirty(idCardComponent);
+        }
+        //WD-EDIT
 
         _idCard.TryChangeFullName(targetId, newFullName, player: player);
         _idCard.TryChangeJobTitle(targetId, newJobTitle, player: player);
@@ -141,7 +155,10 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
         var privilegedId = component.PrivilegedIdSlot.Item;
 
         if (oldTags.SequenceEqual(newAccessList))
+        {
+            UpdateStationRecord(uid, targetId, newFullName, newJobTitle, newJobProto, newJobIcon); //WD-EDIT
             return;
+        }
 
         // I hate that C# doesn't have an option for this and don't desire to write this out the hard way.
         // var difference = newAccessList.Difference(oldTags);
@@ -163,7 +180,7 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
         _adminLogger.Add(LogType.Action, LogImpact.Medium,
             $"{ToPrettyString(player):player} has modified {ToPrettyString(targetId):entity} with the following accesses: [{string.Join(", ", addedTags.Union(removedTags))}] [{string.Join(", ", newAccessList)}]");
 
-        UpdateStationRecord(uid, targetId, newFullName, newJobTitle, newJobProto);
+        UpdateStationRecord(uid, targetId, newFullName, newJobTitle, newJobProto, newJobIcon);
     }
 
     /// <summary>
@@ -184,7 +201,7 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
         return privilegedId != null && _accessReader.IsAllowed(privilegedId.Value, reader);
     }
 
-    private void UpdateStationRecord(EntityUid uid, EntityUid targetId, string newFullName, string newJobTitle, string newJobProto)
+    private void UpdateStationRecord(EntityUid uid, EntityUid targetId, string newFullName, string newJobTitle, string newJobProto, string? newJobIcon) //WD-EDIT (newJobIcon)
     {
         if (_station.GetOwningStation(uid) is not { } station
             || !EntityManager.TryGetComponent<StationRecordKeyStorageComponent>(targetId, out var keyStorage)
@@ -197,11 +214,22 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
         record.Name = newFullName;
         record.JobTitle = newJobTitle;
 
-        if (_prototype.TryIndex<JobPrototype>(newJobProto, out var job))
+        if (!_prototype.TryIndex<JobPrototype>(newJobProto, out var job))
         {
-            record.JobPrototype = newJobProto;
-            record.JobIcon = job.Icon;
+            //WD-EDIT
+            if (!string.IsNullOrWhiteSpace(newJobIcon))
+                record.JobIcon = newJobIcon;
+            _record.Synchronize(station);
+            //WD-EDIT
+            return;
         }
+
+        record.JobPrototype = newJobProto;
+        //WD-EDIT
+        record.JobIcon = string.IsNullOrWhiteSpace(newJobIcon)
+            ? job.Icon
+            : newJobIcon;
+        //WD-EDIT
 
         _record.Synchronize(station);
     }

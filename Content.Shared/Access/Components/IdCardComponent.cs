@@ -14,6 +14,15 @@ namespace Content.Shared.Access.Components
         // FIXME Friends
         public string? FullName;
 
+        //WD-EDIT
+        /// <summary>
+        /// Sets custom icon for HUDs.
+        /// </summary>
+        [DataField("customIcon")]
+        [AutoNetworkedField]
+        public string? CustomIcon;
+        //WD-EDIT
+
         [DataField("jobTitle")]
         [AutoNetworkedField]
         [Access(typeof(SharedIdCardSystem), typeof(SharedPdaSystem), typeof(SharedAgentIdCardSystem), Other = AccessPermissions.ReadWrite)]

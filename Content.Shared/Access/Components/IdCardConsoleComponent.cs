@@ -29,18 +29,19 @@ public sealed class IdCardConsoleComponent : Component
         public readonly string JobTitle;
         public readonly List<string> AccessList;
         public readonly string JobPrototype;
+        public readonly string? SelectedIcon; //WD-EDIT
 
-        public WriteToTargetIdMessage(string fullName, string jobTitle, List<string> accessList, string jobPrototype)
+        public WriteToTargetIdMessage(string fullName, string jobTitle, List<string> accessList, string jobPrototype, string? selectedIcon) //WD-EDIT (selectedIcon)
         {
             FullName = fullName;
             JobTitle = jobTitle;
             AccessList = accessList;
             JobPrototype = jobPrototype;
+            SelectedIcon = selectedIcon; //WD-EDIT
         }
     }
 
     // Put this on shared so we just send the state once in PVS range rather than every time the UI updates.
-
     [DataField("accessLevels", customTypeSerializer: typeof(PrototypeIdListSerializer<AccessLevelPrototype>))]
     public List<string> AccessLevels = new()
     {
@@ -71,8 +72,60 @@ public sealed class IdCardConsoleComponent : Component
         "Salvage",
         "Security",
         "Service",
-        "Theatre",
+        "Theatre"
     };
+
+    //WD-EDIT
+    [DataField("jobIcons")]
+    public List<string> JobIcons = new()
+    {
+        "AtmosphericTechnician",
+        "Bartender",
+        "Botanist",
+        "Boxer",
+        "Brigmedic",
+        "Captain",
+        "CargoTechnician",
+        "Chaplain",
+        "Chef",
+        "Chemist",
+        "ChiefEngineer",
+        "ChiefMedicalOfficer",
+        "Clown",
+        "Detective",
+        "Geneticist",
+        "HeadOfPersonnel",
+        "HeadOfSecurity",
+        "Janitor",
+        "Lawyer",
+        "Librarian",
+        "MedicalDoctor",
+        "MedicalIntern",
+        "Mime",
+        "Musician",
+        "Paramedic",
+        "Passenger",
+        "Psychologist",
+        "QuarterMaster",
+        "Reporter",
+        "ResearchAssistant",
+        "ResearchDirector",
+        "Roboticist",
+        "Scientist",
+        "SecurityCadet",
+        "SecurityOfficer",
+        "SeniorEngineer",
+        "SeniorOfficer",
+        "SeniorResearcher",
+        "ServiceWorker",
+        "ShaftMiner",
+        "StationEngineer",
+        "TechnicalAssistant",
+        "Virologist",
+        "Warden",
+        "Zookeeper"
+    };
+    //WD-EDIT
 
     [Serializable, NetSerializable]
     public sealed class IdCardConsoleBoundUserInterfaceState : BoundUserInterfaceState
@@ -87,6 +140,7 @@ public sealed class IdCardConsoleComponent : Component
         public readonly string[]? TargetIdAccessList;
         public readonly string[]? AllowedModifyAccessList;
         public readonly string TargetIdJobPrototype;
+        public readonly string? TargetIdJobIcon; //WD-EDIT
 
         public IdCardConsoleBoundUserInterfaceState(bool isPrivilegedIdPresent,
             bool isPrivilegedIdAuthorized,
@@ -97,7 +151,8 @@ public sealed class IdCardConsoleComponent : Component
             string[]? allowedModifyAccessList,
             string targetIdJobPrototype,
             string privilegedIdName,
-            string targetIdName)
+            string targetIdName,
+            string? targetIdJobIcon) //WD-EDIT
         {
             IsPrivilegedIdPresent = isPrivilegedIdPresent;
             IsPrivilegedIdAuthorized = isPrivilegedIdAuthorized;
@@ -109,12 +164,13 @@ public sealed class IdCardConsoleComponent : Component
             TargetIdJobPrototype = targetIdJobPrototype;
             PrivilegedIdName = privilegedIdName;
             TargetIdName = targetIdName;
+            TargetIdJobIcon = targetIdJobIcon; //WD-EDIT
         }
     }
 
     [Serializable, NetSerializable]
     public enum IdCardConsoleUiKey : byte
     {
-        Key,
+        Key
     }
 }

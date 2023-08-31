@@ -56,10 +56,7 @@ public sealed class EntityJobInfoOverlay : Overlay
 
             handle.SetTransform(matty);
 
-            var icon = "NoId";
-            var icon_job = GetIcon(hum.Owner);
-            if (icon_job != null)
-                icon = icon_job;
+            var icon = GetIcon(hum.Owner) ?? "NoId"; //ATARAXIA-EDIT
 
             var sprite_icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/Interface/Misc/job_icons.rsi"), icon);
             var _iconTexture = _entManager.EntitySysManager.GetEntitySystem<SpriteSystem>().Frame0(sprite_icon);
@@ -95,37 +92,30 @@ public sealed class EntityJobInfoOverlay : Overlay
 
     private string? GetIcon(EntityUid uid)
     {
-        if (_inventorySystem.TryGetSlotEntity(uid, "id", out var idUid))
+        // ATARAXIA-EDIT
+        if (!_inventorySystem.TryGetSlotEntity(uid, "id", out var idUid))
+            return null;
+
+        // PDA
+        if (_entManager.TryGetComponent<PdaComponent>(idUid, out var pda) && _entManager.TryGetComponent<IdCardComponent>(pda.ContainedId, out var id))
         {
-            // PDA
-            if (_entManager.TryGetComponent(idUid, out PdaComponent? pda) && _entManager.TryGetComponent<IdCardComponent>(pda.ContainedId, out var id))
-            {
-                if (TryMatchJobTitleToIcon(id.JobTitle, out var icon))
-                    return icon;
-            }
-            // ID Card
-            if (_entManager.TryGetComponent(idUid, out id))
-            {
-                if (TryMatchJobTitleToIcon(id.JobTitle, out var icon))
-                    return icon;
-            }
+            // Custom icon (ID card console)
+            if (!string.IsNullOrWhiteSpace(id.CustomIcon))
+                return id.CustomIcon;
+
+            if (TryMatchJobTitleToIcon(id.JobTitle, out var icon))
+                return icon;
         }
+        // ID Card
+        if (!_entManager.TryGetComponent(idUid, out id))
+            return null;
 
-        return null;
-    }
+        // Custom icon (ID card console)
+        if (string.IsNullOrWhiteSpace(id.CustomIcon))
+            return null;
 
-    private string GetNameAndJob(IdCardComponent id)
-    {
-        var jobSuffix = string.IsNullOrWhiteSpace(id.JobTitle) ? string.Empty : $" ({id.JobTitle})";
-
-        var val = string.IsNullOrWhiteSpace(id.FullName)
-            ? Loc.GetString("access-id-card-component-owner-name-job-title-text",
-                ("jobSuffix", jobSuffix))
-            : Loc.GetString("access-id-card-component-owner-full-name-job-title-text",
-                ("fullName", id.FullName),
-                ("jobSuffix", jobSuffix));
-
-        return val;
+        return TryMatchJobTitleToIcon(id.JobTitle, out var jobIcon) ? jobIcon : null;
+        // ATARAXIA-EDIT
     }
 
     private bool TryMatchJobTitleToIcon(string? jobTitle, [NotNullWhen(true)] out string? jobIcon)

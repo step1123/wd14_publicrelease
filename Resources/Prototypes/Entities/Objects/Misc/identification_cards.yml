@@ -434,6 +434,7 @@
     heldPrefix: blue
   - type: IdCard
     jobTitle: Central Commander
+    customIcon: "Nanotrasen" #WD-EDIT
   - type: Access
     groups:
     - AllAccess
@@ -464,6 +465,7 @@
     heldPrefix: blue
   - type: IdCard
     jobTitle: Central Commander
+    customIcon: "Nanotrasen" #WD-EDIT
   - type: Access
     tags:
     - Maintenance

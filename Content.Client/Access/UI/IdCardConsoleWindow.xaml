@@ -35,5 +35,15 @@
             <!-- Access level buttons are added here by the C# code -->
 
         </GridContainer>
+        <!-- WD-EDIT -->
+        <GridContainer Name="CurrentJobIcon" Columns="2">
+            <Label Text="Текущая выбранная иконка для роли: " />
+        </GridContainer>
+        <GridContainer Name="JobIconsGrid" Columns="14" HorizontalAlignment="Center">
+
+            <!-- Job icon buttons are added here by the C# code -->
+
+        </GridContainer>
+        <!-- WD-EDIT -->
     </BoxContainer>
 </DefaultWindow>

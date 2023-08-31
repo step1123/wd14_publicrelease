@@ -64,7 +64,7 @@ namespace Content.Client.Access.UI
             _window?.UpdateState(castState);
         }
 
-        public void SubmitData(string newFullName, string newJobTitle, List<string> newAccessList, string newJobPrototype)
+        public void SubmitData(string newFullName, string newJobTitle, List<string> newAccessList, string newJobPrototype, string? newJobIcon) //WD-EDIT (newJobIcon)
         {
             if (newFullName.Length > MaxFullNameLength)
                 newFullName = newFullName[..MaxFullNameLength];
@@ -76,7 +76,8 @@ namespace Content.Client.Access.UI
                 newFullName,
                 newJobTitle,
                 newAccessList,
-                newJobPrototype));
+                newJobPrototype,
+                newJobIcon)); //WD-EDIT
         }
     }
 }
