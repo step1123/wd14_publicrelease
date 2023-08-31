@@ -104,7 +104,7 @@ public sealed class SiliconChargerSystem : SharedSiliconChargerSystem
         if (damageDealt != null && damageDealt.Total > 0 && chargerComp.WarningTime < _timing.CurTime)
         {
             var popupBurn = Loc.GetString(chargerComp.OverheatString);
-            _popup.PopupEntity(popupBurn, entity, PopupType.MediumCaution);
+            _popup.PopupEntity(popupBurn, entity, entity, PopupType.MediumCaution);
 
             chargerComp.WarningTime = TimeSpan.FromSeconds(_random.Next(3, 7)) + _timing.CurTime;
         }
