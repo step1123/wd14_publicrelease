@@ -32,7 +32,7 @@ namespace Content.Server.White.Other.ExamineSystem
 
             if (should)
             {
-                _consoleHost.RemoteExecuteCommand(actorComponent.PlayerSession, $"notice {message}");
+                _consoleHost.RemoteExecuteCommand(actorComponent.PlayerSession, $"notice [font size=10][color=#aeabc4]{message}[/color][/font]");
             }
         }
 
@@ -44,6 +44,13 @@ namespace Content.Server.White.Other.ExamineSystem
                 TryComp<MetaDataComponent>(uid, out var metaDataComponent))
             {
                 infoLines.Add($"Это же [bold]{metaDataComponent.EntityName}[/bold]!");
+            }
+
+            var idInfoString = GetInfo(uid);
+            if (!string.IsNullOrEmpty(idInfoString))
+            {
+                infoLines.Add(idInfoString);
+                args.PushMarkup(idInfoString);
             }
 
             var slotLabels = new Dictionary<string, string>
@@ -90,17 +97,10 @@ namespace Content.Server.White.Other.ExamineSystem
 
                 if (_entityManager.TryGetComponent<MetaDataComponent>(slotEntity, out var metaData))
                 {
-                    var item = $"[color=silver]{Loc.GetString(slotLabel)} [/color][font size=11][bold][color=lightgray]{metaData.EntityName}[/color][/bold][/font].";
+                    var item = $"{Loc.GetString(slotLabel)} [bold]{metaData.EntityName}[/bold].";
                     args.PushMarkup(item);
                     infoLines.Add(item);
                 }
-            }
-
-            var idInfoString = GetInfo(uid);
-            if (!string.IsNullOrEmpty(idInfoString))
-            {
-                infoLines.Add(idInfoString);
-                args.PushMarkup(idInfoString);
             }
 
             var combinedInfo = string.Join("\n", infoLines);

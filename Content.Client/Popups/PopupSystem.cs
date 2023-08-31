@@ -85,7 +85,7 @@ namespace Content.Client.Popups
 
             if (isLogging)
             {
-                _chatManager.SendMessage($"notice {message}", ChatSelectChannel.Console);
+                _chatManager.SendMessage($"notice [font size=10][color=#aeabc4]{message}[/color][/font]", ChatSelectChannel.Console);
             }
         }
 

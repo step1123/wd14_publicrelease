@@ -413,11 +413,18 @@ public sealed class DrinkSystem : EntitySystem
         }
         else
         {
-            _popup.PopupEntity(
-                Loc.GetString("drink-component-try-use-drink-success-slurp-taste", ("flavors", flavors)), args.User,
-                args.User);
-            _popup.PopupEntity(
-                Loc.GetString("drink-component-try-use-drink-success-slurp"), args.User, Filter.PvsExcept(args.User), true);
+
+            if (TryComp<MetaDataComponent>(args.User, out var metaDataComponentUser) && TryComp<MetaDataComponent>(args.Used, out var metaDataComponentUsed))
+            {
+                var userName = metaDataComponentUser.EntityName;
+                var used = metaDataComponentUsed.EntityName;
+
+                _popup.PopupEntity(
+                    Loc.GetString("drink-component-try-use-drink-success-slurp-taste", ("flavors", flavors)), args.User,
+                    args.User);
+
+                _popup.PopupEntity($"{userName} делает глоток используя {used}", args.User, Filter.PvsExcept(args.User), true);
+            }
 
             // log successful voluntary drinking
             _adminLogger.Add(LogType.Ingestion, LogImpact.Low, $"{ToPrettyString(args.User):target} drank {ToPrettyString(uid):drink}");
