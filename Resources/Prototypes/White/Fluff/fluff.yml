@@ -416,3 +416,18 @@
       bank: 1
       program: 2
 
+
+#thechaotic
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatThechaotic
+  name: Тренч Маллена
+  description: Провонял сигаретами и разрушенными мечтами.
+  components:
+    - type: Sprite
+      sprite:  White/Fluff/thechaotic/coat.rsi
+    - type: Clothing
+      sprite:  White/Fluff/thechaotic/coat.rsi
+    - type: StorageFill
+      contents:
+        - id: SmokingPipeFilledTobacco

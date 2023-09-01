@@ -143,3 +143,9 @@
   id: koitorraMaskLoadout
   entity: ClothingMaskGasKoitorra
   sponsorOnly: true
+
+#thechaotic
+- type: loadout
+  id: thechaoticCoatLoadout
+  entity: ClothingOuterCoatThechaotic
+  sponsorOnly: true
