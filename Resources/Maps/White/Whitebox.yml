@@ -10570,7 +10570,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 21828
       type: Docking
-    - SecondsUntilStateChange: -36496.957
+    - SecondsUntilStateChange: -36529.465
       changeAirtight: False
       state: Opening
       type: Door
@@ -10618,7 +10618,7 @@ entities:
     - dockJointId: docking46345
       dockedWith: 562
       type: Docking
-    - SecondsUntilStateChange: -36496.957
+    - SecondsUntilStateChange: -36529.465
       changeAirtight: False
       state: Opening
       type: Door
@@ -151428,44 +151428,6 @@ entities:
   - uid: 26451
     components:
     - pos: -21.5,50.5
-      parent: 8364
-      type: Transform
-- proto: SpawnMobPlayerCyborgStart
-  entities:
-  - uid: 26605
-    components:
-    - rot: 3.141592653589793 rad
-      pos: 54.5,-19.5
-      parent: 8364
-      type: Transform
-  - uid: 26606
-    components:
-    - rot: 3.141592653589793 rad
-      pos: 54.5,-18.5
-      parent: 8364
-      type: Transform
-  - uid: 26608
-    components:
-    - rot: 3.141592653589793 rad
-      pos: 54.5,-17.5
-      parent: 8364
-      type: Transform
-  - uid: 26609
-    components:
-    - rot: 3.141592653589793 rad
-      pos: 52.5,-17.5
-      parent: 8364
-      type: Transform
-  - uid: 26610
-    components:
-    - rot: 3.141592653589793 rad
-      pos: 52.5,-18.5
-      parent: 8364
-      type: Transform
-  - uid: 26612
-    components:
-    - rot: 3.141592653589793 rad
-      pos: 52.5,-19.5
       parent: 8364
       type: Transform
 - proto: SpawnMobPossumMorty

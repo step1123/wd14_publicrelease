@@ -18,7 +18,6 @@ namespace Content.Server.White.Cyborg.SiliconBrain;
 public sealed class PositronicBrainSystem : SharedPositronicBrainSystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly DoAfterSystem _doAfter = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
 
@@ -32,8 +31,6 @@ public sealed class PositronicBrainSystem : SharedPositronicBrainSystem
         SubscribeLocalEvent<PositronicBrainComponent, MindRemovedMessage>(OnMindRemoved);
         SubscribeLocalEvent<PositronicBrainComponent, GetVerbsEvent<ActivationVerb>>(AddWipeVerb);
         SubscribeLocalEvent<PositronicBrainComponent, BrainInsertEvent>(OnInserted);
-
-        SubscribeLocalEvent<SiliconBrainContainerComponent, SiliconMindDoAfterEvent>(OnMindBAdded);
         SubscribeLocalEvent<SiliconBrainContainerComponent, MindAddedMessage>(OnMindAddedParent);
     }
 
@@ -43,12 +40,6 @@ public sealed class PositronicBrainSystem : SharedPositronicBrainSystem
             return;
 
         PositronicBrainTurningOff(component.BrainUid.Value);
-    }
-
-    private void OnMindBAdded(EntityUid uid, SiliconBrainContainerComponent component, SiliconMindDoAfterEvent args)
-    {
-        if (_mind.TryGetMind(args.User, out var mind))
-            _mind.TransferTo(mind, uid);
     }
 
     private void OnInserted(EntityUid uid, PositronicBrainComponent component, BrainInsertEvent args)
@@ -91,21 +82,6 @@ public sealed class PositronicBrainSystem : SharedPositronicBrainSystem
     private void OnMindAdded(EntityUid uid, PositronicBrainComponent component, MindAddedMessage args)
     {
         RemComp<GhostTakeoverAvailableComponent>(uid);
-        EnsureComp<ActiveSiliconBrainComponent>(uid);
-
-
-        if (TryComp<SiliconBrainComponent>(uid, out var brainComponent) && brainComponent.ParentUid.HasValue)
-        {
-            var doAfterArgs = new DoAfterArgs(uid, TimeSpan.FromMilliseconds(300), new SiliconMindDoAfterEvent(),
-                brainComponent.ParentUid.Value)
-            {
-                BreakOnHandChange = false,
-                RequireCanInteract = false
-            };
-
-            _doAfter.TryStartDoAfter(doAfterArgs);
-        }
-
         UpdatePositronicBrainAppearance(uid, PosiStatus.Occupied);
     }
 
@@ -113,7 +89,6 @@ public sealed class PositronicBrainSystem : SharedPositronicBrainSystem
     {
         if (!Resolve(uid, ref component))
             return;
-        RemComp<ActiveSiliconBrainComponent>(uid);
         RemComp<GhostTakeoverAvailableComponent>(uid);
         RemComp<GhostRoleComponent>(uid);
         RemComp<MindContainerComponent>(uid);

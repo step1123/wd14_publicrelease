@@ -46,7 +46,7 @@ public abstract class SharedCyborgSystem : EntitySystem
     {
         SubscribeLocalEvent<CyborgComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<CyborgComponent, ToolUserAttemptUseEvent>(OnToolUseAttempt);
-        SubscribeLocalEvent<CyborgComponent, ModuleRemovalFinishedEvent>(OnModuleRemoval);
+        SubscribeLocalEvent<CyborgComponent, ModuleRemovalFinishedEvent>(OnModulesRemoval);
         SubscribeLocalEvent<CyborgComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<CyborgComponent, ComponentStartup>(OnComponentStartup);
         SubscribeLocalEvent<CyborgComponent, MapInitEvent>(OnMapInit);
@@ -107,7 +107,7 @@ public abstract class SharedCyborgSystem : EntitySystem
     }
 
 
-    private void OnModuleRemoval(EntityUid uid, CyborgComponent component, ModuleRemovalFinishedEvent args)
+    private void OnModulesRemoval(EntityUid uid, CyborgComponent component, ModuleRemovalFinishedEvent args)
     {
         if (args.Cancelled || args.Handled)
             return;
@@ -116,11 +116,7 @@ public abstract class SharedCyborgSystem : EntitySystem
         {
             foreach (var ent in contained)
             {
-                _hands.PickupOrDrop(args.User, ent);
-                if (!TryComp<CyborgModuleComponent>(ent, out var cyborgModuleComponent))
-                    continue;
-                var ev = new ModuleRemoveEvent(ent, uid);
-                RaiseLocalEvent(ent, ev);
+                RemoveModule(ent);
             }
         }
 
@@ -226,14 +222,11 @@ public abstract class SharedCyborgSystem : EntitySystem
             return false;
         }
 
-        if (component.ModuleContainer.Insert(used))
+        if (InsertModule(used,uid,cyborgModuleComponent,component))
         {
             if (_net.IsClient && _timing.IsFirstTimePredicted)
                 _popup.PopupEntity(Loc.GetString("modules-successfully-installed"), uid, user);
             _audio.PlayPredicted(component.ModuleInsertionSound, uid, user);
-
-            var ev = new ModuleInsertEvent(used, uid);
-            RaiseLocalEvent(used, ev);
             return true;
         }
 
@@ -241,7 +234,7 @@ public abstract class SharedCyborgSystem : EntitySystem
     }
 
 
-    public bool TryRemoveModule(EntityUid uid, EntityUid used, EntityUid user, CyborgComponent component,
+    public bool TryRemoveModules(EntityUid uid, EntityUid used, EntityUid user, CyborgComponent component,
         ToolComponent tool)
     {
         if (component.ModuleContainer.ContainedEntities.Count == 0)
@@ -254,6 +247,34 @@ public abstract class SharedCyborgSystem : EntitySystem
         _tool.UseTool(used, user, uid, 1f, component.ModulesExtractionMethod, new ModuleRemovalFinishedEvent(),
             toolComponent: tool);
         return true;
+    }
+
+    public bool InsertModule(EntityUid uid,EntityUid cyborgUid, CyborgModuleComponent? component = null,CyborgComponent? cyborgComponent = null)
+    {
+        if(!Resolve(uid,ref component) || !Resolve(cyborgUid,ref cyborgComponent) || !cyborgComponent.ModuleContainer.Insert(uid))
+            return false;
+
+        component.Parent = cyborgUid;
+
+        var ev = new ModuleInsertEvent(uid, cyborgUid);
+        RaiseLocalEvent(uid, ev);
+        return true;
+    }
+
+    public void RemoveModule(EntityUid uid, CyborgModuleComponent? component = null)
+    {
+        if(!Resolve(uid,ref component))
+            return;
+
+        _hands.PickupOrDrop(component.Parent, uid);
+
+        if(!component.Parent.HasValue)
+            return;
+
+        var ev = new ModuleRemoveEvent(uid, component.Parent.Value);
+        RaiseLocalEvent(uid, ev);
+
+        component.Parent = null;
     }
 
 

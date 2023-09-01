@@ -153,6 +153,38 @@
         baseWalkSpeed: 4
         baseSprintSpeed: 5
 
+- type: entity
+  id: CyborgJetpackModule
+  parent: CyborgModule
+  name: cyborg jetpack module
+  components:
+    - type: CyborgModule
+      name: "Дополнение джетпак"
+    - type: Sprite
+      layers:
+        - state: icon
+        - state: label_speed
+    - type: ModuleComponentGranting
+      component:
+        - type: JetpackUser
+
+- type: entity
+  id: CyborgZapModule
+  parent: CyborgModule
+  name: cyborg zap module
+  components:
+    - type: CyborgModule
+      name: "Дополнение перезагрузки"
+    - type: Sprite
+      layers:
+        - state: icon
+        - state: label_speed
+    - type: CyborgZapModule
+      zapHeal:
+        groups:
+          Brute: -46
+          Burn: -34
+
 # instruments
 - type: entity
   id: CyborgInstrumentModule
@@ -188,8 +220,6 @@
           - MopItem
           - FireExtinguisherBorg
           - StackHolderFloorTile
-
-
 
 - type: entity
   id: CyborgInstrumentModuleFilledMedicine
@@ -239,6 +269,8 @@
           - StackHolderFloorTile
           - StackHolderCable
           - trayScanner
+          - GasAnalyzer
+          - GeigerCounter
 
 - type: entity
   id: CyborgInstrumentModuleFilledService

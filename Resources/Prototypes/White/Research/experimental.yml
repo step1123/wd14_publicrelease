@@ -5,15 +5,13 @@
     sprite: White/Mobs/Player/Borgs/cyborg.rsi
     state: icon
   discipline: Experimental
-  tier: 3
-  cost: 10000
+  tier: 1
+  cost: 5000
   recipeUnlocks:
-    - CyborgChest
     - CyborgMonitoringComputerCircuitboard
     - BorgChargerMachineCircuitboard
     - CyborgMonitoringServerMachineCircuitboard
     - PositronicBrain
-    - ManMachineInterface
 
 - type: technology
   id: UpgradeBorgModule
@@ -22,11 +20,12 @@
     sprite: White/Objects/Devices/cyborgradiomodule.rsi
     state: icon
   discipline: Experimental
-  tier: 3
+  tier: 2
   cost: 15000
   recipeUnlocks:
     - CyborgHUDModuleSec
     - CyborgHUDModuleMed
     - CyborgSpeedModule
     - CyborgInstrumentModuleFilled
+    - CyborgJetpackModule
 

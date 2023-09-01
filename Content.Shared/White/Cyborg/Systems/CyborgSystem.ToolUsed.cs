@@ -1,10 +1,14 @@
 using Content.Shared.Access.Components;
 using Content.Shared.Emag.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.PowerCell;
 using Content.Shared.Tools.Components;
 using Content.Shared.White.Cyborg.Components;
 using Content.Shared.White.Cyborg.Events;
+using Content.Shared.White.Cyborg.SiliconBrain.Components;
+using Content.Shared.White.Cyborg.SiliconBrain.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -19,6 +23,8 @@ public sealed class CyborgSystemToolUsed : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedSiliconBrainSystem _siliconBrain = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
 
     public override void Initialize()
     {
@@ -27,6 +33,16 @@ public sealed class CyborgSystemToolUsed : EntitySystem
         SubscribeLocalEvent<AccessComponent, ToolUseOnBorgEvent>(OnAccess);
         SubscribeLocalEvent<ToolComponent, ToolUseOnBorgEvent>(OnTool);
         SubscribeLocalEvent<PowerCellComponent, ToolUseOnBorgEvent>(OnBattery);
+        SubscribeLocalEvent<ActiveSiliconBrainComponent, ToolUseOnBorgEvent>(OnBrain);
+    }
+
+    private void OnBrain(EntityUid uid, ActiveSiliconBrainComponent component, ToolUseOnBorgEvent args)
+    {
+        if(args.Handled || !TryComp<SiliconBrainContainerComponent>(args.CyborgUid,out var brainContainerComponent) ||
+           brainContainerComponent.BrainSlot.ContainedEntity.HasValue)
+            return;
+
+        args.Handled = _siliconBrain.TryInsertBrain(args.CyborgUid,uid,brainContainerComponent);
     }
 
     private void OnBattery(EntityUid uid, PowerCellComponent component, ToolUseOnBorgEvent args)
@@ -55,7 +71,10 @@ public sealed class CyborgSystemToolUsed : EntitySystem
         if (cyborgComponent.BatterySlot.ContainedEntity.HasValue)
             args.Handled = _cyborg.TryRemoveBattery(args.CyborgUid, args.Used, args.User, cyborgComponent, component);
         else if (cyborgComponent.ModuleContainer.ContainedEntities.Count > 0)
-            args.Handled = _cyborg.TryRemoveModule(args.CyborgUid, args.Used, args.User, cyborgComponent, component);
+            args.Handled = _cyborg.TryRemoveModules(args.CyborgUid, args.Used, args.User, cyborgComponent, component);
+        else if (TryComp<SiliconBrainContainerComponent>(args.CyborgUid, out var brainContainerComponent) &&
+                 brainContainerComponent.BrainSlot.ContainedEntity.HasValue && (!cyborgComponent.Active || _mobState.IsDead(args.CyborgUid)))
+            args.Handled = _siliconBrain.TryRemoveBrain(args.CyborgUid);
     }
 
     private void OnAccess(EntityUid uid, AccessComponent component, ToolUseOnBorgEvent args)

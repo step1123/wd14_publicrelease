@@ -1,3 +1,4 @@
+using Content.Shared.White.Cyborg.Components;
 using Content.Shared.White.Cyborg.SiliconBrain.Components;
 using Robust.Shared.Containers;
 
@@ -59,5 +60,24 @@ public abstract class SharedSiliconBrainSystem : EntitySystem
 
         if (!HasComp<SiliconBrainComponent>(args.EntityUid))
             args.Cancel();
+    }
+
+    public bool TryInsertBrain(EntityUid uid,EntityUid brainUid,
+        SiliconBrainContainerComponent? brainContainerComponent = null, ActiveSiliconBrainComponent? brainComponent = null)
+    {
+        if (!Resolve(uid, ref brainContainerComponent) || !Resolve(brainUid, ref brainComponent))
+            return false;
+
+        return brainContainerComponent.BrainSlot.Insert(brainUid);
+    }
+
+    public bool TryRemoveBrain(EntityUid uid,
+        SiliconBrainContainerComponent? containerComponent = null)
+    {
+        if (!Resolve(uid, ref containerComponent) )
+            return false;
+
+        _container.EmptyContainer(containerComponent.BrainSlot);
+        return true;
     }
 }

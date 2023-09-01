@@ -132981,38 +132981,6 @@ entities:
     - pos: 29.5,15.5
       parent: 60
       type: Transform
-- proto: SpawnMobPlayerCyborgStart
-  entities:
-  - uid: 14824
-    components:
-    - pos: -33.5,14.5
-      parent: 60
-      type: Transform
-  - uid: 14826
-    components:
-    - pos: -33.5,13.5
-      parent: 60
-      type: Transform
-  - uid: 14829
-    components:
-    - pos: -33.5,12.5
-      parent: 60
-      type: Transform
-  - uid: 14832
-    components:
-    - pos: -31.5,14.5
-      parent: 60
-      type: Transform
-  - uid: 14834
-    components:
-    - pos: -31.5,13.5
-      parent: 60
-      type: Transform
-  - uid: 14837
-    components:
-    - pos: -31.5,12.5
-      parent: 60
-      type: Transform
 - proto: SpawnMobPossumMorty
   entities:
   - uid: 9220
@@ -139240,8 +139208,6 @@ entities:
     - pos: 55.5,12.5
       parent: 60
       type: Transform
-    - nextSignalLeft: True
-      type: TwoWayLever
     - linkedPorts:
         13167:
         - Left: Forward

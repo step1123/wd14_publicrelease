@@ -161,6 +161,9 @@
   - type: Lathe
     idleState: icon
     runningState: building
+    staticRecipes:
+      - ManMachineInterface #WD EDIT
+      - CyborgZapModule
     dynamicRecipes:
       - PowerDrill
       - MiningDrill
@@ -230,11 +233,11 @@
       - WelderExperimental
       - JawsOfLife
       - PositronicBrain #WD EDIT
-      - ManMachineInterface #WD EDIT
       - CyborgHUDModuleSec #WD EDIT
       - CyborgHUDModuleMed #WD EDIT
       - CyborgSpeedModule #WD EDIT
       - CyborgInstrumentModuleFilled #WD EDIT
+      - CyborgJetpackModule #WD EDIT
 
 - type: entity
   id: CircuitImprinter
@@ -356,13 +359,15 @@
   - type: Lathe
     idleState: fab-idle
     runningState: fab-active
-    dynamicRecipes:
-    - ProximitySensor
+    staticRecipes:
+    - CyborgChest
     - LeftArmBorg
     - RightArmBorg
     - LeftLegBorg
     - RightLegBorg
     - LightHeadBorg
+    dynamicRecipes:
+    - ProximitySensor
     - RipleyHarness
     - RipleyLArm
     - RipleyRArm
@@ -381,7 +386,6 @@
     - HamtrRArm
     - HamtrLLeg
     - HamtrRLeg
-    - CyborgChest
   - type: MaterialStorage
     whitelist:
       tags:

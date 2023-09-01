@@ -139548,7 +139548,7 @@ entities:
     - pos: 9.5,-47.5
       parent: 5350
       type: Transform
-    - SecondsUntilStateChange: -30007.1
+    - SecondsUntilStateChange: -30036.838
       state: Closing
       type: Door
     - links:
@@ -139559,7 +139559,7 @@ entities:
     - pos: 10.5,-47.5
       parent: 5350
       type: Transform
-    - SecondsUntilStateChange: -30007.1
+    - SecondsUntilStateChange: -30036.838
       state: Closing
       type: Door
     - links:
@@ -139570,7 +139570,7 @@ entities:
     - pos: 11.5,-47.5
       parent: 5350
       type: Transform
-    - SecondsUntilStateChange: -30007.1
+    - SecondsUntilStateChange: -30036.838
       state: Closing
       type: Door
     - links:
@@ -139581,7 +139581,7 @@ entities:
     - pos: 13.5,-47.5
       parent: 5350
       type: Transform
-    - SecondsUntilStateChange: -30007.1
+    - SecondsUntilStateChange: -30036.838
       state: Closing
       type: Door
     - links:
@@ -139592,7 +139592,7 @@ entities:
     - pos: 14.5,-47.5
       parent: 5350
       type: Transform
-    - SecondsUntilStateChange: -30007.1
+    - SecondsUntilStateChange: -30036.838
       state: Closing
       type: Door
     - links:
@@ -139603,7 +139603,7 @@ entities:
     - pos: 15.5,-47.5
       parent: 5350
       type: Transform
-    - SecondsUntilStateChange: -30007.1
+    - SecondsUntilStateChange: -30036.838
       state: Closing
       type: Door
     - links:
@@ -143708,38 +143708,6 @@ entities:
   - uid: 24290
     components:
     - pos: -53.5,-30.5
-      parent: 5350
-      type: Transform
-- proto: SpawnMobPlayerCyborgStart
-  entities:
-  - uid: 11183
-    components:
-    - pos: 3.5,-29.5
-      parent: 5350
-      type: Transform
-  - uid: 11184
-    components:
-    - pos: 2.5,-29.5
-      parent: 5350
-      type: Transform
-  - uid: 11185
-    components:
-    - pos: 1.5,-29.5
-      parent: 5350
-      type: Transform
-  - uid: 11186
-    components:
-    - pos: 1.5,-30.5
-      parent: 5350
-      type: Transform
-  - uid: 11187
-    components:
-    - pos: 1.5,-31.5
-      parent: 5350
-      type: Transform
-  - uid: 11188
-    components:
-    - pos: 2.5,-31.5
       parent: 5350
       type: Transform
 - proto: SpawnMobRaccoonMorticia

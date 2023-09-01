@@ -80,6 +80,24 @@
     Glass: 1200
 
 - type: latheRecipe
+  id: CyborgJetpackModule
+  result: CyborgJetpackModule
+  completetime: 4
+  materials:
+    Steel: 1300
+    Plastic: 1500
+    Glass: 1200
+
+- type: latheRecipe
+  id: CyborgZapModule
+  result: CyborgZapModule
+  completetime: 4
+  materials:
+    Steel: 1300
+    Plastic: 1500
+    Glass: 1200
+
+- type: latheRecipe
   id: CyborgInstrumentModuleFilled
   result: CyborgInstrumentModuleFilled
   completetime: 4

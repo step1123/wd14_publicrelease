@@ -9,13 +9,8 @@
   discipline: Experimental
   tier: 1
   cost: 5000
-  recipeUnlocks:
+  recipeUnlocks: # Make borgs thinks static
   - ProximitySensor
-  - LeftArmBorg
-  - LightHeadBorg
-  - RightArmBorg
-  - LeftLegBorg
-  - RightLegBorg
   - Drone
   - ExosuitFabricatorMachineCircuitboard
 

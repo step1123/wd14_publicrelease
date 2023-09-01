@@ -1,6 +1,9 @@
 using Content.Server.Body.Components;
+using Content.Server.DoAfter;
 using Content.Server.Mind;
 using Content.Server.Mind.Components;
+using Content.Shared.DoAfter;
+using Content.Shared.White.Cyborg.Components;
 using Content.Shared.White.Cyborg.SiliconBrain;
 using Content.Shared.White.Cyborg.SiliconBrain.Components;
 using Content.Shared.White.Cyborg.SiliconBrain.Systems;
@@ -12,6 +15,7 @@ public sealed class SiliconBrainSystem : SharedSiliconBrainSystem
 {
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly DoAfterSystem _doAfter = default!;
 
     public override void Initialize()
     {
@@ -20,6 +24,45 @@ public sealed class SiliconBrainSystem : SharedSiliconBrainSystem
         SubscribeLocalEvent<SiliconBrainComponent, BrainInsertEvent>(OnInserted);
         SubscribeLocalEvent<SiliconBrainComponent, BrainRemoveEvent>(OnRemoved);
         SubscribeLocalEvent<SiliconBrainComponent, BeingGibbedEvent>(OnGibbed);
+
+        SubscribeLocalEvent<SiliconBrainComponent, MindAddedMessage>(OnMindAdded);
+        SubscribeLocalEvent<ActiveSiliconBrainComponent, MindRemovedMessage>(OnMindRemoved);
+        SubscribeLocalEvent<ActiveSiliconBrainComponent, ComponentStartup>(OnActivate);
+        SubscribeLocalEvent<SiliconBrainContainerComponent, SiliconMindDoAfterEvent>(OnSiliconMindAdded);
+    }
+
+    private void OnSiliconMindAdded(EntityUid uid, SiliconBrainContainerComponent component, SiliconMindDoAfterEvent args)
+    {
+        if (!TryComp<SiliconBrainComponent>(args.User, out var brainComponent) || !brainComponent.ParentUid.HasValue)
+            return;
+
+        if (_mind.TryGetMind(args.User, out var mind))
+            _mind.TransferTo(mind, uid);
+    }
+
+    private void OnActivate(EntityUid uid, ActiveSiliconBrainComponent component, ComponentStartup args)
+    {
+        if (!TryComp<SiliconBrainComponent>(uid, out var brainComponent) || !brainComponent.ParentUid.HasValue)
+            return;
+
+        var doAfterArgs = new DoAfterArgs(uid, TimeSpan.FromMilliseconds(300), new SiliconMindDoAfterEvent(),
+            brainComponent.ParentUid.Value)
+        {
+            BreakOnHandChange = false,
+            RequireCanInteract = false
+        };
+
+        _doAfter.TryStartDoAfter(doAfterArgs);
+    }
+
+    private void OnMindRemoved(EntityUid uid, ActiveSiliconBrainComponent component, MindRemovedMessage args)
+    {
+        RemComp<ActiveSiliconBrainComponent>(uid);
+    }
+
+    private void OnMindAdded(EntityUid uid, SiliconBrainComponent component, MindAddedMessage args)
+    {
+        EnsureComp<ActiveSiliconBrainComponent>(uid);
     }
 
     private void OnGibbed(EntityUid uid, SiliconBrainComponent component, BeingGibbedEvent args)

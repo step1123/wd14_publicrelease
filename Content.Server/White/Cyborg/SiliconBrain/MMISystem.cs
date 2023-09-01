@@ -29,14 +29,12 @@ public sealed class MMISystem : SharedMMISystem
     private void OnMindRemoved(EntityUid uid, MMIComponent component, MindRemovedMessage args)
     {
         component.IsActive = false;
-        RemComp<ActiveSiliconBrainComponent>(uid);
         UpdateAppearance(uid, component);
     }
 
     private void OnMindAdded(EntityUid uid, MMIComponent component, MindAddedMessage args)
     {
         component.IsActive = true;
-        EnsureComp<ActiveSiliconBrainComponent>(uid);
         UpdateAppearance(uid, component);
     }
 
