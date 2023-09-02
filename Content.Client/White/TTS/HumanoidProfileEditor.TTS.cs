@@ -20,6 +20,8 @@ public sealed partial class HumanoidProfileEditor
         "Врача! Позовите врача!"
     };
 
+    private const string AnySexVoiceProto = "SponsorAnySexVoices";
+
     private void InitializeVoice()
     {
         _ttsMgr = IoCManager.Resolve<TTSManager>();
@@ -50,7 +52,11 @@ public sealed partial class HumanoidProfileEditor
         {
             var voice = _voiceList[i];
             if (!HumanoidCharacterProfile.CanHaveVoice(voice, Profile.Sex))
-                continue;
+            {
+                if (!sponsorsManager.TryGetInfo(out var sponsorInfo)
+                    || !sponsorInfo.AllowedMarkings.Contains(AnySexVoiceProto))
+                    continue;
+            }
 
             var name = Loc.GetString(voice.Name);
             _voiceButton.AddItem(name, i);
