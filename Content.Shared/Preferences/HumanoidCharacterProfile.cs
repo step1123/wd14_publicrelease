@@ -647,7 +647,7 @@ namespace Content.Shared.Preferences
             _traitPreferences.AddRange(traits);
 
             prototypeManager.TryIndex<TTSVoicePrototype>(Voice, out var voice);
-            if (voice is null || !CanHaveVoice(voice, Sex))
+            if (voice is null)
                 Voice = SharedHumanoidAppearanceSystem.DefaultSexVoice[sex];
         }
 
