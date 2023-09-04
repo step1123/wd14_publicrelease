@@ -181,3 +181,11 @@
   description: action-description-scream
   serverEvent: !type:ScreamActionEvent
   checkCanInteract: false
+
+- type: instantAction
+  id: Halt
+  useDelay: 5
+  icon: Objects/Weapons/Melee/stunbaton.rsi/stunbaton_off.png
+  name: Halt!
+  description: Halt!
+  event: !type:HaltAction

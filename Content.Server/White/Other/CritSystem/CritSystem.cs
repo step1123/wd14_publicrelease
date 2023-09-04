@@ -24,8 +24,9 @@ public sealed class CritSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<CritComponent, MeleeHitEvent>(HandleHit);
+
         SubscribeLocalEvent<CritComponent, ExaminedEvent>(OnExamine);
+        SubscribeLocalEvent<CritComponent, MeleeHitEvent>(HandleHit);
     }
 
     private void OnExamine(EntityUid uid, CritComponent component, ExaminedEvent args)
@@ -33,7 +34,7 @@ public sealed class CritSystem : EntitySystem
         if (component.IsBloodDagger)
         {
             args.PushMarkup(
-                "[color=red]Критическая жажда: Кинжал Жажды обладает смертоносной точностью. Его владелец имеет 20% шанс нанести критический урон, поражая врага в его самые уязвимые места.\n" +
+                "[color=red]Критическая жажда: Кинжал Жажды обладает смертоносной точностью. Его владелец имеет 25% шанс нанести критический урон, поражая врага в его самые уязвимые места.\n" +
                 "Кровавый абсорб: При каждом успешном критическом ударе, кинжал извлекает кровь из цели, восстанавливая здоровье владельцу пропорционально количеству высосанной крови.[/color]"
             );
         }

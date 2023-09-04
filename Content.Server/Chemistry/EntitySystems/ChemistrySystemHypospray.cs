@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Diagnostics.CodeAnalysis;
-using Content.Server.Atmos.Components;
 using Content.Server.Chemistry.Components;
 using Content.Server.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.Components;
@@ -56,7 +55,7 @@ namespace Content.Server.Chemistry.EntitySystems
             Dirty(component);
         }
 
-        public void OnAfterInteract(EntityUid uid, HyposprayComponent component, AfterInteractEvent args)
+        private void OnAfterInteract(EntityUid uid, HyposprayComponent component, AfterInteractEvent args)
         {
             if (!args.CanReach)
                 return;
@@ -67,7 +66,7 @@ namespace Content.Server.Chemistry.EntitySystems
             TryDoInject(uid, target, user);
         }
 
-        public void OnAttack(EntityUid uid, HyposprayComponent component, MeleeHitEvent args)
+        private void OnAttack(EntityUid uid, HyposprayComponent component, MeleeHitEvent args)
         {
             if (!args.HitEntities.Any())
                 return;
@@ -117,7 +116,7 @@ namespace Content.Server.Chemistry.EntitySystems
 
             // WD EDIT Start
 
-            if (hard == false &&_inventorySystem.TryGetSlotEntity(target.Value, "outerClothing", out var suit) &&
+            if (hard == false && _inventorySystem.TryGetSlotEntity(target.Value, "outerClothing", out var suit) &&
                 _tag.HasTag(suit.Value, "Hardsuit") &&
                 _inventorySystem.TryGetSlotEntity(target.Value, "head", out var helmet) &&
                 _tag.HasAnyTag(helmet.Value, new List<string> {"HardsuitHelmet", "HelmetEVA"}))
@@ -161,7 +160,7 @@ namespace Content.Server.Chemistry.EntitySystems
                 }
 
                 return true;
-            }
+        }
 
             // WD EDIT End
 

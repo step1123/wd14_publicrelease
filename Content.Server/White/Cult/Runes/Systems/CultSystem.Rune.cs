@@ -32,7 +32,6 @@ using Content.Shared.White.Cult.Runes;
 using Content.Shared.White.Cult.UI;
 using Content.Shared.White.Mindshield;
 using Robust.Server.GameObjects;
-using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
@@ -57,7 +56,6 @@ public partial class CultSystem : EntitySystem
     [Dependency] private readonly GunSystem _gunSystem = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly FlammableSystem _flammableSystem = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
 
     public override void Initialize()
     {
@@ -105,7 +103,6 @@ public partial class CultSystem : EntitySystem
     private const string TeleportRunePrototypeId = "TeleportRune";
     private const string ApocalypseRunePrototypeId = "ApocalypseRune";
     private const string RitualDaggerPrototypeId = "RitualDagger";
-    private const string RunicMetalStackPrototypeId = "CultRunicMetal20";
     private const string RunicMetalPrototypeId = "CultRunicMetal";
     private const string SteelPrototypeId = "Steel";
     private const string NarsiePrototypeId = "Narsie";
@@ -335,11 +332,11 @@ public partial class CultSystem : EntitySystem
 
         if (ev.Result)
         {
-            OnAfterInvoke(uid, args.User, cultists);
+            OnAfterInvoke(uid, cultists);
         }
     }
 
-    private void OnAfterInvoke(EntityUid rune, EntityUid user, HashSet<EntityUid> cultists)
+    private void OnAfterInvoke(EntityUid rune, HashSet<EntityUid> cultists)
     {
         if (!_entityManager.TryGetComponent<CultRuneBaseComponent>(rune, out var component))
             return;
@@ -1053,14 +1050,16 @@ public partial class CultSystem : EntitySystem
 
     private void OnActiveInWorld(EntityUid uid, CultEmpowerComponent component, ActivateInWorldEvent args)
     {
-        if(!component.IsRune || !TryComp<CultistComponent>(args.User, out var cultist) || !TryComp<ActorComponent>(args.User, out var actor)) return;
+        if(!component.IsRune || !TryComp<CultistComponent>(args.User, out _) || !TryComp<ActorComponent>(args.User, out var actor))
+            return;
 
         _ui.TryOpen(uid, CultEmpowerUiKey.Key, actor.PlayerSession);
     }
 
     private void OnUseInHand(EntityUid uid, CultEmpowerComponent component, UseInHandEvent args)
     {
-        if(!TryComp<CultistComponent>(args.User, out var cultist) || !TryComp<ActorComponent>(args.User, out var actor)) return;
+        if(!TryComp<CultistComponent>(args.User, out _) || !TryComp<ActorComponent>(args.User, out var actor))
+            return;
 
         _ui.TryOpen(uid, CultEmpowerUiKey.Key, actor.PlayerSession);
     }
@@ -1240,20 +1239,6 @@ public partial class CultSystem : EntitySystem
         }
 
         return true;
-    }
-
-    private void SpawnCultistItems(EntityUid yeban)
-    {
-        var transform = CompOrNull<TransformComponent>(yeban)?.Coordinates;
-
-        if (transform == null)
-            return;
-
-        var dagger = _entityManager.SpawnEntity(RitualDaggerPrototypeId, transform.Value);
-        var ruinicsexoooo = _entityManager.SpawnEntity(RunicMetalStackPrototypeId, transform.Value);
-
-        _handsSystem.TryPickupAnyHand(yeban, dagger);
-        _handsSystem.TryPickupAnyHand(yeban, ruinicsexoooo);
     }
 
     private void HealCultist(EntityUid player)
