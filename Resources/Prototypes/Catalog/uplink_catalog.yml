@@ -64,6 +64,23 @@
   saleLimit: 1
 
 - type: listing
+  id: UplinkMiniEbow
+  name: маленький энергетический арбалет
+  description: Довольно тихое оружие, которое автоматически перезаряжается и оглушает. Хорошо сочетается с другими видами оружия.
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Battery/mini-ebow.rsi, state: icon }
+  productEntity: EnergyCrossbowMini
+  cost:
+    Telecrystal: 10
+  categories:
+  - UplinkWeapons
+  conditions:
+    - !type:StoreWhitelistCondition
+      blacklist:
+        tags:
+          - NukeOpsUplink
+  saleLimit: 1
+
+- type: listing
   id: UplinkEsword
   name: uplink-esword-name
   description: uplink-esword-desc

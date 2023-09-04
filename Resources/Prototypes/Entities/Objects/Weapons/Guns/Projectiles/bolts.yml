@@ -1,0 +1,20 @@
+- type: entity
+  name: energy crossbow bolt
+  id: BoltEnergyCrossbow
+  parent: BaseBullet
+  noSpawn: true
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/plasma.rsi
+    state: bullet
+  - type: Ammo
+    muzzleFlash: null
+  - type: Projectile
+    impactEffect: null
+    damage:
+      types:
+        Poison: 15
+  - type: StunOnCollide
+    stunAmount: 2
+    knockdownAmount: 2
+
