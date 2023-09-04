@@ -169,7 +169,7 @@
               sound: /Audio/Effects/metalbreak.ogg
             - !type:SpawnEntitiesBehavior
               spawn:
-                MaterialWoodPlank:
+                MaterialWoodPlank1:
                   min: 5
                   max: 5
     - type: StaticPrice

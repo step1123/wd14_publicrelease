@@ -208,7 +208,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             return;
 
         if (desiredType != InGameICChatType.Emote && player is not null &&
-            !_chatManager.TrySendNewMessage(player, message)) // WD
+            !_chatManager.TrySendNewMessage(player, message, true)) // WD
             return;
 
         // This message may have a radio prefix, and should then be whispered to the resolved radio channel

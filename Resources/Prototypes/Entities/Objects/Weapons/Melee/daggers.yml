@@ -12,6 +12,8 @@
       damage:
         types:
           Slash: 10.5
+      soundHit:
+        path: /Audio/Weapons/bladeslice.ogg
     - type: Item
       size: 20
     - type: Clothing
@@ -22,6 +24,3 @@
       critChance: 20
       critMultiplier: 2.2
       isBloodDagger: true
-    - type: Reflect
-      reflectProb: 0.15
-      enabled: true

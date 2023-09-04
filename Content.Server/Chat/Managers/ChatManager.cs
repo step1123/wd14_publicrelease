@@ -185,9 +185,9 @@ namespace Content.Server.Chat.Managers
             _utkaSocketWrapper.SendMessageToAll(asayEventMessage);
         }
 
-        public bool TrySendNewMessage(IPlayerSession session, string newMessage)
+        public bool TrySendNewMessage(IPlayerSession session, string newMessage, bool checkLength = false)
         {
-            if (!_antispam || newMessage.Length < _antispamMinLength)
+            if (!_antispam || checkLength && newMessage.Length < _antispamMinLength)
             {
                 _lastMessages.Remove(session.Data.UserId);
                 return true;

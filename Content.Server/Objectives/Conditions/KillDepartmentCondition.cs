@@ -84,7 +84,7 @@ public abstract class KillDepartmentCondition : IObjectiveCondition
         }
     }
 
-    public float Difficulty => 4f;
+    public float Difficulty => 5f;
     public bool Equals(IObjectiveCondition? other)
     {
         return other is KillDepartmentCondition kdc && Equals(Targets, kdc.Targets);

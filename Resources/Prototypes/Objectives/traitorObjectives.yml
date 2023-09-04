@@ -34,16 +34,19 @@
 - type: objective
   id: KillRandomHeadObjective
   issuer: syndicate
-  difficultyOverride: 3.0
+  difficultyOverride: 2.5
   requirements:
   - !type:TraitorRequirement {}
   - !type:IncompatibleConditionsRequirement
     conditions:
     - RandomTraitorAliveCondition
+    - KillAllOtherAntagonistsCondition
+    - SaveRandomNoTraitorPersonObjective
+    - KillAllSecurityCondition
+    - KillAllHeadsCondition
   conditions:
   - !type:KillRandomHeadCondition {}
-  # killing 1 head is enough
-  canBeDuplicate: false
+  canBeDuplicate: true
 
 - type: objective
   id: RandomTraitorAliveObjective
@@ -53,7 +56,10 @@
     - !type:IncompatibleConditionsRequirement
         conditions:
           - KillRandomPersonCondition
+          - KillRandomHeadCondition
           - KillAllOtherAntagonistsCondition
+          - KillAllSecurityCondition
+          - KillAllHeadsCondition
     - !type:MultipleTraitorsRequirement
   conditions:
     - !type:RandomTraitorAliveCondition {}
@@ -299,6 +305,7 @@
         - KillRandomPersonCondition
         - RandomTraitorAliveCondition
         - RandomTraitorProgressCondition
+        - KillRandomHeadCondition
   conditions:
     - !type:KillAllOtherAntagonistsCondition {}
 
@@ -482,6 +489,9 @@
         - DieCondition
         - KillRandomPersonCondition
         - KillAllOtherAntagonistsCondition
+        - KillAllSecurityCondition
+        - KillAllHeadsCondition
+        - KillRandomHeadCondition
   conditions:
     - !type:SaveRandomNoTraitorPersonCondition {}
 
@@ -493,17 +503,22 @@
     - !type:IncompatibleConditionsRequirement
       conditions:
         - KillRandomPersonCondition
+        - SaveRandomNoTraitorPersonObjective
+        - KillRandomHeadCondition
+        - RandomTraitorAliveCondition
   conditions:
     - !type:KillAllHeadsCondition {}
 
 - type: objective
   id: KillAllSecurityObjective
   issuer: syndicate
-  difficultyOverride: 5.0
   requirements:
     - !type:TraitorRequirement {}
     - !type:IncompatibleConditionsRequirement
       conditions:
         - KillRandomPersonCondition
+        - SaveRandomNoTraitorPersonObjective
+        - KillRandomHeadCondition
+        - RandomTraitorAliveCondition
   conditions:
     - !type:KillAllSecurityCondition {}

@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared.Buckle;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Components;
@@ -26,6 +27,7 @@ namespace Content.Shared.Projectiles
         [Dependency] private readonly SharedPhysicsSystem _physics = default!;
         [Dependency] private readonly SharedTransformSystem _transform = default!;
         [Dependency] private readonly PenetratedSystem _penetratedSystem = default!; // WD
+        [Dependency] private readonly SharedBuckleSystem _buckle = default!; // WD
 
         public override void Initialize()
         {
@@ -154,13 +156,16 @@ namespace Content.Shared.Projectiles
             if (component is {Penetrate: true, PenetratedUid: null} &&
                 TryComp(args.Target, out PenetratedComponent? penetrated) &&
                 penetrated is {ProjectileUid: null, IsPinned: false} &&
-                TryComp(args.Target, out PhysicsComponent? physics))
+                TryComp(args.Target, out PhysicsComponent? physics) &&
+                TryComp(uid, out PhysicsComponent? body) && body.BodyStatus == BodyStatus.InAir)
             {
                 component.PenetratedUid = args.Target;
                 penetrated.ProjectileUid = uid;
+                _buckle.TryUnbuckle(args.Target, args.Target, true);
                 _physics.SetLinearVelocity(args.Target, Vector2.Zero, body: physics);
                 _physics.SetBodyType(args.Target, BodyType.Static, body: physics);
                 var xform = Transform(args.Target);
+                _transform.AttachToGridOrMap(args.Target, xform);
                 _transform.SetLocalPosition(xform, Transform(uid).LocalPosition);
                 _transform.SetParent(args.Target, xform, uid);
                 if (TryComp(uid, out PhysicsComponent? projPhysics))

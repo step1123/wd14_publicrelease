@@ -23,6 +23,7 @@
     quickEquip: false
     slots:
     - Back
+    - SuitStorage
   - type: Gun
     cameraRecoilScalar: 0
     fireRate: 2
@@ -84,6 +85,7 @@
     quickEquip: false
     slots:
     - Back
+    - SuitStorage
   - type: Construction
     deconstructionTarget: null
     graph: WeaponFlamethrowerGraph

@@ -80,6 +80,7 @@
     damage:
       types:
         Blunt: 0
+    ignoreResistances: true
   - type: Sprite
     state: rods
   - type: Stack

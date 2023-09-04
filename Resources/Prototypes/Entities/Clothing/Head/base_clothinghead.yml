@@ -152,6 +152,7 @@
     tags:
     - HidesHair
     - WhitelistChameleon
+    - HardsuitHelmet
   - type: IdentityBlocker
 
 - type: entity

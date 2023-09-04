@@ -24,3 +24,6 @@
 
 - type: Tag
   id: CrossbowBolt
+
+- type: Tag
+  id: HardsuitHelmet

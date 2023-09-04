@@ -29,7 +29,7 @@
           path: /Audio/Effects/woodhit.ogg
       - !type:SpawnEntitiesBehavior
         spawn:
-          MaterialWoodPlank:
+          MaterialWoodPlank1:
             min: 2
             max: 3
       - !type:DoActsBehavior

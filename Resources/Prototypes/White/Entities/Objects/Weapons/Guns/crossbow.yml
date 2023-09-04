@@ -11,8 +11,9 @@
     quickEquip: false
     slots:
     - Back
+    - SuitStorage
   - type: Item
-    size: 80
+    size: 50
     sprite: White/Objects/Weapons/crossbow.rsi
   - type: Gun
     forceThrowingAngle: true
@@ -46,12 +47,12 @@
     offset: 0.2,0.2
     damage:
       types:
-        Blunt: 15
+        Piercing: 15
   - type: Powered
     charge: 180
     damage:
       types:
-        Blunt: 10
+        Piercing: 10
         Heat: 10
   - type: Construction
     deconstructionTarget: null
@@ -68,12 +69,13 @@
     sprite: White/Objects/Weapons/crossbow.rsi
     state: base
   - type: Item
-    size: 80
+    size: 50
     sprite: White/Objects/Weapons/crossbow.rsi
   - type: Clothing
     quickEquip: false
     slots:
     - Back
+    - SuitStorage
   - type: Construction
     deconstructionTarget: null
     graph: WeaponPoweredCrossbowGraph

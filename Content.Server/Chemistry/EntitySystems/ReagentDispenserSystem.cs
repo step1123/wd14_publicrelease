@@ -220,6 +220,7 @@ namespace Content.Server.Chemistry.EntitySystems
 
                 bufferSolution.AddReagent(message.ReagentId, FixedPoint2.New((int)reagentDispenser.DispenseAmount));
                 _chemMasterSystem.UpdateUiState(chemMaster);
+                ClickSound(reagentDispenser);
 
                 return;
             } // WD EDIT END

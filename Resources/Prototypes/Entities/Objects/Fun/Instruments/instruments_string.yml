@@ -121,7 +121,7 @@
     - back
     sprite: Objects/Fun/Instruments/guitar.rsi
   - type: Wieldable
-  - type: Damageable # Smash it! Does 20 damage a hit, but breaks after 1 hit. 
+  - type: Damageable # Smash it! Does 20 damage a hit, but breaks after 1 hit.
     damageContainer: Inorganic
   - type: Destructible
     thresholds:
@@ -134,7 +134,7 @@
           path: /Audio/Weapons/guitarsmash.ogg
       - !type:SpawnEntitiesBehavior
         spawn:
-          MaterialWoodPlank:
+          MaterialWoodPlank1:
             min: 2
             max: 4
       - !type:DoActsBehavior
