@@ -59,7 +59,7 @@ public sealed partial class TTSSystem : EntitySystem
             return;
 
         var message = FormattedMessage.RemoveMarkup(ev.Message);
-        var soundData = await GenerateTTS(null, message, ttsPrototype.Speaker, speechRate: "x-slow", effect: "announce");
+        var soundData = await GenerateTTS(null, message, ttsPrototype.Speaker, speechRate: "slow", effect: "announce");
 
         if (soundData == null)
             return;
