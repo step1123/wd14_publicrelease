@@ -25,7 +25,7 @@ public sealed class EnableStalinBunker : IConsoleCommand
             return;
         }
 
-        var enabled = _cfg.GetCVar(CCVars.PanicBunkerEnabled);
+        var enabled = _cfg.GetCVar(WhiteCVars.StalinEnabled);
 
         if (args.Length == 0)
         {
