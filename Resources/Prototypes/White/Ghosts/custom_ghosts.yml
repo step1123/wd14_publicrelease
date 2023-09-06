@@ -2,7 +2,7 @@
   id: ravmorgan-ghost
   ckey: ravmorgan
   sprite: White/Ghosts/ravmorgan-ghost.rsi
-  alpha: 0.9
+  alpha: 1.0
   ghostName: Яйцо
   ghostDescription: Большое...
 
