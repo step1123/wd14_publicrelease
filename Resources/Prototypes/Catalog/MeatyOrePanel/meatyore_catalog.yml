@@ -1317,14 +1317,6 @@
     - MeatyOreToys
 
 - type: listing
-  id: MeatySingularityToy
-  productEntity: SingularityToy
-  cost:
-    MeatyOreCoin: 20
-  categories:
-    - MeatyOreToys
-
-- type: listing
   id: MeatyPonderingOrb
   productEntity: PonderingOrb
   cost:
