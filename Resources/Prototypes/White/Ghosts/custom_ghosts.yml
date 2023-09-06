@@ -3,8 +3,9 @@
   ckey: ravmorgan
   sprite: White/Ghosts/ravmorgan-ghost.rsi
   alpha: 1.0
-  ghostName: Яйцо
-  ghostDescription: Большое...
+  ghostName: Девочка из аниме
+  ghostDescription: А я корчу лицо в рожицу ахегао.
+
 
 - type: customGhost
   id: merkkaa-ghost
@@ -149,3 +150,12 @@
   ghostName: Neco
   ghostDescription: Buranyaaa...
   size: 0.6, 0.6
+
+- type: customGhost
+  id: valtos-ghost
+  ckey: valtos
+  sprite: White/Ghosts/valtos-ghost.rsi
+  alpha: 1.0
+  ghostName: Мяукалка
+  ghostDescription: Дает деньги если погладить по животику...
+  size: 0.7, 0.7
