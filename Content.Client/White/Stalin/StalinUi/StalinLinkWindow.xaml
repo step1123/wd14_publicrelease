@@ -1,0 +1,15 @@
+﻿<controls:FancyWindow  xmlns="https://spacestation14.io"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                       xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                       Title="Stalin Linker"
+                       Resizable="False"
+                       SetWidth="900">
+
+    <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+        <BoxContainer Orientation="Vertical" Margin="10" HorizontalExpand="True" VerticalAlignment="Center">
+            <Label Text="Скопируйте содержимое поля, или нажмите на кнопку ОТКРЫТЬ В БРАУЗЕРЕ" HorizontalExpand="True" HorizontalAlignment="Center"></Label>
+            <LineEdit Editable="False" Name="StalinLinkText" HorizontalExpand="True" Margin="5" MinHeight="25"></LineEdit>
+            <Button Name="OpenInBrowserButton" Text="Открыть в браузере" HorizontalExpand="True"></Button>
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

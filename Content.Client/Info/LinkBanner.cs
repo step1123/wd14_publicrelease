@@ -1,12 +1,15 @@
 ﻿using Content.Client.Changelog;
+using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.EscapeMenu;
 using Content.Client.UserInterface.Systems.Guidebook;
 using Content.Client.White.Stalin;
+using Content.Client.White.Stalin.StalinUi;
 using Content.Shared.CCVar;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Collections;
 using Robust.Shared.Configuration;
+using Robust.Shared.Utility;
 
 namespace Content.Client.Info
 {
