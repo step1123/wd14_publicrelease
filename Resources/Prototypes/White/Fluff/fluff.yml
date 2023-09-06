@@ -431,3 +431,15 @@
     - type: StorageFill
       contents:
         - id: SmokingPipeFilledTobacco
+
+
+#6elblu
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeck6elbluCap
+  name: Плащ NanoTrasen
+  description: Плащ NanoTrasen весьма странной окраски. Так и веет бюрократией и запахом алкоголя.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/6elblu/white-cloak.rsi
+

@@ -149,3 +149,19 @@
   id: thechaoticCoatLoadout
   entity: ClothingOuterCoatThechaotic
   sponsorOnly: true
+
+#6elblu
+- type: loadout
+  id: 6elbluCloakLoadout
+  entity: ClothingNeck6elbluCap
+  sponsorOnly: true
+
+- type: loadout
+  id: 6elbluGlovesLoadout
+  entity: ClothingHandsGlovesColorBlack
+  sponsorOnly: true
+- type: loadout
+
+  id: 6elbluBootsLoadout
+  entity: ClothingShoesTourist
+  sponsorOnly: true
