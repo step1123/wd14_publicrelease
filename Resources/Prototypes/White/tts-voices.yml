@@ -254,3 +254,93 @@
   name: tts-voice-name-lambert
   sex: Male
   speaker: lambert
+
+- type: ttsVoice
+  id: Polina
+  name: tts-voice-name-polina
+  sex: Female
+  speaker: polina
+
+- type: ttsVoice
+  id: Arthas
+  name: tts-voice-name-arthas
+  sex: Male
+  speaker: arthas
+
+- type: ttsVoice
+  id: Xrenoid
+  name: tts-voice-name-xrenoid
+  sex: Male
+  speaker: xrenoid
+
+- type: ttsVoice
+  id: Azir
+  name: tts-voice-name-azir
+  sex: Male
+  speaker: azir
+
+- type: ttsVoice
+  id: Caitlyn
+  name: tts-voice-name-caitlyn
+  sex: Female
+  speaker: caitlyn
+
+- type: ttsVoice
+  id: Ekko
+  name: tts-voice-name-ekko
+  sex: Male
+  speaker: ekko
+
+- type: ttsVoice
+  id: Twitch
+  name: tts-voice-name-twitch
+  sex: Male
+  speaker: twitch
+
+- type: ttsVoice
+  id: Strelok
+  name: tts-voice-name-strelok
+  sex: Male
+  speaker: strelok
+
+- type: ttsVoice
+  id: Ziggs
+  name: tts-voice-name-ziggs
+  sex: Male
+  speaker: ziggs
+
+- type: ttsVoice
+  id: Tracer
+  name: tts-voice-name-tracer
+  sex: Female
+  speaker: tracer
+
+- type: ttsVoice
+  id: Illidan
+  name: tts-voice-name-illidan
+  sex: Male
+  speaker: illidan
+
+- type: ttsVoice
+  id: Rexxar
+  name: tts-voice-name-rexxar
+  sex: Male
+  speaker: rexxar
+
+- type: ttsVoice
+  id: Voljin
+  name: tts-voice-name-voljin
+  sex: Male
+  speaker: voljin
+
+- type: ttsVoice
+  id: Forester
+  name: tts-voice-name-forester
+  sex: Male
+  speaker: forester
+
+- type: ttsVoice
+  id: Sidorovich
+  name: tts-voice-name-sidorovich
+  sex: Male
+  speaker: sidorovich
