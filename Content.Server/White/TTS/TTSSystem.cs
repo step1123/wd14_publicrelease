@@ -59,7 +59,7 @@ public sealed partial class TTSSystem : EntitySystem
             return;
 
         var message = FormattedMessage.RemoveMarkup(ev.Message);
-        var soundData = await GenerateTTS(null, message, ttsPrototype.Speaker);
+        var soundData = await GenerateTTS(null, message, ttsPrototype.Speaker, effect: "announce");
 
         if (soundData == null)
             return;
@@ -212,7 +212,7 @@ public sealed partial class TTSSystem : EntitySystem
         _ttsManager.ResetCache();
     }
 
-    private async Task<byte[]?> GenerateTTS(EntityUid? uid, string text, string speaker, string? speechPitch = null, string? speechRate = null)
+    private async Task<byte[]?> GenerateTTS(EntityUid? uid, string text, string speaker, string? speechPitch = null, string? speechRate = null, string? effect = null)
     {
         var textSanitized = Sanitize(text);
         if (textSanitized == "")
@@ -239,7 +239,7 @@ public sealed partial class TTSSystem : EntitySystem
             rate = speechRate;
         }
 
-        return await _ttsManager.ConvertTextToSpeech(speaker, textSanitized, pitch, rate);
+        return await _ttsManager.ConvertTextToSpeech(speaker, textSanitized, pitch, rate, effect);
     }
 }
 
