@@ -19,7 +19,7 @@ namespace Content.Client.Info
         private void AddDiscordServers()
         {
             AddDiscordServerInfo("Атараксия", "Проект для заинтересованных в отыгрыше.");
-            AddDiscordServerInfo("Гласио", "Ролевой сервер с повышенным уровнем отыгрыша и собственным лором");
+            AddDiscordServerInfo("Гласио", "Ролевой сервер с наивысшим уровнем отыгрыша");
             AddDiscordServerInfo("Амур", "Проект с ЕРП направленностью.");
         }
 

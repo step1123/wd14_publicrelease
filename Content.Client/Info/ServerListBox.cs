@@ -23,7 +23,7 @@ namespace Content.Client.Info
             AddServerInfo("Енги", "Сервер с расслабленным геймплеем");
             AddServerInfo("Амур", "Сервер для любителей ЕРП");
             AddServerInfo("Инфинити️", "Сервер без правил");
-            AddServerInfo("Гласио", "Вайтлистовый сервер");
+            AddServerInfo("Гласио", "Сервер с лучшим отыгрышем");
             AddServerInfo("Атараксия", "Для любителей ролевой игры");
         }
 
