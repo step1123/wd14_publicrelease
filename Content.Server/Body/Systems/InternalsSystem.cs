@@ -9,6 +9,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Content.Shared.Verbs;
 using Content.Server.Popups;
+using Content.Shared.ActionBlocker;
 using Content.Shared.DoAfter;
 using Content.Shared.Internals;
 using Robust.Shared.Utility;
@@ -25,6 +26,7 @@ public sealed class InternalsSystem : EntitySystem
     [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
 
     public override void Initialize()
     {
@@ -59,6 +61,9 @@ public sealed class InternalsSystem : EntitySystem
     public void ToggleInternals(EntityUid uid, EntityUid user, bool force, InternalsComponent? internals = null)
     {
         if (!Resolve(uid, ref internals, false))
+            return;
+
+        if (_actionBlocker.CanInteract(user, uid) == false)
             return;
 
         // Toggle off if they're on

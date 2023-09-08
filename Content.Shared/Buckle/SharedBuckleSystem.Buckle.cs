@@ -426,6 +426,9 @@ public abstract partial class SharedBuckleSystem
             if (HasComp<SleepingComponent>(buckleUid) && buckleUid == userUid)
                 return false;
 
+            if (ActionBlockerSystem.CanInteract(userUid, buckleUid) == false)
+                return false;
+
             // If the strap is a vehicle and the rider is not the person unbuckling, return.
             if (TryComp<VehicleComponent>(strapUid, out var vehicle) &&
                 vehicle.Rider != userUid)
