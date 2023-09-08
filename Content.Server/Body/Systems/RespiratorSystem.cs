@@ -98,7 +98,7 @@ namespace Content.Server.Body.Systems
                     if (_gameTiming.CurTime >= respirator.LastGaspPopupTime + respirator.GaspPopupCooldown)
                     {
                         respirator.LastGaspPopupTime = _gameTiming.CurTime;
-                        
+
                         if (TryComp<MetaDataComponent>(uid, out var metaDataComponent))
                         {
                             _popupSystem.PopupEntity($"{metaDataComponent.EntityName} задыхается!", uid);
@@ -253,7 +253,7 @@ namespace Content.Server.Body.Systems
             if (comp.CPRPerformedBy != null && comp.CPRPerformedBy != user)
                 return false;
 
-            if (!TryComp<HumanoidAppearanceComponent>(target, out _))
+            if (!TryComp<HumanoidAppearanceComponent>(target, out _) && !TryComp<HumanoidAppearanceComponent>(user, out _))
                 return false;
 
             if (!TryComp(target, out MobStateComponent? targetState))
