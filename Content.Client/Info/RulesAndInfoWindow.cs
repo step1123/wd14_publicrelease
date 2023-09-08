@@ -41,7 +41,6 @@ namespace Content.Client.Info
             // AddSection(rulesList, _rules.RulesSection());
             var rulesWikiSection = new RulesWikiSection();
             rulesList.InfoContainer.AddChild(rulesWikiSection);
-            rulesWikiSection.RulesButton.OnPressed += _ => _uri.OpenUri(_cfg.GetCVar(WhiteCVars.RulesWiki));
             // WD EDIT END
             PopulateTutorial(tutorialList);
 
