@@ -6,10 +6,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Content.Server.Chat.Managers;
-using Content.Shared.CCVar;
 using Content.Shared.White;
 using Content.Shared.White.SaltedYayca;
-using Newtonsoft.Json;
 using Robust.Server.Player;
 using Robust.Shared.Asynchronous;
 using Robust.Shared.Configuration;
@@ -17,7 +15,6 @@ using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Content.Server.White.Stalin;
 

@@ -83,6 +83,7 @@ namespace Content.IntegrationTests.Tests.Disposal
   - type: MobThresholds
     thresholds:
       0: Alive
+      100: Critical
       200: Dead
   - type: Damageable
     damageContainer: Biological

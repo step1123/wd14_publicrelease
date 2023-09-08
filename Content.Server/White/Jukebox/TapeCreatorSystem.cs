@@ -152,7 +152,7 @@ public sealed class TapeCreatorSystem : EntitySystem
 
         tapeComponent.Songs.Add(song);
         _popupSystem.PopupEntity($"Запись началась, примерное время ожидания: {_recordTime} секунд", tapeCreatorComponent.Owner);
-        Dirty(ev.TapeCreatorUid);
+        Dirty(ev.TapeCreatorUid, tapeCreatorComponent);
         Dirty(tapeComponent);
         StartRecordDelayAsync(tapeCreatorComponent, _popupSystem, _containerSystem);
     }

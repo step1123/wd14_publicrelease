@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking.Rules;
@@ -17,7 +18,6 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Verbs;
 using Content.Shared.White;
 using Content.Shared.White.MeatyOre;
-using Newtonsoft.Json.Linq;
 using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
 using Robust.Server.Player;
@@ -271,8 +271,9 @@ public sealed class MeatyOreStoreSystem : EntitySystem
                 var responseData = await response.Content.ReadAsStringAsync();
                 if (!string.IsNullOrEmpty(responseData))
                 {
-                    var jsonObject = JObject.Parse(responseData);
-                    if (jsonObject.TryGetValue("remainingTime", out var remainingTimeToken) && TimeSpan.TryParse(remainingTimeToken.ToString(), out var remainingTime))
+                    var jsonDocument = JsonDocument.Parse(responseData);
+                    var root = jsonDocument.RootElement;
+                    if (root.TryGetProperty("remainingTime", out var remainingTimeElement) && TimeSpan.TryParse(remainingTimeElement.ToString(), out var remainingTime))
                     {
                         var time = new TimeSpan(remainingTime.Hours, remainingTime.Minutes, 0);
                         return time;

@@ -7,7 +7,6 @@ using System.Text.Json;
 using System.Threading;
 using Content.Shared.CCVar;
 using NetCoreServer;
-using Newtonsoft.Json.Linq;
 using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
 using Timer = Robust.Shared.Timing.Timer;
@@ -53,8 +52,18 @@ public sealed class UtkaTCPSession : TcpSession
             return false;
         }
 
-        var commandName = JObject.Parse(message)["command"];
-        if (commandName == null) return false;
+        var jsonDocument = JsonDocument.Parse(message);
+        var root = jsonDocument.RootElement;
+        if (!root.TryGetProperty("command", out var commandNameElement))
+        {
+            return false;
+        }
+
+        var commandName = commandNameElement.GetString();
+        if (commandName == null)
+        {
+            return false;
+        }
 
         var utkaCommand = UtkaTCPServer.Commands.Values.FirstOrDefault(x => x.Name == commandName.ToString());
 

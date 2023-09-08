@@ -52,7 +52,7 @@ internal struct ChatRichTextEntry
             if (node.Name == null)
                 continue;
 
-            if (!_tagManager.TryGetMarkupTag(node.Name, out var tag) || !tag.TryGetControl(node, out var control))
+            if (!_tagManager.TryGetMarkupTag(node.Name, null, out var tag) || !tag.TryGetControl(node, out var control))
                 continue;
 
             parent.Children.Add(control);
@@ -252,7 +252,7 @@ internal struct ChatRichTextEntry
             return node.Value.StringValue ?? "";
 
         //Skip the node if there is no markup tag for it.
-        if (!_tagManager.TryGetMarkupTag(node.Name, out var tag))
+        if (!_tagManager.TryGetMarkupTag(node.Name, null, out var tag))
             return "";
 
         if (!node.Closing)

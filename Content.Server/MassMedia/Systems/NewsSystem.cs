@@ -13,7 +13,6 @@ using Content.Shared.CartridgeLoader;
 using Content.Shared.CartridgeLoader.Cartridges;
 using Content.Server.CartridgeLoader;
 using Robust.Shared.Timing;
-using TerraFX.Interop.Windows;
 using Content.Server.Popups;
 
 namespace Content.Server.MassMedia.Systems;

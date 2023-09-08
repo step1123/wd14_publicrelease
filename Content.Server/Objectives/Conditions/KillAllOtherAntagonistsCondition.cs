@@ -3,7 +3,6 @@ using Content.Server.Mind.Components;
 using Content.Server.Objectives.Interfaces;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Internal.TypeSystem;
 using Robust.Shared.Utility;
 using System.Linq;
 
