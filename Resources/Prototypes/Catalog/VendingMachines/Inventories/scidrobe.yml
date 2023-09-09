@@ -1,16 +1,23 @@
 - type: vendingMachineInventory
   id: SciDrobeInventory
   startingInventory:
-    ClothingBackpackScience: 3
-    ClothingBackpackSatchelScience: 3
-    ClothingBackpackDuffelScience: 3
-    ClothingUniformJumpsuitScientist: 3
-    ClothingUniformJumpskirtScientist: 3
-    ClothingUniformJumpsuitScientistFormal: 3
-    ClothingOuterCoatRnd: 3
-    ClothingShoesColorWhite: 3
-    ClothingNeckTieSci: 3
-    ClothingHeadsetScience: 3
-    ClothingMaskGas: 3
-    ClothingOuterWinterSci: 2
-    ClothingNeckScarfStripedPurple: 3
+    #WD edit start
+    ClothingBackpackScience: 6
+    ClothingBackpackSatchelScience: 6
+    ClothingBackpackDuffelScience: 6
+    ClothingHeadHatBeretRND: 6
+    ClothingHeadsetScience: 6
+    ClothingMaskGas: 6
+    ClothingNeckScarfStripedPurple: 6
+    ClothingNeckTieSci: 6
+    ClothingOuterCoatRnd: 6
+    ClothingOuterWinterSci: 6
+    ClothingUniformJumpsuitScientist: 6
+    ClothingUniformJumpskirtScientist: 6
+    ClothingUniformJumpsuitScientistFormal: 6
+    ClothingHandsGlovesLatex: 6
+    ClothingShoesColorWhite: 6
+    ClothingOuterBioScientist: 2
+    ClothingHeadHatHoodBioScientist: 2
+    #WD edit end
+

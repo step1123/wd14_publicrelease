@@ -1,16 +1,18 @@
 - type: vendingMachineInventory
   id: PTechInventory
   startingInventory:
-    PassengerPDA: 5
-    ClearPDA: 5
-    PassengerIDCard: 5
-    ClothingHeadsetGrey: 5
+    #WD edit start
+    PassengerPDA: 7
+    ClearPDA: 7
+    PassengerIDCard: 7
+    ClothingHeadsetGrey: 7
     RubberStampApproved: 1
     RubberStampDenied: 1
-    Paper: 10
-    EncryptionKeyCargo: 2
-    EncryptionKeyEngineering: 2
-    EncryptionKeyMedical: 2
-    EncryptionKeyScience: 2
-    EncryptionKeySecurity: 1
+    Paper: 13
+    EncryptionKeyCargo: 3
+    EncryptionKeyEngineering: 3
+    #WD edit end
+    EncryptionKeyMedical: 3
+    EncryptionKeyScience: 3
+    EncryptionKeySecurity: 3
     EncryptionKeyService: 3

@@ -1,15 +1,19 @@
 - type: vendingMachineInventory
   id: JaniDrobeInventory
   startingInventory:
-    ClothingUniformJumpsuitJanitor: 2
-    ClothingUniformJumpskirtJanitor: 2
-    ClothingShoesColorBlack: 2
-    ClothingHeadHatPurplesoft: 2
-    ClothingBeltJanitor: 2
-    ClothingHeadsetService: 2
-    ClothingOuterWinterJani: 2
-    ClothingNeckScarfStripedPurple: 3
-
+    #WD edit start
+    ClothingBackpack: 4
+    ClothingHeadHatPurplesoft: 4
+    ClothingHeadsetService: 4
+    ClothingNeckScarfStripedPurple: 4
+    ClothingOuterWinterJani: 4
+    ClothingUniformJumpsuitJanitor: 4
+    ClothingUniformJumpskirtJanitor: 4
+    ClothingBeltJanitor: 4
+    ClothingHandsGlovesColorBlack: 4
+    ClothingShoesGaloshes: 2
+    ClothingShoesColorBlack: 4
+    #WD edit end
   emaggedInventory:
     ClothingUniformJumpskirtJanimaid: 2
-    ClothingUniformJumpskirtJanimaidmini: 1
+    ClothingUniformJumpskirtJanimaidmini: 2 #WD edit

@@ -1,20 +1,24 @@
 - type: vendingMachineInventory
   id: SecDrobeInventory
   startingInventory:
-    ClothingBackpackSecurity: 3
-    ClothingBackpackSatchelSecurity: 3
-    ClothingBackpackDuffelSecurity: 3
-    ClothingUniformJumpsuitSec: 3
-    ClothingShoesBootsJack: 3
-    ClothingHeadHatBeret: 3
-    ClothingHeadHatSecsoft: 3
-    ClothingHeadBandRed: 3
-    ClothingHandsGlovesColorBlack: 3
-    ClothingUniformJumpskirtSec: 3
-    ClothingUniformJumpsuitSecGrey: 3
-    ClothingUniformJumpsuitSecBlue: 3
-    ClothingHeadsetSecurity: 3
-    ClothingOuterWinterSec: 2
+    #WD edit start
+    ClothingBackpackSecurity: 4
+    ClothingBackpackSatchelSecurity: 4
+    ClothingBackpackDuffelSecurity: 4
+    ClothingHeadHatBeret: 4
+    ClothingHeadHatSecsoft: 4
+    ClothingHeadBandRed: 4
+    ClothingHeadsetSecurity: 4
+    ClothingEyesGlassesSecurity: 4
+    ClothingOuterWinterSec: 4
+    #WD edit end
     ClothingOuterArmorBasic: 4
-    ClothingEyesBlindfold: 1
-    ClothingShoesBootsCombat: 1
+    #WD edit start
+    ClothingUniformJumpsuitSec: 4
+    ClothingUniformJumpskirtSec: 4
+    ClothingUniformJumpsuitSecGrey: 4
+    ClothingUniformJumpsuitSecBlue: 4
+    ClothingHandsGlovesColorBlack: 4
+    ClothingShoesBootsJack: 4
+    ClothingShoesBootsCombat: 4
+    #WD edit end

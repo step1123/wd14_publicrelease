@@ -1,16 +1,24 @@
 - type: vendingMachineInventory
   id: DetDrobeInventory
   startingInventory:
+    ClothingBackpackSatchelLeather: 2 #WD edit
+    ClothingHeadHatFedoraGrey: 2 #WD edit
+    ClothingHeadHatFedoraBrown: 2 #WD edit
+    ClothingHeadsetSecurity: 2 #WD edit
     ClothingUniformJumpsuitDetective: 2
     ClothingUniformJumpskirtDetective: 2
-    ClothingShoesColorBrown: 2
     ClothingOuterCoatDetective: 2
-    ClothingHeadHatFedoraBrown: 2
+    ClothingOuterVestDetective: 2 #WD edit
+    ClothingOuterCoatGentle: 1 #WD edit
+    ClothingOuterCoatInspector: 1 #WD edit
+    ClothingOuterCoatJensen: 1 #WD edit
     ClothingUniformJumpsuitDetectiveGrey: 2
     ClothingUniformJumpskirtDetectiveGrey: 2
-    ClothingOuterVestDetective: 2
     ClothingNeckTieDet: 2
-    ClothingHeadHatFedoraGrey: 2
+    ClothingShoesLeather: 2 #WD edit
+    ClothingShoesColorBrown: 2 #WD edit
     ClothingHandsGlovesColorBlack: 2
     ClothingHandsGlovesLatex: 2
-    ClothingHeadsetSecurity: 2
+    CigPackGreen: 4 #WD edit
+    SmokingPipeFilledTobacco: 1 #WD edit
+    Matchbox: 2 #WD edit

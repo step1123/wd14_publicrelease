@@ -1,14 +1,22 @@
 ﻿- type: vendingMachineInventory
   id: SalvageEquipmentInventory
   startingInventory:
-    Crowbar: 2
-    Pickaxe: 4
-    OreBag: 4
-    Flare: 4
-    FlashlightLantern: 2
+    #WD edit start
+    WeaponProtoKineticAccelerator: 4
+    WeaponCrusher: 4
+    WeaponCrusherDagger: 4
+    WeaponGrapplingGun: 3
+    HandheldGPSBasic: 10
+    Crowbar: 6
+    BoxMRE: 6
+    Pickaxe: 6
+    SurvivalKnife: 3
+    OreBag: 6
+    Flare: 20
+    FlashlightLantern: 6
+    #WD edit end
     Floodlight: 2
-    HandheldGPSBasic: 2
-    RadioHandheld: 2
-    WeaponCrusher: 2
-    WeaponCrusherDagger: 2
-    WeaponProtoKineticAccelerator: 2
+    RadioHandheld: 10 #WD edit
+    StackHolderHealingItem: 2 #WD edit
+    InflatableWallStack1: 40 #WD edit
+    InflatableDoorStack1: 10 #WD edit

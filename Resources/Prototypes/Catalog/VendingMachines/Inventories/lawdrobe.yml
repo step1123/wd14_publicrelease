@@ -1,19 +1,25 @@
 - type: vendingMachineInventory
   id: LawDrobeInventory
   startingInventory:
-    ClothingUniformJumpsuitLawyerBlue: 1
-    ClothingUniformJumpskirtLawyerBlue: 1
-    ClothingUniformJumpsuitLawyerPurple: 1
-    ClothingUniformJumpskirtLawyerPurple: 1
-    ClothingUniformJumpsuitLawyerRed: 1
-    ClothingUniformJumpskirtLawyerRed: 1
-    ClothingUniformJumpsuitLawyerBlack: 1
-    ClothingUniformJumpskirtLawyerBlack: 1
-    ClothingUniformJumpsuitLawyerGood: 1
-    ClothingUniformJumpskirtLawyerGood: 1
-    ClothingShoesBootsLaceup: 2
+    ClothingBackpack: 2 #WD edit
     ClothingHeadsetService: 2
+    ClothingEyesGlassesSunglasses: 2 #WD edit
+    ClothingEyesGlasses: 2 #WD edit
     ClothingNeckLawyerbadge: 2
+    #WD edit start
+    ClothingUniformJumpsuitLawyerBlue: 2
+    ClothingUniformJumpskirtLawyerBlue: 2
+    ClothingUniformJumpsuitLawyerPurple: 2
+    ClothingUniformJumpskirtLawyerPurple: 2
+    ClothingUniformJumpsuitLawyerRed: 2
+    ClothingUniformJumpskirtLawyerRed: 2
+    ClothingUniformJumpsuitLawyerBlack: 2
+    ClothingUniformJumpskirtLawyerBlack: 2
+    ClothingUniformJumpsuitLawyerGood: 2
+    ClothingUniformJumpskirtLawyerGood: 2
+    ClothingHandsGlovesColorWhite: 2
+    ClothingShoesBootsLaceup: 2
+    #WD edit end
     RubberStampLawyer: 1
   emaggedInventory:
     CyberPen: 1

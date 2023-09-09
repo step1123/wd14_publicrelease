@@ -3,26 +3,24 @@
   startingInventory:
     ClothingUniformJumpsuitChaplain: 2
     ClothingUniformJumpskirtChaplain: 2
-    ClothingUniformJumpsuitMonasticRobeDark: 1
-    ClothingUniformJumpsuitMonasticRobeLight: 1
-    ClothingOuterHoodieChaplain: 1
-    ClothingOuterHoodieBlack: 1
-    ClothingHeadHatHoodChaplainHood: 1
-    ClothingHeadHatHoodNunHood: 1
-    ClothingOuterNunRobe: 1
-    ClothingHeadHatFez: 1
-    ClothingHeadHatPlaguedoctor: 1
-    ClothingHeadHatWitch: 1
-    ClothingHeadHatWitch1: 1
-    ClothingOuterPlagueSuit: 1
-    ClothingMaskPlague: 1
+    #WD edit start
+    ClothingUniformJumpsuitMonasticRobeDark: 2
+    ClothingUniformJumpsuitMonasticRobeLight: 2
+    ClothingOuterHoodieChaplain: 2
+    ClothingOuterHoodieBlack: 2
+    ClothingHeadHatHoodChaplainHood: 2
+    ClothingHeadHatHoodNunHood: 2
+    ClothingOuterNunRobe: 2
+    ClothingHeadHatFez: 2
+    ClothingHeadHatPlaguedoctor: 2
+    ClothingHeadHatWitch: 2
+    ClothingHeadHatWitch1: 2
+    ClothingOuterPlagueSuit: 2
+    ClothingMaskPlague: 2
+    #WD edit end
     ClothingHeadsetService: 2
   emaggedInventory:
-    ClothingOuterArmorCult: 1
-    ClothingHeadHelmetCult: 1
-    ClothingOuterRobesCult: 3
-    ClothingHeadHatHoodCulthood: 3
-    ClothingShoesCult: 4
+    #WD edit - Deleted cult armor
     BedsheetCult: 4
     BibleNecronomicon: 1
     ClothingNeckScarfStripedBlack: 3

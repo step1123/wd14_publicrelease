@@ -41,6 +41,22 @@
     ClothingUniformJumpsuitKimono: 1
     ClothingHeadHatCasa: 1
     ClothingHeadHatHairflower: 1
+    #WD edit start
+    ClothingShoesClownLarge: 1
+    ClothingMaskItalianMoustache: 1
+    ClothingShoesFlippers: 1
+    ClothingMaskRat: 1
+    ClothingMaskRaven: 1
+    ClothingMaskBear: 1
+    ClothingMaskJackal: 1
+    ClothingMaskFox: 1
+    ClothingShoeSlippersDuck: 3
+    ClothingShoesSlippers: 1
+    ClothingHeadHatHoodMoth: 2
+    ClothingNeckCloakMoth: 2
+    ClothingOuterDogi: 1
+    ClothingHeadHatMagician: 1
+    #WD edit end
   emaggedInventory:
     ClothingShoesBling: 1
     ClothingOuterDogi: 1

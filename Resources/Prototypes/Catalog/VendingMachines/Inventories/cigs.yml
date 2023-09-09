@@ -1,16 +1,16 @@
 - type: vendingMachineInventory
   id: CigaretteMachineInventory
   startingInventory:
-    CigPackGreen: 2
-    CigPackRed: 2
-    CigPackBlue: 2
-    CigPackBlack: 2
+    CigPackGreen: 3 #WD edit
+    CigPackRed: 3 #WD edit
+    CigPackBlue: 3 #WD edit
+    CigPackBlack: 3 #WD edit
     CigarCase: 1
-    SmokingPipeFilledTobacco: 1
+    SmokingPipeFilledTobacco: 3 #WD edit
     Vape: 1
     Matchbox: 5
     PackPaperRollingFilters: 3
-    CheapLighter: 4
-    Lighter: 1
+    CheapLighter: 5 #WD edit
+    Lighter: 2 #WD edit
   emaggedInventory:
-    CigPackSyndicate: 1
+    CigPackSyndicate: 2 #WD edit

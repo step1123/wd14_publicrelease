@@ -1,17 +1,21 @@
 - type: vendingMachineInventory
   id: EngiDrobeInventory
   startingInventory:
-    ClothingBackpackDuffelEngineering: 3
-    ClothingBackpackSatchelEngineering: 3
-    ClothingBackpackEngineering: 3
-    ClothingUniformJumpsuitEngineering: 3
-    ClothingUniformJumpskirtEngineering: 3
-    ClothingUniformJumpsuitEngineeringHazard: 3
-    ClothingShoesColorBlack: 3
-    ClothingOuterVestHazard: 3
-    ClothingShoesBootsWork: 3
-    ClothingHeadHatHardhatYellow: 3
-    ClothingHeadHatHardhatOrange: 3
-    ClothingHeadsetEngineering: 3
-    ClothingOuterWinterEngi: 2
-    ClothingNeckScarfStripedOrange: 3
+    #WD edit start
+    ClothingBackpackDuffelEngineering: 5
+    ClothingBackpackSatchelEngineering: 5
+    ClothingBackpackEngineering: 5
+    ClothingHeadHatBeretEngineering: 5
+    ClothingHeadHatHardhatYellow: 5
+    ClothingHeadHatHardhatOrange: 5
+    ClothingHeadsetEngineering: 5
+    ClothingNeckScarfStripedOrange: 5
+    ClothingOuterVestHazard: 5
+    ClothingOuterWinterEngi: 5
+    ClothingUniformJumpsuitEngineering: 5
+    ClothingUniformJumpskirtEngineering: 5
+    ClothingUniformJumpsuitEngineeringHazard: 5
+    ClothingBeltUtility: 5
+    ClothingShoesColorBlack: 5
+    ClothingShoesBootsWork: 5
+    #WD edit end

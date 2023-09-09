@@ -1,8 +1,8 @@
 ﻿- type: vendingMachineInventory
   id: DinnerwareInventory
   startingInventory:
-    ButchCleaver: 1
-    KitchenKnife: 5
+    ButchCleaver: 2 #WD edit
+    KitchenKnife: 3 #WD edit
     FoodBowlBig: 10
     FoodPlate: 10
     FoodPlateSmall: 10
