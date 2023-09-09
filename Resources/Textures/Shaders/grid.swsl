@@ -1,0 +1,60 @@
+﻿const highp float PI = 3.14;
+const highp float TARGET_COUNT = 15.0;
+const highp float GRID_CELL_SIZE = 0.1;
+
+highp vec2 getGridPosition(in highp vec2 uv) {
+	return vec2((uv.x / GRID_CELL_SIZE), (uv.y / GRID_CELL_SIZE));
+}
+
+void fragment() {
+    // Normalized frag coordinates
+    highp vec2 uv = 2.0 * FRAGCOORD.xy / vec2(1024) - 1.0;
+
+    highp vec2 gridBoundUV = getGridPosition(uv);
+
+    highp vec2 cellBoundUV = gridBoundUV - round(gridBoundUV);
+
+    highp float redIntensity = 0.0;
+    highp float blueIntensity = 0.0;
+
+    for (highp float targetIndex = 0.0; targetIndex < TARGET_COUNT; ++targetIndex)
+    {
+        highp float f_targetIndex = targetIndex;
+
+        highp float trigOffset = (PI / TARGET_COUNT) * f_targetIndex;
+        highp vec2 targetPosition = vec2(sin(TIME + trigOffset) * 0.51 + tan(f_targetIndex + trigOffset), cos(TIME + trigOffset) * 0.1 + sin(f_targetIndex + trigOffset));
+        highp vec2 gridBoundTargetPosition = getGridPosition(targetPosition);
+        highp vec2 edgeBoundPosition = vec2(gridBoundTargetPosition.x, gridBoundTargetPosition.y);
+
+        // change the op between the lengths to subtraction for some extreme strobe effects
+        highp float distanceToTarget = length(gridBoundUV - round(gridBoundTargetPosition)) + length((gridBoundUV) - (edgeBoundPosition));
+
+    	redIntensity += length(GRID_CELL_SIZE / (distanceToTarget * 9.5)  / cellBoundUV) * GRID_CELL_SIZE;
+
+    }
+
+    for (highp float targetIndex = 0.0; targetIndex < TARGET_COUNT; ++targetIndex)
+    {
+        highp float f_targetIndex = targetIndex;
+
+        highp float trigOffset = (PI / TARGET_COUNT) * f_targetIndex;
+
+        highp vec2 targetPosition = vec2(sin(TIME + trigOffset) * 0.51 + sin(f_targetIndex + trigOffset), tan(TIME + trigOffset) * 0.1 + sin(f_targetIndex + trigOffset));
+        highp vec2 gridBoundTargetPosition = getGridPosition(targetPosition);
+        highp vec2 edgeBoundPosition = vec2(gridBoundTargetPosition.x, gridBoundTargetPosition.y);
+
+        highp float distanceToTarget = length(gridBoundUV - round(gridBoundTargetPosition)) + distance(gridBoundUV, edgeBoundPosition);
+
+    	blueIntensity += length(GRID_CELL_SIZE / (distanceToTarget * 15.5)  / cellBoundUV) * GRID_CELL_SIZE;
+
+    }
+
+
+    highp vec3 col = vec3(smoothstep(0.2, 1.0, redIntensity + blueIntensity));
+
+	col += redIntensity * vec3(0.0,1.0,0.0);
+   	col += blueIntensity * vec3(0.0,0.0,1.0);
+
+    // Output to screen
+    COLOR = vec4(col,1.0);
+}

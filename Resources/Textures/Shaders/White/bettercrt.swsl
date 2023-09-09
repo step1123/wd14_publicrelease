@@ -3,15 +3,15 @@ uniform sampler2D SCREEN_TEXTURE;
 const highp float PI = 3.1415926535;
 
 // ブラウン管のガラスの曲がり具合（フラットなやつは0.0でいいかな）
-const highp float crt_curve  = 0.02;
+const highp float crt_curve  = -0.09;
 // 走査線の濃さ
 const highp float crt_scan_line_color = 0.348;
 // 光量
-const highp float aperture_grille_rate = 0.5;
+const highp float aperture_grille_rate = 0.1;
 // RFスイッチ的ブラー
-const highp float rf_switch_esque_blur  = 1.1;
+const highp float rf_switch_esque_blur  = 1.5;
 // 白色ノイズ
-const highp float white_noise_rate = 0.05;
+const highp float white_noise_rate = 0.01;
 
 highp float random( highp vec2 pos )
 {

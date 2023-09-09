@@ -37,7 +37,7 @@ public sealed class ParallaxControl : Control
             var ourSize = PixelSize;
 
             var currentTime = (float) _timing.RealTime.TotalSeconds;
-            var offset = Offset + new Vector2(currentTime * 100f, currentTime * 0f);
+            var offset = Offset + new Vector2(currentTime * 0f, currentTime * 100f);
 
             if (layer.Config.Tiled)
             {
