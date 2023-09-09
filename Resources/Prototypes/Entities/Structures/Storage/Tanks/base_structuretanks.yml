@@ -45,6 +45,15 @@
       behaviors:
       - !type:SolutionExplosionBehavior
         solution: tank
+    #WD edit start
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Laser
+        damage: 5
+      behaviors:
+        - !type:SolutionExplosionBehavior
+          solution: tank
+    #WD edit end
     - trigger:
         !type:DamageTrigger
         damage: 10

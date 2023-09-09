@@ -13,6 +13,8 @@ damage-value =
         [Slash] рубящего
         [Piercing] проникающего
         [Heat] теплового
+        [Laser] лазерного
         [Radiation] радиационного
         [Caustic] кислотного
+        [Structural] структурного
     }[/color] урона.
