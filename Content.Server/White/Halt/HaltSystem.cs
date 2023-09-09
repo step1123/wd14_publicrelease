@@ -4,6 +4,8 @@ using Content.Server.Chat.Systems;
 using Content.Shared.Actions.ActionTypes;
 using Robust.Shared.Utility;
 using Content.Shared.Chat;
+using Content.Shared.Humanoid;
+using Content.Shared.Inventory;
 using Content.Shared.White.Other;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -26,7 +28,10 @@ namespace Content.Server.White.Halt
 
         private void OnGetEquipped(EntityUid uid, HaltComponent component, GetItemActionsEvent args)
         {
-            if (args.InHands)
+            if (args.SlotFlags != SlotFlags.MASK)
+                return;
+
+            if (!HasComp<HumanoidAppearanceComponent>(args.User))
                 return;
 
             if (!_prototypeManager.TryIndex<InstantActionPrototype>("Halt", out var action))

@@ -410,7 +410,11 @@ public abstract class SharedActionsSystem : EntitySystem
     #region EquipHandlers
     private void OnDidEquip(EntityUid uid, ActionsComponent component, DidEquipEvent args)
     {
-        var ev = new GetItemActionsEvent(args.SlotFlags);
+        var ev = new GetItemActionsEvent(args.SlotFlags)
+        {
+            User = args.Equipee
+        };
+
         RaiseLocalEvent(args.Equipment, ev);
 
         if (ev.Actions.Count == 0)

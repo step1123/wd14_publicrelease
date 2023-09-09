@@ -21,6 +21,11 @@ public sealed class GetItemActionsEvent : EntityEventArgs
     public SortedSet<ActionType> Actions = new();
 
     /// <summary>
+    ///     User that receiving this event.
+    /// </summary>
+    public EntityUid User;
+
+    /// <summary>
     ///     Slot flags for the inventory slot that this item got equipped to. Null if not in a slot (i.e., if equipped to hands).
     /// </summary>
     public SlotFlags? SlotFlags;
