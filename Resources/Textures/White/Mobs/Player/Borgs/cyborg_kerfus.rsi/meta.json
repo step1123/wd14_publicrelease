@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "license": "CC-BY-3.0",
+  "copyright": "ne ebu",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+      {
+          "name": "icon"
+      },
+    {
+      "name": "kerfusNT",
+      "directions": 4
+    },
+    {
+      "name": "eyes-kerfusNT",
+      "directions": 4,
+      "delays": [
+        [
+          60,
+          0.5,
+          2,
+          60,
+          0.5,
+          2,
+          0.5,
+          60,
+          2,
+          2,
+          60,
+          2
+        ],
+        [
+          60,
+          0.5,
+          2,
+          60,
+          0.5,
+          2,
+          0.5,
+          60,
+          2,
+          2,
+          60,
+          2
+        ],
+        [
+          60,
+          0.5,
+          2,
+          60,
+          0.5,
+          2,
+          0.5,
+          60,
+          2,
+          2,
+          60,
+          2
+        ],
+        [
+          60,
+          0.5,
+          2,
+          60,
+          0.5,
+          2,
+          0.5,
+          60,
+          2,
+          2,
+          60,
+          2
+        ]
+      ]
+    },
+    {
+      "name": "kerfusFlushed",
+      "directions": 4
+    },
+    {
+      "name": "eyes-kerfusFlushed",
+      "directions": 4
+    },
+    {
+      "name": "kerfusMaid",
+      "directions": 4
+    },
+    {
+      "name": "eyes-kerfusMaid",
+      "directions": 4,
+      "delays": [
+        [
+          60,
+          2,
+          60,
+          2
+        ],
+        [
+          60,
+          2,
+          60,
+          2
+        ],
+        [
+          60,
+          2,
+          60,
+          2
+        ],
+        [
+          60,
+          2,
+          60,
+          2
+        ]
+      ]
+    },
+    {
+      "name": "kerfusNoERP",
+      "directions": 4
+    },
+    {
+      "name": "eyes-kerfusNoERP",
+      "directions": 4
+    }
+  ]
+}

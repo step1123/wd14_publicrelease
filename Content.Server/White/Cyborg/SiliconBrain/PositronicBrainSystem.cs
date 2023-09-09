@@ -1,14 +1,10 @@
-using Content.Server.DoAfter;
 using Content.Server.Ghost.Roles.Components;
-using Content.Server.Mind;
 using Content.Server.Mind.Components;
 using Content.Server.Popups;
-using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
-using Content.Shared.White.Cyborg.Components;
 using Content.Shared.White.Cyborg.SiliconBrain;
 using Content.Shared.White.Cyborg.SiliconBrain.Components;
 using Content.Shared.White.Cyborg.SiliconBrain.Systems;
@@ -18,7 +14,6 @@ namespace Content.Server.White.Cyborg.SiliconBrain;
 public sealed class PositronicBrainSystem : SharedPositronicBrainSystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
 
     public override void Initialize()
@@ -44,8 +39,9 @@ public sealed class PositronicBrainSystem : SharedPositronicBrainSystem
 
     private void OnInserted(EntityUid uid, PositronicBrainComponent component, BrainInsertEvent args)
     {
-        if (!TryComp<SiliconBrainComponent>(uid,out var siliconBrainComponent) ||
-            !siliconBrainComponent.ParentUid.HasValue || HasComp<MindContainerComponent>(siliconBrainComponent.ParentUid.Value))
+        if (!TryComp<SiliconBrainComponent>(uid, out var siliconBrainComponent) ||
+            !siliconBrainComponent.ParentUid.HasValue ||
+            HasComp<MindContainerComponent>(siliconBrainComponent.ParentUid.Value))
             return;
 
         SearchMind(uid);

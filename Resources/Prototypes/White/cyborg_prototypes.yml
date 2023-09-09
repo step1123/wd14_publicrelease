@@ -24,4 +24,18 @@
   name: Сервисный киборг
   description: Мяу! обслуживайте персонал в заведениях, таких как бар!
   cyborgPrototype: PlayerCyborgNeko
-  icon: /Textures/White/Mobs/Player/Borgs/cyborg_neko.rsi/icon.png
+  icon: /Textures/White/Mobs/Player/Borgs/cyborg_kerfus.rsi/icon.png
+
+- type: cyborg
+  id: Miner
+  name: Шахтёрский киборг
+  description: ROCK AND STONE!
+  cyborgPrototype: PlayerCyborgMiner
+  icon: /Textures/White/Mobs/Player/Borgs/cyborg_miner.rsi/icon.png
+
+- type: cyborg
+  id: Clown
+  name: Клуня-киборг
+  description: HONK!
+  cyborgPrototype: PlayerCyborgClown
+  icon: /Textures/White/Mobs/Player/Borgs/cyborg_clown.rsi/icon.png

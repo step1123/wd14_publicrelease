@@ -287,6 +287,40 @@
           - FireExtinguisherBorg
 
 - type: entity
+  id: CyborgInstrumentModuleFilledMiner
+  parent: CyborgInstrumentModule
+  suffix: filled Miner
+  components:
+    - type: ContainerFill
+      containers:
+        instrument_slots:
+          - MiningDrill
+          - OreBag
+          - FireExtinguisherBorg
+          - GasAnalyzer
+          - GeigerCounter
+          - Crowbar
+          - Wrench
+          - HandheldGPSBasic
+          - RadioHandheld
+
+- type: entity
+  id: CyborgInstrumentModuleFilledClown
+  parent: CyborgInstrumentModule
+  suffix: filled Clown
+  components:
+    - type: ContainerFill
+      containers:
+        instrument_slots:
+          - BikeHorn
+          - BikeHornInstrument
+          - LauncherCreamPieBorg
+          - ClownRecorder
+          - RubberStampClown
+          - ToyHammer
+          - ToySword
+
+- type: entity
   id: CyborgInstrumentModuleFilledSyndie
   parent: CyborgInstrumentModule
   suffix: filled syndie

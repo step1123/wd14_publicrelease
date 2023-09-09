@@ -15122,6 +15122,11 @@ entities:
       type: Transform
 - proto: BorgChargerEntity
   entities:
+  - uid: 14829
+    components:
+    - pos: 50.5,-1.5
+      parent: 60
+      type: Transform
   - uid: 14850
     components:
     - pos: 51.5,14.5
@@ -133333,6 +133338,13 @@ entities:
     - pos: 48.5,-17.5
       parent: 60
       type: Transform
+- proto: SpawnPointPlayerCyborgClown
+  entities:
+  - uid: 14832
+    components:
+    - pos: 25.5,-11.5
+      parent: 60
+      type: Transform
 - proto: SpawnPointPlayerCyborgEng
   entities:
   - uid: 14892
@@ -133355,6 +133367,18 @@ entities:
   - uid: 15028
     components:
     - pos: 45.5,-22.5
+      parent: 60
+      type: Transform
+- proto: SpawnPointPlayerCyborgMiner
+  entities:
+  - uid: 14824
+    components:
+    - pos: 45.5,-1.5
+      parent: 60
+      type: Transform
+  - uid: 14826
+    components:
+    - pos: 49.5,-1.5
       parent: 60
       type: Transform
 - proto: SpawnPointPlayerCyborgNeko

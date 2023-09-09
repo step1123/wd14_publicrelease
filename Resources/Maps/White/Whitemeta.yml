@@ -14745,6 +14745,16 @@ entities:
       type: Transform
 - proto: BorgChargerEntity
   entities:
+  - uid: 11184
+    components:
+    - pos: 23.5,7.5
+      parent: 5350
+      type: Transform
+  - uid: 11185
+    components:
+    - pos: -42.5,21.5
+      parent: 5350
+      type: Transform
   - uid: 11194
     components:
     - pos: 9.5,-34.5
@@ -139548,7 +139558,7 @@ entities:
     - pos: 9.5,-47.5
       parent: 5350
       type: Transform
-    - SecondsUntilStateChange: -30036.838
+    - SecondsUntilStateChange: -30133.588
       state: Closing
       type: Door
     - links:
@@ -139559,7 +139569,7 @@ entities:
     - pos: 10.5,-47.5
       parent: 5350
       type: Transform
-    - SecondsUntilStateChange: -30036.838
+    - SecondsUntilStateChange: -30133.588
       state: Closing
       type: Door
     - links:
@@ -139570,7 +139580,7 @@ entities:
     - pos: 11.5,-47.5
       parent: 5350
       type: Transform
-    - SecondsUntilStateChange: -30036.838
+    - SecondsUntilStateChange: -30133.588
       state: Closing
       type: Door
     - links:
@@ -139581,7 +139591,7 @@ entities:
     - pos: 13.5,-47.5
       parent: 5350
       type: Transform
-    - SecondsUntilStateChange: -30036.838
+    - SecondsUntilStateChange: -30133.588
       state: Closing
       type: Door
     - links:
@@ -139592,7 +139602,7 @@ entities:
     - pos: 14.5,-47.5
       parent: 5350
       type: Transform
-    - SecondsUntilStateChange: -30036.838
+    - SecondsUntilStateChange: -30133.588
       state: Closing
       type: Door
     - links:
@@ -139603,7 +139613,7 @@ entities:
     - pos: 15.5,-47.5
       parent: 5350
       type: Transform
-    - SecondsUntilStateChange: -30036.838
+    - SecondsUntilStateChange: -30133.588
       state: Closing
       type: Door
     - links:
@@ -144080,6 +144090,13 @@ entities:
     - pos: -7.5,-33.5
       parent: 5350
       type: Transform
+- proto: SpawnPointPlayerCyborgClown
+  entities:
+  - uid: 11183
+    components:
+    - pos: 31.5,-1.5
+      parent: 5350
+      type: Transform
 - proto: SpawnPointPlayerCyborgEng
   entities:
   - uid: 11213
@@ -144102,6 +144119,18 @@ entities:
   - uid: 11210
     components:
     - pos: -15.5,-29.5
+      parent: 5350
+      type: Transform
+- proto: SpawnPointPlayerCyborgMiner
+  entities:
+  - uid: 11186
+    components:
+    - pos: -41.5,27.5
+      parent: 5350
+      type: Transform
+  - uid: 11187
+    components:
+    - pos: -40.5,27.5
       parent: 5350
       type: Transform
 - proto: SpawnPointPlayerCyborgNeko

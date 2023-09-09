@@ -2,10 +2,11 @@
   id: MedicalCyborg
   name: medical-borg
   description: MedicalCyborg
-  playTimeTracker: JobPassenger
+  playTimeTracker: JobMedicalDoctor
   startingGear: MedicalCyborgGear
   requirements:
-    - !type:OverallPlaytimeRequirement
+    - !type:DepartmentTimeRequirement
+      department: Medical
       time: 36000 #10 hrs
   icon: "MedicalDoctor"
   supervisors: job-supervisors-human
@@ -16,10 +17,11 @@
   id: SecurityCyborg
   name: security-borg
   description: SecurityCyborg
-  playTimeTracker: JobPassenger
+  playTimeTracker: JobSecurityOfficer
   startingGear: SecurityCyborgGear
   requirements:
-    - !type:OverallPlaytimeRequirement
+    - !type:DepartmentTimeRequirement
+      department: Security
       time: 36000 #10 hrs
   supervisors: job-supervisors-human
   jobEntity: PlayerCyborgSecurityBattery
@@ -30,10 +32,11 @@
   id: EngineerCyborg
   name: engineer-borg
   description: EngineerCyborg
-  playTimeTracker: JobPassenger
+  playTimeTracker: JobStationEngineer
   startingGear: EngineerCyborgGear
   requirements:
-    - !type:OverallPlaytimeRequirement
+    - !type:DepartmentTimeRequirement
+      department: Engineering
       time: 36000 #10 hrs
   supervisors: job-supervisors-human
   jobEntity: PlayerCyborgEngBattery
@@ -44,7 +47,7 @@
   id: NekoCyborg
   name: neko-borg
   description: NekoCyborg
-  playTimeTracker: JobPassenger
+  playTimeTracker: JobServiceWorker
   startingGear: NekoCyborgGear
   requirements:
     - !type:OverallPlaytimeRequirement
@@ -53,6 +56,35 @@
   jobEntity: PlayerCyborgNekoBattery
   canBeAntag: false
   icon: Bartender
+
+- type: job
+  id: MinerCyborg
+  name: miner-borg
+  description: MinerCyborg
+  playTimeTracker: JobSalvageSpecialist
+  startingGear: MinerCyborgGear
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Cargo
+      time: 36000 #10 hrs
+  supervisors: job-supervisors-human
+  jobEntity: PlayerCyborgMinerBattery
+  canBeAntag: false
+  icon: ShaftMiner
+
+- type: job
+  id: ClownCyborg
+  name: clown-borg
+  description: ClownCyborg
+  playTimeTracker: JobClown
+  startingGear: ClownCyborgGear
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 10000
+  supervisors: job-supervisors-human
+  jobEntity: PlayerCyborgClownBattery
+  canBeAntag: false
+  icon: Clown
 
 
 # ёбанный костыль! Чтобы борги отображались при выборе профессии..
@@ -76,6 +108,16 @@
   id: NekoCyborgGear
   equipment:
     outerClothing: ClothingIconNekoCyborgGear
+
+- type: startingGear
+  id: ClownCyborgGear
+  equipment:
+    outerClothing: ClothingIconClownCyborgGear
+
+- type: startingGear
+  id: MinerCyborgGear
+  equipment:
+    outerClothing: ClothingIconMinerCyborgGear
 
 
 - type: entity
@@ -131,9 +173,47 @@
   components:
     - type: HumanHide
     - type: Sprite
-      sprite: White/Mobs/Player/Borgs/cyborg_neko.rsi
+      sprite: White/Mobs/Player/Borgs/cyborg_kerfus.rsi
       layers:
-        - state: robot
+        - state: kerfusNT
+        - state: eyes-kerfusNT
+          shader: unshaded
     - type: Clothing
-      sprite: White/Mobs/Player/Borgs/cyborg_neko.rsi
-      equippedState: robot
+      sprite: White/Mobs/Player/Borgs/cyborg_kerfus.rsi
+      equippedState: kerfusNT
+
+- type: entity
+  parent: ClothingOuterBaseLarge
+  id: ClothingIconClownCyborgGear
+  name: meow
+  description: mew
+  components:
+    - type: HumanHide
+    - type: Sprite
+      sprite: White/Mobs/Player/Borgs/cyborg_clown.rsi
+      layers:
+        - state: clown
+        - state: clown_e_r
+          shader: unshaded
+        - state: clown_l
+          shader: unshaded
+    - type: Clothing
+      sprite: White/Mobs/Player/Borgs/cyborg_clown.rsi
+      equippedState: clown
+
+- type: entity
+  parent: ClothingOuterBaseLarge
+  id: ClothingIconMinerCyborgGear
+  name: meow
+  description: mew
+  components:
+    - type: HumanHide
+    - type: Sprite
+      sprite: White/Mobs/Player/Borgs/cyborg_miner.rsi
+      layers:
+        - state: minerOLD
+        - state: miner_e
+          shader: unshaded
+    - type: Clothing
+      sprite: White/Mobs/Player/Borgs/cyborg_miner.rsi
+      equippedState: minerOLD

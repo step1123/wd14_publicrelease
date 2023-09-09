@@ -63,11 +63,39 @@
     - type: Sprite
       layers:
         - state: green
-        - sprite: White/Mobs/Player/Borgs/cyborg_neko.rsi
-          state: robot
+        - sprite: White/Mobs/Player/Borgs/cyborg_kerfus.rsi
+          state: kerfusNT
     - type: ConditionalSpawner
       prototypes:
         - PlayerCyborgNekoBattery
+
+- type: entity
+  name: PlayerCyborgMiner Spawner
+  id: SpawnMobPlayerCyborgMiner
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: green
+        - sprite: White/Mobs/Player/Borgs/cyborg_miner.rsi
+          state: minerOLD
+    - type: ConditionalSpawner
+      prototypes:
+        - PlayerCyborgMinerBattery
+
+- type: entity
+  name: PlayerCyborgClown Spawner
+  id: SpawnMobPlayerCyborgClown
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: green
+        - sprite: White/Mobs/Player/Borgs/cyborg_clown.rsi
+          state: clown
+    - type: ConditionalSpawner
+      prototypes:
+        - PlayerCyborgClownBattery
 
 - type: entity
   name: PlayerCyborgStart Spawner
@@ -135,5 +163,31 @@
     - type: Sprite
       layers:
         - state: green
-        - sprite: White/Mobs/Player/Borgs/cyborg_neko.rsi
-          state: robot
+        - sprite: White/Mobs/Player/Borgs/cyborg_kerfus.rsi
+          state: kerfusNT
+
+- type: entity
+  id: SpawnPointPlayerCyborgMiner
+  parent: SpawnPointJobBase
+  name: job spawner PlayerCyborgMiner
+  components:
+    - type: SpawnPoint
+      job_id: MinerCyborg
+    - type: Sprite
+      layers:
+        - state: green
+        - sprite: White/Mobs/Player/Borgs/cyborg_miner.rsi
+          state: minerOLD
+
+- type: entity
+  id: SpawnPointPlayerCyborgClown
+  parent: SpawnPointJobBase
+  name: job spawner PlayerCyborgClown
+  components:
+    - type: SpawnPoint
+      job_id: ClownCyborg
+    - type: Sprite
+      layers:
+        - state: green
+        - sprite: White/Mobs/Player/Borgs/cyborg_clown.rsi
+          state: clown

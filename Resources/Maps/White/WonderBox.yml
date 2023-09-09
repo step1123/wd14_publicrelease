@@ -20822,6 +20822,11 @@ entities:
     - pos: 2.5,-3.5
       parent: 2
       type: Transform
+  - uid: 18569
+    components:
+    - pos: -25.5,-13.5
+      parent: 2
+      type: Transform
   - uid: 18913
     components:
     - pos: -12.5,-28.5
@@ -142082,6 +142087,13 @@ entities:
     - pos: 49.5,-33.5
       parent: 2
       type: Transform
+- proto: SpawnPointPlayerCyborgClown
+  entities:
+  - uid: 1177
+    components:
+    - pos: 27.5,-1.5
+      parent: 2
+      type: Transform
 - proto: SpawnPointPlayerCyborgEng
   entities:
   - uid: 23837
@@ -142104,6 +142116,18 @@ entities:
   - uid: 23842
     components:
     - pos: 42.5,-1.5
+      parent: 2
+      type: Transform
+- proto: SpawnPointPlayerCyborgMiner
+  entities:
+  - uid: 7644
+    components:
+    - pos: -32.5,-19.5
+      parent: 2
+      type: Transform
+  - uid: 18248
+    components:
+    - pos: -30.5,-20.5
       parent: 2
       type: Transform
 - proto: SpawnPointPlayerCyborgNeko

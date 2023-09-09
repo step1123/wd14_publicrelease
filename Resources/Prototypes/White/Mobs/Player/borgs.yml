@@ -298,41 +298,104 @@
       range: 1200
     - type: StationLimitedNetwork
     - type: CyborgSensor
+    - type: OutfitChangeState
+      outfitClicked: ClothingUniformJumpskirtJanimaid
     - type: Sprite
       drawdepth: Mobs
       netsync: false
-      sprite: White/Mobs/Player/Borgs/cyborg_neko.rsi
+      sprite: White/Mobs/Player/Borgs/cyborg_kerfus.rsi
       layers:
-        - state: robot
-        - state: robot-flashlight
+        - state: kerfusNT
+          map: [ "kerfusState" ]
+        - state: eyes-kerfusNT
+          map: [ "kerfusEyesState" ]
+          shader: unshaded
+    - type: GenericVisualizer
+      visuals:
+        enum.OutfitChangeVisuals.Status:
+          kerfusState:
+            Standby: { state: kerfusNT }
+            Active: { state: kerfusMaid }
+          kerfusEyesState:
+            Standby: { state: eyes-kerfusNT }
+            Active: { state: eyes-kerfusMaid }
+
+# COCK AND STONE!
+- type: entity
+  parent: PlayerCyborgBase
+  id: PlayerCyborgMiner
+  name: miner cyborg
+  components:
+    - type: NpcFactionMember
+      factions:
+        - NanoTrasen
+    - type: Cyborg
+      prototype: Miner
+    - type: ContainerFill
+      containers:
+        module-slots:
+          - CyborgRadioModule
+          - CyborgLawsModule
+          - CyborgJetpackModule
+          - CyborgInstrumentModuleFilledMiner
+    - type: DeviceNetwork
+      deviceNetId: Wireless
+      transmitFrequencyId: CyborgSensor
+      receiveFrequencyId: CyborgAction
+    - type: WirelessNetworkConnection
+      range: 1200
+    - type: StationLimitedNetwork
+    - type: CyborgSensor
+    - type: Sprite
+      drawdepth: Mobs
+      netsync: false
+      sprite: White/Mobs/Player/Borgs/cyborg_miner.rsi
+      layers:
+        - state: minerOLD
+        - state: miner_e
+          shader: unshaded
+        - state: miner_l
           shader: unshaded
           visible: false
           map: [ "enum.ToggleVisuals.Layer" ]
-    - type: Absorbent
-      pickupAmount: 10
-    - type: UseDelay
-      delay: 2
-    - type: SolutionRegeneration
-      solution: absorbed
-      generated:
-        reagents:
-          - ReagentId: Water
-            Quantity: 10
-    - type: SolutionPurge
-      solution: absorbed
-      preserve:
-        - Water
-      quantity: 10
-    - type: SolutionContainerManager
-      solutions:
-        absorbed:
-          maxVol: 50
-    - type: MovementSpeedModifier
-      baseWalkSpeed: 2
-      baseSprintSpeed: 3
-    - type: NoSlip
-    - type: DrainableSolution
-      solution: drainBuffer
+
+# HONK!1!
+- type: entity
+  parent: PlayerCyborgBase
+  id: PlayerCyborgClown
+  name: clown cyborg
+  components:
+    - type: NpcFactionMember
+      factions:
+        - NanoTrasen
+    - type: Cyborg
+      prototype: Clown
+    - type: ContainerFill
+      containers:
+        module-slots:
+          - CyborgRadioModule
+          - CyborgLawsModule
+          - CyborgInstrumentModuleFilledClown
+    - type: DeviceNetwork
+      deviceNetId: Wireless
+      transmitFrequencyId: CyborgSensor
+      receiveFrequencyId: CyborgAction
+    - type: WirelessNetworkConnection
+      range: 1200
+    - type: StationLimitedNetwork
+    - type: CyborgSensor
+    - type: Sprite
+      drawdepth: Mobs
+      netsync: false
+      sprite: White/Mobs/Player/Borgs/cyborg_clown.rsi
+      layers:
+        - state: clown
+        - state: clown_e_r
+          shader: unshaded
+        - state: clown_l
+          shader: unshaded
+          visible: false
+          map: [ "enum.ToggleVisuals.Layer" ]
 
 # Synd
 - type: entity
@@ -569,6 +632,39 @@
           - CyborgRadioModule
           - CyborgLawsModule
           - CyborgInstrumentModuleFilledService
+        battery-slot:
+          - PowerCellHigh
+        brain-slot:
+          - PositronicBrain
+
+- type: entity
+  parent: PlayerCyborgMiner
+  id: PlayerCyborgMinerBattery
+  suffix: Battery
+  components:
+    - type: ContainerFill
+      containers:
+        module-slots:
+          - CyborgRadioModule
+          - CyborgLawsModule
+          - CyborgJetpackModule
+          - CyborgInstrumentModuleFilledMiner
+        battery-slot:
+          - PowerCellHigh
+        brain-slot:
+          - PositronicBrain
+
+- type: entity
+  parent: PlayerCyborgClown
+  id: PlayerCyborgClownBattery
+  suffix: Battery
+  components:
+    - type: ContainerFill
+      containers:
+        module-slots:
+          - CyborgRadioModule
+          - CyborgLawsModule
+          - CyborgInstrumentModuleFilledClown
         battery-slot:
           - PowerCellHigh
         brain-slot:

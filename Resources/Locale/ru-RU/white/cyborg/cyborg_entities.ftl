@@ -64,6 +64,8 @@ medical-borg = Медицинский киборг
 security-borg = Охранный киборг
 engineer-borg = Инженерный киборг
 neko-borg = Сервисный киборг
+miner-borg = Шахтёрский киборг
+clown-borg = Клуня киборг
 
 ent-DrinkShakerBorg = Шейкер
  .desc = Если было много пива

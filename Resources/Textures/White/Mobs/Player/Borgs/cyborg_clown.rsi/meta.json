@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "license": "CC-BY-3.0",
+  "copyright": "hz",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+      {
+          "name": "icon"
+      },
+    {
+      "name": "clown",
+      "directions": 4
+    },
+    {
+      "name": "clown_e",
+      "directions": 4
+    },
+    {
+      "name": "clown_e_r",
+      "directions": 4
+    },
+    {
+      "name": "clown_l",
+      "directions": 4
+    }
+  ]
+}
