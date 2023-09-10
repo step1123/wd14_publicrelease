@@ -161,6 +161,15 @@
   size: 0.7, 0.7
 
 - type: customGhost
+  id: nexmachina-ghost
+  ckey: nexmachina
+  sprite: White/Ghosts/nexmachina-ghost.rsi
+  alpha: 0.7
+  ghostName: CoreOverHeaven
+  ghostDescription: Плоф
+  size: 1.0, 1.0
+  
+- type: customGhost
   id: 17shu-ghost
   ckey: 17shu
   sprite: White/Ghosts/17shu-ghost.rsi
