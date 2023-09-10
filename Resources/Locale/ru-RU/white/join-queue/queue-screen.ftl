@@ -1,4 +1,5 @@
+queue-title = Очередь
 queue-quit = Выйти
-queue-position = Позиция в очереди
-queue-of = из
+queue-position = Ваша позиция:
+queue-total = Всего в очереди:
 queue-priority-join = Приоритетный вход

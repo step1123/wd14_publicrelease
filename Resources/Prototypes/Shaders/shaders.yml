@@ -83,31 +83,6 @@
   path: "/Textures/Shaders/starfield.swsl"
 
 - type: shader
-  id: Grid
-  kind: source
-  path: "/Textures/Shaders/grid.swsl"
-
-- type: shader
-  id: Postglitch
-  kind: source
-  path: "/Textures/Shaders/postglitch.swsl"
-
-- type: shader
-  id: Crt
-  kind: source
-  path: "/Textures/Shaders/White/bettercrt.swsl"
-
-- type: shader
-  id: Anime
-  kind: source
-  path: "/Textures/Shaders/White/anime.swsl"
-
-- type: shader
   id: NightVision
   kind: source
   path: "/Textures/Shaders/White/nightvision.swsl"
-
-- type: shader
-  id: Melt
-  kind: source
-  path: "/Textures/Shaders/White/melt.swsl"
