@@ -24,6 +24,7 @@
   - type: ClothingGrantComponent
     component:
       - type: StaminaProtection
+        damageReduction: 0.1
 
 #Alternate / slim basic armor vest
 - type: entity
@@ -85,6 +86,7 @@
   - type: ClothingGrantComponent
     component:
       - type: StaminaProtection
+        damageReduction: 0.1
 
 - type: entity
   parent: ClothingOuterArmorBasic
@@ -236,7 +238,7 @@
       coefficients:
         Blunt: 0.7
         Slash: 0.7
-        Piercing: 0.6
+        Piercing: 0.5
         Laser: 0.7
         Caustic: 0.9
   - type: ExplosionResistance
