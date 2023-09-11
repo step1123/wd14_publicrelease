@@ -1,0 +1,160 @@
+﻿- type: decal
+  id: HarpyLogoPart1Bottom
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/harpylogo.rsi
+    state: HarpyLogoPart1Bottom
+
+- type: decal
+  id: HarpyLogoPart1Top
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/harpylogo.rsi
+    state: HarpyLogoPart1Top
+
+- type: decal
+  id: HarpyLogoPart2Bottom
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/harpylogo.rsi
+    state: HarpyLogoPart2Bottom
+
+- type: decal
+  id: HarpyLogoPart2Top
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/harpylogo.rsi
+    state: HarpyLogoPart2Top
+
+- type: decal
+  id: HarpyLogoPart3Bottom
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/harpylogo.rsi
+    state: HarpyLogoPart3Bottom
+
+- type: decal
+  id: HarpyLogoPart3Top
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/harpylogo.rsi
+    state: HarpyLogoPart3Top
+
+- type: decal
+  id: HarpyLogoPart4Bottom
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/harpylogo.rsi
+    state: HarpyLogoPart4Bottom
+
+- type: decal
+  id: HarpyLogoPart4Top
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/harpylogo.rsi
+    state: HarpyLogoPart4Top
+
+- type: decal
+  id: HarpyLogoPart5Bottom
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/harpylogo.rsi
+    state: HarpyLogoPart5Bottom
+
+- type: decal
+  id: HarpyLogoPart5Top
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/harpylogo.rsi
+    state: HarpyLogoPart5Top
+
+- type: decal
+  id: HarpyLogoPart6Bottom
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/harpylogo.rsi
+    state: HarpyLogoPart6Bottom
+
+- type: decal
+  id: HarpyLogoPart6Top
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/harpylogo.rsi
+    state: HarpyLogoPart6Top
+
+- type: decal
+  id: NightingaleLogoPart1
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/nightingalelogo.rsi
+    state: NightingaleLogoPart1
+
+- type: decal
+  id: NightingaleLogoPart2
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/nightingalelogo.rsi
+    state: NightingaleLogoPart2
+
+- type: decal
+  id: NightingaleLogoPart3
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/nightingalelogo.rsi
+    state: NightingaleLogoPart3
+
+- type: decal
+  id: NightingaleLogoPart4
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/nightingalelogo.rsi
+    state: NightingaleLogoPart4
+
+- type: decal
+  id: NightingaleLogoPart5
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/nightingalelogo.rsi
+    state: NightingaleLogoPart5
+
+- type: decal
+  id: NightingaleLogoPart6
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/nightingalelogo.rsi
+    state: NightingaleLogoPart6
+
+- type: decal
+  id: TsubameLogoPart1
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/nsvtsubamelogo.rsi
+    state: TsubamePart1
+
+- type: decal
+  id: TsubameLogoPart2
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/nsvtsubamelogo.rsi
+    state: TsubamePart2
+
+- type: decal
+  id: TsubameLogoPart3
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/nsvtsubamelogo.rsi
+    state: TsubamePart3
+
+- type: decal
+  id: TsubameLogoPart4
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/nsvtsubamelogo.rsi
+    state: TsubamePart4
+
+- type: decal
+  id: TsubameLogoPart5
+  tags: ["station"]
+  sprite:
+    sprite: White/Decals/Drydock/nsvtsubamelogo.rsi
+    state: TsubamePart5
