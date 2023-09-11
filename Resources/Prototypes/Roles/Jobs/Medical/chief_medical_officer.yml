@@ -16,9 +16,6 @@
   icon: "ChiefMedicalOfficer"
   requireAdminNotify: true
   supervisors: job-supervisors-captain
-  special:
-    - !type:AddImplantSpecial
-      implants: [ MindShieldImplant ]
   whitelistedSpecies:
     - Human
     - Felinid
