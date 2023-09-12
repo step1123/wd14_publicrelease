@@ -314,7 +314,7 @@
 #   soundHit:  Waiting on serv3
     damage:
       types:
-        Laser: 14
+        Heat: 50
   - type: Tag
     tags:
     - EmitterBolt

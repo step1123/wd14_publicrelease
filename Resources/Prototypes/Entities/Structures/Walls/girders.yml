@@ -19,7 +19,7 @@
         mask:
         - MachineMask
         layer:
-        - GlassAirlockLayer
+        - FullTileLayer
   - type: InteractionOutline
   - type: Construction
     graph: Girder
