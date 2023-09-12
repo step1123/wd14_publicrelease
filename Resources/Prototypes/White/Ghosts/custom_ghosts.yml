@@ -168,7 +168,7 @@
   ghostName: CoreOverHeaven
   ghostDescription: Плоф
   size: 1.0, 1.0
-  
+
 - type: customGhost
   id: 17shu-ghost
   ckey: 17shu
@@ -177,3 +177,21 @@
   ghostName: Квакалка
   ghostDescription: А ей только ква и ква...
   size: 0.7, 0.7
+
+- type: customGhost
+  id: renosan-ghost
+  ckey: ren0san
+  sprite: White/Ghosts/renosan-ghost.rsi
+  alpha: 0.8
+  ghostName: Энхиридион
+  ghostDescription: Древняя книга с кодексом чести, руководством и иной полезной информацией для героев.
+  size: 0.8, 0.8
+
+- type: customGhost
+  id: deadisko-ghost
+  ckey: deadisko
+  sprite: White/Ghosts/deadisko-ghost.rsi
+  alpha: 0.8
+  ghostName: Летающий макаронный монстр
+  ghostDescription: Сложноуглеводное всеведующее создание, покровитель пиратов с большими митболами.
+  size: 0.8, 0.8
