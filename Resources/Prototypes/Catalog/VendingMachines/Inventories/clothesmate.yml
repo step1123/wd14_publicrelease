@@ -91,13 +91,6 @@
     ClothingHeadRastaHat: 1
     ClothingEyesEyepatch: 1
     ClothingShoesLeather: 1
-    ClothingBackpackMerc: 1
-    ClothingHeadHatBeretMerc: 1
-    ClothingMaskGasMerc: 1
-    ClothingEyesGlassesMercenary: 1
-    ClothingUniformJumpsuitMercenary: 1
-    ClothingHandsGlovesMercFingerless: 1
-    ClothingShoesBootsMerc: 1
     #WD edit end
     #White bra start
     ClothingUnderwearTopBraWhite: 5
@@ -171,7 +164,10 @@
     #WD edit start
     ClothingUniformJumpsuitTacticool: 1
     ClothingUniformJumpskirtTacticool: 1
-    ClothingOuterVestWebMerc: 1
-    ClothingBeltMercWebbing: 1
-    ClothingHandsMercGlovesCombat: 1
+    ClothingBackpackMerc: 1
+    ClothingHeadHatBeretMerc: 1
+    ClothingHeadBandMerc: 1
+    ClothingUniformJumpsuitMercenary: 1
+    ClothingHandsGlovesMercFingerless: 1
+    ClothingShoesBootsMerc: 1
     #WD edit end
