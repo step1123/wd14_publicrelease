@@ -195,3 +195,21 @@
   ghostName: Летающий макаронный монстр
   ghostDescription: Сложноуглеводное всеведующее создание, покровитель пиратов с большими митболами.
   size: 0.8, 0.8
+
+- type: customGhost
+  id: zilendorie-ghost
+  ckey: zilendorie
+  sprite: White/Ghosts/zilendorie-ghost.rsi
+  alpha: 0.8
+  ghostName: Эзра-Арк
+  ghostDescription: Призрак фембоя. Стал слишком глупеньким и отделился от тела.
+  size: 0.3, 0.3
+
+- type: customGhost
+  id: 4abere1-ghost
+  ckey: 4abere1
+  sprite: White/Ghosts/4abere1-ghost.rsi
+  alpha: 0.8
+  ghostName: Хамптер
+  ghostDescription: Любит чебуреки и мапить.
+  size: 1.3, 1.3
