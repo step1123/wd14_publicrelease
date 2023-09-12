@@ -1,4 +1,5 @@
-﻿using Content.Server.Chat.Systems;
+﻿using System.Linq;
+using Content.Server.Chat.Systems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Alert;
 using Content.Shared.Database;
@@ -23,6 +24,13 @@ public sealed class LawsSystem : EntitySystem
         SubscribeLocalEvent<LawsComponent, StateLawsMessage>(OnStateLaws);
         SubscribeLocalEvent<LawsComponent, PlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<LawsComponent, BoundUIOpenedEvent>(OnOpenUi);
+
+        SubscribeLocalEvent<LawsComponent, ComponentStartup>(OnStartup);
+    }
+
+    private void OnStartup(EntityUid uid, LawsComponent component, ComponentStartup args)
+    {
+        ResetLaws(uid,component);
     }
 
     private void OnOpenUi(EntityUid uid, LawsComponent component, BoundUIOpenedEvent args)
@@ -162,6 +170,16 @@ public sealed class LawsSystem : EntitySystem
             $"The law '{GetLaw(uid, index.Value)}' has been removed from {ToPrettyString(uid).Name}!");
 
         component.Laws.RemoveAt((int) index);
+
+        PinLaws(uid, component);
+    }
+
+    public void ResetLaws(EntityUid uid, LawsComponent? component = null)
+    {
+        if (!Resolve(uid, ref component, false))
+            return;
+
+        component.Laws = component.DefaultLaws.ToList();
 
         PinLaws(uid, component);
     }

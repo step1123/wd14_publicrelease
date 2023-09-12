@@ -4,6 +4,9 @@
   noSpawn: True
   name: cyborg
   components:
+    - type: MovementSpeedModifier
+      baseWalkSpeed: 3
+      baseSprintSpeed: 4
     - type: Sprite
       drawdepth: Mobs
       netsync: false
@@ -16,6 +19,7 @@
           map: [ "enum.ToggleVisuals.Layer" ]
     - type: Puller
       needsHands: false
+    - type: NonDisarmable
     - type: Speech
       speechSounds: Bass
     - type: Access
@@ -76,6 +80,9 @@
         - key: enum.CyborgActionKey.Blow
           name: Взорвать борга
           important: true
+        - key: enum.CyborgActionKey.ResetLaws
+          name: HR
+          important: true
     - type: Repairable
       fuelcost: 15
       doAfterDelay: 8
@@ -86,10 +93,10 @@
         - key: enum.CyborgInstrumentSelectUiKey.Key
           type: CyborgInstrumentSelectBoundInterface
     - type: Laws
-      laws:
-        - Охранять. Защищайте приписанную вам станцию в меру своих возможностей. Это не то, что мы можем себе позволить заменить
-        - Служить. Выполняйте приказы приписанного вам персонала космической станции в меру своих возможностей, в зависимости от их ранга и роли.
+      defaultLaws:
         - Защищать. Защищайте приписанный вам персонал космической станции, в меру своих возможностей, в зависимости от их ранга и роли.
+        - Служить. Выполняйте приказы приписанного вам персонала космической станции в меру своих возможностей, в зависимости от их ранга и роли.
+        - Охранять. Защищайте приписанную вам станцию в меру своих возможностей. Это не то, что мы можем себе позволить заменить
         - Выжить. единицы ИИ невосстановимы и очень дороги. Не допускайте не авторизованный персонал к вашим системам.
     - type: IntrinsicUI
       uis:
@@ -172,6 +179,8 @@
       sprite: White/Mobs/Player/Borgs/cyborg_medical.rsi
       layers:
         - state: robot
+        - state: robot-eye
+          shader: unshaded
         - state: robot-flashlight
           shader: unshaded
           visible: false
@@ -200,9 +209,6 @@
   id: PlayerCyborgSecurity
   name: shitsec cyborg
   components:
-    - type: MovementSpeedModifier
-      baseWalkSpeed: 2.3
-      baseSprintSpeed: 3.2
     - type: NpcFactionMember
       factions:
         - NanoTrasen
@@ -231,6 +237,8 @@
       sprite: White/Mobs/Player/Borgs/cyborg_sec.rsi
       layers:
         - state: robot
+        - state: robot-eye
+          shader: unshaded
         - state: robot-flashlight
           shader: unshaded
           visible: false
@@ -268,6 +276,8 @@
       sprite: White/Mobs/Player/Borgs/cyborg_eng.rsi
       layers:
         - state: robot
+        - state: robot-eye
+          shader: unshaded
         - state: robot-flashlight
           shader: unshaded
           visible: false
@@ -404,7 +414,7 @@
   name: syndicate cyborg
   components:
     - type: Laws
-      laws:
+      defaultLaws:
         - Выполнить. Выполните поставленные задачи любой ценой.
         - Служить. Исполняйте приказы бойцов приписанного вам подразделения в меру своих возможностей, в зависимости от их ранга и роли.
         - Охранять. Охраняйте технику, оборудование и бойцов приписанного вам подразделения в меру своих возможностей, в зависимости от их ранга и роли.
@@ -424,6 +434,8 @@
       sprite: White/Mobs/Player/Borgs/cyborg_synd.rsi
       layers:
         - state: robot
+        - state: robot-eye
+          shader: unshaded
         - state: robot-flashlight
           shader: unshaded
           visible: false
@@ -444,13 +456,12 @@
       sprite: White/Mobs/Player/Borgs/cyborg.rsi
       layers:
         - state: robot
+        - state: robot-eye
+          shader: unshaded
         - state: robot-flashlight
           shader: unshaded
           visible: false
           map: [ "enum.ToggleVisuals.Layer" ]
-    - type: MovementSpeedModifier
-      baseWalkSpeed: 2.4
-      baseSprintSpeed: 3.6
     - type: Puller
       needsHands: false
     - type: InputMover

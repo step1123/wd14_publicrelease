@@ -113,7 +113,7 @@ public sealed class CultistFactorySystem : EntitySystem
     private void UpdateAppearance(EntityUid uid, CultistFactoryComponent component)
     {
         AppearanceComponent? appearance = null;
-        if (!Resolve(uid, ref appearance))
+        if (!Resolve(uid, ref appearance,false))
             return;
 
         _appearance.SetData(uid, CultCraftStructureVisuals.Activated, component.Active);

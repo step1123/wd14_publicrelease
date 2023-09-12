@@ -39,7 +39,7 @@
     - type: Headset
       requiredSlot: NONE
     - type: EncryptionKeyHolder
-      keySlots: 6
+      keySlots: 8
 
 - type: entity
   id: CyborgRadioModuleSyndie
@@ -319,6 +319,7 @@
           - RubberStampClown
           - ToyHammer
           - ToySword
+          - Pen
 
 - type: entity
   id: CyborgInstrumentModuleFilledSyndie

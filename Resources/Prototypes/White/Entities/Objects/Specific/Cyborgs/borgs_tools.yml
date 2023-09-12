@@ -191,12 +191,14 @@
   id: FloorTileItemSteelFull
   suffix: Full
   components:
+    - type: Item
+      size: 150
     - type: Stack
       count: 30
 
 - type: entity
   name: pie cannon
-  parent: BaseStorageItem
+  parent: BaseItem
   id: LauncherCreamPieBorg
   description: Load cream pie for optimal results.
   components:
@@ -224,7 +226,7 @@
       capacity: 1
       count: 1
     - type: Item
-      size: 50
+      size: 100
     - type: Clothing
       sprite: Objects/Weapons/Guns/Cannons/pie_cannon.rsi
       quickEquip: false

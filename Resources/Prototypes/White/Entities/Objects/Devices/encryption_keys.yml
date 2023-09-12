@@ -11,4 +11,4 @@
     - type: Sprite
       layers:
         - state: crypt_gray
-        - state: cargo_label
+        - state: bin_label

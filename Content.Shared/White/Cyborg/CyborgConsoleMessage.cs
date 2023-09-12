@@ -16,7 +16,8 @@ public enum CyborgActionKey : byte
 {
     LawControl,
     Blow,
-    Freeze
+    Freeze,
+    ResetLaws
 }
 
 [NetSerializable]

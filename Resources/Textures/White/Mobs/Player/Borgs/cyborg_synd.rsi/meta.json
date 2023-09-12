@@ -17,6 +17,10 @@
     {
       "name": "robot-flashlight",
       "directions": 4
-    }
+    },
+    {
+        "name": "robot-eye",
+        "directions": 4
+      }
   ]
 }

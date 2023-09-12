@@ -17,6 +17,7 @@ examine-encryption-default-channel =
         [Medical] Медицинский
         [Security] Безопасность
         [Service] Сервисный
+        [Binary] Бинарный
        *[other] _
     }[/color].
 ent-EncryptionKeySyndie = кроваво-красный ключ шифрования

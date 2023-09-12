@@ -16,6 +16,13 @@ public sealed class CyborgChargeFillupSystem : EntitySystem
     {
         SubscribeLocalEvent<LimitedChargesComponent, CyborgInstrumentGotPickupEvent>(OnPickup);
         SubscribeLocalEvent<LimitedChargesComponent, CyborgInstrumentGotInsertedEvent>(OnInsert);
+
+        SubscribeLocalEvent<ActiveChargesChargeComponent,ComponentStartup>(OnStartup);
+    }
+
+    private void OnStartup(EntityUid uid, ActiveChargesChargeComponent component, ComponentStartup args)
+    {
+        component.NextUpdateTime = _timing.CurTime;
     }
 
     private void OnInsert(EntityUid uid, LimitedChargesComponent component, CyborgInstrumentGotInsertedEvent args)
@@ -25,7 +32,7 @@ public sealed class CyborgChargeFillupSystem : EntitySystem
 
     private void OnPickup(EntityUid uid, LimitedChargesComponent component, CyborgInstrumentGotPickupEvent args)
     {
-        EnsureComp<ActiveChargesChargeComponent>(uid).NextUpdateTime = _timing.CurTime;
+        EnsureComp<ActiveChargesChargeComponent>(uid);
     }
 
 

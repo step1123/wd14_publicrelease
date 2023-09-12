@@ -4,7 +4,7 @@
   description: uplink-syndieborg-desc
   productEntity: PlayerCyborgSyndBattery
   cost:
-    Telecrystal: 60
+    Telecrystal: 40
   categories:
     - UplinkUtility
   conditions:

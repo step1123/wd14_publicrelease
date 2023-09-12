@@ -3,5 +3,6 @@
   name: chat-radio-binary
   keycodes:
     - "b"
+    - "б"
   frequency: 1453
   color: "#a6d6e0"

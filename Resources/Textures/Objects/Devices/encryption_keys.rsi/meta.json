@@ -17,6 +17,7 @@
     {"name": "common_label"},
     {"name": "cap_label"},
     {"name": "cargo_label"},
+    {"name": "bin_label"},
     {"name": "ce_label"},
     {"name": "cmo_label"},
     {"name": "com_label"},

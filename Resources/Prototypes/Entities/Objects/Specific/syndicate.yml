@@ -53,7 +53,7 @@
     count: 10
     sizeMultiplier: 0.25
   - type: Item
-    size: 3
+    size: 2
 
 # Uplinks
 - type: entity

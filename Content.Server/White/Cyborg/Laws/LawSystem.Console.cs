@@ -47,6 +47,11 @@ public sealed class LawSystemConsole : EntitySystem
 
     private void OnLawAction(EntityUid uid, LawsComponent component, CyborgActionSelectedEvent args)
     {
+        if (args.Action is CyborgActionKey.ResetLaws && _cyborg.HasAccess(uid, args.User))
+        {
+            _law.ResetLaws(uid,component);
+        }
+
         if (args.Action is not CyborgActionKey.LawControl || !_cyborg.HasAccess(uid, args.User) || args.User == null)
             return;
 

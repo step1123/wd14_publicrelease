@@ -93,6 +93,8 @@
                         <CheckBox Name="MedicalCyborg" Text="{Loc medical-borg}"/>
                         <CheckBox Name="EngineerCyborg" Text="{Loc engineer-borg}"/>
                         <CheckBox Name="SecurityCyborg" Text="{Loc security-borg}"/>
+                        <CheckBox Name="MinerCyborg" Text="{Loc miner-borg}"/>
+                        <CheckBox Name="ClownCyborg" Text="{Loc clown-borg}"/>
                     </BoxContainer>
                 </BoxContainer>
                 <Button Name="SubmitListButton" Text="{Loc admin-job-ban-window-button-ban}"/>
