@@ -213,3 +213,22 @@
   ghostName: Хамптер
   ghostDescription: Любит чебуреки и мапить.
   size: 1.3, 1.3
+
+- type: customGhost
+  id: omntns-ghost
+  ckey: omntns
+  sprite: White/Ghosts/omntns-ghost.rsi
+  alpha: 0.8
+  ghostName: Верховный судья
+  ghostDescription: Олицетворение главенства закона и мудрости оставляет ощущение постоянной слежки. Тем не менее, его лик наполняет вас решимостью.
+  size: 0.8, 0.8
+
+- type: customGhost
+  id: s_k_r_i_m_e_x-ghost
+  ckey: s_k_r_i_m_e_x
+  sprite: White/Ghosts/s_k_r_i_m_e_x-ghost.rsi
+  alpha: 0.8
+  ghostName: Ху Тао
+  ghostDescription: Мяу!
+  size: 0.8, 0.8
+
