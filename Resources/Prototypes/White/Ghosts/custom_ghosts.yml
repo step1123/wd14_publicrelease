@@ -232,3 +232,21 @@
   ghostDescription: Мяу!
   size: 0.8, 0.8
 
+- type: customGhost
+  id: rendzidead-ghost
+  ckey: rendzidead
+  sprite: White/Ghosts/rendzidead-ghost.rsi
+  alpha: 0.6
+  ghostName: Смит Сайковски
+  ghostDescription: Олицетворение бюрократии, но почему-то от него ощущается сильная боль и чувство утраты. Кто знает, что пережила данная душа.
+  size: 0.6, 0.6
+
+- type: customGhost
+  id: nosireapo-ghost
+  ckey: nosireapo
+  sprite: White/Ghosts/nosireapo-ghost.rsi
+  alpha: 0.7
+  ghostName: Жабуля
+  ghostDescription: Неудачный(или слишком удачный) эксперимент по ксенобиологии создал данное существо. Любит квакоть.
+  size: 1.0, 1.0
+
