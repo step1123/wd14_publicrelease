@@ -32,4 +32,7 @@ public sealed partial class WieldableComponent : Component
 
     [DataField("wieldTime")]
     public float WieldTime = 1.5f;
+
+    [DataField("forceTwoHanded")]
+    public bool ForceTwoHanded;
 }

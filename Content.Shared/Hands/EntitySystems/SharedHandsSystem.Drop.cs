@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
+using Content.Shared.Pulling.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 
@@ -39,6 +40,10 @@ public abstract partial class SharedHandsSystem : EntitySystem
             return false;
 
         if (checkActionBlocker && !_actionBlocker.CanDrop(uid))
+            return false;
+
+        // WD edit
+        if (HasComp<HandVirtualItemComponent>(hand.HeldEntity) && TryComp<SharedPullerComponent>(uid, out var sharedPullerComponent) && sharedPullerComponent.Pulling == null)
             return false;
 
         return true;

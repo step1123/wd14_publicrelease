@@ -3,6 +3,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Popups;
@@ -42,6 +43,16 @@ public sealed class WieldableSystem : EntitySystem
         SubscribeLocalEvent<GunWieldBonusComponent, ItemUnwieldedEvent>(OnGunUnwielded);
 
         SubscribeLocalEvent<IncreaseDamageOnWieldComponent, GetMeleeDamageEvent>(OnGetMeleeDamage);
+        SubscribeLocalEvent<WieldableComponent, GotEquippedHandEvent>(OnHandEquipped);
+    }
+
+    // WD edit
+    private void OnHandEquipped(EntityUid uid, WieldableComponent component, GotEquippedHandEvent args)
+    {
+        if (component.ForceTwoHanded)
+        {
+            AttemptWield(args.Equipped, component, args.User, true);
+        }
     }
 
     private void OnMeleeAttempt(EntityUid uid, MeleeRequiresWieldComponent component, ref AttemptMeleeEvent args)
@@ -109,7 +120,7 @@ public sealed class WieldableSystem : EntitySystem
 
     private void OnUseInHand(EntityUid uid, WieldableComponent component, UseInHandEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || component.ForceTwoHanded)
             return;
         if(!component.Wielded)
             AttemptWield(uid, component, args.User);
@@ -153,9 +164,9 @@ public sealed class WieldableSystem : EntitySystem
     /// <summary>
     ///     Attempts to wield an item, creating a DoAfter..
     /// </summary>
-    public void AttemptWield(EntityUid used, WieldableComponent component, EntityUid user)
+    public void AttemptWield(EntityUid used, WieldableComponent component, EntityUid user, bool quite = false)
     {
-        if (!CanWield(used, component, user))
+        if (!CanWield(used, component, user, quite))
             return;
         var ev = new BeforeWieldEvent();
         RaiseLocalEvent(used, ev);
@@ -209,8 +220,12 @@ public sealed class WieldableSystem : EntitySystem
             _virtualItemSystem.TrySpawnVirtualItemInHand(uid, args.Args.User);
         }
 
-        _popupSystem.PopupClient(Loc.GetString("wieldable-component-successful-wield", ("item", uid)), args.Args.User, args.Args.User);
-        _popupSystem.PopupEntity(Loc.GetString("wieldable-component-successful-wield-other", ("user", args.Args.User),("item", uid)), args.Args.User, Filter.PvsExcept(args.Args.User), true);
+        // WD edit
+        if (!component.ForceTwoHanded)
+        {
+            _popupSystem.PopupClient(Loc.GetString("wieldable-component-successful-wield", ("item", uid)), args.Args.User, args.Args.User);
+            _popupSystem.PopupEntity(Loc.GetString("wieldable-component-successful-wield-other", ("user", args.Args.User),("item", uid)), args.Args.User, Filter.PvsExcept(args.Args.User), true);
+        }
 
         var ev = new ItemWieldedEvent();
         RaiseLocalEvent(uid, ref ev);

@@ -20,6 +20,7 @@
       - id: WeaponSniperHristov
       - id: MagazineBoxAntiMateriel
       - id: ClothingNeckTieRed
-      - id: ClothingHandsGlovesLatex
       - id: ClothingUniformJumpsuitLawyerBlack
+      - id: ClothingHandsGlovesCombat # WD edit
       - id: ClothingShoesBootsLaceup
+      - id: WeaponPistolCobra #WD edit
