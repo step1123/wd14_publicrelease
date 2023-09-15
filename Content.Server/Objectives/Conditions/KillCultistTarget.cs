@@ -7,6 +7,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Objectives.Conditions;
 
+[DataDefinition]
 public sealed class KillCultistTarget : IObjectiveCondition
 {
     private IEntityManager EntityManager => IoCManager.Resolve<IEntityManager>();
