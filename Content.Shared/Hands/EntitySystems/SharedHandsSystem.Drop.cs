@@ -42,10 +42,6 @@ public abstract partial class SharedHandsSystem : EntitySystem
         if (checkActionBlocker && !_actionBlocker.CanDrop(uid))
             return false;
 
-        // WD edit
-        if (HasComp<HandVirtualItemComponent>(hand.HeldEntity) && TryComp<SharedPullerComponent>(uid, out var sharedPullerComponent) && sharedPullerComponent.Pulling == null)
-            return false;
-
         return true;
     }
 
