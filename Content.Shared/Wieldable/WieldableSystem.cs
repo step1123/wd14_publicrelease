@@ -272,6 +272,12 @@ public sealed class WieldableSystem : EntitySystem
 
     private void OnVirtualItemDeleted(EntityUid uid, WieldableComponent component, VirtualItemDeletedEvent args)
     {
+        // WD edit
+        if (component.ForceTwoHanded && TryComp<HandsComponent>(args.User, out var handsComponent))
+        {
+            _handsSystem.TryDrop(args.User, uid, Transform(args.User).Coordinates, false, true, handsComponent);
+        }
+
         if (args.BlockingEntity == uid && component.Wielded)
             AttemptUnwield(args.BlockingEntity, component, args.User);
     }
