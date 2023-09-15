@@ -31,6 +31,7 @@ namespace Content.IntegrationTests.Tests.Buckle
   - type: Body
     prototype: Human
   - type: StandingState
+  - type: InputMover
 
 - type: entity
   name: {StrapDummyId}

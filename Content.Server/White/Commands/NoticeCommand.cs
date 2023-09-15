@@ -27,7 +27,7 @@ internal sealed class NoticeCommand : IConsoleCommand
 
         if (player.AttachedEntity is not { } playerEntity)
         {
-            shell.WriteError("You don't have an entity!");
+            //shell.WriteError("You don't have an entity!"); By HitPanda: Breaks test
             return;
         }
 

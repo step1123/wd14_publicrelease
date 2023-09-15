@@ -59,7 +59,7 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndText);
         SubscribeLocalEvent<GameRunLevelChangedEvent>(OnRunLevelChanged);
         SubscribeLocalEvent<RevolutionaryComponent, ComponentInit>(OnComponentInit);
-        SubscribeLocalEvent<RevolutionaryComponent, ComponentRemove>(OnComponentRemove);
+        SubscribeLocalEvent<RevolutionaryComponent, ComponentShutdown>(OnComponentShutdown);
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(HandleLateJoin);
         SubscribeLocalEvent<FlashAttemptEvent>(OnFlashAttempt);
         SubscribeLocalEvent<RevolutionaryComponent, ComponentGetState>(OnGetState);
@@ -108,7 +108,7 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
         }
 
         if (component.NextTimeCheckConditions == TimeSpan.Zero)
-            component.NextTimeCheckConditions += _gameTiming.CurTime + TimeSpan.FromSeconds(180);
+            CheckRoundShouldEnd();
     }
 
     private void OnCloned(EntityUid uid, RevolutionaryComponent component, ref CloningEvent args)
@@ -257,7 +257,7 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
         }
     }
 
-    private void OnComponentRemove(EntityUid uid, RevolutionaryComponent component, ComponentRemove args)
+    private void OnComponentShutdown(EntityUid uid, RevolutionaryComponent component, ComponentShutdown args)
     {
         var query = EntityQueryEnumerator<RevolutionaryRuleComponent>();
         while (query.MoveNext(out var revaRule))
@@ -391,6 +391,12 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
         {
             if (!GameTicker.IsGameRuleAdded(uid, gameRule))
                 continue;
+
+            if (revaRule.NextTimeCheckConditions == TimeSpan.Zero)
+            {
+                revaRule.NextTimeCheckConditions = _gameTiming.CurTime + TimeSpan.FromSeconds(180);
+                return;
+            }
 
             var headRevsAlive = false;
             foreach (var headRev in revaRule.RevHeadPlayers)
