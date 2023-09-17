@@ -55,6 +55,8 @@
     lowPressureMultiplier: 1000
   - type: TemperatureProtection
     coefficient: 0.005
+  - type: FlashImmunity # WD edit
+  - type: EyeProtection # WD edit
 
 #Engineering Hardsuit
 - type: entity
@@ -73,6 +75,8 @@
   - type: PressureProtection
     highPressureMultiplier: 0.1
     lowPressureMultiplier: 1000
+  - type: FlashImmunity # WD edit
+  - type: EyeProtection # WD edit
 
 #Spationaut Hardsuit
 - type: entity
@@ -145,6 +149,7 @@
   - type: PressureProtection
     highPressureMultiplier: 0.525
     lowPressureMultiplier: 1000
+  - type: FlashImmunity # WD edit
 
 #Brigmedic Hardsuit
 - type: entity
@@ -181,6 +186,7 @@
   - type: PressureProtection
     highPressureMultiplier: 0.525
     lowPressureMultiplier: 1000
+  - type: FlashImmunity # WD edit
 
 #Captain's Hardsuit
 - type: entity
@@ -215,6 +221,8 @@
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
+  - type: FlashImmunity # WD edit
+  - type: EyeProtection # WD edit
 
 #Chief Medical Officer's Hardsuit
 - type: entity
@@ -269,6 +277,7 @@
   - type: PressureProtection
     highPressureMultiplier: 0.45
     lowPressureMultiplier: 1000
+  - type: FlashImmunity
 
 #ANTAG HARDSUITS
 #Blood-red Hardsuit
@@ -288,6 +297,8 @@
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
+  - type: FlashImmunity # WD edit
+  - type: EyeProtection # WD edit
 
 #Cybersun Juggernaut Hardsuit
 - type: entity
@@ -304,6 +315,8 @@
   - type: PressureProtection
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
+  - type: FlashImmunity # WD edit
+  - type: EyeProtection # WD edit
 
 #Syndicate Elite Hardsuit
 - type: entity
@@ -324,6 +337,8 @@
     lowPressureMultiplier: 1000
   - type: TemperatureProtection
     coefficient: 0.005
+  - type: FlashImmunity # WD edit
+  - type: EyeProtection # WD edit
 
 #Syndicate Commander Hardsuit
 - type: entity
@@ -342,6 +357,8 @@
   - type: PressureProtection
     highPressureMultiplier: 0.08
     lowPressureMultiplier: 1000
+  - type: FlashImmunity # WD edit
+  - type: EyeProtection # WD edit
 
 #Wizard Hardsuit
 - type: entity
@@ -434,6 +451,8 @@
         Piercing: 0.9
         Heat: 0.9
         Laser: 0.9
+  - type: FlashImmunity # WD edit
+  - type: EyeProtection # WD edit
 
 #ERT Engineer Hardsuit
 - type: entity
@@ -456,6 +475,8 @@
         Piercing: 0.9
         Heat: 0.9
         Laser: 0.9
+  - type: FlashImmunity # WD edit
+  - type: EyeProtection # WD edit
 
 #ERT Medical Hardsuit
 - type: entity
@@ -470,6 +491,8 @@
     sprite: Clothing/Head/Hardsuits/ERThelmets/ertmedical.rsi
   - type: PointLight
     color: "#adffec"
+  - type: FlashImmunity # WD edit
+  - type: EyeProtection # WD edit
 
 #ERT Security Hardsuit
 - type: entity
@@ -492,6 +515,8 @@
         Piercing: 0.9
         Heat: 0.9
         Laser: 0.9
+  - type: FlashImmunity # WD edit
+  - type: EyeProtection # WD edit
 
 #ERT Janitor Hardsuit
 - type: entity
@@ -506,6 +531,8 @@
     sprite: Clothing/Head/Hardsuits/ERThelmets/ertjanitor.rsi
   - type: PointLight
     color: "#cbadff"
+  - type: FlashImmunity # WD edit
+  - type: EyeProtection # WD edit
 
 #CBURN Hardsuit
 - type: entity
@@ -546,6 +573,8 @@
         Piercing: 0.9
         Heat: 0.9
         Laser: 0.9
+  - type: FlashImmunity # WD edit
+  - type: EyeProtection # WD edit
 
 #Deathsquad Hardsuit
 - type: entity
@@ -577,6 +606,8 @@
       - type: ShowHealthBars
         damageContainer: Biological
       - type: NightVision
+  - type: FlashImmunity # WD edit
+  - type: EyeProtection # WD edit
 
 #MISC. HARDSUITS
 #Clown Hardsuit

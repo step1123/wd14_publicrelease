@@ -68,6 +68,9 @@
   - type: Clothing
     sprite: Clothing/Shoes/Specific/galoshes.rsi
   - type: NoSlip
+  - type: ClothingSpeedModifier # WD edit
+    walkModifier: 1 # WD edit
+    sprintModifier: 0.9 # WD edit
 
 - type: entity
   parent: ClothingShoesBaseButcherable
