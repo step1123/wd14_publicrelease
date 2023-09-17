@@ -250,3 +250,10 @@
   ghostDescription: Неудачный(или слишком удачный) эксперимент по ксенобиологии создал данное существо. Любит квакоть.
   size: 1.0, 1.0
 
+- type: customGhost
+  id: afanasy-ghost
+  ckey: afanasiy_pogudov
+  sprite: White/Ghosts/afanasy-ghost.rsi
+  alpha: 0.8
+  ghostName: Свинка
+  ghostDescription: хрю-хрю
