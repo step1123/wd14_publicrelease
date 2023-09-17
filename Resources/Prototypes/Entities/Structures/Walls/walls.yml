@@ -49,6 +49,7 @@
     price: 75
   - type: RadiationBlocker
     resistance: 2
+  - type: WallMark
 
 - type: entity
   parent: BaseWall

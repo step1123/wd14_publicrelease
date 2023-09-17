@@ -321,4 +321,27 @@ public sealed class WhiteCVars
 
     public static readonly CVarDef<bool> LogChatActions =
         CVarDef.Create("white.log_to_chat", true, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
+
+    /*
+     * Aspects
+     */
+
+    public static readonly CVarDef<bool> IsAspectsEnabled =
+        CVarDef.Create("aspects.enabled", false, CVar.SERVERONLY);
+
+    public static readonly CVarDef<double> AspectChance =
+        CVarDef.Create("aspects.chance", 0.66, CVar.SERVERONLY);
+
+    /*
+     * Damage
+     */
+
+    // Applies Projectile and Melee damage.
+    public static readonly CVarDef<float> DamageModifier  =
+        CVarDef.Create("damage.modifier", 1.0f, CVar.REPLICATED);
+
+    // Applies ALL damage, EVEN walls and etc.
+    public static readonly CVarDef<float> DamageGetModifier  =
+        CVarDef.Create("damage.get_modifier", 1.0f, CVar.REPLICATED);
+
 }

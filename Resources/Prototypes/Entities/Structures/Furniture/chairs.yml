@@ -48,6 +48,7 @@
           path: /Audio/Effects/metalbreak.ogg
   - type: StaticPrice
     price: 10
+  - type: ChairMark
 
 - type: entity
   name: chair

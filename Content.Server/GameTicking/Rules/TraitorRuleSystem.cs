@@ -473,6 +473,37 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
         }
     }
 
+    public List<TraitorRole> GetAllLivingConnectedTraitors()
+    {
+        var traitors = new List<TraitorRole>();
+
+        var traitorRules = EntityQuery<TraitorRuleComponent>();
+
+        foreach (var traitorRule in traitorRules)
+        {
+            traitors.AddRange(GetLivingConnectedTraitors(traitorRule));
+        }
+
+        return traitors;
+    }
+
+    private List<TraitorRole> GetLivingConnectedTraitors(TraitorRuleComponent traitorRule)
+    {
+        var traitors = new List<TraitorRole>();
+
+        foreach (var traitor in traitorRule.Traitors)
+        {
+            if (traitor.Mind is { OwnedEntity: not null, Session: not null } &&
+                _mobStateSystem.IsAlive((EntityUid)traitor.Mind.OwnedEntity!) &&
+                traitor.Mind.CurrentEntity == traitor.Mind.OwnedEntity)
+            {
+                traitors.Add(traitor);
+            }
+        }
+
+        return traitors;
+    }
+
     public List<TraitorRole> GetOtherTraitorsAliveAndConnected(Mind.Mind ourMind)
     {
         List<TraitorRole> allTraitors = new();

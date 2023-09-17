@@ -1,0 +1,181 @@
+- type: entity
+  id: RandomAccentAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Акценты вне контроля"
+      description: "Всегда интересно, какой акцент вы услышите следующим."
+      weight: 3
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: RandomAccentAspect
+
+- type: entity
+  id: FastAndFuriousAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Fast and Furious"
+      description: "Люди спешат и не важно куда."
+      weight: 3
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: FastAndFuriousAspect
+
+- type: entity
+  id: RandomAppearanceAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Random appearance"
+      description: "Экипаж перестал узнавать друг-друга в лицо."
+      weight: 3
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: RandomAppearanceAspect
+
+- type: entity
+  id: BombassAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Bombass"
+      description: "Кто-то заложил мины на станции!"
+      weight: 1
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: BombassAspect
+
+- type: entity
+  id: DrunkAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Drunk"
+      description: "На станции стоит явный запах вчерашнего веселья... и кажется оно только начинается."
+      weight: 3
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: DrunkAspect
+
+- type: entity
+  id: CargoRichAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Cargo Rich"
+      description: "Карго работало усердно в прошлую смену, за что они и были награждены премией в размере 100000 кредитов."
+      weight: 2
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: CargoRichAspect
+
+- type: entity
+  id: TraitoredAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Traitored"
+      description: "Кто-то сдал всех предателей!"
+      requires: "Traitors"
+      weight: 1
+      hidden: true
+    - type: TraitoredAspect
+
+- type: entity
+  id: WeakWallsAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Weak Walls"
+      description: "На стенах явно экономили."
+      weight: 2
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: WeakWallsAspect
+
+- type: entity
+  id: NoEngineAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "No engine"
+      description: "Какой-то смышлённый агент синдиката решил украсть все ваши генераторы энергии целиком."
+      weight: 2
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: NoEngineAspect
+
+- type: entity
+  id: AiRunLockAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Airunlock"
+      description: "Кого волнует безопасность? Экипаж свободно может ходить по всем отсекам, ведь все шлюзы теперь для них доступны."
+      weight: 2
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: AiRunLockAspect
+
+- type: entity
+  id: BloodyAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Bloody"
+      description: "В эту смену любая незначительная травма может оказаться летальной."
+      weight: 1
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: BloodyAspect
+
+- type: entity
+  id: WeakAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Weak"
+      description: "Удары стали слабее. Пули мягче. К чему это приведёт?"
+      weight: 1
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: WeakAspect
+
+- type: entity
+  id: BattledAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Battled"
+      description: "Люди очень насторожены и готовы дать отпор в любую секунду."
+      weight: 1
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: BattledAspect
+
+- type: entity
+  id: ChairLeakAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "I Have Two Butts But I must Seat"
+      description: "Стулья украли!"
+      weight: 3
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: ChairLeakAspect

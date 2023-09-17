@@ -6,9 +6,9 @@ using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Melee;
-using JetBrains.Annotations;
+using Content.Shared.White;
 using Robust.Server.GameObjects;
-using Robust.Shared.GameStates;
+using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Physics.Events;
 
@@ -20,10 +20,18 @@ public sealed class ProjectileSystem : SharedProjectileSystem
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly GunSystem _guns = default!;
     [Dependency] private readonly SharedCameraRecoilSystem _sharedCameraRecoil = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
+
+    private float DamageModifier { get; set; }
+
+    private void SetDamage(float value) => DamageModifier = value;
 
     public override void Initialize()
     {
         base.Initialize();
+
+        _cfg.OnValueChanged(WhiteCVars.DamageModifier, SetDamage, true);
+
         SubscribeLocalEvent<ProjectileComponent, StartCollideEvent>(OnStartCollide);
     }
 
@@ -50,7 +58,8 @@ public sealed class ProjectileSystem : SharedProjectileSystem
 
 
         var direction = args.OurBody.LinearVelocity.Normalized();
-        var modifiedDamage = _damageableSystem.TryChangeDamage(target, component.Damage, component.IgnoreResistances, origin: component.Shooter);
+        var damageModifier = component.Damage * DamageModifier;
+        var modifiedDamage = _damageableSystem.TryChangeDamage(target, damageModifier, component.IgnoreResistances, origin: component.Shooter);
         var deleted = Deleted(target);
 
         if (modifiedDamage is not null && EntityManager.EntityExists(component.Shooter))

@@ -6,6 +6,8 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Radiation.Events;
 using Content.Shared.Rejuvenate;
+using Content.Shared.White;
+using Robust.Shared.Configuration;
 using Robust.Shared.GameStates;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -19,9 +21,17 @@ namespace Content.Shared.Damage
         [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
         [Dependency] private readonly INetManager _netMan = default!;
         [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
+        [Dependency] private readonly IConfigurationManager _cfg = default!;
+
+        private float DamageGetModifier { get; set; }
+
+        private void SetDamage(float value) => DamageGetModifier = value;
+
 
         public override void Initialize()
         {
+            _cfg.OnValueChanged(WhiteCVars.DamageGetModifier, SetDamage, true);
+
             SubscribeLocalEvent<DamageableComponent, ComponentInit>(DamageableInit);
             SubscribeLocalEvent<DamageableComponent, ComponentHandleState>(DamageableHandleState);
             SubscribeLocalEvent<DamageableComponent, ComponentGetState>(DamageableGetState);
@@ -161,6 +171,8 @@ namespace Content.Shared.Damage
             {
                 return damage;
             }
+
+            damage *= DamageGetModifier;
 
             var before = new BeforeDamageChangedEvent(damage);
             RaiseLocalEvent(uid.Value, ref before);
