@@ -60,6 +60,7 @@
       sprite: White/Fluff/Maury/chemshit.rsi
 
 # YouWellLeer
+
 #- type: entity
 #  parent: Crowbar
 #  id: Sledgebar
@@ -79,22 +80,22 @@
 #        types:
 #          Blunt: 10
 
-- type: entity
-  parent: ClothingShoesBootsJack
-  id: LeerBoots
-  name: Дисциплина
-  description: Несогласные будут раздавлены.
-  components:
-    - type: Sprite
-      sprite: White/Fluff/YouWellLeer/hosboots.rsi
-    - type: Clothing
-      sprite: White/Fluff/YouWellLeer/hosboots.rsi
+#- type: entity
+#  parent: ClothingShoesBootsJack
+#  id: LeerBoots
+#  name: Дисциплина
+#  description: Несогласные будут раздавлены.
+#  components:
+#    - type: Sprite
+#      sprite: White/Fluff/YouWellLeer/hosboots.rsi
+#    - type: Clothing
+#      sprite: White/Fluff/YouWellLeer/hosboots.rsi
 
 - type: entity
   parent: ClothingHeadBase
   id: LeerCap
-  name: Правосудие
-  description: Там, где правит совесть, законы не нужны.
+  name: старая фуражка
+  description: Реплика фуражки времен старого космоса. Согласно некоторым источникам, такую фуражку носили солдаты несколько столетий назад.
   components:
     - type: Sprite
       sprite: White/Fluff/YouWellLeer/hoscap.rsi
@@ -110,22 +111,22 @@
     - type: Sprite
       sprite: White/Fluff/YouWellLeer/hoscloak.rsi
 
-- type: entity
-  parent: ClothingHandsGlovesCombat
-  id: LeerGloves
-  name: Наказание
-  description: Тактические перчатки из синтетических волокон с дополнительной защитой рук.
-  components:
-    - type: Sprite
-      sprite: White/Fluff/YouWellLeer/hosgloves.rsi
-    - type: Clothing
-      sprite: White/Fluff/YouWellLeer/hosgloves.rsi
+#- type: entity
+#  parent: ClothingHandsGlovesCombat
+#  id: LeerGloves
+#  name: Наказание
+#  description: Тактические перчатки из синтетических волокон с дополнительной защитой рук.
+#  components:
+#    - type: Sprite
+#      sprite: White/Fluff/YouWellLeer/hosgloves.rsi
+#    - type: Clothing
+#      sprite: White/Fluff/YouWellLeer/hosgloves.rsi
 
 - type: entity
   parent: ClothingOuterHardsuitSecurityRed
   id: LeerHardsuit
-  name: Завет
-  description: Созданный на заказ, этот скафандр сочетает в себе хорошие показатели защиты и мобильности.
+  name: Первопроходец
+  description: Боевой скафандр десантников ВКФ, умело разобранный и модифицированный мастерами-любителями.
   components:
     - type: Sprite
       sprite: White/Fluff/YouWellLeer/hoshardsuit.rsi
@@ -145,13 +146,12 @@
     - type: Clothing
       sprite: White/Fluff/YouWellLeer/hoshelmet.rsi
     - type: PointLight
-      color: "#ff0000"
 
 - type: entity
   parent: ClothingUniformJumpsuitHoS
   id: LeerJumpsuit
-  name: комплект ФПУ
-  description: Форма Полевая Универсальная - отличный выбор для любителей боевых действий.
+  name: водолазка ВКФ
+  description: Комплект прочной одежды со страховочными ремнями.
   components:
     - type: Sprite
       sprite: White/Fluff/YouWellLeer/hosjumpsuit.rsi
@@ -168,6 +168,17 @@
       sprite: White/Fluff/YouWellLeer/hosmask.rsi
     - type: Clothing
       sprite: White/Fluff/YouWellLeer/hosmask.rsi
+
+- type: entity
+  parent: ClothingOuterCoatHoSTrench
+  id: LeerTrench
+  name: Офицерский китель
+  description: Бронежилет, поверх которого надет парадный китель офицера ВКФ. Погоны, кажется, сорваны.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/YouWellLeer/hostrench.rsi
+    - type: Clothing
+      sprite: White/Fluff/YouWellLeer/hostrench.rsi
 
 # merkkaa
 - type: entity

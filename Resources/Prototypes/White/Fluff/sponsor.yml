@@ -18,16 +18,17 @@
   sponsorOnly: true
 
 # YouWellLeer
+
 #- type: loadout
 #  id: SledgebarLoadout
 #  entity: Sledgebar
 #  sponsorOnly: true
 
-- type: loadout
-  id: LeerBootsLoadout
-  entity: LeerBoots
-  sponsorOnly: true
-  whitelistedJobs: [HeadOfSecurity]
+#- type: loadout
+#  id: LeerBootsLoadout
+#  entity: LeerBoots
+#  sponsorOnly: true
+#  whitelistedJobs: [HeadOfSecurity]
 
 - type: loadout
   id: LeerCapLoadout
@@ -41,11 +42,11 @@
   sponsorOnly: true
   whitelistedJobs: [HeadOfSecurity]
 
-- type: loadout
-  id: LeerGlovesLoadout
-  entity: LeerGloves
-  sponsorOnly: true
-  whitelistedJobs: [HeadOfSecurity]
+#- type: loadout
+#  id: LeerGlovesLoadout
+#  entity: LeerGloves
+#  sponsorOnly: true
+#  whitelistedJobs: [HeadOfSecurity]
 
 - type: loadout
   id: LeerHardsuitLoadout
@@ -68,6 +69,12 @@
 - type: loadout
   id: LeerMaskLoadout
   entity: LeerMask
+  sponsorOnly: true
+  whitelistedJobs: [HeadOfSecurity]
+
+- type: loadout
+  id: LeerTrenchLoadout
+  entity: LeerTrench
   sponsorOnly: true
   whitelistedJobs: [HeadOfSecurity]
 

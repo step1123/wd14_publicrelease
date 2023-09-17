@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "YouWellLeer#5950 by Armolitskiy#4866",
+  "copyright": "@youwellleer",
   "size": {
     "x": 32,
     "y": 32
@@ -11,7 +11,11 @@
       "name": "icon"
     },
     {
-      "name": "equipped-HELMET",
+      "name": "equipped-OUTERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "equipped-OUTERCLOTHING-body-slim",
       "directions": 4
     },
     {
