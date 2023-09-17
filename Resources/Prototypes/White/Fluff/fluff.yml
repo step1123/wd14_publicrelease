@@ -454,3 +454,42 @@
     - type: Sprite
       sprite: White/Fluff/6elblu/white-cloak.rsi
 
+
+#Serafim547
+- type: entity
+  parent: ClothingEyesBase
+  id: ClothingEyesGlassesMesonBlue
+  name: Утилизаторные очки
+  description: Очки с фиолетовым затемнением, использующие патентованный полимер, обеспечивающие надежную защиту глаз от всех видов повреждений.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/Serafim547/meason_blue.rsi
+    - type: Clothing
+      sprite: White/Fluff/Serafim547/meason_blue.rsi
+    - type: EyeProtection
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitSerafimSalvageSpecialist
+  name: комбинезон специалиста по утилизации
+  description: Удобный прочный комбинезон. Особенно грязный.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/Serafim547/salvage.rsi
+    - type: Clothing
+      sprite: White/Fluff/Serafim547/salvage.rsi
+
+- type: entity
+  parent: BaseDice
+  id: VulpCoin
+  name: Золотая монета
+  description: Коллекционная чеканная монета с родины вульпканин, редкая находка обладающая не столь реальной, сколько символической ценностью.
+  components:
+    - type: Dice
+      sound:
+        collection: CoinDrop
+      sides: 2
+      currentValue: 2
+    - type: Sprite
+      sprite: White/Fluff/Serafim547/vulp_coin.rsi
+      state: coin_2

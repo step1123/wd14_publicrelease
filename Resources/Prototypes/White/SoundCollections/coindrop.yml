@@ -1,0 +1,5 @@
+- type: soundCollection
+  id: CoinDrop
+  files:
+    - /Audio/White/CoinDrop/coindrop1.ogg
+    - /Audio/White/CoinDrop/coindrop2.ogg

@@ -172,3 +172,19 @@
   id: 6elbluBootsLoadout
   entity: ClothingShoesTourist
   sponsorOnly: true
+
+#Serafim547
+- type: loadout
+  id: Serafim547MesonBlueLoadout
+  entity: ClothingEyesGlassesMesonBlue
+  sponsorOnly: true
+
+- type: loadout
+  id: Serafim547SalvageSpecialistLoadout
+  entity: ClothingUniformJumpsuitSerafimSalvageSpecialist
+  sponsorOnly: true
+
+- type: loadout
+  id: Serafim547VulpCoinLoadout
+  entity: VulpCoin
+  sponsorOnly: true
