@@ -257,3 +257,12 @@
   alpha: 0.8
   ghostName: Свинка
   ghostDescription: хрю-хрю
+
+- type: customGhost
+  id: xivi-ghost
+  ckey: xivi
+  sprite: White/Ghosts/xivi-ghost.rsi
+  alpha: 0.9
+  ghostName: Project Bunny
+  ghostDescription: Ride on!
+  size: 0.6, 0.6
