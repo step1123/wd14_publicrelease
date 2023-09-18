@@ -155,6 +155,12 @@ public sealed class RoleBanManager
     //WD start
     public async void UtkaCreateJobBan(string admin, string target, string job, string reason, uint minutes, bool isGlobalBan)
     {
+        if (!_prototypeManager.TryIndex<JobPrototype>(job, out _))
+        {
+            UtkaSendResponse(false);
+            return;
+        }
+
         var role = string.Concat(JobPrefix, job);
 
         var located = await _playerLocator.LookupIdByNameOrIdAsync(target);

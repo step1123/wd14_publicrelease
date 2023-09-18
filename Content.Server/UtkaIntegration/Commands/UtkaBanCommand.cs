@@ -96,6 +96,8 @@ public sealed class UtkaBanCommand : IUtkaCommand
             null,
             serverName);
 
+        UtkaSendResponse(true);
+
         await dbMan.AddServerBanAsync(banDef);
 
         if (plyMgr.TryGetSessionById(targetUid, out var targetPlayer))
@@ -103,8 +105,6 @@ public sealed class UtkaBanCommand : IUtkaCommand
             var msg = banDef.FormatBanMessage(_cfg, LocalizationManager);
             targetPlayer.ConnectedClient.Disconnect(msg);
         }
-
-        UtkaSendResponse(true);
 
         var banlist = await _db.GetServerBansAsync(null, targetUid, null);
         var banId = banlist[^1].Id;
