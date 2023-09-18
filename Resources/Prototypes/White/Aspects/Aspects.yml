@@ -179,3 +179,16 @@
       startAudio:
         path: /Audio/White/Aspects/accent.ogg
     - type: ChairLeakAspect
+
+- type: entity
+  id: PresentAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Presents"
+      description: "А вы верите в Деда Мороза?"
+      weight: 2
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: PresentAspect

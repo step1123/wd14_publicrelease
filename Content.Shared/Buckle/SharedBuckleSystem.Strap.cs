@@ -265,7 +265,7 @@ public abstract partial class SharedBuckleSystem
     /// <summary>
     /// Remove everything attached to the strap
     /// </summary>
-    private void StrapRemoveAll(StrapComponent strapComp)
+    public void StrapRemoveAll(StrapComponent strapComp) // WD EDIT
     {
         foreach (var entity in strapComp.BuckledEntities.ToArray())
         {

@@ -97,7 +97,7 @@ public sealed class RandomGiftSystem : EntitySystem
 
             _possibleGiftsUnsafe.Add(proto.ID);
 
-            if (!proto.Components.ContainsKey(itemCompName))
+            if (!proto.Components.ContainsKey(itemCompName) || proto.SetSuffix is "DEBUG" or "Admeme") // WD EDIT
                 continue;
 
             _possibleGiftsSafe.Add(proto.ID);

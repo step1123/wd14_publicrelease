@@ -23,7 +23,8 @@ public sealed class FastAndFuriousAspect : AspectSystem<FastAndFuriousAspectComp
         var query = EntityQueryEnumerator<MovementSpeedModifierComponent>();
         while (query.MoveNext(out var ent, out var speedModifierComponent))
         {
-            _movementSystem.ChangeBaseSpeed(ent, speedModifierComponent.BaseWalkSpeed + 2.5f, speedModifierComponent.BaseSprintSpeed + 4, speedModifierComponent.Acceleration);
+            _movementSystem.ChangeBaseSpeed(ent, speedModifierComponent.BaseWalkSpeed,
+                speedModifierComponent.BaseSprintSpeed + 3, speedModifierComponent.Acceleration);
         }
     }
 
@@ -33,7 +34,8 @@ public sealed class FastAndFuriousAspect : AspectSystem<FastAndFuriousAspectComp
         var query = EntityQueryEnumerator<MovementSpeedModifierComponent>();
         while (query.MoveNext(out var ent, out var speedModifierComponent))
         {
-            _movementSystem.ChangeBaseSpeed(ent, 2.5f, 4.5f, speedModifierComponent.Acceleration);
+            _movementSystem.ChangeBaseSpeed(ent, speedModifierComponent.BaseWalkSpeed,
+                speedModifierComponent.BaseSprintSpeed, speedModifierComponent.Acceleration);
         }
     }
 
@@ -53,7 +55,8 @@ public sealed class FastAndFuriousAspect : AspectSystem<FastAndFuriousAspectComp
             if (!TryComp<MovementSpeedModifierComponent>(mob, out var speedModifierComponent))
                 return;
 
-            _movementSystem.ChangeBaseSpeed(mob, speedModifierComponent.BaseWalkSpeed + 2.5f, speedModifierComponent.BaseSprintSpeed + 4, speedModifierComponent.Acceleration);
+            _movementSystem.ChangeBaseSpeed(mob, speedModifierComponent.BaseWalkSpeed,
+                speedModifierComponent.BaseSprintSpeed + 3, speedModifierComponent.Acceleration);
         }
     }
 }

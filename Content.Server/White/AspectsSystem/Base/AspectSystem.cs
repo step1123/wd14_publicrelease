@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Chat.Systems;
@@ -6,10 +7,13 @@ using Content.Server.GameTicking.Rules;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Station.Components;
 using Content.Shared.Database;
+using Content.Shared.Physics;
 using Robust.Server.GameObjects;
 using Robust.Shared.Collections;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -73,7 +77,7 @@ namespace Content.Server.White.AspectsSystem.Base
 
             if (aspect is { Description: not null, IsHidden: false })
             {
-                _chatSystem.DispatchGlobalAnnouncement(aspect.Description, playSound: false, colorOverride: Color.LimeGreen);
+                _chatSystem.DispatchGlobalAnnouncement(aspect.Description, playSound: false, colorOverride: Color.Aquamarine);
             }
 
             _audio.PlayGlobal(aspect.StartAudio, Filter.Broadcast(), true);
@@ -107,7 +111,7 @@ namespace Content.Server.White.AspectsSystem.Base
 
             if (aspect is { Name: not null, IsHidden: false })
             {
-                _chatSystem.DispatchGlobalAnnouncement($"Именем аспекта являлось: {aspect.Name}", playSound: false, colorOverride: Color.LimeGreen);
+                _chatSystem.DispatchGlobalAnnouncement($"Именем аспекта являлось: {aspect.Name}", playSound: false, colorOverride: Color.Aquamarine);
             }
 
             _audio.PlayGlobal(aspect.EndAudio, Filter.Broadcast(), true);
@@ -174,26 +178,48 @@ namespace Content.Server.White.AspectsSystem.Base
             }
 
             targetGrid = _robustRandom.Pick(possibleTargets);
+            foreach (var target in possibleTargets.Where(HasComp<BecomesStationComponent>))
+            {
+                targetGrid = target;
+                break;
+            }
 
             if (!TryComp<MapGridComponent>(targetGrid, out var gridComp))
                 return false;
 
             var found = false;
-            var (gridPos, _, gridMatrix) = _transform.GetWorldPositionRotationMatrix(targetGrid);
-            var gridBounds = gridMatrix.TransformBox(gridComp.LocalAABB);
+            var gridBounds = gridComp.LocalAABB.Scale(0.6f);
 
             for (var i = 0; i < 10; i++)
             {
                 var randomX = _robustRandom.Next((int) gridBounds.Left, (int) gridBounds.Right);
                 var randomY = _robustRandom.Next((int) gridBounds.Bottom, (int) gridBounds.Top);
 
-                tile = new Vector2i(randomX - (int) gridPos.X, randomY - (int) gridPos.Y);
+                tile = new Vector2i(randomX, randomY);
                 if (_atmosphere.IsTileSpace(targetGrid, Transform(targetGrid).MapUid, tile,
                         mapGridComp: gridComp)
                     || _atmosphere.IsTileAirBlocked(targetGrid, tile, mapGridComp: gridComp))
                 {
                     continue;
                 }
+
+                var physQuery = GetEntityQuery<PhysicsComponent>();
+                var valid = true;
+                foreach (var ent in gridComp.GetAnchoredEntities(tile))
+                {
+                    if (!physQuery.TryGetComponent(ent, out var body))
+                        continue;
+                    if (body.BodyType != BodyType.Static ||
+                        !body.Hard ||
+                        (body.CollisionLayer & (int) CollisionGroup.Impassable) == 0)
+                        continue;
+
+                    valid = false;
+                    break;
+                }
+
+                if (!valid)
+                    continue;
 
                 found = true;
                 targetCoords = gridComp.GridTileToLocal(tile);

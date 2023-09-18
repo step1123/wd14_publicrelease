@@ -240,7 +240,7 @@ namespace Content.Shared.Damage
             DamageChanged(uid, component, new DamageSpecifier());
         }
 
-        public void SetDamageModifierSetId(EntityUid uid, string damageModifierSetId, DamageableComponent? comp = null)
+        public void SetDamageModifierSetId(EntityUid uid, string? damageModifierSetId, DamageableComponent? comp = null) // WD EDIT
         {
             if (!Resolve(uid, ref comp))
                 return;

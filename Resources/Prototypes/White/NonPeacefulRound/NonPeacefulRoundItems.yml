@@ -5,11 +5,14 @@
     - WeaponSubMachineGunWt550
     - WeaponSubMachineGunC20r
     - WeaponSubMachineGunAtreides
+    - WeaponSubMachineGunDrozd
     - WeaponShotgunBulldog
     - WeaponShotgunDoubleBarreled
     - WeaponShotgunEnforcer
     - WeaponShotgunKammerer
     - WeaponShotgunSawn
+    - WeaponShotgunBlunderbuss
+    - WeaponShotgunImprovisedLoaded
     - WeaponRifleAk
     - WeaponRifleM90GrenadeLauncher
     - WeaponRifleLecter
@@ -18,9 +21,24 @@
     - WeaponRevolverMateba
     - WeaponRevolverPython
     - WeaponRevolverPirate
+    - RevolverCapGunFake
     - WeaponLightMachineGunL6
-    - WeaponFlareGun
-    - Stunbaton
+    - WeaponSniperMosin
+    - Musket
+    - EnergyCrossbowMini
+    - WeaponLauncherRocket
+    - WeaponLauncherPirateCannon
+    - WeaponPistolViper
+    - WeaponPistolCobra
+    - WeaponPistolMk58
+    - WeaponPistolFlintlock
+    - WeaponLaserCannon
+    - WeaponLaserCarbine
+    - WeaponLaserGun
+    - WeaponAdvancedLaser
+    - WeaponMakeshiftLaser
+    - WeaponXrayCannon
+    - WeaponEgun
 
 - type: nonPeacefulRoundEndItems
   id: nonPeacefulRoundEndMelee
@@ -31,13 +49,20 @@
     - Machete
     - Claymore
     - Stunbaton
-    - ClothingBackpackDuffelSyndicateC4tBundle
     - Spear
+    - SpearReinforced
+    - SpearPlasma
+    - SpearUranium
     - ButchCleaver
     - CombatKnife
     - SurvivalKnife
     - EnergyDagger
     - EnergySword
+    - EnergyDoubleSword
+    - EnergyCutlass
+    - Cutlass
     - UnholyHalberd
     - EldritchBlade
     - BaseBallBat
+    - BloodSuckerDagger
+    - Truncheon
