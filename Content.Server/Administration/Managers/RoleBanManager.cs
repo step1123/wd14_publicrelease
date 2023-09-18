@@ -399,6 +399,11 @@ public sealed class RoleBanManager
     private async void UtkaSendJobBanEvent(string ackey, string ckey, uint duration, string job, bool global,
         string reason, int banId)
     {
+        if (job.Contains("Job:"))
+        {
+            job = job.Replace("Job:", "");
+        }
+
         var utkaBanned = new UtkaBannedEvent()
         {
             ACkey = ackey,
