@@ -153,6 +153,82 @@ public sealed class RoleBanManager
     }
 
     //WD start
+    public async void UtkaCreateDepartmentBan(string admin, string target, DepartmentPrototype department, string reason, uint minutes, bool isGlobalBan)
+    {
+        var located = await _playerLocator.LookupIdByNameOrIdAsync(target);
+        if (located == null)
+        {
+            UtkaSendResponse(false);
+            return;
+        }
+
+        var targetUid = located.UserId;
+        var targetHWid = located.LastHWId;
+        var targetAddress = located.LastAddress;
+
+        DateTimeOffset? expires = null;
+        if (minutes > 0)
+        {
+            expires = DateTimeOffset.Now + TimeSpan.FromMinutes(minutes);
+        }
+
+        (IPAddress, int)? addressRange = null;
+        if (targetAddress != null)
+        {
+            if (targetAddress.IsIPv4MappedToIPv6)
+                targetAddress = targetAddress.MapToIPv4();
+
+            // Ban /64 for IPv4, /32 for IPv4.
+            var cidr = targetAddress.AddressFamily == AddressFamily.InterNetworkV6 ? 64 : 32;
+            addressRange = (targetAddress, cidr);
+        }
+
+        var cfg = UnsafePseudoIoC.ConfigurationManager;
+        var serverName = cfg.GetCVar(CCVars.AdminLogsServerName);
+
+        if (isGlobalBan)
+        {
+            serverName = "unknown";
+        }
+
+        var locatedPlayer = await _playerLocator.LookupIdByNameOrIdAsync(admin);
+        if (locatedPlayer == null)
+        {
+            UtkaSendResponse(false);
+            return;
+        }
+        var player = locatedPlayer.UserId;
+
+        UtkaSendResponse(true);
+
+        foreach (var job in department.Roles)
+        {
+            var role = string.Concat(JobPrefix, job);
+
+            var banDef = new ServerRoleBanDef(
+                null,
+                targetUid,
+                addressRange,
+                targetHWid,
+                DateTimeOffset.Now,
+                expires,
+                reason,
+                player,
+                null,
+                role,
+                serverName);
+
+            if (!await AddRoleBan(banDef))
+                continue;
+
+            var banId = await UtkaGetBanId(reason, role, targetUid);
+
+            UtkaSendJobBanEvent(admin, target, minutes, job, isGlobalBan, reason, banId);
+        }
+
+        SendRoleBans(located);
+    }
+
     public async void UtkaCreateJobBan(string admin, string target, string job, string reason, uint minutes, bool isGlobalBan)
     {
         if (!_prototypeManager.TryIndex<JobPrototype>(job, out _))
@@ -230,6 +306,8 @@ public sealed class RoleBanManager
 
         UtkaSendJobBanEvent(admin, target, minutes, job, isGlobalBan, reason, banId);
         UtkaSendResponse(true);
+
+        SendRoleBans(located);
     }
     //WD end
 

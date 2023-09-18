@@ -1,15 +1,20 @@
 ﻿using Content.Server.Administration.Managers;
+using Content.Shared.Roles;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.UtkaIntegration;
 
 public sealed class UtkaJobBanCommand : IUtkaCommand
 {
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+
     public string Name => "jobban";
     public Type RequestMessageType => typeof(UtkaJobBanRequest);
     public void Execute(UtkaTCPSession session, UtkaBaseMessage baseMessage)
     {
-        if (baseMessage is not UtkaJobBanRequest message) return;
+        IoCManager.InjectDependencies(this);
 
+        if (baseMessage is not UtkaJobBanRequest message) return;
         var target = message.Ckey!;
         var job = message.Type!;
         var reason = message.Reason!;
@@ -17,6 +22,14 @@ public sealed class UtkaJobBanCommand : IUtkaCommand
         var isGlobalBan = (bool) message.Global!;
         var admin = message.ACkey!;
 
-        IoCManager.Resolve<RoleBanManager>().UtkaCreateJobBan(admin, target, job, reason, minutes, isGlobalBan);
+        var roleBanManager = IoCManager.Resolve<RoleBanManager>();
+
+        if (_prototypeManager.TryIndex<DepartmentPrototype>(job, out var departmentProto))
+            roleBanManager.UtkaCreateDepartmentBan(admin, target, departmentProto, reason, minutes, isGlobalBan);
+
+        else
+            roleBanManager.UtkaCreateJobBan(admin, target, job, reason, minutes, isGlobalBan);
     }
 }
+
+
