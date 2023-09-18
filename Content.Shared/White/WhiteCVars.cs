@@ -327,10 +327,10 @@ public sealed class WhiteCVars
      */
 
     public static readonly CVarDef<bool> IsAspectsEnabled =
-        CVarDef.Create("aspects.enabled", false, CVar.SERVERONLY);
+        CVarDef.Create("aspects.enabled", true, CVar.SERVERONLY);
 
     public static readonly CVarDef<double> AspectChance =
-        CVarDef.Create("aspects.chance", 0.66, CVar.SERVERONLY);
+        CVarDef.Create("aspects.chance", 0.33, CVar.SERVERONLY);
 
     /*
      * Damage
