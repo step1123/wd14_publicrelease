@@ -161,8 +161,20 @@ public sealed partial class GunSystem : SharedGunSystem
             return;
         }
 
-        // Define target coordinates relative to gun entity, so that network latency on moving grids doesn't fuck up the target location.
-        var coordinates = EntityCoordinates.FromMap(entity, mousePos, TransformSystem, EntityManager);
+        // WD EDIT START
+        EntityCoordinates coordinates;
+
+        if (MapManager.TryFindGridAt(mousePos, out var grid, out _) ||
+            MapManager.TryFindGridAt(Transform(entity).MapPosition, out grid, out _))
+        {
+            coordinates = EntityCoordinates.FromMap(grid, mousePos, TransformSystem, EntityManager);
+        }
+        else
+        {
+            coordinates = EntityCoordinates.FromMap(MapManager.GetMapEntityId(mousePos.MapId), mousePos,
+                TransformSystem, EntityManager);
+        }
+        // WD EDIT END
 
         Sawmill.Debug($"Sending shoot request tick {Timing.CurTick} / {Timing.CurTime}");
 
