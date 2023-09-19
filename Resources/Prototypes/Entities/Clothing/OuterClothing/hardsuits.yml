@@ -870,6 +870,7 @@
     component:
       - type: StaminaProtection
         damageReduction: 0.9
+  - type: GiftIgnore
 
 #CBURN Hardsuit
 - type: entity

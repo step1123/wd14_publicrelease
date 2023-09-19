@@ -1,7 +1,9 @@
 ﻿using Content.Server.Administration.Logs;
 using Content.Server.Hands.Systems;
+using Content.Server.White.Other;
 using Content.Shared.Database;
 using Content.Shared.Examine;
+using Content.Shared.Interaction.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Robust.Server.GameObjects;
@@ -89,6 +91,8 @@ public sealed class RandomGiftSystem : EntitySystem
         var itemCompName = _componentFactory.GetComponentName(typeof(ItemComponent));
         var mapGridCompName = _componentFactory.GetComponentName(typeof(MapGridComponent));
         var physicsCompName = _componentFactory.GetComponentName(typeof(PhysicsComponent));
+        var giftIgnoreCompName = _componentFactory.GetComponentName(typeof(GiftIgnoreComponent)); // WD
+        var unremovableCompName = _componentFactory.GetComponentName(typeof(UnremoveableComponent)); // WD
 
         foreach (var proto in _prototype.EnumeratePrototypes<EntityPrototype>())
         {
@@ -97,7 +101,9 @@ public sealed class RandomGiftSystem : EntitySystem
 
             _possibleGiftsUnsafe.Add(proto.ID);
 
-            if (!proto.Components.ContainsKey(itemCompName) || proto.SetSuffix is "DEBUG" or "Admeme") // WD EDIT
+            if (!proto.Components.ContainsKey(itemCompName) || proto.Components.ContainsKey(giftIgnoreCompName) ||
+                proto.Components.ContainsKey(unremovableCompName) || proto.SetSuffix != null &&
+                (proto.SetSuffix.Contains("DEBUG") || proto.SetSuffix.Contains("Admeme"))) // WD EDIT
                 continue;
 
             _possibleGiftsSafe.Add(proto.ID);

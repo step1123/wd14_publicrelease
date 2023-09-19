@@ -18,14 +18,14 @@ public sealed class BombassAspect : AspectSystem<BombassAspectComponent>
 
     private void SpawnMines()
     {
-        var minMines = _random.Next(35, 100);
+        var minMines = _random.Next(30, 50);
 
         for (var i = 0; i < minMines; i++)
         {
             if (!TryFindRandomTile(out _, out _, out _, out var targetCoords))
                 break;
 
-            EntityManager.SpawnEntity("LandMineExplosive", targetCoords);
+            EntityManager.SpawnEntity("LandMineAspectExplosive", targetCoords);
         }
     }
 }

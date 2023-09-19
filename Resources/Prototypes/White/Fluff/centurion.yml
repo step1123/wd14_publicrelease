@@ -11,6 +11,7 @@
       sprite: White/Fluff/centurion/deathsquad.rsi
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetCapDeathSquadFluff
+    - type: GiftIgnore
 
 - type: entity
   parent: ClothingHeadHelmetHardsuitCap
@@ -37,6 +38,7 @@
       sprite: White/Fluff/centurion/deathsquad.rsi
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitEngineeringWhiteDeathSquadFluff
+    - type: GiftIgnore
 
 - type: entity
   parent: ClothingHeadHelmetHardsuitEngineeringWhite
@@ -63,6 +65,7 @@
       sprite: White/Fluff/centurion/deathsquad.rsi
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitMedicalDeathSquadFluff
+    - type: GiftIgnore
 
 - type: entity
   parent: ClothingHeadHelmetHardsuitMedical
@@ -89,6 +92,7 @@
       sprite: White/Fluff/centurion/deathsquad.rsi
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitSecurityRedDeathSquadFluff
+    - type: GiftIgnore
 
 - type: entity
   parent: ClothingHeadHelmetHardsuitSecurityRed
@@ -115,6 +119,7 @@
       sprite: White/Fluff/centurion/deathsquad.rsi
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitRdDeathSquadFluff
+    - type: GiftIgnore
 
 # Utilizator
 - type: entity
@@ -129,6 +134,7 @@
       sprite: White/Fluff/centurion/breacher.rsi
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitSalvageCenturion
+    - type: GiftIgnore
 
 - type: entity
   parent: ClothingHeadHelmetHardsuitSalvage
@@ -140,6 +146,7 @@
       sprite: White/Fluff/centurion/breacher-helmet.rsi
     - type: Clothing
       sprite: White/Fluff/centurion/breacher-helmet.rsi
+    - type: GiftIgnore
 
 # Security
 - type: entity
@@ -154,6 +161,7 @@
       sprite: White/Fluff/centurion/breacher.rsi
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitSecurityCenturion
+    - type: GiftIgnore
 
 # poxuy
 
@@ -176,6 +184,7 @@
       sprite: White/Fluff/centurion/breacher-helmet.rsi
     - type: Clothing
       sprite: White/Fluff/centurion/breacher-helmet.rsi
+    - type: GiftIgnore
 
 - type: entity
   parent: ClothingHeadHelmetHardsuitRd

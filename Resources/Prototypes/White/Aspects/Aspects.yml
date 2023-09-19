@@ -192,3 +192,16 @@
       startAudio:
         path: /Audio/White/Aspects/accent.ogg
     - type: PresentAspect
+
+- type: entity
+  id: DancingAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Dance"
+      description: "Танцуют все!"
+      weight: 3
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: DancingAspect

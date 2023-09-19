@@ -18,6 +18,7 @@
     - type: ContainerContainer
       containers:
         toggleable-clothing: !type:ContainerSlot {}
+    - type: GiftIgnore
 
 #CAP
 - type: entity
@@ -32,6 +33,7 @@
       sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertleader.rsi
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitERTLeader
+    - type: GiftIgnore
 
 #CE
 - type: entity
@@ -45,6 +47,7 @@
       sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertengineer.rsi
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitERTEngineer
+    - type: GiftIgnore
 
 #CMO
 - type: entity
@@ -58,6 +61,7 @@
       sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertmedical.rsi
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitERTMedical
+    - type: GiftIgnore
 
 #SEC
 - type: entity
@@ -71,6 +75,7 @@
       sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertsecurity.rsi
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitERTSecurity
+    - type: GiftIgnore
 
 # RD
 - type: entity
@@ -84,6 +89,7 @@
       sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertjanitor.rsi
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitERTJanitor
+    - type: GiftIgnore
 
 # other
 - type: entity
@@ -98,6 +104,7 @@
       sprite: Clothing/OuterClothing/Hardsuits/wizard.rsi
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitWizard
+    - type: GiftIgnore
 
 
 # Penis
@@ -114,6 +121,7 @@
       sprite: White/Fluff/serbwo/suits/ertleader.rsi
     - type: ToggleableClothing
       clothingPrototype: ClothingOuterParamedicHelmetFluff
+    - type: GiftIgnore
 
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
@@ -125,6 +133,7 @@
       sprite: White/Fluff/serbwo/helmets/ertleader.rsi
     - type: Clothing
       sprite: White/Fluff/serbwo/helmets/ertleader.rsi
+    - type: GiftIgnore
 
 
 - type: entity
@@ -139,6 +148,7 @@
       sprite: White/Fluff/serbwo/suits/ertmedical.rsi
     - type: ToggleableClothing
       clothingPrototype: ClothingOuterCargoHelmetFluff
+    - type: GiftIgnore
 
 - type: entity
   parent: ClothingHeadHelmetHardsuitSalvage
@@ -150,6 +160,7 @@
       sprite: White/Fluff/serbwo/helmets/ertmedical.rsi
     - type: Clothing
       sprite: White/Fluff/serbwo/helmets/ertmedical.rsi
+    - type: GiftIgnore
 
 # KILL ME PLEASE
 

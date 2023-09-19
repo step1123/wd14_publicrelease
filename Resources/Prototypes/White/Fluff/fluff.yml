@@ -1,4 +1,4 @@
-﻿# DOOMMAX
+# DOOMMAX
 - type: entity
   parent: ClothingOuterEVASuitBase
   id: ClothingOuterSuitGlamorous
@@ -19,6 +19,7 @@
     - type: ContainerContainer
       containers:
         toggleable-clothing: !type:ContainerSlot {}
+    - type: GiftIgnore
 
 - type: entity
   parent: ClothingOuterHardsuitEVA
@@ -35,6 +36,7 @@
     - type: ContainerContainer
       containers:
         toggleable-clothing: !type:ContainerSlot { }
+    - type: GiftIgnore
 
 - type: entity
   parent: ClothingHeadHelmetEVA
@@ -46,6 +48,7 @@
       sprite: White/Fluff/DOOMMAX/helmetglamour.rsi
     - type: Clothing
       sprite: White/Fluff/DOOMMAX/helmetglamour.rsi
+    - type: GiftIgnore
 
 # Maury
 - type: entity
@@ -134,6 +137,7 @@
       sprite: White/Fluff/YouWellLeer/hoshardsuit.rsi
     - type: ToggleableClothing
       clothingPrototype: LeerHelmet
+    - type: GiftIgnore
 
 - type: entity
   parent: ClothingHeadHelmetHardsuitSecurityRed
@@ -146,6 +150,7 @@
     - type: Clothing
       sprite: White/Fluff/YouWellLeer/hoshelmet.rsi
     - type: PointLight
+    - type: GiftIgnore
 
 - type: entity
   parent: ClothingUniformJumpsuitHoS
@@ -352,6 +357,7 @@
       damageCoefficient: 0.90
     - type: ToggleableClothing
       clothingPrototype: ClothingHeadHelmetHardsuitHskveezAtmos
+    - type: GiftIgnore
 
 
 #Hskveez Atmospherics Hardsuit

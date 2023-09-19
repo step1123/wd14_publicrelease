@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: BaseLandMine
   abstract: true
   components:
@@ -67,8 +67,22 @@
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: Default
-    maxIntensity: 3
-    intensitySlope: 1
-    totalIntensity: 120
+    maxIntensity: 10
+    intensitySlope: 3
+    totalIntensity: 120 # about a ~4 tile radius
+    canCreateVacuum: false
+  - type: DeleteOnTrigger
+
+- type: entity
+  name: мина аспекта
+  parent: BaseLandMine
+  id: LandMineAspectExplosive
+  components:
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 4
+    intensitySlope: 2
+    totalIntensity: 25
     canCreateVacuum: false
   - type: DeleteOnTrigger

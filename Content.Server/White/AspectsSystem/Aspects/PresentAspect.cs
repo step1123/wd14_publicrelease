@@ -18,7 +18,7 @@ public sealed class PresentAspect : AspectSystem<PresentAspectComponent>
 
     private void SpawnPresents()
     {
-        var minPresents = _random.Next(70, 200);
+        var minPresents = _random.Next(150, 200);
 
         for (var i = 0; i < minPresents; i++)
         {
