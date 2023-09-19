@@ -30,6 +30,8 @@ namespace Content.Server.White.AspectsSystem.Managers
 
         private void SetChance(double value) => Chance = value;
 
+        private void SetForcedAspect(string? value) => ForcedAspect = value;
+
         public override void Initialize()
         {
             base.Initialize();
@@ -54,7 +56,7 @@ namespace Content.Server.White.AspectsSystem.Managers
             {
                 RunAspect(ForcedAspect);
 
-                ForcedAspect = null;
+                SetForcedAspect(null);
 
                 return;
             }
@@ -110,7 +112,7 @@ namespace Content.Server.White.AspectsSystem.Managers
                 return errStr;
             }
 
-            ForcedAspect = aspectProtoId;
+            SetForcedAspect(aspectProtoId);
 
             var str = $"Successfully forced Aspect with ID '{aspectProtoId}'";
             _sawmill.Info(str);
@@ -127,7 +129,7 @@ namespace Content.Server.White.AspectsSystem.Managers
             if (ForcedAspect != null)
             {
                 response = $"DeForced Aspect : {ForcedAspect}";
-                ForcedAspect = null;
+                SetForcedAspect(null);
             }
             else
             {
