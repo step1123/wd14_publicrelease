@@ -161,29 +161,30 @@ namespace Content.Server.White.AspectsSystem.Managers
 
             foreach (var (proto, aspect) in availableAspects)
             {
-                var aspectId = proto.ID;
+                var initialAspectId = proto.ID;
+                var returnedAspectId = proto.ID;
 
                 if (aspect.Requires != null)
                 {
-                    aspectId += $" (Requires: {aspect.Requires})";
+                    returnedAspectId += $" (Requires: {aspect.Requires})";
                 }
 
                 if (aspect.IsForbidden)
                 {
-                    aspectId += " (ShitSpawn)";
+                    returnedAspectId += " (ShitSpawn)";
                 }
 
-                if (ForcedAspect == aspectId)
+                if (ForcedAspect == initialAspectId)
                 {
-                    aspectId += " (Forced)";
+                    returnedAspectId += " (Forced)";
                 }
 
-                if (CheckIfAspectAlreadyRunning(aspectId))
+                if (CheckIfAspectAlreadyRunning(initialAspectId))
                 {
-                    aspectId += " (Already Running)";
+                    returnedAspectId += " (Already Running)";
                 }
 
-                aspectIds.Add(aspectId);
+                aspectIds.Add(returnedAspectId);
             }
 
             return aspectIds;
