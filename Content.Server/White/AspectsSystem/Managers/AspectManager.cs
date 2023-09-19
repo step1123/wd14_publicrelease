@@ -24,11 +24,11 @@ namespace Content.Server.White.AspectsSystem.Managers
 
         private double Chance { get; set; }
 
+        private string? ForcedAspect { get; set; }
+
         private void SetEnabled(bool value) => AspectsEnabled = value;
 
         private void SetChance(double value) => Chance = value;
-
-        private string? ForcedAspect { get; set; }
 
         public override void Initialize()
         {
