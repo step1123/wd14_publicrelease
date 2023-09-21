@@ -97,7 +97,7 @@ public abstract class SharedReflectSystem : EntitySystem
             return false;
         }
 
-        if (_random.Prob(0.33f) && reflective.Reflective == ReflectType.NonEnergy)
+        if (_random.Prob(0.33f) && TryComp<ReflectComponent>(reflector, out var weapon) && weapon.Reflects == ReflectType.NonEnergy)
         {
             EntityManager.DeleteEntity(projectile);
             _popup.PopupEntity("Пуля сгорает", reflector);
