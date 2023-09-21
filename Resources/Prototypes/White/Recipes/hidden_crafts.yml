@@ -95,3 +95,30 @@
             doAfter: 1
   - node: crossbow
     entity: WeaponPoweredCrossbow
+
+- type: constructionGraph
+  id: SnatcherprodGraph
+  start: rod
+  graph:
+  - node: rod
+    entity: PartRodMetal1
+    edges:
+      - to: unfinished
+        steps:
+          - material: Cable
+            amount: 15
+            doAfter: 1
+  - node: unfinished
+    entity: ProdUnfinished
+    edges:
+      - to: capacitor
+        steps:
+          - tag: CapacitorStockPart
+  - node: capacitor
+    edges:
+      - to: snatcherprod
+        steps:
+          - material: Telecrystal
+            traitorOnly: true
+  - node: snatcherprod
+    entity: Snatcherprod

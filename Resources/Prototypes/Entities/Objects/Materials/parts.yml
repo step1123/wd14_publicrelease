@@ -101,3 +101,7 @@
         - ItemMask
         restitution: 0.3
         friction: 0.2
+  - type: Construction
+    deconstructionTarget: null
+    graph: SnatcherprodGraph
+    node: rod

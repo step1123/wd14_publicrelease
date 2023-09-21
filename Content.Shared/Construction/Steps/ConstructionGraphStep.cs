@@ -10,6 +10,9 @@ namespace Content.Shared.Construction.Steps
 
         [DataField("doAfter")] public float DoAfter { get; }
 
+        [DataField("traitorOnly")]
+        public bool TraitorOnly { get; }
+
         public IReadOnlyList<IGraphAction> Completed => _completed;
 
         public abstract void DoExamine(ExaminedEvent examinedEvent);

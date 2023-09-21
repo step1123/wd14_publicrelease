@@ -24,8 +24,11 @@ public sealed class StaminaMeleeHitEvent : HandledEntityEventArgs
     /// </summary>
     public float FlatModifier = 0;
 
-    public StaminaMeleeHitEvent(List<(EntityUid Entity, StaminaComponent Component)> hitList)
+    public EntityUid User; // WD
+
+    public StaminaMeleeHitEvent(List<(EntityUid Entity, StaminaComponent Component)> hitList, EntityUid user) // WD EDIT
     {
         HitList = hitList;
+        User = user; // WD
     }
 }

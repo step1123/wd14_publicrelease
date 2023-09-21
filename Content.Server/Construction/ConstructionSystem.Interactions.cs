@@ -1,6 +1,8 @@
 using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Construction.Components;
+using Content.Server.Mind.Components;
+using Content.Server.Roles;
 using Content.Server.Temperature.Components;
 using Content.Server.Temperature.Systems;
 using Content.Shared.Construction;
@@ -9,6 +11,7 @@ using Content.Shared.Construction.Steps;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Radio.EntitySystems;
+using Content.Shared.Stacks;
 using Content.Shared.Tools.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -86,6 +89,9 @@ namespace Content.Server.Construction
         private HandleResult HandleNode(EntityUid uid, object ev, ConstructionGraphNode node, bool validation, ConstructionComponent? construction = null)
         {
             if (!Resolve(uid, ref construction))
+                return HandleResult.False;
+
+            if (TryComp(uid, out StackComponent? stack) && stack.Count > 1) // WD
                 return HandleResult.False;
 
             // Let's make extra sure this is zero...
@@ -198,6 +204,11 @@ namespace Content.Server.Construction
             // Let HandleInteraction actually handle the event for this step.
             // We can only perform the rest of our logic if it returns true.
             var handle = HandleInteraction(uid, ev, step, validation, out user, construction);
+
+            if (step.TraitorOnly && TryComp(user, out MindContainerComponent? mindContainer) &&
+                mindContainer.Mind != null && !mindContainer.Mind.Roles.OfType<TraitorRole>().Any()) // WD
+                return HandleResult.False;
+
             if (handle is not HandleResult.True)
                 return handle;
 

@@ -1,0 +1,57 @@
+- type: entity
+  name: хваталка
+  parent: BaseItem
+  id: Snatcherprod
+  description: Искрится жаждой воровства и коварства.
+  components:
+  - type: Sprite
+    sprite: White/Objects/Weapons/snatcherprod.rsi
+    layers:
+    - state: snatcherprod_nocell
+      map: [ "enum.ToggleVisuals.Layer" ]
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 9
+    angle: 0
+    animation: WeaponArcThrust
+  - type: StaminaDamageOnHit
+    damage: 40
+  - type: ItemCooldown
+  - type: Item
+    size: 30
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+     enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
+          nocell: {state: snatcherprod_nocell}
+          True: {state: snatcherprod_on}
+          False: {state: snatcherprod_off}
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+  - type: Snatcherprod
+  - type: Construction
+    deconstructionTarget: null
+    graph: SnatcherprodGraph
+    node: snatcherprod
+
+- type: entity
+  name: палка
+  parent: BaseItem
+  id: ProdUnfinished
+  description: Стержень с проводами.
+  components:
+  - type: Sprite
+    sprite: White/Objects/Weapons/prod.rsi
+    state: prod_unfinished
+  - type: Item
+    size: 30
+  - type: Construction
+    deconstructionTarget: null
+    graph: SnatcherprodGraph
+    node: unfinished
