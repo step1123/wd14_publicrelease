@@ -146,7 +146,6 @@ public sealed class CyborgSystem : SharedCyborgSystem
     {
         UpdateAlert(uid, component);
         Dirty(component);
-        AddTtsComponent(uid);
     }
 
     private void AddTtsComponent(EntityUid uid)
@@ -215,6 +214,7 @@ public sealed class CyborgSystem : SharedCyborgSystem
             $"{ToPrettyString(uid):player} borg has initialized!");
         component.Active = true;
         Dirty(component);
+        AddTtsComponent(uid);
     }
 
 

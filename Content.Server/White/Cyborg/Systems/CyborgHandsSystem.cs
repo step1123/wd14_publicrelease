@@ -59,7 +59,10 @@ public sealed class CyborgHandsSystem : SharedCyborgHandSystem
             return;
 
         if (handsComponent.ActiveHand.HeldEntity != null)
-            TryInsertInstrument(uid, handsComponent.ActiveHand.HeldEntity.Value, component);
+        {
+            if(!TryInsertInstrument(uid, handsComponent.ActiveHand.HeldEntity.Value, component))
+                return;
+        }
 
         if (args.SelectedInstrumentUid != EntityUid.Invalid)
             TryPickupInstrument(uid, args.SelectedInstrumentUid, component, handsComponent);

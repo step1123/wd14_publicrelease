@@ -29,6 +29,7 @@
     - type: Appearance
     - type: Body
       prototype: Cyborg
+    - type: AnimationPlayer
     - type: InputMover
     - type: Eye
     - type: TypingIndicator
@@ -179,6 +180,7 @@
       sprite: White/Mobs/Player/Borgs/cyborg_medical.rsi
       layers:
         - state: robot
+          map: ["enum.CyborgTransformVisualLayers.Main"]
         - state: robot-eye
           shader: unshaded
         - state: robot-flashlight
@@ -187,6 +189,9 @@
           map: [ "enum.ToggleVisuals.Layer" ]
     - type: Cyborg
       prototype: Medical
+    - type: CyborgTransformAnimation
+      transformState: medical_transform
+      duration: 3.0
     - type: ContainerFill
       containers:
         module-slots:
@@ -227,6 +232,9 @@
       deviceNetId: Wireless
       transmitFrequencyId: CyborgSensor
       receiveFrequencyId: CyborgAction
+    - type: CyborgTransformAnimation
+      transformState: sec_transform
+      duration: 2.8
     - type: WirelessNetworkConnection
       range: 1200
     - type: StationLimitedNetwork
@@ -237,6 +245,7 @@
       sprite: White/Mobs/Player/Borgs/cyborg_sec.rsi
       layers:
         - state: robot
+          map: ["enum.CyborgTransformVisualLayers.Main"]
         - state: robot-eye
           shader: unshaded
         - state: robot-flashlight
@@ -270,12 +279,16 @@
       range: 1200
     - type: StationLimitedNetwork
     - type: CyborgSensor
+    - type: CyborgTransformAnimation
+      transformState: engineer_transform
+      duration: 4.6
     - type: Sprite
       drawdepth: Mobs
       netsync: false
       sprite: White/Mobs/Player/Borgs/cyborg_eng.rsi
       layers:
         - state: robot
+          map: ["enum.CyborgTransformVisualLayers.Main"]
         - state: robot-eye
           shader: unshaded
         - state: robot-flashlight
@@ -356,12 +369,16 @@
       range: 1200
     - type: StationLimitedNetwork
     - type: CyborgSensor
+    - type: CyborgTransformAnimation
+      transformState: minerOLD_transform
+      duration: 3.0
     - type: Sprite
       drawdepth: Mobs
       netsync: false
       sprite: White/Mobs/Player/Borgs/cyborg_miner.rsi
       layers:
         - state: minerOLD
+          map: ["enum.CyborgTransformVisualLayers.Main"]
         - state: miner_e
           shader: unshaded
         - state: miner_l
@@ -394,12 +411,16 @@
       range: 1200
     - type: StationLimitedNetwork
     - type: CyborgSensor
+    - type: CyborgTransformAnimation
+      transformState: peace_transform
+      duration: 6.0
     - type: Sprite
       drawdepth: Mobs
       netsync: false
       sprite: White/Mobs/Player/Borgs/cyborg_clown.rsi
       layers:
         - state: clown
+          map: ["enum.CyborgTransformVisualLayers.Main"]
         - state: clown_e_r
           shader: unshaded
         - state: clown_l
