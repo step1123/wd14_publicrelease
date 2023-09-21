@@ -127,6 +127,48 @@
       - WeaponCapacitorRechargerCircuitboard
       - OxygenTank
       - PlasmaTank
+  - type: EmagLatheRecipes
+    emagStaticRecipes:
+       - CartridgeCaselessRifle
+       - CartridgePistol
+       - CartridgeMagnum
+       - ShellShotgun
+       - ShellShotgunFlare
+       - ShellTranquilizer
+       - CartridgeLightRifle
+       - CartridgeRifle
+       - MagazineBoxPistol
+       - MagazineBoxMagnum
+       - MagazineBoxRifle
+       - MagazineBoxLightRifle
+       - MagazineBoxCaselessRifle
+    emagDynamicRecipes:
+      - CartridgePistolRubber
+      - CartridgeMagnumRubber
+      - ShellShotgunBeanbag
+      - CartridgeRifleRubber
+      - CartridgeLightRifleRubber
+      - MagazineBoxPistolRubber
+      - MagazineBoxMagnumRubber
+      - MagazineBoxRifleRubber
+      - MagazineBoxLightRifleRubber
+      - CartridgePistolHighVelocity
+      - CartridgeMagnumHighVelocity
+      - CartridgeLightRifleHighVelocity
+      - CartridgeRifleHighVelocity
+      - MagazineBoxPistolHighVelocity
+      - MagazineBoxMagnumHighVelocity
+      - MagazineBoxLightRifleHighVelocity
+      - MagazineBoxRifleHighVelocity
+      - ShellShotgunIncendiary
+      - CartridgePistolIncendiary
+      - CartridgeMagnumIncendiary
+      - CartridgeLightRifleIncendiary
+      - CartridgeRifleIncendiary
+      - MagazineBoxPistolIncendiary
+      - MagazineBoxMagnumIncendiary
+      - MagazineBoxLightRifleIncendiary
+      - MagazineBoxRifleIncendiary
 
 - type: entity
   id: Protolathe
@@ -238,6 +280,14 @@
       - CyborgSpeedModule #WD EDIT
       - CyborgInstrumentModuleFilled #WD EDIT
       - CyborgJetpackModule #WD EDIT
+  - type: EmagLatheRecipes
+    emagDynamicRecipes:
+      - ExplosivePayload
+      - WeaponLaserCarbine
+      - WeaponAdvancedLaser
+      - WeaponLaserCannon
+      - WeaponXrayCannon
+      - WeaponTaser
 
 - type: entity
   id: CircuitImprinter
@@ -480,6 +530,14 @@
       - WeaponLaserCannon
       - WeaponXrayCannon
       - WeaponTaser
+  - type: EmagLatheRecipes
+    emagStaticRecipes:
+       - CartridgeMagnumAP
+       - CartridgeAntiMateriel
+       - CartridgeCaselessRifle
+       - MagazineBoxMagnumAP
+       - MagazineBoxAntiMateriel
+       - MagazineBoxCaselessRifle
   - type: MaterialStorage
     whitelist:
       tags:
@@ -523,6 +581,14 @@
         - MagazineBoxMagnum
         - MagazineBoxRifle
         - MagazineBoxLightRifle
+    - type: EmagLatheRecipes
+      emagStaticRecipes:
+         - CartridgeMagnumAP
+         - CartridgeAntiMateriel
+         - CartridgeCaselessRifle
+         - MagazineBoxMagnumAP
+         - MagazineBoxAntiMateriel
+         - MagazineBoxCaselessRifle
     - type: MaterialStorage
       whitelist:
         tags:

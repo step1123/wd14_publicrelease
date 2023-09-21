@@ -11,3 +11,45 @@
   completetime: 5
   materials:
     Steel: 1500
+
+- type: latheRecipe
+  id: CartridgeCaselessRifle
+  result: CartridgeCaselessRifle
+  completetime: 2
+  materials:
+    Steel: 30
+
+- type: latheRecipe
+  id: CartridgeAntiMateriel
+  result: CartridgeCaselessRifle
+  completetime: 2
+  materials:
+    Steel: 80
+
+- type: latheRecipe
+  id: CartridgeMagnumAP
+  result: CartridgeMagnumAP
+  completetime: 2
+  materials:
+    Steel: 50
+
+- type: latheRecipe
+  id: MagazineBoxCaselessRifle
+  result: MagazineBoxCaselessRifle
+  completetime: 5
+  materials:
+    Steel: 1800
+
+- type: latheRecipe
+  id: MagazineBoxAntiMateriel
+  result: MagazineBoxAntiMateriel
+  completetime: 5
+  materials:
+    Steel: 800
+
+- type: latheRecipe
+  id: MagazineBoxMagnumAP
+  result: MagazineBoxMagnumAP
+  completetime: 5
+  materials:
+    Steel: 3000
