@@ -30,3 +30,6 @@
 
 - type: Tag
   id: CapacitorStockPart
+
+- type: Tag
+  id: EmpResistance

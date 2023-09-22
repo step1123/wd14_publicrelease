@@ -41,7 +41,7 @@
   id: ActivateFreedomImplant
   name: use-freedom-implant-action-name
   description: use-freedom-implant-action-description
-  charges: 3
+  useDelay: 20
   checkCanInteract: false
   itemIconStyle: BigAction
   priority: -20
@@ -65,8 +65,7 @@
   id: ActivateEmpImplant
   name: use-emp-implant-action-name
   description: use-emp-implant-action-description
-  charges: 3
-  useDelay: 5
+  useDelay: 20
   itemIconStyle: BigAction
   priority: -20
   icon:
