@@ -37,23 +37,28 @@
 #Deathsquad Outfit
 - type: startingGear
   id: DeathSquadGear
+  inhand:
+    left hand: JetpackBlackFilled
   equipment:
     jumpsuit: ClothingUniformJumpsuitDeathSquad
-    back: ClothingBackpackDuffelSyndicateAmmo
+    back: ClothingBackpackDeathSquad
     mask: ClothingMaskGasDeathSquad
     eyes: ClothingEyesGlassesSecurity
     ears: ClothingHeadsetAltCentCom
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitDeathsquad
-    suitstorage: OxygenTankFilled
+    suitstorage: WeaponPulseRifle
     shoes: ClothingShoesBootsMagAdv
     id: DeathsquadPDA
     pocket1: EnergySword
-    belt: ClothingBeltChiefEngineerFilled
+    pocket2: DoubleEmergencyOxygenTankFilled
+    underwearb: ClothingUnderwearBottomBoxersWhite # White-Underwear
+  underweart: ClothingUnderwearTopBraWhite # White-Underwear
+  underwearb: ClothingUnderwearBottomPantiesWhite # White-Underwear
   innerclothingskirt: ClothingUniformJumpskirtColorBlack
-  satchel: ClothingBackpackDuffelSyndicateAmmo
-  duffelbag: ClothingBackpackDuffelSyndicateAmmo
-  
+  satchel: ClothingBackpackDeathSquad
+  duffelbag: ClothingBackpackDeathSquad
+
 # Syndicate Operative Outfit - Monkey
 - type: startingGear
   id: SyndicateOperativeGearMonkey
@@ -97,7 +102,7 @@
     jumpsuit: ClothingUniformJumpsuitOperative
     back: ClothingBackpackDuffelSyndicateOperative
     mask: ClothingMaskGasSyndicate
-  # eyes: Night Vision Goggles whenever they're made
+    # eyes: Night Vision Goggles whenever they're made
     eyes: ClothingEyesGlassesMeson
     ears: ClothingHeadsetAltSyndicate
     gloves: ClothingHandsGlovesCombat
@@ -118,7 +123,7 @@
     jumpsuit: ClothingUniformJumpsuitOperative
     back: ClothingBackpackDuffelSyndicateOperative
     mask: ClothingMaskGasSyndicate
-  # eyes: Night Vision Goggles whenever they're made
+    # eyes: Night Vision Goggles whenever they're made
     eyes: ClothingEyesGlassesMeson
     ears: ClothingHeadsetAltSyndicate
     gloves: ClothingHandsGlovesCombat

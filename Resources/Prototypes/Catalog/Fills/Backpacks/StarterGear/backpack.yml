@@ -3,181 +3,181 @@
   id: ClothingBackpackFilled
   noSpawn: true
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvival
+    - type: StorageFill
+      contents:
+        - id: BoxSurvival
 
 - type: entity
   noSpawn: true
   parent: ClothingBackpackClown
   id: ClothingBackpackClownFilled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxHug
-      - id: RubberStampClown
-      - id: CrayonRainbow
+    - type: StorageFill
+      contents:
+        - id: BoxHug
+        - id: RubberStampClown
+        - id: CrayonRainbow
 
 - type: entity
   noSpawn: true
   parent: ClothingBackpackSecurity
   id: ClothingBackpackSecurityFilled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvivalSecurity
-      - id: Flash
+    - type: StorageFill
+      contents:
+        - id: BoxSurvivalSecurity
+        - id: Flash
 
 - type: entity
   noSpawn: true
   parent: ClothingBackpackMedical
   id: ClothingBackpackMedicalFilled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvivalMedical
+    - type: StorageFill
+      contents:
+        - id: BoxSurvivalMedical
 
 - type: entity
   noSpawn: true
   parent: ClothingBackpackCaptain
   id: ClothingBackpackCaptainFilled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvival
-      - id: Flash
-      #- name: StationCharter
-      #- name: TelescopicBaton
+    - type: StorageFill
+      contents:
+        - id: BoxSurvival
+        - id: Flash
+        #- name: StationCharter
+        #- name: TelescopicBaton
 - type: entity
   noSpawn: true
   parent: ClothingBackpackEngineering
   id: ClothingBackpackChiefEngineerFilled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvivalEngineering
-      - id: Flash
-      #- id: TelescopicBaton
+    - type: StorageFill
+      contents:
+        - id: BoxSurvivalEngineering
+        - id: Flash
+        #- id: TelescopicBaton
 
 - type: entity
   noSpawn: true
   parent: ClothingBackpackScience
   id: ClothingBackpackResearchDirectorFilled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvival
-      - id: Flash
-      #- id: TelescopicBaton
+    - type: StorageFill
+      contents:
+        - id: BoxSurvival
+        - id: Flash
+        #- id: TelescopicBaton
 
 - type: entity
   noSpawn: true
   parent: ClothingBackpack
   id: ClothingBackpackHOPFilled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvival
-      - id: Flash
-      #- id: TelescopicBaton
+    - type: StorageFill
+      contents:
+        - id: BoxSurvival
+        - id: Flash
+        #- id: TelescopicBaton
 
 - type: entity
   noSpawn: true
   parent: ClothingBackpackMedical
   id: ClothingBackpackCMOFilled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvivalMedical
-      - id: Flash
-      #- id: TelescopicBaton
+    - type: StorageFill
+      contents:
+        - id: BoxSurvivalMedical
+        - id: Flash
+        #- id: TelescopicBaton
 
 - type: entity
   noSpawn: true
   parent: ClothingBackpackCargo
   id: ClothingBackpackQuartermasterFilled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvival
-      - id: Flash
-      #- id: TelescopicBaton
+    - type: StorageFill
+      contents:
+        - id: BoxSurvival
+        - id: Flash
+        #- id: TelescopicBaton
 
 - type: entity
   noSpawn: true
   parent: ClothingBackpackSecurity
   id: ClothingBackpackHOSFilled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvivalSecurity
-      - id: Flash
+    - type: StorageFill
+      contents:
+        - id: BoxSurvivalSecurity
+        - id: Flash
 
 - type: entity
   noSpawn: true
   parent: ClothingBackpackEngineering
   id: ClothingBackpackEngineeringFilled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvivalEngineering
+    - type: StorageFill
+      contents:
+        - id: BoxSurvivalEngineering
 
 - type: entity
   noSpawn: true
   parent: ClothingBackpackAtmospherics
   id: ClothingBackpackAtmosphericsFilled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvivalEngineering
+    - type: StorageFill
+      contents:
+        - id: BoxSurvivalEngineering
 
 - type: entity
   noSpawn: true
   parent: ClothingBackpackScience
   id: ClothingBackpackScienceFilled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvival
+    - type: StorageFill
+      contents:
+        - id: BoxSurvival
 
 - type: entity
   noSpawn: true
   parent: ClothingBackpackHydroponics
   id: ClothingBackpackHydroponicsFilled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvival
+    - type: StorageFill
+      contents:
+        - id: BoxSurvival
 
 - type: entity
   noSpawn: true
   parent: ClothingBackpackMime
   id: ClothingBackpackMimeFilled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvival
-      - id: RubberStampMime
+    - type: StorageFill
+      contents:
+        - id: BoxSurvival
+        - id: RubberStampMime
 
 - type: entity
   noSpawn: true
   parent: ClothingBackpackChemistry
   id: ClothingBackpackChemistryFilled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvivalMedical
+    - type: StorageFill
+      contents:
+        - id: BoxSurvivalMedical
 
 - type: entity
   noSpawn: true
   parent: ClothingBackpack
   id: ClothingBackpackChaplainFilled
   components:
-  - type: StorageFill
-    contents:
-      - id: BoxSurvival
-      - id: Bible
-      - id: RubberStampChaplain
+    - type: StorageFill
+      contents:
+        - id: BoxSurvival
+        - id: Bible
+        - id: RubberStampChaplain
 
 - type: entity
   noSpawn: true
@@ -207,11 +207,11 @@
   components:
     - type: StorageFill
       contents:
-      - id: BoxSurvival
-      - id: Lighter
-      - id: CigPackBlack
-      - id: HandLabeler
-      - id: BoxForensicPad
+        - id: BoxSurvival
+        - id: Lighter
+        - id: CigPackBlack
+        - id: HandLabeler
+        - id: BoxForensicPad
 
 # ERT
 
@@ -327,3 +327,23 @@
         - id: Cutlass
         - id: WeaponRevolverPirate
         - id: ClothingEyesEyepatch
+
+- type: entity
+  parent: ClothingBackpackERTLeader
+  id: ClothingBackpackDeathSquad
+  suffix: DeathSquad
+  components:
+    - type: StorageFill
+      contents:
+        - id: BoxSurvival
+        - id: BoxMRE
+        - id: PinpointerNuclear
+        - id: OmnizineChemistryBottle
+          amount: 2
+        - id: Hypospray
+        - id: WeaponRevolverDeckard
+        - id: SpeedLoaderMagnumAP
+        - id: C4
+          amount: 3
+        - id: JawsOfLife
+        - id: EnergyShield

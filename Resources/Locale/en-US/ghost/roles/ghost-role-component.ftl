@@ -145,3 +145,7 @@ ghost-role-information-centcom-official-description = Inspect the station, jot d
 
 ghost-role-information-behonker-name = Behonker
 ghost-role-information-behonker-description = You are an antagonist, bring death and honks to those who do not follow the honkmother.
+
+ghost-role-information-deathsquad-name = Deathsquad Member
+ghost-role-information-deathsquad-description = You are a deathsquad member. Destroy the station and kill all survivors!
+ghost-role-information-deathsquad-rules = You are a part of elite Nanotrasen forces tasked with the destruction of the station. Do whatever is required to complete this task.

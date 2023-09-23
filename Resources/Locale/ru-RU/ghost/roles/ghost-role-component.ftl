@@ -106,3 +106,7 @@ spider-web-action-description = Создает паутину, которая з
 spider-web-action-nogrid = Под тобой нет пола!
 spider-web-action-success = Вы опутываете себя паутиной.
 spider-web-action-fail = Вы не можете размещать здесь паутину! Во всех направлениях уже есть паутина!
+
+ghost-role-information-deathsquad-name = Отряд Смерти
+ghost-role-information-deathsquad-description = Вы - член Отряд Смерти. Уничтожьте станцию и всех выживших!
+ghost-role-information-deathsquad-rules = Вы - часть специальных сил Нанотрайзен и ваша задача - уничтожить станцию и её персонал. Сделайте все, что потребуется, для достижения этой цели.

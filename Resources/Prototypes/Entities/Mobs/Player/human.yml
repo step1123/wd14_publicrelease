@@ -4,35 +4,35 @@
   parent: BaseMobHuman
   id: MobHuman
   components:
-  - type: CombatMode
-  - type: InteractionPopup
-    successChance: 1
-    interactSuccessString: hugging-success-generic
-    interactSuccessSound: /Audio/Effects/thudswoosh.ogg
-    messagePerceivedByOthers: hugging-success-generic-others
-  - type: MindContainer
-    showExamineInfo: true
-  - type: Input
-    context: "human"
-  - type: MobMover
-  - type: InputMover
-  - type: Respirator
-    damage:
-      types:
-        Asphyxiation: 1.0
-    damageRecovery:
-      types:
-        Asphyxiation: -1.0
-  - type: Alerts
-  - type: Actions
-  - type: Eye
-  - type: CameraRecoil
-  - type: Examiner
-  - type: CanHostGuardian
-  - type: NpcFactionMember
-    factions:
-    - NanoTrasen
-  - type: FootPrints
+    - type: CombatMode
+    - type: InteractionPopup
+      successChance: 1
+      interactSuccessString: hugging-success-generic
+      interactSuccessSound: /Audio/Effects/thudswoosh.ogg
+      messagePerceivedByOthers: hugging-success-generic-others
+    - type: MindContainer
+      showExamineInfo: true
+    - type: Input
+      context: "human"
+    - type: MobMover
+    - type: InputMover
+    - type: Respirator
+      damage:
+        types:
+          Asphyxiation: 1.0
+      damageRecovery:
+        types:
+          Asphyxiation: -1.0
+    - type: Alerts
+    - type: Actions
+    - type: Eye
+    - type: CameraRecoil
+    - type: Examiner
+    - type: CanHostGuardian
+    - type: NpcFactionMember
+      factions:
+        - NanoTrasen
+    - type: FootPrints
 
 #Syndie
 - type: entity
@@ -47,7 +47,7 @@
       nameSegments: [names_death_commando]
     - type: NpcFactionMember
       factions:
-      - Syndicate
+        - Syndicate
 
 - type: entity
   parent: MobHumanSyndicateAgent
@@ -80,11 +80,11 @@
       prototypes: [SyndicateOperativeGearFull]
     - type: RandomMetadata
       nameSegments:
-      - SyndicateNamesPrefix
-      - SyndicateNamesNormal
+        - SyndicateNamesPrefix
+        - SyndicateNamesNormal
     - type: NpcFactionMember
       factions:
-      - Syndicate
+        - Syndicate
 
 # DNA Scrambler
 - type: entity
@@ -93,3 +93,33 @@
   name: Scrambled Human
   components:
     - type: RandomHumanoidAppearance
+
+## DeathSquad
+
+- type: entity
+  parent: MobHuman
+  id: MobHumanDeathSquad
+  name: DeathSquad
+  components:
+    - type: Sprite
+      sprite: Markers/jobs.rsi
+      state: deathsquad
+    - type: Loadout
+      prototypes: [DeathSquadGear]
+    - type: RandomMetadata
+      nameSegments:
+        - NamesFirstMilitaryLeader
+        - names_last
+    - type: RandomHumanoidAppearance
+      speciesBlacklist: ["Reptilian", "Diona"]
+
+- type: entity
+  id: MobHumanDeathSquadGhost
+  parent: MobHumanDeathSquad
+  suffix: Ghost Role
+  components:
+    - type: GhostRole
+      name: ghost-role-information-deathsquad-name
+      description: ghost-role-information-deathsquad-description
+      rules: ghost-role-information-deathsquad-rules
+    - type: GhostTakeoverAvailable
