@@ -4,11 +4,13 @@ using System.Numerics;
 using Content.Server.Administration.Managers;
 using System.Text;
 using Content.Server.Ghost;
+using Content.Server.Mind;
 using Content.Server.Players;
 using Content.Server.Spawners.Components;
 using Content.Server.Speech.Components;
 using Content.Server.Station.Components;
 using Content.Shared.CCVar;
+using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid.Prototypes;
@@ -139,6 +141,27 @@ namespace Content.Server.GameTicking
                 JoinAsObserver(player);
                 return;
             }
+
+            //WD start
+            //Ghost system return to round, check for whether the character isn't the same.
+            if (lateJoin)
+            {
+                var allPlayerMinds = EntityManager.System<MindTrackerSystem>().AllMinds
+                    .Where(mind => mind.OriginalOwnerUserId == player.UserId);
+                foreach (var mind in allPlayerMinds)
+                {
+                    if (mind.CharacterName == character.Name && !_adminManager.IsAdmin(player))
+                    {
+                        var message = Loc.GetString("ghost-respawn-same-character");
+                        var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", message));
+                        _chatManager.ChatMessageToOne(ChatChannel.Server, message, wrappedMessage,
+                            default, false, player.ConnectedClient, Color.Red);
+
+                        return;
+                    }
+                }
+            }
+            //WD end
 
             // Automatically de-admin players who are joining.
             if (_cfg.GetCVar(CCVars.AdminDeadminOnJoin) && _adminManager.IsAdmin(player))
