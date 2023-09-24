@@ -1,0 +1,21 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "by tgstation",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base"
+    },
+    {
+      "name": "light",
+      "delays": [[0.3, 0.3, 0.3, 0.3]]
+    },
+    {
+      "name": "icon"
+    }
+  ]
+}

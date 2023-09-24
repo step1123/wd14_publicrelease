@@ -35,7 +35,7 @@
       clothingPrototype: ClothingHeadHelmetEVAGLAMOUR
     - type: ContainerContainer
       containers:
-        toggleable-clothing: !type:ContainerSlot { }
+        toggleable-clothing: !type:ContainerSlot {}
     - type: GiftIgnore
 
 - type: entity
@@ -231,7 +231,7 @@
     - type: PointLight
       radius: 2
       energy: 2
-      color: '#ff6bff'
+      color: "#ff6bff"
 
 - type: entity
   name: дубинка контрактника
@@ -281,7 +281,7 @@
     - type: Sprite
       sprite: Objects/Misc/books.rsi
       layers:
-      - state: summon_book
+        - state: summon_book
     - type: Item
       size: 5
     - type: Paper
@@ -359,7 +359,6 @@
       clothingPrototype: ClothingHeadHelmetHardsuitHskveezAtmos
     - type: GiftIgnore
 
-
 #Hskveez Atmospherics Hardsuit
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
@@ -377,7 +376,7 @@
         - state: light-overlay
           visible: false
           shader: unshaded
-          map: [ "light" ]
+          map: ["light"]
     - type: HandheldLight
       addPrefix: false
     - type: ToggleableLightVisuals
@@ -433,7 +432,6 @@
       bank: 1
       program: 2
 
-
 #thechaotic
 - type: entity
   parent: ClothingOuterStorageBase
@@ -442,13 +440,12 @@
   description: Провонял сигаретами и разрушенными мечтами.
   components:
     - type: Sprite
-      sprite:  White/Fluff/thechaotic/coat.rsi
+      sprite: White/Fluff/thechaotic/coat.rsi
     - type: Clothing
-      sprite:  White/Fluff/thechaotic/coat.rsi
+      sprite: White/Fluff/thechaotic/coat.rsi
     - type: StorageFill
       contents:
         - id: SmokingPipeFilledTobacco
-
 
 #6elblu
 - type: entity
@@ -459,7 +456,6 @@
   components:
     - type: Sprite
       sprite: White/Fluff/6elblu/white-cloak.rsi
-
 
 #Serafim547
 - type: entity
@@ -499,3 +495,71 @@
     - type: Sprite
       sprite: White/Fluff/Serafim547/vulp_coin.rsi
       state: coin_2
+
+# Skrimex
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckSkrimexCap
+  name: Сердце-переливающий плащ
+  description: "Плащ, в котором сердце переливается в центре, можно описать как впечатляющий и загадочный предмет одежды. Он выполнен из темной и непрозрачной ткани, создающей мистическую ауру вокруг носителя. Внутри плаща можно заметить нашивку с инициалами:  Возгалова К. Д."
+  components:
+    - type: Sprite
+      sprite: White/Fluff/skrimex/heart-cap.rsi
+    - type: Clothing
+      sprite: White/Fluff/skrimex/heart-cap.rsi
+
+- type: entity
+  parent: BaseItem
+  id: ZippoLighterSkrimex
+  name: Золотой Zippo
+  description: "Золотое покрытие придает этой зажигалке особую элегантность и роскошность. Она может быть выполнена из разных оттенков золота - бледного, яркого или розового. Корпус зажигалки может быть гладким или украшенным гравировкой, что добавляет ей аристократический шик. А на заднем обороте заметна гравировка с инициалами: Возгалова К. Д."
+  components:
+    - type: Sprite
+      sprite: White/Fluff/skrimex/zippo-lighter.rsi
+      scale: 0.7, 0.7
+      layers:
+        - state: base
+          map: ["enum.WelderLayers.Base"]
+        - state: light
+          map: ["enum.WelderLayers.Flame"]
+          shader: unshaded
+          visible: false
+    - type: Item
+      size: 1
+      sprite: White/Fluff/skrimex/zippo-ывфter.rsi
+      heldPrefix: off
+    - type: ItemCooldown
+    - type: ItemStatus
+    - type: RefillableSolution
+      solution: Welder
+    - type: SolutionContainerManager
+      solutions:
+        Welder:
+          reagents:
+            - ReagentId: WeldingFuel
+              Quantity: 1
+          maxVol: 1
+    - type: MeleeWeapon
+      damage:
+        types:
+          Blunt: 0 #this feels hacky, but is needed for burn damage while active (i think)
+    - type: Welder
+      fuelConsumption: 0
+      fuelLitCost: 0
+      litMeleeDamageBonus:
+        types:
+          Heat: 1
+      tankSafe: true
+      welderOnSounds:
+        collection: lighterOnSounds
+      welderOffSounds:
+        collection: lighterOffSounds
+    - type: PointLight
+      enabled: false
+      radius: 1.5 #smallest possible
+      color: orange
+    - type: Appearance
+    - type: Tag
+      tags:
+        - Lighter
