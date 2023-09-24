@@ -12,3 +12,9 @@
   charges: 1
   useDelay: 30
   serverEvent: !type:HairballActionEvent
+
+- type: entityTargetAction
+  id: SelfHealAction
+  name: self-heal-action
+  serverEvent: !type:SelfHealEvent
+  icon: White/Icons/tongue.png

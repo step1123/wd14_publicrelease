@@ -40,3 +40,18 @@
     interactSuccessString: hugging-success-generic
     interactSuccessSound: /Audio/Effects/thudswoosh.ogg
     messagePerceivedByOthers: hugging-success-generic-others
+  - type: SelfHeal
+    damageContainers:
+      - Biological
+    damage:
+      types:
+        Slash: -0.4
+        Piercing: -0.4
+    disallowedClothingUser:
+      - mask
+    disallowedClothingTarget:
+      - jumpsuit
+      - outerClothing
+    healingSound:
+      path: "/Audio/White/Felinid/lick.ogg"
+
