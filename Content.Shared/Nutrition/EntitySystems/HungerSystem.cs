@@ -4,7 +4,9 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Rejuvenate;
+using Content.Shared.White.Mood;
 using Robust.Shared.GameStates;
+using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -19,6 +21,7 @@ public sealed class HungerSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
     [Dependency] private readonly SharedJetpackSystem _jetpack = default!;
+    [Dependency] private readonly INetManager _net = default!; // WD edit
 
     public override void Initialize()
     {
@@ -29,7 +32,7 @@ public sealed class HungerSystem : EntitySystem
         SubscribeLocalEvent<HungerComponent, EntityUnpausedEvent>(OnUnpaused);
         SubscribeLocalEvent<HungerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<HungerComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<HungerComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovespeed);
+        //SubscribeLocalEvent<HungerComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovespeed); WD-edit
         SubscribeLocalEvent<HungerComponent, RejuvenateEvent>(OnRejuvenate);
     }
 
@@ -142,10 +145,18 @@ public sealed class HungerSystem : EntitySystem
         if (component.CurrentThreshold == component.LastThreshold && !force)
             return;
 
-        if (GetMovementThreshold(component.CurrentThreshold) != GetMovementThreshold(component.LastThreshold))
+        //WD start
+        if (_net.IsServer)
+        {
+            var ev = new MoodEffectEvent("Hunger" + component.CurrentThreshold);
+            RaiseLocalEvent(uid, ev);
+        }
+
+        /*if (GetMovementThreshold(component.CurrentThreshold) != GetMovementThreshold(component.LastThreshold))
         {
             _movementSpeedModifier.RefreshMovementSpeedModifiers(uid);
-        }
+        }*/
+        //WD end
 
         if (component.HungerThresholdAlerts.TryGetValue(component.CurrentThreshold, out var alertId))
         {

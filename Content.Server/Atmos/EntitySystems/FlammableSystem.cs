@@ -15,6 +15,7 @@ using Content.Shared.Rejuvenate;
 using Content.Shared.Temperature;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.White.Mood;
 using Robust.Server.GameObjects;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
@@ -301,10 +302,12 @@ namespace Content.Server.Atmos.EntitySystems
                 if (!flammable.OnFire)
                 {
                     _alertsSystem.ClearAlert(uid, AlertType.Fire);
+                    RaiseLocalEvent(uid, new MoodRemoveEffectEvent("OnFire")); // WD edit
                     continue;
                 }
 
                 _alertsSystem.ShowAlert(uid, AlertType.Fire, null, null);
+                RaiseLocalEvent(uid, new MoodEffectEvent("OnFire")); // WD edit
 
                 if (flammable.FireStacks > 0)
                 {
