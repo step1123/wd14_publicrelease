@@ -22,6 +22,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Server.Objectives;
 using Content.Shared.White.Cult;
+using Content.Shared.White.Mood;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -281,6 +282,8 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
         // Change the faction
         _npcFaction.RemoveFaction(entity, "NanoTrasen", false);
         _npcFaction.AddFaction(entity, "Syndicate");
+
+        RaiseLocalEvent(mind.OwnedEntity.Value, new MoodEffectEvent("TraitorFocused")); // WD edit
 
         // Give traitors their objectives
         var maxDifficulty = _cfg.GetCVar(CCVars.TraitorMaxDifficulty);

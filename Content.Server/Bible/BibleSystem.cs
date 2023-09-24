@@ -15,6 +15,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Timing;
 using Content.Shared.Verbs;
+using Content.Shared.White.Mood;
 using Robust.Shared.Audio;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
@@ -170,6 +171,8 @@ namespace Content.Server.Bible
                 SoundSystem.Play(component.HealSoundPath.GetSound(), Filter.Pvs(args.Target.Value), args.User);
                 _delay.BeginDelay(uid, delay);
             }
+
+            RaiseLocalEvent(args.Target.Value, new MoodEffectEvent("GotBlessed")); // WD edit
         }
 
         private void AddSummonVerb(EntityUid uid, SummonableComponent component, GetVerbsEvent<AlternativeVerb> args)
