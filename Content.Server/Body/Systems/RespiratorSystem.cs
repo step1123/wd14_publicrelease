@@ -20,8 +20,7 @@ using Content.Shared.Mobs; // WD
 using Content.Shared.Mobs.Components; // WD
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups; // WD
-using Content.Shared.White.CPR.Events;
-using Content.Shared.White.Mood; // WD
+using Content.Shared.White.CPR.Events; // WD
 using JetBrains.Annotations;
 using Robust.Server.GameObjects; // WD
 using Robust.Shared.Audio; // WD
@@ -186,7 +185,6 @@ namespace Content.Server.Body.Systems
             if (respirator.SuffocationCycles >= respirator.SuffocationCycleThreshold)
             {
                 _alertsSystem.ShowAlert(uid, AlertType.LowOxygen);
-                RaiseLocalEvent(uid, new MoodEffectEvent("Suffocating")); // WD edit
             }
 
             _damageableSys.TryChangeDamage(uid, respirator.Damage, true, false);
@@ -341,8 +339,6 @@ namespace Content.Server.Body.Systems
                 args.Repeat = true;
             else
                 component.CPRPerformedBy = null;
-
-            RaiseLocalEvent(args.User, new MoodEffectEvent("SavedLife"));
         }
         //WD end
     }

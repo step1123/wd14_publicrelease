@@ -23,7 +23,6 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Roles;
 using Content.Shared.White.Cyborg.Components;
 using Content.Shared.White.Mindshield;
-using Content.Shared.White.Mood;
 using Content.Shared.White.Reva.Components;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
@@ -286,8 +285,6 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
             }
             CheckRoundShouldEnd();
         }
-
-        RaiseLocalEvent(uid, new MoodRemoveEffectEvent("RevolutionFocused"));
     }
 
     private void OnComponentInit(EntityUid uid, RevolutionaryComponent component, ComponentInit args)
@@ -319,8 +316,6 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
             _faction.RemoveFaction(uid, "NanoTrasen");
             RemComp<PacifistComponent>(uid);
             RemComp<PacifiedComponent>(uid);
-
-            RaiseLocalEvent(uid, new MoodEffectEvent("RevolutionFocused"));
         }
     }
 

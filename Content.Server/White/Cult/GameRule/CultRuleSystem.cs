@@ -21,7 +21,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Preferences;
 using Content.Shared.White;
 using Content.Shared.White.Cult;
-using Content.Shared.White.Mood;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
@@ -151,7 +150,6 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
                 cultRuleComponent.CultistsList.Add(MetaData(component.Owner).EntityName, actor.PlayerSession.Name);
             }
 
-            RaiseLocalEvent(uid, new MoodEffectEvent("CultFocused"));
             UpdateCultistsAppearance(cultRuleComponent);
         }
 
@@ -168,8 +166,6 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
             cultRuleComponent.Cultists.Remove(component);
 
             RemoveCultistAppearance(component);
-
-            RaiseLocalEvent(uid, new MoodRemoveEffectEvent("CultFocused"));
 
             CheckRoundShouldEnd();
 

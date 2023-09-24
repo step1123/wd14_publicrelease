@@ -7,7 +7,6 @@
     - alertType: CultBuffed
     - category: Health
     - alertType: Bleeding
-    - category: Mood # WD edit
     - category: Stamina
     - category: Internals
     - alertType: Fire

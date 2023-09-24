@@ -4,7 +4,6 @@ using Content.Shared.Inventory;
 using Content.Shared.StatusEffect;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Stunnable;
-using Content.Shared.White.Mood;
 using JetBrains.Annotations;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
@@ -94,8 +93,6 @@ public sealed class SlipperySystem : EntitySystem
         var playSound = !_statusEffects.HasStatusEffect(other, "KnockedDown");
 
         _stun.TryParalyze(other, TimeSpan.FromSeconds(component.ParalyzeTime), true);
-
-        RaiseLocalEvent(other, new MoodEffectEvent("MobSlipped")); // WD edit
 
         // Preventing from playing the slip sound when you are already knocked down.
         if (playSound)

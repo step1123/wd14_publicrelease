@@ -5,7 +5,6 @@ using Content.Shared.Movement.Components;
 using Content.Shared.Alert;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Rejuvenate;
-using Content.Shared.White.Mood;
 
 namespace Content.Server.Nutrition.EntitySystems;
 
@@ -26,7 +25,7 @@ public sealed class ThirstSystem : EntitySystem
 
         _sawmill = Logger.GetSawmill("thirst");
 
-        //SubscribeLocalEvent<ThirstComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovespeed); WD-edit
+        SubscribeLocalEvent<ThirstComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovespeed);
         SubscribeLocalEvent<ThirstComponent, ComponentStartup>(OnComponentStartup);
         SubscribeLocalEvent<ThirstComponent, RejuvenateEvent>(OnRejuvenate);
     }
@@ -105,13 +104,11 @@ public sealed class ThirstSystem : EntitySystem
 
     private void UpdateEffects(EntityUid uid, ThirstComponent component)
     {
-        //WD start
-        /*if (IsMovementThreshold(component.LastThirstThreshold) != IsMovementThreshold(component.CurrentThirstThreshold) &&
+        if (IsMovementThreshold(component.LastThirstThreshold) != IsMovementThreshold(component.CurrentThirstThreshold) &&
                 TryComp(uid, out MovementSpeedModifierComponent? movementSlowdownComponent))
         {
             _movement.RefreshMovementSpeedModifiers(uid, movementSlowdownComponent);
-        }*/
-        //WD end
+        }
 
         // Update UI
         if (ThirstComponent.ThirstThresholdAlertTypes.TryGetValue(component.CurrentThirstThreshold, out var alertId))
@@ -122,11 +119,6 @@ public sealed class ThirstSystem : EntitySystem
         {
             _alerts.ClearAlertCategory(uid, AlertCategory.Thirst);
         }
-
-        //WD start
-        var ev = new MoodEffectEvent("Thirst" + component.CurrentThirstThreshold);
-        RaiseLocalEvent(uid, ev);
-        //WD end
 
         switch (component.CurrentThirstThreshold)
         {
