@@ -18,7 +18,7 @@ public sealed class BombassAspect : AspectSystem<BombassAspectComponent>
 
     private void SpawnMines()
     {
-        var minMines = _random.Next(30, 50);
+        var minMines = _random.Next(40, 60);
 
         for (var i = 0; i < minMines; i++)
         {

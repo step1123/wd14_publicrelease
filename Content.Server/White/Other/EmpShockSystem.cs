@@ -23,7 +23,7 @@ public sealed class EmpShockSystem : EntitySystem
             !_tag.HasTag(suit.Value, "Hardsuit") || _tag.HasTag(suit.Value, "EmpResistance"))
             return;
 
-        if (_electrocution.TryDoElectrocution(uid, null, 15, TimeSpan.FromSeconds(6), false, 1F, component, true))
+        if (_electrocution.TryDoElectrocution(uid, null, 10, TimeSpan.FromSeconds(3), false, 1F, component, true))
             args.Affected = true;
     }
 }

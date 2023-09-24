@@ -784,6 +784,9 @@
     speciesId: monkey
   - type: InventorySlots
   - type: Cuffable
+  - type: RotationVisuals
+    defaultRotation: 90
+    horizontalRotation: 90
   - type: Fixtures
     fixtures:
       fix1:
@@ -1366,6 +1369,9 @@
     speciesId: monkey
   - type: InventorySlots
   - type: Cuffable
+  - type: RotationVisuals
+    defaultRotation: 90
+    horizontalRotation: 90
   - type: Fixtures
     fixtures:
       fix1:

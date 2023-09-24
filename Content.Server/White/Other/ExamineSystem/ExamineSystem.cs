@@ -1,7 +1,9 @@
+using Content.Server.Access.Systems;
 using Content.Shared.Access.Components;
 using Content.Shared.Examine;
 using Robust.Shared.Enums;
 using Content.Shared.Humanoid;
+using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Inventory;
 using Content.Shared.PDA;
 using Content.Shared.White;
@@ -17,6 +19,7 @@ namespace Content.Server.White.Other.ExamineSystem
     {
         [Dependency] private readonly InventorySystem _inventorySystem = default!;
         [Dependency] private readonly EntityManager _entityManager = default!;
+        [Dependency] private readonly IdCardSystem _idCard = default!;
         [Dependency] private readonly IConsoleHost _consoleHost = default!;
         [Dependency] private readonly INetConfigurationManager _netConfigManager = default!;
 
@@ -40,11 +43,22 @@ namespace Content.Server.White.Other.ExamineSystem
         {
             var infoLines = new List<string>();
 
-            if (TryComp<ActorComponent>(args.Examiner, out var actorComponent) &&
-                TryComp<MetaDataComponent>(uid, out var metaDataComponent))
+            var name = Name(uid);
+
+            var ev = new SeeIdentityAttemptEvent();
+            RaiseLocalEvent(uid, ev);
+            if (ev.Cancelled)
             {
-                infoLines.Add($"Это же [bold]{metaDataComponent.EntityName}[/bold]!");
+                if (_idCard.TryFindIdCard(uid, out var id) && !string.IsNullOrWhiteSpace(id.FullName))
+                {
+                    name = id.FullName;
+                }
+                else
+                {
+                    name = "неизвестный";
+                }
             }
+            infoLines.Add($"Это же [bold]{name}[/bold]!");
 
             var idInfoString = GetInfo(uid);
             if (!string.IsNullOrEmpty(idInfoString))
@@ -105,7 +119,7 @@ namespace Content.Server.White.Other.ExamineSystem
 
             var combinedInfo = string.Join("\n", infoLines);
 
-            if (actorComponent != null)
+            if (TryComp(args.Examined, out ActorComponent? actorComponent))
             {
                 SendNoticeMessage(actorComponent, combinedInfo);
             }

@@ -107,7 +107,7 @@
     primingSound:
       path: /Audio/Effects/minibombcountdown.ogg
       params:
-        volume: 12
+        volume: 20
 
 - type: entity
   name: the nuclear option
