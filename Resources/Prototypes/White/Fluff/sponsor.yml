@@ -188,3 +188,14 @@
   id: Serafim547VulpCoinLoadout
   entity: VulpCoin
   sponsorOnly: true
+
+#Skrimex
+- type: loadout
+  id: SkrimexCapLoadout
+  entity: ClothingNeckSkrimexCap
+  sponsorOnly: true
+
+- type: loadout
+  id: SkrimexZippoLoadout
+  entity: ZippoLighterSkrimex
+  sponsorOnly: true

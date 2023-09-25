@@ -527,7 +527,7 @@
           visible: false
     - type: Item
       size: 1
-      sprite: White/Fluff/skrimex/zippo-ывфter.rsi
+      sprite: White/Fluff/skrimex/zippo-lighter.rsi
       heldPrefix: off
     - type: ItemCooldown
     - type: ItemStatus
