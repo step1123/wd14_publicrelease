@@ -563,3 +563,17 @@
     - type: Tag
       tags:
         - Lighter
+
+
+# Deus
+
+- type: entity
+  parent: ClothingUniformBase
+  id: DeusJumpskirt
+  name: пионер в юбке
+  description: На какой-то далёкой станции есть группа феленидов, которые ходят в этой форме. Кажется происхождение этой традиции уже давно позабыли, но этот набор одежды выглядит довольно так мило.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/deus/deus_jumpsuit.rsi
+    - type: Clothing
+      sprite: White/Fluff/deus/deus_jumpsuit.rsi

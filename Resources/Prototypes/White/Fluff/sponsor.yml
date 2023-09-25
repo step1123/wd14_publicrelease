@@ -199,3 +199,11 @@
   id: SkrimexZippoLoadout
   entity: ZippoLighterSkrimex
   sponsorOnly: true
+
+
+# Deus
+
+- type: loadout
+  id: DeusJumpskirtLoadout
+  entity: DeusJumpskirt
+  sponsorOnly: true
