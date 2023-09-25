@@ -1,0 +1,27 @@
+- type: entity
+  name: experimental stun baton
+  parent: Stunbaton
+  id: ExperimentalStunbaton
+  description: Meowk!
+  components:
+  - type: Clothing
+    sprite: Objects/Weapons/Melee/stunbaton.rsi
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/stunbaton.rsi
+  - type: Stunbaton
+    energyPerUse: 100
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 10
+    bluntStaminaDamageFactor: 2.0
+    angle: 70
+  - type: StaminaDamageOnHit
+    damage: 80
+  - type: Battery
+    maxCharge: 2000
+    startingCharge: 2000
+  - type: Item
+    size: 15
+  - type: StaticPrice
+    price: 1000

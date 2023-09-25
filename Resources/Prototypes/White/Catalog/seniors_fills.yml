@@ -1,0 +1,43 @@
+# Officer
+- type: entity
+  id: ClothingBeltSeniorSecurityFilled
+  parent: ClothingBeltSecurity
+  suffix: Filled
+  components:
+    - type: StorageFill
+      contents:
+        - id: GrenadeFlashBang
+        - id: TearSmokeGrenade
+        - id: ExperimentalStunbaton
+        - id: Handcuffs
+        - id: Handcuffs
+
+# Physician
+- type: entity
+  id: ClothingBeltSeniorPhysicianFilled
+  parent: ClothingBeltMedical
+  suffix: Filled
+  components:
+    - type: StorageFill
+      contents:
+        - id: Scalpel
+        - id: Retractor
+        - id: Cautery
+        - id: Drill
+        - id: Saw
+        - id: Hemostat
+
+# Engineer
+- type: entity
+  id: ClothingBeltUtilitySeniorEngineerFilled
+  parent: ClothingBeltUtility
+  suffix: Filled
+  components:
+    - type: StorageFill
+      contents:
+        - id: ImprovedCrowbar
+        - id: ImprovedWrench
+        - id: ImprovedScrewdriver
+        - id: ImprovedWirecutter
+        - id: ImprovedWelder
+        - id: Multitool

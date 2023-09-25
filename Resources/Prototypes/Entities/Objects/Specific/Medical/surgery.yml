@@ -5,6 +5,9 @@
   id: BaseToolSurgery
   abstract: true
   components:
+  - type: Tag
+    tags:
+      - SurgeryTool
   - type: Sprite
   - type: StaticPrice
     price: 20

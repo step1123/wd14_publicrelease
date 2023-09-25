@@ -888,6 +888,9 @@
   id: socks
 
 - type: Tag
+  id: SurgeryTool
+
+- type: Tag
   id: underwearb
 
 - type: Tag

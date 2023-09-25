@@ -6,16 +6,20 @@
   requirements:
     - !type:RoleTimeRequirement
       role: JobAtmosphericTechnician
-      time: 21600 #6 hrs
+      time: 86400 #24 hrs
     - !type:RoleTimeRequirement
       role: JobStationEngineer
-      time: 21600 #6 hrs
+      time: 86400 #24 hrs
     - !type:DepartmentTimeRequirement
       department: Engineering
       time: 216000 # 60 hrs
   startingGear: SeniorEngineerGear
   icon: "SeniorEngineer"
   supervisors: job-supervisors-ce
+  canBeAntag: false
+  special:
+    - !type:AddImplantSpecial
+      implants: [ MindShieldImplant ]
   access:
   - Maintenance
   - Engineering
@@ -31,8 +35,9 @@
     shoes: ClothingShoesBootsWork
     id: SeniorEngineerPDA
     eyes: ClothingEyesGlassesMeson
-    belt: ClothingBeltUtilityEngineering
+    belt: ClothingBeltUtilitySeniorEngineerFilled
     ears: ClothingHeadsetEngineering
+    gloves: ClothingHandsGlovesColorYellow
   innerclothingskirt: ClothingUniformJumpskirtSeniorEngineer
   satchel: ClothingBackpackSatchelEngineeringFilled
   duffelbag: ClothingBackpackDuffelEngineeringFilled

@@ -1,0 +1,13 @@
+- type: entity
+  name: expanded medkit
+  parent: Medkit
+  id: ExpandedMedkit
+  components:
+    - type: Storage
+      capacity: 40
+    - type: Item
+      size: 20
+      sprite: White/Specific/expmedkit.rsi
+    - type: Sprite
+      sprite: White/Specific/expmedkit.rsi
+      state: icon

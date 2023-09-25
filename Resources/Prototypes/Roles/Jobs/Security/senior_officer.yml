@@ -6,13 +6,13 @@
   requirements:
     - !type:RoleTimeRequirement
       role: JobWarden
-      time: 21600 #6 hrs
+      time: 43200 #12 hrs
     - !type:RoleTimeRequirement
       role: JobDetective
-      time: 7200 #2 hrs
+      time: 28800 #8 hrs
     - !type:RoleTimeRequirement
       role: JobSecurityOfficer
-      time: 21600 #6 hrs
+      time: 43200 #12 hrs
     - !type:DepartmentTimeRequirement
       department: Security
       time: 216000 # 60 hrs
@@ -31,6 +31,7 @@
   - Maintenance
   - Service
   - External
+  - Medical
 
 - type: startingGear
   id: SeniorOfficerGear
@@ -43,9 +44,10 @@
     outerClothing: ClothingOuterArmorBasic
     id: SeniorOfficerPDA
     ears: ClothingHeadsetSecurity
-    belt: ClothingBeltSecurityFilled
+    belt: ClothingBeltSeniorSecurityFilled
     pocket1: WeaponPistolMk58
     pocket2: MagazinePistol
+    gloves: ClothingHandsGlovesCombat
   innerclothingskirt: ClothingUniformJumpskirtSeniorOfficer
   satchel: ClothingBackpackSatchelSecurityFilled
   duffelbag: ClothingBackpackDuffelSecurityFilled

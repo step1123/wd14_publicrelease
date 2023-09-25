@@ -1,0 +1,43 @@
+- type: job
+  id: SeniorSalvageSpecialist
+  name: job-name-senior-salvage-specialist
+  description: job-description-senior-salvage-specialist
+  playTimeTracker: JobSeniorSalvageSpecialist
+  requirements:
+    - !type:RoleTimeRequirement
+      role: JobSalvageSpecialist
+      time: 43200 #12 hrs
+    - !type:DepartmentTimeRequirement
+      department: Cargo
+      time: 216000 # 60 hrs
+  startingGear: SeniorSalvageSpecialistGear
+  icon: "SeniorSalvageSpecialist"
+  supervisors: job-supervisors-qm
+  canBeAntag: false
+  special:
+    - !type:AddImplantSpecial
+      implants: [ MindShieldImplant ]
+  access:
+    - Cargo
+    - Salvage
+    - Maintenance
+    - External
+
+- type: startingGear
+  id: SeniorSalvageSpecialistGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
+    back: ClothingBackpackSalvageFilled
+    shoes: ClothingShoesBootsCombatFilled
+    id: SalvagePDA
+    ears: ClothingHeadsetCargo
+    underwearb: ClothingUnderwearBottomBoxersWhite # White-Underwear
+    outerClothing: ClothingOuterHardsuitImprovedSpatio
+    gloves: ClothingHandsGlovesColorYellow
+    belt: ClothingBeltUtilityFilled
+  underweart: ClothingUnderwearTopBraWhite # White-Underwear
+  underwearb: ClothingUnderwearBottomPantiesWhite # White-Underwear
+  satchel: ClothingBackpackSatchelSalvageFilled
+  duffelbag: ClothingBackpackDuffelSalvageFilled
+
+

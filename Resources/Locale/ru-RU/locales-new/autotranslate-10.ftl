@@ -1,6 +1,6 @@
-ent-SpawnPointSeniorResearcher = Точка спавна старшего учёного
+ent-SpawnPointSeniorResearcher = Точка спавна ведущего исследователя
    .desc = ""
-ent-SpawnPointSeniorOfficer = Точка спавна старшего офицера
+ent-SpawnPointSeniorOfficer = Точка спавна ветерана СБ
    .desc = ""
 ent-SpawnPointBrigmedic = Точка спавна бригмедика
    .desc = ""
