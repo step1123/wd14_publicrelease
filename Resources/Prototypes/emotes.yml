@@ -117,3 +117,24 @@
   buttonText: Облизываться
   chatMessages: [облизывается]
   allowMenu: true
+
+- type: emote
+  id: Salute
+  category: Gesture
+  buttonText: Салютовать
+  chatMessages: [салютует, отдает честь]
+  allowMenu: true
+
+- type: emote
+  id: StandStill
+  category: Gesture
+  buttonText: Стать смирно
+  chatMessages: [стоит в стойке смирно]
+  allowMenu: true
+
+- type: emote
+  id: Маршировать
+  category: Gesture
+  buttonText: Маршировать
+  chatMessages: [марширует]
+  allowMenu: true

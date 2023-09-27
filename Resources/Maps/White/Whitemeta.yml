@@ -144188,6 +144188,13 @@ entities:
     - pos: 21.5,-36.5
       parent: 5350
       type: Transform
+- proto: SpawnPointSeniorSalvageSpecialist
+  entities:
+  - uid: 26639
+    components:
+    - pos: -41.5,26.5
+      parent: 5350
+      type: Transform
 - proto: SpawnPointSalvageSpecialist
   entities:
   - uid: 3739

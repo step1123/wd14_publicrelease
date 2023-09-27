@@ -133470,6 +133470,13 @@ entities:
     - pos: 37.5,-0.5
       parent: 60
       type: Transform
+- proto: SpawnPointSeniorSalvageSpecialist
+  entities:
+  - uid: 24332
+    components:
+    - pos: 37.5,0.5
+      parent: 60
+      type: Transform
 - proto: SpawnPointScientist
   entities:
   - uid: 11343

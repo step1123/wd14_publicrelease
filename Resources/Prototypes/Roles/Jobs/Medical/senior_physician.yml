@@ -6,13 +6,13 @@
   requirements:
     - !type:RoleTimeRequirement
       role: JobChemist
-      time: 86400 #24 hrs
+      time: 86400 # 24 hrs
     - !type:RoleTimeRequirement
       role: JobMedicalDoctor
-      time: 86400 #24 hrs
+      time: 86400 # 24 hrs
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 216000 # 60 hrs
+      time: 288000 # 80 hrs
   startingGear: SeniorPhysicianGear
   icon: "SeniorPhysician"
   supervisors: job-supervisors-cmo
@@ -29,6 +29,7 @@
 - type: startingGear
   id: SeniorPhysicianGear
   equipment:
+    head: ClothingHeadHatBeretBrigmedic
     jumpsuit: ClothingUniformJumpsuitSeniorPhysician
     back: ClothingBackpackMedicalFilled
     shoes: ClothingShoesColorBlack
@@ -38,6 +39,9 @@
     belt: ClothingBeltSeniorPhysicianFilled
     mask: ClothingMaskSterile
     gloves: ClothingHandsGlovesLatex
+    underwearb: ClothingUnderwearBottomBoxersWhite # White-Underwear
+  underweart: ClothingUnderwearTopBraWhite # White-Underwear
+  underwearb: ClothingUnderwearBottomPantiesWhite # White-Underwear
   inhand:
     right hand: ExpandedMedkit
   innerclothingskirt: ClothingUniformJumpskirtSeniorPhysician

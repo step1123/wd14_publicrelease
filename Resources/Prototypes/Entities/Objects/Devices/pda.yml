@@ -954,3 +954,19 @@
     accentVColor: "#DFDFDF"
   - type: Icon
     state: pda-seniorofficer
+
+
+- type: entity
+  parent: BasePDA
+  id: SeniorSalvagePDA
+  name: senior cargo PDA
+  description: Smells like ash.
+  components:
+    - type: Pda
+      id: SeniorSalvageSpecialistIDCard
+      state: pda-miner
+    - type: PdaBorderColor
+      borderColor: "#786546"
+      accentVColor: "#5a0085"
+    - type: Icon
+      state: pda-miner

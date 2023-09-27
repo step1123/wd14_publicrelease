@@ -5,9 +5,9 @@
   description: Meowk!
   components:
   - type: Clothing
-    sprite: Objects/Weapons/Melee/stunbaton.rsi
+    sprite: White/Objects/Weapons/experimental_stunbaton.rsi
   - type: Sprite
-    sprite: Objects/Weapons/Melee/stunbaton.rsi
+    sprite: White/Objects/Weapons/experimental_stunbaton.rsi
   - type: Stunbaton
     energyPerUse: 100
   - type: MeleeWeapon

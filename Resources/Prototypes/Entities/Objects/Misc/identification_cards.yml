@@ -667,3 +667,15 @@
     - state: idseniorofficer
   - type: PresetIdCard
     job: SeniorOfficer
+
+- type: entity
+  parent: IDCardStandard
+  id: SeniorSalvageSpecialistIDCard
+  name: senior cargo ID card
+  components:
+    - type: Sprite
+      layers:
+        - state: default
+        - state: idseniorsalvage
+    - type: PresetIdCard
+      job: SeniorSalvageSpecialist

@@ -154867,6 +154867,13 @@ entities:
     - pos: 60.5,-20.5
       parent: 2
       type: Transform
+- proto: SpawnPointSeniorSalvageSpecialist
+  entities:
+  - uid: 26750
+    components:
+    - pos: -23.5,-20.5
+      parent: 2
+      type: Transform
 - proto: SpawnPointSalvageSpecialist
   entities:
   - uid: 18989

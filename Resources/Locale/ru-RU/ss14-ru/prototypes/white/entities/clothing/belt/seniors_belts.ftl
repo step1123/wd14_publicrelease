@@ -3,7 +3,7 @@ ent-ClothingBeltSeniorSecurityFilled = пояс ветерана СБ
     .suffix = { "" }
 
 ent-ClothingBeltSeniorPhysicianFilled = пояс медицинского офицера
-    .desc = Может вмещать различное медицинское снаряжение.
+    .desc = Может вмещать различное медицинское снаряжение. На вид большой, но везде вмещается.
     .suffix = { "" }
 
 ent-ClothingBeltUtilitySeniorEngineerFilled = пояс бригадира
