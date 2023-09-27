@@ -1,9 +1,26 @@
-﻿<DefaultWindow xmlns="https://spacestation14.io"
-            MinSize="250 100"
-            SetSize="250 100">
-    <BoxContainer Orientation="Vertical">
-        <Label
-            Name="Diagnostics"
-            Text="{Loc health-analyzer-window-no-patient-data-text}"/>
+<!-- WD start -->
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+                Title="{Loc 'gravity-generator-window-title'}"
+                MinSize="260 300">
+    <BoxContainer Margin="4 0" Orientation="Vertical">
+        <controls:StripeBack>
+            <Label Name="EntityNameLabel" Text="N/A" StyleClasses="LabelBig" Align="Center"/>
+        </controls:StripeBack>
+        <GridContainer Columns="2">
+            <Label Text="{Loc 'health-analyzer-window-entity-current-alive-status-text'}" StyleClasses="StatusFieldTitle"/>
+            <Label Name="AliveStatusLabel" Text="{Loc 'health-analyzer-window-no-data'}" Margin="4 0 0 0"/>
+            <Label Text="{Loc 'health-analyzer-window-entity-temperature-text'}" StyleClasses="StatusFieldTitle"/>
+            <Label Name="TemperatureLabel" Text="{Loc 'health-analyzer-window-no-data'}" Margin="4 0 0 0"/>
+            <Label Text="{Loc 'health-analyzer-window-entity-blood-level-text'}" StyleClasses="StatusFieldTitle"/>
+            <Label Name="BloodLevelLabel" Text="{Loc 'health-analyzer-window-no-data'}" Margin="4 0 0 0"/>
+            <Label Text="{Loc 'health-analyzer-window-entity-damage-total-text'}" StyleClasses="StatusFieldTitle"/>
+            <Label Name="TotalDamageLabel" Text="{Loc 'health-analyzer-window-no-data'}" Margin="4 0 0 0"/>
+        </GridContainer>
+        <customControls:HSeparator StyleClasses="LowDivider" Margin="0 0 0 10"/>
+        <!-- Filled by code -->
+        <GridContainer Name="DamageGroupsContainer" Columns="2"/>
     </BoxContainer>
-</DefaultWindow>
+</controls:FancyWindow>
+<!-- WD end -->

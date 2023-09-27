@@ -1,0 +1,14 @@
+<Control xmlns="https://spacestation14.io"
+         xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+         xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
+    <PanelContainer MinSize="120 100" Margin="1">
+        <PanelContainer.PanelOverride>
+            <gfx:StyleBoxFlat BorderColor="#777777" BorderThickness="1"/>
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Vertical">
+            <Label Name="DamageGroupTitle" Align="Center" Margin="5" StyleClasses="StatusFieldTitle"/>
+            <customControls:HSeparator  Margin="5 0"/>
+            <BoxContainer Name="DamageLabelsContainer" Orientation="Vertical" Margin="5"/>
+        </BoxContainer>
+    </PanelContainer>
+</Control>

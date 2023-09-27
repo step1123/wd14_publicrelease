@@ -524,12 +524,18 @@
       IdCardConsole-privilegedId: !type:ContainerSlot
       IdCardConsole-targetId: !type:ContainerSlot
 
+# WD start
 - type: entity
   parent: BaseComputer
   id: computerBodyScanner
   name: body scanner computer
-  description: A body scanner.
+  description: Used to scan patients in body scanner.
   components:
+  - type: BodyScannerConsole
+    reportEntityId: PaperBodyScannerReport
+  - type: DeviceList
+  - type: DeviceNetwork
+    deviceNetId: Wired
   - type: ApcPowerReceiver
     powerLoad: 500
   - type: Computer
@@ -538,6 +544,20 @@
     radius: 1.5
     energy: 1.6
     color: "#1f8c28"
+  - type: DeviceLinkSource
+    range: 4
+    ports:
+      - BodyScannerSender
+  - type: ActivatableUI
+    key: enum.BodyScannerConsoleUIKey.Key
+  - type: UserInterface
+    interfaces:
+      - key: enum.BodyScannerConsoleUIKey.Key
+        type: BodyScannerConsoleBoundUserInterface
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: StrongMetallic
+# WD end
 
 - type: entity
   parent: BaseComputer

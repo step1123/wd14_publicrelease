@@ -107,3 +107,9 @@
   id: ChemMasterSender
   name: Раздатчик
   description: Передатчик сигнала ХимМастера
+
+# WD 
+- type: sourcePort
+  id: BodyScannerSender
+  name: Сканер тела
+  description: Передатчик сканера тела

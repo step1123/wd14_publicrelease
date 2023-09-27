@@ -1,0 +1,165 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+            xmlns:ui="clr-namespace:Content.Client.Pinpointer.UI"
+            xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+            xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
+            xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+            Title="{Loc 'body-scanner-console-window-title'}"
+            MinSize="830 670">
+    <BoxContainer Orientation="Vertical">
+        <BoxContainer Name="MainContainer"
+                      Margin="4 0"
+                      Orientation="Vertical"
+                      Visible="False">
+            <BoxContainer Orientation="Vertical">
+                <!-- Entity name -->
+                <controls:StripeBack>
+                    <Label Name="EntityNameLabel" Text="{Loc 'body-scanner-console-window-no-data'}" StyleClasses="LabelBig" Align="Center"/>
+                </controls:StripeBack>
+                <!-- Main box -->
+                <BoxContainer Orientation="Horizontal">
+                    <!-- First column -->
+                    <BoxContainer Orientation="Vertical" MinSize="300 490">
+                        <GridContainer Columns="2">
+                            <Label Text="{Loc 'body-scanner-console-window-current-alive-status-text'}" StyleClasses="StatusFieldTitle"/>
+                            <Label Name="AliveStatusLabel" Text="{Loc 'body-scanner-console-window-no-data'}" Margin="4 0 0 0"/>
+                            <Label Text="{Loc 'body-scanner-console-window-temperature-text'}" StyleClasses="StatusFieldTitle"/>
+                            <Label Name="TemperatureLabel" Text="{Loc 'body-scanner-console-window-no-data'}" Margin="4 0 0 0"/>
+                            <Label Text="{Loc 'body-scanner-console-window-entity-blood-level-text'}" StyleClasses="StatusFieldTitle"/>
+                            <Label Name="BloodLevelLabel" Text="{Loc 'body-scanner-console-window-no-data'}" Margin="4 0 0 0"/>
+                            <Label Text="{Loc 'body-scanner-console-window-entity-damage-total-text'}" StyleClasses="StatusFieldTitle"/>
+                            <Label Name="TotalDamageLabel" Text="{Loc 'body-scanner-console-window-no-data'}" Margin="4 0 0 0"/>
+                        </GridContainer>
+                        <customControls:HSeparator StyleClasses="LowDivider" Margin="0 5"/>
+                        <GridContainer Name="DamageGroupsContainer" Columns="2"/>
+                    </BoxContainer>
+                    <!-- Second column -->
+                    <customControls:VSeparator StyleClasses="LowDivider" Margin="5 0"/>
+                    <BoxContainer Orientation="Vertical" MinSize="255 485">
+                        <GridContainer Columns="2">
+                            <!-- Temperature -->
+                            <BoxContainer Orientation="Vertical" Margin="4 0 4 4">
+                                <Label Text="{Loc 'body-scanner-console-window-temperature-group-text'}" StyleClasses="StatusFieldTitle"/>
+                                <Label Name="CurrentTemperature"/>
+                                <Label Name="HeatDamageThreshold"/>
+                                <Label Name="ColdDamageThreshold"/>
+                            </BoxContainer>
+                            <!-- Saturation -->
+                            <BoxContainer Orientation="Vertical" Margin="4 0 4 4">
+                                <Label Text="{Loc 'body-scanner-console-window-saturation-group-text'}" StyleClasses="StatusFieldTitle"/>
+                                <Label Name="CurrentSaturation"/>
+                                <Label Name="MinimumSaturation"/>
+                                <Label Name="MaximumSaturation"/>
+                            </BoxContainer>
+                            <!-- Thirst -->
+                            <BoxContainer Orientation="Vertical" Margin="4">
+                                <Label Text="{Loc 'body-scanner-console-window-thirst-group-text'}" StyleClasses="StatusFieldTitle"/>
+                                <Label Name="CurrentThirst"/>
+                                <Label Name="CurrentThirstStatus"/>
+                                <Label Name="CurrentThirstThreshold"/>
+                            </BoxContainer>
+                            <!-- Hunger -->
+                            <BoxContainer Orientation="Vertical" Margin="4">
+                                <Label Text="{Loc 'body-scanner-console-window-hunger-group-text'}" StyleClasses="StatusFieldTitle"/>
+                                <Label Name="CurrentHunger"/>
+                                <Label Name="CurrentHungerStatus"/>
+                                <Label Name="CurrentHungerThreshold"/>
+                            </BoxContainer>
+                        </GridContainer>
+                        <!-- Blood solution-->
+                        <BoxContainer Orientation="Vertical" Margin="4">
+                            <Label Text="{Loc 'body-scanner-console-window-blood-solutions-group-text'}" StyleClasses="StatusFieldTitle"/>
+                            <Label Name="BloodSolutionVolume"/>
+                            <PanelContainer VerticalExpand="True" MinSize="0 100">
+                                <PanelContainer.PanelOverride>
+                                    <gfx:StyleBoxFlat BackgroundColor="#1B1B1E" />
+                                </PanelContainer.PanelOverride>
+                                <ScrollContainer HorizontalExpand="True" MinSize="0 100">
+                                    <BoxContainer Name="BloodSolutionElements" Orientation="Vertical" Margin="4" HorizontalExpand="True"/>
+                                </ScrollContainer>
+                            </PanelContainer>
+                        </BoxContainer>
+                        <!-- Chemical solution-->
+                        <BoxContainer Orientation="Vertical" Margin="4">
+                            <Label Text="{Loc 'body-scanner-console-window-chemical-solutions-group-text'}" StyleClasses="StatusFieldTitle"/>
+                            <Label Name="ChemicalSolutionVolume"/>
+                            <PanelContainer VerticalExpand="True" MinSize="0 100">
+                                <PanelContainer.PanelOverride>
+                                    <gfx:StyleBoxFlat BackgroundColor="#1B1B1E" />
+                                </PanelContainer.PanelOverride>
+                                <ScrollContainer HorizontalExpand="True" MinSize="0 100">
+                                    <BoxContainer Name="ChemicalSolutionElements" Orientation="Vertical" Margin="4" HorizontalExpand="True"/>
+                                </ScrollContainer>
+                            </PanelContainer>
+                        </BoxContainer>
+                    </BoxContainer>
+                    <!-- Third column -->
+                    <customControls:VSeparator StyleClasses="LowDivider" Margin="5 0"/>
+                    <BoxContainer Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <ProgressBar Name="HealthBar"  HorizontalAlignment="Center" VerticalAlignment="Center" MinValue="0" MaxValue="1" MinSize="200 20" Margin="10"/>
+                        <PanelContainer Margin="10 0 0 0" StyleClasses="Inset" VerticalAlignment="Center" >
+                            <SpriteView Name="EntityView" OverrideDirection="South" Scale="8 8" />
+                        </PanelContainer>
+                    </BoxContainer>
+                </BoxContainer>
+                <!-- Main panel bottom row -->
+                <customControls:HSeparator StyleClasses="LowDivider" Margin="0 5"/>
+                <BoxContainer Orientation="Horizontal">
+                    <Label Name="Mind" Margin="5 0 0 0"/>
+                    <customControls:VSeparator StyleClasses="LowDivider" Margin="10 0"/>
+                    <Label Name="DNA"/>
+                    <customControls:VSeparator StyleClasses="LowDivider" Margin="10 0"/>
+                    <Label Name="Fingerprint"/>
+                </BoxContainer>
+            </BoxContainer>
+            <!-- Bottom row -->
+            <customControls:HSeparator StyleClasses="LowDivider" Margin="0 5"/>
+            <BoxContainer Orientation="Horizontal">
+                <Button Name="PrintButton" TextAlign="Center" MinSize="150 25" Margin="0 0 10 5" Text="{Loc 'body-scanner-console-window-print-button'}"/>
+                <Button Name="ScanButton" TextAlign="Center" MinSize="150 25" Margin="0 0 10 5" Text="{Loc 'body-scanner-console-window-scan-button'}"/>
+                <Label Name="StatusText"/>
+            </BoxContainer>
+        </BoxContainer>
+        <BoxContainer Name="NoDataContainer"
+                      VerticalExpand="True"
+                      VerticalAlignment="Center"
+                      HorizontalAlignment="Center"
+                      Margin="4 0"
+                      Orientation="Vertical">
+            <TextureRect Stretch="KeepAspectCentered"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Center"
+                         TexturePath="/Textures/White/Interface/BodyScanner/body_scanner_logo.svg.160dpi.png"
+                         Margin="10"/>
+            <ProgressBar Name="NoDataScanProgressBar"
+                         HorizontalAlignment="Center"
+                         MinValue="0" MaxValue="1"
+                         MinSize="400 75"
+                         Margin="10"/>
+            <Button Name="NoDataScanButton"
+                    HorizontalAlignment="Center"
+                    TextAlign="Center"
+                    MinSize="250 50"
+                    Margin="10"
+                    Text="{Loc 'body-scanner-console-window-scan-button'}"/>
+            <Label Name="NoDataStatusLabel"
+                   Text=" "
+                   HorizontalAlignment="Center"
+                   StyleClasses="LabelBig"
+                   Margin="10"/>
+        </BoxContainer>
+        <!-- Footer -->
+        <BoxContainer Orientation="Vertical" VerticalAlignment="Bottom">
+            <PanelContainer StyleClasses="LowDivider" />
+            <BoxContainer Orientation="Horizontal" Margin="10 2 5 0" VerticalAlignment="Bottom">
+                <Label Text="{Loc 'body-scanner-console-window-flavor-bottom-left'}" StyleClasses="WindowFooterText" />
+                <Label Text="{Loc 'body-scanner-console-window-flavor-bottom-right'}" StyleClasses="WindowFooterText"
+                           HorizontalAlignment="Right" HorizontalExpand="True"  Margin="0 0 5 0" />
+                <TextureRect StyleClasses="NTLogoDark"
+                             Stretch="KeepAspectCentered"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Right"
+                             SetSize="19 19"/>
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

@@ -139,6 +139,7 @@ namespace Content.Server.Body.Components
         ///     Internal solution for blood storage
         /// </summary>
         [ViewVariables(VVAccess.ReadWrite)]
+        [Access(typeof(BloodstreamSystem), Other = AccessPermissions.ReadExecute)] // WD
         public Solution BloodSolution = default!;
 
         /// <summary>
