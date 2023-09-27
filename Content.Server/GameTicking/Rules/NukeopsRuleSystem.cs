@@ -21,6 +21,7 @@ using Content.Server.Spawners.Components;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Server.Traitor;
+using Content.Server.White.Administration;
 using Content.Shared.Dataset;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
@@ -59,6 +60,9 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
     [Dependency] private readonly MapLoaderSystem _map = default!;
     [Dependency] private readonly ShuttleSystem _shuttle = default!;
     [Dependency] private readonly MindSystem _mindSystem = default!;
+    //WD EDIT
+    [Dependency] private readonly AntagRoleBanSystem _antagRoleBan = default!;
+
 
     public override void Initialize()
     {
@@ -440,7 +444,8 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
             // ReSharper disable once ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator
             foreach (var player in everyone)
             {
-                if (!ev.Profiles.ContainsKey(player.UserId))
+                //WD EDIT
+                if (!ev.Profiles.ContainsKey(player.UserId) || _antagRoleBan.HasAntagBan(player))
                 {
                     continue;
                 }

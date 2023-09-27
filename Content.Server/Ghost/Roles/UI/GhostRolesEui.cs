@@ -8,7 +8,7 @@ namespace Content.Server.Ghost.Roles.UI
     {
         public override GhostRolesEuiState GetNewState()
         {
-            return new(EntitySystem.Get<GhostRoleSystem>().GetGhostRolesInfo());
+            return new(EntitySystem.Get<GhostRoleSystem>().GetGhostRolesInfo(Player));
         }
 
         public override void HandleMessage(EuiMessageBase msg)

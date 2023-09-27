@@ -1,8 +1,10 @@
 using Content.Server.Access.Systems;
+using Content.Server.Construction.Completions;
 using Content.Server.Humanoid;
 using Content.Server.IdentityManagement;
 using Content.Server.PDA;
 using Content.Shared.Access.Components;
+using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
 using Content.Shared.PDA;
 using Content.Shared.Preferences;
@@ -27,9 +29,18 @@ public sealed class RandomHumanSystem : EntitySystem
 
     private void OnInit(EntityUid uid, RandomHumanComponent component, ComponentInit args)
     {
+        ChangeHumanAppearance(uid,component);
+    }
+
+    public void ChangeHumanAppearance(EntityUid uid, RandomHumanComponent? randomHumanComponent = null,
+        HumanoidAppearanceComponent? component = null)
+    {
+        if(!Resolve(uid,ref randomHumanComponent, ref component,false))
+            return;
+
         var newProfile = HumanoidCharacterProfile.RandomWithSpecies();
 
-        _humanoid.LoadProfile(uid, newProfile);
+        _humanoid.LoadProfile(uid, newProfile, humanoid:component);
 
         _metaData.SetEntityName(uid, newProfile.Name);
 

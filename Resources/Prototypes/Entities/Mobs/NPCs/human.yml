@@ -39,12 +39,10 @@
   - type: Damageable
     damage:
       types:
-        Bloodloss: 49
-        Asphyxiation: 76
-        Slash: 56
-        Blunt: 19
-  - type: Inventory
-    templateId: corpse
+        Bloodloss: 0
+        Asphyxiation: 0
+        Slash: 55
+        Blunt: 44
 
 - type: entity
   parent: MobHuman

@@ -1,9 +1,9 @@
-ent-MobRandomScienceCorpse = Рандомное тело моба ученого
-   .desc = ""
-ent-MobRandomSecurityCorpse = Рандомное тело моба СБ
-   .desc = ""
-ent-MobRandomCommandCorpse = Рандомное тело моба коммандования
-   .desc = ""
+ent-MobRandomScienceCorpse = Неизвестное тело
+   .desc = Похоже, оно мёртво
+ent-MobRandomSecurityCorpse = Неизвестное тело
+   .desc = Похоже, оно мёртво
+ent-MobRandomCommandCorpse = Неизвестное тело
+   .desc = Похоже, оно мёртво
 ent-FoodEggChickenFertilized = { ent-FoodEgg }
    .desc = { ent-FoodEggBase.desc }
 ent-FoodEggDuckFertilized = { ent-FoodEgg }

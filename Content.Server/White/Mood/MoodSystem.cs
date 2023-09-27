@@ -198,9 +198,12 @@ public sealed class MoodSystem : EntitySystem
 
     private void OnInit(EntityUid uid, MoodComponent component, ComponentInit args)
     {
-        _mobThreshold.TryGetThresholdForState(uid, MobState.Critical, out var critThreshold);
-        if (critThreshold != null)
+        if (TryComp<MobThresholdsComponent>(uid, out var mobThresholdsComponent)
+            && _mobThreshold.TryGetThresholdForState(uid, MobState.Critical,
+                out var critThreshold,mobThresholdsComponent))
+        {
             component.CritThresholdBeforeModify = critThreshold.Value;
+        }
 
         var amount = component.MoodThresholds[MoodThreshold.Neutral];
         SetMood(uid, amount, component, refresh: true);

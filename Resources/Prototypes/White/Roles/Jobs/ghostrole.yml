@@ -1,0 +1,11 @@
+- type: job
+  id: GhostRole
+  name: ghost-role
+  description: GhostRole
+  playTimeTracker: JobPassenger
+
+- type: job
+  id: AntagRole
+  name: antag-role
+  description: AntagRole
+  playTimeTracker: JobPassenger

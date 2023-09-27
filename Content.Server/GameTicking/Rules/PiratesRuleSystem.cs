@@ -9,6 +9,7 @@ using Content.Server.Preferences.Managers;
 using Content.Server.Spawners.Components;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Server.White.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Humanoid;
 using Content.Shared.Preferences;
@@ -44,6 +45,8 @@ public sealed class PiratesRuleSystem : GameRuleSystem<PiratesRuleComponent>
     [Dependency] private readonly NamingSystem _namingSystem = default!;
     [Dependency] private readonly MindSystem _mindSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
+    //WD EDIT
+    [Dependency] private readonly AntagRoleBanSystem _antagRoleBan = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -143,7 +146,13 @@ public sealed class PiratesRuleSystem : GameRuleSystem<PiratesRuleComponent>
             var ops = new IPlayerSession[numOps];
             for (var i = 0; i < numOps; i++)
             {
-                ops[i] = _random.PickAndTake(ev.PlayerPool);
+                var item = _random.PickAndTake(ev.PlayerPool);
+                if (_antagRoleBan.HasAntagBan(item))
+                {
+                    i--;
+                    continue;
+                }
+                ops[i] = item;
             }
 
             var map = "/Maps/Shuttles/pirate.yml";

@@ -88,6 +88,9 @@
                         <CheckBox Name="Reporter" Text="{Loc job-name-reporter}"/>
                         <CheckBox Name="Zookeeper" Text="{Loc job-name-zookeeper}"/>
                         <CheckBox Name="Boxer" Text="{Loc job-name-boxer}"/>
+                    </BoxContainer>
+                    <Control MinWidth="30" />
+                    <BoxContainer Orientation="Vertical">
                         <Label Text="{Loc department-Silicon}" FontColorOverride="LightGray"/>
                         <CheckBox Name="NekoCyborg" Text="{Loc neko-borg}"/>
                         <CheckBox Name="MedicalCyborg" Text="{Loc medical-borg}"/>
@@ -95,6 +98,9 @@
                         <CheckBox Name="SecurityCyborg" Text="{Loc security-borg}"/>
                         <CheckBox Name="MinerCyborg" Text="{Loc miner-borg}"/>
                         <CheckBox Name="ClownCyborg" Text="{Loc clown-borg}"/>
+                        <Label Text="{Loc department-ghost-role}" FontColorOverride="LightGray"/>
+                        <CheckBox Name="GhostRole" Text="{Loc ghost-role}"/>
+                        <CheckBox Name="AntagRole" Text="{Loc antag-role}"/>
                     </BoxContainer>
                 </BoxContainer>
                 <Button Name="SubmitListButton" Text="{Loc admin-job-ban-window-button-ban}"/>

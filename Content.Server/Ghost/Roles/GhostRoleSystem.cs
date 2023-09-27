@@ -1,4 +1,5 @@
 using Content.Server.Administration.Logs;
+using Content.Server.Administration.Managers;
 using Content.Server.EUI;
 using Content.Server.Ghost.Components;
 using Content.Server.Ghost.Roles.Components;
@@ -35,6 +36,9 @@ namespace Content.Server.Ghost.Roles
         [Dependency] private readonly FollowerSystem _followerSystem = default!;
         [Dependency] private readonly TransformSystem _transform = default!;
         [Dependency] private readonly MindSystem _mindSystem = default!;
+        //WD EDIT
+        [Dependency] private readonly RoleBanManager _roleBan = default!;
+        //WD EDIT
 
         private uint _nextRoleIdentifier;
         private bool _needsUpdateGhostRoleCount = true;
@@ -157,7 +161,9 @@ namespace Content.Server.Ghost.Roles
             if (_needsUpdateGhostRoleCount)
             {
                 _needsUpdateGhostRoleCount = false;
+                //Some WD EDIT
                 var response = new GhostUpdateGhostRoleCountEvent(GetGhostRolesInfo().Length);
+
                 foreach (var player in _playerManager.Sessions)
                 {
                     RaiseNetworkEvent(response, player.ConnectedClient);
@@ -193,6 +199,10 @@ namespace Content.Server.Ghost.Roles
         {
             if (!_ghostRoles.TryGetValue(identifier, out var role)) return;
 
+            //WD EDIT
+            if(HasRoleBan(player)) return;
+            //WD EDIT
+
             var ev = new TakeGhostRoleEvent(player);
             RaiseLocalEvent(role.Owner, ref ev);
 
@@ -226,8 +236,14 @@ namespace Content.Server.Ghost.Roles
             _mindSystem.TransferTo(newMind, mob);
         }
 
-        public GhostRoleInfo[] GetGhostRolesInfo()
+        //WD EDIT player input
+        public GhostRoleInfo[] GetGhostRolesInfo(IPlayerSession? player = null)
         {
+            //WD EDIT
+            if (player != null && HasRoleBan(player))
+                return Array.Empty<GhostRoleInfo>();
+            //WD EDIT
+
             var roles = new List<GhostRoleInfo>();
             var metaQuery = GetEntityQuery<MetaDataComponent>();
 
@@ -284,6 +300,12 @@ namespace Content.Server.Ghost.Roles
             _openUis.Clear();
             _ghostRoles.Clear();
             _nextRoleIdentifier = 0;
+        }
+
+        public bool HasRoleBan(IPlayerSession player)
+        {
+            var ghostBan = _roleBan.GetRoleBans(player.UserId)?.TryGetValue("Job:GhostRole",out _);
+            return ghostBan != null && ghostBan.Value;
         }
 
         private void OnPaused(EntityUid uid, GhostRoleComponent component, ref EntityPausedEvent args)

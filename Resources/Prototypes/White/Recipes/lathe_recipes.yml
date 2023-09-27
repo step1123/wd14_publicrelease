@@ -21,7 +21,7 @@
 
 - type: latheRecipe
   id: CartridgeAntiMateriel
-  result: CartridgeCaselessRifle
+  result: CartridgeAntiMateriel
   completetime: 2
   materials:
     Steel: 80
