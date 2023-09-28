@@ -16,5 +16,6 @@
 - type: entityTargetAction
   id: SelfHealAction
   name: self-heal-action
-  serverEvent: !type:SelfHealEvent
+  itemIconStyle: BigAction
   icon: White/Icons/tongue.png
+  serverEvent: !type:SelfHealEvent
