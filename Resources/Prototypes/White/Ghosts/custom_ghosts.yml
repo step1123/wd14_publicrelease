@@ -275,3 +275,11 @@
   ghostName: Fiammetta
   ghostDescription: Горничная под своим кодовым именем. Следит за порядком в кафе Мастера.
   size: 0.5, 0.5
+
+- type: customGhost
+  id: hayras-ghost
+  ckey: hayras
+  sprite: White/Ghosts/hayras-ghost.rsi
+  alpha: 0.8
+  ghostName: Витя
+  ghostDescription: Хню...
