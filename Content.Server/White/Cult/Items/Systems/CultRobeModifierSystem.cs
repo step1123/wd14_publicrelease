@@ -25,6 +25,9 @@ public sealed class CultRobeModifierSystem : EntitySystem
         if (!HasComp<CultistComponent>(args.Equipee))
             return;
 
+        if (args.Slot != "outerClothing")
+            return;
+
         ModifySpeed(args.Equipee, component, true);
         ModifyDamage(args.Equipee, component, true);
     }
@@ -32,6 +35,9 @@ public sealed class CultRobeModifierSystem : EntitySystem
     private void OnUnequip(EntityUid uid, CultRobeModifierComponent component, GotUnequippedEvent args)
     {
         if (!HasComp<CultistComponent>(args.Equipee))
+            return;
+
+        if (args.Slot != "outerClothing")
             return;
 
         ModifySpeed(args.Equipee, component, false);
@@ -45,7 +51,8 @@ public sealed class CultRobeModifierSystem : EntitySystem
 
         var walkSpeed = increase ? move.BaseWalkSpeed * comp.SpeedModifier : move.BaseWalkSpeed / comp.SpeedModifier;
 
-        var sprintSpeed = increase ? move.BaseSprintSpeed * comp.SpeedModifier : move.BaseSprintSpeed / comp.SpeedModifier;
+        var sprintSpeed =
+            increase ? move.BaseSprintSpeed * comp.SpeedModifier : move.BaseSprintSpeed / comp.SpeedModifier;
 
         _movement.ChangeBaseSpeed(uid, walkSpeed, sprintSpeed, move.Acceleration, move);
     }

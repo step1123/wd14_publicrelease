@@ -19,6 +19,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Preferences;
+using Content.Shared.Roles;
 using Content.Shared.White;
 using Content.Shared.White.Cult;
 using Content.Shared.White.Mood;
@@ -63,14 +64,12 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
 
         SubscribeLocalEvent<RoundStartAttemptEvent>(OnStartAttempt);
         SubscribeLocalEvent<RulePlayerJobsAssignedEvent>(OnPlayersSpawned);
-        SubscribeLocalEvent<GameRunLevelChangedEvent>(OnRunLevelChanged);
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndText);
         SubscribeLocalEvent<CultNarsieSummoned>(OnNarsieSummon);
 
         SubscribeLocalEvent<CultistComponent, ComponentInit>(OnCultistComponentInit);
         SubscribeLocalEvent<CultistComponent, ComponentRemove>(OnCultistComponentRemoved);
         SubscribeLocalEvent<CultistComponent, MobStateChangedEvent>(OnCultistsStateChanged);
-
     }
 
     private void OnCultistsStateChanged(EntityUid uid, CultistComponent component, MobStateChangedEvent ev)
@@ -85,7 +84,7 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
     {
         var querry = EntityQueryEnumerator<CultRuleComponent, GameRuleComponent>();
 
-        while (querry.MoveNext(out var ruleEnt, out var cultRuleComponent, out var gameRule))
+        while (querry.MoveNext(out _, out var cultRuleComponent, out _))
         {
             return cultRuleComponent.CultTarget;
         }
@@ -97,14 +96,21 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
     {
         var querry = EntityQueryEnumerator<CultRuleComponent, GameRuleComponent>();
 
-        while (querry.MoveNext(out var ruleEnt, out var cultRuleComponent, out var gameRule))
+        while (querry.MoveNext(out _, out var cultRuleComponent, out _))
         {
-            bool enoughCultists = cultRuleComponent.Cultists.Count > 10;
+            var cultistsAmount = cultRuleComponent.Cultists.Count;
+            var constructsAmount = cultRuleComponent.Constructs.Count;
+            var enoughCultists = cultistsAmount + constructsAmount > 10;
+
+            if (!enoughCultists)
+            {
+                return false;
+            }
 
             var target = cultRuleComponent.CultTarget;
-            bool targetKilled = target == null || _mindSystem.IsCharacterDeadIc(target);
+            var targetKilled = target == null || _mindSystem.IsCharacterDeadIc(target);
 
-            if (enoughCultists && targetKilled)
+            if (targetKilled)
                 return true;
         }
 
@@ -114,14 +120,15 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
     private void CheckRoundShouldEnd()
     {
         var querry = EntityQueryEnumerator<CultRuleComponent, GameRuleComponent>();
-        int aliveCultistsCount = 0;
+        var aliveCultistsCount = 0;
 
-        while (querry.MoveNext(out var ruleEnt, out var cultRuleComponent, out var gameRule))
+        while (querry.MoveNext(out _, out var cultRuleComponent, out _))
         {
             foreach (var cultistComponent in cultRuleComponent.Cultists)
             {
                 var owner = cultistComponent.Owner;
-                if(!TryComp<MobStateComponent>(owner, out var mobState)) continue;
+                if (!TryComp<MobStateComponent>(owner, out var mobState))
+                    continue;
 
                 if (_mobStateSystem.IsAlive(owner, mobState))
                 {
@@ -140,9 +147,16 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
     {
         var query = EntityQueryEnumerator<CultRuleComponent, GameRuleComponent>();
 
-        while (query.MoveNext(out var ruleEnt, out var cultRuleComponent, out var gameRule))
+        while (query.MoveNext(out var ruleEnt, out var cultRuleComponent, out _))
         {
-            if(!GameTicker.IsGameRuleAdded(ruleEnt)) continue;
+            if (!GameTicker.IsGameRuleAdded(ruleEnt))
+                continue;
+
+            if (!TryComp<MindContainerComponent>(uid, out var mindComponent))
+                return;
+
+            if (!mindComponent.HasMind)
+                return;
 
             cultRuleComponent.Cultists.Add(component);
 
@@ -151,19 +165,26 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
                 cultRuleComponent.CultistsList.Add(MetaData(component.Owner).EntityName, actor.PlayerSession.Name);
             }
 
+            var mindSystem = EntityManager.EntitySysManager.GetEntitySystem<MindSystem>();
+            var antagPrototype = _prototypeManager.Index<AntagPrototype>(cultRuleComponent.CultistRolePrototype);
+            var antagRole = new TraitorRole(mindComponent.Mind!, antagPrototype);
+
+            if (mindComponent.Mind != null)
+                mindSystem.AddRole(mindComponent.Mind, antagRole);
+
             RaiseLocalEvent(uid, new MoodEffectEvent("CultFocused"));
             UpdateCultistsAppearance(cultRuleComponent);
         }
-
     }
 
     private void OnCultistComponentRemoved(EntityUid uid, CultistComponent component, ComponentRemove args)
     {
         var query = EntityQueryEnumerator<CultRuleComponent, GameRuleComponent>();
 
-        while (query.MoveNext(out var ruleEnt, out var cultRuleComponent, out var gameRule))
+        while (query.MoveNext(out var ruleEnt, out var cultRuleComponent, out _))
         {
-            if(!GameTicker.IsGameRuleAdded(ruleEnt)) continue;
+            if (!GameTicker.IsGameRuleAdded(ruleEnt))
+                continue;
 
             cultRuleComponent.Cultists.Remove(component);
 
@@ -172,14 +193,12 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
             RaiseLocalEvent(uid, new MoodRemoveEffectEvent("CultFocused"));
 
             CheckRoundShouldEnd();
-
         }
-
     }
 
     private void RemoveCultistAppearance(CultistComponent component)
     {
-        if(TryComp<HumanoidAppearanceComponent>(component.Owner, out var appearanceComponent))
+        if (TryComp<HumanoidAppearanceComponent>(component.Owner, out var appearanceComponent))
         {
             //Потому что я так сказал
             appearanceComponent.EyeColor = Color.White;
@@ -192,19 +211,20 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
     private void UpdateCultistsAppearance(CultRuleComponent cultRuleComponent)
     {
         var cultistsCount = cultRuleComponent.Cultists.Count;
+        var constructsCount = cultRuleComponent.Constructs.Count;
+        var totalCultMembers = cultistsCount + constructsCount;
+        if (totalCultMembers < CultRuleComponent.ReadEyeThreshold)
+            return;
 
         foreach (var cultistComponent in cultRuleComponent.Cultists)
         {
-            if(cultistsCount < CultRuleComponent.ReadEyeThreshold)
-                return;
-
             if (TryComp<HumanoidAppearanceComponent>(cultistComponent.Owner, out var appearanceComponent))
             {
                 appearanceComponent.EyeColor = CultRuleComponent.EyeColor;
                 Dirty(appearanceComponent);
             }
 
-            if(cultistsCount < CultRuleComponent.PentagramThreshold)
+            if (totalCultMembers < CultRuleComponent.PentagramThreshold)
                 return;
 
             EnsureComp<PentagramComponent>(cultistComponent.Owner);
@@ -230,16 +250,11 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
         }
     }
 
-    private void OnRunLevelChanged(GameRunLevelChangedEvent ev)
-    {
-
-    }
-
     private void OnStartAttempt(RoundStartAttemptEvent ev)
     {
         var query = EntityQueryEnumerator<CultRuleComponent, GameRuleComponent>();
 
-        while (query.MoveNext(out var uid, out var cultRule, out var gameRule))
+        while (query.MoveNext(out var uid, out _, out var gameRule))
         {
             if (!GameTicker.IsGameRuleAdded(uid, gameRule))
                 continue;
@@ -249,6 +264,7 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
             {
                 _chatManager.DispatchServerAnnouncement(Loc.GetString("traitor-not-enough-ready-players",
                     ("readyPlayersCount", ev.Players.Length), ("minimumPlayers", minPlayers)));
+
                 ev.Cancel();
                 continue;
             }
@@ -271,13 +287,13 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
 
             foreach (var player in ev.Players)
             {
-                if(!ev.Profiles.ContainsKey(player.UserId))
+                if (!ev.Profiles.ContainsKey(player.UserId))
                     continue;
 
                 cultRule.StarCandidates[player] = ev.Profiles[player.UserId];
             }
 
-            var potentialCultists = FindPotentialCultist(cultRule.StarCandidates, cultRule);
+            var potentialCultists = FindPotentialCultist(cultRule.StarCandidates);
             var pickedCultist = PickCultists(potentialCultists);
             var potentialTargets = FindPotentialTargets(pickedCultist);
 
@@ -296,15 +312,12 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
 
         var potentialTargets = new List<MindContainerComponent>();
 
-        foreach (var (mind, humanoid, actor) in querry)
+        foreach (var (mind, _, actor) in querry)
         {
             var entity = mind.Mind?.OwnedEntity;
 
             if (entity == default)
                 continue;
-
-            //if(!_mobStateSystem.IsAlive(entity.Value))
-                //continue;
 
             if (exclude?.Contains(actor.PlayerSession) is true)
             {
@@ -317,7 +330,8 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
         return potentialTargets;
     }
 
-    private List<IPlayerSession> FindPotentialCultist(in Dictionary<IPlayerSession, HumanoidCharacterProfile> candidates, CultRuleComponent ruleComponent)
+    private List<IPlayerSession> FindPotentialCultist(
+        in Dictionary<IPlayerSession, HumanoidCharacterProfile> candidates)
     {
         var list = new List<IPlayerSession>();
         var pendingQuery = GetEntityQuery<PendingClockInComponent>();
@@ -325,7 +339,8 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
         foreach (var player in candidates.Keys)
         {
             // Role prevents antag.
-            if (!(player.Data.ContentData()?.Mind?.AllRoles.All(role => role is not Job { CanBeAntag: false }) ?? false))
+            if (!(player.Data.ContentData()?.Mind?.AllRoles.All(role => role is not Job { CanBeAntag: false }) ??
+                    false))
             {
                 continue;
             }
@@ -355,20 +370,22 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
             prefList = list;
         }
 
-        if (prefList.Count < _minimalCultists)
+        if (prefList.Count >= _minimalCultists)
         {
-            var playersToAdd = _minimalCultists - prefList.Count;
+            return prefList;
+        }
 
-            foreach (var prefPlayer in prefList)
-            {
-                list.Remove(prefPlayer);
-            }
+        var playersToAdd = _minimalCultists - prefList.Count;
 
-            for (int i = 0; i < playersToAdd; i++)
-            {
-                var randomPlayer = _random.PickAndTake(list);
-                prefList.Add(randomPlayer);
-            }
+        foreach (var prefPlayer in prefList)
+        {
+            list.Remove(prefPlayer);
+        }
+
+        for (var i = 0; i < playersToAdd; i++)
+        {
+            var randomPlayer = _random.PickAndTake(list);
+            prefList.Add(randomPlayer);
         }
 
         return prefList;
@@ -386,10 +403,9 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
         var minCultists = _cfg.GetCVar(WhiteCVars.CultMinPlayers);
         var maxCultists = _cfg.GetCVar(WhiteCVars.CultMaxStartingPlayers);
 
-        int actualCultistCount = prefList.Count > maxCultists ? maxCultists : minCultists;
+        var actualCultistCount = prefList.Count > maxCultists ? maxCultists : minCultists;
 
-
-        for (int i = 0; i < actualCultistCount; i++)
+        for (var i = 0; i < actualCultistCount; i++)
         {
             result.Add(_random.PickAndTake(prefList));
         }
@@ -439,7 +455,9 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
             }
         }
 
-        _audioSystem.PlayGlobal(cultistRule.GreatingsSound, Filter.Empty().AddPlayer(cultist), false, AudioParams.Default);
+        _audioSystem.PlayGlobal(cultistRule.GreatingsSound, Filter.Empty().AddPlayer(cultist), false,
+            AudioParams.Default);
+
         _chatManager.DispatchServerMessage(cultist, Loc.GetString("cult-role-greeting"));
 
         if (_prototypeManager.TryIndex<ObjectivePrototype>("CultistKillObjective", out var cultistObjective))
@@ -454,32 +472,19 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
     {
         var query = EntityQuery<MobStateComponent, MindContainerComponent, CultistComponent>().ToList();
 
-        foreach (var (mobState, mindContainer, cultistComponent) in query)
+        foreach (var (mobState, mindContainer, _) in query)
         {
-            if(mindContainer.HasMind && mindContainer.Mind is not null)
+            if (!mindContainer.HasMind || mindContainer.Mind is null)
             {
-                var reaper = Spawn(CultRuleComponent.ReaperPrototype, Transform(mobState.Owner).Coordinates);
-                _mindSystem.TransferTo(mindContainer.Mind, reaper);
-
-                _bodySystem.GibBody(mobState.Owner);
+                continue;
             }
+
+            var reaper = Spawn(CultRuleComponent.ReaperPrototype, Transform(mobState.Owner).Coordinates);
+            _mindSystem.TransferTo(mindContainer.Mind, reaper);
+
+            _bodySystem.GibBody(mobState.Owner);
         }
 
         _roundEndSystem.EndRound();
-    }
-
-    protected override void Added(EntityUid uid, CultRuleComponent component, GameRuleComponent gameRule, GameRuleAddedEvent args)
-    {
-        base.Added(uid, component, gameRule, args);
-    }
-
-    protected override void Ended(EntityUid uid, CultRuleComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
-    {
-        base.Ended(uid, component, gameRule, args);
-    }
-
-    protected override void Started(EntityUid uid, CultRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
-    {
-        base.Started(uid, component, gameRule, args);
     }
 }

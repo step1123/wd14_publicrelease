@@ -58,7 +58,6 @@ public sealed class RunicDoorSystem : EntitySystem
         if (!this.IsPowered(airlock, EntityManager))
             return;
 
-
         if (HasComp<CultistComponent>(target))
         {
             _doorSystem.TryToggleDoor(airlock);
@@ -71,11 +70,11 @@ public sealed class RunicDoorSystem : EntitySystem
                 return;
 
             var direction = Transform(target).MapPosition.Position - Transform(airlock).MapPosition.Position;
-            var impulseVector = direction * 25000;
+            var impulseVector = direction * 7000;
 
             _physics.ApplyLinearImpulse(target, impulseVector);
 
-            _stunSystem.TryParalyze(target, TimeSpan.FromSeconds(5), true);
+            _stunSystem.TryParalyze(target, TimeSpan.FromSeconds(3), true);
         }
     }
 }

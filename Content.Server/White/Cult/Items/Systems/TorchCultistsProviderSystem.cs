@@ -1,6 +1,7 @@
 ﻿using Content.Server.Atmos.EntitySystems;
 using Content.Server.Mind.Components;
 using Content.Server.Popups;
+using Content.Server.Pulling;
 using Content.Server.Station.Systems;
 using Content.Server.Station.Components;
 using Content.Server.White.Cult.Items.Components;
@@ -32,6 +33,7 @@ public sealed class TorchCultistsProviderSystem : EntitySystem
     [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
     [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly PullingSystem _pulling = default!;
 
     public override void Initialize()
     {
@@ -110,7 +112,6 @@ public sealed class TorchCultistsProviderSystem : EntitySystem
                 continue;
 
             list.Add(meta.Owner.ToString(), meta.EntityName);
-
         }
 
         if (list.Count == 0)
@@ -127,7 +128,10 @@ public sealed class TorchCultistsProviderSystem : EntitySystem
         _ui.ToggleUi(provider.UserInterface, actorComponent.PlayerSession);
     }
 
-    private void OnCultistSelected(EntityUid uid, TorchCultistsProviderComponent component, TorchWindowItemSelectedMessage args)
+    private void OnCultistSelected(
+        EntityUid uid,
+        TorchCultistsProviderComponent component,
+        TorchWindowItemSelectedMessage args)
     {
         var entityUid = args.Session.AttachedEntity;
         var cultists = EntityQuery<CultistComponent>();
@@ -167,8 +171,18 @@ public sealed class TorchCultistsProviderSystem : EntitySystem
         _appearance.SetData(uid, VoidTorchVisuals.Activated, component.Active, appearance);
     }
 
-    private void TeleportToRandomLocation(EntityUid torch, AfterInteractEvent args, TorchCultistsProviderComponent component)
+    private void TeleportToRandomLocation(EntityUid torch, InteractEvent args, TorchCultistsProviderComponent component)
     {
+        if (!args.Target.HasValue)
+        {
+            return;
+        }
+
+        if (_pulling.GetPulled(args.User) != args.Target.Value)
+        {
+            return;
+        }
+
         var ownerTransform = Transform(args.User);
 
         if (_station.GetStationInMap(ownerTransform.MapID) is not { } station ||
@@ -177,6 +191,7 @@ public sealed class TorchCultistsProviderSystem : EntitySystem
         {
             if (ownerTransform.GridUid == null)
                 return;
+
             grid = ownerTransform.GridUid.Value;
         }
 
@@ -192,8 +207,8 @@ public sealed class TorchCultistsProviderSystem : EntitySystem
 
         for (var i = 0; i < 25; i++)
         {
-            var randomX = _random.Next((int)gridBounds.Left, (int)gridBounds.Right);
-            var randomY = _random.Next((int)gridBounds.Bottom, (int)gridBounds.Top);
+            var randomX = _random.Next((int) gridBounds.Left, (int) gridBounds.Right);
+            var randomY = _random.Next((int) gridBounds.Bottom, (int) gridBounds.Top);
 
             var tile = new Vector2i(randomX, randomY);
 
@@ -211,14 +226,16 @@ public sealed class TorchCultistsProviderSystem : EntitySystem
             {
                 if (!physQuery.TryGetComponent(ent, out var body))
                     continue;
+
                 if (body.BodyType != BodyType.Static ||
                     !body.Hard ||
-                    (body.CollisionLayer & (int)CollisionGroup.LargeMobMask) == 0)
+                    (body.CollisionLayer & (int) CollisionGroup.LargeMobMask) == 0)
                     continue;
 
                 valid = false;
                 break;
             }
+
             if (!valid)
                 continue;
 
@@ -227,7 +244,7 @@ public sealed class TorchCultistsProviderSystem : EntitySystem
         }
 
         _xform.SetCoordinates(args.User, targetCoords);
-        _xform.SetCoordinates(args.Target!.Value, targetCoords);
+        _xform.SetCoordinates(args.Target.Value, targetCoords);
 
         UpdateUsesCount(torch, args.User, component);
     }

@@ -12,7 +12,7 @@ namespace Content.Shared.White.Cult;
 /// This is used for tagging a mob as a cultist.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public partial class CultistComponent : Component
+public sealed class CultistComponent : Component
 {
     [DataField("greetSound", customTypeSerializer: typeof(SoundSpecifierTypeSerializer))]
     public readonly SoundSpecifier? CultistGreetSound = new SoundPathSpecifier("/Audio/CultSounds/fart.ogg");
@@ -24,7 +24,6 @@ public partial class CultistComponent : Component
 
     [NonSerialized]
     public List<ActionType> SelectedEmpowers = new();
-
 
     public static InstantAction SummonCultDaggerAction = new()
     {
@@ -70,7 +69,6 @@ public partial class CultistComponent : Component
                 "HumanoidAppearance", "Cultist"
             }
         }
-
     };
 
     public static EntityTargetAction CultSummonCombatEquipmentAction = new()
@@ -92,5 +90,9 @@ public partial class CultistComponent : Component
         }
     };
 
-    public static List<ActionType> CultistActions = new(){SummonCultDaggerAction, BloodRitesAction, CultTwistedConstructionAction, CultTeleportAction, CultSummonCombatEquipmentAction};
+    public static List<ActionType> CultistActions = new()
+    {
+        SummonCultDaggerAction, BloodRitesAction, CultTwistedConstructionAction, CultTeleportAction,
+        CultSummonCombatEquipmentAction
+    };
 }

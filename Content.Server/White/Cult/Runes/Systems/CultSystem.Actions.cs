@@ -27,8 +27,6 @@ public partial class CultSystem
     [Dependency] private readonly EuiManager _euiManager = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
 
-
-
     public void InitializeActions()
     {
         SubscribeLocalEvent<CultistComponent, CultTwistedConstructionActionEvent>(OnTwistedConstructionAction);
@@ -44,7 +42,8 @@ public partial class CultSystem
 
     private void OnStunTarget(EntityUid uid, CultistComponent component, CultStunTargetActionEvent args)
     {
-        if(args.Target == uid || !HasComp<StatusEffectsComponent>(args.Target)) return;
+        if (args.Target == uid || !HasComp<StatusEffectsComponent>(args.Target))
+            return;
 
         if (_stunSystem.TryStun(args.Target, TimeSpan.FromSeconds(6), true))
         {
@@ -54,9 +53,8 @@ public partial class CultSystem
 
     private void OnTeleport(EntityUid uid, CultistComponent component, CultTeleportTargetActionEvent args)
     {
-        if (!TryComp<BloodstreamComponent>(args.Performer, out var bloodstreamComponent) || !TryComp<ActorComponent>(uid, out var actor))
+        if (!TryComp<BloodstreamComponent>(args.Performer, out _) || !TryComp<ActorComponent>(uid, out var actor))
             return;
-
 
         var eui = new TeleportSpellEui(args.Performer, args.Target);
         _euiManager.OpenEui(eui, actor.PlayerSession);
@@ -67,11 +65,11 @@ public partial class CultSystem
 
     private void OnBloodRites(EntityUid uid, CultistComponent component, CultBloodRitesInstantActionEvent args)
     {
-        if (!TryComp<BloodstreamComponent>(args.Performer, out var bloodstreamComponent)) return;
+        if (!TryComp<BloodstreamComponent>(args.Performer, out var bloodstreamComponent))
+            return;
 
         var bruteDamageGroup = _prototypeManager.Index<DamageGroupPrototype>("Brute");
         var burnDamageGroup = _prototypeManager.Index<DamageGroupPrototype>("Burn");
-
 
         var xform = Transform(uid);
 
@@ -79,18 +77,22 @@ public partial class CultSystem
 
         FixedPoint2 totalBloodAmount = 0f;
 
-        var missingBlood = GetMissingBloodValue(bloodstreamComponent);
-
-        bool breakLoop = false;
+        var breakLoop = false;
         foreach (var solutionEntity in entitiesInRange.ToList())
         {
-            if(breakLoop) break;
-            if(!TryComp<PuddleComponent>(solutionEntity, out var puddleComponent)) continue;
-            if(!_solutionSystem.TryGetSolution(solutionEntity, puddleComponent.SolutionName, out var solution)) continue;
+            if (breakLoop)
+                break;
+
+            if (!TryComp<PuddleComponent>(solutionEntity, out var puddleComponent))
+                continue;
+
+            if (!_solutionSystem.TryGetSolution(solutionEntity, puddleComponent.SolutionName, out var solution))
+                continue;
 
             foreach (var solutionContent in solution.Contents.ToList())
             {
-                if(solutionContent.ReagentId != "Blood") continue;
+                if (solutionContent.ReagentId != "Blood")
+                    continue;
 
                 totalBloodAmount += solutionContent.Quantity;
 
@@ -102,7 +104,6 @@ public partial class CultSystem
                     breakLoop = true;
                 }
             }
-
         }
 
         if (totalBloodAmount == 0f)
@@ -117,32 +118,32 @@ public partial class CultSystem
         args.Handled = true;
     }
 
-    private FixedPoint2 GetMissingBloodValue(BloodstreamComponent bloodstreamComponent)
+    private static FixedPoint2 GetMissingBloodValue(BloodstreamComponent bloodstreamComponent)
     {
         return bloodstreamComponent.BloodMaxVolume - bloodstreamComponent.BloodSolution.Volume;
     }
 
     private void OnConcealPresence(EntityUid uid, CultistComponent component, CultConcealPresenceWorldActionEvent args)
     {
-        if (!TryComp<BloodstreamComponent>(args.Performer, out var bloodstreamComponent))
-
+        if (!TryComp<BloodstreamComponent>(args.Performer, out _))
             return;
     }
 
-    private void OnSummonCombatEquipment(EntityUid uid, CultistComponent component, CultSummonCombatEquipmentTargetActionEvent args)
+    private void OnSummonCombatEquipment(
+        EntityUid uid,
+        CultistComponent component,
+        CultSummonCombatEquipmentTargetActionEvent args)
     {
-        if (!TryComp<BloodstreamComponent>(args.Performer, out var bloodstreamComponent))
+        if (!TryComp<BloodstreamComponent>(args.Performer, out _))
             return;
 
         _bloodstreamSystem.TryModifyBloodLevel(uid, -20, createPuddle: false);
-
 
         var coordinates = Transform(uid).Coordinates;
         var armor = Spawn("ClothingOuterArmorCult", coordinates);
         var shoes = Spawn("ClothingShoesCult", coordinates);
         var blade = Spawn("EldritchBlade", coordinates);
         var bola = Spawn("CultBola", coordinates);
-
 
         _inventorySystem.TryUnequip(uid, "outerClothing");
         _inventorySystem.TryUnequip(uid, "shoes");
@@ -156,9 +157,12 @@ public partial class CultSystem
         args.Handled = true;
     }
 
-    private void OnElectromagneticPulse(EntityUid uid, CultistComponent component, CultElectromagneticPulseTargetActionEvent args)
+    private void OnElectromagneticPulse(
+        EntityUid uid,
+        CultistComponent component,
+        CultElectromagneticPulseTargetActionEvent args)
     {
-        if (!TryComp<BloodstreamComponent>(args.Performer, out var bloodstreamComponent))
+        if (!TryComp<BloodstreamComponent>(args.Performer, out _))
             return;
 
         _bloodstreamSystem.TryModifyBloodLevel(uid, -20, createPuddle: false);
@@ -170,9 +174,10 @@ public partial class CultSystem
 
         args.Handled = true;
     }
+
     private void OnShadowShackles(EntityUid uid, CultistComponent component, CultShadowShacklesTargetActionEvent args)
     {
-        if (!TryComp<BloodstreamComponent>(args.Performer, out var bloodstreamComponent))
+        if (!TryComp<BloodstreamComponent>(args.Performer, out _))
             return;
 
         _bloodstreamSystem.TryModifyBloodLevel(uid, -20, createPuddle: false);
@@ -181,10 +186,12 @@ public partial class CultSystem
         _handsSystem.TryPickupAnyHand(uid, cuffs);
 
         args.Handled = true;
-
     }
 
-    private void OnTwistedConstructionAction(EntityUid uid, CultistComponent component, CultTwistedConstructionActionEvent args)
+    private void OnTwistedConstructionAction(
+        EntityUid uid,
+        CultistComponent component,
+        CultTwistedConstructionActionEvent args)
     {
         if (args.Handled)
             return;
@@ -226,7 +233,6 @@ public partial class CultSystem
 
         var xform = Transform(args.Performer).Coordinates;
         var dagger = _entityManager.SpawnEntity(RitualDaggerPrototypeId, xform);
-
 
         _bloodstreamSystem.TryModifyBloodLevel(args.Performer, -30, bloodstreamComponent, false);
         _handsSystem.TryPickupAnyHand(args.Performer, dagger);

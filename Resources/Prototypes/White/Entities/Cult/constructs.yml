@@ -27,10 +27,9 @@
     - type: Fixtures
       fixtures:
         fix1:
-          shape:
-            !type:PhysShapeCircle
+          shape: !type:PhysShapeCircle
             radius: 0.35
-          density: 25
+          density: 300
           mask:
             - FlyingMobMask
           layer:
@@ -102,7 +101,16 @@
     - type: Sprite
       state: boneshaper
     - type: Construct
-      actions: [ ArtificerCreateSoulStone, ArtificerCreateConstructShell, ArtificerConvertCultistFloor, ArtificerCreateCultistWall ]
+      actions:
+        [
+          ArtificerCreateSoulStone,
+          ArtificerCreateConstructShell,
+          ArtificerConvertCultistFloor,
+          ArtificerCreateCultistWall,
+          ArtificerCreateCultistAirlock,
+        ]
+    - type: Puller
+      needsHands: false
     - type: MeleeWeapon
       hidden: true
       angle: 30
@@ -111,9 +119,10 @@
       damage:
         types:
           Blunt: 5
+          Structural: 60
 
 - type: entity
-  id:  WraithConstruct
+  id: WraithConstruct
   parent: BaseConstruct
   name: wraith
   description: run...
@@ -131,7 +140,8 @@
       allowed:
         - Incorporeal
     - type: Construct
-      actions: [ WraithPhase ]
+      actions: [WraithPhase]
+    - type: MovementIgnoreGravity
     - type: MeleeWeapon
       hidden: true
       angle: 30
@@ -141,8 +151,6 @@
         types:
           Blunt: 10
           Slash: 10
-          Structural: 40
-
 
 - type: entity
   id: ReaperConstruct
@@ -159,6 +167,8 @@
         150: Dead
     - type: Sprite
       state: harvester
+    - type: Puller
+      needsHands: false
     - type: MeleeWeapon
       hidden: true
       angle: 30
@@ -169,7 +179,6 @@
           Blunt: 20
           Slash: 20
           Structural: 80
-
 
 - type: entity
   id: ConstructShell

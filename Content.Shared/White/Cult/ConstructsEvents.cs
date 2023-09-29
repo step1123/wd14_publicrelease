@@ -4,7 +4,7 @@ namespace Content.Shared.White.Cult;
 
 public sealed class ArtificerCreateSoulStoneActionEvent : InstantActionEvent
 {
-    public string SoulStonePrototypeId => "SoulShard";
+    public string SoulStonePrototypeId => "SoulShardGhost";
 }
 
 public sealed class ArtificerCreateConstructShellActionEvent : InstantActionEvent
@@ -21,7 +21,11 @@ public sealed class ArtificerCreateCultistWallActionEvent : InstantActionEvent
 {
     public string WallPrototypeId => "WallCult";
 }
-public sealed class ArtificerAttackActionEvent : InstantActionEvent {}
+
+public sealed class ArtificerCreateCultistAirlockActionEvent : InstantActionEvent
+{
+    public string AirlockPrototypeId => "AirlockGlassCult";
+}
 
 public sealed class WraithPhaseActionEvent : InstantActionEvent
 {

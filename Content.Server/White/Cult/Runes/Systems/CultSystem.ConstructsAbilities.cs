@@ -1,5 +1,8 @@
-﻿using Content.Server.Maps;
+﻿using Content.Server.GameTicking;
+using Content.Server.GameTicking.Rules.Components;
+using Content.Server.Maps;
 using Content.Server.Popups;
+using Content.Server.White.Cult.GameRule;
 using Content.Server.White.IncorporealSystem;
 using Content.Shared.Actions;
 using Content.Shared.Actions.ActionTypes;
@@ -21,9 +24,7 @@ public partial class CultSystem
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
-
-
-
+    [Dependency] private readonly GameTicker _gameTicker = default!;
 
     public void InitializeConstructsAbilities()
     {
@@ -31,6 +32,7 @@ public partial class CultSystem
         SubscribeLocalEvent<ArtificerCreateConstructShellActionEvent>(OnArtificerCreateConstructShell);
         SubscribeLocalEvent<ArtificerConvertCultistFloorActionEvent>(OnArtificerConvertCultistFloor);
         SubscribeLocalEvent<ArtificerCreateCultistWallActionEvent>(OnArtificerCreateCultistWall);
+        SubscribeLocalEvent<ArtificerCreateCultistAirlockActionEvent>(OnArtificerCreateCultistAirlock);
 
         SubscribeLocalEvent<WraithPhaseActionEvent>(OnWraithPhase);
         SubscribeLocalEvent<IncorporealComponent, AttackAttemptEvent>(OnAttackAttempt);
@@ -38,6 +40,7 @@ public partial class CultSystem
         SubscribeLocalEvent<JuggernautCreateWallActionEvent>(OnJuggernautCreateWall);
 
         SubscribeLocalEvent<ConstructComponent, ComponentInit>(OnConstructInit);
+        SubscribeLocalEvent<ConstructComponent, ComponentRemove>(OnConstructComponentRemoved);
     }
 
     private void OnConstructInit(EntityUid uid, ConstructComponent component, ComponentInit args)
@@ -46,6 +49,28 @@ public partial class CultSystem
         {
             var actionPrototype = _prototypeManager.Index<InstantActionPrototype>(action);
             _actionsSystem.AddAction(uid, new InstantAction(actionPrototype), uid);
+        }
+
+        var query = EntityQueryEnumerator<CultRuleComponent, GameRuleComponent>();
+
+        while (query.MoveNext(out var ruleEnt, out var cultRuleComponent, out _))
+        {
+            if (!_gameTicker.IsGameRuleAdded(ruleEnt))
+                continue;
+
+            cultRuleComponent.Constructs.Add(component);
+        }
+    }
+
+    private void OnConstructComponentRemoved(EntityUid uid, ConstructComponent component, ComponentRemove args)
+    {
+        var query = EntityQueryEnumerator<CultRuleComponent, GameRuleComponent>();
+        while (query.MoveNext(out var ruleEnt, out var cultRuleComponent, out _))
+        {
+            if (!_gameTicker.IsGameRuleAdded(ruleEnt))
+                continue;
+
+            cultRuleComponent.Constructs.Remove(component);
         }
     }
 
@@ -100,6 +125,16 @@ public partial class CultSystem
         ev.Handled = true;
     }
 
+    private void OnArtificerCreateCultistAirlock(ArtificerCreateCultistAirlockActionEvent ev)
+    {
+        if (!TrySpawnWall(ev.Performer, ev.AirlockPrototypeId))
+        {
+            return;
+        }
+
+        ev.Handled = true;
+    }
+
     private void OnWraithPhase(WraithPhaseActionEvent ev)
     {
         if (_statusEffectsSystem.HasStatusEffect(ev.Performer, ev.StatusEffectId))
@@ -108,7 +143,8 @@ public partial class CultSystem
             return;
         }
 
-        _statusEffectsSystem.TryAddStatusEffect<IncorporealComponent>(ev.Performer, ev.StatusEffectId, TimeSpan.FromSeconds(ev.Duration), false);
+        _statusEffectsSystem.TryAddStatusEffect<IncorporealComponent>(ev.Performer, ev.StatusEffectId,
+            TimeSpan.FromSeconds(ev.Duration), false);
 
         ev.Handled = true;
     }
@@ -157,6 +193,7 @@ public partial class CultSystem
                 return false;
             }
         }
+
         _popupSystem.PopupEntity(Loc.GetString("mime-invisible-wall-popup", ("mime", performer)), performer);
         // Make sure we set the invisible wall to despawn properly
         Spawn(wallPrototypeId, coords);

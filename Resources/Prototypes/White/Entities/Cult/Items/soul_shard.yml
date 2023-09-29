@@ -26,3 +26,14 @@
             False: { state: "soulstone" }
     - type: Speech
 
+- type: entity
+  parent: SoulShard
+  id: SoulShardGhost
+  suffix: Ghost Role
+  components:
+    - type: GhostRole
+      allowMovement: true
+      name: ghost-role-information-soul-shard-name
+      description: ghost-role-information-soul-shard-description
+      rules: ghost-role-information-soul-shard-rules
+    - type: GhostTakeoverAvailable

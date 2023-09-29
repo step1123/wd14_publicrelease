@@ -4,9 +4,6 @@ namespace Content.Server.White.Cult.Runes.Comps;
 public sealed class CultTeleportRuneProviderComponent : Component
 {
     [ViewVariables(VVAccess.ReadOnly)]
-    public EntityUid? Target;
-
-    [ViewVariables(VVAccess.ReadOnly)]
     public EntityUid? BaseRune;
 
     [ViewVariables(VVAccess.ReadOnly)]

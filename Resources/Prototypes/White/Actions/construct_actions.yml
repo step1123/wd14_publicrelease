@@ -22,7 +22,6 @@
   useDelay: 180
   event: !type:ArtificerCreateConstructShellActionEvent
 
-
 - type: instantAction
   id: ArtificerConvertCultistFloor
   name: artificer-convert-cultist-floor-action-name
@@ -34,7 +33,6 @@
   sound: /Audio/White/Cult/curse.ogg
   useDelay: 2
   event: !type:ArtificerConvertCultistFloorActionEvent
-
 
 - type: instantAction
   id: ArtificerCreateCultistWall
@@ -48,6 +46,17 @@
   useDelay: 20
   event: !type:ArtificerCreateCultistWallActionEvent
 
+- type: instantAction
+  id: ArtificerCreateCultistAirlock
+  name: artificer-create-cultist-airlock-action-name
+  description: artificer-create-cultist-airlock-action-description
+  itemIconStyle: NoItem
+  icon:
+    sprite: White/Cult/actions_cult.rsi
+    state: lesserconstruct
+  sound: /Audio/White/Cult/curse.ogg
+  useDelay: 60
+  event: !type:ArtificerCreateCultistAirlockActionEvent
 
 - type: instantAction
   id: WraithPhase
@@ -61,7 +70,6 @@
   useDelay: 20
   event: !type:WraithPhaseActionEvent
 
-
 - type: instantAction
   id: JuggernautCreateWall
   name: juggernaut-create-wall-action-name
@@ -72,4 +80,3 @@
     state: cultforcewall
   useDelay: 35
   event: !type:JuggernautCreateWallActionEvent
-

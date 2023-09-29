@@ -13,7 +13,6 @@ namespace Content.Server.White.Cult.GameRule;
 [RegisterComponent]
 public sealed class CultRuleComponent : Component
 {
-
     public readonly SoundSpecifier GreatingsSound = new SoundPathSpecifier("/Audio/White/Cult/blood_cult_greeting.ogg");
 
     [DataField("cultPrototype", customTypeSerializer: typeof(PrototypeIdSerializer<GamePresetPrototype>))]
@@ -42,6 +41,9 @@ public sealed class CultRuleComponent : Component
     [DataField("cultistStartingItems", customTypeSerializer: typeof(PrototypeIdListSerializer<EntityPrototype>))]
     public List<string> StartingItems = new();
 
+    [DataField("cultistRolePrototype", customTypeSerializer: typeof(PrototypeIdSerializer<AntagPrototype>))]
+    public string CultistRolePrototype = "Cultist";
+
     /// <summary>
     ///     Players who played as an cultist at some point in the round.
     /// </summary>
@@ -50,6 +52,8 @@ public sealed class CultRuleComponent : Component
     public Mind.Mind? CultTarget;
 
     public List<CultistComponent> Cultists = new();
+
+    public List<ConstructComponent> Constructs = new();
 
     public CultWinCondition WinCondition;
 }
