@@ -9,6 +9,8 @@
   - type: Electrified
     enabled: false
     usesApcPower: true
+  - type: ActiveListener
+    range: 10
   - type: RadioMicrophone
     powerRequired: true
     unobstructedRequired: true
@@ -28,14 +30,14 @@
     layers:
     - state: base
     - state: unshaded
-      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
       shader: unshaded
     - state: broadcasting
-      map: ["enum.RadioDeviceVisualLayers.Broadcasting"]
+      map: [ "enum.RadioDeviceVisualLayers.Broadcasting" ]
       shader: unshaded
       visible: false
     - state: speaker
-      map: ["enum.RadioDeviceVisualLayers.Speaker"]
+      map: [ "enum.RadioDeviceVisualLayers.Speaker" ]
       shader: unshaded
       visible: false
   - type: Transform
@@ -50,8 +52,8 @@
     key: enum.IntercomUiKey.Key
   - type: UserInterface
     interfaces:
-      - key: enum.IntercomUiKey.Key
-        type: IntercomBoundUserInterface
+    - key: enum.IntercomUiKey.Key
+      type: IntercomBoundUserInterface
   - type: Construction
     graph: Intercom
     node: intercom
@@ -60,21 +62,21 @@
     damageModifierSet: Metallic
   - type: Destructible
     thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 200
-        behaviors:
-          - !type:DoActsBehavior
-            acts: [ "Destruction" ]
-      - trigger:
-          !type:DamageTrigger
-          damage: 100
-        behaviors:
-          - !type:DoActsBehavior
-            acts: [ "Destruction" ]
-          - !type:PlaySoundBehavior
-            sound:
-              path: /Audio/Effects/metalbreak.ogg
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/metalbreak.ogg
   - type: GenericVisualizer
     visuals:
       enum.PowerDeviceVisuals.Powered:

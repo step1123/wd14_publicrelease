@@ -130,12 +130,12 @@
   id: WardenIDCard
   name: warden ID card
   components:
-    - type: Sprite
-      layers:
-        - state: default
-        - state: idwarden
-    - type: PresetIdCard
-      job: Warden
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idwarden
+  - type: PresetIdCard
+    job: Warden
 
 - type: entity
   parent: IDCardStandard
@@ -214,12 +214,12 @@
   id: QuartermasterIDCard
   name: quartermaster ID card
   components:
-    - type: Sprite
-      layers:
-        - state: default
-        - state: idquartermaster
-    - type: PresetIdCard
-      job: Quartermaster
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idquartermaster
+  - type: PresetIdCard
+    job: Quartermaster
 
 - type: entity
   parent: IDCardStandard
@@ -262,12 +262,12 @@
   id: ChaplainIDCard
   name: chaplain ID card
   components:
-    - type: Sprite
-      layers:
-        - state: default
-        - state: idchaplain
-    - type: PresetIdCard
-      job: Chaplain
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idchaplain
+  - type: PresetIdCard
+    job: Chaplain
 
 - type: entity
   parent: IDCardStandard
@@ -310,36 +310,36 @@
   id: BotanistIDCard
   name: botanist ID card
   components:
-    - type: Sprite
-      layers:
-        - state: default
-        - state: idbotanist
-    - type: PresetIdCard
-      job: Botanist
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idbotanist
+  - type: PresetIdCard
+    job: Botanist
 
 - type: entity
   parent: IDCardStandard
   id: LibrarianIDCard
   name: librarian ID card
   components:
-    - type: Sprite
-      layers:
-        - state: default
-        - state: idcurator
-    - type: PresetIdCard
-      job: Librarian
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idcurator
+  - type: PresetIdCard
+    job: Librarian
 
 - type: entity
   parent: IDCardStandard
   id: LawyerIDCard
   name: lawyer ID card
   components:
-    - type: Sprite
-      layers:
-        - state: default
-        - state: idlawyer
-    - type: PresetIdCard
-      job: Lawyer
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idlawyer
+  - type: PresetIdCard
+    job: Lawyer
 
 - type: entity
   parent: IDCardStandard
@@ -475,12 +475,12 @@
   id: MusicianIDCard
   name: musician ID card
   components:
-    - type: Sprite
-      layers:
-        - state: default
-        - state: idmusician
-    - type: PresetIdCard
-      job: Musician
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idmusician
+  - type: PresetIdCard
+    job: Musician
 
 - type: entity
   parent: CentcomIDCard
@@ -506,8 +506,8 @@
     inHandsOnly: true
   - type: UserInterface
     interfaces:
-      - key: enum.AgentIDCardUiKey.Key
-        type: AgentIDCardBoundUserInterface
+    - key: enum.AgentIDCardUiKey.Key
+      type: AgentIDCardBoundUserInterface
 
 - type: entity
   parent: IDCardStandard
@@ -605,7 +605,6 @@
   - type: Item
     heldPrefix: gold
 
-
 - type: entity
   parent: IDCardStandard
   id: CluwneIDCard
@@ -673,9 +672,9 @@
   id: SeniorSalvageSpecialistIDCard
   name: senior cargo ID card
   components:
-    - type: Sprite
-      layers:
-        - state: default
-        - state: idseniorsalvage
-    - type: PresetIdCard
-      job: SeniorSalvageSpecialist
+  - type: Sprite
+    layers:
+    - state: default
+    - state: idseniorsalvage
+  - type: PresetIdCard
+    job: SeniorSalvageSpecialist

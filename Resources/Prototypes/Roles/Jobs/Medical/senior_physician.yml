@@ -4,27 +4,27 @@
   description: job-description-senior-physician
   playTimeTracker: JobSeniorPhysician
   requirements:
-    - !type:RoleTimeRequirement
-      role: JobChemist
-      time: 86400 # 24 hrs
-    - !type:RoleTimeRequirement
-      role: JobMedicalDoctor
-      time: 86400 # 24 hrs
-    - !type:DepartmentTimeRequirement
-      department: Medical
-      time: 288000 # 80 hrs
+  - !type:RoleTimeRequirement
+    role: JobChemist
+    time: 86400 # 24 hrs
+  - !type:RoleTimeRequirement
+    role: JobMedicalDoctor
+    time: 86400 # 24 hrs
+  - !type:DepartmentTimeRequirement
+    department: Medical
+    time: 288000 # 80 hrs
   startingGear: SeniorPhysicianGear
   icon: "SeniorPhysician"
   supervisors: job-supervisors-cmo
   canBeAntag: false
   special:
-    - !type:AddImplantSpecial
-      implants: [ MindShieldImplant ]
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
   access:
   - Medical
   - Maintenance
   - Chemistry
-  - Paramedic
+  - External
 
 - type: startingGear
   id: SeniorPhysicianGear

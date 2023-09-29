@@ -9,15 +9,28 @@
   cost:
     Telecrystal: 8
   categories:
-    - UplinkWeapons
+  - UplinkWeapons
   conditions:
-    - !type:StoreWhitelistCondition
-      blacklist:
-        tags:
-          - NukeOpsUplink
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
   saleLimit: 1
 
+# WD ADDED
 - type: listing
+  id: UplinkRifleAk
+  name: uplink-rifle-ak-name
+  description: uplink-rifle-ak-description
+  productEntity: WeaponRifleAk
+  cost:
+    Telecrystal: 16
+  categories:
+  - UplinkWeapons
+  saleLimit: 1
+- type: listing
+  # END WD ADDED
+
   id: UplinkPistolViper
   name: uplink-pistol-viper-name
   description: uplink-pistol-viper-desc
@@ -74,10 +87,10 @@
   categories:
   - UplinkWeapons
   conditions:
-    - !type:StoreWhitelistCondition
-      blacklist:
-        tags:
-          - NukeOpsUplink
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
   saleLimit: 1
 
 - type: listing
@@ -146,7 +159,7 @@
   cost:
     Telecrystal: 8
   categories:
-    - UplinkExplosives
+  - UplinkExplosives
 
 - type: listing
   id: UplinkExplosiveSmokeGrenade
@@ -156,7 +169,7 @@
   cost:
     Telecrystal: 1
   categories:
-    - UplinkExplosives
+  - UplinkExplosives
 
 - type: listing
   id: UplinkExplosiveGrenadeFlash
@@ -176,7 +189,7 @@
   cost:
     Telecrystal: 6
   categories:
-    - UplinkExplosives
+  - UplinkExplosives
 
 - type: listing
   id: UplinkGrenadePenguin
@@ -186,7 +199,7 @@
   cost:
     Telecrystal: 4
   categories:
-    - UplinkExplosives
+  - UplinkExplosives
   conditions:
   - !type:BuyerWhitelistCondition
     blacklist:
@@ -299,8 +312,20 @@
   categories:
   - UplinkAmmo
 
-# for the hristov
+# WD ADDED
 - type: listing
+  id: UplinkAkAmmo
+  name: uplink-ak-ammo-name
+  description: uplink-ak-ammo-desc
+  productEntity: MagazineLightRifle
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkAmmo
+- type: listing
+  # END WD ADDED
+  # for the hristov
+
   id: UplinkHristovAmmo
   name: uplink-sniper-ammo-name
   description: uplink-sniper-ammo-desc
@@ -380,10 +405,10 @@
   categories:
   - UplinkUtility
   conditions:
-    - !type:StoreWhitelistCondition
-      blacklist:
-        tags:
-          - NukeOpsUplink
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
   saleLimit: 2
 
 - type: listing
@@ -397,10 +422,10 @@
   categories:
   - UplinkUtility
   conditions:
-    - !type:StoreWhitelistCondition
-      whitelist:
-        tags:
-          - NukeOpsUplink
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
   saleLimit: 1
 
 - type: listing
@@ -488,12 +513,12 @@
   cost:
     Telecrystal: 12
   categories:
-    - UplinkImplants
+  - UplinkImplants
   conditions:
-    - !type:StoreWhitelistCondition
-      blacklist:
-        tags:
-          - NukeOpsUplink
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkFreedomImplanter
@@ -504,7 +529,7 @@
   cost:
     Telecrystal: 8
   categories:
-    - UplinkImplants
+  - UplinkImplants
 
 - type: listing
   id: UplinkMicroBombImplanter
@@ -515,16 +540,16 @@
   cost:
     Telecrystal: 2
   categories:
-    - UplinkImplants
+  - UplinkImplants
   conditions:
-    - !type:StoreWhitelistCondition
-      whitelist:
-        tags:
-          - NukeOpsUplink
-    - !type:BuyerWhitelistCondition
-      blacklist:
-        components:
-          - SurplusBundle
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
 
 - type: listing
   id: UplinkDnaScramblerImplant
@@ -535,7 +560,7 @@
   cost:
     Telecrystal: 10
   categories:
-    - UplinkImplants
+  - UplinkImplants
 
 - type: listing
   id: UplinkEmpImplanter
@@ -546,7 +571,7 @@
   cost:
     Telecrystal: 3
   categories:
-    - UplinkImplants
+  - UplinkImplants
 
 - type: listing
   id: UplinkMacroBombImplanter
@@ -557,16 +582,16 @@
   cost:
     Telecrystal: 20
   categories:
-    - UplinkImplants
+  - UplinkImplants
   conditions:
-    - !type:StoreWhitelistCondition
-      whitelist:
-        tags:
-          - NukeOpsUplink
-    - !type:BuyerWhitelistCondition
-      blacklist:
-        components:
-          - SurplusBundle
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
 
 - type: listing
   id: UplinkUplinkImplanter # uplink uplink real
@@ -579,10 +604,10 @@
   categories:
   - UplinkImplants
   conditions:
-    - !type:StoreWhitelistCondition
-      blacklist:
-        tags:
-          - NukeOpsUplink
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
   saleBlacklist: true
 
 - type: listing
@@ -595,14 +620,14 @@
   categories:
   - UplinkImplants
   conditions:
-    - !type:StoreWhitelistCondition
-      whitelist:
-        tags:
-          - NukeOpsUplink
-    - !type:BuyerWhitelistCondition
-      blacklist:
-        components:
-          - SurplusBundle
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
 
 # Bundles
 
@@ -616,14 +641,14 @@
   categories:
   - UplinkBundles
   conditions:
-    - !type:StoreWhitelistCondition
-      whitelist:
-        tags:
-          - NukeOpsUplink
-    - !type:BuyerWhitelistCondition
-      blacklist:
-        components:
-          - SurplusBundle
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
   saleLimit: 1
 
 - type: listing
@@ -636,14 +661,14 @@
   categories:
   - UplinkBundles
   conditions:
-    - !type:StoreWhitelistCondition
-      whitelist:
-        tags:
-          - NukeOpsUplink
-    - !type:BuyerWhitelistCondition
-      blacklist:
-        components:
-          - SurplusBundle
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
   saleLimit: 1
 
 - type: listing
@@ -809,10 +834,10 @@
   categories:
   - UplinkTools
   conditions:
-    - !type:BuyerWhitelistCondition
-      blacklist:
-        components:
-          - SurplusBundle
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
 
 - type: listing
   id: UplinkCarpDehydrated
@@ -848,12 +873,12 @@
   cost:
     Telecrystal: 5
   categories:
-    - UplinkJob
+  - UplinkJob
   conditions:
-    - !type:BuyerJobCondition
-      whitelist:
-        - Passenger
-        - Boxer
+  - !type:BuyerJobCondition
+    whitelist:
+    - Passenger
+    - Boxer
 
 - type: listing
   id: uplinkNecronomicon
@@ -944,12 +969,12 @@
   categories:
   - UplinkJob
   conditions:
-    - !type:BuyerJobCondition
-      whitelist:
-        - Scientist
-        - SeniorResearcher
-        - ResearchAssistant
-        - ResearchDirector
+  - !type:BuyerJobCondition
+    whitelist:
+    - Scientist
+    - SeniorResearcher
+    - ResearchAssistant
+    - ResearchDirector
 
 - type: listing
   id: uplinkProximityMine
@@ -973,7 +998,7 @@
   id: UplinkSyndicateSpongeBox
   name: uplink-syndicate-sponge-box-name
   description: uplink-syndicate-sponge-box-desc
-  icon: { sprite:  Objects/Misc/monkeycube.rsi, state: box}
+  icon: { sprite: Objects/Misc/monkeycube.rsi, state: box }
   productEntity: SyndicateSpongeBox
   cost:
     Telecrystal: 7
@@ -999,17 +1024,17 @@
   categories:
   - UplinkJob
   conditions:
-    - !type:BuyerJobCondition
-      whitelist:
-        - StationEngineer
-        - AtmosphericTechnician
-        - Scientist
-        - SeniorEngineer
-        - SeniorResearcher
-        - ResearchAssistant
-        - ResearchDirector
-        - ChiefEngineer
-        - TechnicalAssistant
+  - !type:BuyerJobCondition
+    whitelist:
+    - StationEngineer
+    - AtmosphericTechnician
+    - Scientist
+    - SeniorEngineer
+    - SeniorResearcher
+    - ResearchAssistant
+    - ResearchDirector
+    - ChiefEngineer
+    - TechnicalAssistant
 
 # Armor
 
@@ -1022,7 +1047,7 @@
   cost:
     Telecrystal: 6
   categories:
-    - UplinkArmor
+  - UplinkArmor
 
 - type: listing
   id: UplinkClothingNoSlipsShoes
@@ -1253,7 +1278,7 @@
       components:
       - SurplusBundle
 
- # Pointless
+  # Pointless
 
 - type: listing
   id: UplinkRevolverCapGun
@@ -1373,4 +1398,4 @@
   cost:
     Telecrystal: 1
   categories:
-    - UplinkPointless
+  - UplinkPointless

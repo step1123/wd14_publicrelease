@@ -6,6 +6,7 @@
   components:
   - type: RadioMicrophone
     broadcastChannel: Handheld
+    listenRange: 1
   - type: RadioSpeaker
     channels:
     - Handheld

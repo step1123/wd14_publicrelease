@@ -2,6 +2,9 @@
 uplink-pistol-viper-name = Viper
 uplink-pistol-viper-desc = A small, easily concealable, but somewhat underpowered gun. Retrofitted with a fully automatic receiver. Uses pistol magazines (.35 auto).
 
+uplink-rifle-ak-name = AK-74
+uplink-rifle-ak-description = A powerfull automatic rifle. Uses rifle magazines (.30 rifle)
+
 uplink-revolver-python-name = Python
 uplink-revolver-python-desc = A brutally simple, effective, and loud Syndicate revolver. Comes loaded with armor-piercing rounds. Uses .45 magnum.
 
@@ -69,6 +72,9 @@ uplink-mosin-ammo-desc = A box of cartridges for the surplus rifle.
 
 uplink-sniper-ammo-name = ammunition box (.60 antimateriel)
 uplink-sniper-ammo-desc = a box of 10 cartridges for the hristov sniper rifle
+
+uplink-ak-ammo-name = magazine (.30 rifle)
+uplink-ak-ammo-desc = a magazine of .30 rifle ammo suited best for AK-74
 
 # Utility
 uplink-holopara-kit-name = Holoparasite Kit

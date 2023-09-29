@@ -188,7 +188,7 @@ public sealed class RadioDeviceSystem : EntitySystem
     private void OnAttemptListen(EntityUid uid, RadioMicrophoneComponent component, ListenAttemptEvent args)
     {
         if (component.PowerRequired && !this.IsPowered(uid, EntityManager)
-            || component.UnobstructedRequired && !_interaction.InRangeUnobstructed(args.Source, uid, 0))
+            || component.UnobstructedRequired && !_interaction.InRangeUnobstructed(args.Source, uid, component.ListenRange))
         {
             args.Cancel();
         }
