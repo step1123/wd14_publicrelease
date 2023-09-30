@@ -1,0 +1,67 @@
+- type: gameMap
+  id: Polaris
+  mapName: 'Polaris Station'
+  mapPath: /Maps/White/Polaris.yml
+  minPlayers: 20
+  stations:
+    PolarisStation:
+      stationProto: StandardNanotrasenStation
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: '{0} Polaris Station {1}'
+          nameGenerator:
+            !type:NanotrasenNameGenerator
+            prefixCreator: 'TG'
+        - type: StationEmergencyShuttle
+          emergencyShuttlePath: /Maps/Shuttles/emergency_box.yml
+        - type: StationJobs
+          overflowJobs:
+            - Passenger
+          availableJobs:
+            CargoTechnician: [ 3, 3 ]
+            Passenger: [ -1, -1 ]
+            Bartender: [ 1, 1 ]
+            Botanist: [ 2, 2 ]
+            Chef: [ 2, 2 ]
+            Clown: [ 1, 1 ]
+            Janitor: [ 2, 2 ]
+            Mime: [ 1, 1 ]
+            Captain: [ 1, 1 ]
+            HeadOfPersonnel: [ 1, 1 ]
+            ChiefEngineer: [ 1, 1 ]
+            StationEngineer: [ 5, 5 ]
+            ChiefMedicalOfficer: [ 1, 1 ]
+            MedicalDoctor: [ 2, 2 ]
+            Paramedic: [ 1, 1 ]
+            Musician: [ 3, 3 ]
+            Chemist: [ 2, 2 ]
+            ResearchDirector: [ 1, 1 ]
+            Scientist: [ 3, 3 ]
+            HeadOfSecurity: [ 1, 1 ]
+            SecurityOfficer: [ 5, 5 ]
+            Chaplain: [ 2, 2 ]
+            Warden: [ 1, 1 ]
+            Librarian: [ 1, 1 ]
+            Lawyer: [ 0, 0 ]
+            Boxer: [ 2, 2 ]
+            Reporter: [ 3, 3 ]
+            Zookeeper: [ 1, 1 ]
+            Quartermaster: [ 1, 1 ]
+            SalvageSpecialist: [ 4, 4 ]
+            AtmosphericTechnician: [ 3, 3 ]
+            TechnicalAssistant: [ 2, 2 ]
+            MedicalIntern: [ 2, 2 ]
+            ServiceWorker: [ 2, 2 ]
+            SecurityCadet: [ 3, 3 ]
+            Detective: [ 1, 1 ]
+            ResearchAssistant: [ 2, 2 ]
+            MedicalCyborg: [ 1, 1 ]
+            SecurityCyborg: [ 1, 1 ]
+            EngineerCyborg: [ 2, 0 ]
+            NekoCyborg: [ 1, 1 ]
+            SeniorResearcher: [ 1, 1 ]
+            SeniorOfficer: [ 1, 1 ]
+            SeniorPhysician: [ 1, 1 ]
+            SeniorEngineer: [ 1, 1 ]
+            MinerCyborg: [ 1, 1 ]
+            ClownCyborg: [ 1, 1 ]
