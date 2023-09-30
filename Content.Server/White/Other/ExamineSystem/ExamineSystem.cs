@@ -119,7 +119,7 @@ namespace Content.Server.White.Other.ExamineSystem
 
             var combinedInfo = string.Join("\n", infoLines);
 
-            if (TryComp(args.Examined, out ActorComponent? actorComponent))
+            if (TryComp(args.Examiner, out ActorComponent? actorComponent))
             {
                 SendNoticeMessage(actorComponent, combinedInfo);
             }
