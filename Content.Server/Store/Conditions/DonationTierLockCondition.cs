@@ -17,7 +17,7 @@ public sealed class DonationTierLockCondition : ListingCondition
 
         if(!sponsorsManager.TryGetInfo(actor.PlayerSession.UserId, out var sponsorInfo)) return false;
 
-        if (sponsorInfo.Tier < Tier) return false;
+        if (sponsorInfo.Tier != Tier) return false;
 
         return true;
     }
