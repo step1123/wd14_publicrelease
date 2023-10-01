@@ -1,0 +1,43 @@
+- type: entity
+  id: HandheldSeedAnalyzerUnpowered
+  parent: BaseItem
+  name: seed analyzer
+  description: A hand-held seed scanner capable of deciphering genes of the subject.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Hydroponics/seed_analyzer.rsi
+    state: icon
+  - type: ActivatableUI
+    key: enum.SeedAnalyzerUiKey.Key
+    closeOnHandDeselect: false
+  - type: UserInterface
+    interfaces:
+      - key: enum.SeedAnalyzerUiKey.Key
+        type: SeedAnalyzerBoundUserInterface
+  - type: SeedAnalyzer
+    scanningEndSound:
+      path: "/Audio/Items/Medical/healthscanner.ogg"
+  - type: Tag
+    tags:
+      - DiscreteHealthAnalyzer
+  - type: Appearance
+
+- type: entity
+  id: HandheldSeedAnalyzer
+  parent: [ HandheldSeedAnalyzerUnpowered, PowerCellSlotSmallItem]
+  suffix: Powered
+  components:
+  - type: PowerCellDraw
+    drawRate: 0
+    useRate: 5
+  - type: ActivatableUIRequiresPowerCell
+
+- type: entity
+  id: HandheldSeedAnalyzerEmpty
+  parent: HandheldSeedAnalyzer
+  suffix: Empty
+  components:
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
