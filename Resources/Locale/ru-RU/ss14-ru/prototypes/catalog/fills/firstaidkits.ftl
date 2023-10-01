@@ -7,3 +7,6 @@ ent-MedkitBurnFilled = { ent-MedkitBurn }
 ent-MedkitBruteFilled = { ent-MedkitBrute }
     .suffix = Заполненная
     .desc = { ent-MedkitBrute.desc }
+ent-ExpandedMedkitFilled = { ent-ExpandedMedkit }
+    .suffix = Заполненная
+    .desc = { ent-ExpandedMedkit.desc }

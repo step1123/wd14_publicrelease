@@ -26,6 +26,44 @@
         - id: Drill
         - id: Saw
         - id: Hemostat
+        - id: Brutepack
+          amount: 2
+        - id: Ointment
+          amount: 2
+        - id: Bloodpack
+          amount: 2
+        - id: Gauze
+        - id: EmergencyMedipen
+
+- type: entity
+  noSpawn: true
+  parent: ClothingBackpackSatchelMedical
+  id: ClothingBackpackSatchelSeniorMedicalFilled
+  components:
+    - type: StorageFill
+      contents:
+        - id: BoxSurvivalMedical
+        - id: ExpandedMedkitFilled
+
+- type: entity
+  noSpawn: true
+  parent: ClothingBackpackDuffelMedical
+  id: ClothingBackpackDuffelSeniorMedicalFilled
+  components:
+    - type: StorageFill
+      contents:
+        - id: BoxSurvivalMedical
+        - id: ExpandedMedkitFilled
+
+- type: entity
+  noSpawn: true
+  parent: ClothingBackpackMedical
+  id: ClothingBackpackSeniorMedicalFilled
+  components:
+    - type: StorageFill
+      contents:
+        - id: BoxSurvivalMedical
+        - id: ExpandedMedkitFilled
 
 # Engineer
 - type: entity
@@ -41,3 +79,68 @@
         - id: ImprovedWirecutter
         - id: ImprovedWelder
         - id: Multitool
+
+# Researcher
+- type: entity
+  noSpawn: true
+  parent: ClothingBackpackScience
+  id: ClothingBackpackSeniorScienceFilled
+  components:
+    - type: StorageFill
+      contents:
+        - id: BoxSurvival
+        - id: AnomalyLocator
+        - id: AnomalyScanner
+
+- type: entity
+  noSpawn: true
+  parent: ClothingBackpackSatchelScience
+  id: ClothingBackpackSatchelSeniorScienceFilled
+  components:
+    - type: StorageFill
+      contents:
+        - id: BoxSurvival
+        - id: AnomalyLocator
+        - id: AnomalyScanner
+
+- type: entity
+  noSpawn: true
+  parent: ClothingBackpackDuffelScience
+  id: ClothingBackpackDuffelSeniorScienceFilled
+  components:
+    - type: StorageFill
+      contents:
+        - id: BoxSurvival
+        - id: AnomalyLocator
+        - id: AnomalyScanner
+
+# Cargo (Salvage)
+- type: entity
+  noSpawn: true
+  parent: ClothingBackpackSalvage
+  id: ClothingBackpackSeniorSalvageFilled
+  components:
+    - type: StorageFill
+      contents:
+        - id: BoxSurvival
+        - id: WeaponLaserGun
+
+- type: entity
+  noSpawn: true
+  parent: ClothingBackpackSatchelSalvage
+  id: ClothingBackpackSatchelSeniorSalvageFilled
+  components:
+    - type: StorageFill
+      contents:
+        - id: BoxSurvival
+        - id: WeaponLaserGun
+
+- type: entity
+  noSpawn: true
+  parent: ClothingBackpackDuffelSalvage
+  id: ClothingBackpackDuffelSeniorSalvageFilled
+  components:
+    - type: StorageFill
+      contents:
+        - id: BoxSurvival
+        - id: WeaponLaserGun

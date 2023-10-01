@@ -9,7 +9,7 @@
       time: 86400 # 24 hrs
     - !type:DepartmentTimeRequirement
       department: Cargo
-      time: 288000 # 80 hrs
+      time: 720000 # 200 hrs
   startingGear: SeniorSalvageSpecialistGear
   icon: "SeniorSalvageSpecialist"
   supervisors: job-supervisors-qm
@@ -28,20 +28,19 @@
   equipment:
     head: ClothingHeadHatBeretMerc
     jumpsuit: ClothingUniformJumpsuitSeniorSalvageSpecialist
-    back: ClothingBackpackSalvageFilled
+    back: ClothingBackpackSeniorSalvageFilled
     shoes: ClothingShoesBootsCombatFilled
     id: SeniorSalvagePDA
     ears: ClothingHeadsetCargo
     outerClothing: ClothingOuterHardsuitImprovedSpatio
     gloves: ClothingHandsGlovesColorYellow
     belt: ClothingBeltUtilityFilled
+    neck: ClothingNeckCargomedal
     underwearb: ClothingUnderwearBottomBoxersWhite # White-Underwear
   underweart: ClothingUnderwearTopBraWhite # White-Underwear
   underwearb: ClothingUnderwearBottomPantiesWhite # White-Underwear
-  inhand:
-    right hand: WeaponLaserGun
-  satchel: ClothingBackpackSatchelSalvageFilled
+  satchel: ClothingBackpackSatchelSeniorSalvageFilled
   innerclothingskirt: ClothingUniformJumpskirtSeniorSalvageSpecialist
-  duffelbag: ClothingBackpackDuffelSalvageFilled
+  duffelbag: ClothingBackpackDuffelSeniorSalvageFilled
 
 

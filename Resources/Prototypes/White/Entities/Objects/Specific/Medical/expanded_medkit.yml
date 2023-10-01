@@ -6,8 +6,23 @@
     - type: Storage
       capacity: 40
     - type: Item
-      size: 45
+      size: 20 # Так лид сказал. Если что-то ломается (кроме тестов), то поставьте 40
       sprite: White/Specific/expmedkit.rsi
     - type: Sprite
       sprite: White/Specific/expmedkit.rsi
       state: icon
+
+- type: entity
+  id: ExpandedMedkitFilled
+  suffix: Filled
+  parent: ExpandedMedkit
+  components:
+    - type: StorageFill
+      contents:
+        - id: HandheldHealthAnalyzer
+        - id: RegenerativeMesh
+          amount: 3
+        - id: MedicatedSuture
+          amount: 3
+        - id: PillTricordrazine
+          amount: 5

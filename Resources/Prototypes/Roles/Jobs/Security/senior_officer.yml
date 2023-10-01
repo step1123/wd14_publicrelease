@@ -6,16 +6,13 @@
   requirements:
     - !type:RoleTimeRequirement
       role: JobWarden
-      time: 43200 # 12 hrs
+      time: 86400 # 24 hrs
     - !type:RoleTimeRequirement
       role: JobDetective
-      time: 28800 # 8 hrs
-    - !type:RoleTimeRequirement
-      role: JobSecurityOfficer
-      time: 86400 # 24 hrs
+      time: 43200 # 12 hrs
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 288000 # 80 hrs
+      time: 720000 # 200 hrs
   startingGear: SeniorOfficerGear
   icon: "SeniorOfficer"
   supervisors: job-supervisors-hos
@@ -48,6 +45,7 @@
     pocket1: WeaponPistolMk58
     pocket2: MagazinePistol
     gloves: ClothingHandsGlovesCombat
+    neck: ClothingNeckSecuritymedal
     underwearb: ClothingUnderwearBottomBoxersWhite # White-Underwear
   underweart: ClothingUnderwearTopBraWhite # White-Underwear
   underwearb: ClothingUnderwearBottomPantiesWhite # White-Underwear

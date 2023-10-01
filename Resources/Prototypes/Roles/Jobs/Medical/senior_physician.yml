@@ -4,15 +4,12 @@
   description: job-description-senior-physician
   playTimeTracker: JobSeniorPhysician
   requirements:
-  - !type:RoleTimeRequirement
-    role: JobChemist
-    time: 86400 # 24 hrs
-  - !type:RoleTimeRequirement
-    role: JobMedicalDoctor
-    time: 86400 # 24 hrs
-  - !type:DepartmentTimeRequirement
-    department: Medical
-    time: 288000 # 80 hrs
+    - !type:RoleTimeRequirement
+      role: JobChemist
+      time: 86400 # 24 hrs
+    - !type:DepartmentTimeRequirement
+      department: Medical
+      time: 720000 # 200 hrs
   startingGear: SeniorPhysicianGear
   icon: "SeniorPhysician"
   supervisors: job-supervisors-cmo
@@ -31,7 +28,7 @@
   equipment:
     head: ClothingHeadHatBeretBrigmedic
     jumpsuit: ClothingUniformJumpsuitSeniorPhysician
-    back: ClothingBackpackMedicalFilled
+    back: ClothingBackpackSeniorMedicalFilled
     shoes: ClothingShoesColorBlack
     outerClothing: ClothingOuterCoatLabSeniorPhysician
     id: SeniorPhysicianPDA
@@ -39,11 +36,10 @@
     belt: ClothingBeltSeniorPhysicianFilled
     mask: ClothingMaskSterile
     gloves: ClothingHandsGlovesLatex
+    neck: ClothingNeckMedicalmedal
     underwearb: ClothingUnderwearBottomBoxersWhite # White-Underwear
   underweart: ClothingUnderwearTopBraWhite # White-Underwear
   underwearb: ClothingUnderwearBottomPantiesWhite # White-Underwear
-  inhand:
-    right hand: ExpandedMedkit
   innerclothingskirt: ClothingUniformJumpskirtSeniorPhysician
-  satchel: ClothingBackpackSatchelMedicalFilled
-  duffelbag: ClothingBackpackDuffelMedicalFilled
+  satchel: ClothingBackpackSatchelSeniorMedicalFilled
+  duffelbag: ClothingBackpackDuffelSeniorMedicalFilled

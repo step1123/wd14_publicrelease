@@ -6,7 +6,7 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Science
-      time: 288000 # 80 hrs
+      time: 720000 # 200 hrs
   startingGear: SeniorResearcherGear
   icon: "SeniorResearcher"
   supervisors: job-supervisors-rd
@@ -23,16 +23,17 @@
   equipment:
     head: ClothingHeadHatBeretRND
     jumpsuit: ClothingUniformJumpsuitSeniorResearcher
-    back: ClothingBackpackScienceFilled
+    back: ClothingBackpackSeniorScienceFilled
     shoes: ClothingShoesColorBlack
     outerClothing: ClothingOuterCoatLabSeniorResearcher
     id: SeniorResearcherPDA
     ears: ClothingHeadsetScience
     gloves: ClothingHandsGlovesColorYellow
     belt: ClothingBeltUtilityFilled
+    neck: ClothingNeckSciencemedal
     underwearb: ClothingUnderwearBottomBoxersWhite # White-Underwear
   underweart: ClothingUnderwearTopBraWhite # White-Underwear
   underwearb: ClothingUnderwearBottomPantiesWhite # White-Underwear
   innerclothingskirt: ClothingUniformJumpskirtSeniorResearcher
-  satchel: ClothingBackpackSatchelScienceFilled
-  duffelbag: ClothingBackpackDuffelScienceFilled
+  satchel: ClothingBackpackSatchelSeniorScienceFilled
+  duffelbag: ClothingBackpackDuffelSeniorScienceFilled
