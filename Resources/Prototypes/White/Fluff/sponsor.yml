@@ -207,3 +207,20 @@
   id: DeusJumpskirtLoadout
   entity: DeusJumpskirt
   sponsorOnly: true
+
+# JUKEBOX LOADOUT
+
+- type: loadout
+  id: JukeboxLoadout
+  entity: Jukebox
+  sponsorOnly: true
+
+- type: loadout
+  id: TapeRecorderLoadout
+  entity: TapeRecorder
+  sponsorOnly: true
+
+- type: loadout
+  id: TapeLoadout
+  entity: TapeEmpty
+  sponsorOnly: true
