@@ -14,6 +14,13 @@
   - type: SubFloorHide
   - type: Clickable
   - type: InteractionOutline
+  # WD edit sounds start
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/smash.ogg"
+  # WD edit sounds end
   - type: Physics
     bodyType: Static
     canCollide: false

@@ -10,82 +10,23 @@
     sprite: Clothing/Belt/utility.rsi
   - type: Clothing
     sprite: Clothing/Belt/utility.rsi
+  # WD edit sounds start
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/White/Items/handling/toolbelt_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/White/Items/handling/toolbelt_drop.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/White/Items/handling/toolbelt_drop.ogg
   - type: Storage
     capacity: 45
+    storageInsertSound:
+      path: /Audio/Items/belt_equip.ogg
+    # WD edit sounds end
     # TODO: Fill this out more.
-    whitelist:
-      tags:
-        - Powerdrill
-        - Wirecutter
-        - Crowbar
-        - Screwdriver
-        - Flashlight
-        - Wrench
-        - GeigerCounter
-        - Flare
-        - CableCoil
-        - CigPack
-        - Radio
-        - HolofanProjector
-        - Multitool
-        - AppraisalTool
-      components:
-        - AirlockPainter
-        - NetworkConfigurator
-        - RCD
-        - RCDAmmo
-        - Welder
-        - PowerCell
-        - Geiger
-        - TrayScanner
-        - GasAnalyzer
-  - type: ItemMapper
-    mapLayers:
-      drill:
-        whitelist:
-          tags:
-          - Powerdrill
-      cutters_red:
-        whitelist:
-          tags:
-          - Wirecutter
-      crowbar:
-        whitelist:
-          tags:
-          - Crowbar
-      crowbar_red:
-        whitelist:
-          tags:
-          - CrowbarRed
-      screwdriver_nuke:
-        whitelist:
-          tags:
-          - Screwdriver
-      wrench:
-        whitelist:
-          tags:
-          - Wrench
-      multitool:
-        whitelist:
-          tags:
-            - Multitool
-    sprite: Clothing/Belt/belt_overlay.rsi
-  - type: Appearance
-
-- type: entity
-  parent: ClothingBeltStorageBase
-  id: ClothingBeltChiefEngineer
-  name: chief engineer's toolbelt
-  description: Holds tools, looks snazzy.
-  components:
-  - type: Sprite
-    sprite: Clothing/Belt/ce.rsi
-  - type: Clothing
-    sprite: Clothing/Belt/ce.rsi
-  - type: Storage
-    capacity: 105
-    # TODO: Fill this out more.
-    whitelist:
+    whitelist: # WD edit below
       tags:
         - Wirecutter
         - Crowbar
@@ -119,27 +60,27 @@
       drill:
         whitelist:
           tags:
-          - Powerdrill
+            - Powerdrill
       cutters_red:
         whitelist:
           tags:
-          - Wirecutter
+            - Wirecutter
       crowbar:
         whitelist:
           tags:
-          - Crowbar
+            - Crowbar
       crowbar_red:
         whitelist:
           tags:
-          - CrowbarRed
+            - CrowbarRed
       jaws:
         whitelist:
           tags:
-          - JawsOfLife
+            - JawsOfLife
       screwdriver_nuke:
         whitelist:
           tags:
-          - Screwdriver
+            - Screwdriver
       multitool:
         whitelist:
           tags:
@@ -147,12 +88,25 @@
       wrench:
         whitelist:
           tags:
-          - Wrench
+            - Wrench
     sprite: Clothing/Belt/belt_overlay.rsi
   - type: Appearance
 
 - type: entity
-  parent: ClothingBeltStorageBase
+  parent: ClothingBeltUtility # WD edit
+  id: ClothingBeltChiefEngineer
+  name: chief engineer's toolbelt
+  description: Holds tools, looks snazzy.
+  components:
+  - type: Sprite
+    sprite: Clothing/Belt/ce.rsi
+  - type: Clothing
+    sprite: Clothing/Belt/ce.rsi
+  - type: Storage
+    capacity: 105
+
+- type: entity
+  parent: ClothingBeltSecurity # WD edit
   id: ClothingBeltAssault
   name: assault belt
   description: A tactical assault belt.
@@ -163,28 +117,9 @@
     sprite: Clothing/Belt/assault.rsi
   - type: Storage
     whitelist:
-      tags:
-        - CigPack
-        - Taser
       components:
-        - Stunbaton
-        - FlashOnTrigger
-        - Flash
-        - Handcuff
         - RangedMagazine
         - Ammo
-  - type: ItemMapper
-    mapLayers:
-      flashbang:
-        whitelist:
-          components:
-          - FlashOnTrigger
-      stunbaton:
-        whitelist:
-          components:
-          - Stunbaton
-    sprite: Clothing/Belt/belt_overlay.rsi
-  - type: Appearance
 
 - type: entity
   parent: ClothingBeltStorageBase
@@ -353,11 +288,26 @@
   name: security belt
   description: Can hold security gear like handcuffs and flashes.
   components:
+  # WD edit sounds start
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/White/Items/handling/toolbelt_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/White/Items/handling/toolbelt_drop.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/White/Items/handling/toolbelt_drop.ogg
+  # WD edit sounds end
   - type: Sprite
     sprite: Clothing/Belt/security.rsi
   - type: Clothing
     sprite: Clothing/Belt/security.rsi
+  # WD edit sounds start
   - type: Storage
+    storageInsertSound:
+      path: /Audio/Items/belt_equip.ogg
+  # WD edit sounds end
     whitelist:
       tags:
         - CigPack
@@ -400,6 +350,12 @@
     sprite: Clothing/Belt/sheath.rsi
   - type: Storage
     capacity: 15
+    # WD edit sounds start
+    storageInsertSound:
+      path: /Audio/White/Items/equip/sabre_hide.ogg
+    storageRemoveSound:
+      path: /Audio/White/Items/equip/sabre_equip.ogg
+    # WD edit sounds end
     whitelist:
       tags:
         - CaptainSabre

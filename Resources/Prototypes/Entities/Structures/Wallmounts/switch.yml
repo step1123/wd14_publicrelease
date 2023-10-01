@@ -1,5 +1,42 @@
+# WD edit start
+- type: entity
+  id: SwitchBase
+  abstract: true
+  components:
+    - type: Clickable
+    - type: InteractionOutline
+    - type: MeleeSound
+      soundGroups:
+        Brute:
+          path:
+            "/Audio/Weapons/smash.ogg"
+    - type: Damageable
+      damageContainer: Inorganic
+      damageModifierSet: Metallic
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 80
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+        - trigger:
+            !type:DamageTrigger
+            damage: 40
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+            - !type:PlaySoundBehavior
+              sound:
+                path: /Audio/Effects/metalbreak.ogg
+    - type: UseDelay
+      delay: 0.2 # prevent light-toggling auto-clickers.
+# WD edit start
+
 - type: entity
   id: SignalSwitch
+  parent: SwitchBase # WD edit
   name: signal switch
   description: It's a switch for toggling power to things.
   placement:
@@ -9,21 +46,14 @@
   components:
   - type: WallMount
     arc: 360
-  - type: Clickable
-  - type: InteractionOutline
-  - type: Physics
-    canCollide: false
   - type: Sprite
     sprite: Structures/Wallmounts/switch.rsi
     state: on
   - type: SignalSwitch
-  - type: UseDelay
-    delay: 0.5 # prevent light-toggling auto-clickers.
   - type: Rotatable
   - type: Construction
     graph: SignalSwitchGraph
     node: SignalSwitchNode
-  - type: Fixtures
   - type: DeviceNetwork
     deviceNetId: Wireless
   - type: WirelessNetworkConnection
@@ -33,9 +63,15 @@
     - On
     - Off
     - Status
+  # WD edit start
+  - type: Physics
+    canCollide: false
+  - type: Fixtures
+  # WD edit end
 
 - type: entity
   id: SignalButton
+  parent: SwitchBase # WD edit
   name: signal button
   description: It's a button for activating something.
   placement:
@@ -45,15 +81,9 @@
   components:
   - type: WallMount
     arc: 360
-  - type: Clickable
-  - type: InteractionOutline
-  - type: Physics
-    canCollide: false
   - type: Sprite
     sprite: Structures/Wallmounts/switch.rsi
     state: dead
-  - type: UseDelay
-    delay: 0.5 # prevent light-toggling auto-clickers.
   - type: SignalSwitch
     onPort: Pressed
     offPort: Pressed
@@ -62,7 +92,6 @@
   - type: Construction
     graph: SignalButtonGraph
     node: SignalButtonNode
-  - type: Fixtures
   - type: DeviceNetwork
     deviceNetId: Wireless
   - type: WirelessNetworkConnection
@@ -70,29 +99,13 @@
   - type: DeviceLinkSource
     ports:
       - Pressed
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Metallic
-  - type: Destructible
-    thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 80
-        behaviors:
-          - !type:DoActsBehavior
-            acts: [ "Destruction" ]
-      - trigger:
-          !type:DamageTrigger
-          damage: 40
-        behaviors:
-          - !type:DoActsBehavior
-            acts: [ "Destruction" ]
-          - !type:PlaySoundBehavior
-            sound:
-              path: /Audio/Effects/metalbreak.ogg
+  - type: Physics
+    canCollide: false
+  - type: Fixtures
 
 - type: entity
   id: ApcNetSwitch
+  parent: SwitchBase # WD edit
   name: apc net switch
   description: Its a switch for toggling lights that are connected to the same apc.
   placement:
@@ -102,10 +115,6 @@
   components:
     - type: WallMount
       arc: 360
-    - type: Clickable
-    - type: InteractionOutline
-    - type: Physics
-      canCollide: false
     - type: Transform
       anchored: true
     - type: Sprite
@@ -121,25 +130,21 @@
     - type: Construction
       graph: LightSwitchGraph
       node: LightSwitchNode
-    - type: Fixtures
 
 - type: entity
   id: TwoWayLever
+  parent: SwitchBase # WD edit
   name: two way lever
   description: A two way lever.
   placement:
     mode: SnapgridCenter
   components:
-    - type: Clickable
-    - type: InteractionOutline
     - type: Sprite
       sprite: Structures/conveyor.rsi
       layers:
         - state: switch-off
           map: ["enabled", "enum.TwoWayLeverState.Middle"]
     - type: TwoWayLever
-    - type: UseDelay
-      delay: 0.2 # prevent light-toggling auto-clickers.
     - type: Appearance
     - type: GenericVisualizer
       visuals:
@@ -148,17 +153,6 @@
             Right: { state: switch-fwd }
             Middle: { state: switch-off }
             Left: { state: switch-rev }
-    - type: Damageable
-      damageContainer: Inorganic
-      damageModifierSet: Metallic
-    - type: Destructible
-      thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 100
-        behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
     - type: Construction
       graph: LeverGraph
       node: LeverNode

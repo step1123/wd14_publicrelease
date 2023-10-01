@@ -60,6 +60,13 @@
     containers:
       machine_board: !type:Container
       machine_parts: !type:Container
+  # WD edit sounds start
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/smash.ogg"
+  # WD edit sounds end
   - type: Construction
     graph: Machine
     node: machine

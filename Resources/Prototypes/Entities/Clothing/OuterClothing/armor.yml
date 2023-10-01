@@ -25,6 +25,17 @@
     component:
       - type: StaminaProtection
         damageReduction: 0.1
+  # WD edit sounds start
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/White/Items/handling/cloth_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/White/Items/handling/cloth_drop.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/White/Items/handling/cloth_drop.ogg
+  # WD edit sounds end
 
 #Alternate / slim basic armor vest
 - type: entity

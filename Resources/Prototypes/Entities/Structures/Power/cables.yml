@@ -19,6 +19,13 @@
   - type: Sprite
     drawdepth: ThinWire
     visible: false
+  # WD edit sounds start
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/smash.ogg"
+  # WD edit sounds start
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic

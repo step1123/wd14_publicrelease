@@ -8,6 +8,17 @@
     sprite: Objects/Specific/Research/researchdisk.rsi
     state: icon
   - type: ResearchDisk
+    # WD edit sounds start
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/White/Items/handling/disk_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/White/Items/handling/disk_drop.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/White/Items/handling/disk_drop.ogg
+    # WD edit sounds end
 
 - type: entity
   parent: ResearchDisk
@@ -56,6 +67,17 @@
   - type: TechnologyDisk
   - type: StaticPrice
     price: 50
+    # WD edit sounds start
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/White/Items/handling/disk_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/White/Items/handling/disk_drop.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/White/Items/handling/disk_drop.ogg
+    # WD edit sounds end
 
 - type: entity
   parent: TechnologyDisk

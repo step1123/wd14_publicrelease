@@ -65,6 +65,13 @@
   - type: Construction
     graph: AirAlarm
     node: air_alarm
+  # WD edit sounds start
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/smash.ogg"
+  # WD edit sounds end
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic

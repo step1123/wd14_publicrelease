@@ -4,6 +4,14 @@
   abstract: true
   components:
   - type: Sprite
+  # WD edit sounds start
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/White/Items/handling/toolbox_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/toolbox_drop.ogg
+  # WD edit sounds end
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/toolbox_drop.ogg

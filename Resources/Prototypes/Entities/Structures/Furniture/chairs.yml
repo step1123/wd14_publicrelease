@@ -10,6 +10,13 @@
   - type: InteractionOutline
   - type: Physics
     bodyType: Dynamic
+  # WD edit sounds start
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/smash.ogg"
+  # WD edit sounds start
   - type: Fixtures
     fixtures:
       fix1:

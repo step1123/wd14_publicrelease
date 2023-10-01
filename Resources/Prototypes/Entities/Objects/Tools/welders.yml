@@ -5,6 +5,14 @@
   description: "Melts anything as long as it's fueled, don't forget your eye protection!"
   noSpawn: true
   components:
+  # WD edit sounds start
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/White/Items/handling/weldingtool_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/welder_drop.ogg
+  # WD edit sounds end
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/welder_drop.ogg

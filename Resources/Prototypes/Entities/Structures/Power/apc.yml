@@ -126,6 +126,13 @@
     lowVoltageNode: output
   - type: StaticPrice
     price: 500
+  # WD edit sounds start
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/smash.ogg"
+  # WD edit sounds end
 
 # APC under construction
 - type: entity

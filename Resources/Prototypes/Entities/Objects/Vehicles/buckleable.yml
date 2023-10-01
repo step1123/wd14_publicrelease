@@ -15,6 +15,13 @@
   - type: InputMover
   - type: InteractionOutline
   - type: Vehicle
+  # WD edit sounds start
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/smash.ogg"
+  # WD edit sounds end
   - type: MovementSpeedModifier
     weightlessModifier: 0
     acceleration: 2

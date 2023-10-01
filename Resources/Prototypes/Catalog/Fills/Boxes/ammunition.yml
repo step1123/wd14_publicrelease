@@ -362,6 +362,20 @@
     size: 30
   - type: Sprite
     sprite: Objects/Storage/boxes.rsi
+  # WD edit sounds start
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/White/Items/handling/cardboardbox_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/White/Items/handling/cardboardbox_drop.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/White/Items/handling/cardboardbox_drop.ogg
+  - type: EmitSoundOnCollide
+    sound:
+      path: /Audio/White/Items/handling/cardboardbox_drop.ogg
+  # WD edit sounds end
 
 - type: entity
   parent: BaseAmmoProvider

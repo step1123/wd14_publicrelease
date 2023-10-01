@@ -40,6 +40,14 @@
   id: DrinkGlassBase
   abstract: true
   components:
+  # WD edit sounds start
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/White/Items/handling/drinkglass_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/White/Items/handling/drinkglass_drop.ogg
+  # WD edit sounds end
   - type: Drink
     isOpen: true
   - type: Damageable

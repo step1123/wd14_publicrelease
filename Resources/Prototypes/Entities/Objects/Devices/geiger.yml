@@ -31,4 +31,14 @@
             Med: {state: geiger_on_med}
             High: {state: geiger_on_high}
             Extreme: {state: geiger_on_ext}
-
+    # WD edit sounds start
+    - type: EmitSoundOnPickup
+      sound:
+        path: /Audio/White/Items/handling/multitool_pickup.ogg
+    - type: EmitSoundOnDrop
+      sound:
+        path: /Audio/Items/multitool_drop.ogg
+    - type: EmitSoundOnLand
+      sound:
+        path: /Audio/Items/multitool_drop.ogg
+    # WD edit sounds end

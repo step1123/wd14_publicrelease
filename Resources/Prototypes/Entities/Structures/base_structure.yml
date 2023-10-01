@@ -9,6 +9,13 @@
   - type: Clickable
   - type: Physics
     bodyType: Static
+  # WD edit sounds start
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/smash.ogg"
+  # WD edit sounds end
   - type: Fixtures
     fixtures:
       fix1:
