@@ -12,9 +12,24 @@
   whitelistJobs: [Captain, HeadOfPersonnel, ChiefEngineer, ChiefMedicalOfficer, ResearchDirector, HeadOfSecurity, Quartermaster]
 
 # Maury
+#- type: loadout
+#  id: ClothingUniformJumpsuitMaury #Should be ClothingUniformMauryLoadout but like i said i`m retard
+#  entity: ClothingUniformJumpsuitMauryZ
+#  sponsorOnly: true
+
 - type: loadout
-  id: ClothingUniformJumpsuitMaury #Should be ClothingUniformMauryLoadout but like i said i`m retard
-  entity: ClothingUniformJumpsuitMauryZ
+  id: MauryHoodieRed
+  entity: ClothingUniformJumpsuitColorMaury
+  sponsorOnly: true
+
+- type: loadout
+  id: MaurySneakersKedi
+  entity: ClothingShoesMaurySneakers
+  sponsorOnly: true
+
+- type: loadout
+  id: MauryKolokolchik
+  entity: ClothingNeckMauryChoker
   sponsorOnly: true
 
 # YouWellLeer

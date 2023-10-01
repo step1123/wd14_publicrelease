@@ -421,6 +421,15 @@ namespace Content.Shared.Movement.Systems
                 return true;
             }
 
+            //WD start
+            if (_inventory.TryGetSlotEntity(uid, "neck", out var neck)
+                && TryComp<FootstepModifierComponent>(neck, out var modifierComponent))
+            {
+                sound = modifierComponent.Sound;
+                return true;
+            }
+            //WD end
+
             return TryGetFootstepSound(uid, xform, shoes != null, out sound);
         }
 

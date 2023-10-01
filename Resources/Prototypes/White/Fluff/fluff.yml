@@ -51,16 +51,52 @@
     - type: GiftIgnore
 
 # Maury
+#- type: entity
+#  parent: ClothingUniformJumpsuitChemistry
+#  id: ClothingUniformJumpsuitMauryZ #Should be ClothingUniformJumpsuitMaury but i`m retard and lazy idiot
+#  name: Rupi's chemist uniform
+#  description: Обычно NanoTrasen не позволяет сотрудникам изменять выданную им униформу, но по отношению к Руперту они проявили снисходительность.
+#  components:
+#    - type: Sprite
+#      sprite: White/Fluff/Maury/chemshit.rsi
+#    - type: Clothing
+#      sprite: White/Fluff/Maury/chemshit.rsi
+
 - type: entity
-  parent: ClothingUniformJumpsuitChemistry
-  id: ClothingUniformJumpsuitMauryZ #Should be ClothingUniformJumpsuitMaury but i`m retard and lazy idiot
-  name: Rupi's chemist uniform
-  description: Обычно NanoTrasen не позволяет сотрудникам изменять выданную им униформу, но по отношению к Руперту они проявили снисходительность.
+  parent: ClothingUniformJumpsuitColorGrey
+  id: ClothingUniformJumpsuitColorMaury #Should be ClothingUniformJumpsuitMaury but i`m retard and lazy idiot
+  name: красное худи
+  description: Любимая худи Рупи с шортиками. Довольно странно, что NanoTrasen разрешила ему в очередной раз видоизменить свою форму, хотя и с условиями.
   components:
     - type: Sprite
-      sprite: White/Fluff/Maury/chemshit.rsi
+      sprite: White/Fluff/Maury/hoodie.rsi
     - type: Clothing
-      sprite: White/Fluff/Maury/chemshit.rsi
+      sprite: White/Fluff/Maury/hoodie.rsi
+
+- type: entity
+  parent: ClothingShoesColorBlack
+  id: ClothingShoesMaurySneakers
+  name: кеды
+  description: Крутые высокие кеды некой дочерней компании демократической страны, которая производила кеды с XX века.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/Maury/sneakers.rsi
+    - type: Clothing
+      sprite: White/Fluff/Maury/sneakers.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckMauryChoker
+  name: кошачий ошейник
+  description: Кошачий ошейник с колокольчиком. Мило дзынькает и выглядит, но Рупи не даст вам его на себя надеть.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/Maury/choker.rsi
+    - type: Clothing
+      sprite: White/Fluff/Maury/choker.rsi
+    - type: FootstepModifier
+      footstepSoundCollection:
+        collection: FootstepJester
 
 # YouWellLeer
 
