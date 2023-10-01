@@ -3,7 +3,6 @@ using Content.Shared.GameTicking;
 using Robust.Client.Player;
 using Robust.Client.Graphics;
 using Robust.Client.GameObjects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Client.White.EntityHealthBar
 {
@@ -13,6 +12,7 @@ namespace Content.Client.White.EntityHealthBar
         [Dependency] private readonly IOverlayManager _overlayMan = default!;
 
         private EntityHealthBarOverlay _overlay = default!;
+
         public override void Initialize()
         {
             base.Initialize();
@@ -23,7 +23,7 @@ namespace Content.Client.White.EntityHealthBar
             SubscribeLocalEvent<ShowHealthBarsComponent, PlayerDetachedEvent>(OnPlayerDetached);
             SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
 
-            _overlay = new(EntityManager);
+            _overlay = new EntityHealthBarOverlay(EntityManager);
         }
 
         private void OnInit(EntityUid uid, ShowHealthBarsComponent component, ComponentInit args)
@@ -33,9 +33,8 @@ namespace Content.Client.White.EntityHealthBar
                 _overlayMan.AddOverlay(_overlay);
                 _overlay.DamageContainer = component.DamageContainer;
             }
-
-
         }
+
         private void OnRemove(EntityUid uid, ShowHealthBarsComponent component, ComponentRemove args)
         {
             if (_player.LocalPlayer?.ControlledEntity == uid)

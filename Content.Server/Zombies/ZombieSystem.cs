@@ -3,7 +3,6 @@ using Content.Server.Body.Systems;
 using Content.Server.Chat;
 using Content.Server.Chat.Systems;
 using Content.Server.Cloning;
-using Content.Server.Drone.Components;
 using Content.Server.Inventory;
 using Content.Shared.Bed.Sleep;
 using Content.Server.Emoting.Systems;
@@ -48,7 +47,7 @@ namespace Content.Server.Zombies
 
             SubscribeLocalEvent<ZombieComponent, ComponentStartup>(OnStartup);
             SubscribeLocalEvent<ZombieComponent, EmoteEvent>(OnEmote, before:
-                new []{typeof(VocalSystem), typeof(BodyEmotesSystem)});
+                new[] { typeof(VocalSystem), typeof(BodyEmotesSystem) });
 
             SubscribeLocalEvent<ZombieComponent, MeleeHitEvent>(OnMeleeHit);
             SubscribeLocalEvent<ZombieComponent, MobStateChangedEvent>(OnMobState);
@@ -125,6 +124,7 @@ namespace Content.Server.Zombies
         {
             if (component.EmoteSoundsId == null)
                 return;
+
             _protoManager.TryIndex(component.EmoteSoundsId, out component.EmoteSounds);
         }
 
@@ -133,6 +133,7 @@ namespace Content.Server.Zombies
             // always play zombie emote sounds and ignore others
             if (args.Handled)
                 return;
+
             args.Handled = _chat.TryPlayEmoteSound(uid, component.EmoteSounds, args.Emote);
         }
 
@@ -189,7 +190,7 @@ namespace Content.Server.Zombies
             var max = component.MaxZombieInfectionChance;
             var min = component.MinZombieInfectionChance;
             //gets a value between the max and min based on how many items the entity is wearing
-            var chance = (max-min) * ((total - items)/total) + min;
+            var chance = (max - min) * ((total - items) / total) + min;
             return chance;
         }
 
@@ -206,10 +207,10 @@ namespace Content.Server.Zombies
                 if (args.User == entity)
                     continue;
 
-                if (!TryComp<MobStateComponent>(entity, out var mobState) || HasComp<DroneComponent>(entity))
+                if (!TryComp<MobStateComponent>(entity, out var mobState))
                     continue;
 
-                if(!_tag.HasTag(entity, ZombifyableTag))
+                if (!_tag.HasTag(entity, ZombifyableTag))
                     continue;
 
                 if (HasComp<CyborgComponent>(entity))
@@ -221,7 +222,8 @@ namespace Content.Server.Zombies
                 }
                 else
                 {
-                    if (!HasComp<ZombieImmuneComponent>(entity) && _random.Prob(GetZombieInfectionChance(entity, component)))
+                    if (!HasComp<ZombieImmuneComponent>(entity) &&
+                        _random.Prob(GetZombieInfectionChance(entity, component)))
                     {
                         EnsureComp<PendingZombieComponent>(entity);
                         EnsureComp<ZombifyOnDeathComponent>(entity);
@@ -260,6 +262,7 @@ namespace Content.Server.Zombies
                 _humanoidAppearance.SetBaseLayerColor(target, layer, info.Color);
                 _humanoidAppearance.SetBaseLayerId(target, layer, info.ID);
             }
+
             _humanoidAppearance.SetSkinColor(target, zombiecomp.BeforeZombifiedSkinColor);
             _bloodstream.ChangeBloodReagent(target, zombiecomp.BeforeZombifiedBloodReagent);
 

@@ -1,15 +1,14 @@
 using System.Numerics;
+using System.Threading;
 using Content.Shared.Damage;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.FixedPoint;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using Robust.Shared.Timing;
+using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Client.White.EntityHealthBar;
 
@@ -20,61 +19,65 @@ namespace Content.Client.White.EntityHealthBar;
 public sealed class EntityHealthBarOverlay : Overlay
 {
     private readonly IEntityManager _entManager;
+    private readonly SpriteSystem _spriteSystem;
     private readonly SharedTransformSystem _transform;
-    private readonly MobStateSystem _mobStateSystem;
     private readonly MobThresholdSystem _mobThresholdSystem;
+
     private readonly Texture _barTexture;
+
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
+
     public string? DamageContainer;
+
     // for icon frame change timer
-    int iconFrame = 1;
-    double delayTime = 0.25;
+    private int _iconFrame = 1;
+    private const double DelayTime = 0.25;
 
     public EntityHealthBarOverlay(IEntityManager entManager)
     {
         _entManager = entManager;
         _transform = _entManager.EntitySysManager.GetEntitySystem<SharedTransformSystem>();
-        _mobStateSystem = _entManager.EntitySysManager.GetEntitySystem<MobStateSystem>();
         _mobThresholdSystem = _entManager.EntitySysManager.GetEntitySystem<MobThresholdSystem>();
+        _spriteSystem = _entManager.EntitySysManager.GetEntitySystem<SpriteSystem>();
 
         var sprite = new SpriteSpecifier.Rsi(new ResPath("/Textures/Interface/Misc/health_status.rsi"), "background");
         _barTexture = _entManager.EntitySysManager.GetEntitySystem<SpriteSystem>().Frame0(sprite);
 
-        Timer.SpawnRepeating(TimeSpan.FromSeconds(delayTime), () => {
-            if (iconFrame < 8)
-                iconFrame++;
+        Timer.SpawnRepeating(TimeSpan.FromSeconds(DelayTime), () =>
+        {
+            if (_iconFrame < 8)
+                _iconFrame++;
             else
-                iconFrame = 1;
-        }, new System.Threading.CancellationToken());
+                _iconFrame = 1;
+        }, new CancellationToken());
     }
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        var handle = args.WorldHandle;
-        var rotation = args.Viewport.Eye?.Rotation ?? Angle.Zero;
         var spriteQuery = _entManager.GetEntityQuery<SpriteComponent>();
         var xformQuery = _entManager.GetEntityQuery<TransformComponent>();
+        var mobsQuery = _entManager.EntityQuery<MobStateComponent, DamageableComponent>();
 
-        var _spriteSys = _entManager.EntitySysManager.GetEntitySystem<SpriteSystem>();
+        var handle = args.WorldHandle;
+        var rotation = args.Viewport.Eye?.Rotation ?? Angle.Zero;
 
-        const float scale = 1f;
-        var scaleMatrix = Matrix3.CreateScale(new Vector2(scale, scale));
+        var scaleMatrix = Matrix3.CreateScale(Vector2.One);
         var rotationMatrix = Matrix3.CreateRotation(-rotation);
 
-        foreach (var (mob, dmg, threasholds) in _entManager.EntityQuery<MobStateComponent, DamageableComponent, MobThresholdsComponent>(true))
-        {
-            if (!xformQuery.TryGetComponent(mob.Owner, out var xform) ||
-                xform.MapID != args.MapId)
-            {
-                continue;
-            }
+        // Hardcoded width of the progress bar because it doesn't match the texture.
+        const float startX = 1f;
+        const float endX = 15f;
 
+        foreach (var (mob, dmg) in mobsQuery)
+        {
             if (DamageContainer != null && dmg.DamageContainerID != DamageContainer)
+                continue;
+
+            if (!xformQuery.TryGetComponent(mob.Owner, out var xform) || xform.MapID != args.MapId)
                 continue;
 
             var worldPosition = _transform.GetWorldPosition(xform);
             var worldMatrix = Matrix3.CreateTranslation(worldPosition);
-
             Matrix3.Multiply(scaleMatrix, worldMatrix, out var scaledWorld);
             Matrix3.Multiply(rotationMatrix, scaledWorld, out var matty);
 
@@ -82,67 +85,58 @@ public sealed class EntityHealthBarOverlay : Overlay
 
             // Use the sprite itself if we know its bounds. This means short or tall sprites don't get overlapped
             // by the bar.
-            float yOffset;
-            float xIconOffset;
-            float yIconOffset;
+            var yOffset = 1f;
+            var xIconOffset = 1f;
+            var yIconOffset = 1f;
             if (spriteQuery.TryGetComponent(mob.Owner, out var sprite))
             {
-                yOffset = sprite.Bounds.Height + 12f;
-                yIconOffset = sprite.Bounds.Height + 7f;
+                yOffset = sprite.Bounds.Height + 16f;
+                yIconOffset = sprite.Bounds.Height + 13f;
                 xIconOffset = sprite.Bounds.Width + 7f;
-            }
-            else
-            {
-                yOffset = 1f;
-                yIconOffset = 1f;
-                xIconOffset = 1f;
             }
 
             // Position above the entity (we've already applied the matrix transform to the entity itself)
             // Offset by the texture size for every do_after we have.
-            var position = new Vector2(-_barTexture.Width / 2f / EyeManager.PixelsPerMeter,
-                yOffset / EyeManager.PixelsPerMeter);
+            var position = new Vector2(
+                -_barTexture.Width / 2f / EyeManager.PixelsPerMeter,
+                yOffset / EyeManager.PixelsPerMeter
+            );
 
             // Draw the underlying bar texture
-            if (sprite != null && !sprite.ContainerOccluded)
-                handle.DrawTexture(_barTexture, position);
-            else
+            if (sprite == null || sprite.ContainerOccluded)
                 continue;
 
+            handle.DrawTexture(_barTexture, position);
+
             // Draw state icon
-            string current_state;
-            if (_mobStateSystem.IsAlive(mob.Owner, mob))
+            var currentState = mob.CurrentState switch
             {
-                current_state = "life_state";
-            }
-            else
-            {
-                if (_mobStateSystem.IsCritical(mob.Owner, mob) && _mobThresholdSystem.TryGetThresholdForState(mob.Owner, MobState.Critical, out var critThreshold))
-                    current_state = "defib_state";
-                else
-                    current_state = "dead_state";
-            }
+                MobState.Alive    => "life_state",
+                MobState.Critical => "defib_state",
+                MobState.Dead     => "dead_state",
+                _                 => "defib_state"
+            };
 
-            var icon_sprite = new SpriteSpecifier.Rsi(new ResPath("/Textures/Interface/Misc/health_state.rsi"), current_state);
-            Texture _stateIcon = _spriteSys.RsiStateLike(icon_sprite).GetFrame(0, GetIconFrame(_spriteSys.RsiStateLike(icon_sprite)));
+            var iconSprite =
+                new SpriteSpecifier.Rsi(new ResPath("/Textures/Interface/Misc/health_state.rsi"), currentState);
 
-            var icon_position = new Vector2(xIconOffset / EyeManager.PixelsPerMeter,
+            var stateIcon = _spriteSystem.RsiStateLike(iconSprite)
+                .GetFrame(0, GetIconFrame(_spriteSystem.RsiStateLike(iconSprite)));
+
+            var iconPosition = new Vector2(xIconOffset / EyeManager.PixelsPerMeter,
                 yIconOffset / EyeManager.PixelsPerMeter);
 
-            handle.DrawTexture(_stateIcon, icon_position);
+            handle.DrawTexture(stateIcon, iconPosition);
 
             // we are all progressing towards death every day
-            (float ratio, bool inCrit) deathProgress = CalcProgress(mob.Owner, mob, dmg);
+            var deathProgress = CalculateProgress(mob.Owner, mob, dmg);
+            var color = GetProgressColor(deathProgress, mob.CurrentState == MobState.Critical);
 
-            var color = GetProgressColor(deathProgress.ratio, deathProgress.inCrit);
+            var xProgress = (endX - startX) * deathProgress + startX;
 
-            // Hardcoded width of the progress bar because it doesn't match the texture.
-            const float startX = 1f;
-            const float endX = 15f;
+            var box = new Box2(new Vector2(startX, 0f) / EyeManager.PixelsPerMeter,
+                new Vector2(xProgress, 2f) / EyeManager.PixelsPerMeter);
 
-            var xProgress = (endX - startX) * deathProgress.ratio + startX;
-
-            var box = new Box2(new Vector2(startX, 0f) / EyeManager.PixelsPerMeter, new Vector2(xProgress, 2f) / EyeManager.PixelsPerMeter);
             box = box.Translated(position);
             handle.DrawRect(box, color);
         }
@@ -153,75 +147,75 @@ public sealed class EntityHealthBarOverlay : Overlay
 
     private int GetIconFrame(IRsiStateLike sprite)
     {
-        var _spriteSys = _entManager.EntitySysManager.GetEntitySystem<SpriteSystem>();
-
         if (sprite.AnimationFrameCount <= 1)
             return 0;
 
-        var currentFrame = iconFrame;
-        var result = 0;
+        var currentFrame = _iconFrame;
+        int result;
         while (true)
         {
-            if (currentFrame > 0 && currentFrame > sprite.AnimationFrameCount)
-            {
-                currentFrame -= sprite.AnimationFrameCount;
-            }
-            else
+            if (currentFrame <= 0 || currentFrame <= sprite.AnimationFrameCount)
             {
                 result = currentFrame - 1;
                 break;
             }
+
+            currentFrame -= sprite.AnimationFrameCount;
         }
+
         return result;
     }
 
     /// <summary>
     /// Returns a ratio between 0 and 1, and whether the entity is in crit.
     /// </summary>
-    private (float, bool) CalcProgress(EntityUid uid, MobStateComponent component, DamageableComponent dmg)
+    private float CalculateProgress(EntityUid uid, MobStateComponent component, DamageableComponent dmg)
     {
-        if (_mobStateSystem.IsAlive(uid, component))
+        return component.CurrentState switch
         {
-            if (!_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Critical, out var threshold))
-                return (1, false);
-
-            var ratio = 1 - ((FixedPoint2) (dmg.TotalDamage / threshold)).Float();
-            return (ratio, false);
-        }
-
-        if (_mobStateSystem.IsCritical(uid, component))
-        {
-            if (!_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Critical, out var critThreshold) ||
-                !_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Dead, out var deadThreshold))
-            {
-                return (1, true);
-            }
-
-            var ratio = 1 -
-                    ((dmg.TotalDamage - critThreshold) /
-                    (deadThreshold - critThreshold)).Value.Float();
-
-            return (ratio, true);
-        }
-
-        return (0, true);
+            MobState.Alive    => GetAliveDamageState(uid, dmg),
+            MobState.Critical => GetCriticalDamageState(uid, dmg),
+            MobState.Dead     => 0,
+            _                 => 1
+        };
     }
 
-    public static Color GetProgressColor(float progress, bool crit)
+    private float GetCriticalDamageState(EntityUid uid, DamageableComponent dmg)
     {
+        if (_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Critical, out var critThreshold) &&
+            _mobThresholdSystem.TryGetThresholdForState(uid, MobState.Dead, out var deadThreshold))
+        {
+            return 1 - ((dmg.TotalDamage - critThreshold) / (deadThreshold - critThreshold)).Value.Float();
+        }
+
+        return 1f;
+    }
+
+    private float GetAliveDamageState(EntityUid uid, DamageableComponent dmg)
+    {
+        if (_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Critical, out var threshold) ||
+            _mobThresholdSystem.TryGetThresholdForState(uid, MobState.Dead, out threshold))
+        {
+            return 1 - (dmg.TotalDamage / threshold.Value).Float();
+        }
+
+        return 1;
+    }
+
+    private static Color GetProgressColor(float progress, bool crit)
+    {
+        if (crit)
+        {
+            return Color.Red;
+        }
+
         if (progress >= 1.0f)
         {
             return new Color(0f, 1f, 0f);
         }
+
         // lerp
-        if (!crit)
-        {
-            var hue = (5f / 18f) * progress;
-            return Color.FromHsv((hue, 1f, 0.75f, 1f));
-        }
-        else
-        {
-            return Color.Red;
-        }
+        var hue = 5f / 18f * progress;
+        return Color.FromHsv((hue, 1f, 0.75f, 1f));
     }
 }
