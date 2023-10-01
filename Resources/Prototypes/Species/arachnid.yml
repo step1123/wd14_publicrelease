@@ -16,7 +16,6 @@
   sexes:
   - Unsexed
 
-
 - type: markingPoints
   id: MobArachnidMarkingLimits
   onlyWhitelisted: true

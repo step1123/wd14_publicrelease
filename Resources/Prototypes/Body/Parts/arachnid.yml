@@ -149,8 +149,6 @@
     partType: Leg
     symmetry: Left
   - type: MovementBodyPart
-    walkSpeed: 3.0
-    sprintSpeed: 5.0
 
 - type: entity
   id: RightLegArachnid
@@ -167,8 +165,6 @@
     partType: Leg
     symmetry: Right
   - type: MovementBodyPart
-    walkSpeed: 3.0
-    sprintSpeed: 5.0
 
 - type: entity
   id: LeftFootArachnid

@@ -8,11 +8,11 @@
   },
   "states": [
     {
-      "name": "angry",
+      "name": "normal",
       "directions": 4
     },
     {
-      "name": "normal",
+      "name": "angry",
       "directions": 4
     }
   ]

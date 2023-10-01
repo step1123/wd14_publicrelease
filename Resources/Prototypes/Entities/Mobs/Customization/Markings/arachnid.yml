@@ -27,13 +27,22 @@
 
 # Chelicerae
 - type: marking
-  id: ArachnidCheliceraeBasic
+  id: ArachnidCheliceraeDownwards
   bodyPart: HeadSide
   markingCategory: HeadSide
   speciesRestriction: [Arachnid]
   sprites:
   - sprite: Mobs/Customization/Arachnid/chelicerae.rsi
-    state: basic
+    state: downwards
+
+- type: marking
+  id: ArachnidCheliceraeInwards
+  bodyPart: HeadSide
+  markingCategory: HeadSide
+  speciesRestriction: [Arachnid]
+  sprites:
+  - sprite: Mobs/Customization/Arachnid/chelicerae.rsi
+    state: inwards
 
 # Appendages
 - type: marking
@@ -42,10 +51,10 @@
   markingCategory: Tail
   speciesRestriction: [Arachnid]
   sprites:
-  - sprite: White/Mobs/Customization/Arachnid/appendages.rsi
-    state: web
-  - sprite: White/Mobs/Customization/Arachnid/appendages.rsi
-    state: long
+  - sprite: Mobs/Customization/Arachnid/appendages.rsi
+    state: long_primary
+  - sprite: Mobs/Customization/Arachnid/appendages.rsi
+    state: long_secondary
 
 - type: marking
   id: ArachnidAppendagesSharp
@@ -53,10 +62,10 @@
   markingCategory: Tail
   speciesRestriction: [Arachnid]
   sprites:
-  - sprite: White/Mobs/Customization/Arachnid/appendages.rsi
-    state: web
-  - sprite: White/Mobs/Customization/Arachnid/appendages.rsi
-    state: sharp
+  - sprite: Mobs/Customization/Arachnid/appendages.rsi
+    state: sharp_primary
+  - sprite: Mobs/Customization/Arachnid/appendages.rsi
+    state: sharp_secondary
 
 - type: marking
   id: ArachnidAppendagesStingers
@@ -65,9 +74,9 @@
   speciesRestriction: [Arachnid]
   sprites:
   - sprite: White/Mobs/Customization/Arachnid/appendages.rsi
-    state: web
-  - sprite: White/Mobs/Customization/Arachnid/appendages.rsi
-    state: stingers
+    state: stingers_primary
+  - sprite: Mobs/Customization/Arachnid/appendages.rsi
+    state: stingers_secondary
 
 - type: marking
   id: ArachnidAppendagesZigZag
@@ -76,9 +85,9 @@
   speciesRestriction: [Arachnid]
   sprites:
   - sprite: White/Mobs/Customization/Arachnid/appendages.rsi
-    state: web
-  - sprite: White/Mobs/Customization/Arachnid/appendages.rsi
-    state: zigzag
+    state: zigzag_primary
+  - sprite: Mobs/Customization/Arachnid/appendages.rsi
+    state: zigzag_secondary
 
 - type: marking
   id: ArachnidAppendagesCurled
@@ -87,9 +96,9 @@
   speciesRestriction: [Arachnid]
   sprites:
   - sprite: White/Mobs/Customization/Arachnid/appendages.rsi
-    state: web
-  - sprite: White/Mobs/Customization/Arachnid/appendages.rsi
-    state: curled
+    state: curled_primary
+  - sprite: Mobs/Customization/Arachnid/appendages.rsi
+    state: curled_secondary
 
 - type: marking
   id: ArachnidAppendagesChipped
@@ -98,9 +107,9 @@
   speciesRestriction: [Arachnid]
   sprites:
   - sprite: White/Mobs/Customization/Arachnid/appendages.rsi
-    state: web
-  - sprite: White/Mobs/Customization/Arachnid/appendages.rsi
-    state: chipped
+    state: chipped_primary
+  - sprite: Mobs/Customization/Arachnid/appendages.rsi
+    state: chipped_secondary
 
 - type: marking
   id: ArachnidAppendagesHarvest
@@ -109,9 +118,9 @@
   speciesRestriction: [Arachnid]
   sprites:
   - sprite: White/Mobs/Customization/Arachnid/appendages.rsi
-    state: web
-  - sprite: White/Mobs/Customization/Arachnid/appendages.rsi
-    state: harvest
+    state: harvest_primary
+  - sprite: Mobs/Customization/Arachnid/appendages.rsi
+    state: harvest_secondary
 
 - type: marking
   id: ArachnidAppendagesShort
@@ -120,9 +129,31 @@
   speciesRestriction: [Arachnid]
   sprites:
   - sprite: White/Mobs/Customization/Arachnid/appendages.rsi
+    state: short_primary
+  - sprite: Mobs/Customization/Arachnid/appendages.rsi
+    state: short_secondary
+
+- type: marking
+  id: ArachnidAppendagesFreaky
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Arachnid]
+  sprites:
+  - sprite: White/Mobs/Customization/Arachnid/appendages.rsi
+    state: freaky_primary
+  - sprite: Mobs/Customization/Arachnid/appendages.rsi
+    state: freaky_secondary
+
+- type: marking
+  id: ArachnidAppendagesSharpAlt
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Arachnid]
+  sprites:
+  - sprite: White/Mobs/Customization/Arachnid/appendages.rsi
     state: web
   - sprite: White/Mobs/Customization/Arachnid/appendages.rsi
-    state: short
+    state: sharp_alt
 
 # Chest
 - type: marking
@@ -228,3 +259,134 @@
     default:
       type:
         !type:EyeColoring
+
+- type: marking
+  id: ArachnidTorsoArrows
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Arachnid]
+  sprites:
+  - sprite: Mobs/Customization/Arachnid/chest.rsi
+    state: arrows
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+
+- type: marking
+  id: ArachnidTorsoCore
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Arachnid]
+  sprites:
+  - sprite: Mobs/Customization/Arachnid/chest.rsi
+    state: core
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+
+- type: marking
+  id: ArachnidTorsoFiddleback
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Arachnid]
+  sprites:
+  - sprite: Mobs/Customization/Arachnid/chest.rsi
+    state: fiddleback
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+
+- type: marking
+  id: ArachnidTorsoSkull
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Arachnid]
+  sprites:
+  - sprite: Mobs/Customization/Arachnid/chest.rsi
+    state: skull
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+
+- type: marking
+  id: ArachnidTorsoTarget
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [Arachnid]
+  sprites:
+  - sprite: Mobs/Customization/Arachnid/chest.rsi
+    state: target
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+
+# Arms
+- type: marking
+  id: ArachnidRArmStripes
+  bodyPart: RArm
+  markingCategory: Arms
+  speciesRestriction: [Arachnid]
+  sprites:
+  - sprite: Mobs/Customization/Arachnid/arms.rsi
+    state: stripes_right
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+
+- type: marking
+  id: ArachnidLArmStripes
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [Arachnid]
+  sprites:
+  - sprite: Mobs/Customization/Arachnid/arms.rsi
+    state: stripes_left
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+
+# Legs
+- type: marking
+  id: ArachnidRLegStripes
+  bodyPart: RLeg
+  markingCategory: Legs
+  speciesRestriction: [Arachnid]
+  sprites:
+  - sprite: White/Mobs/Customization/Arachnid/legs.rsi
+    state: stripes_right
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+
+- type: marking
+  id: ArachnidLLegStripes
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [Arachnid]
+  sprites:
+  - sprite: White/Mobs/Customization/Arachnid/legs.rsi
+    state: stripes_left
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+
+# Overlay
+- type: marking
+  id: ArachnidOverlayFuzzy
+  bodyPart: Chest
+  markingCategory: Overlay
+  forcedColoring: true
+  speciesRestriction: [Arachnid]
+  sprites:
+  - sprite: Mobs/Customization/Arachnid/overlay.rsi
+    state: fuzzy
+
