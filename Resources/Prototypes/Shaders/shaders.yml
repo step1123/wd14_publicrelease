@@ -88,11 +88,6 @@
   path: "/Textures/Shaders/White/nightvision.swsl"
 
 - type: shader
-  id: Gradient
-  kind: source
-  path: "/Textures/Shaders/White/gradient.swsl"
-
-- type: shader
   id: SaturationScale
   kind: source
   path: "/Textures/Shaders/White/saturationscale.swsl"
