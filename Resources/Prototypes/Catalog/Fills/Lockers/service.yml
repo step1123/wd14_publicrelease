@@ -19,6 +19,7 @@
         amount: 2
       - id: RagItem
         amound: 2
+      - id: Eftpos
 
 #- type: entity
 #  id: LockerFormalFilled
@@ -48,6 +49,7 @@
       - id: ReagentContainerMilk
         amount: 2
       - id: ReagentContainerMilkSoy
+      - id: Eftpos
 
 - type: entity
   id: ClosetJanitorFilled
@@ -114,6 +116,7 @@
       - id: ClothingUniformOveralls
       - id: ClothingHeadHatTrucker
         prob: 0.1
+      - id: Eftpos
 
 - type: entity
   id: LockerBotanistLoot

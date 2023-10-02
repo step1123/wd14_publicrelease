@@ -74,6 +74,7 @@
     preinstalled:
       - NotekeeperCartridge
       - NewsReadCartridge
+      - BankCartridge
     cartridgeSlot:
       priority: -1
       name: Cartridge

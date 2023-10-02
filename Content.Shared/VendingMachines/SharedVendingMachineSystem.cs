@@ -103,7 +103,7 @@ public abstract partial class SharedVendingMachineSystem : EntitySystem
 
         foreach (var (id, amount) in entries)
         {
-            if (PrototypeManager.HasIndex<EntityPrototype>(id))
+            if (PrototypeManager.TryIndex<EntityPrototype>(id, out var proto)) // WD EDIT
             {
                 if (inventory.TryGetValue(id, out var entry))
                     // Prevent a machine's stock from going over three times
@@ -113,9 +113,14 @@ public abstract partial class SharedVendingMachineSystem : EntitySystem
                     // all the items just to restock one empty slot without
                     // losing the rest of the restock.
                     entry.Amount = Math.Min(entry.Amount + amount, 3 * amount);
-                else
-                    inventory.Add(id, new VendingMachineInventoryEntry(type, id, amount));
+                else // WD EDIT START
+                {
+                    var price = GetEntryPrice(proto);
+                    inventory.Add(id, new VendingMachineInventoryEntry(type, id, amount, price));
+                } // WD EDIT END
             }
         }
     }
+
+    protected virtual int GetEntryPrice(EntityPrototype proto) { return 0; } // WD
 }

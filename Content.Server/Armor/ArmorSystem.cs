@@ -39,11 +39,11 @@ namespace Content.Server.Armor
 
                 if (damageType != null)
                 {
-                    price += damageType.ArmorPriceCoefficient * 100 * (1 - modifier.Value);
+                    price += damageType.ArmorPriceCoefficient * 10 * (1 - modifier.Value); // WD EDIT
                 }
                 else
                 {
-                    price += CoefDefaultPrice * 100 * (1 - modifier.Value);
+                    price += CoefDefaultPrice * 10 * (1 - modifier.Value); // WD EDIT
                 }
             }
             foreach (var modifier in component.Modifiers.FlatReduction)

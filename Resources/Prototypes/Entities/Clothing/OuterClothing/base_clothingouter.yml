@@ -52,7 +52,7 @@
     - key: enum.StorageUiKey.Key
       type: StorageBoundUserInterface
   - type: StaticPrice
-    price: 5
+    price: 20
   # WD edit sounds start
   - type: EmitSoundOnPickup
     sound:

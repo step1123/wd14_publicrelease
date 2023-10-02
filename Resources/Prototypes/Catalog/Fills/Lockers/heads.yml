@@ -41,7 +41,6 @@
       - id: WeaponDisabler
       - id: CommsComputerCircuitboard
       - id: ClothingHeadsetAltCommand
-      - id: SpaceCash1000
       - id: PlushieNuke
         prob: 0.1
       - id: CigarGoldCase
@@ -55,6 +54,8 @@
       - id: WeaponAntiqueLaser
       - id: JetpackCaptainFilled
       - id: MedalCase
+      - id: CommandBudgetCard
+      - id: CommandBudgetPinPaper
 
 - type: entity
   id: LockerCaptainFilled
@@ -73,7 +74,6 @@
       - id: WeaponEgun
       - id: CommsComputerCircuitboard
       - id: ClothingHeadsetAltCommand
-      - id: SpaceCash1000
       - id: PlushieNuke
         prob: 0.1
       - id: CigarGoldCase
@@ -88,6 +88,8 @@
       - id: JetpackCaptainFilled
       - id: MedalCase
       - id: ClothingHeadHatCapcap
+      - id: CommandBudgetCard
+      - id: CommandBudgetPinPaper
 
 - type: entity
   id: LockerHeadOfPersonnelFilled
@@ -189,6 +191,7 @@
       - id: MaterialBiomass
         amount: 3
       - id: BoxEncryptionKeyMedical
+      - id: Eftpos
 
 - type: entity
   id: LockerChiefMedicalOfficerFilled

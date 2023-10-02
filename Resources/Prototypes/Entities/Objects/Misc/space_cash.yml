@@ -10,6 +10,8 @@
       Credit: 1
   - type: StaticPrice
     price: 0
+  - type: StackPrice
+    price: 1
   - type: Stack
     stackType: Credit
     count: 1
@@ -39,6 +41,9 @@
         mask:
         - ItemMask
   - type: Appearance
+  - type: Currency
+    price:
+      SpaceCash: 1
 
 - type: material
   id: Credit

@@ -93,10 +93,11 @@ public sealed class CharacterUIController : UIController, IOnStateEntered<Gamepl
             return;
         }
 
-        var (job, objectives, briefing, sprite, entityName) = data;
+        var (job, objectives, briefing, sprite, entityName, memories) = data;
 
         _window.SubText.Text = job;
         _window.Objectives.RemoveAllChildren();
+        _window.Memories.RemoveAllChildren();
 
         foreach (var (groupId, conditions) in objectives)
         {
@@ -134,6 +135,26 @@ public sealed class CharacterUIController : UIController, IOnStateEntered<Gamepl
             objectiveControl.AddChild(briefingControl);
             _window.Objectives.AddChild(objectiveControl);
         }
+
+        //WD EDIT
+        foreach (var (memoryName, memoryValue) in memories)
+        {
+            var memoryControl = new BoxContainer()
+            {
+                Orientation = BoxContainer.LayoutOrientation.Vertical,
+                Modulate = Color.Gray
+            };
+            var text = Loc.TryGetString(memoryName, out var t, ("value", memoryValue))
+                ? t
+                : $"{memoryName}: {memoryValue}";
+
+            memoryControl.AddChild(new Label
+            {
+                Text = text,
+            });
+            _window.Memories.AddChild(memoryControl);
+        }
+        //WD EDIT END
 
         _window.SpriteView.Sprite = sprite;
         _window.NameLabel.Text = entityName;

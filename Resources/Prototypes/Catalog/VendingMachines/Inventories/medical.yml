@@ -11,5 +11,6 @@
     EmergencyMedipen: 2 #WD edit
     SyringeBicaridine: 1 #WD edit
     SyringeDermaline: 1 #WD edit
+    Eftpos: 2 #WD edit
   emaggedInventory:
     SyringeEphedrine: 1 #WD edit

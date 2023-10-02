@@ -23,6 +23,7 @@ namespace Content.Server.Mind
         internal readonly ISet<Role> Roles = new HashSet<Role>();
 
         internal readonly List<Objective> Objectives = new();
+        internal readonly List<Memory> _memories = new();
 
         public string Briefing = String.Empty;
 
@@ -74,6 +75,9 @@ namespace Content.Server.Mind
 
         [ViewVariables(VVAccess.ReadWrite)]
         public string? BorgName { get; set; }
+        
+        [ViewVariables]
+        public IEnumerable<Memory> AllMemories => _memories;
 
         /// <summary>
         ///     The time of death for this Mind.
@@ -133,5 +137,16 @@ namespace Content.Server.Mind
         ///     Gets the current job
         /// </summary>
         public Job? CurrentJob => Roles.OfType<Job>().SingleOrDefault();
+
+        //WD EDIT
+        public void AddMemory(Memory memory)
+        {
+            if (_memories.Contains(memory))
+            {
+                return;
+            }
+            _memories.Add(memory);
+        }
+        //WD EDIT END
     }
 }

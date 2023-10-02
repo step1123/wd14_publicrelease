@@ -6,6 +6,7 @@ using Content.Server.Popups;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Stack;
 using Content.Server.Station.Systems;
+using Content.Server.White.Economy;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Cargo;
@@ -45,6 +46,7 @@ public sealed partial class CargoSystem : SharedCargoSystem
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaSystem = default!;
+    [Dependency] private readonly BankCardSystem _bankCard = default!; // WD
 
     private EntityQuery<TransformComponent> _xformQuery;
     private EntityQuery<CargoSellBlacklistComponent> _blacklistQuery;
@@ -62,6 +64,15 @@ public sealed partial class CargoSystem : SharedCargoSystem
         InitializeShuttle();
         InitializeTelepad();
         InitializeBounty();
+
+        SubscribeLocalEvent<StationBankAccountComponent, ComponentInit>(OnInit); // WD
+    }
+
+    private void OnInit(EntityUid uid, StationBankAccountComponent component, ComponentInit args)
+    {
+        component.BankAccount = _bankCard.CreateAccount(default, 2000);
+        component.BankAccount.CommandBudgetAccount = true;
+        component.BankAccount.Name = Loc.GetString("command-budget");
     }
 
     public override void Shutdown()

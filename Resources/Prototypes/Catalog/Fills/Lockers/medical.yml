@@ -106,6 +106,7 @@
       - id: NitrousOxideTankFilled
         prob: 0.3
       - id: ClothingMaskSterile
+      - id: Eftpos
 
 - type: entity
   id: LockerChemistryFilled
@@ -119,7 +120,8 @@
       - id: BoxPillCanister
       - id: BoxBottle
         amount: 2
-        
+      - id: Eftpos
+
 - type: entity
   id: LockerParamedicFilled
   suffix: Filled
@@ -134,4 +136,5 @@
       - id: ClothingUniformJumpsuitParamedic
       - id: ClothingUniformJumpskirtParamedic
       - id: ClothingEyesHudMedical
-      
+      - id: Eftpos
+

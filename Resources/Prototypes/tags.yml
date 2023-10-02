@@ -913,4 +913,7 @@
 
 - type: Tag
   id: Plushie
+
+- type: Tag
+  id: SpaceCash
 # WHITE END

@@ -77,6 +77,8 @@
   - type: Tag
     tags:
     - Lighter
+  - type: StaticPrice
+    price: 10
 
 
 - type: entity
@@ -106,5 +108,7 @@
         - ReagentId: WeldingFuel
           Quantity: 4
         maxVol: 4 #uses less fuel than a welder, so this isnt as bad as it looks
+  - type: StaticPrice
+    price: 5
 
     #TODO: zippos

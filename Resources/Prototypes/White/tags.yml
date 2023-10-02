@@ -26,6 +26,9 @@
   id: CrossbowBolt
 
 - type: Tag
+  id: IgnoreBalanceChecks
+
+- type: Tag
   id: HardsuitHelmet
 
 - type: Tag

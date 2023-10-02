@@ -101,6 +101,7 @@
     pack: CondimentInventory
     offState: off
     normalState: normal-unshaded
+    priceMultiplier: 1.0
   - type: Sprite
     sprite: Structures/Machines/VendingMachines/condiments.rsi
     drawdepth: SmallObjects
@@ -249,6 +250,7 @@
     normalState: normal-unshaded
     ejectState: eject-unshaded
     denyState: deny-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: CigaretteMachineAds
   - type: Speech
@@ -275,6 +277,7 @@
     brokenState: broken
     normalState: normal-unshaded
     denyState: deny-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: ClothesMateAds
   - type: Speech
@@ -308,6 +311,7 @@
     brokenState: broken
     normalState: normal-unshaded
     denyState: deny-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: ClothesMateAds
   - type: Speech
@@ -347,6 +351,7 @@
     screenState: screen
     ejectDelay: 5
     soundVend: /Audio/Machines/machine_vend_hot_drink.ogg
+    priceMultiplier: 1.0
   - type: Advertise
     pack: HotDrinksMachineAds
   - type: Speech
@@ -384,6 +389,7 @@
     ejectState: eject-unshaded
     denyState: deny-unshaded
     ejectDelay: 1.9
+    priceMultiplier: 1.0
   - type: Advertise
     pack: RobustSoftdrinksAds
   - type: Speech
@@ -451,6 +457,7 @@
   components:
   - type: VendingMachine
     pack: SpaceUpInventory
+    priceMultiplier: 1.0
   - type: Sprite
     sprite: Structures/Machines/VendingMachines/spaceup.rsi
     layers:
@@ -473,6 +480,7 @@
   components:
   - type: VendingMachine
     pack: SodaInventory
+    priceMultiplier: 1.0
   - type: Sprite
     sprite: Structures/Machines/VendingMachines/soda.rsi
     layers:
@@ -496,6 +504,7 @@
   components:
   - type: VendingMachine
     pack: StarkistInventory
+    priceMultiplier: 1.0
   - type: Sprite
     sprite: Structures/Machines/VendingMachines/starkist.rsi
     layers:
@@ -527,6 +536,7 @@
     ejectState: eject-unshaded
     denyState: deny-unshaded
     ejectDelay: 1.9
+    priceMultiplier: 1.0
   - type: Advertise
     pack: RobustSoftdrinksAds
   - type: Speech
@@ -561,6 +571,7 @@
     ejectState: eject-unshaded
     denyState: deny-unshaded
     ejectDelay: 1.9
+    priceMultiplier: 1.0
   - type: Advertise
     pack: RobustSoftdrinksAds
   - type: Speech
@@ -651,6 +662,7 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: DiscountDansAds
   - type: Speech
@@ -893,6 +905,7 @@
     normalState: normal-unshaded
     ejectState: eject-unshaded
     denyState: deny-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: GetmoreChocolateCorpAds
   - type: Speech
@@ -926,6 +939,7 @@
     normalState: normal-unshaded
     ejectState: eject-unshaded
     denyState: deny-unshaded
+    priceMultiplier: 1.0
   - type: Sprite
     sprite: Structures/Machines/VendingMachines/sustenance.rsi
     layers:
@@ -1036,6 +1050,7 @@
     normalState: normal-unshaded
     ejectState: eject-unshaded
     denyState: deny-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: BodaAds
   - type: Speech
@@ -1068,6 +1083,7 @@
     ejectState: eject-unshaded
     denyState: deny-unshaded
     screenState: screen
+    priceMultiplier: 1.0
   - type: Advertise
     pack: AutoDrobeAds
   - type: Speech
@@ -1230,6 +1246,7 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: ChangAds
   - type: Speech
@@ -1290,6 +1307,7 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: DonutAds
   - type: Speech
@@ -1362,6 +1380,7 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: HyDrobeAds
   - type: Sprite
@@ -1388,6 +1407,7 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: LawDrobeAds
   - type: Sprite
@@ -1414,6 +1434,7 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: SecDrobeAds
   - type: Sprite
@@ -1440,6 +1461,7 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: BarDrobeAds
   - type: Sprite
@@ -1466,6 +1488,7 @@
     brokenState: broken
     normalState: normal-unshaded
     denyState: deny-unshaded
+    priceMultiplier: 1.0
   - type: Sprite
     sprite: Structures/Machines/VendingMachines/chapdrobe.rsi
     layers:
@@ -1494,6 +1517,7 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: CargoDrobeAds
   - type: Sprite
@@ -1520,6 +1544,7 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: MediDrobeAds
   - type: Sprite
@@ -1546,6 +1571,7 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: ChemDrobeAds
   - type: Sprite
@@ -1572,6 +1598,7 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: AtmosDrobeAds
   - type: Sprite
@@ -1598,6 +1625,7 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: EngiDrobeAds
   - type: Sprite
@@ -1624,6 +1652,7 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: ChefDrobeAds
   - type: Sprite
@@ -1650,6 +1679,7 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: DetDrobeAds
   - type: Sprite
@@ -1676,6 +1706,7 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: JaniDrobeAds
   - type: Sprite
@@ -1702,6 +1733,7 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: SciDrobeAds
   - type: Sprite
@@ -1754,6 +1786,7 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: RoboDrobeAds
   - type: Sprite
@@ -1780,6 +1813,7 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: GeneDrobeAds
   - type: Sprite
@@ -1806,6 +1840,7 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+    priceMultiplier: 1.0
   - type: Advertise
     pack: ViroDrobeAds
   - type: Sprite
@@ -1832,6 +1867,7 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+    priceMultiplier: 1.0
   - type: Sprite
     sprite: Structures/Machines/VendingMachines/centdrobe.rsi
     layers:
@@ -1863,6 +1899,7 @@
     denyState: deny-unshaded
     ejectDelay: 1.9
     soundVend: /Audio/Items/bikehorn.ogg
+    priceMultiplier: 1.0
   - type: Sprite
     sprite: Structures/Machines/VendingMachines/happyhonk.rsi
     layers:

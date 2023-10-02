@@ -1,0 +1,95 @@
+- type: entity
+  parent: BaseItem
+  id: BaseDepartmentBudgetCard
+  noSpawn: true
+  components:
+    - type: BankCard
+      startingBalance: 5000
+    - type: Sprite
+      sprite: White/Misc/cards.rsi
+      scale: 0.8, 0.8
+
+- type: entity
+  parent: BaseDepartmentBudgetCard
+  id: CommandBudgetCard
+  name: Command budget card
+  components:
+    - type: Sprite
+      state: budgetcard
+    - type: BankCard
+      commandBudgetCard: true
+
+- type: entity
+  parent: Paper
+  id: CommandBudgetPinPaper
+  name: command budget pin
+  components:
+  - type: CommandBudgetPinPaper
+  - type: Paper
+
+- type: entity
+  parent: BaseDepartmentBudgetCard
+  id: CargoBudgetCard
+  noSpawn: true
+  name: Cargo budget card
+  components:
+    - type: Sprite
+      state: car_budget
+    - type: BankCard
+      accountId: 1315
+
+- type: entity
+  parent: BaseDepartmentBudgetCard
+  id: CivilianBudgetCard
+  name: Civilian budget card
+  noSpawn: true
+  components:
+    - type: Sprite
+      state: srv_budget
+    - type: BankCard
+      accountId: 1316
+
+- type: entity
+  parent: BaseDepartmentBudgetCard
+  id: EngineeringBudgetCard
+  name: Engineering budget card
+  noSpawn: true
+  components:
+    - type: Sprite
+      state: eng_budget
+    - type: BankCard
+      accountId: 1318
+
+- type: entity
+  parent: BaseDepartmentBudgetCard
+  id: MedicalBudgetCard
+  name: Medical budget card
+  noSpawn: true
+  components:
+    - type: Sprite
+      state: med_budget
+    - type: BankCard
+      accountId: 1319
+
+- type: entity
+  parent: BaseDepartmentBudgetCard
+  id: ScienceBudgetCard
+  name: Science budget card
+  noSpawn: true
+  components:
+    - type: Sprite
+      state: sci_budget
+    - type: BankCard
+      accountId: 1321
+
+- type: entity
+  parent: BaseDepartmentBudgetCard
+  id: SecurityBudgetCard
+  name: Security budget card
+  noSpawn: true
+  components:
+    - type: Sprite
+      state: sec_budget
+    - type: BankCard
+      accountId: 1320
+

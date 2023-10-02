@@ -50,6 +50,8 @@
     equippedPrefix: unlit
   - type: Item
     size: 1
+  - type: StaticPrice
+    price: 10
 
 - type: entity
   id: CigarGoldSpent

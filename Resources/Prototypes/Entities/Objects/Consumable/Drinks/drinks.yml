@@ -34,6 +34,8 @@
     interfaces:
     - key: enum.TransferAmountUiKey.Key
       type: TransferAmountBoundUserInterface
+  - type: StaticPrice
+    price: 30
 
 - type: entity
   parent: DrinkBase

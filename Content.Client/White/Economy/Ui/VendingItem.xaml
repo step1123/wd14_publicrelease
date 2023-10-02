@@ -1,0 +1,13 @@
+<Control xmlns="https://spacestation14.io">
+    <BoxContainer Orientation="Horizontal">
+        <TextureRect
+            Name="VendingItemTexture"
+            Stretch="KeepAspectCentered" />
+        <Label Name="VendingItemName" HorizontalExpand="True" />
+        <Button
+            Name="VendingItemBuyButton"
+            MinWidth="80"
+            HorizontalAlignment="Right"
+            Access="Public" />
+    </BoxContainer>
+</Control>

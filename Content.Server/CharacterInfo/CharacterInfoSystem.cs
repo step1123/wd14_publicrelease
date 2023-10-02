@@ -26,6 +26,7 @@ public sealed class CharacterInfoSystem : EntitySystem
         var conditions = new Dictionary<string, List<ConditionInfo>>();
         var jobTitle = "No Profession";
         var briefing = "!!ERROR: No Briefing!!"; //should never show on the UI unless there's a bug
+        var memories = new Dictionary<string, string>(); //WD EDIT
         if (EntityManager.TryGetComponent(entity, out MindContainerComponent? mindContainerComponent) && mindContainerComponent.Mind != null)
         {
             var mind = mindContainerComponent.Mind;
@@ -53,8 +54,14 @@ public sealed class CharacterInfoSystem : EntitySystem
 
             // Get briefing
             briefing = mind.Briefing;
+
+            // WD EDIT Get memories
+            foreach (var memory in mind.AllMemories)
+            {
+                memories[memory.Name] = memory.Value;
+            }
         }
 
-        RaiseNetworkEvent(new CharacterInfoEvent(entity, jobTitle, conditions, briefing), args.SenderSession);
+        RaiseNetworkEvent(new CharacterInfoEvent(entity, jobTitle, conditions, briefing, memories), args.SenderSession);
     }
 }

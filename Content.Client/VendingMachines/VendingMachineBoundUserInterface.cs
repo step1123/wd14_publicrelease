@@ -3,13 +3,14 @@ using Content.Shared.VendingMachines;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface.Controls;
 using System.Linq;
+using Content.Client.White.Economy.Ui;
 
 namespace Content.Client.VendingMachines
 {
     public sealed class VendingMachineBoundUserInterface : BoundUserInterface
     {
         [ViewVariables]
-        private VendingMachineMenu? _menu;
+        private VendingMenu? _menu; // WD EDIT
 
         [ViewVariables]
         private List<VendingMachineInventoryEntry> _cachedInventory = new();
@@ -24,14 +25,18 @@ namespace Content.Client.VendingMachines
 
             var vendingMachineSys = EntMan.System<VendingMachineSystem>();
 
-            _cachedInventory = vendingMachineSys.GetAllInventory(Owner);
+            // WD EDIT START
+            var component = EntMan.GetComponent<VendingMachineComponent>(Owner);
+            _cachedInventory = vendingMachineSys.GetAllInventory(Owner, component);
 
-            _menu = new VendingMachineMenu { Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName };
+            _menu = new VendingMenu { Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName };
 
             _menu.OnClose += Close;
             _menu.OnItemSelected += OnItemSelected;
+            _menu.OnWithdraw += SendMessage;
+            // WD EDIT END
 
-            _menu.Populate(_cachedInventory);
+            _menu.Populate(_cachedInventory, component.PriceMultiplier, component.Credits);
 
             _menu.OpenCentered();
         }
@@ -45,21 +50,23 @@ namespace Content.Client.VendingMachines
 
             _cachedInventory = newState.Inventory;
 
-            _menu?.Populate(_cachedInventory);
+            _menu?.Populate(_cachedInventory, newState.PriceMultiplier, newState.Credits);
         }
 
-        private void OnItemSelected(ItemList.ItemListSelectedEventArgs args)
+        // WD EDIT START
+        private void OnItemSelected(int index)
         {
             if (_cachedInventory.Count == 0)
                 return;
 
-            var selectedItem = _cachedInventory.ElementAtOrDefault(args.ItemIndex);
+            var selectedItem = _cachedInventory.ElementAtOrDefault(index);
 
             if (selectedItem == null)
                 return;
 
             SendMessage(new VendingMachineEjectMessage(selectedItem.Type, selectedItem.ID));
         }
+        // WD EDIT END
 
         protected override void Dispose(bool disposing)
         {

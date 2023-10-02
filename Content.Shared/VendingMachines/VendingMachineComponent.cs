@@ -1,8 +1,10 @@
 using Content.Shared.Actions;
 using Content.Shared.Actions.ActionTypes;
+using Content.Shared.Stacks;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
@@ -183,6 +185,24 @@ namespace Content.Shared.VendingMachines
 
         [DataField("whitelist")]
         public EntityWhitelist? Whitelist;
+
+        [DataField("priceMultiplier")]
+        public double PriceMultiplier;
+
+        [ValidatePrototypeId<StackPrototype>]
+        public string CreditStackPrototype = "Credit";
+
+        [DataField("currencyType")]
+        public string CurrencyType = "SpaceCash";
+
+        [DataField("soundInsertCurrency")]
+        public SoundSpecifier SoundInsertCurrency = new SoundPathSpecifier("/Audio/White/Machines/polaroid2.ogg");
+
+        [DataField("soundWithdrawCurrency")]
+        public SoundSpecifier SoundWithdrawCurrency = new SoundPathSpecifier("/Audio/White/Machines/polaroid1.ogg");
+
+        [ViewVariables]
+        public int Credits;
         //WD EDIT END
     }
 
@@ -195,11 +215,14 @@ namespace Content.Shared.VendingMachines
         public string ID;
         [ViewVariables(VVAccess.ReadWrite)]
         public uint Amount;
-        public VendingMachineInventoryEntry(InventoryType type, string id, uint amount)
+        [ViewVariables(VVAccess.ReadWrite)]
+        public int Price; // WD
+        public VendingMachineInventoryEntry(InventoryType type, string id, uint amount, int price)
         {
             Type = type;
             ID = id;
             Amount = amount;
+            Price = price; // WD
         }
     }
 
