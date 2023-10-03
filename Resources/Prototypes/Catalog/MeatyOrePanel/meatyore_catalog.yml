@@ -1839,6 +1839,21 @@
     tier: 5
 
 - type: listing
+  id: DjWalkman
+  productEntity: Walkman
+  cost:
+    MeatyOreCoin: 0
+  categories:
+    - DjJukeboxCategory
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:DonationTierLockCondition
+    tier: 5
+
+
+
+- type: listing
   id: DjTapeRecorder
   productEntity: TapeRecorder
   cost:

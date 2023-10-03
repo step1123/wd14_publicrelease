@@ -6,6 +6,7 @@
   suffix: Empty
   components:
     - type: Jukebox
+      maxAudioRange: 15
     - type: Sprite
       sprite: White/Objects/Devices/jukebox.rsi
       layers:
@@ -27,6 +28,38 @@
       containers:
         jukebox_tapes: !type:Container
         jukebox_default_tapes: !type:Container
+
+- type: entity
+  parent: ClothingBeltBase
+  id: Walkman
+  name: Walkman
+  description: Mini cassette player
+  suffix: Empty
+  components:
+    - type: Jukebox
+      maxAudioRange: 5
+      rolloffFactor: 3.5
+    - type: Sprite
+      sprite: White/Objects/Devices/walkman.rsi
+      layers:
+        - state: walkman
+        - state: walkman_working_overlay
+          map: [ "bars" ]
+    - type: Item
+      sprite: White/Objects/Devices/walkman.rsi
+      heldPrefix: walkman
+      size: 20
+    - type: UserInterface
+      interfaces:
+        - key: enum.JukeboxUIKey.Key
+          type: JukeboxBUI
+    - type: ActivatableUI
+      key: enum.JukeboxUIKey.Key
+    - type: ContainerContainer
+      containers:
+        jukebox_tapes: !type:Container
+        jukebox_default_tapes: !type:Container
+
 
 - type: entity
   parent: BaseItem

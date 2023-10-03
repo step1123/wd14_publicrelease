@@ -40,8 +40,14 @@ public class JukeboxComponent : Component
     [ViewVariables(VVAccess.ReadOnly)]
     public bool Repeating { get; set; } = true;
 
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField("volume") ,ViewVariables(VVAccess.ReadOnly)]
     public float Volume { get; set; }
+
+    [DataField("maxAudioRange")]
+    public float MaxAudioRange { get; set; } = 20f;
+
+    [DataField("rolloffFactor")]
+    public float RolloffFactor { get; set; } = 0.3f;
 
     public PlayingSongData? PlayingSongData { get; set; }
 }
