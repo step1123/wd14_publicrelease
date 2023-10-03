@@ -123,6 +123,9 @@
     sizeMultiplier: 0.17
   - type: Item
     size: 1
+  - type: Construction
+    graph: WebObjects
+    node: cloth
 
 - type: entity
   parent: MaterialBase

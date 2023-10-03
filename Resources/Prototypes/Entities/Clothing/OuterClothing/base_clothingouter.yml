@@ -8,6 +8,8 @@
     - outerClothing
   - type: Sprite
     state: icon
+  - type: StaticPrice
+    price: 40
 
 - type: entity
   abstract: true
@@ -51,8 +53,6 @@
     interfaces:
     - key: enum.StorageUiKey.Key
       type: StorageBoundUserInterface
-  - type: StaticPrice
-    price: 20
   # WD edit sounds start
   - type: EmitSoundOnPickup
     sound:

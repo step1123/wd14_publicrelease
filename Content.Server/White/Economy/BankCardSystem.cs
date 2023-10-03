@@ -31,6 +31,7 @@ public sealed class BankCardSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
     [Dependency] private readonly BankCartridgeSystem _bankCartridge = default!;
+    [Dependency] private readonly GameTicker _gameTicker = default!;
 
     private const int SalaryDelay = 1200;
 
@@ -50,6 +51,12 @@ public sealed class BankCardSystem : EntitySystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        if (_gameTicker.RunLevel != GameRunLevel.InRound)
+        {
+            _salaryTimer = 0f;
+            return;
+        }
 
         _salaryTimer += frameTime;
 
@@ -117,7 +124,7 @@ public sealed class BankCardSystem : EntitySystem
             if (!bankCardComponent.BankAccountId.HasValue || !TryGetAccount(bankCardComponent.BankAccountId.Value, out var bankAccount))
                 return;
 
-            bankAccount.Balance = GetSalary(mind.Mind) * 3;
+            bankAccount.Balance = GetSalary(mind.Mind) + 100;
             mind.Mind?.AddMemory(new Memory("PIN", bankAccount.AccountPin.ToString()));
             bankAccount.Mind = mind.Mind;
             bankAccount.Name = Name(ev.Mob);

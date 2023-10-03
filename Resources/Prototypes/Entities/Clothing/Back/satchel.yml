@@ -26,6 +26,8 @@
   # to prevent bag open/honk spam
   - type: UseDelay
     delay: 0.5
+  - type: StaticPrice
+    price: 40
 
 - type: entity
   parent: ClothingBackpackSatchel

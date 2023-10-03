@@ -135,6 +135,7 @@
   components:
   - type: Implanter
     implant: UplinkImplant
+  - type: GiftIgnore
 
 - type: entity
   id: EmpImplanter

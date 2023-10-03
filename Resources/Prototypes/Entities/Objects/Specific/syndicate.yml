@@ -80,6 +80,7 @@
     preset: StorePresetUplink
     balance:
       Telecrystal: 0
+  - type: GiftIgnore
 
 - type: entity
   parent: BaseUplinkRadio
@@ -90,6 +91,7 @@
     preset: StorePresetUplink
     balance:
       Telecrystal: 20
+  - type: GiftIgnore
 
 - type: entity
   parent: BaseUplinkRadio
@@ -100,6 +102,7 @@
     preset: StorePresetUplink
     balance:
       Telecrystal: 25
+  - type: GiftIgnore
 
 #this uplink MUST be used for nukeops, as it has the tag for filtering the listing.
 - type: entity
@@ -114,6 +117,7 @@
   - type: Tag
     tags:
     - NukeOpsUplink
+  - type: GiftIgnore
 
 - type: entity
   parent: BaseUplinkRadio

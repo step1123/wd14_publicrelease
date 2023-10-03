@@ -8,6 +8,8 @@
     - FEET
   - type: Sprite
     state: icon
+  - type: StaticPrice
+    price: 25
 
 - type: entity
   abstract: true
