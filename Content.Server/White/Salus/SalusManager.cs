@@ -37,7 +37,7 @@ public sealed class SalusManager
         try
         {
             var response = await _httpClient.GetAsync($"{_salusApiLink}{ip}");
-            if (response.StatusCode != HttpStatusCode.OK) return;
+            if (!response.IsSuccessStatusCode) return;
             usingVpn = bool.Parse(await response.Content.ReadAsStringAsync());
 
         }
