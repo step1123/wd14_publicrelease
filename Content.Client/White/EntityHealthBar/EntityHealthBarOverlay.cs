@@ -90,8 +90,8 @@ public sealed class EntityHealthBarOverlay : Overlay
             var yIconOffset = 1f;
             if (spriteQuery.TryGetComponent(mob.Owner, out var sprite))
             {
-                yOffset = sprite.Bounds.Height + 16f;
-                yIconOffset = sprite.Bounds.Height + 13f;
+                yOffset = sprite.Bounds.Height + 12f;
+                yIconOffset = sprite.Bounds.Height + 9f;
                 xIconOffset = sprite.Bounds.Width + 7f;
             }
 

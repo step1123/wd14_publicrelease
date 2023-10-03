@@ -2,7 +2,6 @@ using Content.Shared.DoAfter;
 using Content.Shared.Hands.Components;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Client.DoAfter;
 
@@ -14,13 +13,12 @@ public sealed class DoAfterSystem : SharedDoAfterSystem
 {
     [Dependency] private readonly IOverlayManager _overlay = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly MetaDataSystem _metadata = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-        _overlay.AddOverlay(new DoAfterOverlay(EntityManager, _prototype, GameTiming));
+        _overlay.AddOverlay(new DoAfterOverlay(EntityManager, GameTiming));
     }
 
     public override void Shutdown()
