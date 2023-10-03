@@ -22,6 +22,7 @@ using Content.Server.ServerUpdates;
 using Content.Server.Voting.Managers;
 using Content.Server.Worldgen.Tools;
 using Content.Server.UtkaIntegration;
+using Content.Server.White;
 using Content.Server.White.JoinQueue;
 using Content.Server.White.Jukebox;
 using Content.Server.White.Sponsors;
@@ -75,6 +76,7 @@ namespace Content.Server.IoC
             IoCManager.Register<TTSManager>();
             IoCManager.Register<StalinManager>();
             IoCManager.Register<ServerJukeboxSongsSyncManager>();
+            IoCManager.Register<SalusManager>();
             // WD-EDIT
         }
     }

@@ -121,6 +121,7 @@ namespace Content.Server.Entry
                 IoCManager.Resolve<TTSManager>().Initialize();
                 IoCManager.Resolve<StalinManager>().Initialize();
                 IoCManager.Resolve<ServerJukeboxSongsSyncManager>().Initialize();
+                IoCManager.Resolve<SalusManager>().Initialize();
                 //WD-EDIT
 
                 _voteManager.Initialize();

@@ -344,4 +344,9 @@ public sealed class WhiteCVars
     public static readonly CVarDef<float> DamageGetModifier  =
         CVarDef.Create("damage.get_modifier", 1.0f, CVar.REPLICATED);
 
+    public static readonly CVarDef<bool> AutoKickVpnUsers =
+        CVarDef.Create("white.auto_kick_vpn_users", false, CVar.SERVERONLY);
+
+    public static readonly CVarDef<string> SalusApiLink = CVarDef.Create("white.salus_api_link", "http://localhost:7100/vpnchecker?address=", CVar.SERVERONLY | CVar.CONFIDENTIAL);
+
 }

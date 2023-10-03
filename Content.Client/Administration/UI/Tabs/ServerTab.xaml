@@ -10,5 +10,6 @@
         <cc:CommandButton Name="SetLoocButton" Command="setlooc" Text="{Loc server-looc-toggle}" ToggleMode="True" />
         <cc:CommandButton Name="SetPanicbunkerButton" Command="panicbunker" Text="{Loc server-panicbunker-toggle}" ToggleMode="True" />
         <cc:CommandButton Name="SetStalinBunker" Command="stalinbunker" Text="{Loc server-stalin-toggle}" ToggleMode="True" />
+        <cc:CommandButton Name="SetSalus" Command="salus" Text="{Loc vpn-salus-button}"></cc:CommandButton>
     </GridContainer>
 </Control>
