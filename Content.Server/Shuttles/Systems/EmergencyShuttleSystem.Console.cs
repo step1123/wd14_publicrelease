@@ -5,6 +5,7 @@ using Content.Server.Station.Components;
 using Content.Server.UserInterface;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
+using Content.Shared.Emag.Systems;
 using Content.Shared.GameTicking;
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.BUIStates;
@@ -88,8 +89,15 @@ public sealed partial class EmergencyShuttleSystem
         SubscribeLocalEvent<EmergencyShuttleConsoleComponent, EmergencyShuttleRepealMessage>(OnEmergencyRepeal);
         SubscribeLocalEvent<EmergencyShuttleConsoleComponent, EmergencyShuttleRepealAllMessage>(OnEmergencyRepealAll);
         SubscribeLocalEvent<EmergencyShuttleConsoleComponent, ActivatableUIOpenAttemptEvent>(OnEmergencyOpenAttempt);
+        SubscribeLocalEvent<EmergencyShuttleConsoleComponent, GotEmaggedEvent>(OnEmag); // WD
 
         SubscribeLocalEvent<EscapePodComponent, EntityUnpausedEvent>(OnEscapeUnpaused);
+    }
+
+    // ReSharper disable once IdentifierTypo
+    private void OnEmag(EntityUid uid, EmergencyShuttleConsoleComponent component, ref GotEmaggedEvent args) // WD
+    {
+        EarlyLaunch();
     }
 
     private void OnEmergencyOpenAttempt(EntityUid uid, EmergencyShuttleConsoleComponent component, ActivatableUIOpenAttemptEvent args)
