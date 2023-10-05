@@ -613,3 +613,15 @@
       sprite: White/Fluff/deus/deus_jumpsuit.rsi
     - type: Clothing
       sprite: White/Fluff/deus/deus_jumpsuit.rsi
+
+# GusMopsik
+- type: entity
+  parent: ClothingUniformBase
+  id: GusMopsikJumpsuit
+  name: Форма 404
+  description: Обычная форма обычного сотрудника "СБ"
+  components:
+  - type: Sprite
+    sprite: White/Fluff/GusMopsik/ss_uniform.rsi
+  - type: Clothing
+    sprite: White/Fluff/GusMopsik/ss_uniform.rsi
