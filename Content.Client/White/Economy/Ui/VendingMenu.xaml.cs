@@ -28,7 +28,7 @@ public sealed partial class VendingMenu : DefaultWindow
     /// Populates the list of available items on the vending machine interface
     /// and sets icons based on their prototypes
     /// </summary>
-    public void Populate(List<VendingMachineInventoryEntry> inventory, double priceMultiplier, int credits)
+    public void Populate(List<VendingMachineEntry> inventory, double priceMultiplier, int credits)
     {
         CreditsLabel.Text = Loc.GetString("vending-ui-credits-amount", ("credits", credits));
         WithdrawButton.Disabled = credits == 0;
@@ -54,19 +54,48 @@ public sealed partial class VendingMenu : DefaultWindow
         {
             var entry = inventory[i];
 
-            var itemName = entry.ID;
+            var itemName = string.Empty;
+            var amount = 0;
             Texture? icon = null;
-            if (_prototypeManager.TryIndex<EntityPrototype>(entry.ID, out var prototype))
+            switch (entry)
             {
-                itemName = prototype.Name;
-                icon = spriteSystem.GetPrototypeIcon(prototype).Default;
+                case VendingMachineInventoryEntry inventoryEntry:
+                {
+                    itemName = inventoryEntry.ID;
+                    amount = (int) inventoryEntry.Amount;
+                    if (_prototypeManager.TryIndex<EntityPrototype>(inventoryEntry.ID, out var prototype))
+                    {
+                        itemName = prototype.Name;
+                        icon = spriteSystem.GetPrototypeIcon(prototype).Default;
+                    }
+
+                    break;
+                }
+                case VendingMachineEntityEntry entityEntry:
+                    itemName = entityEntry.Name;
+                    amount = entityEntry.Entities.Count;
+                    if (amount > 0)
+                    {
+                        var entity = entityEntry.Entities[amount - 1];
+                        var entityManager = IoCManager.Resolve<IEntityManager>();
+                        if (entityManager.TryGetComponent(entity, out SpriteComponent? sprite) && sprite.Icon != null)
+                        {
+                            icon = sprite.Icon switch
+                            {
+                                Texture texture => texture,
+                                RSI.State state => state.Frame0,
+                                _ => icon
+                            };
+                        }
+                    }
+                    break;
             }
 
             if (itemName.Length > longestEntry.Length)
                 longestEntry = itemName;
 
             var price = (int) (entry.Price * priceMultiplier);
-            var vendingItem = new VendingItem($"{itemName} [{entry.Amount}]", $"{price} ¢", icon);
+            var vendingItem = new VendingItem($"{itemName} [{amount}]", $"{price} ¢", icon);
 
             var j = i;
             vendingItem.VendingItemBuyButton.OnPressed += _ =>

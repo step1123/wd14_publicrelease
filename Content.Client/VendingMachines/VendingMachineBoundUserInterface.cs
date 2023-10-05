@@ -13,7 +13,7 @@ namespace Content.Client.VendingMachines
         private VendingMenu? _menu; // WD EDIT
 
         [ViewVariables]
-        private List<VendingMachineInventoryEntry> _cachedInventory = new();
+        private List<VendingMachineEntry> _cachedInventory = new();
 
         public VendingMachineBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
         {
@@ -61,10 +61,17 @@ namespace Content.Client.VendingMachines
 
             var selectedItem = _cachedInventory.ElementAtOrDefault(index);
 
-            if (selectedItem == null)
-                return;
-
-            SendMessage(new VendingMachineEjectMessage(selectedItem.Type, selectedItem.ID));
+            switch (selectedItem)
+            {
+                case null:
+                    return;
+                case VendingMachineInventoryEntry inventoryEntry:
+                    SendMessage(new VendingMachineEjectMessage(inventoryEntry.Type, inventoryEntry.ID));
+                    break;
+                case VendingMachineEntityEntry entityEntry:
+                    SendMessage(new VendingMachineEntityEjectMessage(entityEntry.Entities.Last(), entityEntry.Name));
+                    break;
+            }
         }
         // WD EDIT END
 

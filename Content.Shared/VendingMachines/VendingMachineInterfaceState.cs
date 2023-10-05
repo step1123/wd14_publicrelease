@@ -5,12 +5,12 @@ namespace Content.Shared.VendingMachines
     [NetSerializable, Serializable]
     public sealed class VendingMachineInterfaceState : BoundUserInterfaceState
     {
-        public List<VendingMachineInventoryEntry> Inventory;
         // WD EDIT START
+        public List<VendingMachineEntry> Inventory;
         public double PriceMultiplier;
         public int Credits;
 
-        public VendingMachineInterfaceState(List<VendingMachineInventoryEntry> inventory, double priceMultiplier,
+        public VendingMachineInterfaceState(List<VendingMachineEntry> inventory, double priceMultiplier,
             int credits)
         {
             Inventory = inventory;
@@ -22,6 +22,18 @@ namespace Content.Shared.VendingMachines
     [Serializable, NetSerializable]
     public sealed class VendingMachineWithdrawMessage : BoundUserInterfaceMessage
     {
+    }
+
+    [Serializable, NetSerializable]
+    public sealed class VendingMachineEntityEjectMessage : BoundUserInterfaceMessage
+    {
+        public readonly EntityUid Uid;
+        public readonly string Name;
+        public VendingMachineEntityEjectMessage(EntityUid uid, string name)
+        {
+            Uid = uid;
+            Name = name;
+        }
     }
     // WD EDIT END
 

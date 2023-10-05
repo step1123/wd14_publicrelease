@@ -3,6 +3,7 @@ using Content.Shared.Actions.ActionTypes;
 using Content.Shared.Stacks;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
+using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -186,6 +187,13 @@ namespace Content.Shared.VendingMachines
         [DataField("whitelist")]
         public EntityWhitelist? Whitelist;
 
+        public EntityUid? NextEntityToEject;
+
+        public Container Container = default!;
+
+        [ViewVariables]
+        public Dictionary<string, VendingMachineEntityEntry> EntityInventory = new();
+
         [DataField("priceMultiplier")]
         public double PriceMultiplier;
 
@@ -207,7 +215,7 @@ namespace Content.Shared.VendingMachines
     }
 
     [Serializable, NetSerializable]
-    public sealed class VendingMachineInventoryEntry
+    public sealed class VendingMachineInventoryEntry : VendingMachineEntry
     {
         [ViewVariables(VVAccess.ReadWrite)]
         public InventoryType Type;
@@ -215,16 +223,42 @@ namespace Content.Shared.VendingMachines
         public string ID;
         [ViewVariables(VVAccess.ReadWrite)]
         public uint Amount;
-        [ViewVariables(VVAccess.ReadWrite)]
-        public int Price; // WD
-        public VendingMachineInventoryEntry(InventoryType type, string id, uint amount, int price)
+        public VendingMachineInventoryEntry(InventoryType type, string id, uint amount, int price) : base(price) // WD EDIT
         {
             Type = type;
             ID = id;
             Amount = amount;
+        }
+    }
+
+    // WD START
+    [Serializable, NetSerializable]
+    public sealed class VendingMachineEntityEntry : VendingMachineEntry
+    {
+        [ViewVariables(VVAccess.ReadWrite)]
+        public List<EntityUid> Entities;
+        [ViewVariables(VVAccess.ReadWrite)]
+        public string Name;
+
+        public VendingMachineEntityEntry(List<EntityUid> entities, string name, int price) : base(price) // WD EDIT
+        {
+            Entities = entities;
+            Name = name;
+        }
+    }
+
+    [Serializable, NetSerializable]
+    public abstract class VendingMachineEntry
+    {
+        [ViewVariables(VVAccess.ReadWrite)]
+        public int Price; // WD
+
+        protected VendingMachineEntry(int price)
+        {
             Price = price; // WD
         }
     }
+    // WD END
 
     [Serializable, NetSerializable]
     public enum InventoryType : byte

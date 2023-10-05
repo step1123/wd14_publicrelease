@@ -29,6 +29,7 @@ using Content.Shared.VendingMachines;
 using Content.Shared.White.Economy;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
+using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -50,6 +51,7 @@ namespace Content.Server.VendingMachines
         [Dependency] private readonly BankCardSystem _bankCard = default!;
         [Dependency] private readonly TagSystem _tag = default!;
         [Dependency] private readonly StackSystem _stackSystem = default!;
+        [Dependency] private readonly SharedContainerSystem _container = default!;
         // WD END
 
         private ISawmill _sawmill = default!;
@@ -79,6 +81,7 @@ namespace Content.Server.VendingMachines
 
             SubscribeLocalEvent<VendingMachineComponent, InteractUsingEvent>(OnInteractUsing);
             SubscribeLocalEvent<VendingMachineComponent, VendingMachineWithdrawMessage>(OnWithdrawMessage);
+            SubscribeLocalEvent<VendingMachineComponent, VendingMachineEntityEjectMessage>(OnEntityEjectMessage);
 
             //WD EDIT END
 
@@ -106,6 +109,8 @@ namespace Content.Server.VendingMachines
         protected override void OnComponentInit(EntityUid uid, VendingMachineComponent component, ComponentInit args)
         {
             base.OnComponentInit(uid, component, args);
+
+            component.Container = _container.EnsureContainer<Container>(uid, "vending-container"); // WD
 
             if (HasComp<ApcPowerReceiverComponent>(uid))
             {
@@ -212,6 +217,59 @@ namespace Content.Server.VendingMachines
             args.Handled = true;
         }
         //WD EDIT
+        private void OnEntityEjectMessage(EntityUid uid, VendingMachineComponent component, VendingMachineEntityEjectMessage args)
+        {
+            if (!this.IsPowered(uid, EntityManager))
+                return;
+
+            if (args.Session.AttachedEntity is not { Valid: true } entity || Deleted(entity))
+                return;
+
+            if (IsAuthorized(uid, entity, component))
+            {
+                TryEjectEntity(uid, args.Uid, args.Name, component.CanShoot, component, entity);
+            }
+        }
+
+        private void TryEjectEntity(EntityUid uid, EntityUid itemUid, string name, bool throwItem,
+            VendingMachineComponent? vendComponent = null, EntityUid? sender = null)
+        {
+            if (!Resolve(uid, ref vendComponent))
+                return;
+
+            if (vendComponent.Ejecting || vendComponent.Broken || !this.IsPowered(uid, EntityManager))
+            {
+                return;
+            }
+
+            if (!vendComponent.Container.Contains(itemUid))
+            {
+                Popup.PopupEntity(Loc.GetString("vending-machine-component-try-eject-invalid-item"), uid);
+                Deny(uid, vendComponent);
+                return;
+            }
+
+            vendComponent.EntityInventory.TryGetValue(name, out var entry);
+
+            if (entry != null)
+            {
+                if (!TryPerformTransaction(uid, entry, vendComponent, sender))
+                    return;
+
+                entry.Entities.Remove(itemUid);
+                
+                if (!entry.Entities.Any())
+                    vendComponent.EntityInventory.Remove(name);
+            }
+
+            // Start Ejecting, and prevent users from ordering while anim playing
+            vendComponent.Ejecting = true;
+            vendComponent.NextEntityToEject = itemUid;
+            vendComponent.ThrowNextItem = throwItem;
+            UpdateVendingMachineInterfaceState(uid, vendComponent);
+            TryUpdateVisualState(uid, vendComponent);
+            Audio.PlayPvs(vendComponent.SoundVend, uid);
+        }
 
         private void OnInteractUsing(EntityUid uid, VendingMachineComponent component, InteractUsingEvent args)
         {
@@ -267,29 +325,61 @@ namespace Content.Server.VendingMachines
             if (component.Whitelist == null || !component.Whitelist.IsValid(itemUid))
                 return false;
 
-            if (!TryComp<MetaDataComponent>(itemUid, out var metaData))
+            var name = Name(itemUid);
+            var price = (int) _pricing.GetPrice(itemUid);
+
+            if(component.EntityInventory.TryGetValue(name, out var entry))
+                entry.Entities.Add(itemUid);
+            else
             {
-                return false;
+                component.EntityInventory.Add(name, new VendingMachineEntityEntry(new List<EntityUid> {itemUid}, name,
+                    price));
             }
 
-            if (metaData.EntityPrototype == null)
-                return false;
+            component.Container.Insert(itemUid);
 
-            var entityId = metaData.EntityPrototype.ID;
+            return true;
+        }
 
-            if (!component.Inventory.TryGetValue(entityId, out var item))
+        private bool TryPerformTransaction(EntityUid uid, VendingMachineEntry entry,
+            VendingMachineComponent vendComponent, EntityUid? sender)
+        {
+            var price = GetPrice(entry, vendComponent);
+            if (price <= 0 || !sender.HasValue || _tag.HasTag(sender.Value, "IgnoreBalanceChecks"))
+                return true;
+
+            var success = false;
+            if (vendComponent.Credits >= price)
             {
-                var price = GetEntryPrice(metaData.EntityPrototype);
-                item = new VendingMachineInventoryEntry(InventoryType.Regular, entityId, 1, price);
-                component.Inventory.Add(entityId, item);
+                vendComponent.Credits -= price;
+                success = true;
             }
             else
             {
-                item.Amount++;
-            }
-            Del(itemUid);
+                var items = _accessReader.FindPotentialAccessItems(sender.Value);
+                foreach (var item in items)
+                {
+                    var nextItem = item;
+                    if (TryComp(item, out PdaComponent? pda) && pda.ContainedId is { Valid: true } id)
+                        nextItem = id;
 
-            return true;
+                    if (!TryComp<BankCardComponent>(nextItem, out var bankCard) || !bankCard.BankAccountId.HasValue
+                        || !_bankCard.TryGetAccount(bankCard.BankAccountId.Value, out var account)
+                        || account.Balance < price)
+                        continue;
+
+                    _bankCard.TryChangeBalance(bankCard.BankAccountId.Value, -price);
+                    success = true;
+                    break;
+                }
+            }
+
+            if (success)
+                return true;
+
+            Popup.PopupEntity(Loc.GetString("vending-machine-component-no-balance"), uid);
+            Deny(uid, vendComponent);
+            return false;
         }
 
         protected override int GetEntryPrice(EntityPrototype proto)
@@ -297,7 +387,7 @@ namespace Content.Server.VendingMachines
             return (int) _pricing.GetEstimatedPrice(proto);
         }
 
-        private int GetPrice(VendingMachineInventoryEntry entry, VendingMachineComponent comp)
+        private int GetPrice(VendingMachineEntry entry, VendingMachineComponent comp)
         {
             return (int) (entry.Price * GetPriceMultiplier(comp));
         }
@@ -394,9 +484,6 @@ namespace Content.Server.VendingMachines
 
             if (entry.Amount <= 0)
             {
-                //WD EDIT
-                vendComponent.Inventory.Remove(entry.ID);
-                //WD EDIT END
                 Popup.PopupEntity(Loc.GetString("vending-machine-component-try-eject-out-of-stock"), uid);
                 Deny(uid, vendComponent);
                 return;
@@ -406,42 +493,8 @@ namespace Content.Server.VendingMachines
                 return;
 
             // WD START
-            var price = GetPrice(entry, vendComponent);
-            if (price > 0 && sender.HasValue && !_tag.HasTag(sender.Value, "IgnoreBalanceChecks"))
-            {
-                var success = false;
-                if (vendComponent.Credits >= price)
-                {
-                    vendComponent.Credits -= price;
-                    success = true;
-                }
-                else
-                {
-                    var items = _accessReader.FindPotentialAccessItems(sender.Value);
-                    foreach (var item in items)
-                    {
-                        var nextItem = item;
-                        if (TryComp(item, out PdaComponent? pda) && pda.ContainedId is { Valid: true } id)
-                            nextItem = id;
-
-                        if (!TryComp<BankCardComponent>(nextItem, out var bankCard) || !bankCard.BankAccountId.HasValue
-                            || !_bankCard.TryGetAccount(bankCard.BankAccountId.Value, out var account)
-                            || account.Balance < price)
-                            continue;
-
-                        _bankCard.TryChangeBalance(bankCard.BankAccountId.Value, -price);
-                        success = true;
-                        break;
-                    }
-                }
-
-                if (!success)
-                {
-                    Popup.PopupEntity(Loc.GetString("vending-machine-component-no-balance"), uid);
-                    Deny(uid, vendComponent);
-                    return;
-                }
-            }
+            if (!TryPerformTransaction(uid, entry, vendComponent, sender))
+                return;
             // WD END
 
             // Start Ejecting, and prevent users from ordering while anim playing
@@ -543,6 +596,20 @@ namespace Content.Server.VendingMachines
 
             if (string.IsNullOrEmpty(vendComponent.NextItemToEject))
             {
+                // WD START
+                if (vendComponent.NextEntityToEject != null)
+                {
+                    if (vendComponent.Container.Remove(vendComponent.NextEntityToEject.Value, force: true) &&
+                        vendComponent.ThrowNextItem)
+                    {
+                        var range = vendComponent.NonLimitedEjectRange;
+                        var direction = new Vector2(_random.NextFloat(-range, range), _random.NextFloat(-range, range));
+                        _throwingSystem.TryThrow(vendComponent.NextEntityToEject.Value, direction,
+                            vendComponent.NonLimitedEjectForce);
+                    }
+                    vendComponent.NextEntityToEject = null;
+                }
+                // WD END
                 vendComponent.ThrowNextItem = false;
                 return;
             }

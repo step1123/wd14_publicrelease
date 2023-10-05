@@ -52,12 +52,12 @@ public abstract partial class SharedVendingMachineSystem : EntitySystem
     /// <param name="uid"></param>
     /// <param name="component"></param>
     /// <returns></returns>
-    public List<VendingMachineInventoryEntry> GetAllInventory(EntityUid uid, VendingMachineComponent? component = null)
+    public List<VendingMachineEntry> GetAllInventory(EntityUid uid, VendingMachineComponent? component = null) // WD EDIT
     {
         if (!Resolve(uid, ref component))
             return new();
 
-        var inventory = new List<VendingMachineInventoryEntry>(component.Inventory.Values);
+        var inventory = new List<VendingMachineEntry>(component.Inventory.Values); // WD EDIT
 
         if (HasComp<EmaggedComponent>(uid))
             inventory.AddRange(component.EmaggedInventory.Values);
@@ -65,15 +65,19 @@ public abstract partial class SharedVendingMachineSystem : EntitySystem
         if (component.Contraband)
             inventory.AddRange(component.ContrabandInventory.Values);
 
+        inventory.AddRange(component.EntityInventory.Values); // WD
+
         return inventory;
     }
 
-    public List<VendingMachineInventoryEntry> GetAvailableInventory(EntityUid uid, VendingMachineComponent? component = null)
+    public List<VendingMachineInventoryEntry> GetAvailableInventory(EntityUid uid, VendingMachineComponent? component = null) // WD EDIT
     {
         if (!Resolve(uid, ref component))
             return new();
 
-        return GetAllInventory(uid, component).Where(_ => _.Amount > 0).ToList();
+        return GetAllInventory(uid, component).Where(e => e is VendingMachineInventoryEntry {Amount: > 0})
+            .Cast<VendingMachineInventoryEntry>()
+            .ToList(); // WD EDIT
     }
 
     private void AddInventoryFromPrototype(EntityUid uid, Dictionary<string, uint>? entries,
