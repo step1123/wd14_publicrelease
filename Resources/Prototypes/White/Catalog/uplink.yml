@@ -17,3 +17,99 @@
         components:
           - SurplusBundle
   saleLimit: 1
+
+- type: listing
+  id: UplinkHelmetSwat
+  name: Шлем спецназа
+  description: Чрезвычайно прочный шлем, обычно используемый военизированными формированиями. Он украшен гнусным рисунком в красную и черную полоску.
+  productEntity: ClothingHeadHelmetSwatSyndicate
+  cost:
+    Telecrystal: 2
+  categories:
+    - UplinkArmor
+
+- type: listing
+  id: UplinkMiniEbow
+  name: Маленький энергетический арбалет
+  description: Довольно тихое оружие, которое автоматически перезаряжается и оглушает. Хорошо сочетается с другими видами оружия.
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Battery/mini-ebow.rsi, state: icon }
+  productEntity: EnergyCrossbowMini
+  cost:
+    Telecrystal: 10
+  categories:
+  - UplinkWeapons
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+  saleLimit: 1
+
+- type: listing
+  id: UplinkBloodDagger
+  name: Кинжал жажды
+  description: "Критическая жажда: Кинжал Жажды обладает смертоносной точностью. Его владелец имеет 40% шанс нанести критический урон, поражая врага в его самые уязвимые места. Кровавый абсорб: При каждом успешном критическом ударе, кинжал извлекает кровь из цели, восстанавливая здоровье владельцу пропорционально количеству высосанной крови."
+  icon: { sprite: /Textures/Objects/Weapons/Melee/blood_dagger.rsi, state: icon }
+  productEntity: BloodSuckerDagger
+  cost:
+    Telecrystal: 6
+  categories:
+  - UplinkWeapons
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+  saleLimit: 1
+
+- type: listing
+  id: UplinkRifleAk
+  name: uplink-rifle-ak-name
+  description: uplink-rifle-ak-description
+  productEntity: WeaponRifleAk
+  cost:
+    Telecrystal: 16
+  categories:
+  - UplinkWeapons
+  saleLimit: 1
+
+- type: listing
+  id: UplinkAkAmmo
+  name: uplink-ak-ammo-name
+  description: uplink-ak-ammo-desc
+  productEntity: MagazineLightRifle
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkAmmo
+
+- type: listing
+  id: UplinkBeeGrenade
+  name: Граната с пчелами!? Что?..
+  description: Это как..
+  productEntity: GrenadeBees
+  cost:
+    Telecrystal: 8
+  categories:
+  - UplinkExplosives
+
+- type: listing
+  id: UplinkExplosiveSmokeGrenade
+  name: дымовая граната
+  description: для постановки маскирующих завес
+  productEntity: SmokeGrenade
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkExplosives
+
+- type: listing
+  id: UplinkSmokeImplanter
+  name: Имплант дыма
+  description: Выпускает облако дыма при активации.
+  icon: { sprite: /Textures/Objects/Weapons/Grenades/smokegrenade.rsi, state: icon }
+  productEntity: SmokeImplanter
+  cost:
+    Telecrystal: 2
+  categories:
+  - UplinkImplants

@@ -21,6 +21,6 @@
       slots:
         - back
     - type: Crit
-      critChance: 20
-      critMultiplier: 2.2
+      critChance: 40
+      critMultiplier: 2
       isBloodDagger: true

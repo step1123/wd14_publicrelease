@@ -48,6 +48,7 @@
       - state: inhand-right-blade
         shader: unshaded
   - type: Reflect
+    reflectProb: 0.5
     enabled: false
     reflects:
       - Energy
@@ -126,6 +127,11 @@
   - type: Tag
     tags:
     - Write
+  - type: Reflect
+    reflectProb: 0.25
+    enabled: false
+    reflects:
+      - Energy
 
 - type: entity
   parent: BaseItem

@@ -1,0 +1,11 @@
+- type: instantAction
+  id: ActivateSmokeImplant
+  name: Выпустить облако дыма
+  description: Выпускает облако дыма вокруг вас.
+  useDelay: 20
+  itemIconStyle: BigAction
+  priority: -20
+  icon:
+    sprite: Objects/Weapons/Grenades/smokegrenade.rsi
+    state: icon
+  event: !type:ActivateImplantEvent

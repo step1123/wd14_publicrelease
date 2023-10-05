@@ -1,0 +1,7 @@
+- type: entity
+  id: SmokeImplanter
+  name: Имплант дыма
+  parent: BaseImplantOnlyImplanter
+  components:
+    - type: Implanter
+      implant: SmokeImplant
