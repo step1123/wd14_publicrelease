@@ -1162,7 +1162,7 @@
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_shield.rsi, state: eshield-on }
   productEntity: EnergyShield
   cost:
-    Telecrystal: 5
+    Telecrystal: 6
   categories:
   - UplinkMisc
   saleLimit: 1

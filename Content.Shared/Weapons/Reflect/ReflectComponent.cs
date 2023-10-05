@@ -36,6 +36,9 @@ public sealed partial class ReflectComponent : Component
     // WD START
     [DataField("passiveReflect"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public bool PassiveReflect;
+
+    [DataField("damageOnReflect"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    public bool DamageOnReflect;
     // WD END
 }
 
