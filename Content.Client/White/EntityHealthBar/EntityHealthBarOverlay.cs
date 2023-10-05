@@ -56,7 +56,7 @@ public sealed class EntityHealthBarOverlay : Overlay
     {
         var spriteQuery = _entManager.GetEntityQuery<SpriteComponent>();
         var xformQuery = _entManager.GetEntityQuery<TransformComponent>();
-        var mobsQuery = _entManager.EntityQuery<MobStateComponent, DamageableComponent>();
+        var mobsQuery = _entManager.EntityQuery<MobStateComponent, DamageableComponent, MobThresholdsComponent>();
 
         var handle = args.WorldHandle;
         var rotation = args.Viewport.Eye?.Rotation ?? Angle.Zero;
@@ -68,7 +68,7 @@ public sealed class EntityHealthBarOverlay : Overlay
         const float startX = 1f;
         const float endX = 15f;
 
-        foreach (var (mob, dmg) in mobsQuery)
+        foreach (var (mob, dmg, thresholds) in mobsQuery)
         {
             if (DamageContainer != null && dmg.DamageContainerID != DamageContainer)
                 continue;
@@ -129,7 +129,7 @@ public sealed class EntityHealthBarOverlay : Overlay
             handle.DrawTexture(stateIcon, iconPosition);
 
             // we are all progressing towards death every day
-            var deathProgress = CalculateProgress(mob.Owner, mob, dmg);
+            var deathProgress = CalculateProgress(mob.Owner, mob, dmg, thresholds);
             var color = GetProgressColor(deathProgress, mob.CurrentState == MobState.Critical);
 
             var xProgress = (endX - startX) * deathProgress + startX;
@@ -169,21 +169,21 @@ public sealed class EntityHealthBarOverlay : Overlay
     /// <summary>
     /// Returns a ratio between 0 and 1, and whether the entity is in crit.
     /// </summary>
-    private float CalculateProgress(EntityUid uid, MobStateComponent component, DamageableComponent dmg)
+    private float CalculateProgress(EntityUid uid, MobStateComponent component, DamageableComponent dmg, MobThresholdsComponent thresholds)
     {
         return component.CurrentState switch
         {
-            MobState.Alive    => GetAliveDamageState(uid, dmg),
-            MobState.Critical => GetCriticalDamageState(uid, dmg),
+            MobState.Alive    => GetAliveDamageState(uid, dmg, thresholds),
+            MobState.Critical => GetCriticalDamageState(uid, dmg, thresholds),
             MobState.Dead     => 0,
             _                 => 1
         };
     }
 
-    private float GetCriticalDamageState(EntityUid uid, DamageableComponent dmg)
+    private float GetCriticalDamageState(EntityUid uid, DamageableComponent dmg, MobThresholdsComponent thresholds)
     {
-        if (_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Critical, out var critThreshold) &&
-            _mobThresholdSystem.TryGetThresholdForState(uid, MobState.Dead, out var deadThreshold))
+        if (_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Critical, out var critThreshold, thresholds) &&
+            _mobThresholdSystem.TryGetThresholdForState(uid, MobState.Dead, out var deadThreshold, thresholds))
         {
             return 1 - ((dmg.TotalDamage - critThreshold) / (deadThreshold - critThreshold)).Value.Float();
         }
@@ -191,10 +191,10 @@ public sealed class EntityHealthBarOverlay : Overlay
         return 1f;
     }
 
-    private float GetAliveDamageState(EntityUid uid, DamageableComponent dmg)
+    private float GetAliveDamageState(EntityUid uid, DamageableComponent dmg, MobThresholdsComponent thresholds)
     {
-        if (_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Critical, out var threshold) ||
-            _mobThresholdSystem.TryGetThresholdForState(uid, MobState.Dead, out threshold))
+        if (_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Critical, out var threshold, thresholds) ||
+            _mobThresholdSystem.TryGetThresholdForState(uid, MobState.Dead, out threshold, thresholds))
         {
             return 1 - (dmg.TotalDamage / threshold.Value).Float();
         }
