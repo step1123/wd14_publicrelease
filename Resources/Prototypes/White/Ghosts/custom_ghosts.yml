@@ -175,7 +175,7 @@
   sprite: White/Ghosts/17shu-ghost.rsi
   alpha: 0.9
   ghostName: Квакалка
-  ghostDescription: А ей только ква и ква...
+  ghostDescription: Квакающий покемон..
   size: 0.7, 0.7
 
 - type: customGhost
