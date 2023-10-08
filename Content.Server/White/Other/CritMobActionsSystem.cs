@@ -53,7 +53,10 @@ public sealed class CritMobActionsSystem : EntitySystem
                     lastWords = lastWords.Substring(0, MaxLastWordsLength);
                 }
                 lastWords += "...";
-                _chat.TrySendInGameICMessage(uid, lastWords, InGameICChatType.Whisper, ChatTransmitRange.Normal, force: true);
+                // WD EDIT START
+                _chat.TryProccessRadioMessage(uid, lastWords, out var output, out _);
+                _chat.TrySendInGameICMessage(uid, output, InGameICChatType.Whisper, ChatTransmitRange.Normal, force: true, checkRadioPrefix: false);
+                // WD EDIT END
                 _host.ExecuteCommand(actor.PlayerSession, "ghost");
             });
 

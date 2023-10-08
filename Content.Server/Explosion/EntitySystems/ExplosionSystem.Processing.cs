@@ -5,6 +5,7 @@ using Content.Server.Mind.Components;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
 using Content.Shared.Database;
+using Content.Shared.Disposal.Components;
 using Content.Shared.Explosion;
 using Content.Shared.FixedPoint;
 using Content.Shared.Maps;
@@ -416,6 +417,15 @@ public sealed partial class ExplosionSystem : EntitySystem
                     var damageStr = string.Join(", ", appliedDamage.DamageDict.Select(entry => $"{entry.Key}: {entry.Value}"));
                     _adminLogger.Add(LogType.Explosion, LogImpact.Medium,
                         $"Explosion caused [{damageStr}] to {ToPrettyString(uid):target} at {Transform(uid).Coordinates}");
+                }
+            }
+
+            if (TryComp(uid, out SharedDisposalUnitComponent? disposal) && EntityManager.IsQueuedForDeletion(uid)) // WD
+            {
+                foreach (var entity in disposal.RecentlyEjected)
+                {
+                    ProcessEntity(entity, epicenter, damage, throwForce, id, xform, damageQuery, physicsQuery,
+                        transformQuery, tagQuery, projectileQuery);
                 }
             }
         }

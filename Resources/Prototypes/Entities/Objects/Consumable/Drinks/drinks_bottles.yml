@@ -41,6 +41,8 @@
         acts: [ "Destruction" ]
   - type: TrashOnEmpty
     solution: drink
+  - type: StaticPrice
+    price: 80
 
 - type: entity
   parent: DrinkBottleBaseFull

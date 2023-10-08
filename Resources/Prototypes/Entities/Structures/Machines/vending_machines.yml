@@ -939,7 +939,6 @@
     normalState: normal-unshaded
     ejectState: eject-unshaded
     denyState: deny-unshaded
-    priceMultiplier: 1.0
   - type: Sprite
     sprite: Structures/Machines/VendingMachines/sustenance.rsi
     layers:

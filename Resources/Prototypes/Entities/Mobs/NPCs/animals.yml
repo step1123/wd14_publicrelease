@@ -1351,7 +1351,7 @@
         damage: 50
       behaviors:
       - !type:ExplodeBehavior
-      
+
 - type: entity
   name: monkey
   id: MobMonkeySyndicateAgent
@@ -1618,6 +1618,7 @@
         types:
           Piercing: 8
           Poison: 6
+          Structural: 4
     - type: FootstepModifier
       footstepSoundCollection:
         collection: FootstepClownFast

@@ -526,6 +526,8 @@
       - id: GoldenBikeHorn
         prob: 0.1
         orGroup: GiftPool
+  - type: StaticPrice
+    price: 30
 
 - type: entity
   id: HappyHonkMime
