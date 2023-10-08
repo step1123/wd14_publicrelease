@@ -20,7 +20,7 @@ namespace Content.Client.RoundEnd
         {
             _entityManager = entityManager;
 
-            MinSize = SetSize = new Vector2(520, 580);
+            MinSize = SetSize = new Vector2(800, 580);
 
             Title = Loc.GetString("round-end-summary-window-title");
 
@@ -156,7 +156,8 @@ namespace Content.Client.RoundEnd
                                 ("playerOOCName", playerInfo.PlayerOOCName),
                                 ("icNameColor", icNameColor),
                                 ("playerICName", playerInfo.PlayerICName),
-                                ("playerRole", Loc.GetString(playerInfo.Role))));
+                                ("playerRole", Loc.GetString(playerInfo.Role)),
+                                ("reputation", playerInfo.Reputation)));
                     }
                 }
                 hBox.AddChild(playerInfoText);

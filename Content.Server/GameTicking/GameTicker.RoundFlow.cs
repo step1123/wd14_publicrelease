@@ -19,6 +19,7 @@ using Robust.Shared.Utility;
 using System.Linq;
 using System.Threading.Tasks;
 using Content.Server.UtkaIntegration;
+using Content.Server.White.Reputation;
 using Content.Server.White.Stalin;
 using Content.Shared.Database;
 using Content.Shared.White;
@@ -34,6 +35,7 @@ namespace Content.Server.GameTicking
         //WD-EDIT
         [Dependency] private readonly UtkaTCPWrapper _utkaSocketWrapper = default!;
         [Dependency] private readonly StalinManager _stalinManager = default!;
+        [Dependency] private readonly ReputationSystem _repSys = default!;
         //WD-EDIT
 
         private static readonly Counter RoundNumberMetric = Metrics.CreateCounter(
@@ -361,6 +363,17 @@ namespace Content.Server.GameTicking
                 else if (mind.CurrentEntity != null && TryName(mind.CurrentEntity.Value, out var icName))
                     playerIcName = icName;
 
+                // WD start
+                var reputation = "";
+                if (mind.Session != null &&
+                    _repSys.TryModifyReputationOnRoundEnd(mind.Session.Name, out var value, out var delta))
+                {
+                    var color = value >= 0 ? "green" : "red";
+                    var change = delta >= 0 ? $"+{delta}" : $"{delta}";
+                    reputation = $"[color={color}]{value} ({change})";
+                }
+                // WD end
+
                 var playerEndRoundInfo = new RoundEndMessageEvent.RoundEndPlayerInfo()
                 {
                     // Note that contentPlayerData?.Name sticks around after the player is disconnected.
@@ -374,7 +387,8 @@ namespace Content.Server.GameTicking
                         : mind.AllRoles.FirstOrDefault()?.Name ?? Loc.GetString("game-ticker-unknown-role"),
                     Antag = antag,
                     Observer = observer,
-                    Connected = connected
+                    Connected = connected,
+                    Reputation = reputation
                 };
                 listOfPlayerInfo.Add(playerEndRoundInfo);
             }

@@ -15,6 +15,7 @@ public sealed class UtkaBanCommand : IUtkaCommand
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private UtkaTCPWrapper _utkaSocketWrapper = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
+    [Dependency] private readonly IEntityManager _entMan = default!;
 
     private const ILocalizationManager LocalizationManager = default!;
 
@@ -121,6 +122,7 @@ public sealed class UtkaBanCommand : IUtkaCommand
             BanId = banId
         };
         _utkaSocketWrapper.SendMessageToAll(utkaBanned);
+        _entMan.EventBus.RaiseEvent(EventSource.Local, utkaBanned);
     }
 
     private void UtkaSendResponse(bool banned)

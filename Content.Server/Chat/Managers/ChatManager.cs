@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
@@ -8,6 +9,7 @@ using Content.Server.Players;
 using Content.Server.Preferences.Managers;
 using Content.Server.Station.Systems;
 using Content.Server.UtkaIntegration;
+using Content.Server.White.Reputation;
 using Content.Server.White.Sponsors;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
@@ -15,6 +17,7 @@ using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.White;
 using Robust.Server.Player;
+using Robust.Shared.Asynchronous;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -52,6 +55,8 @@ namespace Content.Server.Chat.Managers
         [Dependency] private readonly SponsorsManager _sponsorsManager = default!;
         [Dependency] private readonly UtkaTCPWrapper _utkaSocketWrapper = default!;
         [Dependency] private readonly IGameTiming _timing = default!;
+        [Dependency] private readonly ReputationManager _repManager = default!;
+        [Dependency] private readonly ITaskManager _taskManager = default!;
         /// WD-EDIT
 
         /// <summary>
@@ -262,8 +267,22 @@ namespace Content.Server.Chat.Managers
             if (!TrySendNewMessage(player, message)) // WD
                 return;
 
+            // WD start
+            //_repManager.GetCachedPlayerReputation(player.UserId, out var value);
+            var task = Task.Run(async () => await _repManager.GetPlayerReputation(player.UserId));
+            _taskManager.BlockWaitOnTask(task);
+            var value = task.GetAwaiter().GetResult();
+
+            var reputation = "";
+            if (value != null)
+            {
+                var color = value >= 0 ? "green" : "red";
+                reputation = $"[color={color}]({value})[/color]";
+            }
+            // WD end
+
             Color? colorOverride = null;
-            var wrappedMessage = Loc.GetString("chat-manager-send-ooc-wrap-message", ("playerName",player.Name), ("message", FormattedMessage.EscapeText(message)));
+            var wrappedMessage = Loc.GetString("chat-manager-send-ooc-wrap-message", ("playerName",player.Name), ("message", FormattedMessage.EscapeText(message)), ("rep", reputation));
             if (_adminManager.HasAdminFlag(player, AdminFlags.Admin))
             {
                 var prefs = _preferencesManager.GetPreferences(player.UserId);
@@ -272,13 +291,13 @@ namespace Content.Server.Chat.Managers
             if (player.ConnectedClient.UserData.PatronTier is { } patron &&
                      PatronOocColors.TryGetValue(patron, out var patronColor))
             {
-                wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", patronColor),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
+                wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", patronColor),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)), ("rep", reputation));
             }
 
             //WD-EDIT
             if (_sponsorsManager.TryGetInfo(player.UserId, out var sponsorData) && sponsorData.OOCColor != null)
             {
-                wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", sponsorData.OOCColor),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
+                wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", sponsorData.OOCColor),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)), ("rep", reputation));
             }
             //WD-EDIT
 

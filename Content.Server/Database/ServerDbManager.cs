@@ -247,6 +247,31 @@ namespace Content.Server.Database
         Task EditAdminNote(int id, string message, Guid editedBy, DateTime editedAt);
 
         #endregion
+
+        #region Player Reputation (WD edit)
+
+        /// <summary>
+        /// Set player's reputation to the certain value.
+        /// </summary>
+        /// <param name="player">Guid of the player to set the value.</param>
+        /// <param name="value">Value to set.</param>
+        Task SetPlayerReputation(Guid player, float value);
+
+        /// <summary>
+        /// Modify player's reputation by adding value (currentValue + value).
+        /// </summary>
+        /// <param name="player">Guid of the player to modify the value.</param>
+        /// <param name="value">Value to add.</param>
+        Task ModifyPlayerReputation(Guid player, float value);
+
+        /// <summary>
+        /// Gets value of player reputation.
+        /// </summary>
+        /// <param name="player">Guid of the player to get the value.</param>
+        /// <returns>Value of player's reputation.</returns>
+        Task<float> GetPlayerReputation(Guid player);
+
+        #endregion
     }
 
     public sealed class ServerDbManager : IServerDbManager
@@ -446,6 +471,28 @@ namespace Content.Server.Database
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.UpdatePlayTimes(updates));
+        }
+
+        #endregion
+
+        #region Player Reputation (WD edit)
+
+        public Task SetPlayerReputation(Guid player, float value)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetPlayerReputation(player, value));
+        }
+
+        public Task ModifyPlayerReputation(Guid player, float value)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.ModifyPlayerReputation(player, value));
+        }
+
+        public Task<float> GetPlayerReputation(Guid player)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetPlayerReputation(player));
         }
 
         #endregion

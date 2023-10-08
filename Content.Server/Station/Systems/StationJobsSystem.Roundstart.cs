@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Server.Administration.Managers;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Station.Components;
+using Content.Server.White.Reputation;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Robust.Shared.Network;
@@ -17,6 +18,7 @@ public sealed partial class StationJobsSystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly RoleBanManager _roleBanManager = default!;
     [Dependency] private readonly PlayTimeTrackingSystem _playTime = default!;
+    [Dependency] private readonly ReputationManager _reputationManager = default!; // WD edit
 
     private Dictionary<int, HashSet<string>> _jobsByWeight = default!;
     private List<int> _orderedWeights = default!;
@@ -245,7 +247,8 @@ public sealed partial class StationJobsSystem
                                 continue;
 
                             // Picking players it finds that have the job set.
-                            var player = _random.Pick(jobPlayerOptions[job]);
+                            //var player = _random.Pick(jobPlayerOptions[job]);
+                            var player = GetPlayerToAssign(jobPlayerOptions[job]); // WD edit
                             AssignPlayer(player, job, station);
                             stationShares[station]--;
 
@@ -374,4 +377,33 @@ public sealed partial class StationJobsSystem
 
         return outputDict;
     }
+
+    // WD start
+    private NetUserId GetPlayerToAssign(HashSet<NetUserId> players)
+    {
+        var list = new List<NetUserId>();
+
+        foreach (var player in players)
+        {
+            if (!_reputationManager.GetCachedPlayerReputation(player, out var value))
+                continue;
+
+            if (value == null)
+                continue;
+
+            var weight = _reputationManager.GetPlayerWeight(value.Value);
+
+            for (var i = 0; i < weight; i++)
+            {
+                list.Add(player);
+            }
+        }
+
+        if (list.Count == 0)
+            return _random.Pick(players);
+
+        var number = _random.Next(list.Count - 1);
+        return list[number];
+    }
+    // WD end
 }

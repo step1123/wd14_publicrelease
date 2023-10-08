@@ -28,6 +28,7 @@ public sealed class RoleBanManager
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IPlayerLocator _playerLocator = default!;
     [Dependency] private readonly UtkaTCPWrapper _utkaSockets = default!; // WD
+    [Dependency] private readonly IEntityManager _entMan = default!; // WD
 
     private const string JobPrefix = "Job:";
 
@@ -417,6 +418,7 @@ public sealed class RoleBanManager
         };
 
         _utkaSockets.SendMessageToAll(utkaBanned);
+        _entMan.EventBus.RaiseEvent(EventSource.Local, utkaBanned);
     }
 
     private async Task<int> UtkaGetBanId(string reason, string role, NetUserId targetUid)

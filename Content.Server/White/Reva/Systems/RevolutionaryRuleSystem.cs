@@ -16,6 +16,7 @@ using Content.Server.Storage.EntitySystems;
 using Content.Server.Traits.Assorted;
 using Content.Server.White.Administration;
 using Content.Server.White.Mindshield;
+using Content.Server.White.Reputation;
 using Content.Server.White.Reva.Components;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Inventory;
@@ -51,6 +52,7 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
     [Dependency] private readonly StorageSystem _storageSystem = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly AntagRoleBanSystem _antagRoleBan = default!;
+    [Dependency] private readonly ReputationManager _reputationManager = default!;
 
     public override void Initialize()
     {
@@ -521,8 +523,11 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
 
             for (var i = 0; i < numHeadRevs; i++)
             {
-                headRevs.Add(_random.PickAndTake(prefList));
+                //headRevs.Add(_random.PickAndTake(prefList));
                 //_sawmill.Info("Selected a preferred Head Rev.");
+                var reva = _reputationManager.PickPlayerBasedOnReputation(prefList);
+                headRevs.Add(reva);
+                prefList.Remove(reva);
             }
 
             foreach (var headRev in headRevs)

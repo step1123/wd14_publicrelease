@@ -145,6 +145,7 @@ namespace Content.Shared.GameTicking
             public bool Antag;
             public bool Observer;
             public bool Connected;
+            public string Reputation; // WD edit
         }
 
         public string GamemodeTitle { get; }

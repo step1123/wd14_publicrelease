@@ -22,6 +22,7 @@ using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Server.Traitor;
 using Content.Server.White.Administration;
+using Content.Server.White.Reputation;
 using Content.Shared.Dataset;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
@@ -62,6 +63,8 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
     [Dependency] private readonly MindSystem _mindSystem = default!;
     //WD EDIT
     [Dependency] private readonly AntagRoleBanSystem _antagRoleBan = default!;
+    [Dependency] private readonly ReputationManager _reputationManager = default!;
+    //WD EDIT
 
 
     public override void Initialize()
@@ -505,7 +508,9 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
                     }
                     else
                     {
-                        nukeOp = _random.PickAndTake(cmdrPrefList);
+                        //nukeOp = _random.PickAndTake(cmdrPrefList);
+                        nukeOp = _reputationManager.PickPlayerBasedOnReputation(cmdrPrefList); // WD edit
+                        cmdrPrefList.Remove(nukeOp); // WD edit
                         everyone.Remove(nukeOp);
                         prefList.Remove(nukeOp);
                         medPrefList.Remove(nukeOp);
@@ -535,7 +540,9 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
                     }
                     else
                     {
-                        nukeOp = _random.PickAndTake(medPrefList);
+                        //nukeOp = _random.PickAndTake(medPrefList);
+                        nukeOp = _reputationManager.PickPlayerBasedOnReputation(medPrefList); // WD edit
+                        medPrefList.Remove(nukeOp); // WD edit
                         everyone.Remove(nukeOp);
                         Logger.InfoS("preset", "Insufficient preferred nukeop commanders, picking an agent");
                     }
@@ -543,7 +550,9 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
                 }
                 else
                 {
-                    nukeOp = _random.PickAndTake(prefList);
+                    //nukeOp = _random.PickAndTake(prefList);
+                    nukeOp = _reputationManager.PickPlayerBasedOnReputation(prefList); // WD edit
+                    prefList.Remove(nukeOp); // WD edit
                     everyone.Remove(nukeOp);
                     Logger.InfoS("preset", "Selected a preferred nukeop commander.");
                 }

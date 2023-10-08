@@ -1032,6 +1032,68 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
 
         #endregion
 
+        #region Player Reputation (WD edit)
+
+        public async Task SetPlayerReputation(Guid player, float value)
+        {
+            await using var db = await GetDb();
+
+            var reputation = await db.DbContext.PlayerReputations
+                .SingleOrDefaultAsync(p => p.UserId == player);
+
+            if (reputation == null)
+            {
+                reputation = new PlayerReputation()
+                {
+                    UserId = player,
+                    Reputation = value
+                };
+                db.DbContext.PlayerReputations.Add(reputation);
+            }
+            else
+            {
+                reputation.Reputation = value;
+            }
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task ModifyPlayerReputation(Guid player, float value)
+        {
+            await using var db = await GetDb();
+
+            var reputation = await db.DbContext.PlayerReputations
+                .SingleOrDefaultAsync(p => p.UserId == player);
+
+            if (reputation == null)
+            {
+                reputation = new PlayerReputation()
+                {
+                    UserId = player,
+                    Reputation = 0f + value
+                };
+                db.DbContext.PlayerReputations.Add(reputation);
+            }
+            else
+            {
+                reputation.Reputation += value;
+            }
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<float> GetPlayerReputation(Guid player)
+        {
+            await using var db = await GetDb();
+
+            var reputation = await db.DbContext.PlayerReputations
+                .SingleOrDefaultAsync(p => p.UserId == player);
+
+            return reputation?.Reputation ?? 0f;
+        }
+
+        #endregion
+
         protected abstract Task<DbGuard> GetDb();
 
         protected abstract class DbGuard : IAsyncDisposable

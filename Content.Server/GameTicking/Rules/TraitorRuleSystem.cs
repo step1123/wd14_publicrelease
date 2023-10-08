@@ -22,6 +22,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Server.Objectives;
 using Content.Server.White.Administration;
+using Content.Server.White.Reputation;
 using Content.Shared.White.Cult;
 using Content.Shared.White.Mood;
 
@@ -42,6 +43,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     [Dependency] private readonly MindSystem _mindSystem = default!;
     //WD EDIT
     [Dependency] private readonly AntagRoleBanSystem _antagRoleBan = default!;
+    [Dependency] private readonly ReputationManager _reputationManager = default!;
 
     private ISawmill _sawmill = default!;
 
@@ -209,7 +211,9 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
 
         for (var i = 0; i < traitorCount; i++)
         {
-            var pref = _random.PickAndTake(prefList);
+            //var pref = _random.PickAndTake(prefList);
+            var pref = _reputationManager.PickPlayerBasedOnReputation(prefList);
+            prefList.Remove(pref);
 
             if (_antagRoleBan.HasAntagBan(pref))
             {

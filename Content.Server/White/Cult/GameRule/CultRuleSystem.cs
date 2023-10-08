@@ -12,6 +12,7 @@ using Content.Server.Roles;
 using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Components;
 using Content.Server.Storage.EntitySystems;
+using Content.Server.White.Reputation;
 using Content.Shared.Body.Systems;
 using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
@@ -48,6 +49,7 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
     [Dependency] private readonly RoundEndSystem _roundEndSystem = default!;
     [Dependency] private readonly MindSystem _mindSystem = default!;
     [Dependency] private readonly SharedBodySystem _bodySystem = default!;
+    [Dependency] private readonly ReputationManager _reputationManager = default!;
 
     private ISawmill _sawmill = default!;
 
@@ -407,7 +409,10 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
 
         for (var i = 0; i < actualCultistCount; i++)
         {
-            result.Add(_random.PickAndTake(prefList));
+            //result.Add(_random.PickAndTake(prefList));
+            var player = _reputationManager.PickPlayerBasedOnReputation(prefList);
+            result.Add(player);
+            prefList.Remove(player);
         }
 
         return result;

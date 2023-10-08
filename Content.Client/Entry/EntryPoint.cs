@@ -22,6 +22,7 @@ using Content.Client.Viewport;
 using Content.Client.Voting;
 using Content.Client.White.JoinQueue;
 using Content.Client.White.Jukebox;
+using Content.Client.White.Reputation;
 using Content.Client.White.Sponsors;
 using Content.Client.White.Stalin;
 using Content.Client.White.TTS;
@@ -83,6 +84,7 @@ namespace Content.Client.Entry
         [Dependency] private readonly StalinManager _stalinManager = default!;
         [Dependency] private readonly TTSManager _ttsManager = default!;
         [Dependency] private readonly ClientJukeboxSongsSyncManager _jukeboxSyncManager = default!;
+        [Dependency] private readonly ReputationManager _reputationManager = default!;
         //WD-EDIT
 
         public override void Init()
@@ -197,6 +199,7 @@ namespace Content.Client.Entry
             _queueManager.Initialize();
             _ttsManager.Initialize();
             _jukeboxSyncManager.Initialize();
+            _reputationManager.Initialize();
             //WD-EDIT
 
             _baseClient.RunLevelChanged += (_, args) =>
