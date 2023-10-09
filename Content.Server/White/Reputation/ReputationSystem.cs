@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using Content.Server.Administration;
 using Content.Server.GameTicking;
 using Content.Server.Mind.Components;
@@ -7,8 +6,9 @@ using Content.Server.UtkaIntegration;
 using Content.Server.White.AspectsSystem.Base;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.White;
 using Robust.Server.Player;
-using Robust.Shared.Asynchronous;
+using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Utility;
 
@@ -19,8 +19,12 @@ public sealed class ReputationSystem : EntitySystem
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly ReputationManager _repManager = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly ITaskManager _taskManager = default!;
     [Dependency] private readonly IPlayerLocator _locator = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
+
+    private const int MinPlayers = 15;
+    private const int MinRoundLength = 25;
+    private const int MinTimePlayerConnected = 20;
 
     public override void Initialize()
     {
@@ -41,6 +45,10 @@ public sealed class ReputationSystem : EntitySystem
         newValue = null;
         deltaValue = null;
 
+        var repEnabled = _cfg.GetCVar(WhiteCVars.ReputationEnabled);
+        if (!repEnabled)
+            return false;
+
         if (!_playerManager.TryGetSessionByUsername(name, out var session) || session.AttachedEntity == null)
             return false;
 
@@ -53,13 +61,17 @@ public sealed class ReputationSystem : EntitySystem
         if (value == null)
             return false;
 
-        var longRound = _gameTicker.RoundDuration().Minutes >= 25;
-        if (delta != 0 && longRound)
+        var longConnected = _repManager.GetCachedPlayerConnection(uid, out var date)
+                             && DateTime.UtcNow - date >= TimeSpan.FromMinutes(MinTimePlayerConnected);
+        var longRound = _gameTicker.RoundDuration() >= TimeSpan.FromMinutes(MinRoundLength);
+        var enoughPlayers = _playerManager.PlayerCount >= MinPlayers;
+
+        if (delta != 0 && longRound && longConnected && enoughPlayers)
         {
             _repManager.ModifyPlayerReputation(uid, delta);
         }
 
-        deltaValue = longRound ? delta : 0f;
+        deltaValue = longRound && longConnected && enoughPlayers ? delta : 0f;
         newValue = value + deltaValue;
 
         return true;

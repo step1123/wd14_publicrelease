@@ -346,4 +346,9 @@ public sealed class WhiteCVars
 
     public static readonly CVarDef<string> SalusApiLink = CVarDef.Create("white.salus_api_link", "http://localhost:7100/vpnchecker?address=", CVar.SERVERONLY | CVar.CONFIDENTIAL);
 
+    /*
+     * Reputation
+     */
+    public static readonly CVarDef<bool> ReputationEnabled =
+        CVarDef.Create("white.reputation_enabled", true, CVar.SERVERONLY);
 }
