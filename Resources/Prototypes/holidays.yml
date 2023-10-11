@@ -234,9 +234,6 @@
   name: holiday-name-bastille-day
   beginDay: 14
   beginMonth: July
-  greet:
-    !type:Custom
-    text: holiday-custom-bastille-day
 
 - type: holiday
   id: FriendshipDay
