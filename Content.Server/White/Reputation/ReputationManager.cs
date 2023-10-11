@@ -128,20 +128,25 @@ public sealed class ReputationManager : EntitySystem
         return success;
     }
 
-    public int GetPlayerWeight(float reputation)
+    public int GetPlayerWeight(float rep)
     {
-        return reputation switch
-        {
-            > 1000 => 9,
-            > 700 => 8,
-            > 500 => 7,
-            > 300 => 6,
-            > 100 => 5,
-            > 50 => 4,
-            > 15 => 3,
-            < 0 => 1,
-            _ => 2
-        };
+        // Min-max return values
+        const int minValue = 30;
+        const int maxValue = 50;
+
+        // Min-max reputation values
+        const float minReputation = 0f;
+        const float maxReputation = 1000f;
+
+        if (rep < minReputation)
+            return 20;
+
+        var normalizedReputation = (rep - minReputation) / (maxReputation - minReputation);
+        var result = (int)(minValue + (normalizedReputation * (maxValue - minValue)));
+
+        result = Math.Max(minValue, Math.Min(maxValue, result));
+
+        return result;
     }
 
     public IPlayerSession PickPlayerBasedOnReputation(List<IPlayerSession> prefList)

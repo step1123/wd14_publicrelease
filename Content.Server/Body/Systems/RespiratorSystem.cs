@@ -340,7 +340,10 @@ namespace Content.Server.Body.Systems
             if (CanCPR(args.Target, component, args.User))
                 args.Repeat = true;
             else
+            {
                 component.CPRPerformedBy = null;
+                component.CPRPlayingStream?.Stop();
+            }
 
             RaiseLocalEvent(args.User, new MoodEffectEvent("SavedLife"));
         }
