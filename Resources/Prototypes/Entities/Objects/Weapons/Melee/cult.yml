@@ -12,7 +12,7 @@
     attackRate: 1.5
     damage:
       types:
-        Slash: 12
+        Slash: 10
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Item
@@ -22,19 +22,19 @@
     slots:
     - back
   - type: RuneDrawerProvider
-    runePrototypes: [OfferingRune,
-                     EmpoweringRune,
-                     BuffRune,
-                     TeleportRune,
-                     ReviveRune,
-                     BarrierRune,
-                     SummoningRune,
-                     BloodBoilRune,
-                     ApocalypseRune]
+    runePrototypes: [ OfferingRune,
+                      EmpoweringRune,
+                      BuffRune,
+                      TeleportRune,
+                      ReviveRune,
+                      BarrierRune,
+                      SummoningRune,
+                      BloodBoilRune,
+                      ApocalypseRune ]
   - type: UserInterface
     interfaces:
-      - key: enum.ListViewSelectorUiKey.Key
-        type: ListViewSelectorBUI
+    - key: enum.ListViewSelectorUiKey.Key
+      type: ListViewSelectorBUI
 
 - type: entity
   name: eldritch blade
@@ -47,10 +47,10 @@
     sprite: Objects/Weapons/Melee/cult_blade.rsi
     state: icon
   - type: MeleeWeapon
-    attackRate: 0.75
+    attackRate: 0.9
     damage:
       types:
-        Slash: 33
+        Slash: 20
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Item

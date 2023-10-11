@@ -596,11 +596,12 @@ public sealed partial class ChatSystem : SharedChatSystem
         string wrappedMessage;
         wrappedMessage = Loc.GetString("chat-manager-send-cult-chat-wrap-message",
             ("channelName", Loc.GetString("chat-manager-cult-channel-name")),
+            ("player", playerName),
             ("message", FormattedMessage.EscapeText(message)));
+
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Cult chat from {player:Player}: {message}");
 
         _chatManager.ChatMessageToMany(ChatChannel.Cult, message, wrappedMessage, source, hideChat, false, clients.ToList());
-
     }
 
     private IEnumerable<INetChannel> GetCultChatClients()

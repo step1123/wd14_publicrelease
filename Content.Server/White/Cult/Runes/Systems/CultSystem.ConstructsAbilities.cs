@@ -1,7 +1,9 @@
-﻿using Content.Server.GameTicking;
+﻿using System.Linq;
+using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Maps;
 using Content.Server.Popups;
+using Content.Server.Roles;
 using Content.Server.White.Cult.GameRule;
 using Content.Server.White.IncorporealSystem;
 using Content.Shared.Actions;
@@ -13,6 +15,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
 using Content.Shared.StatusEffect;
 using Content.Shared.White.Cult;
+using Robust.Shared.Utility;
 
 namespace Content.Server.White.Cult.Runes.Systems;
 

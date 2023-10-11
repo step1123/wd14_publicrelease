@@ -5,6 +5,7 @@ using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Body.Systems;
+using Content.Server.Chemistry.Components.SolutionManager;
 using Content.Server.DoAfter;
 using Content.Server.Hands.Systems;
 using Content.Server.Mind.Components;
@@ -12,6 +13,7 @@ using Content.Server.Weapons.Ranged.Systems;
 using Content.Server.White.Cult.GameRule;
 using Content.Server.White.Cult.Runes.Comps;
 using Content.Shared.Actions;
+using Content.Shared.Actions.ActionTypes;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -34,6 +36,7 @@ using Content.Shared.White.Mindshield;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 
@@ -91,6 +94,7 @@ public sealed partial class CultSystem : EntitySystem
         SubscribeLocalEvent<CultistComponent, NameSelectorMessage>(OnChoose);
         SubscribeLocalEvent<CultRuneBaseComponent, InteractUsingEvent>(TryErase);
         SubscribeLocalEvent<CultRuneBaseComponent, CultEraseEvent>(OnErase);
+        SubscribeLocalEvent<CultRuneBaseComponent, StartCollideEvent>(HandleCollision);
 
         InitializeBuffSystem();
         InitializeNarsie();
@@ -295,6 +299,19 @@ public sealed partial class CultSystem : EntitySystem
         _popupSystem.PopupEntity(Loc.GetString("cult-erased-rune"), args.User);
     }
 
+    private void HandleCollision(EntityUid uid, CultRuneBaseComponent component, ref StartCollideEvent args)
+    {
+        if (!TryComp<SolutionContainerManagerComponent>(args.OtherEntity, out var solution))
+        {
+            return;
+        }
+
+        if (solution.Solutions.TryGetValue("vapor", out var vapor) && vapor.TryGetReagent("HolyWater", out _))
+        {
+            Del(uid);
+        }
+    }
+
     //Erasing end
 
     /*
@@ -426,7 +443,7 @@ public sealed partial class CultSystem : EntitySystem
         if (isTarget)
         {
             _bodySystem.GibBody(target);
-            AddUsesToRevive();
+            AddChargesToReviveRune();
 
             return true;
         }
@@ -434,13 +451,9 @@ public sealed partial class CultSystem : EntitySystem
         if (!SpawnShard(target))
         {
             _bodySystem.GibBody(target);
-            AddUsesToRevive();
-        }
-        else
-        {
-            AddUsesToRevive();
         }
 
+        AddChargesToReviveRune();
         return true;
     }
 
@@ -462,13 +475,9 @@ public sealed partial class CultSystem : EntitySystem
         if (!SpawnShard(target))
         {
             _bodySystem.GibBody(target);
-            AddUsesToRevive();
-        }
-        else
-        {
-            AddUsesToRevive();
         }
 
+        AddChargesToReviveRune();
         return true;
     }
 
@@ -786,20 +795,20 @@ public sealed partial class CultSystem : EntitySystem
             return;
         }
 
-        var result = Revive(victim.Value, args.User, component);
+        var result = Revive(victim.Value, args.User);
 
         args.Result = result;
     }
 
-    private bool Revive(EntityUid target, EntityUid user, CultRuneReviveComponent component)
+    private bool Revive(EntityUid target, EntityUid user)
     {
-        if (component.UsesToRevive < component.UsesHave)
+        if (CultRuneReviveComponent.ChargesLeft == 0)
         {
             _popupSystem.PopupEntity(Loc.GetString("cult-revive-rune-no-charges"), user, user);
             return false;
         }
 
-        component.UsesHave -= 3;
+        CultRuneReviveComponent.ChargesLeft--;
 
         _entityManager.EventBus.RaiseLocalEvent(target, new RejuvenateEvent());
         return true;
@@ -1110,11 +1119,11 @@ public sealed partial class CultSystem : EntitySystem
                 return;
             }
 
-            _actionsSystem.AddAction(playerEntity.Value, action, null!);
+            _actionsSystem.AddAction(playerEntity.Value, (ActionType) action.Clone(), null!);
         }
         else if (cultistsActions < component.MinRequiredCultistActions)
         {
-            _actionsSystem.AddAction(playerEntity.Value, action, null!);
+            _actionsSystem.AddAction(playerEntity.Value, (ActionType) action.Clone(), null!);
         }
     }
 
@@ -1208,6 +1217,9 @@ public sealed partial class CultSystem : EntitySystem
                 "CULT", true, _apocRuneEndDrawing, colorOverride: Color.DarkRed);
         }
 
+        var damageSpecifier = new DamageSpecifier(_prototypeManager.Index<DamageTypePrototype>("Slash"), 10);
+        _damageableSystem.TryChangeDamage(uid, damageSpecifier, true, false);
+
         _entityManager.SpawnEntity(rune, transform.Value);
     }
 
@@ -1233,14 +1245,9 @@ public sealed partial class CultSystem : EntitySystem
         return true;
     }
 
-    private void AddUsesToRevive()
+    private void AddChargesToReviveRune(uint amount = 1)
     {
-        var runes = EntityQuery<CultRuneReviveComponent>();
-
-        foreach (var rune in runes)
-        {
-            rune.UsesHave += 1;
-        }
+        CultRuneReviveComponent.ChargesLeft += amount;
     }
 
     private bool IsAllowedToDraw(EntityUid uid)

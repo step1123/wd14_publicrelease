@@ -1,5 +1,6 @@
 ﻿using Content.Server.Mind;
 using Content.Server.Mind.Components;
+using Content.Server.Roles;
 using Content.Server.White.Cult.Runes.Comps;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
@@ -27,23 +28,32 @@ public partial class CultSystem
     {
         var target = args.Target;
 
-        if(!HasComp<CultistComponent>(args.User)) return;
+        if (!HasComp<CultistComponent>(args.User)) return;
 
-        if(!TryComp<MobStateComponent>(target, out var state) || state.CurrentState != MobState.Dead) return;
+        if (!TryComp<MobStateComponent>(target, out var state) || state.CurrentState != MobState.Dead) return;
 
-        if(!TryComp<MindContainerComponent>(target, out var mindComponent) || mindComponent.Mind is null || !TryComp<HumanoidAppearanceComponent>(target, out _)) return;
+        if (!TryComp<MindContainerComponent>(target, out var mindComponent) || mindComponent.Mind is null || !TryComp<HumanoidAppearanceComponent>(target, out _)) return;
 
         _mindSystem.TransferTo(mindComponent.Mind, uid);
 
-        var shardMetaData = MetaData(uid);
         var targetName = MetaData(target.Value).EntityName;
 
-        shardMetaData.EntityName = Loc.GetString("soul-shard-description",("soul", targetName));
-        shardMetaData.EntityDescription = Loc.GetString("soul-shard-description", ("soul", targetName));
+        _metaDataSystem.SetEntityName(uid, Loc.GetString("soul-shard-description", ("soul", targetName)));
+        _metaDataSystem.SetEntityDescription(uid, Loc.GetString("soul-shard-description", ("soul", targetName)));
     }
 
     private void OnShardMindAdded(EntityUid uid, SoulShardComponent component, MindAddedMessage args)
     {
+        if (!_mindSystem.TryGetMind(uid, out var mind))
+        {
+            return;
+        }
+
+        if (_mindSystem.TryGetRole<AntagonistRole>(mind, out var role))
+        {
+            _mindSystem.RemoveRole(mind, role);
+        }
+
         _appearanceSystem.SetData(uid, SoulShardVisualState.State, true);
         _lightSystem.SetEnabled(uid, true);
     }

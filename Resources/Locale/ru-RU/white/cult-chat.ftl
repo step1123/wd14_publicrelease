@@ -1,3 +1,3 @@
-chat-manager-cult-channel-name = КУЛЬТ
-chat-manager-send-cult-chat-wrap-message = { $channelName }: { $message }
+chat-manager-cult-channel-name = Культ
+chat-manager-send-cult-chat-wrap-message = \[{ $channelName }\] { $player }: { $message }
 hud-chatbox-select-channel-Cult = Культ

@@ -59,7 +59,7 @@ public sealed class CultistComponent : Component
         CanTargetSelf = true,
         DeselectOnMiss = true,
         Repeat = false,
-        Description = "A sinister spell that is used to turn metal into runic metal.",
+        Description = "A useful spell that teleports cultists to a chosen destination",
         Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/White/Cult/actions_cult.rsi"), "teleport"),
         Event = new CultTeleportTargetActionEvent(),
         Whitelist = new EntityWhitelist
@@ -78,7 +78,7 @@ public sealed class CultistComponent : Component
         CanTargetSelf = true,
         DeselectOnMiss = true,
         Repeat = false,
-        Description = "A sinister spell that is used to turn metal into runic metal.",
+        Description = "A crucial spell that enables you to summon a full set of combat gear",
         Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/White/Cult/actions_cult.rsi"), "armor"),
         Event = new CultSummonCombatEquipmentTargetActionEvent(),
         Whitelist = new EntityWhitelist

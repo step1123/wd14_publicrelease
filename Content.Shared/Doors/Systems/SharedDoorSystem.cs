@@ -250,7 +250,7 @@ public abstract class SharedDoorSystem : EntitySystem
         if (door.State == DoorState.Welded)
             return false;
 
-        var ev = new BeforeDoorOpenedEvent();
+        var ev = new BeforeDoorOpenedEvent(user); // WD CHANGED
         RaiseLocalEvent(uid, ev, false);
         if (ev.Cancelled)
             return false;
@@ -323,7 +323,7 @@ public abstract class SharedDoorSystem : EntitySystem
         if (door.State is DoorState.Welded or DoorState.Closed)
             return false;
 
-        var ev = new BeforeDoorClosedEvent(door.PerformCollisionCheck);
+        var ev = new BeforeDoorClosedEvent(door.PerformCollisionCheck, user); // WD CHANGED
         RaiseLocalEvent(uid, ev, false);
         if (ev.Cancelled)
             return false;

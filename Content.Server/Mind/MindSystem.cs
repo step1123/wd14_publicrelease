@@ -94,7 +94,7 @@ public sealed class MindSystem : EntitySystem
         if (_userMinds.TryGetValue(user, out mind))
         {
             DebugTools.Assert(mind.UserId == user);
-            DebugTools.Assert(_playerManager.GetPlayerData(user).ContentData() is not {} data
+            DebugTools.Assert(_playerManager.GetPlayerData(user).ContentData() is not { } data
                               || data.Mind == mind);
             return true;
         }
@@ -147,7 +147,7 @@ public sealed class MindSystem : EntitySystem
             return;
 
         // If the player is currently visiting some other entity, simply attach to that entity.
-        if (mind.VisitingEntity is {Valid: true} visiting
+        if (mind.VisitingEntity is { Valid: true } visiting
             && visiting != uid
             && !Deleted(visiting)
             && !Terminating(visiting))
@@ -412,11 +412,12 @@ public sealed class MindSystem : EntitySystem
 
         var oldComp = mind.OwnedComponent;
         var oldEntity = mind.OwnedEntity;
-        if(oldComp != null && oldEntity != null)
+        if (oldComp != null && oldEntity != null)
             InternalEjectMind(oldEntity.Value, oldComp);
 
         SetOwnedEntity(mind, entity, component);
-        if (mind.OwnedComponent != null){
+        if (mind.OwnedComponent != null)
+        {
             InternalAssignMind(mind.OwnedEntity!.Value, mind, mind.OwnedComponent);
             mind.OriginalOwnedEntity ??= mind.OwnedEntity;
         }
@@ -544,6 +545,12 @@ public sealed class MindSystem : EntitySystem
     public bool HasRole<T>(Mind mind) where T : Role
     {
         return mind.Roles.Any(role => role is T);
+    }
+
+    public bool TryGetRole<T>(Mind mind, [NotNullWhen(true)] out Role? role) where T : Role
+    {
+        role = mind.Roles.FirstOrDefault(role => role is T);
+        return role is not null;
     }
 
     public bool TryGetSession(Mind mind, [NotNullWhen(true)] out IPlayerSession? session)
