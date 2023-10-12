@@ -7346,7 +7346,6 @@ entities:
       - 8651
       - 8649
       - 8650
-      - invalid
       - 8648
       type: DeviceNetwork
     - devices:
