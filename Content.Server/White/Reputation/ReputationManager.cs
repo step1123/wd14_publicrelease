@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Content.Server.Administration;
 using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Shared.GameTicking;
@@ -15,9 +16,14 @@ public sealed class ReputationManager : EntitySystem
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly IServerNetManager _netMgr = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly ILogManager _logManager = default!;
+    [Dependency] private readonly IPlayerLocator _locator = default!;
 
     private readonly Dictionary<NetUserId, ReputationInfo> _cacheReputation = new();
     private readonly Dictionary<NetUserId, DateTime> _playerConnectionTime = new();
+
+    private ISawmill _sawmill = default!;
+    private const string SawmillId = "reputation.logs";
 
     public override void Initialize()
     {
@@ -94,18 +100,30 @@ public sealed class ReputationManager : EntitySystem
 
     #region PublicApi
 
-    public async void SetPlayerReputation(NetUserId player, float value)
+    public async void SetPlayerReputation(NetUserId player, float value, string? admin = null)
     {
+        var preValue = await GetPlayerReputation(player);
+        if (preValue == null)
+            return;
+
         var guid = player.UserId;
         await SetPlayerReputationTask(guid, value);
+
         RaiseLocalEvent(new UpdateCachedReputationEvent(player));
+        await LogReputationChange(player, preValue.Value, false, admin);
     }
 
-    public async void ModifyPlayerReputation(NetUserId player, float value)
+    public async void ModifyPlayerReputation(NetUserId player, float value, string? admin = null)
     {
+        var preValue = await GetPlayerReputation(player);
+        if (preValue == null)
+            return;
+
         var guid = player.UserId;
         await ModifyPlayerReputationTask(guid, value);
+
         RaiseLocalEvent(new UpdateCachedReputationEvent(player));
+        await LogReputationChange(player, preValue.Value, true, admin);
     }
 
     public async Task<float?> GetPlayerReputation(NetUserId player)
@@ -214,6 +232,26 @@ public sealed class ReputationManager : EntitySystem
         {
             return null;
         }
+    }
+
+    private async Task LogReputationChange(NetUserId user, float preValue, bool modify, string? admin = null)
+    {
+        var located = await _locator.LookupIdAsync(user);
+        if (located == null)
+            return;
+
+        var newValue = await GetPlayerReputation(user);
+        if (newValue == null)
+            return;
+
+        var adminName = admin != null ? $" by {admin}" : "";
+
+        var msg = modify
+            ? $"Reputation of {located.Username} was modified from {preValue} to {newValue.Value}{adminName}."
+            : $"Reputation of {located.Username} was set from {preValue} to {newValue.Value}{adminName}.";
+
+        _sawmill = _logManager.GetSawmill(SawmillId);
+        _sawmill.Info(msg);
     }
 
     #endregion

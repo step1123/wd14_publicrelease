@@ -10,7 +10,7 @@
             Access="Public"
             HorizontalExpand="True"
             VerticalExpand="False"
-            ToolTip="foobar"
+            ToolTip="{Loc 'criminal-login-in-desc'}"
             TooltipDelay="0.25">
             <BoxContainer Orientation="Horizontal" >
                 <TextureRect Access="Public" Name="LIcon"

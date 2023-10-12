@@ -35,8 +35,9 @@ public sealed class SetReputationCommand : IConsoleCommand
         }
 
         var uid = playerData.UserId;
+        var admin = playerData.UserName;
 
-        repManager.SetPlayerReputation(uid, value);
+        repManager.SetPlayerReputation(uid, value, admin);
 
         shell.WriteLine($"Set reputation of {args[0]} to {args[1]}.");
     }

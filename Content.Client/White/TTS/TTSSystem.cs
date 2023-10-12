@@ -102,9 +102,12 @@ public sealed class TTSSystem : EntitySystem
 
     private void OnPlayTTS(PlayTTSEvent ev)
     {
-        var volume = 0f;
+        if (_volume <= -20f)
+            return;
+
+        var volume = _volume;
         if (ev.BoostVolume)
-            volume = 5f;
+            volume += 5f;
         if (!TryCreateAudioSource(ev.Data, out var source, volume))
             return;
 
