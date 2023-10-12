@@ -7,6 +7,7 @@ using Content.Server.Explosion.Components;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NPC.Pathfinding;
 using Content.Server.Station.Systems;
+using Content.Shared.Armor;
 using Content.Shared.Audio;
 using Content.Shared.Camera;
 using Content.Shared.CCVar;
