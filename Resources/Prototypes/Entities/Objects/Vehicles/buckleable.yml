@@ -208,7 +208,7 @@
     baseSprintSpeed: 6
   - type: Armor
     modifiers:
-      coeffecients:
+      coefficients:
         Blunt: 0.8
         Slash: 0.6
         Piercing: 0.85
@@ -305,7 +305,7 @@
       maxBuckleDistance: 1
     - type: Armor
       modifiers:
-        coeffecients:
+        coefficients:
           Blunt: 0.8
           Slash: 0.6
           Piercing: 0.85
