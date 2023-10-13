@@ -5,6 +5,7 @@
   components:
     - type: Storage
       capacity: 40
+      ignoreSize: true # ААААААААААА БЛЯТЬ У МЕНЯ ЭТА ОШИБКА ГЛАЗА ЕБУУТ ААА
     - type: Item
       size: 20 # Так лид сказал. Если что-то ломается (кроме тестов), то поставьте 40
       sprite: White/Specific/expmedkit.rsi

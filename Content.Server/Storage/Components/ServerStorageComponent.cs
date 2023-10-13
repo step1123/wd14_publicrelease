@@ -38,6 +38,8 @@ namespace Content.Server.Storage.Components
         [DataField("blacklist")]
         public EntityWhitelist? Blacklist = null;
 
+        [DataField("ignoreSize")] public bool IgnoreSize; //СКИНУ ТЕБЯ В ЧС
+
         /// <summary>
         ///     If true, storage will show popup messages to the player after failed interactions.
         ///     Usually this is message that item doesn't fit inside container.

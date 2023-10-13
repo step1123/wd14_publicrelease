@@ -54,7 +54,7 @@
     sprite: Objects/Consumable/Drinks/beerglass.rsi
     state: icon
   product: CrateFoodBarSupply
-  cost: 750
+  cost: 1000
   category: Food
   group: market
 

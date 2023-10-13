@@ -98,10 +98,9 @@ public sealed class BankCardSystem : EntitySystem
             component.BankAccountId = acc.BankAccount.AccountId;
             return;
         }
-
-        if (component.BankAccountId.HasValue)
+        if (component.AccoundId.HasValue)
         {
-            CreateAccount(component.BankAccountId.Value, component.StartingBalance);
+            CreateAccount(component.AccoundId.Value, component.StartingBalance);
             return;
         }
 

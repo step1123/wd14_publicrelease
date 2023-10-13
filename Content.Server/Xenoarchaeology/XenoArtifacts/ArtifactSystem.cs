@@ -307,7 +307,8 @@ public sealed partial class ArtifactSystem : EntitySystem
     private void OnRoundEnd(RoundEndTextAppendEvent ev)
     {
         var RoundEndTimer = _configurationManager.GetCVar(CCVars.ArtifactRoundEndTimer);
-        if (RoundEndTimer > 0)
+        // Ломается говно
+        if (RoundEndTimer > 1)
         {
             var query = EntityQueryEnumerator<ArtifactComponent>();
             while (query.MoveNext(out var ent, out var artifactComp))

@@ -18,7 +18,7 @@
     hand 1:
       part: LeftArmBorg
     hand 2:
-      part: LeftArmBorg
+      part: RightArmBorg
     hand 3:
       part: LeftArmBorg
     left leg:

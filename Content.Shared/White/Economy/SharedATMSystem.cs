@@ -17,11 +17,17 @@ public abstract class SharedATMSystem : EntitySystem
 
     protected virtual void OnATMInit(EntityUid uid, ATMComponent component, ComponentInit args)
     {
+        if(component.CardSlot == null) //Нихуя не олвейс фалс, юнит тест ебалнит
+            return;
+
         _itemSlotsSystem.AddItemSlot(uid, component.SlotId, component.CardSlot);
     }
 
     private void OnATMRemoved(EntityUid uid, ATMComponent component, ComponentRemove args)
     {
+        if(component.CardSlot == null) //Нихуя не олвейс фалс, юнит тест ебалнит
+            return;
+
         _itemSlotsSystem.TryEject(uid, component.CardSlot, null!, out _);
         _itemSlotsSystem.RemoveItemSlot(uid, component.CardSlot);
     }

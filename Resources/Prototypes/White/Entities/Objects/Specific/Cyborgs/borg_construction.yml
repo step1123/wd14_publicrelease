@@ -33,6 +33,11 @@
       edges:
         - to: borg
           steps:
+            - tag: BorgLeftArm
+              name: left borg arm
+              icon:
+                sprite: Mobs/Silicon/drone.rsi
+                state: "l_hand"
             - tool: Anchoring
               doAfter: 1
 

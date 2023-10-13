@@ -18,6 +18,26 @@
   parent: ClothingBeltMedical
   suffix: Filled
   components:
+    - type: Storage
+      capacity: 80
+      whitelist:
+        tags:
+          - Wrench
+          - Bottle
+          - Spray
+          - Brutepack
+          - Bloodpack
+          - Gauze
+          - Ointment
+          - CigPack
+          - PillCanister
+          - Radio
+          - DiscreteHealthAnalyzer
+          - SurgeryTool
+        components:
+          - Hypospray
+          - Injector
+          - Pill
     - type: StorageFill
       contents:
         - id: Scalpel

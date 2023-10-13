@@ -160,6 +160,8 @@
       interfaces:
         - key: enum.CultStructureCraftUiKey.Key
           type: StructureCraftBoundUserInterface
+    - type: Item
+      size: 30
 
 - type: entity
   parent: CultRunicMetal
@@ -170,6 +172,8 @@
       state: runic
     - type: Stack
       count: 1
+    - type: Item
+      size: 1
 
 - type: entity
   parent: CultRunicMetal
@@ -180,3 +184,5 @@
       state: runic
     - type: Stack
       count: 20
+    - type: Item
+      size: 20
