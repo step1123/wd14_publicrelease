@@ -23,6 +23,7 @@ using Content.Server.Voting.Managers;
 using Content.Server.Worldgen.Tools;
 using Content.Server.UtkaIntegration;
 using Content.Server.White;
+using Content.Server.White.JobWhitelist;
 using Content.Server.White.JoinQueue;
 using Content.Server.White.Jukebox;
 using Content.Server.White.Reputation;
@@ -71,6 +72,7 @@ namespace Content.Server.IoC
             IoCManager.Register<PoissonDiskSampler>();
 
             // WD-EDIT
+            IoCManager.Register<JobWhitelistManager>();
             IoCManager.Register<SponsorsManager>();
             IoCManager.Register<JoinQueueManager>();
             IoCManager.Register<UtkaTCPWrapper>();

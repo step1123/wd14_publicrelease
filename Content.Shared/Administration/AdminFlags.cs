@@ -97,6 +97,11 @@ namespace Content.Shared.Administration
         AdminSpecies = 1 << 16,
 
         /// <summary>
+        ///     Commands for Job Whitelist.
+        /// </summary>
+        JobWhitelist = 1 << 17, // WD EDIT
+
+        /// <summary>
         ///     Dangerous host permissions like scsi.
         /// </summary>
         Host = 1u << 31,

@@ -1,5 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Shared.Players.PlayTimeTracking;
+using Content.Shared.White.JobWhitelist;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
@@ -67,6 +69,7 @@ namespace Content.Shared.Roles
         public static bool TryRequirementsMet(
             JobPrototype job,
             Dictionary<string, TimeSpan> playTimes,
+            List<string> allowedJobs, // WD EDIT
             [NotNullWhen(false)] out string? reason,
             IPrototypeManager prototypes)
         {
@@ -74,9 +77,15 @@ namespace Content.Shared.Roles
             if (job.Requirements == null)
                 return true;
 
+            if (allowedJobs.Contains(job.ID)) // WD EDIT
+                return true;
+
             foreach (var requirement in job.Requirements)
             {
-                if (!TryRequirementMet(requirement, playTimes, out reason, prototypes))
+                if (requirement is WLRequirement && !TryRequirementMet(requirement, playTimes, allowedJobs, out _, prototypes) && job.Requirements.Count > 1) // WD EDIT
+                    continue;
+
+                if (!TryRequirementMet(requirement, playTimes, allowedJobs, out reason, prototypes)) // WD EDIT
                     return false;
             }
 
@@ -89,6 +98,7 @@ namespace Content.Shared.Roles
         public static bool TryRequirementMet(
             JobRequirement requirement,
             Dictionary<string, TimeSpan> playTimes,
+            List<string> allowedJobs, // WD EDIT
             [NotNullWhen(false)] out string? reason,
             IPrototypeManager prototypes)
 
@@ -97,6 +107,14 @@ namespace Content.Shared.Roles
 
             switch (requirement)
             {
+                // WD EDIT start
+                case WLRequirement wlRequirement:
+                    if (allowedJobs.Contains(wlRequirement.Key))
+                        return true;
+
+                    reason = Loc.GetString("jobwhitelist-required");
+                    return false;
+                // WD EDIT end
                 case DepartmentTimeRequirement deptRequirement:
                     var playtime = TimeSpan.Zero;
 

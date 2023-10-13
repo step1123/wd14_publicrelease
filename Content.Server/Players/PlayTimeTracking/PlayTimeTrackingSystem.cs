@@ -4,12 +4,14 @@ using Content.Server.Afk;
 using Content.Server.Afk.Events;
 using Content.Server.GameTicking;
 using Content.Server.Roles;
+using Content.Server.White.JobWhitelist;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Roles;
+using Content.Shared.White.JobWhitelist;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
@@ -30,6 +32,7 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly PlayTimeTrackingManager _tracking = default!;
     [Dependency] private readonly IAdminManager _adminManager = default!;
+    [Dependency] private readonly JobWhitelistManager _jobWhitelist = default!; // WD EDIT
 
     public override void Initialize()
     {
@@ -164,38 +167,54 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
 
     public bool IsAllowed(IPlayerSession player, string role)
     {
-        if (IsBypassingChecks(player))
+        if (!_prototypes.TryIndex<JobPrototype>(role, out var job) ||
+            job.Requirements == null) // WD EDIT
             return true;
 
-        if (!_prototypes.TryIndex<JobPrototype>(role, out var job) ||
-            job.Requirements == null ||
-            !_cfg.GetCVar(CCVars.GameRoleTimers))
-            return true;
+        // WD EDIT start
+        if (!job.Requirements.Any(req => req is WLRequirement))
+        {
+            if (!_cfg.GetCVar(CCVars.GameRoleTimers) || IsBypassingChecks(player))
+                return true;
+        }
+        // WD EDIT end
 
         var playTimes = _tracking.GetTrackerTimes(player);
 
-        return JobRequirements.TryRequirementsMet(job, playTimes, out _, _prototypes);
+        var allowedJobs = _jobWhitelist.TakeAllowedJobs(player.UserId); // WD EDIT
+
+        return JobRequirements.TryRequirementsMet(job, playTimes, allowedJobs, out _, _prototypes); // WD EDIT
     }
 
     public HashSet<string> GetDisallowedJobs(IPlayerSession player)
     {
         var roles = new HashSet<string>();
 
-        if (IsBypassingChecks(player))
-            return roles;
-
-        if (!_cfg.GetCVar(CCVars.GameRoleTimers))
-            return roles;
-
         var playTimes = _tracking.GetTrackerTimes(player);
+
+        var allowedJobs = _jobWhitelist.TakeAllowedJobs(player.UserId); // WD EDIT
+
 
         foreach (var job in _prototypes.EnumeratePrototypes<JobPrototype>())
         {
+            if (allowedJobs.Contains(job.ID)) // WD EDIT
+                continue;
+
             if (job.Requirements != null)
             {
+                // WD EDIT start
+                if (!job.Requirements.Any(req => req is WLRequirement))
+                {
+                    if (!_cfg.GetCVar(CCVars.GameRoleTimers) || IsBypassingChecks(player))
+                        continue;
+                }
+                // WD EDIT end
+
                 foreach (var requirement in job.Requirements)
                 {
-                    if (JobRequirements.TryRequirementMet(requirement, playTimes, out _, _prototypes))
+                    if (JobRequirements.TryRequirementMet(requirement, playTimes, allowedJobs, out _, _prototypes)) // WD EDIT
+                        continue;
+                    if (requirement is WLRequirement && job.Requirements.Count > 1) // WD EDIT
                         continue;
 
                     goto NoRole;
@@ -216,15 +235,14 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
 
         var player = _playerManager.GetSessionByUserId(userId);
 
-        if (IsBypassingChecks(player))
-            return;
-
         if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
         {
             // Sorry mate but your playtimes haven't loaded.
             Logger.ErrorS("playtime", $"Playtimes weren't ready yet for {player} on roundstart!");
             playTimes ??= new Dictionary<string, TimeSpan>();
         }
+
+        var allowedJobs = _jobWhitelist.TakeAllowedJobs(userId); // WD EDIT
 
         for (var i = 0; i < jobs.Count; i++)
         {
@@ -235,9 +253,17 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
                 jobber.Requirements.Count == 0)
                 continue;
 
+            if (allowedJobs.Contains(job)) // WD EDIT
+                continue;
+
+            if (IsBypassingChecks(player) && !jobber.Requirements.Any(req => req is WLRequirement)) // WD EDIT
+                continue;
+
             foreach (var requirement in jobber.Requirements)
             {
-                if (JobRequirements.TryRequirementMet(requirement, playTimes, out _, _prototypes))
+                if (JobRequirements.TryRequirementMet(requirement, playTimes, allowedJobs, out _, _prototypes)) // WD EDIT
+                    continue;
+                if (requirement is WLRequirement && jobber.Requirements.Count > 1) // WD EDIT
                     continue;
 
                 jobs.RemoveSwap(i);

@@ -941,6 +941,46 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
 
         #endregion
 
+        // WD EDIT start
+        #region JobWhitelist
+
+        public async Task<List<string>> TakeAllowedJobWhitelistAsync(Guid player)
+        {
+            await using var db = await GetDb();
+
+            var jobIds = await db.DbContext.UserJobWhitelist
+                .Where(entry => entry.UserId == player)
+                .Select(entry => entry.JobId)
+                .ToListAsync();
+
+            return jobIds;
+        }
+
+        public async Task AddToJobWhitelistAsync(NetUserId player, string job)
+        {
+            await using var db = await GetDb();
+
+            db.DbContext.UserJobWhitelist.Add(new UserJobWhitelist { UserId = player, JobId = job });
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task RemoveFromJobWhitelistAsync(Guid player, string? job = null)
+        {
+            await using var db = await GetDb();
+
+            var query = db.DbContext.UserJobWhitelist.Where(entry => entry.UserId == player);
+
+            if (job != null)
+                query = query.Where(entry => entry.JobId == job);
+
+            db.DbContext.UserJobWhitelist.RemoveRange(query.ToList());
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        #endregion
+        // WD EDIT end
+
         #region Uploaded Resources Logs
 
         public async Task AddUploadedResourceLogAsync(NetUserId user, DateTime date, string path, byte[] data)

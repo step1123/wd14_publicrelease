@@ -31,6 +31,7 @@ using Robust.Shared.Utility;
 using Content.Server.Station.Systems;
 using Content.Server.UtkaIntegration;
 using Content.Server.White;
+using Content.Server.White.JobWhitelist;
 using Content.Server.White.JoinQueue;
 using Content.Server.White.Jukebox;
 using Content.Server.White.Reputation;
@@ -164,6 +165,7 @@ namespace Content.Server.Entry
                 IoCManager.Resolve<RoleBanManager>().Initialize();
 
                 //WD-EDIT
+                IoCManager.Resolve<JobWhitelistManager>().Initialize();
                 IoCManager.Resolve<UtkaTCPWrapper>().Initialize();
                 UtkaTCPServer.RegisterCommands();
                 //WD-EDIT

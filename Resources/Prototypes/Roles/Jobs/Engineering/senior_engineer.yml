@@ -4,12 +4,11 @@
   description: job-description-senior-engineer
   playTimeTracker: JobSeniorEngineer
   requirements:
-    - !type:RoleTimeRequirement
-      role: JobAtmosphericTechnician
-      time: 86400 # 24 hrs
+    - !type:WLRequirement
+      requirementJob: SeniorEngineer
     - !type:DepartmentTimeRequirement
       department: Engineering
-      time: 720000 # 200 hrs
+      time: 2880000 # 800 hrs
   startingGear: SeniorEngineerGear
   icon: "SeniorEngineer"
   supervisors: job-supervisors-ce

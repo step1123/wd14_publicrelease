@@ -6,6 +6,7 @@ using Content.Shared.CCVar;
 using Content.Shared.Players;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Roles;
+using Content.Shared.White.JobWhitelist;
 using Robust.Client;
 using Robust.Client.Player;
 using Robust.Shared.Configuration;
@@ -25,6 +26,7 @@ public sealed class JobRequirementsManager
 
     private readonly Dictionary<string, TimeSpan> _roles = new();
     private readonly List<string> _roleBans = new();
+    private readonly List<string> _allowedJobs = new(); // WD EDIT
 
     private ISawmill _sawmill = default!;
 
@@ -37,6 +39,7 @@ public sealed class JobRequirementsManager
         // Yeah the client manager handles role bans and playtime but the server ones are separate DEAL.
         _net.RegisterNetMessage<MsgRoleBans>(RxRoleBans);
         _net.RegisterNetMessage<MsgPlayTime>(RxPlayTime);
+        _net.RegisterNetMessage<MsgJobWL>(RxJobWL); // WD EDIT
 
         _client.RunLevelChanged += ClientOnRunLevelChanged;
         _adminManager.AdminStatusUpdated += () => Updated?.Invoke(); // WD
@@ -50,6 +53,20 @@ public sealed class JobRequirementsManager
             _roles.Clear();
         }
     }
+
+    // WD EDIT start
+    private void RxJobWL(MsgJobWL message)
+    {
+        _sawmill.Debug($"Received jobwhitelist info containing {message.AllowedJobs.Count} entries.");
+
+        if (_allowedJobs.Equals(message.AllowedJobs))
+            return;
+
+        _allowedJobs.Clear();
+        _allowedJobs.AddRange(message.AllowedJobs);
+        Updated?.Invoke();
+    }
+    // WD EDIT end
 
     private void RxRoleBans(MsgRoleBans message)
     {
@@ -91,27 +108,41 @@ public sealed class JobRequirementsManager
             return false;
         }
 
-        if (job.Requirements == null ||
-            !_cfg.GetCVar(CCVars.GameRoleTimers))
-        {
+        if (job.Requirements == null)
             return true;
+
+        // WD EDIT start
+        if (!job.Requirements.Any(req => req is WLRequirement))
+        {
+            if (!_cfg.GetCVar(CCVars.GameRoleTimers) || _adminManager.IsActive())
+                return true;
         }
+        // WD EDIT end
 
         var player = _playerManager.LocalPlayer?.Session;
 
         if (player == null)
             return true;
 
-        if (_adminManager.IsActive()) // WD
+        if (_allowedJobs.Contains(job.ID)) // WD EDIT
             return true;
+
+
 
         var reasonBuilder = new StringBuilder();
 
         var first = true;
         foreach (var requirement in job.Requirements)
         {
-            if (JobRequirements.TryRequirementMet(requirement, _roles, out reason, _prototypes))
+            // WD EDIT start
+            if (JobRequirements.TryRequirementMet(requirement, _roles, _allowedJobs, out reason, _prototypes))
                 continue;
+            if (requirement is WLRequirement && job.Requirements.Count > 1)
+            {
+                reasonBuilder.AppendLine(Loc.GetString("jobwhitelist-or-required")+"\n");
+                continue;
+            }
+            // WD EDIT end
 
             if (!first)
                 reasonBuilder.Append('\n');

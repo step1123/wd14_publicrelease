@@ -1064,6 +1064,22 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("uploaded_resource_log", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.UserJobWhitelist", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
+                    b.Property<string>("JobId")
+                        .HasColumnType("text")
+                        .HasColumnName("job_id");
+
+                    b.HasKey("UserId", "JobId")
+                        .HasName("PK_job_whitelist");
+
+                    b.ToTable("job_whitelist", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.Whitelist", b =>
                 {
                     b.Property<Guid>("UserId")

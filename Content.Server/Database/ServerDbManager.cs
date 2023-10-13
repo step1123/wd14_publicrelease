@@ -223,6 +223,18 @@ namespace Content.Server.Database
 
         #endregion
 
+        // WD EDIT start
+        #region JobWhitelist
+
+        Task<List<string>> TakeAllowedJobWhitelistAsync(Guid player);
+
+        Task AddToJobWhitelistAsync(NetUserId player, string job);
+
+        Task RemoveFromJobWhitelistAsync(Guid player, string? job);
+
+        #endregion
+        // WD EDIT end
+
         #region Uploaded Resources Logs
 
         Task AddUploadedResourceLogAsync(NetUserId user, DateTime date, string path, byte[] data);
@@ -667,6 +679,26 @@ namespace Content.Server.Database
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.RemoveFromWhitelistAsync(player));
         }
+
+        // WD EDIT start
+        public Task<List<string>> TakeAllowedJobWhitelistAsync(Guid player)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand((() => _db.TakeAllowedJobWhitelistAsync(player)));
+        }
+
+        public Task AddToJobWhitelistAsync(NetUserId player, string job)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand((() => _db.AddToJobWhitelistAsync(player, job)));
+        }
+
+        public Task RemoveFromJobWhitelistAsync(Guid player, string? job = null)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand((() => _db.RemoveFromJobWhitelistAsync(player, job)));
+        }
+        // WD EDIT end
 
         public Task AddUploadedResourceLogAsync(NetUserId user, DateTime date, string path, byte[] data)
         {

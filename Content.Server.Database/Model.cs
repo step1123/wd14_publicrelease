@@ -27,6 +27,7 @@ namespace Content.Server.Database
         public DbSet<AdminLog> AdminLog { get; set; } = null!;
         public DbSet<AdminLogPlayer> AdminLogPlayer { get; set; } = null!;
         public DbSet<Whitelist> Whitelist { get; set; } = null!;
+        public DbSet<UserJobWhitelist> UserJobWhitelist { get; set; } = null!; // WD EDIT
         public DbSet<ServerBan> Ban { get; set; } = default!;
         public DbSet<ServerUnban> Unban { get; set; } = default!;
         public DbSet<ServerBanExemption> BanExemption { get; set; } = default!;
@@ -339,6 +340,16 @@ namespace Content.Server.Database
     {
         [Required, Key] public Guid UserId { get; set; }
     }
+
+    // WD EDIT start
+    [Table("job_whitelist")]
+    [PrimaryKey(nameof(UserId), nameof(JobId))]
+    public class UserJobWhitelist
+    {
+        public Guid UserId { get; set; }
+        public string JobId { get; set; } = null!;
+    }
+    // WD EDIT end
 
     public class Admin
     {
