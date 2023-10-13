@@ -344,3 +344,45 @@
   name: tts-voice-name-sidorovich
   sex: Male
   speaker: sidorovich
+
+- type: ttsVoice
+  id: TfEngineer
+  name: tts-voice-name-tf-engineer
+  sex: Male
+  speaker: engineer
+
+- type: ttsVoice
+  id: TfHeavy
+  name: tts-voice-name-tf-heavy
+  sex: Male
+  speaker: heavy
+
+- type: ttsVoice
+  id: TfMedic
+  name: tts-voice-name-tf-medic
+  sex: Male
+  speaker: medic
+
+- type: ttsVoice
+  id: TfSniper
+  name: tts-voice-name-tf-sniper
+  sex: Male
+  speaker: sniper
+
+- type: ttsVoice
+  id: TfSpy
+  name: tts-voice-name-tf-spy
+  sex: Male
+  speaker: spy
+
+- type: ttsVoice
+  id: TfDemoman
+  name: tts-voice-name-tf-demoman
+  sex: Male
+  speaker: demoman
+
+- type: ttsVoice
+  id: Valtos
+  name: tts-voice-name-valtos
+  sex: Female
+  speaker: valtos
