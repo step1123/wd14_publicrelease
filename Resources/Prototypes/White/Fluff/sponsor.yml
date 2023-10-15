@@ -246,3 +246,25 @@
   id: TapeLoadout
   entity: TapeEmpty
   sponsorOnly: true
+
+# Vtergot loadout
+
+- type: loadout
+  id: VtergotCloakOrderLoadout
+  entity: ClothingNeckCloakOrder
+  sponsorOnly: true
+
+- type: loadout
+  id: VtergotJumpsuitISBLoadout
+  entity: ClothingUniformJumpsuitISB
+  sponsorOnly: true
+
+- type: loadout
+  id: VtergotGlovesStrictLoadout
+  entity: ClothingHandsGlovesStrict
+  sponsorOnly: true
+
+- type: loadout
+  id: VtergotBootsPeopledavLoadout
+  entity: ClothingShoesBootsPeopledav
+  sponsorOnly: true

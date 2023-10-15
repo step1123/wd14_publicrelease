@@ -625,3 +625,49 @@
     sprite: White/Fluff/GusMopsik/ss_uniform.rsi
   - type: Clothing
     sprite: White/Fluff/GusMopsik/ss_uniform.rsi
+
+# Vtergot
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitISB
+  name: Офицерская форма ИСБ
+  description: Старая, но довольно-таки хорошо сохранившаяся форма офицера ИСБ
+  components:
+    - type: Sprite
+      sprite: White/Fluff/Vtergot/isbform.rsi
+    - type: Clothing
+      sprite: White/Fluff/Vtergot/isbform.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingNeckCloakOrder
+  name: Порядок
+  description: Чисто белый цвет этого плаща ознаменовывает пришествие безопасности и порядка в то место, куда приходит его владелец.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/Vtergot/order.rsi
+
+- type: entity
+  parent: ClothingHandsBase
+  id: ClothingHandsGlovesStrict
+  name: Строгие офицерские перчатки
+  description: Удерживайте галактику в своих ежовых рукавицах при помощи страха.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/Vtergot/strictgloves.rsi
+    - type: Clothing
+      sprite: White/Fluff/Vtergot/strictgloves.rsi
+    - type: Fiber
+      fiberMaterial: fibers-leather
+    - type: FingerprintMask
+
+- type: entity
+  parent: ClothingShoesBaseButcherable
+  id: ClothingShoesBootsPeopledav
+  name: Людодавы
+  description: Давите несогласных!
+  components:
+    - type: Sprite
+      sprite: White/Fluff/Vtergot/peopledav.rsi
+    - type: Clothing
+      sprite: White/Fluff/Vtergot/peopledav.rsi
