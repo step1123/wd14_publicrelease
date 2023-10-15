@@ -283,3 +283,11 @@
   alpha: 0.8
   ghostName: Витя
   ghostDescription: Хню...
+
+- type: customGhost
+  id: trora-ghost
+  ckey: trora
+  sprite: White/Ghosts/nairsark-ghost.rsi
+  alpha: 1
+  ghostName: Maid
+  ghostDescription: Not a fucking fumo.
