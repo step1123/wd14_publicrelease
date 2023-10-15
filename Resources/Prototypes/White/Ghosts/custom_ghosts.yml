@@ -18,10 +18,10 @@
 - type: customGhost
   id: nairsark-ghost
   ckey: nairsark
-  sprite: White/Ghosts/nairsark-ghost.rsi
-  alpha: 1
-  ghostName: Maid
-  ghostDescription: Not a fucking fumo
+  sprite: White/Ghosts/frostnova-ghost.rsi
+  alpha: 0.7
+  ghostName: Winter's Scar
+  ghostDescription: ...
 
 - type: customGhost
   id: animeshka-ghost
