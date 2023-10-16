@@ -168,7 +168,10 @@ namespace Content.Server.VendingMachines
         private void OnEmagged(EntityUid uid, VendingMachineComponent component, ref GotEmaggedEvent args)
         {
             // only emag if there are emag-only items
-            args.Handled = component.EmaggedInventory.Count > 0;
+            args.Handled = component.EmaggedInventory.Count > 0 || component.PriceMultiplier > 0; // WD EDIT START
+            component.PriceMultiplier = 0;
+            UpdateVendingMachineInterfaceState(uid, component);
+            // WD EDIT END
         }
 
         private void OnDamage(EntityUid uid, VendingMachineComponent component, DamageChangedEvent args)
@@ -257,7 +260,7 @@ namespace Content.Server.VendingMachines
                     return;
 
                 entry.Entities.Remove(itemUid);
-                
+
                 if (!entry.Entities.Any())
                     vendComponent.EntityInventory.Remove(name);
             }

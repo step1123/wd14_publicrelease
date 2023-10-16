@@ -140,14 +140,17 @@ public partial class CultSystem
         _bloodstreamSystem.TryModifyBloodLevel(uid, -20, createPuddle: false);
 
         var coordinates = Transform(uid).Coordinates;
+        var helmet = Spawn("ClothingHeadHelmetCult", coordinates);
         var armor = Spawn("ClothingOuterArmorCult", coordinates);
         var shoes = Spawn("ClothingShoesCult", coordinates);
         var blade = Spawn("EldritchBlade", coordinates);
         var bola = Spawn("CultBola", coordinates);
 
+        _inventorySystem.TryUnequip(uid, "head");
         _inventorySystem.TryUnequip(uid, "outerClothing");
         _inventorySystem.TryUnequip(uid, "shoes");
 
+        _inventorySystem.TryEquip(uid, helmet, "head", force: true);
         _inventorySystem.TryEquip(uid, armor, "outerClothing", force: true);
         _inventorySystem.TryEquip(uid, shoes, "shoes", force: true);
 

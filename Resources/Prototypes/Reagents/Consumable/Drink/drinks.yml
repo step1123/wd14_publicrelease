@@ -321,6 +321,15 @@
   name: reagent-name-holy-water
   parent: Water
   desc: reagent-desc-holy-water
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 4
+      - !type:DeconvertCultist
+        conditions:
+        - !type:ReagentThreshold
+          min: 25
 #WD end
 
 - type: reagent

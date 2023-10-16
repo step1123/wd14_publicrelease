@@ -1,6 +1,9 @@
 ﻿using System.Linq;
 using Content.Server.Stack;
 using Content.Server.Store.Components;
+using Content.Shared.Destructible;
+using Content.Shared.Emag.Components;
+using Content.Shared.Emag.Systems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
@@ -29,6 +32,12 @@ public sealed class ATMSystem : SharedATMSystem
         SubscribeLocalEvent<ATMComponent, ATMRequestWithdrawMessage>(OnWithdrawRequest);
         SubscribeLocalEvent<ATMComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<ATMComponent, ComponentStartup>(OnComponentStartup);
+        SubscribeLocalEvent<ATMComponent, GotEmaggedEvent>(OnEmag);
+    }
+
+    private void OnEmag(EntityUid uid, ATMComponent component, ref GotEmaggedEvent args)
+    {
+        args.Handled = true;
     }
 
     private void OnComponentStartup(EntityUid uid, ATMComponent component, ComponentStartup args)
@@ -85,7 +94,8 @@ public sealed class ATMSystem : SharedATMSystem
             return;
         }
 
-        if (!_bankCardSystem.TryGetAccount(bankCard.BankAccountId.Value, out var account) || account.AccountPin != args.Pin)
+        if (!_bankCardSystem.TryGetAccount(bankCard.BankAccountId.Value, out var account) ||
+            account.AccountPin != args.Pin && !HasComp<EmaggedComponent>(uid))
         {
             _popupSystem.PopupEntity(Loc.GetString("atm-wrong-pin"), uid);
             _audioSystem.PlayPvs(component.SoundDeny, uid);

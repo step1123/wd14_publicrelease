@@ -45,7 +45,6 @@ public sealed class CultPentagramSystem : EntitySystem
 
         sprite.LayerMapSet(PentagramKey.Key, layer);
         sprite.LayerSetOffset(layer, new Vector2(0.0f, adj));
-        sprite.LayerSetShader(layer, "unshaded");
     }
 
     private void PentagramRemoved(EntityUid uid, PentagramComponent component, ComponentShutdown args)

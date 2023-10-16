@@ -154,6 +154,7 @@
         - runic
         - runic_2
         - runic_3
+      sizeMultiplier: 0.17
     - type: Appearance
     - type: RunicMetal
     - type: UserInterface
@@ -161,7 +162,6 @@
         - key: enum.CultStructureCraftUiKey.Key
           type: StructureCraftBoundUserInterface
     - type: Item
-      size: 30
 
 - type: entity
   parent: CultRunicMetal
@@ -172,6 +172,7 @@
       state: runic
     - type: Stack
       count: 1
+      sizeMultiplier: 0.17
     - type: Item
       size: 1
 
@@ -184,5 +185,6 @@
       state: runic
     - type: Stack
       count: 20
+      sizeMultiplier: 0.17
     - type: Item
-      size: 20
+      size: 3

@@ -40,6 +40,7 @@ public sealed partial class AtmWindow : DefaultWindow
             StatusLabel.Text = cast.InfoMessage;
             BalanceLabel.Visible = false;
             Divider.Visible = false;
+            StatusLabel.Visible = true;
             WithdrawSlider.Visible = false;
             PinLineEdit.Visible = false;
             WithdrawButton.Visible = false;
@@ -50,13 +51,25 @@ public sealed partial class AtmWindow : DefaultWindow
 
         BalanceLabel.Text = Loc.GetString("atm-ui-balance", ("balance", cast.AccountBalance));
         BalanceLabel.Visible = true;
-        Divider.Visible = true;
-        WithdrawSlider.Visible = true;
-        PinLineEdit.Visible = true;
-        WithdrawButton.Visible = true;
 
-        WithdrawSlider.MaxValue = cast.AccountBalance;
-        WithdrawSlider.Value = Math.Min(WithdrawSlider.Value, cast.AccountBalance);
+        if (cast.AccountBalance > 0)
+        {
+            Divider.Visible = true;
+            StatusLabel.Visible = true;
+            WithdrawSlider.Visible = true;
+            PinLineEdit.Visible = true;
+            WithdrawButton.Visible = true;
+
+            WithdrawSlider.MaxValue = cast.AccountBalance;
+            WithdrawSlider.Value = Math.Min(WithdrawSlider.Value, cast.AccountBalance);
+            return;
+        }
+
+        Divider.Visible = false;
+        StatusLabel.Visible = false;
+        WithdrawSlider.Visible = false;
+        PinLineEdit.Visible = false;
+        WithdrawButton.Visible = false;
     }
 
     protected override void FrameUpdate(FrameEventArgs args)

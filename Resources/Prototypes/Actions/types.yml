@@ -41,7 +41,7 @@
   id: ActivateFreedomImplant
   name: use-freedom-implant-action-name
   description: use-freedom-implant-action-description
-  useDelay: 20
+  useDelay: 10
   checkCanInteract: false
   itemIconStyle: BigAction
   priority: -20
@@ -65,7 +65,7 @@
   id: ActivateEmpImplant
   name: use-emp-implant-action-name
   description: use-emp-implant-action-description
-  useDelay: 20
+  useDelay: 40
   itemIconStyle: BigAction
   priority: -20
   icon:
@@ -92,7 +92,7 @@
   itemIconStyle: BigItem
   useDelay: 1 # equip noise spam.
   event: !type:ToggleClothingEvent
-  
+
 - type: instantAction
   id: CombatModeToggle
   name: action-name-combat

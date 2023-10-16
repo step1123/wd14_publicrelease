@@ -1,15 +1,10 @@
 ﻿using System.Linq;
-using System.Threading;
 using Content.Server.Chemistry.Components.SolutionManager;
-using Content.Server.Chemistry.EntitySystems;
 using Content.Server.Stunnable;
-using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
-using Content.Shared.White.Cult;
 using Robust.Server.GameObjects;
-using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Server.White.Cult.HolyWater;
 
@@ -23,7 +18,6 @@ public sealed class HolyWaterSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CultistComponent, SolutionChangedEvent>(OnSolutionChanged);
         SubscribeLocalEvent<BibleWaterConvertComponent, AfterInteractEvent>(OnBibleInteract);
     }
 
@@ -56,31 +50,5 @@ public sealed class HolyWaterSystem : EntitySystem
                 return;
             }
         }
-    }
-
-    private void OnSolutionChanged(EntityUid uid, CultistComponent component, SolutionChangedEvent args)
-    {
-        if (!args.Solution.ContainsReagent("HolyWater"))
-            return;
-
-        if (component.HolyConvertToken != null)
-            return;
-
-        _stun.TryParalyze(uid, TimeSpan.FromSeconds(component.HolyConvertTime + 5f), true);
-        var target = Identity.Name(uid, EntityManager);
-        _popup.PopupEntity(Loc.GetString("holy-water-started-converting", ("target", target)), uid);
-
-        component.HolyConvertToken = new CancellationTokenSource();
-        Timer.Spawn(TimeSpan.FromSeconds(component.HolyConvertTime), () => ConvertCultist(uid), component.HolyConvertToken.Token);
-    }
-
-    private void ConvertCultist(EntityUid uid)
-    {
-        if (!TryComp<CultistComponent>(uid, out var cultist))
-            return;
-
-        cultist.HolyConvertToken = null;
-        RemComp<CultistComponent>(uid);
-        RemComp<PentagramComponent>(uid);
     }
 }

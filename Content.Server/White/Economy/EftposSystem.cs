@@ -25,7 +25,7 @@ public sealed class EftposSystem : EntitySystem
     private void OnInteractUsing(EntityUid uid, EftposComponent component, InteractUsingEvent args)
     {
         if (component.BankAccountId == null || !TryComp(args.Used, out BankCardComponent? bankCard) ||
-            bankCard.BankAccountId == component.BankAccountId || component.Amount <= 0)
+            bankCard.BankAccountId == component.BankAccountId || component.Amount <= 0 || bankCard.CommandBudgetCard)
             return;
 
         if (_bankCardSystem.TryChangeBalance(bankCard.BankAccountId!.Value, -component.Amount) &&

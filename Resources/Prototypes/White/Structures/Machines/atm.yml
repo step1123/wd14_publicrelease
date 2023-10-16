@@ -44,15 +44,17 @@
     enabled: false
     sound:
       path: /Audio/Ambience/Objects/vending_machine_hum.ogg
-  # - type: Destructible
-  #   thresholds:
-  #   - trigger:
-  #       !type:DamageTrigger
-  #       damage: 100
-  #     behaviors:
-  #     - !type:DoActsBehavior
-  #       acts: ["Breakage"]
-  #     - !type:EjectVendorItems
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
   - type: ActivatableUI
     key: enum.ATMUiKey.Key
     singleUser: true

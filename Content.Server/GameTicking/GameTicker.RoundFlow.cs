@@ -426,6 +426,7 @@ namespace Content.Server.GameTicking
             RandomizeLobbyBackground();
             ResettingCleanup();
             IncrementRoundNumber();
+            EnableShuttleCall(); // WD
 
             if (!LobbyEnabled)
             {
@@ -535,6 +536,15 @@ namespace Content.Server.GameTicking
 
             _utkaSocketWrapper.SendMessageToAll(utkaRoundStatusEvent);
 
+        }
+
+        private void EnableShuttleCall()
+        {
+            if (_configurationManager.GetCVar(WhiteCVars.EmergencyShuttleCallEnabled))
+                return;
+
+            _configurationManager.SetCVar(WhiteCVars.EmergencyShuttleCallEnabled, true);
+            _chatManager.SendAdminAnnouncement("Вызов шаттла включен.");
         }
         //WD-EDIT
 

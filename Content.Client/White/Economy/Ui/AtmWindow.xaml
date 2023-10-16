@@ -12,7 +12,7 @@
             <Label Name="StatusLabel"/>
             <SliderIntInput Name="WithdrawSlider"/>
             <BoxContainer HorizontalExpand="True" VerticalExpand="True" VerticalAlignment="Bottom" Orientation="Horizontal">
-                <LineEdit Name="PinLineEdit" HorizontalExpand="True" Text="Enter PIN"/>
+                <LineEdit Name="PinLineEdit" HorizontalExpand="True" Text="{Loc 'atm-ui-enter-pin'}"/>
                 <Button Name="WithdrawButton" Text="{Loc 'store-ui-default-withdraw-text'}"/>
             </BoxContainer>
         </BoxContainer>

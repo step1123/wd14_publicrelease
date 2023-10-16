@@ -2,7 +2,7 @@
   id: ActivateSmokeImplant
   name: Выпустить облако дыма
   description: Выпускает облако дыма вокруг вас.
-  useDelay: 20
+  useDelay: 40
   itemIconStyle: BigAction
   priority: -20
   icon:

@@ -1,8 +1,11 @@
+using System.Linq;
 using Content.Server.Access.Systems;
 using Content.Server.Construction.Completions;
 using Content.Server.Humanoid;
 using Content.Server.IdentityManagement;
+using Content.Server.Mind.Components;
 using Content.Server.PDA;
+using Content.Server.Roles;
 using Content.Shared.Access.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
@@ -41,6 +44,10 @@ public sealed class RandomHumanSystem : EntitySystem
         var newProfile = HumanoidCharacterProfile.RandomWithSpecies();
 
         _humanoid.LoadProfile(uid, newProfile, humanoid:component);
+
+        if (TryComp(uid, out MindContainerComponent? mindContainer) && mindContainer.HasMind &&
+            mindContainer.Mind.Roles.OfType<NukeopsRole>().Any())
+            return;
 
         _metaData.SetEntityName(uid, newProfile.Name);
 
