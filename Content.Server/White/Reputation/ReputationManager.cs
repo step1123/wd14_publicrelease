@@ -43,7 +43,7 @@ public sealed class ReputationManager : EntitySystem
 
         private void OnPlayerSpawn(PlayerBeforeSpawnEvent ev)
         {
-            _playerConnectionTime.Add(ev.Player.UserId, DateTime.UtcNow);
+            _playerConnectionTime[ev.Player.UserId] = DateTime.UtcNow;
         }
 
         private void OnConnected(object? sender, NetChannelArgs e)
