@@ -268,3 +268,15 @@
   id: VtergotBootsPeopledavLoadout
   entity: ClothingShoesBootsPeopledav
   sponsorOnly: true
+
+# Geraldiy
+
+- type: loadout
+  id: GeraldiyUSSPHat
+  entity: ClothingHeadHatCapUSSPBlack
+  sponsorOnly: true
+
+- type: loadout
+  id: GeraldiyUSSPCoat
+  entity: ClothingOuterCoatUSSPOvercoatBlack
+  sponsorOnly: true

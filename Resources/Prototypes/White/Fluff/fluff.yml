@@ -671,3 +671,28 @@
       sprite: White/Fluff/Vtergot/peopledav.rsi
     - type: Clothing
       sprite: White/Fluff/Vtergot/peopledav.rsi
+
+# Geraldiy
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatCapUSSPBlack
+  name: кожаная фуражка СССП
+  description: Довольная старая вещь эпохи СССП.
+  suffix: Fluff
+  components:
+    - type: Sprite
+      sprite: White/Fluff/Geraldiy/ussp_hat.rsi
+    - type: Clothing
+      sprite: White/Fluff/Geraldiy/ussp_hat.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatUSSPOvercoatBlack
+  name: бронированная шинель СССП
+  description: Довольная старая вещь эпохи СССП.
+  suffix: Fluff
+  components:
+    - type: Sprite
+      sprite: White/Fluff/Geraldiy/ussp_coat.rsi
+    - type: Clothing
+      sprite: White/Fluff/Geraldiy/ussp_coat.rsi
