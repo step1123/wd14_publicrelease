@@ -86,6 +86,9 @@
       sprite: Structures/Windows/cracks.rsi
   - type: StaticPrice
     price: 100
+  - type: ReflectAspectMark
+  - type: WindowMark
+    replacementProto: WallSolid
 
 - type: entity
   id: WindowDirectional
@@ -170,6 +173,7 @@
     node: windowDirectional
   - type: StaticPrice
     price: 10
+  - type: ReflectAspectMark
 
 - type: entity
   id: WindowTintedDirectional

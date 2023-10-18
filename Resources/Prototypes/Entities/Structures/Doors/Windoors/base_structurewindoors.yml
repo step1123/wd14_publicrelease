@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: BaseWindoor
   parent: BaseStructure
   abstract: true
@@ -138,6 +138,7 @@
     - board
   - type: StaticPrice
     price: 100
+  - type: ReflectAspectMark
 
 - type: entity
   id: BaseSecureWindoor

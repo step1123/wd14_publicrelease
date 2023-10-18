@@ -52,6 +52,8 @@
       sprite: Structures/Windows/cracks.rsi
   - type: StaticPrice
     price: 132
+  - type: WindowMark
+    replacementProto: WallReinforced
 
 - type: entity
   id: PlasmaReinforcedWindowDirectional

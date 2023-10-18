@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: Airlock
   parent: BaseStructure
   name: airlock
@@ -128,5 +128,6 @@
     group: Standard
   - type: StaticPrice
     price: 150
+  - type: ReflectAspectMark
   placement:
     mode: SnapgridCenter

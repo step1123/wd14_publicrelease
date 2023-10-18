@@ -11,6 +11,7 @@ using Content.Server.Speech.Components;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Server.UtkaIntegration;
+using Content.Server.White.AspectsSystem.Aspects.Components;
 using Content.Server.White.Other.Speech;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration;
@@ -57,6 +58,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly INetConfigurationManager _netConfigurationManager = default!; // WD
+    [Dependency] private readonly GameTicker _gameTicker = default!; // WD
 
     //WD-EDIT
     [Dependency] private readonly UtkaTCPWrapper _utkaSockets = default!;
@@ -219,6 +221,12 @@ public sealed partial class ChatSystem : SharedChatSystem
                 SendEntityWhisper(source, modMessage, range, channel, nameOverride, force: force);
                 return;
             }
+        }
+
+        if (desiredType == InGameICChatType.Speak &&
+            _gameTicker.GetActiveGameRules().Where(HasComp<WhisperAspectComponent>).Any()) // WD
+        {
+            desiredType = InGameICChatType.Whisper;
         }
 
         // Otherwise, send whatever type.

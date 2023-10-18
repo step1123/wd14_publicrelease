@@ -72,6 +72,7 @@ namespace Content.Server.White.AspectsSystem.Managers
         {
             _cfg.SetCVar(WhiteCVars.DamageModifier, 1.0f);
             _cfg.SetCVar(WhiteCVars.DamageGetModifier, 1.0f);
+            _cfg.SetCVar(WhiteCVars.SlipPowerModifier, 1.0f);
         }
 
         #endregion

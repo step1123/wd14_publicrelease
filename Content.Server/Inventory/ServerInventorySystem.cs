@@ -46,6 +46,9 @@ namespace Content.Server.Inventory
 
             Dictionary<string, EntityUid> inventoryEntities = new();
             var slots = GetSlots(uid);
+
+            List<string> slotIds = new(); // WD
+
             while (enumerator.MoveNext(out var containerSlot))
             {
                 //records all the entities stored in each of the target's slots
@@ -58,9 +61,16 @@ namespace Content.Server.Inventory
                         inventoryEntities.Add(slot.Name, containedEntity);
                     }
                 }
-                //drops everything in the target's inventory on the ground
-                TryUnequip(uid, containerSlot.ID, true, true);
+
+                slotIds.Add(containerSlot.ID); // WD EDIT
             }
+
+            foreach (var id in slotIds) // WD EDIT
+            {
+                //drops everything in the target's inventory on the ground
+                TryUnequip(uid, id, true, true);
+            }
+
             // This takes the objects we removed and stored earlier
             // and actually equips all of it to the new entity
             foreach (var (slot, item) in inventoryEntities)

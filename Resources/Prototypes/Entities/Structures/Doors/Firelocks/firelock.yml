@@ -104,6 +104,7 @@
       arc: 360
     - type: StaticPrice
       price: 150
+    - type: ReflectAspectMark
 
 - type: entity
   id: Firelock

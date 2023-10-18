@@ -206,3 +206,135 @@
         path: /Audio/White/Aspects/accent.ogg
       forbidden: true
     - type: DancingAspect
+
+- type: entity
+  id: ReflectAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Reflect"
+      description: "Ваше отражение повсюду."
+      weight: 2
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: ReflectAspect
+
+- type: entity
+  id: SlipperyAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Slippery"
+      description: "Постарайтесь не поскальзываться!"
+      weight: 2
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: SlipperyAspect
+
+- type: entity
+  id: TraitorRichAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Extra TC"
+      description: "Синдикат выделил 10 дополнительных телекристаллов для предателей."
+      requires: "Traitors"
+      weight: 2
+      hidden: true
+    - type: TraitorRichAspect
+
+- type: entity
+  id: WhisperAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Whisper"
+      description: "Из-за боли в горле речь дается вам с трудом."
+      weight: 3
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: WhisperAspect
+
+- type: entity
+  id: DarknessAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Darkness"
+      description: "Почему все так темно?"
+      weight: 2
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: DarknessAspect
+
+- type: entity
+  id: StolenFloorAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Stolen Floor"
+      description: "Рабочие забыли положить плитку при строительстве станции."
+      weight: 3
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: StolenFloorAspect
+
+- type: entity
+  id: WindowLeakAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Are We In Dungeon"
+      description: "В связи с невероятной хрупкостью окон было решено заменить их на стены."
+      weight: 3
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: WindowLeakAspect
+
+- type: entity
+  id: CatEarsAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Cat Ears And Tail"
+      description: "Мяукайте."
+      weight: 3
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: CatEarsAspect
+
+- type: entity
+  id: NothingAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Nothing"
+      description: "Ничего."
+      weight: 3
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+      forbidden: true
+      hidden: true
+    - type: NothingAspect
+
+- type: entity
+  id: SkeletonAspect
+  parent: BaseGameRule
+  noSpawn: true
+  components:
+    - type: Aspect
+      name: "Skeletons"
+      description: "АЧК АЧК!"
+      weight: 1
+      startAudio:
+        path: /Audio/White/Aspects/accent.ogg
+    - type: SkeletonAspect

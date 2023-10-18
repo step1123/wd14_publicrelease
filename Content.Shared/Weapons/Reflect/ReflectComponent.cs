@@ -39,6 +39,9 @@ public sealed partial class ReflectComponent : Component
 
     [DataField("damageOnReflect"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
     public bool DamageOnReflect;
+
+    [DataField("burnProb"), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    public float BurnProb;
     // WD END
 }
 

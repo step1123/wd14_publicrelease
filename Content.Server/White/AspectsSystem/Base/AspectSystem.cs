@@ -159,19 +159,28 @@ namespace Content.Server.White.AspectsSystem.Base
             return true;
         }
 
+        protected bool TryGetStationGrids([NotNullWhen(true)] out EntityUid? targetStation,
+            [NotNullWhen(true)] out HashSet<EntityUid>? grids)
+        {
+            if (!TryGetRandomStation(out targetStation))
+            {
+                targetStation = EntityUid.Invalid;
+                grids = null;
+                return false;
+            }
+
+            grids = Comp<StationDataComponent>(targetStation.Value).Grids;
+
+            return grids.Count > 0;
+        }
+
         protected bool TryFindRandomTile(out Vector2i tile, [NotNullWhen(true)] out EntityUid? targetStation, out EntityUid targetGrid, out EntityCoordinates targetCoords)
         {
             tile = default;
 
             targetCoords = EntityCoordinates.Invalid;
-            if (!TryGetRandomStation(out targetStation))
-            {
-                targetStation = EntityUid.Invalid;
-                targetGrid = EntityUid.Invalid;
-                return false;
-            }
-            var possibleTargets = Comp<StationDataComponent>(targetStation.Value).Grids;
-            if (possibleTargets.Count == 0)
+
+            if (!TryGetStationGrids(out targetStation, out var possibleTargets))
             {
                 targetGrid = EntityUid.Invalid;
                 return false;

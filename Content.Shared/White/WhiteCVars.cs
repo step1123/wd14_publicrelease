@@ -351,4 +351,7 @@ public sealed class WhiteCVars
      */
     public static readonly CVarDef<bool> ReputationEnabled =
         CVarDef.Create("white.reputation_enabled", true, CVar.SERVERONLY);
+
+    public static readonly CVarDef<float> SlipPowerModifier =
+        CVarDef.Create("white.slip_power_modifier", 1.0f, CVar.REPLICATED);
 }

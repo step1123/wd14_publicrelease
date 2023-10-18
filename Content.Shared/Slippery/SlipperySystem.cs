@@ -4,9 +4,11 @@ using Content.Shared.Inventory;
 using Content.Shared.StatusEffect;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Stunnable;
+using Content.Shared.White;
 using Content.Shared.White.Mood;
 using JetBrains.Annotations;
 using Robust.Shared.Audio;
+using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Physics.Components;
@@ -23,6 +25,11 @@ public sealed class SlipperySystem : EntitySystem
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    // WD START
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
+
+    private float SlipPowerModifier { get; set; }
+    // WD END
 
     public override void Initialize()
     {
@@ -35,6 +42,8 @@ public sealed class SlipperySystem : EntitySystem
         SubscribeLocalEvent<NoSlipComponent, InventoryRelayedEvent<SlipAttemptEvent>>((e, c, ev) => OnNoSlipAttempt(e, c, ev.Args));
         SubscribeLocalEvent<SlipperyComponent, ComponentGetState>(OnSlipperyGetState);
         SubscribeLocalEvent<SlipperyComponent, ComponentHandleState>(OnSlipperyHandleState);
+
+        _cfg.OnValueChanged(WhiteCVars.SlipPowerModifier, x => SlipPowerModifier = x, true); // WD
     }
 
     private void OnSlipperyHandleState(EntityUid uid, SlipperyComponent component, ref ComponentHandleState args)
@@ -89,11 +98,11 @@ public sealed class SlipperySystem : EntitySystem
         RaiseLocalEvent(uid, ref ev);
 
         if (TryComp(other, out PhysicsComponent? physics))
-            _physics.SetLinearVelocity(other, physics.LinearVelocity * component.LaunchForwardsMultiplier, body: physics);
+            _physics.SetLinearVelocity(other, physics.LinearVelocity * component.LaunchForwardsMultiplier * SlipPowerModifier, body: physics); // WD EDIT
 
         var playSound = !_statusEffects.HasStatusEffect(other, "KnockedDown");
 
-        _stun.TryParalyze(other, TimeSpan.FromSeconds(component.ParalyzeTime), true);
+        _stun.TryParalyze(other, TimeSpan.FromSeconds(component.ParalyzeTime * SlipPowerModifier), true); // WD EDIT
 
         RaiseLocalEvent(other, new MoodEffectEvent("MobSlipped")); // WD edit
 

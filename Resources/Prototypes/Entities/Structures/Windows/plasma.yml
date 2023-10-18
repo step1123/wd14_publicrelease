@@ -43,6 +43,8 @@
     price: 60
   - type: RadiationBlocker
     resistance: 2
+  - type: WindowMark
+    replacementProto: WallSolid
 
 - type: entity
   id: PlasmaWindowDirectional

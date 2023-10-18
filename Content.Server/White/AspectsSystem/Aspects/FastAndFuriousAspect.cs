@@ -1,3 +1,4 @@
+using Content.Server.Cloning;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.White.AspectsSystem.Aspects.Components;
@@ -15,9 +16,11 @@ public sealed class FastAndFuriousAspect : AspectSystem<FastAndFuriousAspectComp
     {
         base.Initialize();
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(HandleLateJoin);
+        SubscribeLocalEvent<MovementSpeedModifierComponent, CloningEvent>(HandleCloning);
     }
 
-    protected override void Started(EntityUid uid, FastAndFuriousAspectComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
+    protected override void Started(EntityUid uid, FastAndFuriousAspectComponent component, GameRuleComponent gameRule,
+        GameRuleStartedEvent args)
     {
         base.Started(uid, component, gameRule, args);
         var query = EntityQueryEnumerator<MovementSpeedModifierComponent>();
@@ -28,7 +31,8 @@ public sealed class FastAndFuriousAspect : AspectSystem<FastAndFuriousAspectComp
         }
     }
 
-    protected override void Ended(EntityUid uid, FastAndFuriousAspectComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
+    protected override void Ended(EntityUid uid, FastAndFuriousAspectComponent component, GameRuleComponent gameRule,
+        GameRuleEndedEvent args)
     {
         base.Ended(uid, component, gameRule, args);
         var query = EntityQueryEnumerator<MovementSpeedModifierComponent>();
@@ -39,18 +43,26 @@ public sealed class FastAndFuriousAspect : AspectSystem<FastAndFuriousAspectComp
         }
     }
 
+    private void HandleCloning(EntityUid uid, MovementSpeedModifierComponent component, ref CloningEvent ev)
+    {
+        ModifySpeedIfActive(ev.Target);
+    }
+
     private void HandleLateJoin(PlayerSpawnCompleteEvent ev)
+    {
+        if (!ev.LateJoin)
+            return;
+
+        ModifySpeedIfActive(ev.Mob);
+    }
+
+    private void ModifySpeedIfActive(EntityUid mob)
     {
         var query = EntityQueryEnumerator<FastAndFuriousAspectComponent, GameRuleComponent>();
         while (query.MoveNext(out var ruleEntity, out _, out var gameRule))
         {
             if (!GameTicker.IsGameRuleAdded(ruleEntity, gameRule))
                 continue;
-
-            if (!ev.LateJoin)
-                return;
-
-            var mob = ev.Mob;
 
             if (!TryComp<MovementSpeedModifierComponent>(mob, out var speedModifierComponent))
                 return;

@@ -50,6 +50,7 @@
   - type: RadiationBlocker
     resistance: 2
   - type: WallMark
+  - type: ReflectAspectMark
 
 - type: entity
   parent: BaseWall
