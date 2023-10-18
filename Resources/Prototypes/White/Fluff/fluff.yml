@@ -696,3 +696,16 @@
       sprite: White/Fluff/Geraldiy/ussp_coat.rsi
     - type: Clothing
       sprite: White/Fluff/Geraldiy/ussp_coat.rsi
+
+# KnifeCappy
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCoatSamuraiCappy
+  name: куртка самурая
+  description: Культовая куртка рокера из старых годов, от неё исходит ощущение перемен.
+  suffix: Fluff
+  components:
+    - type: Sprite
+      sprite: White/Fluff/KnifeCappy/samurai_jacket.rsi
+    - type: Clothing
+      sprite: White/Fluff/KnifeCappy/samurai_jacket.rsi
