@@ -35,4 +35,7 @@
   id: CapacitorStockPart
 
 - type: Tag
+  id: DeleteWithWindows
+
+- type: Tag
   id: EmpResistance

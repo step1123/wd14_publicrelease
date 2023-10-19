@@ -46,7 +46,7 @@ public sealed class SkeletonAspect : AspectSystem<SkeletonAspectComponent>
 
     private void HandleLateJoin(PlayerSpawnCompleteEvent ev)
     {
-        var query = EntityQueryEnumerator<RandomAccentAspectComponent, GameRuleComponent>();
+        var query = EntityQueryEnumerator<SkeletonAspectComponent, GameRuleComponent>();
         while (query.MoveNext(out var ruleEntity, out _, out var gameRule))
         {
             if (!GameTicker.IsGameRuleAdded(ruleEntity, gameRule))

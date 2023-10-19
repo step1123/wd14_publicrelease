@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: HospitalCurtains
   parent: BaseStructure
   name: curtains
@@ -56,6 +56,9 @@
           MaterialCloth1:
             min: 1
             max: 2
+  - type: Tag
+    tags:
+      - DeleteWithWindows
   placement:
     mode: SnapgridCenter
 

@@ -37,7 +37,7 @@ public sealed class CatEarsAspect : AspectSystem<CatEarsAspectComponent>
 
     private void HandleLateJoin(PlayerSpawnCompleteEvent ev)
     {
-        var query = EntityQueryEnumerator<RandomAppearanceAspectComponent, GameRuleComponent>();
+        var query = EntityQueryEnumerator<CatEarsAspectComponent, GameRuleComponent>();
         while (query.MoveNext(out var ruleEntity, out _, out var gameRule))
         {
             if (!GameTicker.IsGameRuleAdded(ruleEntity, gameRule))
