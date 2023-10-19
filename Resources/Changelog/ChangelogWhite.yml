@@ -4965,3 +4965,10 @@ Entries:
     type: Add
   id: 421
   time: '2023-10-19T17:16:36.0000000+00:00'
+- author: Aviu
+  changes:
+  - message: "\u0424\u0438\u043A\u0441\u044B \u0430\u0441\u043F\u0435\u043A\u0442\u043E\
+      \u0432."
+    type: Fix
+  id: 422
+  time: '2023-10-19T19:40:44.0000000+00:00'
