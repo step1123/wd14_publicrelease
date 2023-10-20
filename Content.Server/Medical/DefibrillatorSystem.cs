@@ -17,6 +17,7 @@ using Content.Shared.Medical;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Tag;
 using Content.Shared.Timing;
 using Content.Shared.Toggleable;
 using Robust.Server.Player;
@@ -44,6 +45,7 @@ public sealed class DefibrillatorSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly TagSystem _tag = default!; // WD
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -222,12 +224,16 @@ public sealed class DefibrillatorSystem : EntitySystem
                 mindComp.Mind?.Session is { } playerSession)
             {
                 session = playerSession;
+
+                if (_tag.HasTag(target, "DefibRevive") && mindComp.Mind.CurrentEntity != target) // WD
+                    _mind.UnVisit(mindComp.Mind);
+
                 // notify them they're being revived.
                 if (mindComp.Mind.CurrentEntity != target)
                 {
                     _chatManager.TrySendInGameICMessage(uid, Loc.GetString("defibrillator-ghosted"),
                         InGameICChatType.Speak, true);
-                    _euiManager.OpenEui(new ReturnToBodyEui(mindComp.Mind, _mind), session);
+                    _euiManager.OpenEui(new ReturnToBodyEui(mindComp.Mind, _mind, _tag), session); // WD EDIT
                 }
                 else // WD EDIT
                 {
@@ -235,6 +241,8 @@ public sealed class DefibrillatorSystem : EntitySystem
                     if (_mobState.IsDead(target, mob))
                         _damageable.TryChangeDamage(target, component.ZapHeal, true, origin: uid);
                     _mobState.ChangeMobState(target, MobState.Critical, mob, uid);
+                    if (!_mobState.IsDead(target, mob))
+                        _tag.RemoveTag(target, "DefibRevive");
                     _mobThreshold.SetAllowRevives(target, false, thresholds);
                 } // WD EDIT END
             }
