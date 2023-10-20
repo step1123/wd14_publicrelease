@@ -1,11 +1,12 @@
 ﻿<BoxContainer xmlns="https://spacestation14.io"
-              Orientation="Vertical">
-    <Label Text="Правила сервера White Dream" StyleClasses="LabelHeading"/>
-    <BoxContainer Orientation="Vertical">
-        <Button Name="RulesButton"
-                StyleClasses="ButtonColorRed"
-                MinHeight="40"
-                Text="Открыть правила"
-                Access="Public"/>
-    </BoxContainer>
+              Orientation="Vertical" HorizontalExpand="True">
+    <Label Text="Правила сервера White Dream"
+           StyleClasses="LabelHeading"
+           HorizontalExpand="True"
+           HorizontalAlignment="Center"/>
+    <Button Name="RulesButton"
+            StyleClasses="ButtonColorRed"
+            MinHeight="40"
+            Text="Открыть правила"
+            Access="Public"/>
 </BoxContainer>
