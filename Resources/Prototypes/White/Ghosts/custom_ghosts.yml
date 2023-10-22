@@ -56,10 +56,10 @@
   ghostName: Фырчало
   ghostDescription: Инженерный борг
 
-#reider207
+#reider207-frametamer
 - type: customGhost
   id: reider207-ghost
-  ckey: reider207
+  ckey: frametamer
   sprite: White/Ghosts/reider207-ghost.rsi
   alpha: 0.8
   ghostName: Гань Юй
