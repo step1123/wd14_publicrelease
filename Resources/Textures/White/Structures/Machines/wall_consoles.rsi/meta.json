@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "copyright": "Made by Valentyi for WhiteDream",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "comp_wall_0"
+    },
+    {
+      "name": "comp_wall_broken"
+    },
+    {
+      "name": "comp_wall_frame_2"
+    },
+    {
+      "name": "comp_wall_frame_1_2"
+    },
+    {
+      "name": "comp_wall_frame_1"
+    },
+    {
+      "name": "comp_wall_frame_0_1"
+    },
+    {
+      "name": "comp_wall_frame_0"
+    },
+    {
+      "name": "miner_layer",
+      "delays": [
+        [
+          2.0,
+          2.0
+        ]
+      ]
+    },
+	{
+      "name": "scanner_layer",
+      "delays": [
+        [
+          2.0,
+          2.0
+        ]
+      ]
+    },
+	{
+      "name": "energy_layer",
+      "delays": [
+        [
+          2.0,
+          2.0
+        ]
+      ]
+    },
+	{
+      "name": "no_board_layer",
+      "delays": [
+        [
+          2.0,
+          2.0
+        ]
+      ]
+    },
+	{
+      "name": "request_layer",
+      "delays": [
+        [
+          2.0,
+          2.0
+        ]
+      ]
+    },
+	{
+      "name": "service_layer",
+      "delays": [
+        [
+          2.0,
+          2.0
+        ]
+      ]
+    },
+	{
+      "name": "research_layer",
+      "delays": [
+        [
+          2.0,
+          2.0
+        ]
+      ]
+    },
+	{
+      "name": "artifact_layer",
+      "delays": [
+        [
+          2.0,
+          2.0
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+﻿- type: construction
+  name: wall mount console
+  id: ComputerWall
+  graph: ComputerWall
+  startNode: start
+  targetNode: computer
+  category: construction-category-machines
+  description: Форма для сборки настенной консоли
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canRotate: true
+  canBuildInImpassable: true
+  icon:
+    sprite: White/Structures/Machines/wall_consoles.rsi
+    state: comp_wall_0
+  conditions:
+  - !type:WallmountCondition {}

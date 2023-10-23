@@ -1,0 +1,70 @@
+﻿# board
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: SalvageConsoleWallMountCircuitboard
+  name: плата настенной консоли экспедиций
+  description: Плата для создания настенной консоли экспедиций.
+  components:
+  - type: Sprite
+    state: cpu_supply
+  - type: ComputerBoard
+    prototype: SalvageConsoleWallMount
+  - type: Tag
+    tags:
+    - WallMountConsoleElectronics
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: MediaConsoleWallMountCircuitboard
+  name: плата настенной консоли СМИ
+  description: Плата для создания настенной консоли СМИ.
+  components:
+  - type: Sprite
+    state: cpu_service
+  - type: ComputerBoard
+    prototype: MassMediaConsoleWallMount
+  - type: Tag
+    tags:
+    - WallMountConsoleElectronics
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: OrdersConsoleWallMountCircuitboard
+  name: плата настенной консоли заказа грузов
+  description: Плата для создания настенной консоли заказа грузов.
+  components:
+  - type: Sprite
+    state: cpu_supply
+  - type: ComputerBoard
+    prototype: OrdersConsoleWallMount
+  - type: Tag
+    tags:
+    - WallMountConsoleElectronics
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: RadarConsoleWallMountCircuitboard
+  name: плата настенной консоли сканера массы
+  description: Плата для создания настенной консоли сканера массы.
+  components:
+  - type: Sprite
+    state: cpu_supply
+  - type: ComputerBoard
+    prototype: RadarConsoleWallMount
+  - type: Tag
+    tags:
+    - WallMountConsoleElectronics
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: PowerConsoleWallMountCircuitboard
+  name: плата настенной консоли контроля питания
+  description: Плата для создания настенной консоли контроля питания.
+  components:
+  - type: Sprite
+    state: cpu_engineering
+  - type: ComputerBoard
+    prototype: PowerConsoleWallMount
+  - type: Tag
+    tags:
+    - WallMountConsoleElectronics

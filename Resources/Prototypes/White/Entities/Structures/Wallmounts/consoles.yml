@@ -1,0 +1,377 @@
+﻿# Base structure
+- type: entity
+  id: BaseStructureWallMountConsole
+  parent: BaseStructure
+  abstract: true
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.35,0.25,0.35"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: InteractionOutline
+  - type: Rotatable
+  - type: WallMount
+    arc: 360
+  - type: Construction
+    graph: ComputerWall
+    node: frameUnsecured
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    drawdepth: Objects
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: monitorBroken
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+# Base console
+- type: entity
+  parent: BaseStructureWallMountConsole
+  id: BaseWallConsole
+  name: настенная консоль
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Effects/glass_hit.ogg"
+  - type: Construction
+    graph: ComputerWall
+    node: computer
+    containers:
+    - board
+  - type: Computer
+  - type: ApcPowerReceiver
+    powerLoad: 200
+  - type: ExtensionCableReceiver
+  - type: ActivatableUIRequiresPower
+  - type: Sprite
+    sprite: White/Structures/Machines/wall_consoles.rsi
+    layers:
+    - map: [ "computerLayerBody" ]
+      state: comp_wall_0
+    - map: [ "computerLayerScreen" ]
+      state: no_board_layer
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ComputerVisuals.Powered:
+        computerLayerScreen:
+          True: { visible: true, shader: unshaded }
+          False: { visible: false }
+        computerLayerKeys:
+          True: { visible: true, shader: unshaded }
+          False: { visible: true, shader: shaded }
+  - type: LitOnPowered
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    enabled: false
+    mask: /Textures/Effects/LightMasks/cone.png
+    autoRot: true
+    offset: "0, 0.4" # shine from the top, not bottom of the computer
+    castShadows: false
+  - type: EmitSoundOnUIOpen
+    sound:
+      collection: Keyboard
+  - type: ContainerContainer
+    containers:
+      board: !type:Container
+        ents: [ ]
+
+# Broken
+- type: entity
+  parent: BaseStructureWallMountConsole
+  id: ComputerWallBroken
+  name: разбитая настенная консоль
+  description: Эта консоль видала лучшие времена.
+  components:
+  - type: Construction
+    graph: ComputerWall
+    node: monitorBroken
+  - type: Sprite
+    sprite: White/Structures/Machines/wall_consoles.rsi
+    state: comp_wall_broken
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/metalbreak.ogg
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+# Frame
+- type: entity
+  id: ComputerWallFrame
+  parent: BaseStructureWallMountConsole
+  name: рамка настенной консоли
+  description: Рамка для сборки настенной консоли.
+  components:
+  - type: Sprite
+    sprite: White/Structures/Machines/wall_consoles.rsi
+    layers:
+    - state: comp_wall_frame_1
+      map: [ "enum.ConstructionVisuals.Layer" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ConstructionVisuals.Key:
+        enum.ConstructionVisuals.Layer:
+          frameUnsecured: { state: comp_wall_frame_0 }
+          boardUnsecured: { state: comp_wall_frame_0_1 }
+          missingWires: { state: comp_wall_frame_1 }
+          monitorMissing: { state: comp_wall_frame_1_2 }
+          monitorUnsecured: { state: comp_wall_frame_2 }
+
+# Salvage console
+- type: entity
+  id: SalvageConsoleWallMount
+  parent: BaseWallConsole
+  name: настенная консоль экспедиций
+  description: Настенная версия консоли экспедиций.
+  components:
+  - type: Sprite
+    sprite: White/Structures/Machines/wall_consoles.rsi
+    layers:
+    - map: [ "computerLayerBody" ]
+      state: comp_wall_0
+    - map: [ "computerLayerScreen" ]
+      state: miner_layer
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ComputerVisuals.Powered:
+        computerLayerScreen:
+          True: { visible: true, shader: unshaded }
+          False: { visible: false }
+        computerLayerKeys:
+          True: { visible: true, shader: unshaded }
+          False: { visible: true }
+  - type: SalvageExpeditionConsole
+  - type: ActivatableUI
+    key: enum.SalvageConsoleUiKey.Expedition
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+    - key: enum.SalvageConsoleUiKey.Expedition
+      type: SalvageExpeditionConsoleBoundUserInterface
+  - type: Construction
+    board: SalvageConsoleWallMountCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#b89f25"
+  - type: AccessReader
+    access: [ [ "Salvage" ] ]
+
+# Order console
+- type: entity
+  id: OrdersConsoleWallMount
+  parent: BaseWallConsole
+  name: настенная консоль заказа грузов
+  description: Настенная консоли заказа грузов.
+  components:
+  - type: Sprite
+    sprite: White/Structures/Machines/wall_consoles.rsi
+    layers:
+    - map: [ "computerLayerBody" ]
+      state: comp_wall_0
+    - map: [ "computerLayerScreen" ]
+      state: request_layer
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ComputerVisuals.Powered:
+        computerLayerScreen:
+          True: { visible: true, shader: unshaded }
+          False: { visible: false }
+        computerLayerKeys:
+          True: { visible: true, shader: unshaded }
+          False: { visible: true }
+  - type: CargoOrderConsole
+  - type: ActivatableUI
+    key: enum.CargoConsoleUiKey.Orders
+  - type: UserInterface
+    interfaces:
+    - key: enum.CargoConsoleUiKey.Orders
+      type: CargoOrderConsoleBoundUserInterface
+  - type: Computer
+    board: OrdersConsoleWallMountCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#b89f25"
+  - type: AccessReader
+    access: [ [ "Cargo" ] ]
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSource
+    range: 200
+    ports:
+    - OrderSender
+  - type: GuideHelp
+    guides:
+    - Cargo
+
+# MassMedia console
+- type: entity
+  id: MassMediaConsoleWallMount
+  parent: BaseWallConsole
+  name: настенная консоль СМИ
+  description: Настенная версия новостной консоли.
+  components:
+  - type: Sprite
+    sprite: White/Structures/Machines/wall_consoles.rsi
+    layers:
+    - map: [ "computerLayerBody" ]
+      state: comp_wall_0
+    - map: [ "computerLayerScreen" ]
+      state: service_layer
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ComputerVisuals.Powered:
+        computerLayerScreen:
+          True: { visible: true, shader: unshaded }
+          False: { visible: false }
+        computerLayerKeys:
+          True: { visible: true, shader: unshaded }
+          False: { visible: true }
+  - type: Computer
+    board: MediaConsoleWallMountCircuitboard
+  - type: DeviceNetworkRequiresPower
+  - type: NewsWrite
+  - type: AccessReader
+    access: [ [ "Command" ] ]
+  - type: ActivatableUI
+    key: enum.NewsWriteUiKey.Key
+  - type: ActivatableUIRequiresVision
+  - type: Transform
+    anchored: true
+  - type: UserInterface
+    interfaces:
+    - key: enum.NewsWriteUiKey.Key
+      type: NewsWriteBoundUserInterface
+
+# Radar console
+- type: entity
+  id: RadarConsoleWallMount
+  parent: BaseWallConsole
+  name: настенный сканер масс
+  description: Настенная версия консоли сканера массы.
+  components:
+  - type: Sprite
+    sprite: White/Structures/Machines/wall_consoles.rsi
+    layers:
+    - map: [ "computerLayerBody" ]
+      state: comp_wall_0
+    - map: [ "computerLayerScreen" ]
+      state: scanner_layer
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ComputerVisuals.Powered:
+        computerLayerScreen:
+          True: { visible: true, shader: unshaded }
+          False: { visible: false }
+        computerLayerKeys:
+          True: { visible: true, shader: unshaded }
+          False: { visible: true }
+  - type: RadarConsole
+  - type: ActivatableUI
+    key: enum.RadarConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+    - key: enum.RadarConsoleUiKey.Key
+      type: RadarConsoleBoundUserInterface
+  - type: Computer
+    board: RadarConsoleWallMountCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#e6e227"
+
+# Power console
+- type: entity
+  id: PowerConsoleWallMount
+  parent: BaseWallConsole
+  name: настенная консоль контроля питания
+  description: Настенная версия консоли контроля питания.
+  components:
+  - type: Sprite
+    sprite: White/Structures/Machines/wall_consoles.rsi
+    layers:
+    - map: [ "computerLayerBody" ]
+      state: comp_wall_0
+    - map: [ "computerLayerScreen" ]
+      state: energy_layer
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.ComputerVisuals.Powered:
+        computerLayerScreen:
+          True: { visible: true, shader: unshaded }
+          False: { visible: false }
+        computerLayerKeys:
+          True: { visible: true, shader: unshaded }
+          False: { visible: true }
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#c9c042"
+  - type: Computer
+    board: PowerConsoleWallMountCircuitboard
+  - type: PowerMonitoringConsole
+  - type: NodeContainer
+    examinable: true
+    nodes:
+      hv:
+        !type:CableDeviceNode
+        nodeGroupID: HVPower
+  - type: ActivatableUI
+    key: enum.PowerMonitoringConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+    - key: enum.PowerMonitoringConsoleUiKey.Key
+      type: PowerMonitoringConsoleBoundUserInterface
