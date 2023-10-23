@@ -5,7 +5,8 @@ namespace Content.Shared.White.Economy;
 [RegisterComponent, NetworkedComponent]
 public sealed class BankCardComponent : Component
 {
-    [DataField("accountId")] public readonly int? AccoundId;
+    [DataField("accountId")]
+    public readonly int? AccountId;
 
     [ViewVariables]
     public int? BankAccountId;

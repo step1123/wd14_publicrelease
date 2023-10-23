@@ -1,10 +1,13 @@
 using Content.Client.UserInterface.Fragments;
+using Content.Shared.CartridgeLoader;
 using Content.Shared.White.Economy;
+using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 
 namespace Content.Client.White.Economy.Ui;
 
+[UsedImplicitly]
 public sealed class BankUi : UIFragment
 {
     private BankUiFragment? _fragment;
@@ -17,6 +20,8 @@ public sealed class BankUi : UIFragment
     public override void Setup(BoundUserInterface userInterface, EntityUid? fragmentOwner)
     {
         _fragment = new BankUiFragment();
+
+        _fragment.OnLinkAttempt += message => userInterface.SendMessage(new CartridgeUiMessage(message));
     }
 
     public override void UpdateState(BoundUserInterfaceState state)

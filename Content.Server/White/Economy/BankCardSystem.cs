@@ -98,9 +98,9 @@ public sealed class BankCardSystem : EntitySystem
             component.BankAccountId = acc.BankAccount.AccountId;
             return;
         }
-        if (component.AccoundId.HasValue)
+        if (component.AccountId.HasValue)
         {
-            CreateAccount(component.AccoundId.Value, component.StartingBalance);
+            CreateAccount(component.AccountId.Value, component.StartingBalance);
             return;
         }
 
@@ -124,6 +124,8 @@ public sealed class BankCardSystem : EntitySystem
                 return;
 
             bankAccount.Balance = GetSalary(mind.Mind) + 100;
+            mind.Mind?.AddMemory(new Memory(Loc.GetString("character-info-memories-account-number"),
+                bankAccount.AccountId.ToString()));
             mind.Mind?.AddMemory(new Memory("PIN", bankAccount.AccountPin.ToString()));
             bankAccount.Mind = mind.Mind;
             bankAccount.Name = Name(ev.Mob);
@@ -139,7 +141,6 @@ public sealed class BankCardSystem : EntitySystem
                 return;
 
             bankAccount.CartridgeUid = program;
-            bankAccount.LoaderUid = pdaUid;
             comp.AccountId = bankAccount.AccountId;
         }
     }
@@ -210,8 +211,8 @@ public sealed class BankCardSystem : EntitySystem
         }
 
         account.Balance += amount;
-        if (account is {CartridgeUid: not null, LoaderUid: not null})
-            _bankCartridge.UpdateUiState(account.CartridgeUid.Value, account.LoaderUid.Value);
+        if (account.CartridgeUid != null)
+            _bankCartridge.UpdateUiState(account.CartridgeUid.Value);
 
         return true;
     }

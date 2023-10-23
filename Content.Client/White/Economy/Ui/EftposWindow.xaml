@@ -5,26 +5,22 @@
 
     <BoxContainer Orientation="Vertical" VerticalExpand="True" HorizontalExpand="True">
         <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
-            <Label
-                Name="AmountLabel"
-                Text="{Loc 'eftpos-ui-amount-text'}" />
-            <LineEdit
-                Name="AmountLineEdit"
-                PlaceHolder="0"
-                MinWidth="60"
-                Access="Public" />
-            <Button
-                Name="CardButton"
-                Access="Public"
-                HorizontalExpand="True"
-                HorizontalAlignment="Right"
-                ToolTip="{Loc 'eftpos-ui-card-lock-desc'}"
-                Text="{Loc 'eftpos-ui-card-lock-text'}" />
+            <Label Name="AmountLabel"
+                   Text="{Loc 'eftpos-ui-amount-text'}" />
+            <LineEdit Name="AmountLineEdit"
+                      PlaceHolder="0"
+                      MinWidth="60"
+                      Access="Public" />
+            <Button Name="CardButton"
+                    Access="Public"
+                    HorizontalExpand="True"
+                    HorizontalAlignment="Right"
+                    ToolTip="{Loc 'eftpos-ui-card-lock-desc'}"
+                    Text="{Loc 'eftpos-ui-card-lock-text'}" />
         </BoxContainer>
-        <Label
-            Name="AccountLabel"
-            VerticalExpand="True"
-            VerticalAlignment="Bottom"
-            Access="Public" />
+        <Label Name="AccountLabel"
+               VerticalExpand="True"
+               VerticalAlignment="Bottom"
+               Access="Public" />
     </BoxContainer>
 </DefaultWindow>

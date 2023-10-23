@@ -34,7 +34,7 @@ public sealed partial class EftposWindow : DefaultWindow
 
     public void UpdateState(BoundUserInterfaceState state)
     {
-        if(state is not EftposBuiState eftState)
+        if (state is not EftposBuiState eftState)
             return;
 
         AmountLineEdit.Text = eftState.Amount == 0 ? string.Empty : eftState.Amount.ToString();
