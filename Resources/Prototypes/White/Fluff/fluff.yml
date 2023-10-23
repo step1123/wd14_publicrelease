@@ -709,3 +709,16 @@
       sprite: White/Fluff/KnifeCappy/samurai_jacket.rsi
     - type: Clothing
       sprite: White/Fluff/KnifeCappy/samurai_jacket.rsi
+
+# Medicgaming
+- type: entity
+  parent: ClothingEyesBase
+  id: ClothingEyesDealGlassesMedic
+  name: СделкоДел
+  description: Модные розово-жёлтые очки. Даются только самым модным и успешным продавцам.
+  suffix: Fluff
+  components:
+    - type: Sprite
+      sprite: White/Fluff/Medicgaming/deal_glasses.rsi
+    - type: Clothing
+      sprite: White/Fluff/Medicgaming/deal_glasses.rsi
