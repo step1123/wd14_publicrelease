@@ -485,7 +485,7 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
                 var jobPrototype = player.ContentData()?.Mind?.CurrentJob!.Prototype;
                 return jobPrototype != null &&
                        !headsPrototypes.Contains(player.ContentData()?.Mind?.CurrentJob?.Prototype!) &&
-                       jobPrototype.CanBeAntag && !_antagRoleBan.HasAntagBan(player);
+                       jobPrototype.CanBeAntag && !_antagRoleBan.HasAntagBan(player.UserId);
             }).ToList();
 
             var headPlayers = players.Where(player => !nonHeadCrew.Contains(player) &&

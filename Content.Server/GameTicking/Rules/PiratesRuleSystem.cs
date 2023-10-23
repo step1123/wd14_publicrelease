@@ -147,7 +147,7 @@ public sealed class PiratesRuleSystem : GameRuleSystem<PiratesRuleComponent>
             for (var i = 0; i < numOps; i++)
             {
                 var item = _random.PickAndTake(ev.PlayerPool);
-                if (_antagRoleBan.HasAntagBan(item))
+                if (_antagRoleBan.HasAntagBan(item.UserId))
                 {
                     i--;
                     continue;

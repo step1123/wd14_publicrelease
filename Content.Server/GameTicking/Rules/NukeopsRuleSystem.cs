@@ -448,7 +448,7 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
             foreach (var player in everyone)
             {
                 //WD EDIT
-                if (!ev.Profiles.ContainsKey(player.UserId) || _antagRoleBan.HasAntagBan(player))
+                if (!ev.Profiles.ContainsKey(player.UserId) || _antagRoleBan.HasAntagBan(player.UserId))
                 {
                     continue;
                 }

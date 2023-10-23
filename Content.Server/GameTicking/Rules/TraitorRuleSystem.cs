@@ -218,7 +218,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
             var pref = _reputationManager.PickPlayerBasedOnReputation(prefList);
             prefList.Remove(pref);
 
-            if (_antagRoleBan.HasAntagBan(pref))
+            if (_antagRoleBan.HasAntagBan(pref.UserId))
             {
                 if (prefList.Count == 0)
                 {
@@ -238,6 +238,10 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
 
     public bool MakeTraitor(IPlayerSession traitor)
     {
+        //WD EDIT
+        if (_antagRoleBan.HasAntagBan(traitor.UserId))
+            return false;
+
         var traitorRule = EntityQuery<TraitorRuleComponent>().FirstOrDefault();
         if (traitorRule == null)
         {
