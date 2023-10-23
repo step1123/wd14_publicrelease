@@ -1,4 +1,4 @@
-﻿- type: constructionGraph
+- type: constructionGraph
   id: Computer
   start: start
   graph:
@@ -126,6 +126,11 @@
         - to: monitorUnsecured
           steps:
             - tool: Screwing
+          completed:
+            - !type:EmptyContainer
+              container: IdCardConsole-privilegedId
+            - !type:EmptyContainer
+              container: IdCardConsole-targetId
 
     - node: monitorBroken
       entity: ComputerBroken

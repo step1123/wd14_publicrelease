@@ -136,6 +136,9 @@
         Piercing: 0.6
         Laser: 0.5
   - type: GroupExamine
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
 
 - type: entity
   parent: ClothingOuterBaseLarge
@@ -158,6 +161,10 @@
         Caustic: 0.75
   - type: GroupExamine
   - type: GiftIgnore
+  - type: ClothingGrantComponent
+    component:
+      - type: StaminaProtection
+        damageReduction: 0.8
 
 - type: entity
   parent: ClothingOuterArmorHeavy

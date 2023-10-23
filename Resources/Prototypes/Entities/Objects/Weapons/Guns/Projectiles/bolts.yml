@@ -14,7 +14,22 @@
     damage:
       types:
         Poison: 15
+  - type: Reflective
+    reflective:
+    - Energy
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.2,0.1,0.2"
+        hard: false
+        mask:
+        - Opaque
   - type: StunOnCollide
-    stunAmount: 2
-    knockdownAmount: 2
+    stunAmount: 1
+    knockdownAmount: 1
+    slowdownAmount: 3
+    walkSpeedModifier: 0.6
+    runSpeedModifier: 0.4
 

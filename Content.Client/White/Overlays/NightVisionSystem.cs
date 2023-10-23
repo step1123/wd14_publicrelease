@@ -30,18 +30,12 @@ public sealed class NightVisionSystem : EntitySystem
 
     private void OnPlayerAttached(EntityUid uid, NightVisionComponent component, PlayerAttachedEvent args)
     {
-        if (_player.LocalPlayer?.ControlledEntity != uid)
-            return;
-
         _overlayMan.AddOverlay(_overlay);
         _lightManager.DrawLighting = false;
     }
 
     private void OnPlayerDetached(EntityUid uid, NightVisionComponent component, PlayerDetachedEvent args)
     {
-        if (_player.LocalPlayer?.ControlledEntity != uid)
-            return;
-
         _overlayMan.RemoveOverlay(_overlay);
         _lightManager.DrawLighting = true;
     }

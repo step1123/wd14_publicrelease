@@ -13,11 +13,11 @@
     slots:
     - Belt
   - type: Gun
-    fireRate: 0.3
+    fireRate: 0.25
     soundGunshot:
       path: /Audio/Weapons/click.ogg
   - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 2.5
+    rechargeCooldown: 3.5
     rechargeSound:
       path: /Audio/Weapons/Guns/MagIn/revolver_magin.ogg
   - type: BasicEntityAmmoProvider

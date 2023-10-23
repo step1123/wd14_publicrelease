@@ -35,7 +35,6 @@
       sprite: Clothing/Eyes/Misc/blindfold.rsi
     - type: FlashImmunity
     - type: EyeProtection
-      protectionTime: 5
     - type: ClothingGrantComponent
       component:
         - type: ShowHealthBars
