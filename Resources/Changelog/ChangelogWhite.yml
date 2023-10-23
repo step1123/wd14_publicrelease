@@ -4994,3 +4994,10 @@ Entries:
     type: Tweak
   id: 424
   time: '2023-10-20T11:55:50.0000000+00:00'
+- author: ThereDrD
+  changes:
+  - message: "\u0424\u0438\u043A\u0441 \u0441\u0442\u0430\u043D\u0446\u0438\u0438\
+      \ \u043F\u0440\u0438\u0431\u044B\u0442\u0438\u044F"
+    type: Fix
+  id: 425
+  time: '2023-10-23T12:04:25.0000000+00:00'
