@@ -22,6 +22,7 @@ public abstract class SharedEntityStorageComponent : Component
     public readonly int MasksToRemove = (int) (
         CollisionGroup.MidImpassable |
         CollisionGroup.HighImpassable |
+        CollisionGroup.MobLayer | // WD
         CollisionGroup.LowImpassable);
 
     /// <summary>

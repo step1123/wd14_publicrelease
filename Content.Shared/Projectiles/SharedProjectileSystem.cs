@@ -2,6 +2,7 @@ using System.Numerics;
 using Content.Shared.Buckle;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.Sound.Components;
@@ -28,6 +29,7 @@ namespace Content.Shared.Projectiles
         [Dependency] private readonly SharedTransformSystem _transform = default!;
         [Dependency] private readonly PenetratedSystem _penetratedSystem = default!; // WD
         [Dependency] private readonly SharedBuckleSystem _buckle = default!; // WD
+        [Dependency] private readonly MobStateSystem _mobState = default!; // WD
 
         public override void Initialize()
         {
@@ -223,6 +225,11 @@ namespace Content.Shared.Projectiles
         private void PreventCollision(EntityUid uid, ProjectileComponent component, ref PreventCollideEvent args)
         {
             if (component.IgnoreShooter && args.OtherEntity == component.Shooter)
+            {
+                args.Cancelled = true;
+            }
+
+            if (_mobState.IsDead(args.OtherEntity)) // WD
             {
                 args.Cancelled = true;
             }

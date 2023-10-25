@@ -94,3 +94,4 @@
   - type: IconSmooth
     key: walls
     mode: NoSprite
+  - type: ReflectAspectMark
