@@ -133,7 +133,7 @@ public sealed class SpeciesPrototype : IPrototype
     [DataField("sponsorOnly")]
     public bool SponsorOnly { get; } = false;
 
-    [DataField("forAmins")]
+    [DataField("forAdmins")]
     public bool ForAdmins { get; } = false;
 }
 

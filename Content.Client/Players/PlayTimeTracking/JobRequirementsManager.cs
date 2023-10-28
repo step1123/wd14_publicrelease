@@ -112,7 +112,7 @@ public sealed class JobRequirementsManager
             return true;
 
         // WD EDIT start
-        if (!job.Requirements.Any(req => req is WLRequirement))
+        if (!job.Requirements.Any(req => req is WLRequirement) || !_cfg.GetCVar(CCVars.GameRoleWhitelist))
         {
             if (!_cfg.GetCVar(CCVars.GameRoleTimers) || _adminManager.IsActive())
                 return true;
