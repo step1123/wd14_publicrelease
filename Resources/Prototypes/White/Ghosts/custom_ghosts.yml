@@ -6,7 +6,6 @@
   ghostName: Девочка из аниме
   ghostDescription: А я корчу лицо в рожицу ахегао.
 
-
 - type: customGhost
   id: merkkaa-ghost
   ckey: merkkaa
@@ -291,3 +290,11 @@
   alpha: 1
   ghostName: Maid
   ghostDescription: Not a fucking fumo.
+
+- type: customGhost
+  id: mrregari-ghost
+  ckey: mr_regari
+  sprite: White/Ghosts/mr_regari.rsi
+  alpha: 0.9
+  ghostName: Темная сущность
+  ghostDescription: Интересно чья она.
