@@ -483,30 +483,6 @@
       contents:
         - id: SmokingPipeFilledTobacco
 
-- type: entity
-  parent: ClothingNeckBase
-  id: ClothingNeckTieThechaotic
-  name: багровый галстук
-  description: Свободно завязанный тёмно-красный галстук, показывает что детектив работает не в полную силу.
-  suffix: Fluff
-  components:
-    - type: Sprite
-      sprite: White/Fluff/thechaotic/red_tie.rsi
-    - type: Clothing
-      sprite: White/Fluff/thechaotic/red_tie.rsi
-
-- type: entity
-  parent: ClothingUniformBase
-  id: ClothingJumpsuitBlackThechaotic
-  name: экстра нуарный костюм
-  description: Когда просто нуарного для полного эффекта не хватает.
-  suffix: Fluff
-  components:
-    - type: Sprite
-      sprite: White/Fluff/thechaotic/black_suit.rsi
-    - type: Clothing
-      sprite: White/Fluff/thechaotic/black_suit.rsi
-
 #6elblu
 - type: entity
   parent: ClothingNeckBase
