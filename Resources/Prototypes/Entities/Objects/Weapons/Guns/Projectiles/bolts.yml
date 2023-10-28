@@ -29,7 +29,7 @@
   - type: StunOnCollide
     stunAmount: 1
     knockdownAmount: 1
-    slowdownAmount: 3
-    walkSpeedModifier: 0.6
-    runSpeedModifier: 0.4
+    slowdownAmount: 4
+    walkSpeedModifier: 0.5
+    runSpeedModifier: 0.3
 

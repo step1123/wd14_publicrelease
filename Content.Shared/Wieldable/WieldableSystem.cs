@@ -14,6 +14,7 @@ using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Player;
+using Robust.Shared.Random;
 
 namespace Content.Shared.Wieldable;
 
@@ -25,6 +26,7 @@ public sealed class WieldableSystem : EntitySystem
     [Dependency] private readonly SharedItemSystem _itemSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
+    [Dependency] private readonly IRobustRandom _random = default!; // WD
 
     public override void Initialize()
     {
@@ -43,10 +45,13 @@ public sealed class WieldableSystem : EntitySystem
         SubscribeLocalEvent<GunWieldBonusComponent, ItemUnwieldedEvent>(OnGunUnwielded);
 
         SubscribeLocalEvent<IncreaseDamageOnWieldComponent, GetMeleeDamageEvent>(OnGetMeleeDamage);
+
+        // WD
         SubscribeLocalEvent<WieldableComponent, GotEquippedHandEvent>(OnHandEquipped);
+        SubscribeLocalEvent<WieldableComponent, DisarmAttemptEvent>(OnDisarmAttempt);
     }
 
-    // WD edit
+    // WD edit START
     private void OnHandEquipped(EntityUid uid, WieldableComponent component, GotEquippedHandEvent args)
     {
         if (component.ForceTwoHanded)
@@ -54,6 +59,14 @@ public sealed class WieldableSystem : EntitySystem
             AttemptWield(args.Equipped, component, args.User, true);
         }
     }
+
+    private void OnDisarmAttempt(EntityUid uid, WieldableComponent component, DisarmAttemptEvent args)
+    {
+        if (component.Wielded && _random.Prob(0.9f))
+            args.Cancel();
+    }
+    // WD END
+
 
     private void OnMeleeAttempt(EntityUid uid, MeleeRequiresWieldComponent component, ref AttemptMeleeEvent args)
     {

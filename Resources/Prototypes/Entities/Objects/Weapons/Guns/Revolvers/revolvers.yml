@@ -17,7 +17,7 @@
     - Belt
   - type: Gun
     selectedMode: SemiAuto
-    fireRate: 1.5
+    fireRate: 2
     availableModes:
     - SemiAuto
     soundGunshot:
@@ -111,7 +111,7 @@
     sprite: Objects/Weapons/Guns/Revolvers/python.rsi
   - type: Gun
     selectedMode: SemiAuto
-    fireRate: 1.5
+    fireRate: 2
     availableModes:
     - SemiAuto
     soundGunshot:
@@ -119,7 +119,7 @@
       params:
         volume: 2.25
 
-- type: entity 
+- type: entity
   name: Python
   parent: WeaponRevolverPython
   id: WeaponRevolverPythonAP # For the uplink.
