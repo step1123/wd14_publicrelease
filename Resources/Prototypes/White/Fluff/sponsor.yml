@@ -172,6 +172,16 @@
   entity: ClothingOuterCoatThechaotic
   sponsorOnly: true
 
+- type: loadout
+  id: thechaoticSuitLoadout
+  entity: ClothingJumpsuitBlackThechaotic
+  sponsorOnly: true
+
+- type: loadout
+  id: thechaoticTieLoadout
+  entity: ClothingNeckTieThechaotic
+  sponsorOnly: true
+
 #6elblu
 - type: loadout
   id: 6elbluCloakLoadout
