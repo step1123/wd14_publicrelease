@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using Content.Server.Body.Systems;
 using Content.Server.Cargo.Systems;
 using Content.Server.Construction;
 using Content.Server.GameTicking;
@@ -17,6 +18,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Server.Chat.Managers;
+using Content.Server.Explosion.EntitySystems;
 using Content.Server.Parallax;
 using Content.Server.Procedural;
 using Content.Server.Shuttles.Systems;
@@ -25,6 +27,7 @@ using Content.Shared.CCVar;
 using Content.Shared.Construction.EntitySystems;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
+using Content.Shared.Tools.Components;
 using Robust.Server.Maps;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
@@ -41,8 +44,10 @@ namespace Content.Server.Salvage
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly AnchorableSystem _anchorable = default!;
         [Dependency] private readonly BiomeSystem _biome = default!;
+        [Dependency] private readonly BodySystem _body = default!;
         [Dependency] private readonly CargoSystem _cargo = default!;
         [Dependency] private readonly DungeonSystem _dungeon = default!;
+        [Dependency] private readonly ExplosionSystem _explosion = default!;
         [Dependency] private readonly MapLoaderSystem _map = default!;
         [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
         [Dependency] private readonly RadioSystem _radioSystem = default!;
@@ -67,6 +72,7 @@ namespace Content.Server.Salvage
             SubscribeLocalEvent<SalvageMagnetComponent, RefreshPartsEvent>(OnRefreshParts);
             SubscribeLocalEvent<SalvageMagnetComponent, UpgradeExamineEvent>(OnUpgradeExamine);
             SubscribeLocalEvent<SalvageMagnetComponent, ExaminedEvent>(OnExamined);
+            SubscribeLocalEvent<SalvageMagnetComponent, ToolUseAttemptEvent>(OnToolUseAttempt);
             SubscribeLocalEvent<SalvageMagnetComponent, ComponentShutdown>(OnMagnetRemoval);
             SubscribeLocalEvent<GridRemovalEvent>(OnGridRemoval);
 
@@ -181,6 +187,26 @@ namespace Content.Server.Salvage
             var factor = MathF.Pow(component.PartRatingDelay, rating);
             component.AttachingTime = component.BaseAttachingTime * factor;
             component.CooldownTime = component.BaseCooldownTime * factor;
+        }
+
+        // А нехуй
+        private void OnToolUseAttempt(EntityUid uid, SalvageMagnetComponent component, ToolUseAttemptEvent args)
+        {
+            if (component.MagnetState != MagnetState.Inactive)
+            {
+                var target = args.User;
+
+                var coords = Transform(target).Coordinates;
+
+                _popupSystem.PopupCoordinates(Loc.GetString("salvage-system-magnet-gib", ("target", target)), coords, type: PopupType.LargeCaution);
+
+                _explosion.QueueExplosion(Transform(target).MapPosition, ExplosionSystem.DefaultExplosionPrototypeId,
+                    4, 1, 2, maxTileBreak: 0);
+
+                _body.GibBody(target);
+
+                args.Cancel();
+            }
         }
 
         private void OnUpgradeExamine(EntityUid uid, SalvageMagnetComponent component, UpgradeExamineEvent args)
