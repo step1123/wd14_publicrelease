@@ -64,7 +64,7 @@ public sealed class RunicDoorSystem : EntitySystem
             return false;
 
         var direction = Transform(user).MapPosition.Position - Transform(airlock).MapPosition.Position;
-        var impulseVector = direction * 7000;
+        var impulseVector = direction * 2000;
 
         _physics.ApplyLinearImpulse(user, impulseVector);
 

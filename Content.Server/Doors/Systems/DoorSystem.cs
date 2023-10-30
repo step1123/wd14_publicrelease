@@ -14,6 +14,7 @@ using Content.Shared.Verbs;
 using Robust.Shared.Audio;
 using Content.Server.Administration.Logs;
 using Content.Server.Power.EntitySystems;
+using Content.Server.White.Cult.Structures;
 using Content.Shared.Tools;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
@@ -233,7 +234,7 @@ public sealed class DoorSystem : SharedDoorSystem
     }
     private void OnEmagged(EntityUid uid, DoorComponent door, ref GotEmaggedEvent args)
     {
-        if(TryComp<AirlockComponent>(uid, out var airlockComponent))
+        if(TryComp<AirlockComponent>(uid, out var airlockComponent) && !HasComp<RunicDoorComponent>(uid)) // WD EDIT
         {
             if (_bolts.IsBolted(uid) || !this.IsPowered(uid, EntityManager))
                 return;

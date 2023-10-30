@@ -1,40 +1,91 @@
 - type: entity
   id: AirlockGlassCult
-  parent: Airlock
+  parent: BaseStructure
   name: runic airlock
   description: Strange glass airlock with a rune.
   components:
-    - type: MeleeSound
-      soundGroups:
-        Brute:
-          path:
-            "/Audio/Effects/glass_hit.ogg"
-    - type: Door
-      occludes: false
-    - type: Occluder
-      enabled: false
-    - type: Sprite
-      sprite: /Textures/White/Cult/Structures/cult_airlock.rsi
-    - type: Fixtures
-      fixtures:
-        airlockFix:
-          shape:
-            !type:PhysShapeAabb
-            bounds: "-0.49,-0.49,0.49,0.49" # don't want this colliding with walls or they won't close
-          density: 100
-          mask:
-            - FullTileMask
-          layer:     #removed opaque from the layer, allowing lasers to pass through glass airlocks
-            - GlassAirlockLayer
-    - type: LayerChangeOnWeld
-      unWeldedLayer: GlassAirlockLayer
-      weldedLayer: GlassLayer
-    - type: RadiationBlocker
-      resistance: 2
-    - type: RunicDoor
-    - type: Construction
-      graph: AirlockGlassCult
-      node: airlock
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Effects/glass_hit.ogg"
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: /Textures/White/Cult/Structures/cult_airlock.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+    - state: closed_unlit
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseUnlit"]
+    - state: welded
+      map: ["enum.WeldableLayers.BaseWelded"]
+      visible: false
+    - state: bolted_unlit
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseBolted"]
+    - state: emergency_unlit
+      map: ["enum.DoorVisualLayers.BaseEmergencyAccess"]
+      shader: unshaded
+    - state: panel_closed
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      visible: false
+  - type: AnimationPlayer
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49" # don't want this colliding with walls or they won't close
+        density: 100
+        mask:
+        - FullTileMask
+        layer:
+        - GlassAirlockLayer
+  - type: Door
+    occludes: false
+    crushDamage:
+      types:
+        Blunt: 15
+    openSound:
+      path: /Audio/Machines/airlock_open.ogg
+    closeSound:
+      path: /Audio/Machines/airlock_close.ogg
+    denySound:
+      path: /Audio/Machines/airlock_deny.ogg
+  - type: Airlock
+    openUnlitVisible: true
+  - type: DoorBolt
+  - type: Appearance
+  - type: Airtight
+    fixVacuum: true
+    noAirWhenFullyAirBlocked: false
+  - type: RadiationBlocker
+    resistance: 2
+  - type: Occluder
+    enabled: false
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: RunicDoor
+  - type: ApcPowerReceiver
+    needsPower: false
+  - type: Construction
+    graph: AirlockGlassCult
+    node: airlock
+  - type: PlacementReplacement
+    key: walls
+  placement:
+    mode: SnapgridCenter
 
 - type: entity
   id: CultGirder
@@ -79,7 +130,7 @@
           behaviors:
             - !type:SpawnEntitiesBehavior
               spawn:
-                SheetSteel1:
+                CultRunicMetal1:
                   min: 1
                   max: 1
             - !type:DoActsBehavior
