@@ -57,6 +57,7 @@
   - type: Tag
     tags:
       - Bucket
+      - DroneUsable
   - type: PhysicalComposition
     materialComposition:
       Plastic: 50

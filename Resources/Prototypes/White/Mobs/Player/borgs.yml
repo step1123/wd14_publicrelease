@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: PlayerSiliconBase
   id: PlayerCyborgBase
   noSpawn: True
@@ -59,6 +59,7 @@
       tags:
         - DoorBumpOpener
         - ShoesRequiredStepTriggerImmune
+        - DroneUsable
     - type: Wires
       BoardName: Mech
       LayoutId: Mech

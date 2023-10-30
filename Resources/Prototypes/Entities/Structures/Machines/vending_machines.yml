@@ -713,6 +713,9 @@
     radius: 1.5
     energy: 1.6
     color: "#b89e2a"
+  - type: Tag
+    tags:
+      - DroneUsable
 
 - type: entity
   parent: VendingMachine

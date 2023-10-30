@@ -4,6 +4,7 @@ using Content.Shared.Access.Systems;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
+using Content.Shared.Drone;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Physics;
@@ -492,6 +493,9 @@ public abstract class SharedDoorSystem : EntitySystem
         // if there is no "user" we skip the access checks. Access is also ignored in some game-modes.
         if (user == null || AccessType == AccessTypes.AllowAll)
             return true;
+
+        if (HasComp<DroneComponent>(user.Value)) // WD
+            return false;
 
         // If the door is on emergency access we skip the checks.
         if (TryComp<AirlockComponent>(uid, out var airlock) && airlock.EmergencyAccess)

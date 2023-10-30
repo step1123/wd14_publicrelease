@@ -1,5 +1,6 @@
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
+using Content.Shared.Drone;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
@@ -202,6 +203,9 @@ public sealed class LockSystem : EntitySystem
         // Not having an AccessComponent means you get free access. woo!
         if (!Resolve(uid, ref reader, false))
             return true;
+
+        if (HasComp<DroneComponent>(user)) // WD
+            return false;
 
         if (_accessReader.IsAllowed(user, reader))
             return true;

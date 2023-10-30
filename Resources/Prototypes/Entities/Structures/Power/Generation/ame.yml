@@ -94,6 +94,9 @@
     requirePower: true
     highVoltageNode: input
     mediumVoltageNode: ame
+  - type: Tag
+    tags:
+      - DroneUsable
 
 - type: entity
   noSpawn: true
@@ -105,6 +108,9 @@
     anchored: false
   - type: Physics
     bodyType: Dynamic
+  - type: Tag
+    tags:
+      - DroneUsable
 
 - type: entity
   id: AmeShielding
@@ -196,3 +202,6 @@
     onBump: false
     requirePower: true
     highVoltageNode: ame
+  - type: Tag
+    tags:
+      - DroneUsable

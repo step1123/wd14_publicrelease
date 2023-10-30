@@ -175,6 +175,7 @@
     tags:
     - ShoesRequiredStepTriggerImmune
     - CannotSuicide
+    - DroneUsable
   - type: IntrinsicUI
     uis:
     - key: enum.LawsUiKey.Key
@@ -230,7 +231,7 @@
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
-  - type: MovementIgnoreGravity
+  - type: MovementAlwaysTouching
   - type: Fixtures
     fixtures:
       fix1:
