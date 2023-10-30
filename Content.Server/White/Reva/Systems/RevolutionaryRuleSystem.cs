@@ -622,4 +622,36 @@ public sealed class RevolutionaryRuleSystem : GameRuleSystem<RevolutionaryRuleCo
         return _prototypeManager.EnumeratePrototypes<JobPrototype>().Where(job =>
             job.Access.Contains("Command") || job.AccessGroups.Contains("AllAccess")).ToList();
     }
+
+    public void TransferRole(EntityUid uid, EntityUid transferTo, RevolutionaryComponent? comp)
+    {
+        if (!Resolve(uid, ref comp))
+            return;
+
+        var query = EntityQueryEnumerator<RevolutionaryRuleComponent, GameRuleComponent>();
+        while (query.MoveNext(out var ruleEnt, out var revaRule, out var gameRule))
+        {
+            if (!GameTicker.IsGameRuleAdded(ruleEnt, gameRule))
+                continue;
+
+            if (!TryComp<MindContainerComponent>(uid, out var mindComponent))
+                continue;
+
+            if (!mindComponent.HasMind)
+                continue;
+
+            var session = mindComponent.Mind?.Session;
+            if (session == null)
+                continue;
+
+            revaRule.RevPlayers.Remove(session);
+            if (comp.HeadRevolutionary)
+                revaRule.RevHeadPlayers.Remove(session);
+        }
+
+        var childRevComp = EnsureComp<RevolutionaryComponent>(transferTo);
+        childRevComp.HeadRevolutionary = comp.HeadRevolutionary;
+        Dirty(childRevComp);
+        RemComp<RevolutionaryComponent>(uid);
+    }
 }

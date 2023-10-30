@@ -492,4 +492,21 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
 
         _roundEndSystem.EndRound();
     }
+
+    public void TransferRole(EntityUid uid, EntityUid transferTo)
+    {
+        var query = EntityQueryEnumerator<CultRuleComponent, GameRuleComponent>();
+        while (query.MoveNext(out var ruleEnt, out var cultRuleComponent, out var gameRule))
+        {
+            if (!GameTicker.IsGameRuleAdded(ruleEnt, gameRule))
+                continue;
+
+            var name = MetaData(uid).EntityName;
+
+            cultRuleComponent.CultistsList.Remove(name);
+        }
+
+        AddComp<CultistComponent>(transferTo);
+        RemComp<CultistComponent>(uid);
+    }
 }

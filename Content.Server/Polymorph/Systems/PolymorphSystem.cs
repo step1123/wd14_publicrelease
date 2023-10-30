@@ -1,4 +1,6 @@
 using Content.Server.Actions;
+using Content.Server.GameTicking.Rules;
+using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Humanoid;
 using Content.Server.Inventory;
 using Content.Server.Mind;
@@ -6,6 +8,8 @@ using Content.Server.Mind.Commands;
 using Content.Server.Mind.Components;
 using Content.Server.Nutrition;
 using Content.Server.Polymorph.Components;
+using Content.Server.White.Cult.GameRule;
+using Content.Server.White.Reva.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Actions.ActionTypes;
 using Content.Shared.Buckle;
@@ -16,6 +20,8 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Polymorph;
 using Content.Shared.Popups;
+using Content.Shared.White.Cult;
+using Content.Shared.White.Reva.Components;
 using JetBrains.Annotations;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -43,6 +49,11 @@ namespace Content.Server.Polymorph.Systems
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly TransformSystem _transform = default!;
         [Dependency] private readonly MindSystem _mindSystem = default!;
+        // WD START
+        [Dependency] private readonly NukeopsRuleSystem _nukeOps = default!;
+        [Dependency] private readonly RevolutionaryRuleSystem _revolutionary = default!;
+        [Dependency] private readonly CultRuleSystem _cult = default!;
+        // WD END
 
         private ISawmill _sawmill = default!;
 
@@ -234,6 +245,26 @@ namespace Content.Server.Polymorph.Systems
 
             if (_mindSystem.TryGetMind(uid, out var mind))
                 _mindSystem.TransferTo(mind, child);
+
+            // WD START
+            if (proto.TransferRoles)
+            {
+                if (HasComp<NukeOperativeComponent>(uid))
+                {
+                    _nukeOps.TransferRole(uid, child);
+                }
+
+                if (TryComp<RevolutionaryComponent>(uid, out var revComp))
+                {
+                    _revolutionary.TransferRole(uid, child, revComp);
+                }
+
+                if (HasComp<CultistComponent>(uid))
+                {
+                    _cult.TransferRole(uid, child);
+                }
+            }
+            // WD END
 
             //Ensures a map to banish the entity to
             EnsurePausesdMap();

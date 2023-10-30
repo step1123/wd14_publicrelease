@@ -8,3 +8,4 @@
   transferHumanoidAppearance: true
   revertOnCrit: false
   revertOnDeath: false
+  transferRoles: true

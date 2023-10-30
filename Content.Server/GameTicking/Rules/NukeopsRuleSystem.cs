@@ -901,4 +901,20 @@ public sealed class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComponent>
             SpawnOperativesForGhostRoles(uid, component);
     }
 
+    public void TransferRole(EntityUid uid, EntityUid transferTo) // WD
+    {
+        var query = EntityQueryEnumerator<NukeopsRuleComponent, GameRuleComponent>();
+        while (query.MoveNext(out var ruleEnt, out var nukeops, out var gameRule))
+        {
+            if (!GameTicker.IsGameRuleAdded(ruleEnt, gameRule))
+                continue;
+
+            var name = MetaData(uid).EntityName;
+
+            nukeops.OperativePlayers.Remove(name);
+        }
+
+        AddComp<NukeOperativeComponent>(transferTo);
+        RemComp<NukeOperativeComponent>(uid);
+    }
 }

@@ -97,6 +97,11 @@ namespace Content.Shared.Polymorph
 
         [DataField("allowRepeatedMorphs", serverOnly: true)]
         public bool AllowRepeatedMorphs = false;
+
+        // WD START
+        [DataField("transferRoles", serverOnly: true)]
+        public bool TransferRoles = false;
+        // WD END
     }
 
     public enum PolymorphInventoryChange : byte
