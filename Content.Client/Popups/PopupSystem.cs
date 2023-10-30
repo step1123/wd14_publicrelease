@@ -83,9 +83,20 @@ namespace Content.Client.Popups
 
             _aliveWorldLabels.Add(label);
 
+            var fontSizeDict = new Dictionary<PopupType, string>
+            {
+                { PopupType.Medium, "12" },
+                { PopupType.MediumCaution, "12" },
+                { PopupType.Large, "15" },
+                { PopupType.LargeCaution, "15" }
+            };
+
+            var fontsize = fontSizeDict.ContainsKey(type) ? fontSizeDict[type] : "10";
+            var fontcolor = (type == PopupType.LargeCaution || type == PopupType.MediumCaution || type == PopupType.SmallCaution) ? "c62828" : "aeabc4";
+
             if (isLogging)
             {
-                _chatManager.SendMessage($"notice [font size=10][color=#aeabc4]{message}[/color][/font]", ChatSelectChannel.Console);
+                _chatManager.SendMessage($"notice [font size={fontsize}][color=#{fontcolor}]{message}[/color][/font]", ChatSelectChannel.Console);
             }
         }
 
