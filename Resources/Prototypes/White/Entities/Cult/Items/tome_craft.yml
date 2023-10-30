@@ -22,6 +22,7 @@
     - type: PointLight
       color: red
       range: 2
+    - type: CultItem
 
 - type: entity
   parent: ClothingEyesBase
@@ -40,6 +41,7 @@
         - type: ShowHealthBars
           damageContainer: Biological
         - type: NightVision
+    - type: CultItem
 
 - type: entity
   name: veil shifter
@@ -69,6 +71,7 @@
       color: red
       range: 2
     - type: VoidTeleport
+    - type: CultItem
 
 - type: entity
   name: void torch
@@ -103,6 +106,7 @@
       interfaces:
           - key: enum.CultTeleporterUiKey.Key
             type: TorchWindowBUI
+    - type: CultItem
 
 - type: cultistFactoryProduction
   id: FactoryCultShuttleCurse
@@ -161,6 +165,7 @@
         - key: enum.CultStructureCraftUiKey.Key
           type: StructureCraftBoundUserInterface
     - type: Item
+    - type: CultItem
 
 - type: entity
   parent: CultRunicMetal
@@ -174,6 +179,7 @@
       sizeMultiplier: 0.17
     - type: Item
       size: 1
+    - type: CultItem
 
 - type: entity
   parent: CultRunicMetal
@@ -187,3 +193,4 @@
       sizeMultiplier: 0.17
     - type: Item
       size: 3
+    - type: CultItem

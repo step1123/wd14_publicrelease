@@ -61,3 +61,4 @@
       walkSpeed: 0.5
       sprintSpeed: 0.5
       canThrowTrigger: true
+    - type: CultItem

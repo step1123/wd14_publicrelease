@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: CultPylon
   parent: BaseStructure
   name: pylon
@@ -234,8 +234,7 @@
   - type: CultCraftStructureVisuals
   - type: CultistFactory
     products:
-    - FactoryEldritchBlade
-    - FactoryArmorCult
+    - FactoryUnholyHalberd
     - FactoryCultRobeModify
     - FactoryCultMirrorShield
   - type: UserInterface

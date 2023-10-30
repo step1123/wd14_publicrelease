@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: BaseConstruct
   abstract: true
   noSpawn: true
@@ -203,3 +203,4 @@
     - type: ContainerContainer
       containers:
         Shard: !type:ContainerSlot
+    - type: CultItem

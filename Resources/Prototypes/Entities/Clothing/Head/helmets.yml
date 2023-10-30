@@ -132,6 +132,7 @@
         Slash: 0.8
         Piercing: 0.9
         Heat: 0.9
+  - type: CultItem
 
 #SCAF Helmet
 - type: entity

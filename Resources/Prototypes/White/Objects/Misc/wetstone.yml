@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: WetStone
   parent: BaseItem
   name: wet stone
@@ -26,3 +26,4 @@
       sprite: White/Items/Misc/wetstone.rsi
       size: 1
       state: cult_sharpener
+    - type: CultItem
