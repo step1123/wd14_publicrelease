@@ -298,3 +298,10 @@
   alpha: 0.9
   ghostName: Темная сущность
   ghostDescription: Интересно чья она.
+
+- type: customGhost
+  id: thefrendlypsychopath-ghost
+  ckey: thefrendlypsychopath
+  sprite: White/Ghosts/psychopath-ghost.rsi
+  ghostName: ЕРП Кицуне
+  ghostDescription: Тут тебе не рады.
