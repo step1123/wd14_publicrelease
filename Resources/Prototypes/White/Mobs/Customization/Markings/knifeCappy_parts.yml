@@ -1,0 +1,29 @@
+﻿- type: marking
+  id: knifeCappyEars1
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [ Human, Felinid, Reptilian ]
+  sponsorOnly: true
+  sprites:
+    - sprite: White/Mobs/Customization/knifeCappy_parts.rsi
+      state: frills_axolotl2
+
+- type: marking
+  id: knifeCappyTail1
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Human, Felinid, Reptilian ]
+  sponsorOnly: true
+  sprites:
+    - sprite: White/Mobs/Customization/knifeCappy_parts.rsi
+      state: tail_dtiger
+
+- type: marking
+  id: knifeCappyTail2
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Human, Felinid, Reptilian ]
+  sponsorOnly: true
+  sprites:
+    - sprite: White/Mobs/Customization/knifeCappy_parts.rsi
+      state: tail_smooth
