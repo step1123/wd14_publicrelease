@@ -982,6 +982,8 @@ public sealed partial class CultSystem : EntitySystem
         float severity,
         CultRuneBloodBoilComponent component)
     {
+        cultists = cultists.Where(HasComp<CultistComponent>).ToHashSet(); // Prevent constructs from using the rune
+
         if (cultists.Count < component.SummonMinCount)
         {
             _popupSystem.PopupEntity(Loc.GetString("cult-blood-boil-rune-need-minimum"), user, user);
@@ -990,17 +992,6 @@ public sealed partial class CultSystem : EntitySystem
 
         var xformQuery = GetEntityQuery<TransformComponent>();
         var xform = xformQuery.GetComponent(rune);
-
-        foreach (var cultist in cultists)
-        {
-            if (!TryComp<BloodstreamComponent>(cultist, out var bloodstreamComponent))
-                return false;
-
-            _bloodstreamSystem.TryModifyBloodLevel(cultist, -40, bloodstreamComponent);
-        }
-
-        var projectileCount =
-            (int) MathF.Round(MathHelper.Lerp(component.MinProjectiles, component.MaxProjectiles, severity));
 
         var inRange = _lookup.GetEntitiesInRange(rune, component.ProjectileRange * severity, LookupFlags.Dynamic);
         inRange.RemoveWhere(x =>
@@ -1016,6 +1007,19 @@ public sealed partial class CultSystem : EntitySystem
         }
 
         _random.Shuffle(list);
+
+        var bloodCost = -120 / cultists.Count;
+
+        foreach (var cultist in cultists)
+        {
+            if (!TryComp<BloodstreamComponent>(cultist, out var bloodstreamComponent))
+                return false;
+
+            _bloodstreamSystem.TryModifyBloodLevel(cultist, bloodCost, bloodstreamComponent);
+        }
+
+        var projectileCount =
+            (int) MathF.Round(MathHelper.Lerp(component.MinProjectiles, component.MaxProjectiles, severity));
 
         while (projectileCount > 0)
         {
@@ -1183,6 +1187,7 @@ public sealed partial class CultSystem : EntitySystem
         if (teleportRune)
         {
             var teleportRuneEntity = _entityManager.SpawnEntity(rune, transform.Value);
+            _xform.AttachToGridOrMap(teleportRuneEntity);
 
             _entityManager.TryGetComponent<CultRuneTeleportComponent>(teleportRuneEntity, out var sex);
             {
@@ -1220,7 +1225,7 @@ public sealed partial class CultSystem : EntitySystem
         var damageSpecifier = new DamageSpecifier(_prototypeManager.Index<DamageTypePrototype>("Slash"), 10);
         _damageableSystem.TryChangeDamage(uid, damageSpecifier, true, false);
 
-        _entityManager.SpawnEntity(rune, transform.Value);
+        _xform.AttachToGridOrMap(_entityManager.SpawnEntity(rune, transform.Value));
     }
 
     private bool SpawnShard(EntityUid target)
