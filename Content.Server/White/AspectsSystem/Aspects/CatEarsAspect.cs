@@ -1,16 +1,22 @@
+using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.White.AspectsSystem.Aspects.Components;
 using Content.Server.White.AspectsSystem.Base;
+using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
+using Content.Shared.Speech;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 namespace Content.Server.White.AspectsSystem.Aspects;
 
 public sealed class CatEarsAspect : AspectSystem<CatEarsAspectComponent>
 {
     [Dependency] private readonly IPrototypeManager _protoMan = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly ChatSystem _chat = default!;
 
     private MarkingPrototype _ears = default!;
     private MarkingPrototype _tail = default!;
@@ -19,9 +25,27 @@ public sealed class CatEarsAspect : AspectSystem<CatEarsAspectComponent>
     {
         base.Initialize();
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(HandleLateJoin);
+        SubscribeLocalEvent<RoundEndedEvent>(OnRoundEnd);
 
         _ears = _protoMan.Index<MarkingPrototype>("FelinidEarsBasic");
         _tail = _protoMan.Index<MarkingPrototype>("FelinidTailBasic");
+    }
+
+    private void OnRoundEnd(RoundEndedEvent ev)
+    {
+        var query = EntityQueryEnumerator<CatEarsAspectComponent, GameRuleComponent>();
+        while (query.MoveNext(out var ruleEntity, out _, out var gameRule))
+        {
+            if (!GameTicker.IsGameRuleAdded(ruleEntity, gameRule))
+                continue;
+
+            var entQuery = EntityQueryEnumerator<SpeechComponent, HumanoidAppearanceComponent>();
+            while (entQuery.MoveNext(out var ent, out _, out _))
+            {
+                _chat.TrySendInGameICMessage(ent, _random.Pick(new[] {"Мяу", "Мур", "Ня"}), InGameICChatType.Speak,
+                    ChatTransmitRange.Normal);
+            }
+        }
     }
 
     protected override void Started(EntityUid uid, CatEarsAspectComponent component, GameRuleComponent gameRule,
