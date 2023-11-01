@@ -428,6 +428,8 @@
   name: tts-voice-name-officer-enclave
   sex: Male
   speaker: officer_enclave
+  roundStart: false
+  borgVoice: true
 
 - type: ttsVoice
   id: Richardson
