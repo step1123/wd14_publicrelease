@@ -386,3 +386,51 @@
   name: tts-voice-name-valtos
   sex: Female
   speaker: valtos
+
+- type: ttsVoice
+  id: Khajiit
+  name: tts-voice-name-khajiit
+  sex: Male
+  speaker: khajiit
+
+- type: ttsVoice
+  id: Punisher
+  name: tts-voice-name-punisher
+  sex: Male
+  speaker: punisher
+
+- type: ttsVoice
+  id: Johnny
+  name: tts-voice-name-johnny
+  sex: Male
+  speaker: johnny
+
+- type: ttsVoice
+  id: Panam
+  name: tts-voice-name-panam
+  sex: Female
+  speaker: panam
+
+- type: ttsVoice
+  id: Dornan
+  name: tts-voice-name-dornan
+  sex: Male
+  speaker: dornan
+
+- type: ttsVoice
+  id: VFemale
+  name: tts-voice-name-v-female
+  sex: Female
+  speaker: v_female
+
+- type: ttsVoice
+  id: OfficerEnclave
+  name: tts-voice-name-officer-enclave
+  sex: Male
+  speaker: officer_enclave
+
+- type: ttsVoice
+  id: Richardson
+  name: tts-voice-name-richardson
+  sex: Male
+  speaker: richardson
