@@ -303,3 +303,19 @@
   id: MedicgamingDealGlasses
   entity: ClothingEyesDealGlassesMedic
   sponsorOnly: true
+
+# Oleg_Tinkoff
+- type: loadout
+  id: TinkoffGopHelmet
+  entity: ClothingHeadHelmetGopTinkoff
+  sponsorOnly: true
+
+- type: loadout
+  id: TinkoffShoesGop
+  entity: ClothingShoesGopTinkoff
+  sponsorOnly: true
+
+- type: loadout
+  id: TinkoffSuitGop
+  entity: ClothingUniformGopTinkoff
+  sponsorOnly: true

@@ -746,3 +746,40 @@
       sprite: White/Fluff/Medicgaming/deal_glasses.rsi
     - type: Clothing
       sprite: White/Fluff/Medicgaming/deal_glasses.rsi
+
+# Oleg_Tinkoff
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHelmetGopTinkoff
+  name: шлем с забралом "Маска-1"
+  description: Защитный шлем «Маска-1» появился на вооружении в давних временах, как замена шлему «Сфера».
+  suffix: Fluff
+  components:
+    - type: Sprite
+      sprite: White/Fluff/Oleg_Tinkoff/helmet_gop.rsi
+    - type: Clothing
+      sprite: White/Fluff/Oleg_Tinkoff/helmet_gop.rsi
+
+- type: entity
+  parent: ClothingShoesColorBlack
+  id: ClothingShoesGopTinkoff
+  name: cпортивные кроссовки "ГОП ПАК"
+  description: Предназначены для спорта и гоп стопа.
+  suffix: Fluff
+  components:
+    - type: Sprite
+      sprite: White/Fluff/Oleg_Tinkoff/shoes_gop.rsi
+    - type: Clothing
+      sprite: White/Fluff/Oleg_Tinkoff/shoes_gop.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformGopTinkoff
+  name: cпортивный костюм "ГОП ПАК"
+  description: От костюма пахнет семечками, порохом и криминалом.
+  suffix: Fluff
+  components:
+    - type: Sprite
+      sprite: White/Fluff/Oleg_Tinkoff/uniform_gop.rsi
+    - type: Clothing
+      sprite: White/Fluff/Oleg_Tinkoff/uniform_gop.rsi
