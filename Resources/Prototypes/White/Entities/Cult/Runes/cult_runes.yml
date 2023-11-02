@@ -67,6 +67,7 @@
     gatherInvokers: false
   - type: CultRuneTeleport
     label: "безымянная метка"
+  - type: CultVisible
 
 - type: entity
   parent: CollideRune

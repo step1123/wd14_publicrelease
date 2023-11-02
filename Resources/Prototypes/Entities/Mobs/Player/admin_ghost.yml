@@ -129,3 +129,4 @@
   - type: ShowHealthBars
   - type: ShowJobInfo
   - type: Invisibility
+  - type: CultVisibility

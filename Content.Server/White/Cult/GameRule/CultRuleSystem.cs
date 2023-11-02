@@ -12,6 +12,7 @@ using Content.Server.Roles;
 using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Components;
 using Content.Server.Storage.EntitySystems;
+using Content.Server.White.Cult.Visibility;
 using Content.Server.White.Reputation;
 using Content.Shared.Body.Systems;
 using Content.Shared.Humanoid;
@@ -153,6 +154,8 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
 
     private void OnCultistComponentInit(EntityUid uid, CultistComponent component, ComponentInit args)
     {
+        EnsureComp<CultVisibilityComponent>(uid);
+
         var query = EntityQueryEnumerator<CultRuleComponent, GameRuleComponent>();
 
         while (query.MoveNext(out var ruleEnt, out var cultRuleComponent, out _))
@@ -187,6 +190,8 @@ public sealed class CultRuleSystem : GameRuleSystem<CultRuleComponent>
 
     private void OnCultistComponentRemoved(EntityUid uid, CultistComponent component, ComponentRemove args)
     {
+        RemComp<CultVisibilityComponent>(uid);
+
         var query = EntityQueryEnumerator<CultRuleComponent, GameRuleComponent>();
 
         while (query.MoveNext(out var ruleEnt, out var cultRuleComponent, out _))
