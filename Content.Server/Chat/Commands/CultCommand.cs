@@ -29,6 +29,10 @@ namespace Content.Server.Chat.Commands
             if (player.Status != SessionStatus.InGame)
                 return;
 
+            var entMan = IoCManager.Resolve<IEntityManager>();
+            if (!entMan.HasComponent<CultistComponent>(player.AttachedEntity))
+                return;
+
             if (args.Length < 1)
                 return;
 
