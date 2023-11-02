@@ -98,6 +98,7 @@
     - type: GhostRecruitmentSpawnPoint
       prototype: RandomHumanoidSpawnerERTSecurity
       recruitmentName: ERTRecruitment
+      priority: 2
     - type: Sprite
       layers:
         - state: green
@@ -111,6 +112,7 @@
     - type: GhostRecruitmentSpawnPoint
       prototype: RandomHumanoidSpawnerERTSecurityEVA
       recruitmentName: ERTRecruitment
+      priority: 2
     - type: Sprite
       layers:
         - state: green

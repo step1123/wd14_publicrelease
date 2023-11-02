@@ -783,7 +783,7 @@
       coefficients:
         Blunt: 0.5
         Slash: 0.5
-        Piercing: 0.2
+        Piercing: 0.3
         Heat: 0.6
         Radiation: 0.25
         Caustic: 0.4
@@ -796,8 +796,7 @@
   - type: ClothingGrantComponent
     component:
       - type: StaminaProtection
-        damageReduction: 0.8
-  - type: GiftIgnore
+        damageReduction: 0.6
 
 #ERT Engineer Hardsuit
 - type: entity
