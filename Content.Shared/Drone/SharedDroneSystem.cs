@@ -16,8 +16,8 @@ public class SharedDroneSystem : EntitySystem
 
     private void OnInteractionAttempt(EntityUid uid, DroneComponent component, InteractionAttemptEvent args)
     {
-        if (args.Target != null && !HasComp<UnremoveableComponent>(args.Target) &&
-            !_tagSystem.HasAnyTag(args.Target.Value, "DroneUsable", "Trash", "Structure"))
+        if (args.Target != null && !HasComp<UnremoveableComponent>(args.Target) && !_tagSystem.HasAnyTag(
+                args.Target.Value, "DroneUsable", "Trash", "Structure", "RCDDeconstructWhitelist", "Wall", "Window"))
             args.Cancel();
     }
 

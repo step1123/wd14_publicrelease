@@ -15,3 +15,7 @@
     - type: Tag
       tags:
         - CannotSuicide
+        - CanPilot
+        - FootstepSound
+        - DoorBumpOpener
+        - ZombifyableByMelee

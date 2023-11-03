@@ -46,6 +46,9 @@
       fillBaseName: jug
     - type: StaticPrice
       price: 80
+    - type: Tag
+      tags:
+        - ChemicalContainer
 
 - type: entity
   parent: Jug

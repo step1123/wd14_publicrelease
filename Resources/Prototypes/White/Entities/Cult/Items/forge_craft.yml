@@ -65,6 +65,13 @@
     - CultOuterArmor
 
 - type: cultistFactoryProduction
+  id: FactoryHelmetCult
+  name: Шлем культа
+  icon: "/Textures/Clothing/Head/Helmets/cult.rsi/icon.png"
+  item:
+    - ClothingHeadHelmetCult
+
+- type: cultistFactoryProduction
   id: FactoryCultRobeModify
   name: Одеяние флагелланта
   icon: "/Textures/Clothing/OuterClothing/Misc/cultrobes.rsi/icon.png"

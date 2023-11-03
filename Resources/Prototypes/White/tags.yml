@@ -42,3 +42,6 @@
 
 - type: Tag
   id: DefibRevive
+
+- type: Tag
+  id: ChemicalContainer

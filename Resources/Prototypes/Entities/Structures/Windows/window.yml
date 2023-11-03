@@ -36,7 +36,7 @@
         mask:
         - FullTileMask
         layer:
-        - GlassAirlockLayer
+        - GlassLayer
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Glass
@@ -135,7 +135,7 @@
         mask:
         - FullTileMask
         layer:
-        - GlassAirlockLayer
+        - GlassLayer
   - type: Repairable
   - type: Damageable
     damageContainer: Inorganic

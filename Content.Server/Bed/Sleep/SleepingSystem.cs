@@ -5,6 +5,7 @@ using Content.Shared.Actions.ActionTypes;
 using Content.Shared.Audio;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Damage;
+using Content.Shared.Emoting;
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
@@ -46,6 +47,12 @@ namespace Content.Server.Bed.Sleep
             SubscribeLocalEvent<SleepingComponent, ExaminedEvent>(OnExamined);
             SubscribeLocalEvent<SleepingComponent, SlipAttemptEvent>(OnSlip);
             SubscribeLocalEvent<ForcedSleepingComponent, ComponentInit>(OnInit);
+            SubscribeLocalEvent<SleepingComponent, EmoteAttemptEvent>(OnTryEmote); // WD
+        }
+
+        private void OnTryEmote(EntityUid uid, SleepingComponent component, EmoteAttemptEvent args) // WD
+        {
+            args.Cancel();
         }
 
         /// <summary>

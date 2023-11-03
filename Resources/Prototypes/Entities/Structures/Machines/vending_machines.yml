@@ -875,6 +875,8 @@
       tags:
         - Bottle
         - Bloodpack
+        - GlassBeaker
+        - ChemicalContainer
   - type: Advertise
     pack: SmartFridgeAds
   - type: Speech

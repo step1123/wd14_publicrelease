@@ -1,6 +1,6 @@
-﻿- type: cultistFactoryProduction
+- type: cultistFactoryProduction
   id: FactoryWhetstone
-  icon: "/Textures/White/Items/Misc/wetstone.rsi/sharpener.png"
+  icon: "/Textures/White/Items/Misc/wetstone.rsi/cult_sharpener_used.png"
   name: Точильный камень
   item:
     - CultSharpener

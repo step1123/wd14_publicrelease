@@ -235,6 +235,9 @@
   - type: CultistFactory
     products:
     - FactoryUnholyHalberd
+    - FactoryEldritchBlade
+    - FactoryArmorCult
+    - FactoryHelmetCult
     - FactoryCultRobeModify
     - FactoryCultMirrorShield
   - type: UserInterface

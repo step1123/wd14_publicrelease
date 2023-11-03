@@ -26,6 +26,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Pulling;
 using Content.Shared.Pulling.Components;
 using Content.Shared.Rejuvenate;
 using Content.Shared.White.Cult;
@@ -59,6 +60,7 @@ public sealed partial class CultSystem : EntitySystem
     [Dependency] private readonly GunSystem _gunSystem = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly FlammableSystem _flammableSystem = default!;
+    [Dependency] private readonly SharedPullingSystem _pullSystem = default!;
 
     public override void Initialize()
     {
@@ -407,7 +409,7 @@ public sealed partial class CultSystem : EntitySystem
         if (state.CurrentState != MobState.Dead)
         {
             var canBeConverted = _entityManager.TryGetComponent<MindContainerComponent>(victim.Value, out var mind) &&
-                mind.HasMind;
+                mind.HasMind && HasComp<ActorComponent>(victim.Value);
 
             var isTarget = mind != null && mind.Mind == target;
 
@@ -436,7 +438,7 @@ public sealed partial class CultSystem : EntitySystem
 
         if (cultists.Count < offering.SacrificeMinCount)
         {
-            _popupSystem.PopupEntity(Loc.GetString("cult-convert-not-enough-cultists"), user, user);
+            _popupSystem.PopupEntity(Loc.GetString("cult-sacrifice-not-enough-cultists"), user, user);
             return false;
         }
 
@@ -648,6 +650,15 @@ public sealed partial class CultSystem : EntitySystem
 
         foreach (var target in targets)
         {
+            if (TryComp(target, out SharedPullableComponent? pullable) && pullable.Puller.HasValue &&
+                !targets.Contains(pullable.Puller.Value))
+                _pullSystem.TryStopPull(pullable);
+
+            if (TryComp(target, out SharedPullerComponent? puller) && puller.Pulling.HasValue &&
+                !targets.Contains(puller.Pulling.Value) &&
+                TryComp(puller.Pulling.Value, out SharedPullableComponent? targetPullable))
+                _pullSystem.TryStopPull(targetPullable);
+
             _xform.SetCoordinates(target, xFormSelected.Coordinates);
         }
 
