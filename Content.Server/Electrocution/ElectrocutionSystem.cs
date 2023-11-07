@@ -56,7 +56,7 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
     private const string DamageType = "Shock";
 
     // Yes, this is absurdly small for a reason.
-    private const float ElectrifiedDamagePerWatt = 0.0015f;
+    private const float ElectrifiedDamagePerWatt = 0.0005f; // WD EDIT
 
     private const float RecursiveDamageMultiplier = 0.75f;
     private const float RecursiveTimeMultiplier = 0.8f;

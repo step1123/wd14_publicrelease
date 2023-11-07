@@ -42,6 +42,8 @@
       highVoltageNode: high
       mediumVoltageNode: medium
       lowVoltageNode: low
+      shockDamage: 5
+      shockTime: 2
     - type: NodeContainer
       nodes:
         high:
@@ -73,7 +75,7 @@
               acts: ["Destruction"]
         - trigger:
             !type:DamageTrigger
-            damage: 100
+            damage: 50
           behaviors:
             - !type:ChangeConstructionNodeBehavior
               node: grilleBroken

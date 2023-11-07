@@ -18,7 +18,6 @@
     Piercing: 0.2
     Shock: 1.2
   flatReductions:
-    Blunt: 5
     Heat: 5
     Piercing: 10
     Laser: 5
