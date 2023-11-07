@@ -23,6 +23,7 @@ using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
 using Content.Shared.Timing;
 using Content.Shared.Verbs;
+using Content.Shared.White.Sounds;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
@@ -378,6 +379,13 @@ namespace Content.Server.Storage.EntitySystems
                 if (_sharedHandsSystem.TryPickupAnyHand(player, args.InteractedItemUID, handsComp: hands)
                     && storageComp.StorageRemoveSound != null)
                     _audio.Play(storageComp.StorageRemoveSound, Filter.Pvs(uid, entityManager: EntityManager), uid, true, AudioParams.Default);
+
+                // WD edit
+                if (hands.ActiveHand != null)
+                {
+                    var gotRemoved = new GotRemovedEvent(player, args.InteractedItemUID, hands.ActiveHand);
+                    RaiseLocalEvent(args.InteractedItemUID, gotRemoved, false);
+                }
                 return;
             }
 

@@ -11,7 +11,12 @@
       soundGroups:
         Brute:
           path:
-            "/Audio/Weapons/slash.ogg"
+            "/Audio/White/Web/attack.ogg" # WD edit start
+    - type: FootstepModifier
+      footstepSoundCollection:
+        collection: FootstepWeb
+        params:
+          volume: 1 # WD edit end
     - type: Sprite
       sprite: Objects/Misc/spiderweb.rsi
       layers:
@@ -40,9 +45,15 @@
           layer:
           - MidImpassable
     - type: Damageable
-      damageModifierSet: Wood
+      damageModifierSet: Web
     - type: Destructible
       thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 300 #excess damage (nuke?). avoid computational cost of spawning entities.
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
       - trigger:
           !type:DamageTrigger
           damage: 10

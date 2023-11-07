@@ -1,0 +1,6 @@
+﻿- type: soundCollection
+  id: FootstepWeb
+  files:
+    - /Audio/White/Web/walk1.ogg
+    - /Audio/White/Web/walk2.ogg
+    - /Audio/White/Web/walk3.ogg

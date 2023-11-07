@@ -6,6 +6,7 @@ using Content.Shared.Popups;
 using Content.Shared.Sound.Components;
 using Content.Shared.Throwing;
 using Content.Shared.White.EndOfRoundStats.EmitSoundStatSystem;
+using Content.Shared.White.Sounds;
 using JetBrains.Annotations;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
@@ -41,6 +42,9 @@ public abstract class SharedEmitSoundSystem : EntitySystem
         SubscribeLocalEvent<EmitSoundOnActivateComponent, ActivateInWorldEvent>(OnEmitSoundOnActivateInWorld);
         SubscribeLocalEvent<EmitSoundOnPickupComponent, GotEquippedHandEvent>(OnEmitSoundOnPickup);
         SubscribeLocalEvent<EmitSoundOnDropComponent, DroppedEvent>(OnEmitSoundOnDrop);
+
+        // WD edit
+        SubscribeLocalEvent<EmitSoundOnPickupComponent, GotRemovedEvent>(EmitSoundOnGotRemoved);
 
         SubscribeLocalEvent<EmitSoundOnCollideComponent, EntityUnpausedEvent>(OnEmitSoundUnpaused);
         SubscribeLocalEvent<EmitSoundOnCollideComponent, StartCollideEvent>(OnEmitSoundOnCollide);
@@ -98,6 +102,12 @@ public abstract class SharedEmitSoundSystem : EntitySystem
         TryEmitSound(uid, component, args.User);
     }
 
+    // WD edit
+    private void EmitSoundOnGotRemoved(EntityUid uid, EmitSoundOnPickupComponent component, GotRemovedEvent args)
+    {
+        TryEmitSound(uid, component, args.User, false);
+    }
+
     private void OnEmitSoundOnDrop(EntityUid uid, EmitSoundOnDropComponent component, DroppedEvent args)
     {
         TryEmitSound(uid, component, args.User);
@@ -119,7 +129,7 @@ public abstract class SharedEmitSoundSystem : EntitySystem
         }
 
         if (_netMan.IsServer)
-            RaiseLocalEvent(new EmitSoundStatEvent(component.Owner, component.Sound));
+            RaiseLocalEvent(new EmitSoundStatEvent(uid, component.Sound));
     }
 
     private void OnEmitSoundUnpaused(EntityUid uid, EmitSoundOnCollideComponent component, ref EntityUnpausedEvent args)

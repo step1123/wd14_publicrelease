@@ -47,7 +47,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 150 #excess damage (nuke?). avoid computational cost of spawning entities.
+        damage: 300 #excess damage (nuke?). avoid computational cost of spawning entities.  # WD edit
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]

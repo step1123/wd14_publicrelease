@@ -530,6 +530,11 @@
         node: girder
       - !type:DoActsBehavior
         acts: ["Destruction"]
+      - !type:SpawnEntitiesBehavior # WD edit start
+        spawn:
+          SheetPlasteel1:
+            min: 1
+            max: 2 # WD edit end
   - type: IconSmooth
     key: walls
     base: reinf_over
@@ -802,6 +807,11 @@
           path: /Audio/Effects/metalbreak.ogg
       - !type:ChangeConstructionNodeBehavior
         node: girder
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
       - !type:DoActsBehavior
         acts: ["Destruction"]
     destroySound:
@@ -856,7 +866,7 @@
         acts: ["Destruction"]
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 100
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -865,6 +875,11 @@
         node: girder
       - !type:DoActsBehavior
         acts: ["Destruction"]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 1
     destroySound:
       path: /Audio/Effects/metalbreak.ogg
   - type: IconSmooth
@@ -971,6 +986,12 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
+        damage: 300 #excess damage (nuke?). avoid computational cost of spawning entities.
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
         damage: 30
       behaviors:
       - !type:DoActsBehavior
@@ -978,8 +999,8 @@
       - !type:SpawnEntitiesBehavior
         spawn:
           MaterialWebSilk:
-            min: 1
-            max: 1
+            min: 2
+            max: 3
   - type: IconSmooth
     key: walls
     base: wall

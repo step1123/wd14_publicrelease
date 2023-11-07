@@ -138,18 +138,29 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
+        damage: 300 #excess damage (nuke?). avoid computational cost of spawning entities. # WD edit start
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger # WD edit end
         damage: 50
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          path: /Audio/Effects/woodhit.ogg
+#     - !type:PlaySoundBehavior WD edit - govno
+#       sound:
+#         path: /Audio/Effects/woodhit.ogg
       - !type:SpawnEntitiesBehavior
         spawn:
           MaterialWebSilk:
-            min: 1
-            max: 1
+            min: 3 # WD edit start
+            max: 4
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/slash.ogg" # WD edit end
   - type: Construction
     graph: WebStructures
     node: bed
