@@ -496,10 +496,6 @@
     component:
       - type: StaminaProtection
         damageReduction: 0.5
-  - type: Tag
-    tags:
-    - Hardsuit
-    - EmpResistance
 
 #Cybersun Juggernaut Hardsuit
 - type: entity
@@ -537,10 +533,6 @@
       - type: StaminaProtection
         damageReduction: 0.9
   - type: GiftIgnore
-  - type: Tag
-    tags:
-    - Hardsuit
-    - EmpResistance
 
 #Syndicate Elite Hardsuit
 - type: entity
@@ -579,10 +571,6 @@
     component:
       - type: StaminaProtection
         damageReduction: 0.5
-  - type: Tag
-    tags:
-    - Hardsuit
-    - EmpResistance
 
 #Syndicate Commander Hardsuit
 - type: entity
@@ -619,10 +607,6 @@
     component:
       - type: StaminaProtection
         damageReduction: 0.6
-  - type: Tag
-    tags:
-    - Hardsuit
-    - EmpResistance
 
 #Wizard Hardsuit
 - type: entity
@@ -888,10 +872,6 @@
       - type: StaminaProtection
         damageReduction: 0.9
   - type: GiftIgnore
-  - type: Tag
-    tags:
-    - Hardsuit
-    - EmpResistance
 
 #CBURN Hardsuit
 - type: entity

@@ -20,7 +20,7 @@ public sealed class EmpShockSystem : EntitySystem
     private void OnEmpPulse(EntityUid uid, StatusEffectsComponent component, ref EmpPulseEvent args)
     {
         if (!_inventorySystem.TryGetSlotEntity(uid, "outerClothing", out var suit) ||
-            !_tag.HasTag(suit.Value, "Hardsuit") || _tag.HasTag(suit.Value, "EmpResistance"))
+            !_tag.HasTag(suit.Value, "Hardsuit"))
             return;
 
         if (_electrocution.TryDoElectrocution(uid, null, 10, TimeSpan.FromSeconds(3), false, 1F, component, true))

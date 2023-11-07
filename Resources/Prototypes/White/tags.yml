@@ -38,9 +38,6 @@
   id: DeleteWithWindows
 
 - type: Tag
-  id: EmpResistance
-
-- type: Tag
   id: DefibRevive
 
 - type: Tag
