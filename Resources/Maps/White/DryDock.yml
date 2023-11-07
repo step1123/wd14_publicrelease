@@ -7539,7 +7539,6 @@ entities:
       - 8663
       - 8661
       - 8662
-      - invalid
       - 8660
       type: DeviceNetwork
     - devices:
