@@ -291,6 +291,11 @@
   entity: ClothingOuterCoatUSSPOvercoatBlack
   sponsorOnly: true
 
+- type: loadout
+  id: GeraldiyUSSPMask
+  entity: ClothingMaskGasGeraldiy
+  sponsorOnly: true
+
 # KnifeCappy
 
 - type: loadout

@@ -721,6 +721,18 @@
     - type: Clothing
       sprite: White/Fluff/Geraldiy/ussp_coat.rsi
 
+- type: entity
+  parent: ClothingMaskGas
+  id: ClothingMaskGasGeraldiy
+  name: противогаз СССП
+  description: Противогаз времен эпохи СССП. На нем видно много потёртостей, изношены укрепляющие пластины, но он до сих пор служит своему владельцу на протяжении сотен лет.
+  suffix: Fluff
+  components:
+    - type: Sprite
+      sprite: White/Fluff/Geraldiy/ussp_mask.rsi
+    - type: Clothing
+      sprite: White/Fluff/Geraldiy/ussp_mask.rsi
+
 # KnifeCappy
 - type: entity
   parent: ClothingOuterStorageBase
