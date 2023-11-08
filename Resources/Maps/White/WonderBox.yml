@@ -76,9 +76,6 @@ entities:
     - type: LoadedMap
     - type: GridTree
     - type: MovedGrids
-    - following:
-      - invalid
-      type: Followed
   - uid: 2
     components:
     - type: MetaData
@@ -13370,9 +13367,6 @@ entities:
       type: BecomesStation
     - type: SpreaderGrid
     - type: GridPathfinding
-    - following:
-      - invalid
-      type: Followed
 - proto: AccordionInstrument
   entities:
   - uid: 4
@@ -13473,9 +13467,6 @@ entities:
       - 10886
       - 10885
       type: DeviceList
-    - following:
-      - invalid
-      type: Followed
   - uid: 24
     components:
     - rot: -1.5707963267948966 rad
@@ -16109,9 +16100,6 @@ entities:
     - pos: 0.5,-0.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 210
     components:
     - pos: 0.5,-2.5
@@ -16155,9 +16143,6 @@ entities:
     - pos: -13.5,-8.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 218
     components:
     - pos: -6.5,-5.5
@@ -16175,9 +16160,6 @@ entities:
       pos: 7.5,-4.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 221
     components:
     - rot: -1.5707963267948966 rad
@@ -16342,9 +16324,6 @@ entities:
       pos: 0.5,-55.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 5368
     components:
     - pos: 48.5,29.5
@@ -16750,9 +16729,6 @@ entities:
       pos: -41.5,-9.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
 - proto: AirlockExternalLocked
   entities:
   - uid: 314
@@ -16939,9 +16915,6 @@ entities:
     - pos: 0.5,-15.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 347
     components:
     - pos: 1.5,-15.5
@@ -17216,9 +17189,6 @@ entities:
     - pos: -20.5,-49.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
 - proto: AirlockMaintGlass
   entities:
   - uid: 478
@@ -17373,9 +17343,6 @@ entities:
       pos: 30.5,-19.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
 - proto: AirlockMaintLocked
   entities:
   - uid: 386
@@ -17562,9 +17529,6 @@ entities:
       pos: 35.5,5.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 429
     components:
     - pos: 26.5,19.5
@@ -18399,9 +18363,6 @@ entities:
       pos: 52.5,-31.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
 - proto: AirlockMedicalLocked
   entities:
   - uid: 511
@@ -18440,9 +18401,6 @@ entities:
       pos: 58.5,-1.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
 - proto: AirlockQuartermasterGlassLocked
   entities:
   - uid: 517
@@ -18473,9 +18431,6 @@ entities:
       pos: -24.5,-16.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
 - proto: AirlockScienceGlassLocked
   entities:
   - uid: 521
@@ -18638,9 +18593,6 @@ entities:
     - links:
       - 24230
       type: DeviceLinkSink
-    - following:
-      - invalid
-      type: Followed
   - uid: 549
     components:
     - pos: -1.5,-34.5
@@ -18649,9 +18601,6 @@ entities:
     - links:
       - 24230
       type: DeviceLinkSink
-    - following:
-      - invalid
-      type: Followed
   - uid: 550
     components:
     - pos: 62.5,-7.5
@@ -18785,9 +18734,6 @@ entities:
     - pos: 24.5,14.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
 - proto: AirlockTheatreLocked
   entities:
   - uid: 570
@@ -18852,9 +18798,6 @@ entities:
     - ShutdownSubscribers:
       - 130
       type: DeviceNetwork
-    - following:
-      - invalid
-      type: Followed
   - uid: 580
     components:
     - pos: 18.5,-46.5
@@ -19768,9 +19711,6 @@ entities:
     - pos: 27.5,-39.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 734
     components:
     - pos: 27.5,-38.5
@@ -19796,9 +19736,6 @@ entities:
     - pos: 28.5,-37.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 739
     components:
     - pos: 29.5,-39.5
@@ -20148,9 +20085,6 @@ entities:
     - pos: 13.5,-46.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 801
     components:
     - pos: 13.5,-47.5
@@ -20203,9 +20137,6 @@ entities:
     - pos: 17.5,-47.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 811
     components:
     - pos: 17.5,-48.5
@@ -20226,9 +20157,6 @@ entities:
     - pos: 18.5,-48.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 815
     components:
     - pos: 19.5,-46.5
@@ -21861,9 +21789,6 @@ entities:
       pos: 47.5,10.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 1002
     components:
     - rot: 1.5707963267948966 rad
@@ -22247,9 +22172,6 @@ entities:
       pos: -11.5,11.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 1044
     components:
     - rot: -1.5707963267948966 rad
@@ -22935,9 +22857,6 @@ entities:
     - links:
       - 18297
       type: DeviceLinkSink
-    - following:
-      - invalid
-      type: Followed
   - uid: 23614
     components:
     - pos: 0.5,-61.5
@@ -34514,9 +34433,6 @@ entities:
     - pos: 9.5,-35.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 3021
     components:
     - pos: 9.5,-34.5
@@ -35626,9 +35542,6 @@ entities:
     - pos: 9.5,-40.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 3204
     components:
     - pos: 0.5,-39.5
@@ -39829,9 +39742,6 @@ entities:
     - pos: 59.5,-23.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 3924
     components:
     - pos: 59.5,-22.5
@@ -40639,9 +40549,6 @@ entities:
       type: Transform
     - enabled: True
       type: AmbientSound
-    - following:
-      - invalid
-      type: Followed
   - uid: 4083
     components:
     - pos: 65.5,-30.5
@@ -51901,9 +51808,6 @@ entities:
       type: Transform
     - enabled: True
       type: AmbientSound
-    - following:
-      - invalid
-      type: Followed
   - uid: 5604
     components:
     - pos: 38.5,-24.5
@@ -56031,9 +55935,6 @@ entities:
       type: Transform
     - enabled: True
       type: AmbientSound
-    - following:
-      - invalid
-      type: Followed
   - uid: 6020
     components:
     - pos: -22.5,-33.5
@@ -56310,9 +56211,6 @@ entities:
     - pos: 7.5,-49.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 6070
     components:
     - pos: 8.5,-49.5
@@ -57159,9 +57057,6 @@ entities:
     - pos: 45.5,-2.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 6220
     components:
     - pos: 45.5,-1.5
@@ -67473,9 +67368,6 @@ entities:
     - pos: -15.5,-20.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 7816
     components:
     - pos: -19.5,-25.5
@@ -67646,9 +67538,6 @@ entities:
     - pos: 0.5,-26.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 7850
     components:
     - pos: 0.5,-25.5
@@ -67689,9 +67578,6 @@ entities:
     - pos: 0.5,-18.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 7858
     components:
     - pos: 0.5,-17.5
@@ -68013,9 +67899,6 @@ entities:
     - pos: 36.5,0.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 7922
     components:
     - pos: 36.5,2.5
@@ -68201,9 +68084,6 @@ entities:
     - pos: 60.5,-40.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 7960
     components:
     - pos: 60.5,-41.5
@@ -68234,9 +68114,6 @@ entities:
     - pos: 60.5,-44.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 7966
     components:
     - pos: 68.5,-44.5
@@ -69929,9 +69806,6 @@ entities:
       pos: -12.5,-14.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 8303
     components:
     - rot: -1.5707963267948966 rad
@@ -70028,9 +69902,6 @@ entities:
       pos: 16.5,-8.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 8319
     components:
     - rot: -1.5707963267948966 rad
@@ -70433,9 +70304,6 @@ entities:
       pos: -11.5,15.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 8386
     components:
     - rot: -1.5707963267948966 rad
@@ -70490,9 +70358,6 @@ entities:
       pos: -15.5,9.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 8395
     components:
     - rot: -1.5707963267948966 rad
@@ -70577,9 +70442,6 @@ entities:
       pos: -22.5,15.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 8409
     components:
     - rot: -1.5707963267948966 rad
@@ -70814,9 +70676,6 @@ entities:
       pos: -50.5,-1.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 8448
     components:
     - rot: -1.5707963267948966 rad
@@ -71141,9 +71000,6 @@ entities:
       pos: 21.5,3.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 8502
     components:
     - rot: -1.5707963267948966 rad
@@ -71180,9 +71036,6 @@ entities:
       pos: 27.5,3.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 8508
     components:
     - rot: -1.5707963267948966 rad
@@ -73325,9 +73178,6 @@ entities:
     - pos: -40.53645,6.423809
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 8772
     components:
     - pos: -40.546867,6.069396
@@ -73512,9 +73362,6 @@ entities:
       pos: 7.5,9.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 8795
     components:
     - rot: 1.5707963267948966 rad
@@ -73849,9 +73696,6 @@ entities:
     - pos: 52.5,0.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 8853
     components:
     - pos: 56.5,0.5
@@ -74895,9 +74739,6 @@ entities:
     - pos: -36.5,-22.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 25770
     components:
     - pos: -24.5,-39.5
@@ -76441,9 +76282,6 @@ entities:
         - 0
         - 0
       type: EntityStorage
-    - following:
-      - invalid
-      type: Followed
   - uid: 9004
     components:
     - pos: 31.5,20.5
@@ -79910,9 +79748,6 @@ entities:
       pos: -19.5,-42.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
 - proto: ComputerCargoOrders
   entities:
   - uid: 9309
@@ -80099,9 +79934,6 @@ entities:
     - pos: 4.5,12.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
 - proto: ComputerPowerMonitoring
   entities:
   - uid: 5333
@@ -80172,9 +80004,6 @@ entities:
     - pos: 58.5,-19.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 9344
     components:
     - rot: -1.5707963267948966 rad
@@ -80186,9 +80015,6 @@ entities:
     - pos: -11.5,-36.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 9346
     components:
     - pos: 7.5,10.5
@@ -80208,9 +80034,6 @@ entities:
     - pos: -34.5,-1.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 9349
     components:
     - rot: 1.5707963267948966 rad
@@ -80546,9 +80369,6 @@ entities:
     - links:
       - 19915
       type: DeviceLinkSink
-    - following:
-      - invalid
-      type: Followed
   - uid: 9388
     components:
     - rot: -1.5707963267948966 rad
@@ -80558,9 +80378,6 @@ entities:
     - links:
       - 19914
       type: DeviceLinkSink
-    - following:
-      - invalid
-      type: Followed
   - uid: 9389
     components:
     - rot: 3.141592653589793 rad
@@ -80713,9 +80530,6 @@ entities:
     - links:
       - 19915
       type: DeviceLinkSink
-    - following:
-      - invalid
-      type: Followed
   - uid: 9406
     components:
     - rot: 1.5707963267948966 rad
@@ -80725,9 +80539,6 @@ entities:
     - links:
       - 19915
       type: DeviceLinkSink
-    - following:
-      - invalid
-      type: Followed
   - uid: 9407
     components:
     - rot: -1.5707963267948966 rad
@@ -81142,9 +80953,6 @@ entities:
     - pos: -2.5,-47.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
 - proto: CrateFilledSpawner
   entities:
   - uid: 9444
@@ -81952,9 +81760,6 @@ entities:
     - pos: 51.520435,6.498612
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 9487
     components:
     - pos: -42.5052,5.9026136
@@ -82171,9 +81976,6 @@ entities:
     - pos: 42.5,-19.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
 - proto: CultAltarSpawner
   entities:
   - uid: 26725
@@ -82419,9 +82221,6 @@ entities:
     - pos: 47.5,-41.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
 - proto: DisposalBend
   entities:
   - uid: 9544
@@ -82447,9 +82246,6 @@ entities:
       pos: -39.5,-1.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 9548
     components:
     - rot: 1.5707963267948966 rad
@@ -83800,9 +83596,6 @@ entities:
       pos: 6.5,-13.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 9779
     components:
     - rot: -1.5707963267948966 rad
@@ -86147,9 +85940,6 @@ entities:
       pos: 13.5,8.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 10202
     components:
     - rot: 1.5707963267948966 rad
@@ -87169,9 +86959,6 @@ entities:
       pos: 53.5,-24.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 10363
     components:
     - rot: -1.5707963267948966 rad
@@ -87405,9 +87192,6 @@ entities:
     - pos: 50.5,-6.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 10408
     components:
     - pos: 46.5,-3.5
@@ -87790,9 +87574,6 @@ entities:
     - pos: -10.5,-4.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
 - proto: DrinkFlaskBar
   entities:
   - uid: 24873
@@ -89189,9 +88970,6 @@ entities:
     - pos: 48.507797,-34.49399
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
 - proto: EmergencyRollerBedSpawnFolded
   entities:
   - uid: 10569
@@ -89216,9 +88994,6 @@ entities:
     - pos: -10.5,-47.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 10573
     components:
     - pos: -10.5,-48.5
@@ -89229,9 +89004,6 @@ entities:
     - pos: -10.5,-49.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 10575
     components:
     - rot: 1.5707963267948966 rad
@@ -90704,9 +90476,6 @@ entities:
       - 51
       - 26046
       type: DeviceNetwork
-    - following:
-      - invalid
-      type: Followed
   - uid: 10794
     components:
     - pos: 1.5,20.5
@@ -93631,9 +93400,6 @@ entities:
     - pos: -35.33219,-28.183262
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
 - proto: FloraTree03
   entities:
   - uid: 8579
@@ -94764,9 +94530,6 @@ entities:
       type: Transform
     - color: '#03FCD3FF'
       type: AtmosPipeColor
-    - following:
-      - invalid
-      type: Followed
   - uid: 11295
     components:
     - rot: -1.5707963267948966 rad
@@ -94849,9 +94612,6 @@ entities:
       pos: 61.5,-28.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 11306
     components:
     - rot: 3.141592653589793 rad
@@ -96940,9 +96700,6 @@ entities:
       type: Transform
     - color: '#E32636FF'
       type: AtmosPipeColor
-    - following:
-      - invalid
-      type: Followed
   - uid: 11537
     components:
     - pos: 1.5,39.5
@@ -98138,9 +97895,6 @@ entities:
       type: AtmosPipeColor
     - enabled: True
       type: AmbientSound
-    - following:
-      - invalid
-      type: Followed
   - uid: 11648
     components:
     - rot: -1.5707963267948966 rad
@@ -99429,9 +99183,6 @@ entities:
       type: Transform
     - color: '#E32636FF'
       type: AtmosPipeColor
-    - following:
-      - invalid
-      type: Followed
   - uid: 11791
     components:
     - rot: 1.5707963267948966 rad
@@ -100620,9 +100371,6 @@ entities:
       type: Transform
     - color: '#0055CCFF'
       type: AtmosPipeColor
-    - following:
-      - invalid
-      type: Followed
   - uid: 11939
     components:
     - rot: 3.141592653589793 rad
@@ -102105,9 +101853,6 @@ entities:
       type: Transform
     - color: '#E32636FF'
       type: AtmosPipeColor
-    - following:
-      - invalid
-      type: Followed
   - uid: 12126
     components:
     - pos: 17.5,10.5
@@ -102269,9 +102014,6 @@ entities:
       type: Transform
     - color: '#0055CCFF'
       type: AtmosPipeColor
-    - following:
-      - invalid
-      type: Followed
   - uid: 12149
     components:
     - pos: 15.5,-9.5
@@ -112223,9 +111965,6 @@ entities:
       type: Transform
     - color: '#E32636FF'
       type: AtmosPipeColor
-    - following:
-      - invalid
-      type: Followed
   - uid: 13424
     components:
     - rot: 1.5707963267948966 rad
@@ -113391,9 +113130,6 @@ entities:
       type: Transform
     - color: '#0055CCFF'
       type: AtmosPipeColor
-    - following:
-      - invalid
-      type: Followed
   - uid: 13574
     components:
     - rot: 1.5707963267948966 rad
@@ -115981,9 +115717,6 @@ entities:
       type: AtmosPipeColor
     - enabled: True
       type: AmbientSound
-    - following:
-      - invalid
-      type: Followed
   - uid: 13845
     components:
     - rot: 3.141592653589793 rad
@@ -117169,9 +116902,6 @@ entities:
       type: Transform
     - color: '#0055CCFF'
       type: AtmosPipeColor
-    - following:
-      - invalid
-      type: Followed
   - uid: 14001
     components:
     - rot: 3.141592653589793 rad
@@ -117274,9 +117004,6 @@ entities:
       type: Transform
     - color: '#E32636FF'
       type: AtmosPipeColor
-    - following:
-      - invalid
-      type: Followed
   - uid: 14013
     components:
     - rot: 3.141592653589793 rad
@@ -117822,9 +117549,6 @@ entities:
       type: Transform
     - color: '#E32636FF'
       type: AtmosPipeColor
-    - following:
-      - invalid
-      type: Followed
   - uid: 14083
     components:
     - rot: -1.5707963267948966 rad
@@ -119181,9 +118905,6 @@ entities:
       type: AmbientSound
     - color: '#0055CCFF'
       type: AtmosPipeColor
-    - following:
-      - invalid
-      type: Followed
   - uid: 14256
     components:
     - pos: -21.5,-1.5
@@ -119221,9 +118942,6 @@ entities:
       type: AmbientSound
     - color: '#0055CCFF'
       type: AtmosPipeColor
-    - following:
-      - invalid
-      type: Followed
   - uid: 14260
     components:
     - rot: 1.5707963267948966 rad
@@ -119883,9 +119601,6 @@ entities:
       type: AmbientSound
     - color: '#0055CCFF'
       type: AtmosPipeColor
-    - following:
-      - invalid
-      type: Followed
   - uid: 14327
     components:
     - pos: 23.5,16.5
@@ -119951,9 +119666,6 @@ entities:
       type: AmbientSound
     - color: '#0055CCFF'
       type: AtmosPipeColor
-    - following:
-      - invalid
-      type: Followed
   - uid: 14334
     components:
     - rot: 3.141592653589793 rad
@@ -120892,9 +120604,6 @@ entities:
       type: AmbientSound
     - color: '#E32636FF'
       type: AtmosPipeColor
-    - following:
-      - invalid
-      type: Followed
   - uid: 14422
     components:
     - rot: 3.141592653589793 rad
@@ -120905,9 +120614,6 @@ entities:
       type: AmbientSound
     - color: '#E32636FF'
       type: AtmosPipeColor
-    - following:
-      - invalid
-      type: Followed
   - uid: 14423
     components:
     - pos: -3.5,-46.5
@@ -121076,9 +120782,6 @@ entities:
       type: AmbientSound
     - color: '#E32636FF'
       type: AtmosPipeColor
-    - following:
-      - invalid
-      type: Followed
   - uid: 14439
     components:
     - rot: 3.141592653589793 rad
@@ -122359,9 +122062,6 @@ entities:
       type: AmbientSound
     - color: '#E32636FF'
       type: AtmosPipeColor
-    - following:
-      - invalid
-      type: Followed
   - uid: 14569
     components:
     - rot: 3.141592653589793 rad
@@ -122372,9 +122072,6 @@ entities:
       type: AmbientSound
     - color: '#E32636FF'
       type: AtmosPipeColor
-    - following:
-      - invalid
-      type: Followed
   - uid: 14570
     components:
     - rot: 3.141592653589793 rad
@@ -122857,9 +122554,6 @@ entities:
     - pos: -31.5,-50.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 4900
     components:
     - pos: -48.5,-40.5
@@ -130259,9 +129953,6 @@ entities:
       pos: 35.5,-21.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 24505
     components:
     - rot: 3.141592653589793 rad
@@ -130721,9 +130412,6 @@ entities:
       pos: -14.5,-49.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 24594
     components:
     - rot: -1.5707963267948966 rad
@@ -130804,9 +130492,6 @@ entities:
     - pos: 18.5,-21.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 24617
     components:
     - rot: -1.5707963267948966 rad
@@ -132277,9 +131962,6 @@ entities:
     - pos: 24.5,-4.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
     missingComponents:
     - ActiveListener
   - uid: 15907
@@ -133146,9 +132828,6 @@ entities:
     - pos: 27.5,-15.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
 - proto: LockerCaptainFilled
   entities:
   - uid: 9176
@@ -134036,9 +133715,6 @@ entities:
     - pos: -8.5,-49.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 16068
     components:
     - pos: -21.5,20.5
@@ -134783,9 +134459,6 @@ entities:
     - pos: 57.402763,-17.630022
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 16164
     components:
     - pos: 11.286225,-2.7049103
@@ -135482,9 +135155,6 @@ entities:
     - pos: -25.5,-22.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
 - proto: OxygenCanister
   entities:
   - uid: 16259
@@ -136435,9 +136105,6 @@ entities:
     - pos: 44.5,-6.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 16360
     components:
     - pos: -12.5,2.5
@@ -137291,9 +136958,6 @@ entities:
     - pos: 11.5,-16.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 16446
     components:
     - pos: -39.5,-8.5
@@ -137304,9 +136968,6 @@ entities:
     - pos: -41.5,-12.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 16448
     components:
     - pos: -39.5,-12.5
@@ -138006,9 +137667,6 @@ entities:
     - pos: 11.5,-5.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 16523
     components:
     - pos: -19.5,-9.5
@@ -138078,9 +137736,6 @@ entities:
     - pos: -19.5,-4.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
 - proto: PottedPlant17
   entities:
   - uid: 24154
@@ -138451,9 +138106,6 @@ entities:
     - pos: -51.5,7.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 16561
     components:
     - pos: -42.5,7.5
@@ -138837,9 +138489,6 @@ entities:
       type: Transform
     - enabled: False
       type: AmbientSound
-    - following:
-      - invalid
-      type: Followed
   - uid: 16606
     components:
     - rot: -1.5707963267948966 rad
@@ -139918,9 +139567,6 @@ entities:
       type: Transform
     - enabled: False
       type: AmbientSound
-    - following:
-      - invalid
-      type: Followed
   - uid: 16846
     components:
     - pos: -1.5,-45.5
@@ -141688,9 +141334,6 @@ entities:
       pos: 3.5,-48.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 16950
     components:
     - rot: 1.5707963267948966 rad
@@ -143346,9 +142989,6 @@ entities:
     - pos: 52.5,12.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 26712
     components:
     - pos: 57.5,-54.5
@@ -143600,9 +143240,6 @@ entities:
     - pos: 41.5,-46.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17172
     components:
     - pos: 36.5,-24.5
@@ -143917,9 +143554,6 @@ entities:
     - pos: 45.5,-49.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17213
     components:
     - pos: 59.5,-36.5
@@ -143930,9 +143564,6 @@ entities:
     - pos: 65.5,-45.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17215
     components:
     - pos: 75.5,-35.5
@@ -144318,9 +143949,6 @@ entities:
     - pos: -42.5,12.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17271
     components:
     - pos: -54.5,16.5
@@ -144448,9 +144076,6 @@ entities:
     - pos: 7.5,-55.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 16760
     components:
     - pos: 6.5,-55.5
@@ -144708,9 +144333,6 @@ entities:
     - pos: 0.5,-65.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17297
     components:
     - pos: 2.5,-64.5
@@ -144783,9 +144405,6 @@ entities:
       pos: -39.5,-6.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17316
     components:
     - rot: 1.5707963267948966 rad
@@ -144930,9 +144549,6 @@ entities:
       pos: 26.5,-35.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17340
     components:
     - rot: 1.5707963267948966 rad
@@ -145073,9 +144689,6 @@ entities:
     - pos: 18.5,-43.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17365
     components:
     - pos: 17.5,-43.5
@@ -145116,9 +144729,6 @@ entities:
     - pos: 17.5,-45.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17373
     components:
     - pos: 18.5,-45.5
@@ -145154,9 +144764,6 @@ entities:
     - pos: 22.5,-49.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17380
     components:
     - pos: 21.5,-49.5
@@ -145172,9 +144779,6 @@ entities:
     - pos: 18.5,-49.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17383
     components:
     - pos: 17.5,-49.5
@@ -145298,9 +144902,6 @@ entities:
     - pos: -37.5,-20.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17427
     components:
     - pos: -37.5,-19.5
@@ -145385,9 +144986,6 @@ entities:
       pos: -3.5,-48.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17443
     components:
     - rot: -1.5707963267948966 rad
@@ -145430,9 +145028,6 @@ entities:
       pos: 3.5,-47.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17450
     components:
     - rot: -1.5707963267948966 rad
@@ -145942,18 +145537,12 @@ entities:
       pos: 47.5,-51.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17567
     components:
     - rot: 3.141592653589793 rad
       pos: 46.5,-51.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17568
     components:
     - rot: 3.141592653589793 rad
@@ -145966,9 +145555,6 @@ entities:
       pos: 44.5,-51.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17584
     components:
     - rot: 3.141592653589793 rad
@@ -146197,9 +145783,6 @@ entities:
       pos: 54.5,-4.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17626
     components:
     - rot: 3.141592653589793 rad
@@ -146212,9 +145795,6 @@ entities:
       pos: 41.5,-7.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17648
     components:
     - rot: 3.141592653589793 rad
@@ -146245,18 +145825,12 @@ entities:
       pos: 35.5,21.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17654
     components:
     - rot: 3.141592653589793 rad
       pos: 37.5,21.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17655
     components:
     - rot: 3.141592653589793 rad
@@ -146365,9 +145939,6 @@ entities:
       pos: 28.5,23.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17681
     components:
     - rot: 3.141592653589793 rad
@@ -146620,9 +146191,6 @@ entities:
       pos: -3.5,-15.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17729
     components:
     - rot: 3.141592653589793 rad
@@ -148016,9 +147584,6 @@ entities:
     - pos: -30.5,9.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 18020
     components:
     - pos: -32.5,9.5
@@ -148703,9 +148268,6 @@ entities:
       pos: -39.5,-18.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 18108
     components:
     - rot: -1.5707963267948966 rad
@@ -148884,9 +148446,6 @@ entities:
     - pos: -3.6900847,23.50073
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 18143
     components:
     - pos: 62.54678,-0.40223756
@@ -149589,9 +149148,6 @@ entities:
     - links:
       - 18302
       type: DeviceLinkSink
-    - following:
-      - invalid
-      type: Followed
   - uid: 22160
     components:
     - rot: -1.5707963267948966 rad
@@ -149682,9 +149238,6 @@ entities:
     - links:
       - 18300
       type: DeviceLinkSink
-    - following:
-      - invalid
-      type: Followed
   - uid: 18201
     components:
     - rot: -1.5707963267948966 rad
@@ -149867,9 +149420,6 @@ entities:
     - links:
       - 18299
       type: DeviceLinkSink
-    - following:
-      - invalid
-      type: Followed
   - uid: 18222
     components:
     - pos: 44.5,1.5
@@ -150238,9 +149788,6 @@ entities:
     - links:
       - 18334
       type: DeviceLinkSink
-    - following:
-      - invalid
-      type: Followed
   - uid: 18266
     components:
     - pos: 0.5,13.5
@@ -150409,9 +149956,6 @@ entities:
     - links:
       - 18302
       type: DeviceLinkSink
-    - following:
-      - invalid
-      type: Followed
   - uid: 23401
     components:
     - rot: -1.5707963267948966 rad
@@ -150692,9 +150236,6 @@ entities:
     - links:
       - 24257
       type: DeviceLinkSink
-    - following:
-      - invalid
-      type: Followed
   - uid: 24254
     components:
     - rot: 3.141592653589793 rad
@@ -152951,9 +152492,6 @@ entities:
       pos: 18.5,-10.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 18396
     components:
     - pos: 12.5,17.5
@@ -153650,9 +153188,6 @@ entities:
       pos: 8.5,-46.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 18508
     components:
     - rot: 1.5707963267948966 rad
@@ -154102,9 +153637,6 @@ entities:
       pos: 12.5,21.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 18584
     components:
     - rot: 1.5707963267948966 rad
@@ -156728,9 +156260,6 @@ entities:
     - pos: -29.5,-21.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 18994
     components:
     - pos: -31.5,-21.5
@@ -156915,9 +156444,6 @@ entities:
     - pos: 68.5,-27.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 23830
     components:
     - pos: 76.5,-17.5
@@ -157607,9 +157133,6 @@ entities:
     - pos: 7.5,-22.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 19095
     components:
     - pos: 7.5,-23.5
@@ -157764,9 +157287,6 @@ entities:
     - pos: -16.5,-48.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 19109
     components:
     - pos: 0.5,5.5
@@ -157882,9 +157402,6 @@ entities:
     - pos: -8.5,18.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 9094
     components:
     - pos: -7.5,20.5
@@ -159168,9 +158685,6 @@ entities:
     - pos: -20.5,-29.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 19268
     components:
     - pos: -19.5,-29.5
@@ -160616,9 +160130,6 @@ entities:
     - pos: 44.5,-43.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 19540
     components:
     - pos: 43.5,-40.5
@@ -160764,9 +160275,6 @@ entities:
     - pos: -11.5,-54.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 19569
     components:
     - pos: -14.5,-55.5
@@ -161145,9 +160653,6 @@ entities:
     - pos: 60.5,-25.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 19608
     components:
     - pos: -15.5,55.5
@@ -161293,9 +160798,6 @@ entities:
     - pos: 55.5,-12.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 19633
     components:
     - pos: 41.5,-0.5
@@ -162644,9 +162146,6 @@ entities:
     - pos: 40.5,-41.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 19833
     components:
     - pos: 40.5,-42.5
@@ -163850,9 +163349,6 @@ entities:
     - pos: 47.5,-42.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
 - proto: VehicleKeyATV
   entities:
   - uid: 19922
@@ -164363,9 +163859,6 @@ entities:
     - pos: 29.5,-10.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
 - proto: VendingMachineSeedsUnlocked
   entities:
   - uid: 19980
@@ -164746,9 +164239,6 @@ entities:
       pos: -29.5,-26.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 2859
     components:
     - rot: 1.5707963267948966 rad
@@ -165431,9 +164921,6 @@ entities:
       pos: -31.5,-26.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 19046
     components:
     - pos: 58.5,-64.5
@@ -165863,9 +165350,6 @@ entities:
     - pos: 3.5,-2.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20093
     components:
     - pos: 4.5,-2.5
@@ -165877,9 +165361,6 @@ entities:
       pos: -3.5,-5.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20095
     components:
     - pos: 5.5,-1.5
@@ -166089,9 +165570,6 @@ entities:
       pos: -7.5,11.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20133
     components:
     - rot: 3.141592653589793 rad
@@ -166423,17 +165901,11 @@ entities:
     - pos: -5.5,-4.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20190
     components:
     - pos: -5.5,-3.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20191
     components:
     - pos: -5.5,-2.5
@@ -166512,9 +165984,6 @@ entities:
       pos: -1.5,-10.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20207
     components:
     - rot: -1.5707963267948966 rad
@@ -166754,9 +166223,6 @@ entities:
     - pos: 30.5,21.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20266
     components:
     - pos: 31.5,21.5
@@ -167143,9 +166609,6 @@ entities:
       pos: -13.5,-9.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20355
     components:
     - rot: 1.5707963267948966 rad
@@ -167266,9 +166729,6 @@ entities:
       pos: -2.5,-29.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20375
     components:
     - rot: 1.5707963267948966 rad
@@ -167347,9 +166807,6 @@ entities:
       pos: -33.5,-19.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20388
     components:
     - rot: 1.5707963267948966 rad
@@ -168087,9 +167544,6 @@ entities:
       pos: -8.5,21.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20516
     components:
     - rot: -1.5707963267948966 rad
@@ -168192,9 +167646,6 @@ entities:
       pos: -14.5,26.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20533
     components:
     - rot: -1.5707963267948966 rad
@@ -169010,9 +168461,6 @@ entities:
       pos: -9.5,-48.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20734
     components:
     - rot: -1.5707963267948966 rad
@@ -169031,9 +168479,6 @@ entities:
       pos: -15.5,-57.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20737
     components:
     - rot: -1.5707963267948966 rad
@@ -169088,9 +168533,6 @@ entities:
       pos: -10.5,-50.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20746
     components:
     - rot: -1.5707963267948966 rad
@@ -169205,9 +168647,6 @@ entities:
       pos: 1.5,-47.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20765
     components:
     - rot: -1.5707963267948966 rad
@@ -169340,9 +168779,6 @@ entities:
       pos: 16.5,-47.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20787
     components:
     - rot: -1.5707963267948966 rad
@@ -169373,9 +168809,6 @@ entities:
       pos: 24.5,-49.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20792
     components:
     - rot: -1.5707963267948966 rad
@@ -169388,9 +168821,6 @@ entities:
       pos: 15.5,-57.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20794
     components:
     - rot: -1.5707963267948966 rad
@@ -169415,18 +168845,12 @@ entities:
       pos: 12.5,-46.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20798
     components:
     - rot: -1.5707963267948966 rad
       pos: 12.5,-47.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20799
     components:
     - rot: -1.5707963267948966 rad
@@ -169493,45 +168917,30 @@ entities:
       pos: 17.5,-57.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20810
     components:
     - rot: -1.5707963267948966 rad
       pos: 20.5,-57.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20811
     components:
     - rot: -1.5707963267948966 rad
       pos: 19.5,-57.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20812
     components:
     - rot: -1.5707963267948966 rad
       pos: 12.5,-48.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20813
     components:
     - rot: -1.5707963267948966 rad
       pos: 16.5,-49.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20814
     components:
     - rot: -1.5707963267948966 rad
@@ -169562,18 +168971,12 @@ entities:
       pos: 20.5,-49.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20819
     components:
     - rot: -1.5707963267948966 rad
       pos: 24.5,-45.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20820
     components:
     - rot: -1.5707963267948966 rad
@@ -169592,18 +168995,12 @@ entities:
       pos: 11.5,-46.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20823
     components:
     - rot: -1.5707963267948966 rad
       pos: 11.5,-47.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20824
     components:
     - rot: -1.5707963267948966 rad
@@ -169634,9 +169031,6 @@ entities:
       pos: 14.5,-49.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20829
     components:
     - rot: -1.5707963267948966 rad
@@ -169685,9 +169079,6 @@ entities:
       pos: 11.5,-50.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20837
     components:
     - rot: -1.5707963267948966 rad
@@ -169807,9 +169198,6 @@ entities:
       pos: -2.5,-51.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20857
     components:
     - rot: -1.5707963267948966 rad
@@ -169972,9 +169360,6 @@ entities:
       pos: 12.5,-22.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 20884
     components:
     - rot: -1.5707963267948966 rad
@@ -170827,9 +170212,6 @@ entities:
       pos: 56.5,-28.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 21026
     components:
     - rot: -1.5707963267948966 rad
@@ -171184,9 +170566,6 @@ entities:
       pos: 51.5,-44.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 21085
     components:
     - rot: -1.5707963267948966 rad
@@ -171289,9 +170668,6 @@ entities:
       pos: 43.5,-44.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 21102
     components:
     - rot: -1.5707963267948966 rad
@@ -171400,9 +170776,6 @@ entities:
       pos: 52.5,-50.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 21120
     components:
     - rot: -1.5707963267948966 rad
@@ -174274,9 +173647,6 @@ entities:
       pos: -5.5,0.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 21665
     components:
     - rot: -1.5707963267948966 rad
@@ -174504,9 +173874,6 @@ entities:
       pos: -8.5,9.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 21706
     components:
     - pos: 81.5,-28.5
@@ -174641,9 +174008,6 @@ entities:
       pos: -2.5,-52.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 21730
     components:
     - rot: -1.5707963267948966 rad
@@ -174824,9 +174188,6 @@ entities:
     - pos: 24.5,-20.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 21774
     components:
     - pos: -1.5,-60.5
@@ -174892,9 +174253,6 @@ entities:
     - pos: 34.5,-40.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 21787
     components:
     - pos: 34.5,-39.5
@@ -174930,17 +174288,11 @@ entities:
     - pos: 39.5,-46.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 21794
     components:
     - pos: 35.5,-45.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 21797
     components:
     - pos: 82.5,-36.5
@@ -175190,17 +174542,11 @@ entities:
     - pos: -17.5,-47.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 23485
     components:
     - pos: -17.5,-48.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 23486
     components:
     - pos: -17.5,-49.5
@@ -175276,9 +174622,6 @@ entities:
     - pos: -23.5,-51.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 24008
     components:
     - pos: -26.5,-52.5
@@ -175299,9 +174642,6 @@ entities:
     - pos: -24.5,-52.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 24018
     components:
     - pos: -24.5,-54.5
@@ -175712,18 +175052,12 @@ entities:
       pos: -41.5,-35.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 8623
     components:
     - rot: 1.5707963267948966 rad
       pos: -43.5,-35.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 9441
     components:
     - pos: -38.5,-51.5
@@ -176418,9 +175752,6 @@ entities:
     - pos: 18.5,16.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 21889
     components:
     - pos: 18.5,15.5
@@ -176441,9 +175772,6 @@ entities:
     - pos: 18.5,6.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 21893
     components:
     - pos: 18.5,5.5
@@ -176504,9 +175832,6 @@ entities:
     - pos: 13.5,18.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 21905
     components:
     - pos: 11.5,20.5
@@ -176562,9 +175887,6 @@ entities:
     - pos: 18.5,21.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 21916
     components:
     - pos: 19.5,21.5
@@ -176625,9 +175947,6 @@ entities:
     - pos: 14.5,23.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 21928
     components:
     - pos: 8.5,22.5
@@ -176648,9 +175967,6 @@ entities:
     - pos: 5.5,21.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 21932
     components:
     - pos: 4.5,21.5
@@ -176896,9 +176212,6 @@ entities:
     - pos: 19.5,30.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 21981
     components:
     - pos: 19.5,31.5
@@ -177069,9 +176382,6 @@ entities:
     - pos: 30.5,12.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 22017
     components:
     - pos: 35.5,13.5
@@ -177212,9 +176522,6 @@ entities:
     - pos: 30.5,6.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 22045
     components:
     - pos: 30.5,5.5
@@ -177480,9 +176787,6 @@ entities:
     - pos: 53.5,15.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 22100
     components:
     - pos: 53.5,14.5
@@ -177883,9 +177187,6 @@ entities:
       pos: 40.5,1.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 22170
     components:
     - rot: -1.5707963267948966 rad
@@ -178018,9 +177319,6 @@ entities:
       pos: 37.5,-8.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 22192
     components:
     - rot: -1.5707963267948966 rad
@@ -178045,9 +177343,6 @@ entities:
       pos: 33.5,-9.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 22196
     components:
     - rot: -1.5707963267948966 rad
@@ -178150,9 +177445,6 @@ entities:
       pos: 32.5,-16.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 22213
     components:
     - rot: 3.141592653589793 rad
@@ -178171,9 +177463,6 @@ entities:
       pos: 32.5,-19.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 22216
     components:
     - rot: 3.141592653589793 rad
@@ -179163,9 +178452,6 @@ entities:
       pos: -19.5,-19.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 22382
     components:
     - rot: 1.5707963267948966 rad
@@ -179184,9 +178470,6 @@ entities:
       pos: -21.5,-18.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 22385
     components:
     - rot: 1.5707963267948966 rad
@@ -179205,9 +178488,6 @@ entities:
       pos: -22.5,-16.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 22388
     components:
     - rot: 1.5707963267948966 rad
@@ -179268,9 +178548,6 @@ entities:
       pos: -26.5,-14.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 22398
     components:
     - rot: 1.5707963267948966 rad
@@ -180435,9 +179712,6 @@ entities:
       pos: 2.5,20.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 22598
     components:
     - rot: 1.5707963267948966 rad
@@ -180456,9 +179730,6 @@ entities:
       pos: -15.5,21.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 22601
     components:
     - rot: -1.5707963267948966 rad
@@ -180519,9 +179790,6 @@ entities:
       pos: -21.5,21.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 22611
     components:
     - rot: -1.5707963267948966 rad
@@ -180984,9 +180252,6 @@ entities:
       pos: -18.5,-26.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 22688
     components:
     - rot: -1.5707963267948966 rad
@@ -181023,9 +180288,6 @@ entities:
       pos: -17.5,-29.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 22694
     components:
     - rot: -1.5707963267948966 rad
@@ -181068,9 +180330,6 @@ entities:
       pos: -21.5,-32.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 22701
     components:
     - rot: -1.5707963267948966 rad
@@ -181515,9 +180774,6 @@ entities:
       pos: -8.5,-40.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 22775
     components:
     - rot: -1.5707963267948966 rad
@@ -181559,9 +180815,6 @@ entities:
       pos: -10.5,-56.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 22793
     components:
     - rot: -1.5707963267948966 rad
@@ -182216,9 +181469,6 @@ entities:
       pos: 47.5,-26.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 22904
     components:
     - rot: -1.5707963267948966 rad
@@ -182830,9 +182080,6 @@ entities:
       pos: 15.5,45.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 23022
     components:
     - rot: -1.5707963267948966 rad
@@ -183263,9 +182510,6 @@ entities:
     - pos: 77.5,-39.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 23102
     components:
     - pos: -5.5,42.5
@@ -183357,9 +182601,6 @@ entities:
     - pos: 58.5,-9.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 23123
     components:
     - pos: 58.5,-10.5
@@ -185645,9 +184886,6 @@ entities:
     - pos: 22.5,32.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
 - proto: WaterTank
   entities:
   - uid: 23231
@@ -185732,9 +184970,6 @@ entities:
     - pos: -22.5,8.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 23246
     components:
     - pos: 28.5,-15.5
@@ -186768,9 +186003,6 @@ entities:
       pos: -17.5,-13.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
 - proto: WindoorSecureChapelLocked
   entities:
   - uid: 23361
@@ -186912,9 +186144,6 @@ entities:
       pos: 54.5,-7.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 23380
     components:
     - rot: 1.5707963267948966 rad
@@ -187114,9 +186343,6 @@ entities:
       pos: 49.5,-11.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 16836
     components:
     - rot: 1.5707963267948966 rad
@@ -187169,9 +186395,6 @@ entities:
       pos: -22.5,-9.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17410
     components:
     - rot: -1.5707963267948966 rad
@@ -187232,9 +186455,6 @@ entities:
       pos: -22.5,-3.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 17422
     components:
     - rot: -1.5707963267948966 rad
@@ -187754,9 +186974,6 @@ entities:
     - pos: 26.5,5.5
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 23510
     components:
     - pos: 21.5,1.5
@@ -189099,9 +188316,6 @@ entities:
     - pos: 1.4831703,-52.541615
       parent: 2
       type: Transform
-    - following:
-      - invalid
-      type: Followed
   - uid: 23697
     components:
     - pos: 70.471954,-24.499626
