@@ -40,8 +40,6 @@
     KillAllOtherAntagonistsObjective: 0.02
     KillRandomHeadObjective: 0.25
     HarvestBrainsObjective: 0.07
-    HarvestHeartsObjective: 0.07
-    HarvestKidneysObjective: 0.07
     KillAllHeadsObjective: 0.05
     KillAllSecurityObjective: 0.05
 

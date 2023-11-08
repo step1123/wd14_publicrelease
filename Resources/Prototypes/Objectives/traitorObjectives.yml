@@ -22,7 +22,7 @@
         conditions:
           - RandomTraitorAliveCondition
           - KillAllOtherAntagonistsCondition
-          - SaveRandomNoTraitorPersonObjective
+          - SaveRandomNoTraitorPersonCondition
           - KillAllSecurityCondition
           - KillAllHeadsCondition
   conditions:
@@ -41,7 +41,7 @@
     conditions:
     - RandomTraitorAliveCondition
     - KillAllOtherAntagonistsCondition
-    - SaveRandomNoTraitorPersonObjective
+    - SaveRandomNoTraitorPersonCondition
     - KillAllSecurityCondition
     - KillAllHeadsCondition
   conditions:
@@ -324,7 +324,7 @@
   conditions:
     - !type:StealFewItemsCondition
       prototype: WeaponEgun
-      quantityRange: [1, 2]
+      quantityRange: [1, 3]
 
 - type: objective
   id: FewIDCardObjective
@@ -342,7 +342,7 @@
     - !type:StealFewItemsCondition
       prototype: PassengerIDCard
       prototypeParent: IDCardStandard
-      quantityRange: [5, 10]
+      quantityRange: [5, 9]
 
 - type: objective
   id: FewHandsGlovesColorYellowObjective
@@ -363,7 +363,7 @@
   conditions:
     - !type:StealFewItemsCondition
       prototype: ClothingHandsGlovesColorYellow
-      quantityRange: [2, 8]
+      quantityRange: [2, 7]
 
 - type: objective
   id: FewStunbatonObjective
@@ -443,11 +443,12 @@
     - !type:IncompatibleConditionsRequirement
       conditions:
         - DieCondition
+    - !type:MultiplePeopleRequirement
   conditions:
     - !type:StealFewItemsCondition
       prototype: OrganHumanBrain
       tag: Brain
-      quantityRange: [8, 12]
+      quantityRange: [6, 11]
 
 - type: objective
   id: HarvestHeartsObjective
@@ -458,11 +459,12 @@
     - !type:IncompatibleConditionsRequirement
       conditions:
         - DieCondition
+    - !type:MultiplePeopleRequirement
   conditions:
     - !type:StealFewItemsCondition
       prototype: OrganHumanHeart
       tag: Heart
-      quantityRange: [8, 12]
+      quantityRange: [6, 11]
 
 - type: objective
   id: HarvestKidneysObjective
@@ -473,11 +475,12 @@
     - !type:IncompatibleConditionsRequirement
       conditions:
         - DieCondition
+    - !type:MultiplePeopleRequirement
   conditions:
     - !type:StealFewItemsCondition
       prototype: OrganHumanKidneys
       tag: Kidneys
-      quantityRange: [8, 12]
+      quantityRange: [6, 11]
 
 - type: objective
   id: SaveRandomNoTraitorPersonObjective
@@ -506,6 +509,8 @@
         - SaveRandomNoTraitorPersonObjective
         - KillRandomHeadCondition
         - RandomTraitorAliveCondition
+    - !type:MultiplePeopleRequirement
+      minPeople: 30
   conditions:
     - !type:KillAllHeadsCondition {}
 
@@ -520,5 +525,7 @@
         - SaveRandomNoTraitorPersonObjective
         - KillRandomHeadCondition
         - RandomTraitorAliveCondition
+    - !type:MultiplePeopleRequirement
+      minPeople: 30
   conditions:
     - !type:KillAllSecurityCondition {}
