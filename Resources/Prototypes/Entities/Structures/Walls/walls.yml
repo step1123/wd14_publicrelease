@@ -1001,6 +1001,9 @@
           MaterialWebSilk:
             min: 2
             max: 3
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/woodhit.ogg
   - type: IconSmooth
     key: walls
     base: wall

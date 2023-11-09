@@ -1,0 +1,27 @@
+- type: construction
+  id: ClothingUnderwearSocksWeb
+  graph: WebObjects
+  startNode: start
+  targetNode: socks
+  category: construction-category-clothing
+  entityWhitelist:
+    tags:
+    - SpiderCraft
+  icon:
+    sprite: White/Clothing/Underwear/Socks/web.rsi
+    state: icon
+  objectType: Item
+
+- type: construction
+  id: ClothingUnderwearBottomWebLower
+  graph: WebObjects
+  startNode: start
+  targetNode: panties
+  category: construction-category-clothing
+  entityWhitelist:
+    tags:
+    - SpiderCraft
+  icon:
+    sprite: White/Clothing/Underwear/Bottom/web.rsi
+    state: icon
+  objectType: Item

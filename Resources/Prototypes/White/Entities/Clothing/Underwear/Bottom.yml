@@ -300,3 +300,14 @@
     - type: Sprite
       sprite: White/Clothing/Underwear/Bottom/thong.rsi
 
+- type: entity
+  parent: ClothingUnderwearBottomBase
+  id: ClothingUnderwearBottomWebLower
+  name: Panties
+  description: Web.
+  components:
+    - type: Sprite
+      sprite: White/Clothing/Underwear/Bottom/web.rsi
+    - type: Construction
+      graph: WebObjects
+      node: panties

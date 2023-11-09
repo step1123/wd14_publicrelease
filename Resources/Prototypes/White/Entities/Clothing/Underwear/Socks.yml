@@ -241,3 +241,14 @@
   - type: Sprite
     sprite: White/Clothing/Underwear/Socks/thin_thigh.rsi
 
+- type: entity
+  parent: ClothingUnderwearSocksBase
+  id: ClothingUnderwearSocksWeb
+  name: stockings
+  description: Standard Nanotrasen stockings for station employees. Web.
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Underwear/Socks/web.rsi
+  - type: Construction
+    graph: WebObjects
+    node: socks

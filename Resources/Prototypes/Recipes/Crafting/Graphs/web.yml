@@ -36,6 +36,24 @@
         amount: 4
         doAfter: 6
 
+    - to: socks
+      steps:
+      - material: WebSilk
+        amount: 2
+        doAfter: 2
+
+    - to: panties
+      steps:
+      - material: WebSilk
+        amount: 2
+        doAfter: 2
+
+    - to: shield
+      steps:
+      - material: WebSilk
+        amount: 12
+        doAfter: 6
+
   # Deconstruction
   - node: tile
     entity: FloorTileItemWeb
@@ -51,3 +69,12 @@
 
   - node: cloth
     entity: MaterialCloth1
+
+  - node: socks
+    entity: ClothingUnderwearSocksWeb
+
+  - node: panties
+    entity: ClothingUnderwearBottomWebLower
+
+  - node: shield
+    entity: WebShield

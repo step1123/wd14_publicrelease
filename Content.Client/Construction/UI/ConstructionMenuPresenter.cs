@@ -1,9 +1,11 @@
 using System.Linq;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Content.Shared.Construction.Prototypes;
+using Content.Shared.Tag;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Placement;
+using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.Utility;
@@ -24,6 +26,7 @@ namespace Content.Client.Construction.UI
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly IPlacementManager _placementManager = default!;
         [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+        [Dependency] private readonly IPlayerManager _playerManager = default!;
 
         private readonly IConstructionMenuView _constructionView;
 
@@ -156,6 +159,11 @@ namespace Content.Client.Construction.UI
             foreach (var recipe in _prototypeManager.EnumeratePrototypes<ConstructionPrototype>())
             {
                 if (recipe.Hide)
+                    continue;
+
+                if (_playerManager.LocalPlayer == null
+                || _playerManager.LocalPlayer.ControlledEntity == null
+                || (recipe.EntityWhitelist != null && !recipe.EntityWhitelist.IsValid(_playerManager.LocalPlayer.ControlledEntity.Value)))
                     continue;
 
                 if (!string.IsNullOrEmpty(search))

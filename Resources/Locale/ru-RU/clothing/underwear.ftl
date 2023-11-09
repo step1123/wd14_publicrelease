@@ -60,3 +60,5 @@ ent-ClothingUnderwearBottomPantiesStripped = трусики
     .desc = В полосочку.
 ent-ClothingUnderwearBottomPantiesThong = трусики
     .desc = Стринги.
+ent-ClothingUnderwearBottomWebLower = трусики
+    .desc = Паутинные.

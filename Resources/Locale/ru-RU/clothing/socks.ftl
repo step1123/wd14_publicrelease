@@ -50,3 +50,5 @@ ent-ClothingUnderwearSocksThinKnee = носки
     .desc = Прозрачные.
 ent-ClothingUnderwearSocksThinThigh = носки
     .desc = Прозрачные.
+ent-ClothingUnderwearSocksWeb = чулки
+    .desc = Паутинные.
