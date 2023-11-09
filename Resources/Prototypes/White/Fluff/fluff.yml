@@ -795,3 +795,40 @@
       sprite: White/Fluff/Oleg_Tinkoff/uniform_gop.rsi
     - type: Clothing
       sprite: White/Fluff/Oleg_Tinkoff/uniform_gop.rsi
+
+# Zilendorie
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadFurazhkaZilendorie
+  name: фуражка комиссара
+  description: Фирменная фуражка Имперских комиссаров. Символ власти, объект страха и просто красивая шляпа.
+  suffix: Fluff
+  components:
+    - type: Sprite
+      sprite: White/Fluff/Zilendorie/furazhka.rsi
+    - type: Clothing
+      sprite: White/Fluff/Zilendorie/furazhka.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformMundirZilendorie
+  name: форма комиссара
+  description: Стандартная форма Имперского Комиссара. Пояс украшает знаковый красный кушак, выдаваемый юным комиссарам по завершению Схолы Прогениум.
+  suffix: Fluff
+  components:
+    - type: Sprite
+      sprite: White/Fluff/Zilendorie/mundir.rsi
+    - type: Clothing
+      sprite: White/Fluff/Zilendorie/mundir.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterShinelZilendorie
+  name: шинель комиссара
+  description: Парадная шинель Имперского Комиссара.
+  suffix: Fluff
+  components:
+    - type: Sprite
+      sprite: White/Fluff/Zilendorie/shinel.rsi
+    - type: Clothing
+      sprite: White/Fluff/Zilendorie/shinel.rsi

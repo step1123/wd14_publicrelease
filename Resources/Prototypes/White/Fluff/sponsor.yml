@@ -324,3 +324,19 @@
   id: TinkoffSuitGop
   entity: ClothingUniformGopTinkoff
   sponsorOnly: true
+
+# Zilendorie
+- type: loadout
+  id: ZilendorieFurazhka
+  entity: ClothingHeadFurazhkaZilendorie
+  sponsorOnly: true
+
+- type: loadout
+  id: ZilendorieMundir
+  entity: ClothingUniformMundirZilendorie
+  sponsorOnly: true
+
+- type: loadout
+  id: ZilendorieShinel
+  entity: ClothingOuterShinelZilendorie
+  sponsorOnly: true
