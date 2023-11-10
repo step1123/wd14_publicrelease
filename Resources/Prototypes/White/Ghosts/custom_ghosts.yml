@@ -305,3 +305,12 @@
   sprite: White/Ghosts/psychopath-ghost.rsi
   ghostName: ЕРП Кицуне
   ghostDescription: Тут тебе не рады.
+
+- type: customGhost
+  id: ssao-ghost
+  ckey: ssao
+  sprite: White/Ghosts/ssao-ghost.rsi
+  alpha: 0.9
+  ghostName: Мяукалка
+  ghostDescription: Мяу!
+  size: 0.6, 0.6
