@@ -250,8 +250,8 @@
   size: 1.0, 1.0
 
 - type: customGhost
-  id: afanasy-ghost
-  ckey: afanasiy_pogudov
+  id: svinka-ghost
+  ckey: svinka
   sprite: White/Ghosts/afanasy-ghost.rsi
   alpha: 0.8
   ghostName: Свинка
