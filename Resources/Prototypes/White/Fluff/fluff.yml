@@ -832,3 +832,12 @@
       sprite: White/Fluff/Zilendorie/shinel.rsi
     - type: Clothing
       sprite: White/Fluff/Zilendorie/shinel.rsi
+
+- type: entity
+  parent: ClothingNeckBase
+  id: ClothingSvinkaNeckFluff
+  name: офицерский плащ
+  description: Офицерский плащ с логотипом NanoTrasen, показывающий преданность своему делу его владельца.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/svinka/cloak.rsi
