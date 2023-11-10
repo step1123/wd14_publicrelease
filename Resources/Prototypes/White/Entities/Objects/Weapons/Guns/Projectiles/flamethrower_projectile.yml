@@ -27,6 +27,6 @@
         - Impassable
         - BulletImpassable
   - type: IgnitionSource
-    temperature: 4000
+    temperature: 1000
   - type: Ammo
     muzzleFlash: null

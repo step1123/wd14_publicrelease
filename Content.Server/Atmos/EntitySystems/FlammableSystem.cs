@@ -270,8 +270,9 @@ namespace Content.Server.Atmos.EntitySystems
             // process all fire events
             foreach (var (flammable, deltaTemp) in _fireEvents)
             {
-                // 100 -> 1, 200 -> 2, 400 -> 3...
-                var fireStackMod = Math.Max(MathF.Log2(deltaTemp / 100) + 1, 0);
+                // WD EDIT START
+                var fireStackMod = Math.Max(MathF.Log2(deltaTemp) + 2, 0);
+                // WD EDIT END
                 var fireStackDelta = fireStackMod - flammable.FireStacks;
                 if (fireStackDelta > 0)
                 {
