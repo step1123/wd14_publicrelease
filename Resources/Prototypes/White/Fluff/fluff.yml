@@ -3,6 +3,7 @@
   parent: ClothingOuterEVASuitBase
   id: ClothingOuterSuitGlamorous
   name: glamorous suit
+  suffix: fluff
   description: An emergency suit in cases of... emergencies. But glamorous.
   components:
     - type: Sprite
@@ -25,6 +26,7 @@
   parent: ClothingOuterHardsuitEVA
   id: ClothingOuterHardsuitEVAGLAMOUR
   name: скафандр EVA GLAMOUR
+  suffix: fluff
   description: Улучшеный Скафандр Гламура! Модный, стильный, совершенный! Способен защитить вас от космического вакуума. В этом скафандре все главы будут ваши. На скафандре подписан владелец - Алина Бэккен.
   components:
     - type: Sprite
@@ -42,6 +44,7 @@
   parent: ClothingHeadHelmetEVA
   id: ClothingHeadHelmetEVAGLAMOUR
   name: шлем EVA GLAMOUR
+  suffix: fluff
   description: Гламурный вариант шлема EVA.
   components:
     - type: Sprite
@@ -66,6 +69,7 @@
   parent: ClothingUniformJumpsuitColorGrey
   id: ClothingUniformJumpsuitColorMaury #Should be ClothingUniformJumpsuitMaury but i`m retard and lazy idiot
   name: красное худи
+  suffix: fluff
   description: Любимая худи Рупи с шортиками. Довольно странно, что NanoTrasen разрешила ему в очередной раз видоизменить свою форму, хотя и с условиями.
   components:
     - type: Sprite
@@ -77,6 +81,7 @@
   parent: ClothingShoesColorBlack
   id: ClothingShoesMaurySneakers
   name: кеды
+  suffix: fluff
   description: Крутые высокие кеды некой дочерней компании демократической страны, которая производила кеды с XX века.
   components:
     - type: Sprite
@@ -88,6 +93,7 @@
   parent: ClothingNeckBase
   id: ClothingNeckMauryChoker
   name: кошачий ошейник
+  suffix: fluff
   description: Кошачий ошейник с колокольчиком. Мило дзынькает и выглядит, но Рупи не даст вам его на себя надеть.
   components:
     - type: Sprite
@@ -134,6 +140,7 @@
   parent: ClothingHeadBase
   id: LeerCap
   name: старая фуражка
+  suffix: fluff
   description: Реплика фуражки времен старого космоса. Согласно некоторым источникам, такую фуражку носили солдаты несколько столетий назад.
   components:
     - type: Sprite
@@ -145,6 +152,7 @@
   parent: ClothingNeckBase
   id: LeerCloak
   name: плащ-палатка
+  suffix: fluff
   description: Плащ, который при необходимости можно оборудовать в палатку, незаменимая вещь на войне.
   components:
     - type: Sprite
@@ -165,6 +173,7 @@
   parent: ClothingOuterHardsuitSecurityRed
   id: LeerHardsuit
   name: Первопроходец
+  suffix: fluff
   description: Боевой скафандр десантников ВКФ, умело разобранный и модифицированный мастерами-любителями.
   components:
     - type: Sprite
@@ -179,6 +188,7 @@
   parent: ClothingHeadHelmetHardsuitSecurityRed
   id: LeerHelmet
   name: шлем
+  suffix: fluff
   description: Просто шлем
   components:
     - type: Sprite
@@ -192,6 +202,7 @@
   parent: ClothingUniformJumpsuitHoS
   id: LeerJumpsuit
   name: водолазка ВКФ
+  suffix: fluff
   description: Комплект прочной одежды со страховочными ремнями.
   components:
     - type: Sprite
@@ -203,6 +214,7 @@
   parent: ClothingMaskGas
   id: LeerMask
   name: Заслон-1
+  suffix: fluff
   description: Полумаска из прочных материалов с возможностью подключения ЗСД.
   components:
     - type: Sprite
@@ -214,6 +226,7 @@
   parent: ClothingOuterCoatHoSTrench
   id: LeerTrench
   name: Офицерский китель
+  suffix: fluff
   description: Бронежилет, поверх которого надет парадный китель офицера ВКФ. Погоны, кажется, сорваны.
   components:
     - type: Sprite
@@ -225,6 +238,7 @@
 - type: entity
   parent: Bible
   name: няко библия
+  suffix: fluff
   description: Книга является заметками кошко богини. Её потомки используют эту книгу как Библию.
   id: BibleNya
   components:
@@ -246,6 +260,7 @@
   parent: ClothingUniformBase
   id: WareteJumpskirt
   name: репонит
+  suffix: fluff
   description: Жаростойкая куртка. С предупреждением о возможной взрывоопасности.
   components:
     - type: Sprite
@@ -258,6 +273,7 @@
   parent: ClothingNeckBase
   id: HSKveezKulon
   name: плазменное сердце
+  suffix: fluff
   description: Не взрывай.
   components:
     - type: Sprite
@@ -271,6 +287,7 @@
 
 - type: entity
   name: дубинка контрактника
+  suffix: fluff
   parent: Stunbaton
   id: HSKveezStunBaton
   description: Телескопическая дубинка, наносящая легкий электрический шок.
@@ -285,6 +302,7 @@
   parent: BaseItem
   id: OmntnsHammer
   name: Молоток судьи.
+  suffix: fluff
   description: Порядок, порядок! Никаких бомб в здании моего суда.
   components:
     - type: Sprite
@@ -312,7 +330,7 @@
   id: PetSummonBook
   name: странная потрёпанная книга
   description: Книга непонятного происхождения.
-  suffix: Флафф
+  suffix: fluff
   components:
     - type: Sprite
       sprite: Objects/Misc/books.rsi
@@ -338,6 +356,7 @@
   parent: ClothingUnderwearSocksBase
   id: ClothingUnderwearSocksGray2sh0nka
   name: серые чулки
+  suffix: fluff
   description: Вау. Они.. серые?
   components:
     - type: Sprite
@@ -348,6 +367,7 @@
   parent: BaseHandheldInstrument
   id: SuperSynthesizerInstrumentDerderiot
   name: клавитара
+  suffix: fluff
   description: Выглядит модно. Прямиком из 80-ых! Да!
   components:
     - type: Instrument
@@ -366,6 +386,7 @@
   parent: ClothingOuterHardsuitBase
   id: ClothingOuterHardsuitHskveezAtmos
   name: "старый скафандр атмос-техника"
+  suffix: fluff
   description: "Специальный костюм, защищающий от опасной среды с низким давлением. Имеет тепловую защиту. В отличии от его новых версий имеет облегченную конструкцию без части защитных пластин. На запястье гравировка Ахахах! Уроды! Хахаах! Кто добавил в воздушную смесь Плазму и Закись Азота?! Хехехе! Одна половина станции горит, а вторая ржет над этим!!!. АХАХАХА!"
   components:
     - type: Sprite
@@ -399,6 +420,7 @@
 - type: entity
   parent: ClothingHeadHardsuitWithLightBase
   id: ClothingHeadHelmetHardsuitHskveezAtmos
+  suffix: fluff
   noSpawn: true
   name: "старый шлем атмос-техника"
   description: "Шлем скафандра. Защищает от давления и высоких температур, немного легче стандартного из-за более легкой конструкции"
@@ -440,6 +462,7 @@
   parent: ClothingMaskGas
   id: ClothingMaskGasKoitorra
   name: бионическая нейрочелюсть
+  suffix: fluff
   description: "Жесткая и темная. По центру шеи расположен светодиод, обрамлённый металлическими вставками, что плавно двигаются вниз. На краю шеи есть еле видное обозначение модели: 'JawV-02, Роджер Фенелон'."
   components:
     - type: Sprite
@@ -473,6 +496,7 @@
   parent: ClothingOuterStorageBase
   id: ClothingOuterCoatThechaotic
   name: Тренч Маллена
+  suffix: fluff
   description: Провонял сигаретами и разрушенными мечтами.
   components:
     - type: Sprite
@@ -488,7 +512,7 @@
   id: ClothingNeckTieThechaotic
   name: багровый галстук
   description: Свободно завязанный тёмно-красный галстук, показывает что детектив работает не в полную силу.
-  suffix: Fluff
+  suffix: fluff
   components:
     - type: Sprite
       sprite: White/Fluff/thechaotic/red_tie.rsi
@@ -500,7 +524,7 @@
   id: ClothingJumpsuitBlackThechaotic
   name: экстра нуарный костюм
   description: Когда просто нуарного для полного эффекта не хватает.
-  suffix: Fluff
+  suffix: fluff
   components:
     - type: Sprite
       sprite: White/Fluff/thechaotic/black_suit.rsi
@@ -512,6 +536,7 @@
   parent: ClothingNeckBase
   id: ClothingNeck6elbluCap
   name: Плащ NanoTrasen
+  suffix: fluff
   description: Плащ NanoTrasen весьма странной окраски. Так и веет бюрократией и запахом алкоголя.
   components:
     - type: Sprite
@@ -522,6 +547,7 @@
   parent: ClothingEyesBase
   id: ClothingEyesGlassesMesonBlue
   name: Утилизаторные очки
+  suffix: fluff
   description: Очки с фиолетовым затемнением, использующие патентованный полимер, обеспечивающие надежную защиту глаз от всех видов повреждений.
   components:
     - type: Sprite
@@ -534,6 +560,7 @@
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitSerafimSalvageSpecialist
   name: комбинезон специалиста по утилизации
+  suffix: fluff
   description: Удобный прочный комбинезон. Особенно грязный.
   components:
     - type: Sprite
@@ -545,6 +572,7 @@
   parent: BaseDice
   id: VulpCoin
   name: Золотая монета
+  suffix: fluff
   description: Коллекционная чеканная монета с родины вульпканин, редкая находка обладающая не столь реальной, сколько символической ценностью.
   components:
     - type: Dice
@@ -562,6 +590,7 @@
   parent: ClothingNeckBase
   id: ClothingNeckSkrimexCap
   name: Сердце-переливающий плащ
+  suffix: fluff
   description: "Плащ, в котором сердце переливается в центре, можно описать как впечатляющий и загадочный предмет одежды. Он выполнен из темной и непрозрачной ткани, создающей мистическую ауру вокруг носителя. Внутри плаща можно заметить нашивку с инициалами:  Возгалова К. Д."
   components:
     - type: Sprite
@@ -573,6 +602,7 @@
   parent: BaseItem
   id: ZippoLighterSkrimex
   name: Золотой Zippo
+  suffix: fluff
   description: "Золотое покрытие придает этой зажигалке особую элегантность и роскошность. Она может быть выполнена из разных оттенков золота - бледного, яркого или розового. Корпус зажигалки может быть гладким или украшенным гравировкой, что добавляет ей аристократический шик. А на заднем обороте заметна гравировка с инициалами: Возгалова К. Д."
   components:
     - type: Sprite
@@ -631,6 +661,7 @@
   parent: ClothingUniformBase
   id: DeusJumpskirt
   name: пионер в юбке
+  suffix: fluff
   description: На какой-то далёкой станции есть группа феленидов, которые ходят в этой форме. Кажется происхождение этой традиции уже давно позабыли, но этот набор одежды выглядит довольно так мило.
   components:
     - type: Sprite
@@ -643,6 +674,7 @@
   parent: ClothingUniformBase
   id: GusMopsikJumpsuit
   name: Форма 404
+  suffix: fluff
   description: Обычная форма обычного сотрудника "СБ"
   components:
   - type: Sprite
@@ -655,6 +687,7 @@
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitISB
   name: Офицерская форма ИСБ
+  suffix: fluff
   description: Старая, но довольно-таки хорошо сохранившаяся форма офицера ИСБ
   components:
     - type: Sprite
@@ -666,6 +699,7 @@
   parent: ClothingNeckBase
   id: ClothingNeckCloakOrder
   name: Порядок
+  suffix: fluff
   description: Чисто белый цвет этого плаща ознаменовывает пришествие безопасности и порядка в то место, куда приходит его владелец.
   components:
     - type: Sprite
@@ -675,6 +709,7 @@
   parent: ClothingHandsBase
   id: ClothingHandsGlovesStrict
   name: Строгие офицерские перчатки
+  suffix: fluff
   description: Удерживайте галактику в своих ежовых рукавицах при помощи страха.
   components:
     - type: Sprite
@@ -689,6 +724,7 @@
   parent: ClothingShoesBaseButcherable
   id: ClothingShoesBootsPeopledav
   name: Людодавы
+  suffix: fluff
   description: Давите несогласных!
   components:
     - type: Sprite
@@ -702,7 +738,7 @@
   id: ClothingHeadHatCapUSSPBlack
   name: кожаная фуражка СССП
   description: Довольная старая вещь эпохи СССП.
-  suffix: Fluff
+  suffix: fluff
   components:
     - type: Sprite
       sprite: White/Fluff/Geraldiy/ussp_hat.rsi
@@ -714,7 +750,7 @@
   id: ClothingOuterCoatUSSPOvercoatBlack
   name: бронированная шинель СССП
   description: Довольная старая вещь эпохи СССП.
-  suffix: Fluff
+  suffix: fluff
   components:
     - type: Sprite
       sprite: White/Fluff/Geraldiy/ussp_coat.rsi
@@ -726,7 +762,7 @@
   id: ClothingMaskGasGeraldiy
   name: противогаз СССП
   description: Противогаз времен эпохи СССП. На нем видно много потёртостей, изношены укрепляющие пластины, но он до сих пор служит своему владельцу на протяжении сотен лет.
-  suffix: Fluff
+  suffix: fluff
   components:
     - type: Sprite
       sprite: White/Fluff/Geraldiy/ussp_mask.rsi
@@ -739,7 +775,7 @@
   id: ClothingOuterCoatSamuraiCappy
   name: куртка самурая
   description: Культовая куртка рокера из старых годов, от неё исходит ощущение перемен.
-  suffix: Fluff
+  suffix: fluff
   components:
     - type: Sprite
       sprite: White/Fluff/KnifeCappy/samurai_jacket.rsi
@@ -752,7 +788,7 @@
   id: ClothingEyesDealGlassesMedic
   name: СделкоДел
   description: Модные розово-жёлтые очки. Даются только самым модным и успешным продавцам.
-  suffix: Fluff
+  suffix: fluff
   components:
     - type: Sprite
       sprite: White/Fluff/Medicgaming/deal_glasses.rsi
@@ -765,7 +801,7 @@
   id: ClothingHeadHelmetGopTinkoff
   name: шлем с забралом "Маска-1"
   description: Защитный шлем «Маска-1» появился на вооружении в давних временах, как замена шлему «Сфера».
-  suffix: Fluff
+  suffix: fluff
   components:
     - type: Sprite
       sprite: White/Fluff/Oleg_Tinkoff/helmet_gop.rsi
@@ -777,7 +813,7 @@
   id: ClothingShoesGopTinkoff
   name: cпортивные кроссовки "ГОП ПАК"
   description: Предназначены для спорта и гоп стопа.
-  suffix: Fluff
+  suffix: fluff
   components:
     - type: Sprite
       sprite: White/Fluff/Oleg_Tinkoff/shoes_gop.rsi
@@ -789,7 +825,7 @@
   id: ClothingUniformGopTinkoff
   name: cпортивный костюм "ГОП ПАК"
   description: От костюма пахнет семечками, порохом и криминалом.
-  suffix: Fluff
+  suffix: fluff
   components:
     - type: Sprite
       sprite: White/Fluff/Oleg_Tinkoff/uniform_gop.rsi
@@ -802,7 +838,7 @@
   id: ClothingHeadFurazhkaZilendorie
   name: фуражка комиссара
   description: Фирменная фуражка Имперских комиссаров. Символ власти, объект страха и просто красивая шляпа.
-  suffix: Fluff
+  suffix: fluff
   components:
     - type: Sprite
       sprite: White/Fluff/Zilendorie/furazhka.rsi
@@ -814,7 +850,7 @@
   id: ClothingUniformMundirZilendorie
   name: форма комиссара
   description: Стандартная форма Имперского Комиссара. Пояс украшает знаковый красный кушак, выдаваемый юным комиссарам по завершению Схолы Прогениум.
-  suffix: Fluff
+  suffix: fluff
   components:
     - type: Sprite
       sprite: White/Fluff/Zilendorie/mundir.rsi
@@ -826,7 +862,7 @@
   id: ClothingOuterShinelZilendorie
   name: шинель комиссара
   description: Парадная шинель Имперского Комиссара.
-  suffix: Fluff
+  suffix: fluff
   components:
     - type: Sprite
       sprite: White/Fluff/Zilendorie/shinel.rsi
@@ -837,6 +873,7 @@
   parent: ClothingNeckBase
   id: ClothingSvinkaNeckFluff
   name: офицерский плащ
+  suffix: fluff
   description: Офицерский плащ с логотипом NanoTrasen, показывающий преданность своему делу его владельца.
   components:
     - type: Sprite

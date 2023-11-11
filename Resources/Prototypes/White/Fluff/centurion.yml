@@ -3,6 +3,7 @@
   parent: ClothingOuterHardsuitCap
   id: ClothingOuterHardsuitCapDeathSquadFluff
   name: Истязательный Скафандр
+  suffix: fluff
   description: Сколько же тайн в нём хранится?
   components:
     - type: Sprite
@@ -18,6 +19,7 @@
   id: ClothingHeadHelmetCapDeathSquadFluff
   noSpawn: true
   name: Шлем истязательного скафандра
+  suffix: fluff
   description: Яйца олега
   components:
   - type: Sprite
@@ -30,6 +32,7 @@
   parent: ClothingOuterHardsuitEngineeringWhite
   id: ClothingOuterHardsuitEngineeringWhiteDeathSquadFluff
   name: Истязательный Скафандр
+  suffix: fluff
   description: Сколько же тайн в нём хранится?
   components:
     - type: Sprite
@@ -45,6 +48,7 @@
   id: ClothingHeadHelmetHardsuitEngineeringWhiteDeathSquadFluff
   noSpawn: true
   name: Шлем истязательного скафандра
+  suffix: fluff
   description: Яйца олега
   components:
   - type: Sprite
@@ -57,6 +61,7 @@
   parent: ClothingOuterHardsuitMedical
   id: ClothingOuterHardsuitMedicalDeathSquadFluff
   name: Истязательный Скафандр
+  suffix: fluff
   description: Сколько же тайн в нём хранится?
   components:
     - type: Sprite
@@ -72,6 +77,7 @@
   id: ClothingHeadHelmetHardsuitMedicalDeathSquadFluff
   noSpawn: true
   name: Шлем истязательного скафандра
+  suffix: fluff
   description: Яйца олега
   components:
   - type: Sprite
@@ -84,6 +90,7 @@
   parent: ClothingOuterHardsuitSecurityRed
   id: ClothingOuterHardsuitSecurityRedDeathSquadFluff
   name: Истязательный Скафандр
+  suffix: fluff
   description: Сколько же тайн в нём хранится?
   components:
     - type: Sprite
@@ -99,6 +106,7 @@
   id: ClothingHeadHelmetHardsuitSecurityRedDeathSquadFluff
   noSpawn: true
   name: Шлем истязательного скафандра
+  suffix: fluff
   description: Яйца олега
   components:
   - type: Sprite
@@ -111,6 +119,7 @@
   parent: ClothingOuterHardsuitRd
   id: ClothingOuterHardsuitRdDeathSquadFluff
   name: Истязательный Скафандр
+  suffix: fluff
   description: Сколько же тайн в нём хранится?
   components:
     - type: Sprite
@@ -126,6 +135,7 @@
   parent: ClothingOuterHardsuitSalvage
   id: ClothingOuterHardsuitSalvageCenturion
   name: Штурмовой Скафандр
+  suffix: fluff
   description: Робаст.
   components:
     - type: Sprite
@@ -140,6 +150,7 @@
   parent: ClothingHeadHelmetHardsuitSalvage
   id: ClothingHeadHelmetHardsuitSalvageCenturion
   name: Штурмовой Шлем
+  suffix: fluff
   description: Анробаст.
   components:
     - type: Sprite
@@ -153,6 +164,7 @@
   parent: ClothingOuterHardsuitSecurity
   id: ClothingOuterHardsuitSecurityCenturion
   name: Штурмовой Скафандр
+  suffix: fluff
   description: Робаст.
   components:
     - type: Sprite
@@ -169,6 +181,7 @@
   parent: ClothingNeckBase
   id: ClothingCenturionNeckFluff
   name: Мяукательный плащ
+  suffix: fluff
   description: мяукает
   components:
     - type: Sprite
@@ -178,6 +191,7 @@
   parent: ClothingHeadHelmetHardsuitSecurity
   id: ClothingHeadHelmetHardsuitSecurityCenturion
   name: Штурмовой Шлем
+  suffix: fluff
   description: Анробаст.
   components:
     - type: Sprite
@@ -191,6 +205,7 @@
   id: ClothingHeadHelmetHardsuitRdDeathSquadFluff
   noSpawn: true
   name: Шлем истязательного скафандра
+  suffix: fluff
   description: Яйца олега
   components:
   - type: Sprite

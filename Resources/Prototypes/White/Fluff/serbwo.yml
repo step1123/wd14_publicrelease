@@ -2,6 +2,7 @@
   parent: ClothingOuterEVASuitBase
   id: ClothingOuterSuitDeadSquadFake
   name: Эскадрон Гильдии
+  suffix: fluff
   description: An advanced hardsuit favored by assistant for use in pool party.
   components:
     - type: Sprite
@@ -25,6 +26,7 @@
   parent: ClothingOuterHardsuitCap
   id: ClothingOuterHardsuitERTLeaderFluff
   name: ERT leader's hardsuit
+  suffix: fluff
   description: A protective hardsuit worn by members of an emergency response team.
   components:
     - type: Sprite
@@ -40,6 +42,7 @@
   parent: ClothingOuterHardsuitEngineeringWhite
   id: ClothingOuterHardsuitERTEngineerFluff
   name: ERT engineer's hardsuit
+  suffix: fluff
   components:
     - type: Sprite
       sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertengineer.rsi
@@ -54,6 +57,7 @@
   parent: ClothingOuterHardsuitMedical
   id: ClothingOuterHardsuitERTMedicalFluff
   name: ERT medic's hardsuit
+  suffix: fluff
   components:
     - type: Sprite
       sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertmedical.rsi
@@ -68,6 +72,7 @@
   parent: ClothingOuterHardsuitSecurity
   id: ClothingOuterHardsuitERTSecurityFluff
   name: ERT security's hardsuit
+  suffix: fluff
   components:
     - type: Sprite
       sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertsecurity.rsi
@@ -82,6 +87,7 @@
   parent: ClothingOuterHardsuitRd
   id: ClothingOuterHardsuitERTJanitorFluff
   name: ERT janitor's hardsuit
+  suffix: fluff
   components:
     - type: Sprite
       sprite: Clothing/OuterClothing/Hardsuits/ERTSuits/ertjanitor.rsi
@@ -96,6 +102,7 @@
   parent: ClothingOuterHardsuitEngineering
   id: ClothingOuterHardsuitWizardFluff
   name: wizard hardsuit
+  suffix: fluff
   description: A bizarre gem-encrusted suit that radiates magical energies.
   components:
     - type: Sprite
@@ -113,6 +120,7 @@
   parent: ClothingOuterHardsuitVoidParamed
   id: ClothingOuterParamedicSuitFluff
   name: Ревуела Гильдии
+  suffix: fluff
   description: Трава...
   components:
     - type: Sprite
@@ -127,6 +135,7 @@
   parent: ClothingHeadHardsuitWithLightBase
   id: ClothingOuterParamedicHelmetFluff
   name: Ревуела Гильдии
+  suffix: fluff
   description: Трава...
   components:
     - type: Sprite
@@ -140,6 +149,7 @@
   parent: ClothingOuterHardsuitSalvage
   id: ClothingOuterCargoSuitFluff
   name: Ревуела Гильдии
+  suffix: fluff
   description: Трава...
   components:
     - type: Sprite
@@ -154,6 +164,7 @@
   parent: ClothingHeadHelmetHardsuitSalvage
   id: ClothingOuterCargoHelmetFluff
   name: Ревуела Гильдии
+  suffix: fluff
   description: Трава...
   components:
     - type: Sprite
@@ -168,6 +179,7 @@
   parent: ClothingNeckBase
   id: ClothingSerbwoNeckFluff
   name: плащ гильдии
+  suffix: fluff
   description: излучает ауру спокойствия и умиротворения!
   components:
     - type: Sprite
