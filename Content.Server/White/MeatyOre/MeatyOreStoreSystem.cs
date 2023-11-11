@@ -46,6 +46,7 @@ public sealed class MeatyOreStoreSystem : EntitySystem
     private static readonly string MeatyOreCurrencyPrototype = "MeatyOreCoin";
 
     private bool _meatyOrePanelEnabled;
+    private bool _antagGrantEnabled;
 
     private readonly Dictionary<NetUserId, StoreComponent> _meatyOreStores = new();
 
@@ -57,6 +58,7 @@ public sealed class MeatyOreStoreSystem : EntitySystem
 
         _configurationManager.OnValueChanged(WhiteCVars.MeatyOrePanelEnabled, OnPanelEnableChanged, true);
         _configurationManager.OnValueChanged(WhiteCVars.OnlyInOhio, s => _apiUrl = s, true);
+        _configurationManager.OnValueChanged(WhiteCVars.EnableGrantAntag, b => _antagGrantEnabled = b, true );
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnPostRoundCleanup);
         SubscribeNetworkEvent<MeatyOreShopRequestEvent>(OnShopRequested);
@@ -66,6 +68,9 @@ public sealed class MeatyOreStoreSystem : EntitySystem
 
     private void MeatyOreVerbs(GetVerbsEvent<Verb> ev)
     {
+        if(!_antagGrantEnabled)
+            return;
+
         if (!EntityManager.TryGetComponent<ActorComponent>(ev.User, out var actorComponent))
             return;
 
@@ -192,6 +197,12 @@ public sealed class MeatyOreStoreSystem : EntitySystem
         {
             return;
         }
+
+        if (!store.Balance.TryGetValue(MeatyOreCurrencyPrototype, out var currency))
+            return;
+
+        if(currency - 10 < 0)
+            return;
 
 
         var fake = _antagBan.HasAntagBan(userActorComponent.PlayerSession.UserId)

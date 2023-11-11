@@ -354,4 +354,10 @@ public sealed class WhiteCVars
 
     public static readonly CVarDef<float> SlipPowerModifier =
         CVarDef.Create("white.slip_power_modifier", 1.0f, CVar.REPLICATED);
+
+    /*
+     * Antag grant
+     */
+    public static readonly CVarDef<bool> EnableGrantAntag =
+        CVarDef.Create("white.antag_grant_enabled", true, CVar.SERVERONLY);
 }
