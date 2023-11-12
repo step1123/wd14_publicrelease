@@ -3,13 +3,25 @@
   id: SuitGlamorousLoadout
   entity: ClothingOuterSuitGlamorous
   sponsorOnly: true
-  blacklistJobs: [Captain, HeadOfPersonnel, ChiefEngineer, ChiefMedicalOfficer, ResearchDirector, HeadOfSecurity, Quartermaster]
+  blacklistJobs: [Captain, HeadOfPersonnel, ChiefEngineer, ChiefMedicalOfficer, ResearchDirector, HeadOfSecurity, Warden, Detective, SeniorOfficer, SecurityOfficer, Quartermaster]
 
 - type: loadout
   id: ClothingOuterHardsuitEVAGLAMOURsLoadout
   entity: ClothingOuterHardsuitEVAGLAMOUR
   sponsorOnly: true
-  whitelistJobs: [Captain, HeadOfPersonnel, ChiefEngineer, ChiefMedicalOfficer, ResearchDirector, HeadOfSecurity, Quartermaster]
+  whitelistJobs: [Captain, HeadOfPersonnel, ChiefEngineer, ChiefMedicalOfficer, ResearchDirector, Quartermaster]
+
+- type: loadout
+  id: GammaUniformLoadout
+  entity: ClothingUniformJumpsuitGamma
+  sponsorOnly: true
+  whitelistJobs: [HeadOfSecurity, Warden, SecurityOfficer, Detective, SeniorOfficer]
+
+- type: loadout
+  id: GammaBeretLoadout
+  entity: ClothingHeadHatBeretGamma
+  sponsorOnly: true
+  whitelistJobs: [HeadOfSecurity, Warden, SecurityOfficer, Detective, SeniorOfficer]
 
 # Maury
 #- type: loadout

@@ -53,6 +53,31 @@
       sprite: White/Fluff/DOOMMAX/helmetglamour.rsi
     - type: GiftIgnore
 
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitGamma
+  suffix: fluff
+  name: Снаряжение отряда «Гамма»
+  description: Довольно старая и потрёпанная форма секретного и элитного отряда.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/DOOMMAX/uniform.rsi
+    - type: Clothing
+      sprite: White/Fluff/DOOMMAX/uniform.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretGamma
+  suffix: fluff
+  name: Потрёпанный берет
+  description: Старый, слегка рваный и подгоревший берет лидера отряда «Гамма». На нем еще не засохла кровь былых боев.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/DOOMMAX/hat.rsi
+    - type: Clothing
+      sprite: White/Fluff/DOOMMAX/hat.rsi
+
+
 # Maury
 #- type: entity
 #  parent: ClothingUniformJumpsuitChemistry
