@@ -237,10 +237,3 @@
     Cold: 1.45
     Heat: 1.45
     Laser: 1.45
-
-- type: damageModifierSet
-  id: Harpy
-  coefficients:
-    Blunt: 1.15
-    Slash: 1.15
-    Piercing: 1.15
