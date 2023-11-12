@@ -138,3 +138,19 @@
   buttonText: Маршировать
   chatMessages: [марширует]
   allowMenu: true
+
+- type: emote
+  id: Sigh
+  category: Vocal
+  chatMessages: [вздыхает]
+
+- type: emote
+  id: Whistle
+  category: Vocal
+  chatMessages: [свистит]
+
+- type: emote
+  id: Crying
+  category: Vocal
+  chatMessages: [плачет]
+
