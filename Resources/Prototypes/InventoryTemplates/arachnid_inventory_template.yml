@@ -117,23 +117,6 @@
       strippingWindowPos: 0,3
       displayName: Back
 
-    - name: pocket4
-      slotTexture: web
-      slotFlags: POCKET
-      slotGroup: MainHotbar
-      stripTime: 3
-      uiWindowPos: 2,4
-      strippingWindowPos: 1,5
-      displayName: Pocket 4
-    - name: pocket3
-      slotTexture: web
-      slotFlags: POCKET
-      slotGroup: MainHotbar
-      stripTime: 3
-      uiWindowPos: 0,4
-      strippingWindowPos: 0,5
-      displayName: Pocket 3
-
     - name: outerClothing
       slotTexture: suit
       slotFlags: OUTERCLOTHING
@@ -162,3 +145,20 @@
       dependsOn: jumpsuit
       displayName: Pocket 2
       stripHidden: true
+
+    - name: pocket4
+      slotTexture: web
+      slotFlags: POCKET
+      slotGroup: MainHotbar
+      stripTime: 3
+      uiWindowPos: 2,4
+      strippingWindowPos: 1,5
+      displayName: Pocket 4
+    - name: pocket3
+      slotTexture: web
+      slotFlags: POCKET
+      slotGroup: MainHotbar
+      stripTime: 3
+      uiWindowPos: 0,4
+      strippingWindowPos: 0,5
+      displayName: Pocket 3

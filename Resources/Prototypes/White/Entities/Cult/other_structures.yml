@@ -56,7 +56,6 @@
       path: /Audio/Machines/airlock_deny.ogg
   - type: Airlock
     openUnlitVisible: true
-  - type: DoorBolt
   - type: Appearance
   - type: Airtight
     fixVacuum: true

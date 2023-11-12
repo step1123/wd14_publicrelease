@@ -111,6 +111,7 @@
   - type: Tag
     tags:
       - Wringer
+      - DroneUsable
   - type: Physics
     bodyType: Dynamic
   - type: Transform
@@ -296,6 +297,7 @@
     - type: Tag
       tags:
         - Wringer
+        - DroneUsable
     - type: Damageable
       damageContainer: Inorganic
       damageModifierSet: Metallic

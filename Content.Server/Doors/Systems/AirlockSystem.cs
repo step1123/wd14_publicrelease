@@ -183,7 +183,7 @@ namespace Content.Server.Doors.Systems
 
         public bool CanChangeState(EntityUid uid, AirlockComponent component)
         {
-            return this.IsPowered(uid, EntityManager) && !_bolts.IsBolted(uid);
+            return this.IsPowered(uid, EntityManager) && (!TryComp(uid, out DoorBoltComponent? comp) || !_bolts.IsBolted(uid, comp)); // WD EDIT
         }
     }
 }
