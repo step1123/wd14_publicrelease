@@ -98,7 +98,8 @@
         - id: ImprovedScrewdriver
         - id: ImprovedWirecutter
         - id: ImprovedWelder
-        - id: Multitool
+        - id: Tricorder
+        - id: HolofanProjector
 
 # Researcher
 - type: entity

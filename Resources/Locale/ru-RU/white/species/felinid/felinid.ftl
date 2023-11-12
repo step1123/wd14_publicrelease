@@ -1,7 +1,7 @@
 hairball-action = Откашлять комок шерсти.
 hairball-action-desc = Люди это не любят.
 hairball-mask = Сначала сними { $mask }.
-hairball-cough = { CAPITALIZE(THE($name)) } пытается выкашлять комок шесрти!
+hairball-cough = { CAPITALIZE(THE($name)) } пытается выкашлять комок шерсти!
 action-name-eat-mouse = Съесть мышь.
 action-description-eat-mouse = Съешьте мышь в своей руке, получая питательные вещества и заряд комка шерсти.
 marking-FelinidEarsBasic = Обычные ушки

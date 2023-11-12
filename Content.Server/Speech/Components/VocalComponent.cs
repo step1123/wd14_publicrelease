@@ -1,5 +1,5 @@
-using Content.Server.Humanoid;
 using Content.Server.Speech.EntitySystems;
+using Content.Server.White.AspectsSystem.Aspects;
 using Content.Shared.Actions;
 using Content.Shared.Actions.ActionTypes;
 using Content.Shared.Chat.Prototypes;
@@ -14,7 +14,7 @@ namespace Content.Server.Speech.Components;
 ///     Component required for entities to be able to do vocal emotions.
 /// </summary>
 [RegisterComponent]
-[Access(typeof(VocalSystem))]
+[Access(typeof(VocalSystem), typeof(CatEarsAspect))]
 public sealed class VocalComponent : Component
 {
     /// <summary>
@@ -43,11 +43,10 @@ public sealed class VocalComponent : Component
     ///     Currently loaded emote sounds prototype, based on entity sex.
     ///     Null if no valid prototype for entity sex was found.
     /// </summary>
-    [ViewVariables]
+    [ViewVariables(VVAccess.ReadWrite)]
     public EmoteSoundsPrototype? EmoteSounds = null;
 }
 
 public sealed class ScreamActionEvent : InstantActionEvent
 {
-
 }

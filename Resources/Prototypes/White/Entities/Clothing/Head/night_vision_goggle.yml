@@ -1,0 +1,27 @@
+﻿# Night Vision Goggles
+- type: entity
+  parent: ClothingEyesBase
+  id: ClothingEyesNightVisionGoggles
+  name: ПНВ
+  description: Теперь ты видишь во тьме!
+  components:
+  - type: Sprite
+    sprite: White/Clothing/Head/nightvision.rsi
+  - type: Clothing
+    sprite: White/Clothing/Head/nightvision.rsi
+  - type: ClothingGrantComponent
+    component:
+    - type: NightVision
+
+# Night Vision Goggles (Chameleon)
+- type: entity
+  parent: ClothingEyesNightVisionGoggles
+  id: ClothingEyesNightVisionGogglesSyndie
+  components:
+  - type: ChameleonClothing
+    slot: [ eyes ]
+    default: ClothingEyesGlassesSunglasses
+  - type: UserInterface
+    interfaces:
+    - key: enum.ChameleonUiKey.Key
+      type: ChameleonBoundUserInterface

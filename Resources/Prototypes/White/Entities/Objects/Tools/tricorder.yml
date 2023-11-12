@@ -1,0 +1,53 @@
+﻿- type: entity
+  parent: BaseItem
+  id: Tricorder
+  name: Трикодер
+  description: Многофункциональное устройство, которое может выполнять огромный спектр задач.
+  components:
+  - type: Sprite
+    sprite: White/Items/Tools/tricorder.rsi
+    layers:
+    - state: icon
+    - state: on
+      map: [ "tricorder_power" ]
+  - type: Tricorder
+  - type: StaticPrice
+    price: 300
+  - type: Tool
+    qualities:
+    - Pulsing
+  - type: ActivatableUI
+    key: enum.NetworkConfiguratorUiKey.List
+    inHandsOnly: true
+  - type: UserInterface
+    interfaces:
+    - key: enum.NetworkConfiguratorUiKey.List
+      type: NetworkConfiguratorBoundUserInterface
+    - key: enum.NetworkConfiguratorUiKey.Configure
+      type: NetworkConfiguratorBoundUserInterface
+    - key: enum.NetworkConfiguratorUiKey.Link
+      type: NetworkConfiguratorBoundUserInterface
+    - key: enum.GasAnalyzerUiKey.Key
+      type: GasAnalyzerBoundUserInterface
+    - key: enum.HealthAnalyzerUiKey.Key
+      type: HealthAnalyzerBoundUserInterface
+  - type: NetworkConfigurator
+  - type: Tag
+    tags:
+    - DroneUsable
+    - Multitool
+    - DiscreteHealthAnalyzer
+  - type: Clothing
+    sprite: Objects/Tools/multitool.rsi
+    quickEquip: false
+    slots:
+    - Belt
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/White/Items/handling/multitool_pickup.ogg
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/multitool_drop.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/multitool_drop.ogg

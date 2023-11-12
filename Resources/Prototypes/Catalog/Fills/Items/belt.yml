@@ -26,6 +26,7 @@
       - id: Welder
       - id: Multitool
 
+# WD EDIT START
 - type: entity
   id: ClothingBeltChiefEngineerFilled
   parent: ClothingBeltChiefEngineer
@@ -36,8 +37,11 @@
       - id: PowerDrill
       - id: JawsOfLife
       - id: WelderExperimental
-      - id: Multitool
+      - id: Tricorder
+      - id: HolofanProjector
+        amount: 2
       - id: CableApcStack
+# WD EDIT END
 
 - type: entity
   id: ClothingBeltSecurityFilled

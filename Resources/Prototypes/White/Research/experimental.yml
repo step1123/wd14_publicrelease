@@ -29,3 +29,15 @@
     - CyborgInstrumentModuleFilled
     - CyborgJetpackModule
 
+# Night Vision Tech
+- type: technology
+  id: NightVisionTech
+  name: night vision technology
+  icon:
+    sprite: White/Clothing/Head/nightvision.rsi
+    state: icon
+  discipline: Experimental
+  tier: 2
+  cost: 10000
+  recipeUnlocks:
+  - ClothingEyesNightVisionGoggles
