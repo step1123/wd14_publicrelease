@@ -296,8 +296,8 @@
   ckey: mr_regari
   sprite: White/Ghosts/mr_regari.rsi
   alpha: 0.9
-  ghostName: Темная сущность
-  ghostDescription: Интересно чья она.
+  ghostName: Обсидиановое сердце
+  ghostDescription: Сердце древнего бога, дабы не дать ему возродиться было заперто в бедрокиуме.
 
 - type: customGhost
   id: thefrendlypsychopath-ghost
