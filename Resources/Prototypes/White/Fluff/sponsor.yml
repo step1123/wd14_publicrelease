@@ -357,3 +357,8 @@
   id: SvinkaCoatFluffLoadout
   entity: ClothingSvinkaNeckFluff
   sponsorOnly: true
+
+- type: loadout
+  id: AntohagGasMaskLoadout
+  entity: AntohagGasMaskFluff
+  sponsorOnly: true

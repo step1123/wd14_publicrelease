@@ -903,3 +903,15 @@
   components:
     - type: Sprite
       sprite: White/Fluff/svinka/cloak.rsi
+
+- type: entity
+  parent: ClothingMaskGas
+  id: AntohagGasMaskFluff
+  name: Промышленный противогаз утилизатора
+  suffix: fluff
+  description: Плотно прилегающий противогаз, использующийся для защиты от внешних опасностей атмосферы.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/antohag/hosmask.rsi
+    - type: Clothing
+      sprite: White/Fluff/antohag/hosmask.rsi
