@@ -1,0 +1,62 @@
+# Window Paper
+- type: entity
+  id: WindowPaper
+  parent: BaseStructure
+  name: сёдзи
+  description: Окно, но только из бумаги
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Window
+  components:
+  - type: WallMount
+    arc: 360 # interact despite grilles
+  - type: Tag
+    tags:
+    - RCDDeconstructWhitelist
+    - ForceFixRotations
+    - Window
+  - type: Sprite
+    drawdepth: WallTops
+    sprite: White/Structures/Windows/paperwindow.rsi
+  - type: Icon
+    sprite: White/Structures/Windows/paperwindow.rsi
+    state: full
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb { }
+        mask:
+        - FullTileMask
+        layer:
+        - GlassLayer
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Glass
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50 #excess damage (nuke?). avoid computational cost of spawning entities.
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 25
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Airtight
+  - type: IconSmooth
+    key: windows
+    base: window
+  - type: Construction
+    graph: WindowPaperGraph
+    node: paperDoor
+  - type: Appearance
+  - type: StaticPrice
+    price: 100

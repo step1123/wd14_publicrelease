@@ -32,7 +32,7 @@
 # Night Vision Tech
 - type: technology
   id: NightVisionTech
-  name: night vision technology
+  name: Технологии ночного видиния
   icon:
     sprite: White/Clothing/Head/nightvision.rsi
     state: icon

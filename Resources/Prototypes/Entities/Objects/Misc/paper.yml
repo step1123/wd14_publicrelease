@@ -21,6 +21,9 @@
     sound:
       path: /Audio/White/Items/handling/paper_throw.ogg
   # WD edit sounds end
+  - type: PhysicalComposition
+    materialComposition:
+      Paper: 1
   - type: Sprite
     sprite: Objects/Misc/bureaucracy.rsi
     layers:

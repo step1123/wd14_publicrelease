@@ -1,0 +1,9 @@
+﻿- type: cargoProduct
+  id: CratePaper
+  icon:
+    sprite: Objects/Materials/Sheets/other.rsi
+    state: paper
+  product: CratePaper
+  cost: 1000
+  category: Materials
+  group: market

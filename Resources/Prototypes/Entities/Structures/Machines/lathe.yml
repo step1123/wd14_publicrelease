@@ -280,6 +280,7 @@
       - CyborgSpeedModule #WD EDIT
       - CyborgInstrumentModuleFilled #WD EDIT
       - CyborgJetpackModule #WD EDIT
+      - ClothingEyesNightVisionGoggles # WD EDIT
   - type: EmagLatheRecipes
     emagDynamicRecipes:
       - ExplosivePayload

@@ -1,0 +1,15 @@
+﻿# Paper window construction
+- type: construction
+  name: сёдзи
+  id: WindowPaper
+  graph: WindowPaperGraph
+  startNode: start
+  targetNode: paperDoor
+  category: construction-category-structures
+  description: Окно, но только из бумаги
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: White/Structures/Windows/paperwindow.rsi
+    state: full

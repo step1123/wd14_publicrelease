@@ -30,6 +30,10 @@
   name: paper
   suffix: Full
   components:
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      Paper: 1
   - type: Stack
     stackType: Paper
     baseLayer: base

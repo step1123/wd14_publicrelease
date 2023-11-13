@@ -20,6 +20,9 @@
         layer:
         - TabletopMachineLayer
   - type: Lathe
+    whitelist:
+      tags:
+      - Sheet
   - type: MaterialStorage
   - type: ActivatableUI
     key: enum.LatheUiKey.Key
@@ -52,69 +55,69 @@
     drawdepth: SmallObjects
     layers:
     - state: icon
-      map: ["enum.LatheVisualLayers.IsRunning"]
+      map: [ "enum.LatheVisualLayers.IsRunning" ]
     - state: unlit
       shader: unshaded
-      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
     - state: inserting
-      map: ["enum.MaterialStorageVisualLayers.Inserting"]
+      map: [ "enum.MaterialStorageVisualLayers.Inserting" ]
   - type: Lathe
     producingSound: /Audio/Machines/scanning.ogg
     idleState: icon
     runningState: printing
     staticRecipes:
-      - BoxFolderGreenBAN
-      - PaperRequestTargetStation
-      - PaperReportCC
-      - PaperCompletedStation
-      - PaperFailedStation
-      - PaperRequestCentComm
-      - PaperRequestERT
-      - PaperRequestRXBZZ
-      - PaperRequestExecution
-      - PaperRequestMagistrat
-      - BoxFolderBlueBAN
-      - PaperDomotionComm
-      - PaperDismissalReq
-      - PaperRequestHeadCouncil
-      - PaperHeadCouncilEnd
-      - BoxFolderRedBAN
-      - PaperOrderSec
-      - PaperDonos
-      - PaperLic
-      - PaperTimeRequestWeapon
-      - PaperRequestExecutionSec
-      - PaperOrderWeapon
-      - PaperRequestGuard
-      - BoxFolderRYellowBAN
-      - PaperRequestBuild
-      - PaperRequestMaterial
-      - PaperReportElect
-      - PaperReportAtmos
-      - BoxFolderWhiteBAN
-      - PaperRequestNarco
-      - PaperRequestExecutionMed
-      - PaperWaiverOfClaims
-      - PaperDurka
-      - BoxFolderPurpleBAN
-      - PaperRequestReasonable
-      - PaperRequestLaw
-      - PaperBrain
-      - BoxFolderYellowBAN
-      - PaperCargoOrder
-      - BoxFolderGreyBAN
-      - PaperRequestUpID
-      - PaperRequestWork
-      - PaperRequestTrash
-      - PaperEndTrash
-      - PaperRequestCourt
-      - PaperDismissalSer
-      - PaperPromotion
-      - PaperRequestBotan
+    - BoxFolderGreenBAN
+    - PaperRequestTargetStation
+    - PaperReportCC
+    - PaperCompletedStation
+    - PaperFailedStation
+    - PaperRequestCentComm
+    - PaperRequestERT
+    - PaperRequestRXBZZ
+    - PaperRequestExecution
+    - PaperRequestMagistrat
+    - BoxFolderBlueBAN
+    - PaperDomotionComm
+    - PaperDismissalReq
+    - PaperRequestHeadCouncil
+    - PaperHeadCouncilEnd
+    - BoxFolderRedBAN
+    - PaperOrderSec
+    - PaperDonos
+    - PaperLic
+    - PaperTimeRequestWeapon
+    - PaperRequestExecutionSec
+    - PaperOrderWeapon
+    - PaperRequestGuard
+    - BoxFolderRYellowBAN
+    - PaperRequestBuild
+    - PaperRequestMaterial
+    - PaperReportElect
+    - PaperReportAtmos
+    - BoxFolderWhiteBAN
+    - PaperRequestNarco
+    - PaperRequestExecutionMed
+    - PaperWaiverOfClaims
+    - PaperDurka
+    - BoxFolderPurpleBAN
+    - PaperRequestReasonable
+    - PaperRequestLaw
+    - PaperBrain
+    - BoxFolderYellowBAN
+    - PaperCargoOrder
+    - BoxFolderGreyBAN
+    - PaperRequestUpID
+    - PaperRequestWork
+    - PaperRequestTrash
+    - PaperEndTrash
+    - PaperRequestCourt
+    - PaperDismissalSer
+    - PaperPromotion
+    - PaperRequestBotan
   - type: EmagLatheRecipes
     emagStaticRecipes:
-      - BoxFolderBlackBAN
-      - PaperSyndicat
+    - BoxFolderBlackBAN
+    - PaperSyndicat
   - type: MaterialStorage
 
 # Recipe Paper
@@ -122,297 +125,297 @@
 - type: latheRecipe
   id: PaperRequestTargetStation # Tide
   result: PaperRequestTargetStation
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperReportCC # Tide
   result: PaperReportCC
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperCompletedStation # Tide
   result: PaperCompletedStation
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperFailedStation # Tide
   result: PaperFailedStation
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperRequestCentComm # Tide
   result: PaperRequestCentComm
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperRequestERT # Tide
   result: PaperRequestERT
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperRequestRXBZZ # Tide
   result: PaperRequestRXBZZ
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperRequestExecution # Tide
   result: PaperRequestExecution
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperRequestMagistrat # Tide
   result: PaperRequestMagistrat
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 #  PaperCommand
 - type: latheRecipe
   id: PaperDomotionComm # Tide
   result: PaperDomotionComm
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperDismissalReq # Tide
   result: PaperDismissalReq
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperRequestHeadCouncil # Tide
   result: PaperRequestHeadCouncil
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperHeadCouncilEnd # Tide
   result: PaperHeadCouncilEnd
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 #  PaperSecurity
 - type: latheRecipe
   id: PaperOrderSec # Tide
   result: PaperOrderSec
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperRequestExecutionSec # Tide
   result: PaperRequestExecutionSec
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperDonos # Tide
   result: PaperDonos
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperLic # Tide
   result: PaperLic
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperTimeRequestWeapon # Tide
   result: PaperTimeRequestWeapon
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperOrderWeapon # Tide
   result: PaperOrderWeapon
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperRequestGuard # Tide
   result: PaperRequestGuard
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 #  PaperEng
 - type: latheRecipe
   id: PaperRequestBuild # Tide
   result: PaperRequestBuild
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperRequestMaterial # Tide
   result: PaperRequestMaterial
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperReportElect # Tide
   result: PaperReportElect
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperReportAtmos # Tide
   result: PaperReportAtmos
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 #  PaperMed
 - type: latheRecipe
   id: PaperRequestNarco # Tide
   result: PaperRequestNarco
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperRequestExecutionMed # Tide
   result: PaperRequestExecutionMed
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperWaiverOfClaims # Tide
   result: PaperWaiverOfClaims
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperDurka # Tide
   result: PaperDurka
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 #  PaperSci
 - type: latheRecipe
   id: PaperRequestReasonable # Tide
   result: PaperRequestReasonable
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperRequestLaw # Tide
   result: PaperRequestLaw
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperBrain # Tide
   result: PaperBrain
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 #  PaperCargo
 - type: latheRecipe
   id: PaperCargoOrder # Tide
   result: PaperCargoOrder
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 #  PaperService
 - type: latheRecipe
   id: PaperRequestUpID # Tide
   result: PaperRequestUpID
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperRequestWork # Tide
   result: PaperRequestWork
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperRequestTrash # Tide
   result: PaperRequestTrash
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperEndTrash # Tide
   result: PaperEndTrash
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperRequestCourt # Tide
   result: PaperRequestCourt
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperDismissalSer # Tide
   result: PaperDismissalSer
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperPromotion # Tide
   result: PaperPromotion
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 - type: latheRecipe
   id: PaperRequestBotan # Tide
   result: PaperRequestBotan
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 #  PaperSyndicat
 - type: latheRecipe
   id: PaperSyndicat # Tide
   result: PaperSyndicat
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 0
+    Paper: 1
 
 # PapersAll
 #  Station->CentComm
@@ -924,62 +927,62 @@
 - type: latheRecipe
   id: BoxFolderGreenBAN # Tide
   result: BoxFolderGreenBAN
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 1
+    Paper: 999
 
 - type: latheRecipe
   id: BoxFolderGreyBAN # Tide
   result: BoxFolderGreyBAN
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 1
+    Paper: 999
 
 - type: latheRecipe
   id: BoxFolderWhiteBAN # Tide
   result: BoxFolderWhiteBAN
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 1
+    Paper: 999
 
 - type: latheRecipe
   id: BoxFolderYellowBAN # Tide
   result: BoxFolderYellowBAN
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 1
+    Paper: 999
 
 - type: latheRecipe
   id: BoxFolderBlueBAN # Tide
   result: BoxFolderBlueBAN
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 1
+    Paper: 999
 
 - type: latheRecipe
   id: BoxFolderRedBAN # Tide
   result: BoxFolderRedBAN
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 1
+    Paper: 999
 
 - type: latheRecipe
   id: BoxFolderRYellowBAN # Tide
   result: BoxFolderRYellowBAN
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 1
+    Paper: 999
 
 - type: latheRecipe
   id: BoxFolderPurpleBAN # Tide
   result: BoxFolderPurpleBAN
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 1
+    Paper: 999
 
 - type: latheRecipe
   id: BoxFolderBlackBAN # Tide
   result: BoxFolderBlackBAN
-  completetime: 1
+  completetime: 3
   materials:
-    Paper: 1
+    Paper: 999
