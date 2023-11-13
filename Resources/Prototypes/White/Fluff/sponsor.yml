@@ -23,6 +23,12 @@
   sponsorOnly: true
   whitelistJobs: [HeadOfSecurity, Warden, SecurityOfficer, Detective, SeniorOfficer]
 
+- type: loadout
+  id: ChaplanSchemaLoadout
+  entity: DommaxChaplainSchema
+  sponsorOnly: true
+  whitelistJobs: [Chaplain]
+
 # Maury
 #- type: loadout
 #  id: ClothingUniformJumpsuitMaury #Should be ClothingUniformMauryLoadout but like i said i`m retard

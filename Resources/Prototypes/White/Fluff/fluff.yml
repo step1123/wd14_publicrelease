@@ -77,6 +77,35 @@
     - type: Clothing
       sprite: White/Fluff/DOOMMAX/hat.rsi
 
+- type: entity
+  parent: ClothingNeckBase
+  id: DommaxChaplainSchema
+  name: Великая Схима
+  suffix: fluff
+  description: Высшая монашеская степень. Схима указывает, что носящий ее мертв, или есть мертвец, но живой. Мертв для сей жизни, а живет другою жизнию.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/DOOMMAX/bishop_schema.rsi
+    - type: Clothing
+      sprite: White/Fluff/DOOMMAX/bishop_schema.rsi
+    - type: ToggleableClothing
+      clothingPrototype: ClothingHeadHatChaplainSchema
+      requiredSlot:
+        - neck
+    - type: ContainerContainer
+      containers:
+        toggleable-clothing: !type:ContainerSlot { }
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatChaplainSchema
+  name: Капюшон Великой Схимы
+  description: Высшая монашеская степень. Схима указывает, что носящий ее мертв, или есть мертвец, но живой. Мертв для сей жизни, а живет другою жизнию.
+  components:
+    - type: Sprite
+      sprite: White/Fluff/DOOMMAX/bishop_schema_hood.rsi
+    - type: Clothing
+      sprite: White/Fluff/DOOMMAX/bishop_schema_hood.rsi
 
 # Maury
 #- type: entity
