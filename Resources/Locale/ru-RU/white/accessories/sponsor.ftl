@@ -8,3 +8,6 @@ ent-Sledgebar = мьёльнир
 ent-BibleNya = няко-библия
     .desc = книга является заметками кошко богини. Её потомки используют эту книгу как Библию.
     .suffix = { "Fluff" }
+
+marking-TajaranTailCommisar = Кошачий хвост
+marking-TajaranTailCommisar-tajaran-tail = Кошачий хвост
