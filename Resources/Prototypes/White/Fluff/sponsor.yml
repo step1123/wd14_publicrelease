@@ -368,3 +368,9 @@
   id: AntohagGasMaskLoadout
   entity: AntohagGasMaskFluff
   sponsorOnly: true
+
+# Forg
+- type: loadout
+  id: ForgPlushieRyan
+  entity: PlushieRyanForg
+  sponsorOnly: true
