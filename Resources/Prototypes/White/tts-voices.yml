@@ -436,3 +436,93 @@
   name: tts-voice-name-richardson
   sex: Male
   speaker: richardson
+
+- type: ttsVoice
+  id: Elenwen
+  name: tts-voice-name-elenwen
+  sex: Female
+  speaker: elenwen
+
+- type: ttsVoice
+  id: EmperorTit
+  name: tts-voice-name-emperor-tit
+  sex: Male
+  speaker: emperor
+
+- type: ttsVoice
+  id: GuardSkyrim
+  name: tts-voice-name-guard-skyrim
+  sex: Male
+  speaker: guard
+
+- type: ttsVoice
+  id: Hagraven
+  name: tts-voice-name-hagraven
+  sex: Male
+  speaker: hagraven
+
+- type: ttsVoice
+  id: HermaeusMora
+  name: tts-voice-name-hermaeus-mora
+  sex: Male
+  speaker: hermaeus_mora
+
+- type: ttsVoice
+  id: Nord
+  name: tts-voice-name-nord
+  sex: Male
+  speaker: nord
+
+- type: ttsVoice
+  id: Ulfric
+  name: tts-voice-name-ulfric
+  sex: Male
+  speaker: ulfric
+
+- type: ttsVoice
+  id: GoodThalya
+  name: tts-voice-name-good-thalya
+  sex: Female
+  speaker: good_thalya
+
+- type: ttsVoice
+  id: Cerys
+  name: tts-voice-name-cerys
+  sex: Female
+  speaker: cerys
+
+- type: ttsVoice
+  id: Judy
+  name: tts-voice-name-judy
+  sex: Female
+  speaker: judy
+
+- type: ttsVoice
+  id: Mitch
+  name: tts-voice-name-mitch
+  sex: Male
+  speaker: mitch
+
+- type: ttsVoice
+  id: Skippy
+  name: tts-voice-name-skippy
+  sex: Male
+  speaker: skippy
+
+- type: ttsVoice
+  id: Butch
+  name: tts-voice-name-butch
+  sex: Male
+  speaker: butch
+
+- type: ttsVoice
+  id: Marcus
+  name: tts-voice-name-marcus
+  sex: Male
+  speaker: marcus
+
+- type: ttsVoice
+  id: Sulik
+  name: tts-voice-name-sulik
+  sex: Male
+  speaker: sulik
