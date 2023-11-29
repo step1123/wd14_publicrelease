@@ -1,4 +1,4 @@
-<p align="center"> <img alt="Space Station 14" width="550" height="464" src="https://sun9-72.userapi.com/impg/5QK_wjSoV6j7GQq-091q2G3QQkdDdDzewTxnBg/JQnkrIS91oU.jpg" /></p>
+<p align="center"> <img alt="Space Station 14" width="550" height="464" src="https://cdn.discordapp.com/attachments/487507598271184896/1179499919808135208/JQnkrIS91oU.png?ex=657a01e6&is=65678ce6&hm=54c04e6d36197e43f70510d1b2cea75bad5d05558393942338c8ab422a88db74" /></p>
 
 Space Station 14 это ремейк SS13, который работает на собственном движке [Цыганская Арба](https://github.com/space-wizards/RobustToolbox), написанном на Хуйне.
 
